@@ -1,8 +1,6 @@
-"""Validation models and utilities for PFC MCP tools.
+"""Validation models and utilities for PFC MCP tools."""
 
-Provides Annotated types with Pydantic validation for tool parameters.
-"""
-
+from pathlib import PurePosixPath, PureWindowsPath
 from typing import Annotated, Optional
 
 from pydantic import Field
@@ -13,17 +11,26 @@ from pydantic.functional_validators import AfterValidator
 DEFAULT_SEARCH_LIMIT = 10
 MAX_SEARCH_LIMIT = 20
 
+# Task/output pagination
+DEFAULT_OUTPUT_LINES = 64
+MAX_OUTPUT_LINES = 200
+DEFAULT_TASK_LIST_LIMIT = 32
+MAX_TASK_LIST_LIMIT = 100
+
+# Timeout constraints (milliseconds)
+MIN_TIMEOUT_MS = 1000
+MAX_TIMEOUT_MS = 600000
+
+# Wait constraints (seconds)
+MIN_WAIT_SECONDS = 1
+MAX_WAIT_SECONDS = 3600
+
+# Description constraints
+DESCRIPTION_MAX_LENGTH = 200
+
 
 def normalize_input(value: Optional[str], lowercase: bool = False) -> str:
-    """Normalize user input: collapse whitespace, optionally lowercase.
-
-    Args:
-        value: Input string to normalize
-        lowercase: Whether to convert to lowercase
-
-    Returns:
-        Normalized string with collapsed whitespace
-    """
+    """Normalize user input: collapse whitespace, optionally lowercase."""
     if value is None:
         return ""
     normalized = " ".join(value.split())
@@ -38,6 +45,22 @@ def validate_non_empty_string(value: str) -> str:
     return stripped
 
 
+def validate_script_path(value: str) -> str:
+    """Validate entry script path."""
+    stripped = validate_non_empty_string(value)
+    if not (PurePosixPath(stripped).is_absolute() or PureWindowsPath(stripped).is_absolute()):
+        raise ValueError("entry_script must be an absolute path")
+    return stripped
+
+
+def validate_task_description(value: str) -> str:
+    """Validate task description text."""
+    stripped = validate_non_empty_string(value)
+    if len(stripped) > DESCRIPTION_MAX_LENGTH:
+        raise ValueError(f"description is too long (max {DESCRIPTION_MAX_LENGTH} chars)")
+    return stripped
+
+
 # Search query for commands
 SearchQuery = Annotated[
     str,
@@ -48,8 +71,8 @@ SearchQuery = Annotated[
         description=(
             "Search keywords for PFC commands. Examples: 'ball create', "
             "'contact property', 'model solve'. Case-insensitive."
-        )
-    )
+        ),
+    ),
 ]
 
 # Python API search query
@@ -62,8 +85,8 @@ PythonAPISearchQuery = Annotated[
         description=(
             "Search keywords for PFC Python SDK API. Examples: 'ball pos', "
             "'contact force', 'model solve'. Case-insensitive."
-        )
-    )
+        ),
+    ),
 ]
 
 # Search limit
@@ -73,6 +96,85 @@ SearchLimit = Annotated[
         default=DEFAULT_SEARCH_LIMIT,
         ge=1,
         le=MAX_SEARCH_LIMIT,
-        description=f"Maximum number of results (1-{MAX_SEARCH_LIMIT})."
-    )
+        description=f"Maximum number of results (1-{MAX_SEARCH_LIMIT}).",
+    ),
+]
+
+TaskId = Annotated[
+    str,
+    AfterValidator(validate_non_empty_string),
+    Field(..., description="Task ID returned by pfc_execute_task or pfc_execute_code"),
+]
+
+ScriptPath = Annotated[
+    str,
+    AfterValidator(validate_script_path),
+    Field(..., description="Absolute path to entry Python script in PFC workspace"),
+]
+
+TaskDescription = Annotated[
+    str,
+    AfterValidator(validate_task_description),
+    Field(..., min_length=1, max_length=DESCRIPTION_MAX_LENGTH, description="Brief task purpose"),
+]
+
+TimeoutMs = Annotated[
+    Optional[int],
+    Field(
+        default=None,
+        ge=MIN_TIMEOUT_MS,
+        le=MAX_TIMEOUT_MS,
+        description="Execution timeout in milliseconds. Null means no timeout.",
+    ),
+]
+
+RunInBackground = Annotated[
+    bool,
+    Field(default=True, description="Return immediately with task ID when true"),
+]
+
+SkipNewestTasks = Annotated[
+    int,
+    Field(default=0, ge=0, description="Skip N most recent tasks before listing"),
+]
+
+TaskListLimit = Annotated[
+    int,
+    Field(default=DEFAULT_TASK_LIST_LIMIT, ge=1, le=MAX_TASK_LIST_LIMIT, description="Max tasks to return"),
+]
+
+SkipNewestLines = Annotated[
+    int,
+    Field(default=0, ge=0, description="Skip N newest output lines before pagination"),
+]
+
+OutputLimit = Annotated[
+    int,
+    Field(default=DEFAULT_OUTPUT_LINES, ge=1, le=MAX_OUTPUT_LINES, description="Output lines per page"),
+]
+
+FilterText = Annotated[
+    Optional[str],
+    Field(default=None, description="Only keep output lines containing this text"),
+]
+
+WaitSeconds = Annotated[
+    float,
+    Field(
+        default=MIN_WAIT_SECONDS,
+        ge=MIN_WAIT_SECONDS,
+        le=MAX_WAIT_SECONDS,
+        description="Wait time before querying status",
+    ),
+]
+
+ConsoleCode = Annotated[
+    str,
+    AfterValidator(validate_non_empty_string),
+    Field(..., min_length=1, description="Python code to execute in PFC user console"),
+]
+
+ConsoleTimeoutMs = Annotated[
+    int,
+    Field(default=30000, ge=MIN_TIMEOUT_MS, le=MAX_TIMEOUT_MS, description="Console execution timeout in milliseconds"),
 ]

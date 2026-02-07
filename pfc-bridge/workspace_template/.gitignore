@@ -1,0 +1,73 @@
+# ===========================================
+# PFC Workspace .gitignore Template
+# ===========================================
+# Copy this file to your PFC project workspace
+# ===========================================
+
+# -----------------------------------------
+# PFC Runtime Files
+# -----------------------------------------
+# Error logs and dumps
+errorlog.txt
+*.dmp
+
+# Temporary files
+*.temp
+*.tmp
+
+# PFC state files (regenerated on load)
+*.sav.bak
+
+# -----------------------------------------
+# PFC Server Files
+# -----------------------------------------
+# User console scripts (managed by pfc-server)
+# These are auto-generated temporary scripts
+.user_console/
+
+# -----------------------------------------
+# Nagisa Server Data (managed by pfc-server)
+# -----------------------------------------
+# Contains task persistence, output logs, and server state
+.nagisa/
+
+# -----------------------------------------
+# OS Generated Files
+# -----------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------
+# Editor/IDE Files
+# -----------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# -----------------------------------------
+# Python
+# -----------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+
+# -----------------------------------------
+# Optional: Uncomment to ignore project file
+# -----------------------------------------
+# PFC project files are usually small and can be tracked
+# Uncomment if you want to ignore them:
+# *.prj
+
+# -----------------------------------------
+# Optional: Uncomment to ignore save files
+# -----------------------------------------
+# Save files can be large (100MB+)
+# Uncomment if you don't want to track them:
+# *.sav
+# *.p2sav
+# *.p3sav

@@ -1,0 +1,703 @@
+{
+  "module": "itasca",
+  "description": "Core PFC Python SDK module providing simulation control, domain management, and state persistence",
+  "import_statement": "import itasca",
+  "functions": [
+    {
+      "name": "command",
+      "signature": "itasca.command(command: str) -> None",
+      "description": "Issue a PFC command. This is the primary way to access PFC commands not available in Python SDK. Commands are executed immediately.",
+      "parameters": [
+        {
+          "name": "command",
+          "type": "str",
+          "required": true,
+          "description": "PFC command string"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "limitations": "Cannot return command output. For queries, use specific Python SDK functions or fish variables."
+    },
+    {
+      "name": "cycle",
+      "signature": "itasca.cycle() -> int",
+      "description": "Get the cycle number. Returns the total number of cycles executed since model initialization.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Current cycle number"
+      }
+    },
+    {
+      "name": "timestep",
+      "signature": "itasca.timestep() -> float",
+      "description": "Get the global timestep value used for mechanical calculations.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Current timestep value"
+      }
+    },
+    {
+      "name": "mech_age",
+      "signature": "itasca.mech_age() -> float",
+      "description": "Return the accumulated mechanical time (cycle number × timestep).",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Accumulated mechanical time"
+      }
+    },
+    {
+      "name": "dim",
+      "signature": "itasca.dim() -> int",
+      "description": "Get the code dimensionality (2 for 2D, 3 for 3D).",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Dimensionality (2 or 3)"
+      }
+    },
+    {
+      "name": "gravity",
+      "signature": "itasca.gravity() -> vec",
+      "description": "Get the gravity vector. Returns a vector object with x, y, z components.",
+      "parameters": [],
+      "returns": {
+        "type": "vec",
+        "description": "Gravity vector"
+      }
+    },
+    {
+      "name": "gravity_x",
+      "signature": "itasca.gravity_x() -> float",
+      "description": "Get the x-component of gravity.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "X-component of gravity"
+      }
+    },
+    {
+      "name": "gravity_y",
+      "signature": "itasca.gravity_y() -> float",
+      "description": "Get the y-component of gravity.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Y-component of gravity"
+      }
+    },
+    {
+      "name": "gravity_z",
+      "signature": "itasca.gravity_z() -> float",
+      "description": "Get the z-component of gravity.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Z-component of gravity"
+      }
+    },
+    {
+      "name": "set_gravity",
+      "signature": "itasca.set_gravity(value: vec) -> None",
+      "description": "Set the gravity vector. Modifies the gravity for all objects in the simulation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Gravity vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_gravity_x",
+      "signature": "itasca.set_gravity_x(value: float) -> None",
+      "description": "Set the x-component of gravity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X-component of gravity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_gravity_y",
+      "signature": "itasca.set_gravity_y(value: float) -> None",
+      "description": "Set the y-component of gravity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y-component of gravity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_gravity_z",
+      "signature": "itasca.set_gravity_z(value: float) -> None",
+      "description": "Set the z-component of gravity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z-component of gravity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "domain_min",
+      "signature": "itasca.domain_min() -> vec",
+      "description": "Get domain lower bound as vector.",
+      "parameters": [],
+      "returns": {
+        "type": "vec",
+        "description": "Domain lower bound vector"
+      }
+    },
+    {
+      "name": "domain_min_x",
+      "signature": "itasca.domain_min_x() -> float",
+      "description": "Get the x-component of domain lower bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "X-component of domain lower bound"
+      }
+    },
+    {
+      "name": "domain_min_y",
+      "signature": "itasca.domain_min_y() -> float",
+      "description": "Get the y-component of domain lower bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Y-component of domain lower bound"
+      }
+    },
+    {
+      "name": "domain_min_z",
+      "signature": "itasca.domain_min_z() -> float",
+      "description": "Get the z-component of domain lower bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Z-component of domain lower bound"
+      }
+    },
+    {
+      "name": "domain_max",
+      "signature": "itasca.domain_max() -> vec",
+      "description": "Get domain upper bound as vector.",
+      "parameters": [],
+      "returns": {
+        "type": "vec",
+        "description": "Domain upper bound vector"
+      }
+    },
+    {
+      "name": "domain_max_x",
+      "signature": "itasca.domain_max_x() -> float",
+      "description": "Get the x-component of domain upper bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "X-component of domain upper bound"
+      }
+    },
+    {
+      "name": "domain_max_y",
+      "signature": "itasca.domain_max_y() -> float",
+      "description": "Get the y-component of domain upper bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Y-component of domain upper bound"
+      }
+    },
+    {
+      "name": "domain_max_z",
+      "signature": "itasca.domain_max_z() -> float",
+      "description": "Get the z-component of domain upper bound.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Z-component of domain upper bound"
+      }
+    },
+    {
+      "name": "set_domain_min",
+      "signature": "itasca.set_domain_min(value: vec) -> None",
+      "description": "Set domain lower bound as vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Domain lower bound vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_min_x",
+      "signature": "itasca.set_domain_min_x(value: float) -> None",
+      "description": "Set the x-component of domain lower bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X-component of domain lower bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_min_y",
+      "signature": "itasca.set_domain_min_y(value: float) -> None",
+      "description": "Set the y-component of domain lower bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y-component of domain lower bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_min_z",
+      "signature": "itasca.set_domain_min_z(value: float) -> None",
+      "description": "Set the z-component of domain lower bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z-component of domain lower bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_max",
+      "signature": "itasca.set_domain_max(value: vec) -> None",
+      "description": "Set domain upper bound as vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Domain upper bound vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_max_x",
+      "signature": "itasca.set_domain_max_x(value: float) -> None",
+      "description": "Set the x-component of domain upper bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X-component of domain upper bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_max_y",
+      "signature": "itasca.set_domain_max_y(value: float) -> None",
+      "description": "Set the y-component of domain upper bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y-component of domain upper bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_domain_max_z",
+      "signature": "itasca.set_domain_max_z(value: float) -> None",
+      "description": "Set the z-component of domain upper bound.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z-component of domain upper bound"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "domain_condition",
+      "signature": "itasca.domain_condition(value: str) -> str",
+      "description": "Get the domain condition given a domain direction. Acceptable values are 'x' or 'y' in 2D; 'x', 'y' or 'z' in 3D.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "str",
+          "required": true,
+          "description": "Domain direction ('x', 'y', or 'z')"
+        }
+      ],
+      "returns": {
+        "type": "str",
+        "description": "Domain condition ('destroy', 'periodic', 'reflect', or 'stop')"
+      }
+    },
+    {
+      "name": "set_domain_condition",
+      "signature": "itasca.set_domain_condition(direction: str, condition: str) -> None",
+      "description": "Set the domain condition for a given domain direction. Acceptable directions are 'x' or 'y' in 2D; 'x', 'y' or 'z' in 3D. Acceptable conditions are 'destroy', 'periodic', 'reflect' and 'stop'.",
+      "parameters": [
+        {
+          "name": "direction",
+          "type": "str",
+          "required": true,
+          "description": "Domain direction ('x', 'y', or 'z')"
+        },
+        {
+          "name": "condition",
+          "type": "str",
+          "required": true,
+          "description": "Domain condition ('destroy', 'periodic', 'reflect', or 'stop')"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "domain_strain_rate",
+      "signature": "itasca.domain_strain_rate() -> tens3",
+      "description": "Get the domain strain-rate tensor.",
+      "parameters": [],
+      "returns": {
+        "type": "tens3",
+        "description": "Domain strain-rate tensor"
+      }
+    },
+    {
+      "name": "set_domain_strain_rate",
+      "signature": "itasca.set_domain_strain_rate(stress: tens3) -> None",
+      "description": "Set the domain strain-rate tensor.",
+      "parameters": [
+        {
+          "name": "stress",
+          "type": "tens3",
+          "required": true,
+          "description": "Domain strain-rate tensor"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "add_save_variable",
+      "signature": "itasca.add_save_variable(variable_name: str) -> None",
+      "description": "Add the name of Python variable to the list of variables to be saved in the save file. Critical for state persistence and context continuity across save/restore operations.",
+      "parameters": [
+        {
+          "name": "variable_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of Python variable to save"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "remove_save_variable",
+      "signature": "itasca.remove_save_variable(variable_name: str) -> None",
+      "description": "Remove the name of the Python variable from the list of variables to be saved in the save file.",
+      "parameters": [
+        {
+          "name": "variable_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of Python variable to remove from save list"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "clear_save_variables",
+      "signature": "itasca.clear_save_variables() -> None",
+      "description": "Clear the list of names of the Python variables to be saved in the save file.",
+      "parameters": [],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "get_save_variables",
+      "signature": "itasca.get_save_variables() -> tuple of str",
+      "description": "Get the names of the Python variables to be saved in the save file.",
+      "parameters": [],
+      "returns": {
+        "type": "tuple of str",
+        "description": "Tuple of variable names"
+      }
+    },
+    {
+      "name": "set_callback",
+      "signature": "itasca.set_callback(function_name: str, call_point: float or str) -> None",
+      "description": "Register a Python function to be called during the cycling sequence. The function should exist in __main__ namespace and be callable with any number of arguments. Call_point can be a float (location in cycling sequence) or a string (pre-defined callback event).",
+      "parameters": [
+        {
+          "name": "function_name",
+          "type": "str",
+          "required": true,
+          "description": "String name of the function to register"
+        },
+        {
+          "name": "call_point",
+          "type": "float or str",
+          "required": true,
+          "description": "Location in cycling sequence (float) or callback event name (str)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "remove_callback",
+      "signature": "itasca.remove_callback(function_name: str, call_point: float or str) -> None",
+      "description": "Remove a Python function from the callback system. Call_point can be a float (location in cycling sequence) or a string (pre-defined callback event).",
+      "parameters": [
+        {
+          "name": "function_name",
+          "type": "str",
+          "required": true,
+          "description": "String name of the function to remove"
+        },
+        {
+          "name": "call_point",
+          "type": "float or str",
+          "required": true,
+          "description": "Location in cycling sequence (float) or callback event name (str)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "state_callbacks",
+      "signature": "itasca.state_callbacks() -> dict {any: tuple of str}",
+      "description": "Return a dictionary of the currently defined Python new, save and restore callback events. Keys are callback points, values are tuples of Python function names.",
+      "parameters": [],
+      "returns": {
+        "type": "dict {any: tuple of str}",
+        "description": "Dictionary of callback points to function names"
+      }
+    },
+    {
+      "name": "deterministic",
+      "signature": "itasca.deterministic() -> bool",
+      "description": "Get the deterministic mode. In deterministic mode, all model runs with identical initial conditions result in identical solutions at the cost of >20% performance reduction. In nondeterministic mode, identical initial conditions may lead to divergent solutions due to summation order (all solutions equally valid to machine precision).",
+      "parameters": [],
+      "returns": {
+        "type": "bool",
+        "description": "True if deterministic mode enabled"
+      }
+    },
+    {
+      "name": "set_deterministic",
+      "signature": "itasca.set_deterministic(value: bool) -> None",
+      "description": "Set the deterministic mode. In deterministic mode, all model runs with identical initial conditions result in identical solutions at the cost of >20% performance reduction. In nondeterministic mode, identical initial conditions may lead to divergent solutions due to summation order (all solutions equally valid to machine precision).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "bool",
+          "required": true,
+          "description": "True to enable deterministic mode"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "threads",
+      "signature": "itasca.threads() -> int",
+      "description": "Get the number of threads used for parallel computations.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Number of threads"
+      }
+    },
+    {
+      "name": "set_threads",
+      "signature": "itasca.set_threads(value: int) -> None",
+      "description": "Set the number of threads used for parallel computations.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "int",
+          "required": true,
+          "description": "Number of threads"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "fos",
+      "signature": "itasca.fos() -> float",
+      "description": "Get the factor of safety.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Factor of safety value"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "itasca.group(group_name: str) -> int",
+      "description": "Return the group index associated with a given group name. A group index can be used instead of a string for faster execution.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "Group name"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Group index"
+      }
+    },
+    {
+      "name": "slot",
+      "signature": "itasca.slot(slot_name: str) -> int",
+      "description": "Return the slot index associated with a given slot name. A slot index can be used instead of a string for faster execution.",
+      "parameters": [
+        {
+          "name": "slot_name",
+          "type": "str",
+          "required": true,
+          "description": "Slot name"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Slot index"
+      }
+    },
+    {
+      "name": "mainWindow",
+      "signature": "itasca.mainWindow() -> QMainWindow",
+      "description": "Get the string pointer address of the QMainWindow. Used for GUI integration.",
+      "parameters": [],
+      "returns": {
+        "type": "QMainWindow",
+        "description": "Pointer to QMainWindow"
+      }
+    },
+    {
+      "name": "dockWidget",
+      "signature": "itasca.dockWidget(window_name: str, dock_location: str, add_close_controls: bool) -> Pointer to QDockWidget",
+      "description": "Return a pointer to an empty QDockWidget with the specified attributes. Use shiboken.wrapInstance to access the QDockWidget class through PySide bindings.",
+      "parameters": [
+        {
+          "name": "window_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of the dock widget window"
+        },
+        {
+          "name": "dock_location",
+          "type": "str",
+          "required": true,
+          "description": "Location to dock the widget"
+        },
+        {
+          "name": "add_close_controls",
+          "type": "bool",
+          "required": true,
+          "description": "Whether to add close controls"
+        }
+      ],
+      "returns": {
+        "type": "Pointer to QDockWidget",
+        "description": "Pointer to QDockWidget"
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "command": "clump scale",
+  "category": "clump",
+  "search_keywords": [
+    "scale",
+    "size",
+    "volume"
+  ],
+  "description": "Scale clumps. The pebbles are scaled, their positions are modified, and the volume is updated. If the volume or moment of inertia has been previously specified by the user either via the clump attribute command or via FISH, the principal moments of inertia are in a fixed state and will not be scaled. This can be modified with FISH (see the clump.moi.fix intrinsic for further details). One can either scale the volume to a target value, the volume to the volume of an equivalent disk with unit thickness (2D) or sphere (3D) with a specified diameter, or via the return value of a FISH function. This operation may fail if a clump is scaled so that any of its pebbles fall outside of the model domain. If this happens for any clump, then no clumps are scaled.",
+  "syntax": "clump scale <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "diameter",
+      "syntax": "diameter <fdiam>",
+      "description": "Scale the clump to have volume of an equivalent disk with unit thickness (2D) or sphere (3D) with specified diameter"
+    },
+    {
+      "name": "volume",
+      "syntax": "volume <fvol>",
+      "description": "Scale the clump to have volume fvol"
+    },
+    {
+      "name": "fish-size",
+      "syntax": "fish-size <s> <fval>",
+      "description": "Use the FISH function s to scale the 'size' of the clump to fval. The FISH function must take a single argument that is a clump pointer and return a floating point value corresponding to a linear measure of the clump size"
+    }
+  ],
+  "notes": [
+    "Scaling modifies: pebble sizes, pebble positions, and clump volume",
+    "If volume or moment of inertia was previously user-specified (via clump attribute or FISH), principal moments of inertia are in fixed state and will NOT be scaled automatically",
+    "Fixed moment of inertia state can be modified via FISH (clump.moi.fix intrinsic)",
+    "All-or-nothing behavior: if ANY clump would have pebbles outside model domain after scaling, NO clumps are scaled",
+    "Operation fails if scaled pebbles would fall outside model domain"
+  ],
+  "examples": [
+    {
+      "command": "clump scale volume [svol]",
+      "description": "Scale all clumps to target volume (FISH variable svol)"
+    },
+    {
+      "command": "clump scale diameter 0.4",
+      "description": "Scale all clumps to equivalent sphere diameter 0.4"
+    },
+    {
+      "command": "clump scale volume 1.5 range id 1 100",
+      "description": "Scale clumps 1-100 to volume 1.5"
+    },
+    {
+      "command": "clump scale diameter 2.0 range group 'aggregate'",
+      "description": "Scale clumps in 'aggregate' group to equivalent sphere diameter 2.0"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump scale ...') - Python SDK does not provide direct clump scaling method"
+  }
+}

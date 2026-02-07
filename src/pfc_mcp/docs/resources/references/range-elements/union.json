@@ -1,0 +1,15 @@
+{
+  "name": "union",
+  "category": "phrase_modifiers",
+  "category_name": "Phrase Modifiers",
+  "syntax": "range ... union",
+  "description": "Change from intersection (AND) to union (OR) logic for multiple elements.",
+  "examples": [
+    "range group 'top' group 'bottom' union"
+  ],
+  "search_keywords": [
+    "union",
+    "or",
+    "combine"
+  ]
+}

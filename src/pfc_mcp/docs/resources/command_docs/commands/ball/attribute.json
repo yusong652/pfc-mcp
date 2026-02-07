@@ -1,0 +1,62 @@
+{
+  "command": "ball attribute",
+  "category": "ball",
+  "search_keywords": [
+    "attribute",
+    "set",
+    "density",
+    "velocity",
+    "position"
+  ],
+  "description": "Set the value of ball attributes. This command is a synonym for the ball initialize command. Ball attributes are characteristics of the balls such as position or size. These are distinct from ball properties (assigned with the ball property command) that are surface properties of the balls that are used to fill contact model properties.",
+  "syntax": "ball attribute <keyword> <value> <range>",
+  "modifiers": [
+    {
+      "name": "add",
+      "syntax": "add <f>",
+      "description": "Add value to existing attribute"
+    },
+    {
+      "name": "multiply",
+      "syntax": "multiply <f>",
+      "description": "Multiply existing attribute by value"
+    },
+    {
+      "name": "replace",
+      "syntax": "replace <f>",
+      "description": "Replace existing attribute with value (default)"
+    },
+    {
+      "name": "gradient",
+      "syntax": "gradient <v>",
+      "description": "Apply linear gradient in each axis direction starting at origin"
+    },
+    {
+      "name": "gradient-x/y/z",
+      "syntax": "gradient-x <f>",
+      "description": "Apply linear gradient in specific direction"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball attribute density 1000.0 damp 0.7",
+      "description": "Set density to 1000 and damping coefficient to 0.7 for all balls (most common usage)"
+    },
+    {
+      "command": "ball attribute velocity (0.0,0.0,-1.0) range position-x -4.5 0.0",
+      "description": "Set initial velocity for balls in specified position range"
+    },
+    {
+      "command": "ball attribute force-applied (0.0,0.0,-1.0) range group 'mygroup'",
+      "description": "Apply constant force to balls in group (not updated during cycling)"
+    },
+    {
+      "command": "ball attribute radius 0.5 multiply 1.2 range id 1 100",
+      "description": "Multiply radius by 1.2 for balls with ID 1-100 (use model clean after geometry changes)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Use Ball.set_*() methods (e.g., Ball.set_density(), Ball.set_vel(), Ball.set_pos()) - requires iteration over ball range"
+  }
+}

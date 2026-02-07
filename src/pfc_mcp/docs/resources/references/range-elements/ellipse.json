@@ -1,0 +1,15 @@
+{
+  "name": "ellipse",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "ellipse vertices <v1> <v2> <v3> <v4> [origin <v>]",
+  "description": "Ellipse inscribed in rectangle defined by four vertices.",
+  "examples": [
+    "range ellipse vertices (0,0,0) (10,0,0) (10,5,0) (0,5,0)"
+  ],
+  "search_keywords": [
+    "ellipse",
+    "elliptical",
+    "oval"
+  ]
+}

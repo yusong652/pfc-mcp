@@ -1,0 +1,34 @@
+{
+  "command": "plot clear",
+  "category": "plot",
+  "search_keywords": [
+    "clear",
+    "remove",
+    "empty",
+    "items"
+  ],
+  "description": "Removes all plot items from the plot. The plot settings are not changed. If a plot name is not specified, the current view is assumed.",
+  "syntax": "plot <s> clear",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot clear",
+      "description": "Remove all items from the current plot"
+    },
+    {
+      "command": "plot 'myplot' clear",
+      "description": "Remove all items from plot 'myplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> clear') - no direct Python SDK method"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "rectangle",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "rectangle vertices <v1> <v2> <v3> <v4> [origin <v>]",
+  "description": "Rectangular cylinder. Four vertices define the rectangle.",
+  "examples": [
+    "range rectangle vertices (0,0,0) (10,0,0) (10,10,0) (0,10,0)"
+  ],
+  "search_keywords": [
+    "rectangle",
+    "rectangular",
+    "box"
+  ]
+}

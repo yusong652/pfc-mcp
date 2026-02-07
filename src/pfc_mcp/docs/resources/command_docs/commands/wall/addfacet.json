@@ -1,0 +1,56 @@
+{
+  "command": "wall addfacet",
+  "category": "wall",
+  "search_keywords": [
+    "addfacet",
+    "extend",
+    "vertex"
+  ],
+  "description": "Add a facet to a wall. The faceted wall is specified with the keywords id or name. If facets exist in the specified wall, then the proposed facet must share {a vertex in 2D; edge in 3D} with a preexisting facet. If the facet ID is not specified with the facetid keyword, the next available ID is assigned to the facet. The entire facet must fall within the model domain. The vertex keyword must be given {twice in 2D; three times in 3D} followed by the ID of the vertex in the specified wall or a position vector of the vertex position. At least {one vertex in 2D; 2 vertices in 3D} must be shared with the specified wall and the facet must not interpenetrate a preexisting facet. Note: While cycling, facets can only be added before cycle point 0 (i.e., when the timestep is calculated).",
+  "syntax": "wall addfacet <keyword> ...",
+  "keywords": [
+    {
+      "name": "facetid",
+      "syntax": "facetid <ifacet>",
+      "description": "ID of the facet that is being added. Auto-assigned if not specified"
+    },
+    {
+      "name": "group",
+      "syntax": "group name <s> slot <slot>",
+      "description": "Specify group name for the created facet. Default slot is 'Default' if not specified"
+    },
+    {
+      "name": "id",
+      "syntax": "id <id>",
+      "description": "ID of the wall to which the facet is being added. Cannot be given with the name keyword"
+    },
+    {
+      "name": "name",
+      "syntax": "name <s>",
+      "description": "Name of the wall to which the facet is being added. Cannot be given with the id keyword"
+    },
+    {
+      "name": "vertex",
+      "syntax": "vertex <vpos> | <ivert>",
+      "description": "The vertex position (vector) or vertex ID (integer). Must be specified {twice in 2D; three times in 3D}"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall addfacet name boundary vertex (0.6,0) vertex (0.7,0) facetid 7",
+      "description": "Add facet with ID 7 to wall named 'boundary' using two position vectors (2D)"
+    },
+    {
+      "command": "wall addfacet id 1 vertex -5 -5 -5 vertex -5 -5 5 vertex 5 -5 5",
+      "description": "Add facet to wall ID 1 using three position vectors (3D)"
+    },
+    {
+      "command": "wall addfacet name 'fred' vertex [v1] vertex [v2] vertex [c]",
+      "description": "Add facet to wall named 'fred' using vertex IDs from FISH variables"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall addfacet ...') - Python SDK does not provide facet creation methods"
+  }
+}

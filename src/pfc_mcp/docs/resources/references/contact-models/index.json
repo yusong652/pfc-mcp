@@ -1,0 +1,92 @@
+{
+  "type": "contact_model_properties",
+  "description": "Reference documentation for contact model properties. Each contact model has specific properties that control its mechanical behavior. Use this reference when setting properties via 'contact cmat', 'contact property', or Python SDK.",
+
+  "usage_contexts": [
+    "contact cmat add model <name> property <prop> <value>",
+    "contact cmat default model <name> property <prop> <value>",
+    "contact property <prop> <value> range ...",
+    "Python: contact.set_prop('<prop>', value)"
+  ],
+
+  "property_metadata_fields": {
+    "keyword": "Property name used in commands",
+    "symbol": "Mathematical symbol used in documentation",
+    "description": "Description including physical meaning and units",
+    "type": "Data type (FLT=float, INT=integer, BOOL=boolean, VEC=vector)",
+    "range": "Valid value range",
+    "default": "Default value if not specified",
+    "modifiable": "Can be changed after contact creation",
+    "inheritable": "Can inherit from contacting pieces (balls/walls)"
+  },
+
+  "models": [
+    {
+      "name": "linear",
+      "file": "linear.json",
+      "full_name": "Linear Model",
+      "description": "Linear elastic-frictional contact model with optional damping",
+      "property_groups": ["Linear Group", "Dashpot Group"],
+      "common_use": "Default general-purpose contact model",
+      "priority": "high",
+      "status": "documented"
+    },
+    {
+      "name": "linearcbond",
+      "file": "linearcbond.json",
+      "full_name": "Linear Contact Bond Model",
+      "description": "Linear model with contact-based bonds for point adhesion",
+      "property_groups": ["Linear Group", "Dashpot Group", "Contact Bond Group"],
+      "common_use": "Point-based bonds, adhesion, weak cementation",
+      "priority": "high",
+      "status": "documented"
+    },
+    {
+      "name": "linearpbond",
+      "file": "linearpbond.json",
+      "full_name": "Linear Parallel Bond Model",
+      "description": "Linear model with parallel bonds for cemented materials - transmits force AND moment",
+      "property_groups": ["Linear Group", "Dashpot Group", "Parallel Bond Group"],
+      "common_use": "Cemented particulate materials, intact rock, bonded assemblies",
+      "priority": "high",
+      "status": "documented"
+    },
+    {
+      "name": "hertz",
+      "file": "hertz.json",
+      "full_name": "Hertz Model",
+      "description": "Nonlinear elastic contact model based on Hertz-Mindlin theory - F_n ~ δ^1.5",
+      "property_groups": ["Hertz Group", "Dashpot Group"],
+      "common_use": "Impact simulations, nonlinear elasticity, realistic contact mechanics",
+      "priority": "medium",
+      "status": "documented"
+    },
+    {
+      "name": "rrlinear",
+      "file": "rrlinear.json",
+      "full_name": "Rolling Resistance Linear Model",
+      "description": "Linear model with torque mechanism opposing rolling motion - simulates surface roughness effects",
+      "property_groups": ["Linear Group", "Dashpot Group", "Rolling Resistance Group"],
+      "common_use": "Granular materials with rolling resistance, heap repose angle analysis",
+      "priority": "medium",
+      "status": "documented"
+    }
+  ],
+
+  "related_documentation": {
+    "command_docs": [
+      "../cmat/add.json",
+      "../cmat/default.json",
+      "../../contact/property.json"
+    ],
+    "pfc_manual": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/contact_models/index.html"
+  },
+
+  "notes": [
+    "Property availability depends on the contact model",
+    "Inheritable properties can receive values from contacting pieces",
+    "Non-modifiable properties are read-only or calculated automatically",
+    "Use 'emod' and 'kratio' with deformability method for automatic stiffness calculation",
+    "Vector properties use contact plane coordinate system"
+  ]
+}

@@ -1,0 +1,1643 @@
+{
+  "class": "Ball",
+  "description": "Ball object representing a single ball in PFC discrete element simulation. Obtained via itasca.ball.create(), itasca.ball.find(), or itasca.ball.list().",
+  "note": "Objects of this type should not be created (instantiated) directly in Python. Use module functions that return instances.",
+  "method_groups": {
+    "identification": [
+      "id",
+      "valid",
+      "delete"
+    ],
+    "position": [
+      "pos",
+      "pos_x",
+      "pos_y",
+      "pos_z",
+      "set_pos",
+      "set_pos_x",
+      "set_pos_y",
+      "set_pos_z"
+    ],
+    "orientation": [
+      "euler",
+      "euler_x",
+      "euler_y",
+      "euler_z",
+      "set_euler",
+      "set_euler_x",
+      "set_euler_y",
+      "set_euler_z"
+    ],
+    "displacement": [
+      "disp",
+      "disp_x",
+      "disp_y",
+      "disp_z",
+      "set_disp",
+      "set_disp_x",
+      "set_disp_y",
+      "set_disp_z"
+    ],
+    "velocity": [
+      "vel",
+      "vel_x",
+      "vel_y",
+      "vel_z",
+      "set_vel",
+      "set_vel_x",
+      "set_vel_y",
+      "set_vel_z"
+    ],
+    "spin": [
+      "spin",
+      "spin_x",
+      "spin_y",
+      "spin_z",
+      "set_spin",
+      "set_spin_x",
+      "set_spin_y",
+      "set_spin_z"
+    ],
+    "forces": [
+      "force_app",
+      "force_app_x",
+      "force_app_y",
+      "force_app_z",
+      "set_force_app",
+      "set_force_app_x",
+      "set_force_app_y",
+      "set_force_app_z",
+      "force_contact",
+      "force_contact_x",
+      "force_contact_y",
+      "force_contact_z",
+      "set_force_contact",
+      "set_force_contact_x",
+      "set_force_contact_y",
+      "set_force_contact_z",
+      "force_unbal",
+      "force_unbal_x",
+      "force_unbal_y",
+      "force_unbal_z"
+    ],
+    "moments": [
+      "moment_app",
+      "moment_app_x",
+      "moment_app_y",
+      "moment_app_z",
+      "set_moment_app",
+      "set_moment_app_x",
+      "set_moment_app_y",
+      "set_moment_app_z",
+      "moment_contact",
+      "moment_contact_x",
+      "moment_contact_y",
+      "moment_contact_z",
+      "set_moment_contact",
+      "set_moment_contact_x",
+      "set_moment_contact_y",
+      "set_moment_contact_z",
+      "moment_unbal",
+      "moment_unbal_x",
+      "moment_unbal_y",
+      "moment_unbal_z"
+    ],
+    "physical_properties": [
+      "mass",
+      "mass_real",
+      "density",
+      "set_density",
+      "radius",
+      "set_radius",
+      "damp",
+      "set_damp",
+      "moi",
+      "moi_real"
+    ],
+    "contacts": [
+      "contacts",
+      "contact_count"
+    ],
+    "groups": [
+      "group",
+      "groups",
+      "in_group",
+      "set_group",
+      "group_remove"
+    ],
+    "properties": [
+      "has_prop",
+      "prop",
+      "props",
+      "set_prop"
+    ],
+    "fixity": [
+      "fix",
+      "set_fix"
+    ],
+    "other": [
+      "extra",
+      "set_extra",
+      "fragment",
+      "set_fragment",
+      "inside",
+      "stress"
+    ]
+  },
+  "methods": [
+    {
+      "name": "id",
+      "signature": "ball.id() -> int",
+      "description": "Get ball ID number. Unique identifier for this ball.",
+      "returns": {
+        "type": "int",
+        "description": "Ball ID"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "ball.valid() -> bool",
+      "description": "Check if this ball is live (still exists in the model). Returns False if ball has been deleted.",
+      "returns": {
+        "type": "bool",
+        "description": "True if ball exists, False if deleted"
+      }
+    },
+    {
+      "name": "delete",
+      "signature": "ball.delete() -> None",
+      "description": "Delete this ball from the model. Associated contacts are automatically deleted. Ball ID may be reused.",
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "ball.pos() -> vec",
+      "description": "Get ball centroid location as vector (x, y, z).",
+      "returns": {
+        "type": "vec",
+        "description": "(x, y, z) position coordinates"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "ball.pos_x() -> float",
+      "description": "Get X-component of ball position.",
+      "returns": {
+        "type": "float",
+        "description": "X coordinate"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "ball.pos_y() -> float",
+      "description": "Get Y-component of ball position.",
+      "returns": {
+        "type": "float",
+        "description": "Y coordinate"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "ball.pos_z() -> float",
+      "description": "Get Z-component of ball position.",
+      "returns": {
+        "type": "float",
+        "description": "Z coordinate"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "ball.set_pos(value: vec) -> None",
+      "description": "Set ball centroid location. Modifies ball state immediately. May cause overlaps.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "(x, y, z) coordinates"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_x",
+      "signature": "ball.set_pos_x(value: float) -> None",
+      "description": "Set X-component of ball position.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_y",
+      "signature": "ball.set_pos_y(value: float) -> None",
+      "description": "Set Y-component of ball position.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_z",
+      "signature": "ball.set_pos_z(value: float) -> None",
+      "description": "Set Z-component of ball position.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "euler",
+      "signature": "ball.euler() -> vec",
+      "description": "Get ball orientation as Euler angles (vector).",
+      "returns": {
+        "type": "vec",
+        "description": "Euler angles (rx, ry, rz)"
+      }
+    },
+    {
+      "name": "euler_x",
+      "signature": "ball.euler_x() -> float",
+      "description": "Get X-component of ball orientation.",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about X axis"
+      }
+    },
+    {
+      "name": "euler_y",
+      "signature": "ball.euler_y() -> float",
+      "description": "Get Y-component of ball orientation.",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about Y axis"
+      }
+    },
+    {
+      "name": "euler_z",
+      "signature": "ball.euler_z() -> float",
+      "description": "Get Z-component of ball orientation.",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about Z axis"
+      }
+    },
+    {
+      "name": "set_euler",
+      "signature": "ball.set_euler(value: vec) -> None",
+      "description": "Set ball orientation using Euler angles.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Euler angles (rx, ry, rz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_x",
+      "signature": "ball.set_euler_x(value: float) -> None",
+      "description": "Set X-component of ball orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about X axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_y",
+      "signature": "ball.set_euler_y(value: float) -> None",
+      "description": "Set Y-component of ball orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about Y axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_z",
+      "signature": "ball.set_euler_z(value: float) -> None",
+      "description": "Set Z-component of ball orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about Z axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "ball.disp() -> vec",
+      "description": "Get ball displacement vector from initial position.",
+      "returns": {
+        "type": "vec",
+        "description": "Displacement (dx, dy, dz)"
+      }
+    },
+    {
+      "name": "disp_x",
+      "signature": "ball.disp_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X displacement"
+      },
+      "description": "Get X-component of ball displacement"
+    },
+    {
+      "name": "disp_y",
+      "signature": "ball.disp_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y displacement"
+      },
+      "description": "Get Y-component of ball displacement"
+    },
+    {
+      "name": "disp_z",
+      "signature": "ball.disp_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z displacement"
+      },
+      "description": "Get Z-component of ball displacement"
+    },
+    {
+      "name": "set_disp",
+      "signature": "ball.set_disp(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Displacement vector (dx, dy, dz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set ball displacement vector"
+    },
+    {
+      "name": "set_disp_x",
+      "signature": "ball.set_disp_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of ball displacement"
+    },
+    {
+      "name": "set_disp_y",
+      "signature": "ball.set_disp_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of ball displacement"
+    },
+    {
+      "name": "set_disp_z",
+      "signature": "ball.set_disp_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of ball displacement"
+    },
+    {
+      "name": "vel",
+      "signature": "ball.vel() -> vec",
+      "description": "Get ball velocity vector (vx, vy, vz).",
+      "returns": {
+        "type": "vec",
+        "description": "Velocity components"
+      }
+    },
+    {
+      "name": "vel_x",
+      "signature": "ball.vel_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X velocity"
+      },
+      "description": "Get X-component of ball velocity"
+    },
+    {
+      "name": "vel_y",
+      "signature": "ball.vel_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y velocity"
+      },
+      "description": "Get Y-component of ball velocity"
+    },
+    {
+      "name": "vel_z",
+      "signature": "ball.vel_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z velocity"
+      },
+      "description": "Get Z-component of ball velocity"
+    },
+    {
+      "name": "set_vel",
+      "signature": "ball.set_vel(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Velocity vector (vx, vy, vz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set ball velocity vector"
+    },
+    {
+      "name": "set_vel_x",
+      "signature": "ball.set_vel_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X velocity component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of ball velocity"
+    },
+    {
+      "name": "set_vel_y",
+      "signature": "ball.set_vel_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y velocity component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of ball velocity"
+    },
+    {
+      "name": "set_vel_z",
+      "signature": "ball.set_vel_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z velocity component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of ball velocity"
+    },
+    {
+      "name": "spin",
+      "signature": "ball.spin() -> vec",
+      "description": "Get ball angular velocity vector (wx, wy, wz).",
+      "returns": {
+        "type": "vec",
+        "description": "Angular velocity"
+      }
+    },
+    {
+      "name": "spin_x",
+      "signature": "ball.spin_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X angular velocity"
+      },
+      "description": "Get X-component of ball spin"
+    },
+    {
+      "name": "spin_y",
+      "signature": "ball.spin_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y angular velocity"
+      },
+      "description": "Get Y-component of ball spin"
+    },
+    {
+      "name": "spin_z",
+      "signature": "ball.spin_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z angular velocity"
+      },
+      "description": "Get Z-component of ball spin"
+    },
+    {
+      "name": "set_spin",
+      "signature": "ball.set_spin(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Angular velocity vector (wx, wy, wz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set ball angular velocity (spin) vector"
+    },
+    {
+      "name": "set_spin_x",
+      "signature": "ball.set_spin_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X angular velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of ball spin"
+    },
+    {
+      "name": "set_spin_y",
+      "signature": "ball.set_spin_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y angular velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of ball spin"
+    },
+    {
+      "name": "set_spin_z",
+      "signature": "ball.set_spin_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z angular velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of ball spin"
+    },
+    {
+      "name": "force_app",
+      "signature": "ball.force_app() -> vec",
+      "description": "Get ball applied force vector.",
+      "returns": {
+        "type": "vec",
+        "description": "Applied force"
+      }
+    },
+    {
+      "name": "force_app_x",
+      "signature": "ball.force_app_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X applied force"
+      },
+      "description": "Get X-component of applied force"
+    },
+    {
+      "name": "force_app_y",
+      "signature": "ball.force_app_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y applied force"
+      },
+      "description": "Get Y-component of applied force"
+    },
+    {
+      "name": "force_app_z",
+      "signature": "ball.force_app_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z applied force"
+      },
+      "description": "Get Z-component of applied force"
+    },
+    {
+      "name": "set_force_app",
+      "signature": "ball.set_force_app(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Applied force vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set ball applied force vector"
+    },
+    {
+      "name": "set_force_app_x",
+      "signature": "ball.set_force_app_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of applied force"
+    },
+    {
+      "name": "set_force_app_y",
+      "signature": "ball.set_force_app_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of applied force"
+    },
+    {
+      "name": "set_force_app_z",
+      "signature": "ball.set_force_app_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of applied force"
+    },
+    {
+      "name": "force_contact",
+      "signature": "ball.force_contact() -> vec",
+      "description": "Get total contact force on ball.",
+      "returns": {
+        "type": "vec",
+        "description": "Contact force"
+      }
+    },
+    {
+      "name": "force_contact_x",
+      "signature": "ball.force_contact_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X contact force"
+      },
+      "description": "Get X-component of contact force"
+    },
+    {
+      "name": "force_contact_y",
+      "signature": "ball.force_contact_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y contact force"
+      },
+      "description": "Get Y-component of contact force"
+    },
+    {
+      "name": "force_contact_z",
+      "signature": "ball.force_contact_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z contact force"
+      },
+      "description": "Get Z-component of contact force"
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "ball.set_force_contact(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Contact force vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set contact force vector"
+    },
+    {
+      "name": "set_force_contact_x",
+      "signature": "ball.set_force_contact_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of contact force"
+    },
+    {
+      "name": "set_force_contact_y",
+      "signature": "ball.set_force_contact_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of contact force"
+    },
+    {
+      "name": "set_force_contact_z",
+      "signature": "ball.set_force_contact_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of contact force"
+    },
+    {
+      "name": "force_unbal",
+      "signature": "ball.force_unbal() -> vec",
+      "description": "Get ball unbalanced force.",
+      "returns": {
+        "type": "vec",
+        "description": "Unbalanced force"
+      }
+    },
+    {
+      "name": "force_unbal_x",
+      "signature": "ball.force_unbal_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X unbalanced force"
+      },
+      "description": "Get X-component of unbalanced force"
+    },
+    {
+      "name": "force_unbal_y",
+      "signature": "ball.force_unbal_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y unbalanced force"
+      },
+      "description": "Get Y-component of unbalanced force"
+    },
+    {
+      "name": "force_unbal_z",
+      "signature": "ball.force_unbal_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z unbalanced force"
+      },
+      "description": "Get Z-component of unbalanced force"
+    },
+    {
+      "name": "moment_app",
+      "signature": "ball.moment_app() -> vec",
+      "description": "Get ball applied moment vector.",
+      "returns": {
+        "type": "vec",
+        "description": "Applied moment"
+      }
+    },
+    {
+      "name": "moment_app_x",
+      "signature": "ball.moment_app_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X applied moment"
+      },
+      "description": "Get X-component of applied moment"
+    },
+    {
+      "name": "moment_app_y",
+      "signature": "ball.moment_app_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y applied moment"
+      },
+      "description": "Get Y-component of applied moment"
+    },
+    {
+      "name": "moment_app_z",
+      "signature": "ball.moment_app_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z applied moment"
+      },
+      "description": "Get Z-component of applied moment"
+    },
+    {
+      "name": "set_moment_app",
+      "signature": "ball.set_moment_app(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Applied moment vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set ball applied moment vector"
+    },
+    {
+      "name": "set_moment_app_x",
+      "signature": "ball.set_moment_app_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of applied moment"
+    },
+    {
+      "name": "set_moment_app_y",
+      "signature": "ball.set_moment_app_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of applied moment"
+    },
+    {
+      "name": "set_moment_app_z",
+      "signature": "ball.set_moment_app_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of applied moment"
+    },
+    {
+      "name": "moment_contact",
+      "signature": "ball.moment_contact() -> vec",
+      "description": "Get total contact moment on ball.",
+      "returns": {
+        "type": "vec",
+        "description": "Contact moment"
+      }
+    },
+    {
+      "name": "moment_contact_x",
+      "signature": "ball.moment_contact_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X contact moment"
+      },
+      "description": "Get X-component of contact moment"
+    },
+    {
+      "name": "moment_contact_y",
+      "signature": "ball.moment_contact_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y contact moment"
+      },
+      "description": "Get Y-component of contact moment"
+    },
+    {
+      "name": "moment_contact_z",
+      "signature": "ball.moment_contact_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z contact moment"
+      },
+      "description": "Get Z-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "ball.set_moment_contact(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Contact moment vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set contact moment vector"
+    },
+    {
+      "name": "set_moment_contact_x",
+      "signature": "ball.set_moment_contact_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact_y",
+      "signature": "ball.set_moment_contact_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact_z",
+      "signature": "ball.set_moment_contact_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of contact moment"
+    },
+    {
+      "name": "moment_unbal",
+      "signature": "ball.moment_unbal() -> vec",
+      "description": "Get ball unbalanced moment.",
+      "returns": {
+        "type": "vec",
+        "description": "Unbalanced moment"
+      }
+    },
+    {
+      "name": "moment_unbal_x",
+      "signature": "ball.moment_unbal_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X unbalanced moment"
+      },
+      "description": "Get X-component of unbalanced moment"
+    },
+    {
+      "name": "moment_unbal_y",
+      "signature": "ball.moment_unbal_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y unbalanced moment"
+      },
+      "description": "Get Y-component of unbalanced moment"
+    },
+    {
+      "name": "moment_unbal_z",
+      "signature": "ball.moment_unbal_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z unbalanced moment"
+      },
+      "description": "Get Z-component of unbalanced moment"
+    },
+    {
+      "name": "mass",
+      "signature": "ball.mass() -> float",
+      "description": "Get ball inertial mass.",
+      "returns": {
+        "type": "float",
+        "description": "Inertial mass"
+      }
+    },
+    {
+      "name": "mass_real",
+      "signature": "ball.mass_real() -> float",
+      "description": "Get ball real (gravitational) mass.",
+      "returns": {
+        "type": "float",
+        "description": "Real mass"
+      }
+    },
+    {
+      "name": "density",
+      "signature": "ball.density() -> float",
+      "description": "Get ball density.",
+      "returns": {
+        "type": "float",
+        "description": "Density"
+      }
+    },
+    {
+      "name": "set_density",
+      "signature": "ball.set_density(value: float) -> None",
+      "description": "Set ball density.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Density value"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "radius",
+      "signature": "ball.radius() -> float",
+      "description": "Get ball radius.",
+      "returns": {
+        "type": "float",
+        "description": "Radius"
+      }
+    },
+    {
+      "name": "set_radius",
+      "signature": "ball.set_radius(value: float) -> None",
+      "description": "Set ball radius.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Radius value"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "damp",
+      "signature": "ball.damp() -> float",
+      "description": "Get ball local damping coefficient.",
+      "returns": {
+        "type": "float",
+        "description": "Damping"
+      }
+    },
+    {
+      "name": "set_damp",
+      "signature": "ball.set_damp(value: float) -> None",
+      "description": "Set ball local damping coefficient.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Damping coefficient"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "moi",
+      "signature": "ball.moi() -> float",
+      "description": "Get ball moment of inertia.",
+      "returns": {
+        "type": "float",
+        "description": "Moment of inertia"
+      }
+    },
+    {
+      "name": "moi_real",
+      "signature": "ball.moi_real() -> float",
+      "description": "Get ball real (gravitational) moment of inertia.",
+      "returns": {
+        "type": "float",
+        "description": "Real MOI"
+      }
+    },
+    {
+      "name": "contacts",
+      "signature": "ball.contacts(piece: object = None, all: bool = False, type: type = None) -> tuple[Contact, ...]",
+      "description": "Get tuple of contacts associated with this ball. Can filter by piece (Ball/Pebble/Facet), type, and virtual contacts.",
+      "parameters": [
+        {
+          "name": "piece",
+          "type": "object",
+          "required": false,
+          "description": "Optional Ball, Pebble, or Facet"
+        },
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "Include virtual contacts (default: False)"
+        },
+        {
+          "name": "type",
+          "type": "type",
+          "required": false,
+          "description": "Filter by contact type"
+        }
+      ],
+      "returns": {
+        "type": "tuple[Contact, ...]",
+        "description": "Tuple of contacts"
+      }
+    },
+    {
+      "name": "contact_count",
+      "signature": "ball.contact_count(all: bool = False, type: type = None) -> int",
+      "description": "Get number of contacts associated with this ball.",
+      "parameters": [
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "Include virtual contacts"
+        },
+        {
+          "name": "type",
+          "type": "type",
+          "required": false,
+          "description": "Filter by contact type"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Number of contacts"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "ball.group(slot: str | int = None) -> str",
+      "description": "Get ball group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or number (optional)"
+        }
+      ],
+      "returns": {
+        "type": "str",
+        "description": "Group name"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "ball.groups() -> dict[str, str]",
+      "description": "Get dictionary of all groups this ball belongs to.",
+      "returns": {
+        "type": "dict[str, str]",
+        "description": "Slot->group mapping"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "ball.in_group(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Test if ball is in a given group.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name or ID to check"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or number (optional)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if in group"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "ball.set_group(group_name: str | int, slot: str | int = None) -> None",
+      "description": "Set ball group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name or ID to assign"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or number (optional)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "ball.group_remove(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Remove ball from given group.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name or ID to remove from"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or number (optional)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if removed"
+      }
+    },
+    {
+      "name": "has_prop",
+      "signature": "ball.has_prop(property_name: str) -> bool",
+      "description": "Check if ball has the given surface property.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Surface property name (depends on contact model, e.g., 'kn', 'ks', 'fric' for linear model, 'pb_kn', 'pb_ks', 'pb_coh' for parallel bond, 'hz_kn' for Hertz)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if property exists"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "ball.prop(property_name: str) -> any",
+      "description": "Get a surface property value of this ball.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Surface property name (depends on contact model, e.g., 'kn', 'ks', 'fric' for linear model, 'pb_kn', 'pb_ks', 'pb_coh' for parallel bond, 'hz_kn' for Hertz)"
+        }
+      ],
+      "returns": {
+        "type": "any",
+        "description": "Property value"
+      }
+    },
+    {
+      "name": "props",
+      "signature": "ball.props() -> dict[str, any]",
+      "description": "Get dictionary of all surface properties of this ball.",
+      "returns": {
+        "type": "dict[str, any]",
+        "description": "All properties"
+      }
+    },
+    {
+      "name": "set_prop",
+      "signature": "ball.set_prop(property_name: str, value: any) -> None",
+      "description": "Set a surface property of this ball.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Surface property name (depends on contact model, e.g., 'kn', 'ks', 'fric' for linear model, 'pb_kn', 'pb_ks', 'pb_coh' for parallel bond, 'hz_kn' for Hertz)"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true,
+          "description": "Property value"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "fix",
+      "signature": "ball.fix(component: int) -> bool",
+      "description": "Get ball fixity condition for a vector component.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true,
+          "description": "Degree of freedom (0-5: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "False=free, True=fixed"
+      }
+    },
+    {
+      "name": "set_fix",
+      "signature": "ball.set_fix(component: int, fix: bool) -> None",
+      "description": "Set ball fixity condition.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true,
+          "description": "Degree of freedom (0-5: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ)"
+        },
+        {
+          "name": "fix",
+          "type": "bool",
+          "required": true,
+          "description": "Fixity condition (False=free, True=fixed)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "ball.extra(slot: int) -> any",
+      "description": "Get ball extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot number (1-8)"
+        }
+      ],
+      "returns": {
+        "type": "any",
+        "description": "Extra data"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "ball.set_extra(slot: int, value: any) -> None",
+      "description": "Set ball extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot number (1-8)"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true,
+          "description": "Value to store"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "fragment",
+      "signature": "ball.fragment() -> int",
+      "description": "Get ball fragment ID.",
+      "returns": {
+        "type": "int",
+        "description": "Fragment ID"
+      }
+    },
+    {
+      "name": "set_fragment",
+      "signature": "ball.set_fragment(id: int) -> None",
+      "description": "Set ball fragment ID.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Fragment ID number"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "inside",
+      "signature": "ball.inside(point: vec) -> bool",
+      "description": "Test whether a point is inside this ball.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point coordinates to test (x, y, z)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if inside"
+      }
+    },
+    {
+      "name": "stress",
+      "signature": "ball.stress() -> tensor",
+      "description": "Get stress tensor arising from all contacts acting on the ball.",
+      "returns": {
+        "type": "tensor",
+        "description": "Stress tensor"
+      }
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "module": "itasca.clump",
+  "description": "Clump object management in PFC - rigid aggregates of pebbles (overlapping spheres) used to model complex particle shapes",
+  "import_statement": "import itasca as it",
+  "functions": [
+    {
+      "name": "containing",
+      "signature": "itasca.clump.containing(point: vec) -> Clump",
+      "description": "Find the clump containing the point. Returns the clump whose volume contains the given point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to check (x, y, z)"
+        }
+      ],
+      "returns": {
+        "type": "Clump",
+        "description": "Clump object containing the point, or None if no clump contains it"
+      }
+    },
+    {
+      "name": "count",
+      "signature": "itasca.clump.count() -> int",
+      "description": "Get total number of clumps in the model. O(1) operation - very fast.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Number of clumps currently in the model"
+      }
+    },
+    {
+      "name": "energies",
+      "signature": "itasca.clump.energies() -> dict[str, float]",
+      "description": "Get all clump energy contributions as a dictionary. Returns all available energy types with their total values summed across all clumps.",
+      "parameters": [],
+      "returns": {
+        "type": "dict[str, float]",
+        "description": "Dictionary mapping energy names to their total values. Keys include 'energy-body', 'energy-damp', 'energy-kinetic'"
+      }
+    },
+    {
+      "name": "energy",
+      "signature": "itasca.clump.energy(energy_name: str) -> float",
+      "description": "Get the clump total energy contribution. This is the sum over all clumps of the energy with name energy_name (see the set energy command). Available energies are: 'energy-body', 'energy-damp' and 'energy-kinetic'.",
+      "parameters": [
+        {
+          "name": "energy_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of energy type. Available: 'energy-body', 'energy-damp', 'energy-kinetic'"
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "Total energy contribution"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.clump.find(id: int) -> Clump | None",
+      "description": "Find clump by ID number. Returns None if clump doesn't exist. Finding by ID is O(1) - very fast.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Clump ID to search for"
+        }
+      ],
+      "returns": {
+        "type": "Clump | None",
+        "description": "Clump object if found, None if ID doesn't exist"
+      }
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.clump.inbox(lower_bound: vec, upper_bound: vec, intersect: bool = True) -> tuple[Clump, ...]",
+      "description": "Get a tuple of clumps with extents intersecting a box. The extent is the axis-aligned bounding box of the clump. If intersect=False, only clumps with positions falling in the box are returned.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the box (x, y, z)"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the box (x, y, z)"
+        },
+        {
+          "name": "intersect",
+          "type": "bool",
+          "required": false,
+          "description": "If True, return clumps with extents intersecting box. If False, only clumps with positions in box (default: True)"
+        }
+      ],
+      "returns": {
+        "type": "tuple[Clump, ...]",
+        "description": "Tuple of clump objects in the specified box"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.clump.list() -> Iterator[Clump]",
+      "description": "Return an iterator over all clumps in the model. Returns iterator (not list). Order not guaranteed. Use list(it.clump.list()) to create snapshot before modifying during iteration.",
+      "parameters": [],
+      "returns": {
+        "type": "Iterator[Clump]",
+        "description": "Iterator yielding Clump objects"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.clump.maxid() -> int",
+      "description": "Get the maximum clump ID currently in the model.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum clump ID"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.clump.near(point: vec, radius: float = 0.0) -> Clump",
+      "description": "Find the closest clump to a point. If radius is non-zero, only search within this radius.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to search from (x, y, z)"
+        },
+        {
+          "name": "radius",
+          "type": "float",
+          "required": false,
+          "description": "Search radius. If 0.0, search entire model (default: 0.0)"
+        }
+      ],
+      "returns": {
+        "type": "Clump",
+        "description": "Closest clump object, or None if no clump found within radius"
+      }
+    }
+  ]
+}

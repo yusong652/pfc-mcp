@@ -1,0 +1,65 @@
+{
+  "command": "model new",
+  "category": "model",
+  "search_keywords": [
+    "new",
+    "clear",
+    "reset"
+  ],
+  "description": "Clear model-state information. Model information is cleared, allowing one to begin a new problem. The optional 'force' keyword suppresses the model reset confirmation dialog (which will normally appear if the model has changed since the last save when the model new command is used). Values associated with the project or program state are unaffected by the model new command. Model-state information includes any defined FISH functions and variables, histories, and tables.",
+  "syntax": "model new <force>",
+  "keywords": [
+    {
+      "name": "force",
+      "syntax": "force",
+      "description": "Suppress the model reset confirmation dialog (which normally appears if model has changed since last save)"
+    }
+  ],
+  "notes": [
+    "Clears ALL model-state information",
+    "Allows starting a new problem from scratch",
+    "Model-state information cleared includes:",
+    "  - All FISH functions and variables",
+    "  - All histories",
+    "  - All tables",
+    "  - All model objects (balls, clumps, walls, contacts, etc.)",
+    "  - Domain settings",
+    "  - Material properties",
+    "Values associated with PROJECT or PROGRAM state are NOT affected (see 'project new' and 'program' commands)",
+    "force keyword: suppresses confirmation dialog if model changed since last save",
+    "IMPORTANT: When running several different problems from a called file, 'model new' must be given BEFORE each new problem",
+    "Entire model state can be saved via 'model save' and restored via 'model restore'",
+    "Alternative: FISH can write/read data to files (see File Utilities) for selective data preservation",
+    "Deterministic mode is reset to default setting after 'model new'"
+  ],
+  "examples": [
+    {
+      "command": "model new",
+      "description": "Clear model and start fresh (may show confirmation dialog)"
+    },
+    {
+      "command": "model new force",
+      "description": "Clear model without confirmation dialog"
+    },
+    {
+      "command": "model new\nmodel domain extent -10 10\nball generate number 1000 radius 0.5",
+      "description": "Clear model and setup new problem"
+    },
+    {
+      "command": "model save 'problem1.sav'\nmodel new force\n; setup problem 2\nmodel save 'problem2.sav'",
+      "description": "Save current problem, clear, setup new problem"
+    },
+    {
+      "command": "; Running multiple problems from a data file\nmodel new force\n; Problem 1 setup and solve\nmodel solve\n\nmodel new force\n; Problem 2 setup and solve\nmodel solve",
+      "description": "Multiple problems in one data file - use 'model new' before each"
+    },
+    {
+      "command": "program call 'problem1.dat'\nmodel new force\nprogram call 'problem2.dat'",
+      "description": "Call multiple problem files with 'model new' between them"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model new') or itasca.command('model new force') - Python SDK does not provide direct model.new() function"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "command": "wall export",
+  "category": "wall",
+  "search_keywords": [
+    "export",
+    "geometry",
+    "STL"
+  ],
+  "description": "Exports walls to geometry sets. If no range is specified, then all walls in the model are exported. At the moment, it is only possible to export walls to geometry sets. The geometry sets may in turn be directly used for post-processing or exported as STL files to be used by third-party CAD software.",
+  "syntax": "wall export <keyword> <range>",
+  "keywords": [
+    {
+      "name": "geometry",
+      "syntax": "geometry set <s> split",
+      "description": "Export to geometry sets. Use 'set' to specify base name, 'split' to export each wall to separate sets"
+    },
+    {
+      "name": "set",
+      "syntax": "set <s>",
+      "description": "Set geometry set base name to s. Default: 'walls'. If split is used, each wall gets name like 'basename_wall1'. Otherwise all walls go into one set named s"
+    },
+    {
+      "name": "split",
+      "syntax": "split",
+      "description": "Export each wall into a dedicated geometry set. Default: all walls into one set. Note: existing sets with same name are overridden"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall export geometry",
+      "description": "Export all walls into one geometry set named 'walls' (default)"
+    },
+    {
+      "command": "wall export geometry set 'mygeometry'",
+      "description": "Export all walls into one geometry set named 'mygeometry'"
+    },
+    {
+      "command": "wall export geometry split",
+      "description": "Export each wall into separate geometry sets named 'walls_wall1', 'walls_wall2', etc."
+    },
+    {
+      "command": "wall export geometry set 'boundary' split",
+      "description": "Export each wall into separate geometry sets named 'boundary_wall1', 'boundary_wall2', etc."
+    },
+    {
+      "command": "wall export geometry set 'container' range name 'box'",
+      "description": "Export walls named 'box' into geometry set 'container'"
+    },
+    {
+      "command": "wall export geometry range id 1 10",
+      "description": "Export walls with IDs 1-10 into geometry set 'walls'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall export geometry ...') - Python SDK does not provide wall export functionality"
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "command": "clump distribute",
+  "category": "clump",
+  "search_keywords": [
+    "distribute",
+    "overlap",
+    "porosity"
+  ],
+  "description": "Distribute clumps with overlaps. This process ceases when a target porosity is achieved. By default, the clump positions and sizes are drawn from uniform distributions throughout the model domain. As a result, the set of clumps generated is affected by the state of the random-number generator (see model random). The clump sizes can also be drawn from a Gaussian distribution via the gauss keyword. A number of clump distributions, with size ranges and volume fractions each using a unique clump template, can be specified. The optional range is applied to each clump upon generation and, if the clump does not fall within the range, it is not added to the model and does not affect the stopping criteria. This command contrasts with the clump generate command where clumps, with sizes chosen from a single distribution, are generated without overlap until the target number of clumps, or the number of attempts to place clumps, is achieved.",
+  "syntax": "clump distribute <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "number-bins",
+      "syntax": "number-bins <inum>",
+      "description": "Number of distributions used to generate the assembly. Allows multiple size distributions with different templates"
+    },
+    {
+      "name": "bin",
+      "syntax": "bin <ibin> <keyword> ...",
+      "description": "Specify the distributional properties of bin ibin. Any number of distributions with radii ranges, volume fractions, and distributional types can be specified. The volume fractions of all distributions must sum to 1",
+      "sub_keywords": [
+        {
+          "name": "template",
+          "syntax": "template <stname>",
+          "description": "Name of the clump template to be used"
+        },
+        {
+          "name": "size",
+          "syntax": "size <fsizelow> <fsizehi>",
+          "description": "Specify the size range to be used during generation. If fsizehi is not specified, then fsizehi = fsizelow. Default: fsizehi = fsizelow = 1.0. Cannot be given with the fish-distribution keyword"
+        },
+        {
+          "name": "volume-fraction",
+          "syntax": "volume-fraction <fvfrac>",
+          "description": "The volume fraction of clumps in this distribution. The sum of volume fractions of all distributions must be 1"
+        },
+        {
+          "name": "gauss",
+          "syntax": "gauss <fcutoff>",
+          "description": "Specify that the clump sizes are chosen from a Gaussian distribution with mean value (fradlow + fradhi)/2 and standard deviation (fradhi - fradlow)/2. The optional fcutoff (default 0.1), multiplied by fradlow, constitutes the minimum size allowed"
+        },
+        {
+          "name": "fish-distribution",
+          "syntax": "fish-distribution <s> <a1...an>",
+          "description": "The clump sizes are drawn from the distribution represented by the FISH function s. Function arguments can be specified as though no function arguments are required. The FISH function must return a floating point value that is the clump size. A FISH distribution cannot be specified with the gauss or size keywords"
+        },
+        {
+          "name": "density",
+          "syntax": "density <fdens>",
+          "description": "The clump density. Default: 1"
+        },
+        {
+          "name": "group",
+          "syntax": "group <s> <slot slot> <pebble>",
+          "description": "Specify that generated clumps or pebbles are given group name s at slot slot. If the slot keyword is not specified, then the group name is assigned to the slot Default. The optional pebble keyword specifies that the group is assigned to the pebbles and not to the clump"
+        },
+        {
+          "name": "azimuth",
+          "syntax": "azimuth <fazlow> <fazhi>",
+          "description": "Range of azimuths to rotate the clump template randomly about. An azimuthal rotation is a right-hand rotation about the out-of-plane direction (2D) or z-axis (3D) in degrees"
+        },
+        {
+          "name": "elevation",
+          "syntax": "elevation <fellow> <felhi>",
+          "description": "Range of elevations to rotate the clump template randomly about (3D ONLY). An elevating rotation is a right hand rotation about the x-axis in degrees"
+        },
+        {
+          "name": "tilt",
+          "syntax": "tilt <ftiltlow> <ftilthi>",
+          "description": "Range of tilts to rotate the clump template randomly about (3D ONLY). A tilting rotation is a right-hand rotation about the y-axis in degrees"
+        }
+      ]
+    },
+    {
+      "name": "porosity",
+      "syntax": "porosity <fporos>",
+      "description": "The final porosity is set to fporos. Default: 0.16 (2D) or 0.359 (3D), corresponding to the porosity for a tight, monodisperse packing of disks (2D) or spheres (3D)"
+    },
+    {
+      "name": "box",
+      "syntax": "box <fxmin> <fxmax> <fymin> <fymax> <fzmin> <fzmax>",
+      "description": "Clumps will fully fall within this box, such that they will not overlap the box faces or edges. By default, the box is the model domain. z-components are 3D ONLY"
+    },
+    {
+      "name": "diameter",
+      "syntax": "diameter",
+      "description": "Specify that the linear size used to scale the clumps is the volume equivalent diameter of a disk (2D) or sphere (3D)"
+    },
+    {
+      "name": "fish-size",
+      "syntax": "fish-size <sfname>",
+      "description": "The size used to scale the clumps while generating can be specified by the FISH function sfname. The return value of the FISH function should be a linear measure of the clump size and the function should take one argument that is a clump pointer"
+    },
+    {
+      "name": "resolution",
+      "syntax": "resolution <fres>",
+      "description": "Optional resolution that can be used as a multiplicative factor of the size of each clump generated. Default: 1.0"
+    }
+  ],
+  "notes": [
+    "A model domain must be specified prior to clump generation",
+    "Significant clump overlaps will likely result from this operation",
+    "While cycling, clumps can only be created before cycle point 0 (i.e., when the timestep is calculated)",
+    "Clump positions and sizes drawn from uniform distributions by default (affected by random-number generator state)",
+    "Volume fractions of all bins must sum to 1",
+    "Contrasts with clump generate command: distribute allows overlaps and stops at target porosity, while generate creates clumps without overlap until target number or attempt limit is reached"
+  ],
+  "examples": [
+    {
+      "command": "clump distribute porosity 0.4 diameter template 'triangle' size 2 4 box -9 9",
+      "description": "Create clumps with overlap within the specified box until porosity reaches 0.4. Size set by equivalent circle/sphere diameter"
+    },
+    {
+      "command": "clump distribute resolution 0.5 number-bins 1 diameter box -2.5 2.5 -2.5 2.5 -5 5 bin 1 template 'pill' az 0 90 el 0 90 tilt 0 90 size 1.0 1.5 porosity 0.5",
+      "description": "Create clumps with overlap and specified orientation ranges (azimuth, elevation, tilt) until porosity reaches 0.5"
+    },
+    {
+      "command": "clump distribute porosity 0.3 diameter number-bins 6 box -40 40 -40 40 -40 40 bin 1 size 9.99 19.98 volume-fraction 0.41 group 'comp1' template 'comp1' bin 2 size 9.9 19.8 volume-fraction 0.21 group 'comp2' template 'comp2' bin 3 size 9.5 19 volume-fraction 0.14 group 'comp3' template 'comp3' bin 4 size 9.76 19.52 volume-fraction 0.11 group 'comp4' template 'comp4' bin 5 size 9.6 19.2 volume-fraction 0.07 group 'comp5' template 'comp5' bin 6 size 9.8 19.6 volume-fraction 0.06 group 'comp6' template 'comp6'",
+      "description": "Create multi-component assembly with 6 bins, each with different size ranges, volume fractions, groups, and templates. Volume fractions sum to 1.0. Stops at porosity 0.3"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump distribute ...') - Python SDK cannot directly distribute clumps with templating system"
+  }
+}

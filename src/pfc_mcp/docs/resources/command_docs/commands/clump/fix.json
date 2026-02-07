@@ -1,0 +1,72 @@
+{
+  "command": "clump fix",
+  "category": "clump",
+  "search_keywords": [
+    "fix",
+    "velocity",
+    "spin"
+  ],
+  "description": "Fix the specified clump velocities. As a result, clump motion is constant in the specified directions (fixed velocities are not updated during cycling).",
+  "syntax": "clump fix <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "velocity",
+      "description": "Fix all components of translational velocity"
+    },
+    {
+      "name": "velocity-x",
+      "description": "Fix x-component of translational velocity"
+    },
+    {
+      "name": "velocity-y",
+      "description": "Fix y-component of translational velocity"
+    },
+    {
+      "name": "velocity-z",
+      "description": "Fix z-component of translational velocity (3D only)"
+    },
+    {
+      "name": "spin",
+      "description": "Fix all components of angular velocity"
+    },
+    {
+      "name": "spin-x",
+      "description": "Fix x-component of angular velocity (3D only)"
+    },
+    {
+      "name": "spin-y",
+      "description": "Fix y-component of angular velocity (3D only)"
+    },
+    {
+      "name": "spin-z",
+      "description": "Fix z-component of angular velocity (3D only)"
+    }
+  ],
+  "notes": [
+    "Multiple velocity components can be fixed simultaneously",
+    "Fixed velocities remain constant during cycling (not updated by force calculations)",
+    "Use clump free command to release fixed velocities"
+  ],
+  "examples": [
+    {
+      "command": "clump fix velocity-x velocity-y spin range id 1 4 not",
+      "description": "Fix the x- and y- components of velocity and the rotational velocity of all clumps except those with ID 1, 2, 3, and 4"
+    },
+    {
+      "command": "clump fix velocity-x range id 1",
+      "description": "Fix the x-component of velocity of clump with ID 1"
+    },
+    {
+      "command": "clump fix velocity-z range group 'platen'",
+      "description": "Fix z-velocity for clumps in 'platen' group (common in compression tests)"
+    },
+    {
+      "command": "clump fix velocity spin range all",
+      "description": "Fix all translational and rotational velocity components for all clumps (fully constrained)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Clump.set_fix(component, True) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration: for c in itasca.clump.list(): c.set_fix(component, True)"
+  }
+}

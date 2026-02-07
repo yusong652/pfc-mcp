@@ -1,0 +1,140 @@
+{
+  "module": "itasca.contact",
+  "description": "Contact management in PFC - handles interactions between balls, pebbles, and facets",
+  "import_statement": "import itasca as it",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.contact.count(process: str = 'mechanical', type: TypeObject = None, all: bool = False) -> int",
+      "description": "Get the number of contacts. All arguments are optional. If type is specified, count is limited to that contact type (e.g., itasca.BallBallContact). If all=True, virtual contacts are included.",
+      "parameters": [
+        {
+          "name": "process",
+          "type": "str",
+          "required": false,
+          "description": "Contact class name (default: 'mechanical')"
+        },
+        {
+          "name": "type",
+          "type": "TypeObject",
+          "required": false,
+          "description": "Python type object to filter contacts (e.g., itasca.BallBallContact, itasca.BallFacetContact)"
+        },
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "If True, include virtual contacts (default: False)"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Number of contacts matching the criteria"
+      }
+    },
+    {
+      "name": "energy",
+      "signature": "itasca.contact.energy(energy_name: str, process: str = 'mechanical', type: TypeObject = None) -> float",
+      "description": "Get energy values accumulated over contacts. Can filter by process and contact type.",
+      "parameters": [
+        {
+          "name": "energy_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of energy quantity to query"
+        },
+        {
+          "name": "process",
+          "type": "str",
+          "required": false,
+          "description": "Process name (default: 'mechanical')"
+        },
+        {
+          "name": "type",
+          "type": "TypeObject",
+          "required": false,
+          "description": "Python contact type object to filter"
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "Total energy value for specified contacts"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.contact.find(type: TypeObject, id: int or tuple) -> Contact",
+      "description": "Get the contact of the given type. The id can be either an integer ID or a tuple containing two objects (e.g., (wall_object, ball_object)).",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "TypeObject",
+          "required": true,
+          "description": "Python contact type object (e.g., itasca.BallBallContact)"
+        },
+        {
+          "name": "id",
+          "type": "int or tuple",
+          "required": true,
+          "description": "Contact ID (int) or tuple of two objects (object1, object2)"
+        }
+      ],
+      "returns": {
+        "type": "Contact",
+        "description": "Contact object if found, None otherwise"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.contact.list(process_name: str = 'Mechanical', type: TypeObject = None, all: bool = False) -> Contact iterator",
+      "description": "Get a contact iterator object. Returns iterator (not list). If type is specified, only contacts of that type are returned. If all=True, virtual contacts are included.",
+      "parameters": [
+        {
+          "name": "process_name",
+          "type": "str",
+          "required": false,
+          "description": "Process name (default: 'Mechanical')"
+        },
+        {
+          "name": "type",
+          "type": "TypeObject",
+          "required": false,
+          "description": "Python contact type object to filter (e.g., itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact, itasca.PebbleFacetContact)"
+        },
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "If True, include virtual contacts (default: False)"
+        }
+      ],
+      "returns": {
+        "type": "Contact iterator",
+        "description": "Iterator yielding Contact objects"
+      }
+    },
+    {
+      "name": "model_prop_index",
+      "signature": "itasca.contact.model_prop_index(model_name: str, property_name: str) -> int",
+      "description": "Get a contact model property index. Used for efficient property access in contact models.",
+      "parameters": [
+        {
+          "name": "model_name",
+          "type": "str",
+          "required": true,
+          "description": "Contact model name"
+        },
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Property name within the model"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Property index"
+      }
+    }
+  ]
+}

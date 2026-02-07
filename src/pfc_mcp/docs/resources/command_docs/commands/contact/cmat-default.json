@@ -1,0 +1,338 @@
+{
+  "command": "contact cmat default",
+  "category": "contact",
+  "search_keywords": [
+    "cmat",
+    "default"
+  ],
+  "description": "Set the default slot(s) of the CMAT. Attempts to assign the following information to the default slot(s) of the CMAT. If the optional keyword 'type' is issued, then it must be followed by a valid contact type name, and the corresponding default slot of the CMAT will be modified. If no type is specified, then the command will attempt to modify all the default slots. By default, only mechanical contacts are considered.",
+  "syntax": "contact cmat default <type stype> <keyword> ...",
+  "keywords": [
+    {
+      "name": "inheritance",
+      "syntax": "inheritance <keyword> <b> ...",
+      "description": "Set inheritance flag for contact model property to boolean b. The property must support inheritance",
+      "parameters": [
+        {
+          "name": "keyword",
+          "type": "string",
+          "description": "Property name"
+        },
+        {
+          "name": "b",
+          "type": "boolean",
+          "description": "Inheritance setting (true/false)"
+        }
+      ]
+    },
+    {
+      "name": "mechanical",
+      "syntax": "mechanical",
+      "description": "Apply to mechanical contacts (default behavior)"
+    },
+    {
+      "name": "method",
+      "syntax": "method <keyword> ...",
+      "description": "Register contact model method with argument name-value pairs. Will be invoked at contact creation",
+      "common_methods": [
+        {
+          "name": "deformability",
+          "description": "Set deformability-based properties (emod, kratio, etc.)",
+          "typical_args": [
+            "emod",
+            "kratio"
+          ]
+        },
+        {
+          "name": "bond",
+          "description": "Activate bonding behavior",
+          "typical_args": [
+            "gap"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "model",
+      "syntax": "model <model_name>",
+      "description": "Specify the default contact model. Default slot(s) will not be modified if the corresponding contact type(s) cannot use the specified model",
+      "available_models": [
+        {
+          "name": "linear",
+          "description": "Linear Model - elastic and frictional behavior",
+          "typical_properties": [
+            "kn",
+            "ks",
+            "fric",
+            "dp_nratio",
+            "dp_sratio",
+            "dp_mode"
+          ]
+        },
+        {
+          "name": "linearpbond",
+          "description": "Linear Parallel Bond Model - bonded material behavior",
+          "typical_properties": [
+            "pb_kn",
+            "pb_ks",
+            "pb_ten",
+            "pb_coh",
+            "pb_fa",
+            "fric"
+          ]
+        },
+        {
+          "name": "linearcbond",
+          "description": "Linear Contact Bond Model - contact-based bonds",
+          "typical_properties": [
+            "cb_kn",
+            "cb_ks",
+            "cb_ten",
+            "cb_coh",
+            "cb_fa",
+            "fric"
+          ]
+        },
+        {
+          "name": "hertz",
+          "description": "Hertz Model - non-linear elastic contact",
+          "typical_properties": [
+            "hz_shear",
+            "hz_poiss",
+            "fric"
+          ]
+        },
+        {
+          "name": "rrlinear",
+          "description": "Rolling Resistance Linear Model",
+          "typical_properties": [
+            "kn",
+            "ks",
+            "fric",
+            "rr_fric",
+            "dp_nratio",
+            "dp_sratio"
+          ]
+        },
+        {
+          "name": "arrlinear",
+          "description": "Adhesive Rolling Resistance Linear Model"
+        },
+        {
+          "name": "bilinear",
+          "description": "Bilinear Contact Model"
+        },
+        {
+          "name": "burger",
+          "description": "Burger's Model - viscoelastic behavior"
+        },
+        {
+          "name": "fish",
+          "description": "FISH Model - custom user-defined model"
+        },
+        {
+          "name": "flatjoint",
+          "description": "Flat-Joint Model - smooth joint surfaces"
+        },
+        {
+          "name": "hysteretic",
+          "description": "Hysteretic Model - loading/unloading paths"
+        },
+        {
+          "name": "lineardipole",
+          "description": "Linear Dipole Model (3D ONLY)"
+        },
+        {
+          "name": "smoothjoint",
+          "description": "Smooth-Joint Model - reduced interlocking"
+        },
+        {
+          "name": "softbond",
+          "description": "Soft-Bond Model - crushable bonds"
+        },
+        {
+          "name": "null",
+          "description": "Null Model - no force transmission"
+        }
+      ]
+    },
+    {
+      "name": "property",
+      "syntax": "property <keyword> <value> <inheritance b> ...",
+      "description": "Specify contact model property. If optional 'inheritance' is issued, then the property must support inheritance and a boolean must follow indicating its inheritance flag",
+      "parameters": [
+        {
+          "name": "keyword",
+          "type": "string",
+          "description": "Property name (model-specific)"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "description": "Property value"
+        },
+        {
+          "name": "b",
+          "type": "boolean",
+          "required": false,
+          "description": "Inheritance setting (if inheritance keyword specified)"
+        }
+      ]
+    },
+    {
+      "name": "proximity",
+      "syntax": "proximity <fd>",
+      "description": "Set contact detection distance",
+      "parameters": [
+        {
+          "name": "fd",
+          "type": "float",
+          "description": "Detection distance value"
+        }
+      ]
+    },
+    {
+      "name": "thermal",
+      "syntax": "thermal",
+      "description": "Apply to thermal contacts (instead of mechanical)"
+    },
+    {
+      "name": "type",
+      "syntax": "type <contact_type>",
+      "description": "Specify that this CMAT entry applies to contacts of the specified type. This can also be accomplished with the contact range element",
+      "available_types": [
+        {
+          "name": "ball-ball",
+          "description": "Ball-ball contact default CMAT entry"
+        },
+        {
+          "name": "ball-facet",
+          "description": "Ball-facet contact default CMAT entry"
+        },
+        {
+          "name": "ball-pebble",
+          "description": "Ball-pebble contact default CMAT entry"
+        },
+        {
+          "name": "ball-rblock",
+          "description": "Ball-rblock contact default CMAT entry"
+        },
+        {
+          "name": "pebble-facet",
+          "description": "Pebble-facet contact default CMAT entry"
+        },
+        {
+          "name": "pebble-pebble",
+          "description": "Pebble-pebble contact default CMAT entry"
+        },
+        {
+          "name": "pebble-rblock",
+          "description": "Pebble-rblock contact default CMAT entry"
+        },
+        {
+          "name": "rblock-facet",
+          "description": "Rblock-facet contact default CMAT entry"
+        },
+        {
+          "name": "rblock-rblock",
+          "description": "Rblock-rblock contact default CMAT entry"
+        }
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "command": "contact cmat default model linear property kn 1e8 ks 5e7 fric 0.5",
+      "description": "Set default entry to linear model with specified stiffness and friction"
+    },
+    {
+      "command": "contact cmat default model linear prop dp_nratio 0.8 dp_mode 1",
+      "description": "Set default entry to linear model with damping properties (from BlenderBalls.dat)"
+    },
+    {
+      "command": "contact cmat default model rrlinear method deformability emod 5e9 kratio 1.5 property fric 0.5 dp_nratio 0.7 dp_sratio 0.7 dp_mode 1 rr_fric 0.3",
+      "description": "Set default to rrlinear model with deformability method and rolling resistance (from Rolling Resistance example)"
+    },
+    {
+      "command": "contact cmat default model linearpbond method deformability emod 1e10 kratio 1.0",
+      "description": "Set default to linearpbond model with deformability method (from PunchIndentation.dat)"
+    },
+    {
+      "command": "contact cmat default type ball-ball model hertz property hz_shear 2e9 hz_poiss 0.25 fric 0.3",
+      "description": "Set ball-ball default to Hertz model with specific properties"
+    },
+    {
+      "command": "contact cmat default type ball-facet model linear property kn 1e8 ks 5e7",
+      "description": "Set ball-facet default separately with linear model"
+    },
+    {
+      "command": "contact cmat default mechanical model linear property kn 1e8",
+      "description": "Set mechanical contact default (all types) to linear model"
+    },
+    {
+      "command": "contact cmat default thermal property th_kn 100",
+      "description": "Set thermal contact default properties"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('contact cmat default ...') - Python SDK does not provide direct CMAT API, must use command interface"
+  },
+  "model_properties_reference": {
+    "path": "../model-properties/index.json",
+    "description": "For detailed property information for each contact model, see the model-properties reference documentation",
+    "quick_links": {
+      "linear": "../model-properties/linear.json",
+      "linearpbond": "../model-properties/linearpbond.json",
+      "linearcbond": "../model-properties/linearcbond.json",
+      "hertz": "../model-properties/hertz.json",
+      "rrlinear": "../model-properties/rrlinear.json"
+    }
+  },
+  "related_commands": [
+    "contact cmat add",
+    "contact cmat apply",
+    "contact cmat remove",
+    "contact model assign"
+  ],
+  "notes": [
+    "If 'type' keyword is NOT specified, ALL default slots are modified",
+    "If 'type' keyword IS specified, only that contact type's default slot is modified",
+    "Default slots are used when no specific CMAT entry matches a newly created contact",
+    "The default slot(s) will not be modified if the contact type(s) cannot use the specified model",
+    "Multiple properties can be set in a single command",
+    "The 'method' keyword registers methods that execute automatically at contact creation",
+    "Common method 'deformability' calculates stiffnesses from elastic modulus and stiffness ratio",
+    "Use 'mechanical' (default) or 'thermal' to specify contact type"
+  ],
+  "common_use_cases": [
+    {
+      "use_case": "Set global default for all contact types",
+      "command": "contact cmat default model linear property kn 1e8 ks 5e7 fric 0.5"
+    },
+    {
+      "use_case": "Set different defaults per contact type",
+      "command": "contact cmat default type ball-ball model hertz property hz_shear 2e9\ncontact cmat default type ball-facet model linear property kn 1e8"
+    },
+    {
+      "use_case": "Use deformability method for automatic stiffness calculation",
+      "command": "contact cmat default model linear method deformability emod 5e9 kratio 1.5"
+    },
+    {
+      "use_case": "Set bonded material default with parallel bonds",
+      "command": "contact cmat default model linearpbond property pb_kn 1e9 pb_ks 5e8 pb_ten 1e6 pb_coh 5e5"
+    }
+  ],
+  "typical_workflow": [
+    "1. Define default contact behavior for all types: contact cmat default model linear ...",
+    "2. Or set per-type defaults: contact cmat default type ball-ball model ...",
+    "3. Add specific CMAT entries for special cases: contact cmat add ...",
+    "4. Create contacts - they automatically get assigned according to CMAT rules",
+    "5. If needed, apply CMAT to existing contacts: contact cmat apply"
+  ],
+  "important_distinctions": {
+    "default_vs_add": "The 'default' command sets the fallback behavior when no specific CMAT entry matches. The 'add' command creates specific rules that are checked first.",
+    "with_type_vs_without_type": "Without 'type' keyword, ALL default slots are modified. With 'type', only that specific contact type is affected.",
+    "method_vs_property": "Methods are procedures that can calculate multiple properties (e.g., 'deformability' calculates kn/ks from emod/kratio). Properties are direct value assignments."
+  }
+}

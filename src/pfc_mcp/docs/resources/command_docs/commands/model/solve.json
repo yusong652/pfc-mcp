@@ -1,0 +1,433 @@
+{
+  "command": "model solve",
+  "category": "model",
+  "search_keywords": [
+    "solve",
+    "equilibrium",
+    "convergence"
+  ],
+  "description": "Solve to a specified limit. The solve logic provides a mechanism to continue cycling a model until specified criteria are met, oftentimes resulting in a model that is in equilibrium to some tolerance. Any combination of the keywords below can be given in a single model solve command. If multiple solve limits are given, then cycling will continue until one of the limits is met, unless the 'and' keyword is used, in which case all criteria must be met before cycling stops.",
+  "syntax": "model solve <keyword> ...",
+  "keywords": [
+    {
+      "name": "and",
+      "syntax": "and",
+      "description": "Specify that when multiple solve limits are given, ALL must be met before cycling is stopped. Default behavior is to stop once any solve limit is met"
+    },
+    {
+      "name": "or",
+      "syntax": "or",
+      "description": "Specify that when multiple solve limits are set, cycling should stop when ANY one limit is met. This is the default behavior"
+    },
+    {
+      "name": "calm",
+      "syntax": "calm <i>",
+      "description": "Specify that every i cycles, the model will be calmed. For mechanical processes, all velocities (both linear and angular) that are not fixed are nulled during a calm"
+    },
+    {
+      "name": "clock",
+      "syntax": "clock <f>",
+      "description": "Limit the computer run time to f in minutes. By default, there is no limit to the run time"
+    },
+    {
+      "name": "convergence",
+      "syntax": "convergence <f>",
+      "description": "Limit based on the maximum convergence value of all gridpoints, zones, balls, clumps, or rigid blocks. The convergence value is defined as the ratio of the current mechanical force ratio to the target force ratio. A convergence value of 1.0 is considered 'converged', but it is possible to restrict or relax that by using a value greater or less than 1.0"
+    },
+    {
+      "name": "cycles",
+      "syntax": "cycles <i>",
+      "description": "Synonym to 'model cycle'. Limit of the number of cycles to take during this solve operation"
+    },
+    {
+      "name": "cycles-super",
+      "syntax": "cycles-super <i>",
+      "description": "A solve limit based on the number of 'Super-Cycles' taken during the current solve command. One 'Super-Cycle' includes all master and slave steps taken as part of a loosely coupled solve system"
+    },
+    {
+      "name": "cycles-total",
+      "syntax": "cycles-total <i>",
+      "description": "A solve limit based on the total number of accumulated cycles"
+    },
+    {
+      "name": "ratio",
+      "syntax": "ratio <f>",
+      "description": "Limit based on the convergence ratio returned by all active modules. By default this is the same as ratio-average"
+    },
+    {
+      "name": "ratio-average",
+      "syntax": "ratio-average <f>",
+      "description": "Limit based on the average convergence ratio returned by all active modules"
+    },
+    {
+      "name": "ratio-local",
+      "syntax": "ratio-local <f>",
+      "description": "Limit based on the local convergence ratio returned by all active modules"
+    },
+    {
+      "name": "ratio-maximum",
+      "syntax": "ratio-maximum <f>",
+      "description": "Limit based on the maximum convergence ratio returned by all active modules"
+    },
+    {
+      "name": "time",
+      "syntax": "time <f>",
+      "description": "Cycle until the total time accumulated by any active process after the initiation of the solve meets or exceeds f. This is distinct from the time-total keyword that refers to the total age of the process"
+    },
+    {
+      "name": "time-total",
+      "syntax": "time-total <f>",
+      "description": "Cycle until the total age of any active process meets or exceeds f. This is distinct from the time keyword"
+    },
+    {
+      "name": "time-total-zone",
+      "syntax": "time-total-zone <f>",
+      "description": "Cycle until the total age of any active process in a zone module meets or exceeds f"
+    },
+    {
+      "name": "unbalanced-average",
+      "syntax": "unbalanced-average <f>",
+      "description": "Cycle until the average unbalanced quantity, defined by the active processes, is less than or equal to f. For the mechanical process, unbalanced refers to the average unbalanced force"
+    },
+    {
+      "name": "unbalanced-maximum",
+      "syntax": "unbalanced-maximum <f>",
+      "description": "Cycle until the maximum unbalanced quantity, defined by the active processes, is less than or equal to f. For the mechanical process, unbalanced refers to the maximum unbalanced force"
+    },
+    {
+      "name": "elastic",
+      "syntax": "elastic <only>",
+      "description": "Perform a mechanical calculation in two steps: first, assuming elastic behavior; then, using the actual strength values of the material. The cohesion and tensile strength for all materials are set to high values for the first step. For the second step, they are reset to original values. If the optional 'only' keyword is provided, then only the elastic portion (first step) is undertaken. This keyword only applies to the mechanical process"
+    },
+    {
+      "name": "fish-call",
+      "syntax": "fish-call <f> <s> <keyword>",
+      "description": "Add the FISH function s to the Fish-Call list at location f, as with the 'fish callback' command. Optional keywords: interval <i> (call every i steps), process <keyword> (call only if specific process is active: creep, dynamic, fluid, mechanical, thermal)"
+    },
+    {
+      "name": "fish-halt",
+      "syntax": "fish-halt <s>",
+      "description": "The FISH function s is called during every cycle to determine whether cycling should continue. If s returns false, cycling continues; otherwise, cycling terminates"
+    },
+    {
+      "name": "mechanical",
+      "syntax": "mechanical <keyword>",
+      "description": "Specifies a solve limit for the mechanical process specifically",
+      "sub_keywords": [
+        {
+          "name": "convergence",
+          "syntax": "convergence <f>",
+          "description": "Limit based on the maximum convergence value of all gridpoints and zones (PFC balls do not support this). Convergence value = current force ratio / target force ratio. 1.0 = converged"
+        },
+        {
+          "name": "cycles",
+          "syntax": "cycles <i>",
+          "description": "Limit of the number of cycles to take with mechanical active during this solve operation"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total <i>",
+          "description": "Total number of cycles taken with mechanical active since model creation"
+        },
+        {
+          "name": "cycles-total-zone",
+          "syntax": "cycles-total-zone <i>",
+          "description": "Total number of cycles taken with mechanical active in the zone module"
+        },
+        {
+          "name": "ratio",
+          "syntax": "ratio <f>",
+          "description": "Limit based on the current convergence ratio value. By default this is the same as ratio-average"
+        },
+        {
+          "name": "ratio-average",
+          "syntax": "ratio-average <f>",
+          "description": "Limited based on the average convergence ratio"
+        },
+        {
+          "name": "ratio-local",
+          "syntax": "ratio-local <f>",
+          "description": "Limited based on the local convergence ratio"
+        },
+        {
+          "name": "ratio-maximum",
+          "syntax": "ratio-maximum <f>",
+          "description": "Limited based on the maximum convergence ratio"
+        },
+        {
+          "name": "time",
+          "syntax": "time <f>",
+          "description": "Limit of the time accumulated while this process is active during this solve operation"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Limit of the time accumulated while this process is active since model creation"
+        },
+        {
+          "name": "time-total-zone",
+          "syntax": "time-total-zone <f>",
+          "description": "Total accumulated mechanical time in the zone module"
+        },
+        {
+          "name": "unbalanced-maximum",
+          "syntax": "unbalanced-maximum <f>",
+          "description": "Limit based on the maximum unbalanced force among model objects"
+        }
+      ]
+    },
+    {
+      "name": "creep",
+      "syntax": "creep <keyword>",
+      "description": "Specify a solve limit for the creep process specifically",
+      "sub_keywords": [
+        {
+          "name": "cycles",
+          "syntax": "cycles <i>",
+          "description": "Limit of the number of cycles to take with creep active during this solve operation"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total <i>",
+          "description": "Total number of cycles taken with creep active since model creation"
+        },
+        {
+          "name": "cycles-total-zone",
+          "syntax": "cycles-total-zone <i>",
+          "description": "Total number of cycles taken with creep active in the zone module"
+        },
+        {
+          "name": "time",
+          "syntax": "time <f>",
+          "description": "Limit of the time accumulated while this process is active during this solve operation"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Limit of the time accumulated while this process is active since model creation"
+        },
+        {
+          "name": "time-total-zone",
+          "syntax": "time-total-zone <f>",
+          "description": "Total accumulated creep time in the zone module"
+        }
+      ]
+    },
+    {
+      "name": "dynamic",
+      "syntax": "dynamic <keyword>",
+      "description": "Specify a solve limit for the dynamic process specifically",
+      "sub_keywords": [
+        {
+          "name": "cycles",
+          "syntax": "cycles <i>",
+          "description": "Limit of the number of cycles to take with dynamic active during this solve operation"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total <i>",
+          "description": "Total number of cycles taken with dynamic active since model creation"
+        },
+        {
+          "name": "cycles-total-zone",
+          "syntax": "cycles-total-zone <i>",
+          "description": "Total number of cycles taken with dynamic active in the zone module"
+        },
+        {
+          "name": "time",
+          "syntax": "time <f>",
+          "description": "Limit of the time accumulated while this process is active during this solve operation"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Limit of the time accumulated while this process is active since model creation"
+        },
+        {
+          "name": "time-total-zone",
+          "syntax": "time-total-zone <f>",
+          "description": "Total accumulated dynamic time in the zone module"
+        }
+      ]
+    },
+    {
+      "name": "fluid",
+      "syntax": "fluid <keyword>",
+      "description": "Specifies a solve limit for the fluid process specifically",
+      "sub_keywords": [
+        {
+          "name": "cycles",
+          "syntax": "cycles <i>",
+          "description": "Limit of the number of cycles to take with fluid-flow active during this solve operation"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total <i>",
+          "description": "Total number of cycles taken with fluid-flow active since model creation"
+        },
+        {
+          "name": "cycles-total-zone",
+          "syntax": "cycles-total-zone <i>",
+          "description": "Total number of cycles taken with fluid-flow active in the zone module"
+        },
+        {
+          "name": "ratio-flow",
+          "syntax": "ratio-flow <f>",
+          "description": "Specifies a limiting convergence ratio as defined by the fluid-flow logic (FLAC3D only)"
+        },
+        {
+          "name": "time",
+          "syntax": "time <f>",
+          "description": "Limit of the time accumulated while this process is active during this solve operation"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Limit of the time accumulated while this process is active since model creation"
+        },
+        {
+          "name": "time-total-zone",
+          "syntax": "time-total-zone <f>",
+          "description": "Total accumulated fluid time in the zone module"
+        }
+      ]
+    },
+    {
+      "name": "thermal",
+      "syntax": "thermal <keyword>",
+      "description": "Specifies a solve limit for the thermal process specifically",
+      "sub_keywords": [
+        {
+          "name": "cycles",
+          "syntax": "cycles <i>",
+          "description": "Limit of the number of cycles to take with thermal active during this solve operation"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total <i>",
+          "description": "Total number of cycles taken with thermal active since model creation"
+        },
+        {
+          "name": "cycles-total-zone",
+          "syntax": "cycles-total-zone <i>",
+          "description": "Total number of cycles taken with thermal active in the zone module"
+        },
+        {
+          "name": "ratio",
+          "syntax": "ratio <f>",
+          "description": "Specifies a limiting convergence ratio as defined by the thermal logic"
+        },
+        {
+          "name": "ratio-local",
+          "syntax": "ratio-local <f>",
+          "description": "Specifies a limiting local convergence ratio as defined by the thermal logic"
+        },
+        {
+          "name": "time",
+          "syntax": "time <f>",
+          "description": "Limit of the time accumulated while this process is active during this solve operation"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Limit of the time accumulated while this process is active since model creation"
+        },
+        {
+          "name": "time-total-zone",
+          "syntax": "time-total-zone <f>",
+          "description": "Total accumulated thermal time in the zone module"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Primary purpose: cycle model until specified criteria are met (often to equilibrium)",
+    "Multiple keywords can be combined in a single solve command",
+    "Default logic: stop when ANY limit is met (OR logic)",
+    "Use 'and' keyword: ALL limits must be met before stopping",
+    "Use 'or' keyword: ANY limit met will stop (default behavior)",
+    "Common usage: 'model solve ratio 1e-5' - solve to force ratio equilibrium",
+    "ratio: convergence ratio (smaller = more converged, typical: 1e-4 to 1e-6)",
+    "convergence: 1.0 = converged (ratio of current to target force ratio)",
+    "calm: periodically zero velocities to remove kinetic energy",
+    "elastic: two-step solve (elastic first, then actual strength)",
+    "fish-halt: custom stopping criteria via FISH function",
+    "fish-call: execute FISH during solve (with optional interval/process filters)",
+    "clock: wall-clock time limit in minutes",
+    "Process-specific limits: mechanical, creep, dynamic, fluid, thermal",
+    "Each process has: cycles, cycles-total, time, time-total, ratio options",
+    "unbalanced-average/maximum: based on unbalanced force",
+    "Super-cycles: for loosely coupled multi-process systems",
+    "See documentation: 'Equilibrium' for ratio definitions"
+  ],
+  "examples": [
+    {
+      "command": "model solve",
+      "description": "Solve to equilibrium using default criteria (ratio 1e-5)"
+    },
+    {
+      "command": "model solve ratio 1e-5",
+      "description": "Solve until average force ratio is less than 1e-5 (typical equilibrium)"
+    },
+    {
+      "command": "model solve ratio 1e-4",
+      "description": "Solve to less strict equilibrium (ratio 1e-4)"
+    },
+    {
+      "command": "model solve cycles 10000",
+      "description": "Solve for exactly 10000 cycles (no equilibrium check)"
+    },
+    {
+      "command": "model solve ratio 1e-5 calm 100",
+      "description": "Solve to equilibrium, calm every 100 cycles"
+    },
+    {
+      "command": "model solve ratio 1e-5 cycles 50000",
+      "description": "Solve to equilibrium OR max 50000 cycles (whichever comes first)"
+    },
+    {
+      "command": "model solve ratio 1e-5 and cycles 10000",
+      "description": "Solve until BOTH ratio < 1e-5 AND 10000 cycles completed"
+    },
+    {
+      "command": "model solve unbalanced-maximum 1.0",
+      "description": "Solve until maximum unbalanced force is less than 1.0"
+    },
+    {
+      "command": "model solve elastic",
+      "description": "Two-step solve: elastic first, then actual strength"
+    },
+    {
+      "command": "model solve elastic only",
+      "description": "Solve assuming elastic behavior only (no strength)"
+    },
+    {
+      "command": "model solve mechanical ratio 1e-5",
+      "description": "Solve mechanical process to ratio 1e-5"
+    },
+    {
+      "command": "model solve clock 60",
+      "description": "Solve with 60 minute wall-clock time limit"
+    },
+    {
+      "command": "model solve ratio 1e-5 clock 120",
+      "description": "Solve to equilibrium OR 120 minutes (whichever comes first)"
+    },
+    {
+      "command": "fish define check_stop\n  if ball.num < 100 then\n    check_stop = true\n  else\n    check_stop = false\n  endif\nend\nmodel solve fish-halt check_stop",
+      "description": "Solve with custom FISH stopping criteria"
+    },
+    {
+      "command": "model solve ratio-average 1e-5 ratio-maximum 1e-4",
+      "description": "Solve until average ratio < 1e-5 OR max ratio < 1e-4"
+    },
+    {
+      "command": "model solve time 1.0",
+      "description": "Solve until 1.0 time units accumulated during this solve"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model solve ratio 1e-5') - Python SDK does not provide direct solve() function. For custom solve loops in Python, manually compute equilibrium metrics:\n\nimport math\ndef vec_mag(v): return math.sqrt(v[0]**2 + v[1]**2 + v[2]**2)\n\nwhile True:\n    itasca.cycle(100)\n    # Compute unbalanced force ratio manually:\n    unbal_sum = sum(vec_mag(b.force_unbal()) for b in itasca.ball.list())\n    contact_sum = sum(vec_mag(b.force_contact()) for b in itasca.ball.list())\n    ratio = unbal_sum / contact_sum if contact_sum > 0 else 0\n    if ratio < 1e-5:\n        break\n\nNote: Prefer 'model solve' command for standard equilibrium. Custom loops require manual force ratio calculations."
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "command": "plot export",
+  "category": "plot",
+  "search_keywords": [
+    "export",
+    "save",
+    "bitmap",
+    "png",
+    "pdf",
+    "svg",
+    "postscript",
+    "csv",
+    "dxf",
+    "print",
+    "image",
+    "screenshot"
+  ],
+  "description": "Export the contents of a plot to a file. Can create hardcopy images, convert to different file formats, or create data files to recreate the plot. If no plot name is specified, the current view is assumed. Default filename is 'flac3d_name' where 'name' is the plot name.",
+  "syntax": "plot <s> export <keyword>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "bitmap",
+      "syntax": "bitmap <keyword ...>",
+      "description": "Render plot to a bitmap file. Supports PNG (default), BMP, PPM, XBM, XPM formats. Sub-keywords: dpi <i> (dots per inch), dpm <i> (dots per meter), filename <s> (output file, extension determines format), size <ix> <iy> (bitmap size in pixels, default 1024x768)."
+    },
+    {
+      "name": "csv",
+      "syntax": "csv <filename s>",
+      "description": "Create CSV text file with data from plot items that support conversion (e.g., charts, tables). Can be imported into spreadsheet programs. Default extension is CSV."
+    },
+    {
+      "name": "datafile",
+      "syntax": "datafile <filename s>",
+      "description": "Export a data file that can recreate the plot when read with the program call command. Default extension is F3DAT."
+    },
+    {
+      "name": "dxf",
+      "syntax": "dxf <filename s>",
+      "description": "Export geometric contents as DXF file. Note: DXF format does not support all plot features, results may differ from screen. Default extension is DXF."
+    },
+    {
+      "name": "pdf",
+      "syntax": "pdf <keyword ...>",
+      "description": "Create PDF file. Sub-keywords: filename <s>, landscape (default portrait), margin <fx1 fx2 fy1 fy2> <inches|millimeters> (default 0.25in), paper <fx fy> <inches|millimeters> (default 11x8.5in), size <ix iy> (bitmap size for 3D rendering)."
+    },
+    {
+      "name": "postscript",
+      "syntax": "postscript <keyword ...>",
+      "description": "Create Postscript file. Sub-keywords: filename <s>, landscape (default portrait), margin <fx1 fx2 fy1 fy2> <inches|millimeters> (default 0.25in), paper <fx fy> <inches|millimeters> (default 11x8.5in), size <ix iy> (bitmap size for 3D rendering). Default extension is PS."
+    },
+    {
+      "name": "print",
+      "syntax": "print",
+      "description": "Send plot to operating system print system. Opens print dialog in interactive mode, or sends to default printer when running from data file."
+    },
+    {
+      "name": "svg",
+      "syntax": "svg <keyword ...>",
+      "description": "Generate Scalable Vector Graphics file. Sub-keywords: filename <s> (default extension SVG), size <ix iy> (bitmap portion size in pixels)."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot export bitmap filename 'output.png'",
+      "description": "Export current plot to PNG file"
+    },
+    {
+      "command": "plot export bitmap size 1920 1080 filename 'hd_output.png'",
+      "description": "Export plot as 1920x1080 PNG image"
+    },
+    {
+      "command": "plot 'myplot' export pdf filename 'report.pdf' landscape",
+      "description": "Export plot 'myplot' to PDF in landscape orientation"
+    },
+    {
+      "command": "plot export svg filename 'vector.svg'",
+      "description": "Export plot as SVG vector graphics"
+    },
+    {
+      "command": "plot export csv filename 'data.csv'",
+      "description": "Export plot data to CSV file"
+    },
+    {
+      "command": "plot export bitmap dpi 300 filename 'highres.png'",
+      "description": "Export plot as high-resolution 300 DPI PNG"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot export bitmap filename <path>') - no direct Python SDK method"
+  }
+}

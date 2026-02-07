@@ -1,0 +1,1079 @@
+{
+  "module": "ball",
+  "description": "Natural language keywords for ball module API search",
+  "keywords": {
+    "create ball": [
+      "itasca.ball.create"
+    ],
+    "create balls": [
+      "itasca.ball.create"
+    ],
+    "new ball": [
+      "itasca.ball.create"
+    ],
+    "make ball": [
+      "itasca.ball.create"
+    ],
+    "add ball": [
+      "itasca.ball.create"
+    ],
+    "generate ball": [
+      "itasca.ball.create"
+    ],
+    "ball containing point": [
+      "itasca.ball.containing"
+    ],
+    "point in ball": [
+      "itasca.ball.containing"
+    ],
+    "which ball contains": [
+      "itasca.ball.containing"
+    ],
+    "ball energy": [
+      "itasca.ball.energy"
+    ],
+    "kinetic energy": [
+      "itasca.ball.energy"
+    ],
+    "total energy": [
+      "itasca.ball.energy"
+    ],
+    "balls in box": [
+      "itasca.ball.inbox"
+    ],
+    "balls in region": [
+      "itasca.ball.inbox"
+    ],
+    "spatial query": [
+      "itasca.ball.inbox"
+    ],
+    "maximum ball id": [
+      "itasca.ball.maxid"
+    ],
+    "max ball id": [
+      "itasca.ball.maxid"
+    ],
+    "highest id": [
+      "itasca.ball.maxid"
+    ],
+    "nearest ball": [
+      "itasca.ball.near"
+    ],
+    "closest ball": [
+      "itasca.ball.near"
+    ],
+    "ball near point": [
+      "itasca.ball.near"
+    ],
+    "find nearest": [
+      "itasca.ball.near"
+    ],
+    "list balls": [
+      "itasca.ball.list"
+    ],
+    "iterate balls": [
+      "itasca.ball.list"
+    ],
+    "all balls": [
+      "itasca.ball.list"
+    ],
+    "get balls": [
+      "itasca.ball.list"
+    ],
+    "loop balls": [
+      "itasca.ball.list"
+    ],
+    "find ball": [
+      "itasca.ball.find"
+    ],
+    "get ball": [
+      "itasca.ball.find"
+    ],
+    "search ball": [
+      "itasca.ball.find"
+    ],
+    "ball by id": [
+      "itasca.ball.find"
+    ],
+    "count balls": [
+      "itasca.ball.count"
+    ],
+    "number of balls": [
+      "itasca.ball.count"
+    ],
+    "how many balls": [
+      "itasca.ball.count"
+    ],
+    "total balls": [
+      "itasca.ball.count"
+    ],
+    "_comment_identification": "Identification methods",
+    "ball id": [
+      "itasca.ball.Ball.id"
+    ],
+    "get ball id": [
+      "itasca.ball.Ball.id"
+    ],
+    "ball identifier": [
+      "itasca.ball.Ball.id"
+    ],
+    "check ball valid": [
+      "itasca.ball.Ball.valid"
+    ],
+    "is ball valid": [
+      "itasca.ball.Ball.valid"
+    ],
+    "ball exists": [
+      "itasca.ball.Ball.valid"
+    ],
+    "ball still exists": [
+      "itasca.ball.Ball.valid"
+    ],
+    "delete ball": [
+      "itasca.ball.Ball.delete"
+    ],
+    "remove ball": [
+      "itasca.ball.Ball.delete"
+    ],
+    "destroy ball": [
+      "itasca.ball.Ball.delete"
+    ],
+    "erase ball": [
+      "itasca.ball.Ball.delete"
+    ],
+    "_comment_position": "Position methods",
+    "ball position": [
+      "itasca.ball.Ball.pos"
+    ],
+    "get position": [
+      "itasca.ball.Ball.pos"
+    ],
+    "ball location": [
+      "itasca.ball.Ball.pos"
+    ],
+    "where is ball": [
+      "itasca.ball.Ball.pos"
+    ],
+    "ball coordinates": [
+      "itasca.ball.Ball.pos"
+    ],
+    "ball centroid": [
+      "itasca.ball.Ball.pos"
+    ],
+    "position x": [
+      "itasca.ball.Ball.pos_x"
+    ],
+    "x coordinate": [
+      "itasca.ball.Ball.pos_x"
+    ],
+    "horizontal position": [
+      "itasca.ball.Ball.pos_x"
+    ],
+    "position y": [
+      "itasca.ball.Ball.pos_y"
+    ],
+    "y coordinate": [
+      "itasca.ball.Ball.pos_y"
+    ],
+    "position z": [
+      "itasca.ball.Ball.pos_z"
+    ],
+    "z coordinate": [
+      "itasca.ball.Ball.pos_z"
+    ],
+    "vertical position": [
+      "itasca.ball.Ball.pos_z"
+    ],
+    "height ball": [
+      "itasca.ball.Ball.pos_z"
+    ],
+    "set position": [
+      "itasca.ball.Ball.set_pos"
+    ],
+    "move ball": [
+      "itasca.ball.Ball.set_pos"
+    ],
+    "change position": [
+      "itasca.ball.Ball.set_pos"
+    ],
+    "relocate ball": [
+      "itasca.ball.Ball.set_pos"
+    ],
+    "update position": [
+      "itasca.ball.Ball.set_pos"
+    ],
+    "set position x": [
+      "itasca.ball.Ball.set_pos_x"
+    ],
+    "set x coordinate": [
+      "itasca.ball.Ball.set_pos_x"
+    ],
+    "move x": [
+      "itasca.ball.Ball.set_pos_x"
+    ],
+    "set position y": [
+      "itasca.ball.Ball.set_pos_y"
+    ],
+    "set y coordinate": [
+      "itasca.ball.Ball.set_pos_y"
+    ],
+    "move y": [
+      "itasca.ball.Ball.set_pos_y"
+    ],
+    "set position z": [
+      "itasca.ball.Ball.set_pos_z"
+    ],
+    "set z coordinate": [
+      "itasca.ball.Ball.set_pos_z"
+    ],
+    "move z": [
+      "itasca.ball.Ball.set_pos_z"
+    ],
+    "set height": [
+      "itasca.ball.Ball.set_pos_z"
+    ],
+    "_comment_orientation": "Orientation methods",
+    "ball orientation": [
+      "itasca.ball.Ball.euler"
+    ],
+    "ball rotation": [
+      "itasca.ball.Ball.euler"
+    ],
+    "euler angles": [
+      "itasca.ball.Ball.euler"
+    ],
+    "get orientation": [
+      "itasca.ball.Ball.euler"
+    ],
+    "rotation angles": [
+      "itasca.ball.Ball.euler"
+    ],
+    "orientation x": [
+      "itasca.ball.Ball.euler_x"
+    ],
+    "euler x": [
+      "itasca.ball.Ball.euler_x"
+    ],
+    "rotation x": [
+      "itasca.ball.Ball.euler_x"
+    ],
+    "orientation y": [
+      "itasca.ball.Ball.euler_y"
+    ],
+    "euler y": [
+      "itasca.ball.Ball.euler_y"
+    ],
+    "rotation y": [
+      "itasca.ball.Ball.euler_y"
+    ],
+    "orientation z": [
+      "itasca.ball.Ball.euler_z"
+    ],
+    "euler z": [
+      "itasca.ball.Ball.euler_z"
+    ],
+    "rotation z": [
+      "itasca.ball.Ball.euler_z"
+    ],
+    "set orientation": [
+      "itasca.ball.Ball.set_euler"
+    ],
+    "set rotation": [
+      "itasca.ball.Ball.set_euler"
+    ],
+    "rotate ball": [
+      "itasca.ball.Ball.set_euler"
+    ],
+    "change orientation": [
+      "itasca.ball.Ball.set_euler"
+    ],
+    "set euler": [
+      "itasca.ball.Ball.set_euler"
+    ],
+    "set orientation x": [
+      "itasca.ball.Ball.set_euler_x"
+    ],
+    "set rotation x": [
+      "itasca.ball.Ball.set_euler_x"
+    ],
+    "set euler x": [
+      "itasca.ball.Ball.set_euler_x"
+    ],
+    "set orientation y": [
+      "itasca.ball.Ball.set_euler_y"
+    ],
+    "set rotation y": [
+      "itasca.ball.Ball.set_euler_y"
+    ],
+    "set euler y": [
+      "itasca.ball.Ball.set_euler_y"
+    ],
+    "set orientation z": [
+      "itasca.ball.Ball.set_euler_z"
+    ],
+    "set rotation z": [
+      "itasca.ball.Ball.set_euler_z"
+    ],
+    "set euler z": [
+      "itasca.ball.Ball.set_euler_z"
+    ],
+    "_comment_displacement": "Displacement methods",
+    "ball displacement": [
+      "itasca.ball.Ball.disp"
+    ],
+    "get displacement": [
+      "itasca.ball.Ball.disp"
+    ],
+    "displacement vector": [
+      "itasca.ball.Ball.disp"
+    ],
+    "total displacement": [
+      "itasca.ball.Ball.disp"
+    ],
+    "displacement x": [
+      "itasca.ball.Ball.disp_x"
+    ],
+    "x displacement": [
+      "itasca.ball.Ball.disp_x"
+    ],
+    "horizontal displacement": [
+      "itasca.ball.Ball.disp_x"
+    ],
+    "displacement y": [
+      "itasca.ball.Ball.disp_y"
+    ],
+    "y displacement": [
+      "itasca.ball.Ball.disp_y"
+    ],
+    "displacement z": [
+      "itasca.ball.Ball.disp_z"
+    ],
+    "z displacement": [
+      "itasca.ball.Ball.disp_z"
+    ],
+    "vertical displacement": [
+      "itasca.ball.Ball.disp_z"
+    ],
+    "set displacement": [
+      "itasca.ball.Ball.set_disp"
+    ],
+    "change displacement": [
+      "itasca.ball.Ball.set_disp"
+    ],
+    "update displacement": [
+      "itasca.ball.Ball.set_disp"
+    ],
+    "set displacement x": [
+      "itasca.ball.Ball.set_disp_x"
+    ],
+    "set x displacement": [
+      "itasca.ball.Ball.set_disp_x"
+    ],
+    "set displacement y": [
+      "itasca.ball.Ball.set_disp_y"
+    ],
+    "set y displacement": [
+      "itasca.ball.Ball.set_disp_y"
+    ],
+    "set displacement z": [
+      "itasca.ball.Ball.set_disp_z"
+    ],
+    "set z displacement": [
+      "itasca.ball.Ball.set_disp_z"
+    ],
+    "_comment_velocity": "Velocity methods",
+    "ball velocity": [
+      "itasca.ball.Ball.vel"
+    ],
+    "get velocity": [
+      "itasca.ball.Ball.vel"
+    ],
+    "ball speed": [
+      "itasca.ball.Ball.vel"
+    ],
+    "velocity vector": [
+      "itasca.ball.Ball.vel"
+    ],
+    "velocity x": [
+      "itasca.ball.Ball.vel_x"
+    ],
+    "x velocity": [
+      "itasca.ball.Ball.vel_x"
+    ],
+    "horizontal velocity": [
+      "itasca.ball.Ball.vel_x"
+    ],
+    "velocity y": [
+      "itasca.ball.Ball.vel_y"
+    ],
+    "y velocity": [
+      "itasca.ball.Ball.vel_y"
+    ],
+    "velocity z": [
+      "itasca.ball.Ball.vel_z"
+    ],
+    "z velocity": [
+      "itasca.ball.Ball.vel_z"
+    ],
+    "vertical velocity": [
+      "itasca.ball.Ball.vel_z"
+    ],
+    "set velocity": [
+      "itasca.ball.Ball.set_vel"
+    ],
+    "change velocity": [
+      "itasca.ball.Ball.set_vel"
+    ],
+    "update velocity": [
+      "itasca.ball.Ball.set_vel"
+    ],
+    "set speed": [
+      "itasca.ball.Ball.set_vel"
+    ],
+    "set velocity x": [
+      "itasca.ball.Ball.set_vel_x"
+    ],
+    "set x velocity": [
+      "itasca.ball.Ball.set_vel_x"
+    ],
+    "set velocity y": [
+      "itasca.ball.Ball.set_vel_y"
+    ],
+    "set y velocity": [
+      "itasca.ball.Ball.set_vel_y"
+    ],
+    "set velocity z": [
+      "itasca.ball.Ball.set_vel_z"
+    ],
+    "set z velocity": [
+      "itasca.ball.Ball.set_vel_z"
+    ],
+    "_comment_spin": "Angular velocity methods",
+    "ball spin": [
+      "itasca.ball.Ball.spin"
+    ],
+    "angular velocity": [
+      "itasca.ball.Ball.spin"
+    ],
+    "rotation rate": [
+      "itasca.ball.Ball.spin"
+    ],
+    "get spin": [
+      "itasca.ball.Ball.spin"
+    ],
+    "spin vector": [
+      "itasca.ball.Ball.spin"
+    ],
+    "spin x": [
+      "itasca.ball.Ball.spin_x"
+    ],
+    "angular velocity x": [
+      "itasca.ball.Ball.spin_x"
+    ],
+    "rotation rate x": [
+      "itasca.ball.Ball.spin_x"
+    ],
+    "spin y": [
+      "itasca.ball.Ball.spin_y"
+    ],
+    "angular velocity y": [
+      "itasca.ball.Ball.spin_y"
+    ],
+    "rotation rate y": [
+      "itasca.ball.Ball.spin_y"
+    ],
+    "spin z": [
+      "itasca.ball.Ball.spin_z"
+    ],
+    "angular velocity z": [
+      "itasca.ball.Ball.spin_z"
+    ],
+    "rotation rate z": [
+      "itasca.ball.Ball.spin_z"
+    ],
+    "set spin": [
+      "itasca.ball.Ball.set_spin"
+    ],
+    "set angular velocity": [
+      "itasca.ball.Ball.set_spin"
+    ],
+    "change spin": [
+      "itasca.ball.Ball.set_spin"
+    ],
+    "set rotation rate": [
+      "itasca.ball.Ball.set_spin"
+    ],
+    "set spin x": [
+      "itasca.ball.Ball.set_spin_x"
+    ],
+    "set angular velocity x": [
+      "itasca.ball.Ball.set_spin_x"
+    ],
+    "set spin y": [
+      "itasca.ball.Ball.set_spin_y"
+    ],
+    "set angular velocity y": [
+      "itasca.ball.Ball.set_spin_y"
+    ],
+    "set spin z": [
+      "itasca.ball.Ball.set_spin_z"
+    ],
+    "set angular velocity z": [
+      "itasca.ball.Ball.set_spin_z"
+    ],
+    "_comment_forces": "Force methods",
+    "applied force": [
+      "itasca.ball.Ball.force_app"
+    ],
+    "ball force": [
+      "itasca.ball.Ball.force_app"
+    ],
+    "get applied force": [
+      "itasca.ball.Ball.force_app"
+    ],
+    "force applied": [
+      "itasca.ball.Ball.force_app"
+    ],
+    "applied force x": [
+      "itasca.ball.Ball.force_app_x"
+    ],
+    "force x": [
+      "itasca.ball.Ball.force_app_x"
+    ],
+    "applied force y": [
+      "itasca.ball.Ball.force_app_y"
+    ],
+    "force y": [
+      "itasca.ball.Ball.force_app_y"
+    ],
+    "applied force z": [
+      "itasca.ball.Ball.force_app_z"
+    ],
+    "force z": [
+      "itasca.ball.Ball.force_app_z"
+    ],
+    "set applied force": [
+      "itasca.ball.Ball.set_force_app"
+    ],
+    "apply force": [
+      "itasca.ball.Ball.set_force_app"
+    ],
+    "set force": [
+      "itasca.ball.Ball.set_force_app"
+    ],
+    "set applied force x": [
+      "itasca.ball.Ball.set_force_app_x"
+    ],
+    "set force x": [
+      "itasca.ball.Ball.set_force_app_x"
+    ],
+    "apply force x": [
+      "itasca.ball.Ball.set_force_app_x"
+    ],
+    "set applied force y": [
+      "itasca.ball.Ball.set_force_app_y"
+    ],
+    "set force y": [
+      "itasca.ball.Ball.set_force_app_y"
+    ],
+    "apply force y": [
+      "itasca.ball.Ball.set_force_app_y"
+    ],
+    "set applied force z": [
+      "itasca.ball.Ball.set_force_app_z"
+    ],
+    "set force z": [
+      "itasca.ball.Ball.set_force_app_z"
+    ],
+    "apply force z": [
+      "itasca.ball.Ball.set_force_app_z"
+    ],
+    "total contact force": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "get total contact force": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "sum contact forces": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "ball contact force sum": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "total force from contacts": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "force from contacts": [
+      "itasca.ball.Ball.force_contact"
+    ],
+    "total contact force x": [
+      "itasca.ball.Ball.force_contact_x"
+    ],
+    "total contact force y": [
+      "itasca.ball.Ball.force_contact_y"
+    ],
+    "total contact force z": [
+      "itasca.ball.Ball.force_contact_z"
+    ],
+    "set contact force": [
+      "itasca.ball.Ball.set_force_contact"
+    ],
+    "set contact force x": [
+      "itasca.ball.Ball.set_force_contact_x"
+    ],
+    "set contact force y": [
+      "itasca.ball.Ball.set_force_contact_y"
+    ],
+    "set contact force z": [
+      "itasca.ball.Ball.set_force_contact_z"
+    ],
+    "unbalanced force": [
+      "itasca.ball.Ball.force_unbal"
+    ],
+    "out of balance force": [
+      "itasca.ball.Ball.force_unbal"
+    ],
+    "residual force": [
+      "itasca.ball.Ball.force_unbal"
+    ],
+    "unbalanced force x": [
+      "itasca.ball.Ball.force_unbal_x"
+    ],
+    "unbalanced force y": [
+      "itasca.ball.Ball.force_unbal_y"
+    ],
+    "unbalanced force z": [
+      "itasca.ball.Ball.force_unbal_z"
+    ],
+    "_comment_moments": "Moment methods",
+    "applied moment": [
+      "itasca.ball.Ball.moment_app"
+    ],
+    "applied torque": [
+      "itasca.ball.Ball.moment_app"
+    ],
+    "ball moment": [
+      "itasca.ball.Ball.moment_app"
+    ],
+    "get moment": [
+      "itasca.ball.Ball.moment_app"
+    ],
+    "applied moment x": [
+      "itasca.ball.Ball.moment_app_x"
+    ],
+    "torque x": [
+      "itasca.ball.Ball.moment_app_x"
+    ],
+    "applied moment y": [
+      "itasca.ball.Ball.moment_app_y"
+    ],
+    "torque y": [
+      "itasca.ball.Ball.moment_app_y"
+    ],
+    "applied moment z": [
+      "itasca.ball.Ball.moment_app_z"
+    ],
+    "torque z": [
+      "itasca.ball.Ball.moment_app_z"
+    ],
+    "set applied moment": [
+      "itasca.ball.Ball.set_moment_app"
+    ],
+    "apply moment": [
+      "itasca.ball.Ball.set_moment_app"
+    ],
+    "apply torque": [
+      "itasca.ball.Ball.set_moment_app"
+    ],
+    "set moment": [
+      "itasca.ball.Ball.set_moment_app"
+    ],
+    "set applied moment x": [
+      "itasca.ball.Ball.set_moment_app_x"
+    ],
+    "set torque x": [
+      "itasca.ball.Ball.set_moment_app_x"
+    ],
+    "set applied moment y": [
+      "itasca.ball.Ball.set_moment_app_y"
+    ],
+    "set torque y": [
+      "itasca.ball.Ball.set_moment_app_y"
+    ],
+    "set applied moment z": [
+      "itasca.ball.Ball.set_moment_app_z"
+    ],
+    "set torque z": [
+      "itasca.ball.Ball.set_moment_app_z"
+    ],
+    "contact moment": [
+      "itasca.ball.Ball.moment_contact"
+    ],
+    "contact torque": [
+      "itasca.ball.Ball.moment_contact"
+    ],
+    "get contact moment": [
+      "itasca.ball.Ball.moment_contact"
+    ],
+    "contact moment x": [
+      "itasca.ball.Ball.moment_contact_x"
+    ],
+    "contact moment y": [
+      "itasca.ball.Ball.moment_contact_y"
+    ],
+    "contact moment z": [
+      "itasca.ball.Ball.moment_contact_z"
+    ],
+    "set contact moment": [
+      "itasca.ball.Ball.set_moment_contact"
+    ],
+    "set contact moment x": [
+      "itasca.ball.Ball.set_moment_contact_x"
+    ],
+    "set contact moment y": [
+      "itasca.ball.Ball.set_moment_contact_y"
+    ],
+    "set contact moment z": [
+      "itasca.ball.Ball.set_moment_contact_z"
+    ],
+    "unbalanced moment": [
+      "itasca.ball.Ball.moment_unbal"
+    ],
+    "unbalanced torque": [
+      "itasca.ball.Ball.moment_unbal"
+    ],
+    "residual moment": [
+      "itasca.ball.Ball.moment_unbal"
+    ],
+    "unbalanced moment x": [
+      "itasca.ball.Ball.moment_unbal_x"
+    ],
+    "unbalanced moment y": [
+      "itasca.ball.Ball.moment_unbal_y"
+    ],
+    "unbalanced moment z": [
+      "itasca.ball.Ball.moment_unbal_z"
+    ],
+    "_comment_physical": "Physical property methods",
+    "ball mass": [
+      "itasca.ball.Ball.mass"
+    ],
+    "get mass": [
+      "itasca.ball.Ball.mass"
+    ],
+    "inertial mass": [
+      "itasca.ball.Ball.mass"
+    ],
+    "ball weight": [
+      "itasca.ball.Ball.mass"
+    ],
+    "real mass": [
+      "itasca.ball.Ball.mass_real"
+    ],
+    "gravitational mass": [
+      "itasca.ball.Ball.mass_real"
+    ],
+    "actual mass": [
+      "itasca.ball.Ball.mass_real"
+    ],
+    "ball density": [
+      "itasca.ball.Ball.density"
+    ],
+    "get density": [
+      "itasca.ball.Ball.density"
+    ],
+    "material density": [
+      "itasca.ball.Ball.density"
+    ],
+    "set density": [
+      "itasca.ball.Ball.set_density"
+    ],
+    "change density": [
+      "itasca.ball.Ball.set_density"
+    ],
+    "update density": [
+      "itasca.ball.Ball.set_density"
+    ],
+    "ball radius": [
+      "itasca.ball.Ball.radius"
+    ],
+    "get radius": [
+      "itasca.ball.Ball.radius"
+    ],
+    "ball size": [
+      "itasca.ball.Ball.radius"
+    ],
+    "particle radius": [
+      "itasca.ball.Ball.radius"
+    ],
+    "set radius": [
+      "itasca.ball.Ball.set_radius"
+    ],
+    "change radius": [
+      "itasca.ball.Ball.set_radius"
+    ],
+    "resize ball": [
+      "itasca.ball.Ball.set_radius"
+    ],
+    "update radius": [
+      "itasca.ball.Ball.set_radius"
+    ],
+    "ball damping": [
+      "itasca.ball.Ball.damp"
+    ],
+    "damping coefficient": [
+      "itasca.ball.Ball.damp"
+    ],
+    "local damping": [
+      "itasca.ball.Ball.damp"
+    ],
+    "get damping": [
+      "itasca.ball.Ball.damp"
+    ],
+    "set damping": [
+      "itasca.ball.Ball.set_damp"
+    ],
+    "change damping": [
+      "itasca.ball.Ball.set_damp"
+    ],
+    "update damping": [
+      "itasca.ball.Ball.set_damp"
+    ],
+    "moment of inertia": [
+      "itasca.ball.Ball.moi"
+    ],
+    "inertia": [
+      "itasca.ball.Ball.moi"
+    ],
+    "rotational inertia": [
+      "itasca.ball.Ball.moi"
+    ],
+    "real moment of inertia": [
+      "itasca.ball.Ball.moi_real"
+    ],
+    "real inertia": [
+      "itasca.ball.Ball.moi_real"
+    ],
+    "gravitational inertia": [
+      "itasca.ball.Ball.moi_real"
+    ],
+    "_comment_contacts": "Contact methods",
+    "ball contacts": [
+      "itasca.ball.Ball.contacts"
+    ],
+    "get contacts": [
+      "itasca.ball.Ball.contacts"
+    ],
+    "contact list": [
+      "itasca.ball.Ball.contacts"
+    ],
+    "associated contacts": [
+      "itasca.ball.Ball.contacts"
+    ],
+    "contact count": [
+      "itasca.ball.Ball.contact_count"
+    ],
+    "number of contacts": [
+      "itasca.ball.Ball.contact_count"
+    ],
+    "how many contacts": [
+      "itasca.ball.Ball.contact_count"
+    ],
+    "count contacts": [
+      "itasca.ball.Ball.contact_count"
+    ],
+    "_comment_groups": "Group methods",
+    "ball group": [
+      "itasca.ball.Ball.group"
+    ],
+    "get group": [
+      "itasca.ball.Ball.group"
+    ],
+    "group name": [
+      "itasca.ball.Ball.group"
+    ],
+    "which group": [
+      "itasca.ball.Ball.group"
+    ],
+    "ball groups": [
+      "itasca.ball.Ball.groups"
+    ],
+    "all groups": [
+      "itasca.ball.Ball.groups"
+    ],
+    "list groups": [
+      "itasca.ball.Ball.groups"
+    ],
+    "get all groups": [
+      "itasca.ball.Ball.groups"
+    ],
+    "in group": [
+      "itasca.ball.Ball.in_group"
+    ],
+    "check group": [
+      "itasca.ball.Ball.in_group"
+    ],
+    "is in group": [
+      "itasca.ball.Ball.in_group"
+    ],
+    "belongs to group": [
+      "itasca.ball.Ball.in_group"
+    ],
+    "set group": [
+      "itasca.ball.Ball.set_group"
+    ],
+    "assign group": [
+      "itasca.ball.Ball.set_group"
+    ],
+    "change group": [
+      "itasca.ball.Ball.set_group"
+    ],
+    "add to group": [
+      "itasca.ball.Ball.set_group"
+    ],
+    "remove from group": [
+      "itasca.ball.Ball.group_remove"
+    ],
+    "delete from group": [
+      "itasca.ball.Ball.group_remove"
+    ],
+    "unassign group": [
+      "itasca.ball.Ball.group_remove"
+    ],
+    "_comment_properties": "Surface property methods",
+    "has property": [
+      "itasca.ball.Ball.has_prop"
+    ],
+    "check property": [
+      "itasca.ball.Ball.has_prop"
+    ],
+    "property exists": [
+      "itasca.ball.Ball.has_prop"
+    ],
+    "get property": [
+      "itasca.ball.Ball.prop"
+    ],
+    "surface property": [
+      "itasca.ball.Ball.prop"
+    ],
+    "property value": [
+      "itasca.ball.Ball.prop"
+    ],
+    "all properties": [
+      "itasca.ball.Ball.props"
+    ],
+    "list properties": [
+      "itasca.ball.Ball.props"
+    ],
+    "get all properties": [
+      "itasca.ball.Ball.props"
+    ],
+    "surface properties": [
+      "itasca.ball.Ball.props"
+    ],
+    "set property": [
+      "itasca.ball.Ball.set_prop"
+    ],
+    "assign property": [
+      "itasca.ball.Ball.set_prop"
+    ],
+    "change property": [
+      "itasca.ball.Ball.set_prop"
+    ],
+    "update property": [
+      "itasca.ball.Ball.set_prop"
+    ],
+    "_comment_fixity": "Fixity methods",
+    "ball fixity": [
+      "itasca.ball.Ball.fix"
+    ],
+    "is fixed": [
+      "itasca.ball.Ball.fix"
+    ],
+    "check fixity": [
+      "itasca.ball.Ball.fix"
+    ],
+    "fixity condition": [
+      "itasca.ball.Ball.fix"
+    ],
+    "degree of freedom": [
+      "itasca.ball.Ball.fix"
+    ],
+    "set fixity": [
+      "itasca.ball.Ball.set_fix"
+    ],
+    "fix ball": [
+      "itasca.ball.Ball.set_fix"
+    ],
+    "lock ball": [
+      "itasca.ball.Ball.set_fix"
+    ],
+    "constrain ball": [
+      "itasca.ball.Ball.set_fix"
+    ],
+    "free ball": [
+      "itasca.ball.Ball.set_fix"
+    ],
+    "_comment_other": "Other methods",
+    "extra data": [
+      "itasca.ball.Ball.extra"
+    ],
+    "get extra": [
+      "itasca.ball.Ball.extra"
+    ],
+    "extra variable": [
+      "itasca.ball.Ball.extra"
+    ],
+    "set extra": [
+      "itasca.ball.Ball.set_extra"
+    ],
+    "set extra data": [
+      "itasca.ball.Ball.set_extra"
+    ],
+    "store extra": [
+      "itasca.ball.Ball.set_extra"
+    ],
+    "ball fragment": [
+      "itasca.ball.Ball.fragment"
+    ],
+    "fragment id": [
+      "itasca.ball.Ball.fragment"
+    ],
+    "get fragment": [
+      "itasca.ball.Ball.fragment"
+    ],
+    "set fragment": [
+      "itasca.ball.Ball.set_fragment"
+    ],
+    "assign fragment": [
+      "itasca.ball.Ball.set_fragment"
+    ],
+    "change fragment": [
+      "itasca.ball.Ball.set_fragment"
+    ],
+    "point inside ball": [
+      "itasca.ball.Ball.inside"
+    ],
+    "is point inside": [
+      "itasca.ball.Ball.inside"
+    ],
+    "contains point": [
+      "itasca.ball.Ball.inside"
+    ],
+    "test inside": [
+      "itasca.ball.Ball.inside"
+    ],
+    "ball stress": [
+      "itasca.ball.Ball.stress"
+    ],
+    "stress tensor": [
+      "itasca.ball.Ball.stress"
+    ],
+    "get stress": [
+      "itasca.ball.Ball.stress"
+    ],
+    "contact stress": [
+      "itasca.ball.Ball.stress"
+    ]
+  }
+}

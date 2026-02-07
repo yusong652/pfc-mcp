@@ -1,0 +1,623 @@
+{
+  "model": "linearpbond",
+  "full_name": "Linear Parallel Bond Model",
+  "search_keywords": ["linearpbond", "parallel", "bond", "contact", "model"],
+  "description": "Linear parallel bond model simulates a finite-sized piece of cement-like material deposited between two contacting pieces. It combines a linear elastic interface with a parallel bond that transmits both force and moment, allowing the bonded interface to resist relative rotation. This is the most commonly used model for simulating cemented particulate materials.",
+
+  "typical_applications": [
+    "Cemented particulate materials",
+    "Rock mechanics (intact rock, synthetic rock mass)",
+    "Bonded granular assemblies",
+    "Materials with strong inter-particle bonds",
+    "Concrete and cement composites",
+    "Fault slip modeling with inserted interfaces"
+  ],
+
+  "key_characteristics": [
+    "Parallel bond transmits BOTH force and moment (unlike linearcbond which only transmits force)",
+    "Bond can resist relative rotation via moment transmission",
+    "Simulates finite-sized cement-like material between particles",
+    "Bond acts in parallel with base linear behavior (both contribute to total force)",
+    "Complex strength criteria: tensile strength, cohesion, friction angle",
+    "Bond breakage based on stress at bond periphery, not total force",
+    "After bond breaks, contact behavior reverts to linear model"
+  ],
+
+  "property_groups": [
+    {
+      "name": "Linear Group",
+      "description": "Base linear elastic and frictional properties (acts in parallel with bond)",
+      "properties": [
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Base linear stiffness, acts in parallel with bond. Total normal force = linear force + parallel-bond force. Inheritance uses series formula: 1/kn = 1/kn(1) + 1/kn(2)."
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Base linear stiffness, acts in parallel with bond. Total shear force = linear force + parallel-bond force. Inheritance uses series formula: 1/ks = 1/ks(1) + 1/ks(2)."
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Coulomb friction coefficient for the linear component. Applied after bond breaks. Inheritance uses minimum: fric = min(fric(1), fric(2))."
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap [length]",
+          "type": "FLT",
+          "range": "ℝ",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Reference surface gap. Used to define initial contact configuration."
+        },
+        {
+          "keyword": "lin_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode [-]",
+          "type": "INT",
+          "range": "{0, 1}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls how normal force is updated during contact.",
+          "values": [
+            {
+              "value": 0,
+              "description": "update is absolute - force recalculated each cycle"
+            },
+            {
+              "value": 1,
+              "description": "update is incremental - force accumulated incrementally"
+            }
+          ]
+        },
+        {
+          "keyword": "emod",
+          "symbol": "E*",
+          "description": "Effective modulus [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method to calculate kn and ks. Not a direct property - set via method argument."
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ*",
+          "description": "Normal-to-shear stiffness ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)*",
+          "default": "0.0*",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method. Defined as κ* ≡ k_n / k_s. By convention, κ* = 0.0 if either stiffness is 0."
+        },
+        {
+          "keyword": "lin_slip",
+          "symbol": "s",
+          "description": "Slip state [-]",
+          "type": "BOOL",
+          "range": "{false, true}",
+          "default": "false",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only state indicator for linear component.",
+          "values": [
+            {
+              "value": true,
+              "description": "slipping - shear force at friction limit"
+            },
+            {
+              "value": false,
+              "description": "not slipping - shear force below friction limit"
+            }
+          ]
+        },
+        {
+          "keyword": "lin_force",
+          "symbol": "F^l",
+          "description": "Linear force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Force from linear component only. Total force = lin_force + pb_force. In contact plane: (-F_n^l, F_ss^l, F_st^l). In 2D: F_ss^l ≡ 0.",
+          "components": {
+            "2D": "(-F_n^l, F_st^l)",
+            "3D": "(-F_n^l, F_ss^l, F_st^l)"
+          }
+        },
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Constant area [length*length]",
+          "type": "FLT",
+          "range": "(0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "User-defined contact area. Separate from bond area (calculated from pb_radius)."
+        }
+      ]
+    },
+    {
+      "name": "Dashpot Group",
+      "description": "Viscous damping properties for energy dissipation",
+      "properties": [
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Normal direction damping as fraction of critical damping."
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Shear direction damping as fraction of critical damping."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode [-]",
+          "type": "INT",
+          "range": "{0, 1, 2, 3}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls when dashpot forces are active.",
+          "values": [
+            {
+              "value": 0,
+              "description": "full normal & full shear"
+            },
+            {
+              "value": 1,
+              "description": "no-tension normal & full shear"
+            },
+            {
+              "value": 2,
+              "description": "full normal & slip-cut shear"
+            },
+            {
+              "value": 3,
+              "description": "no-tension normal & slip-cut shear"
+            }
+          ]
+        },
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only dashpot force vector. In 2D: F_ss^d ≡ 0.",
+          "components": {
+            "2D": "(-F_n^d, F_st^d)",
+            "3D": "(-F_n^d, F_ss^d, F_st^d)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Parallel-Bond Group",
+      "description": "Parallel bond properties - finite-sized cement-like material transmitting force and moment",
+      "properties": [
+        {
+          "keyword": "pb_rmul",
+          "symbol": "λ̄",
+          "description": "Radius multiplier [-]",
+          "type": "FLT",
+          "range": "(0.0, +∞)",
+          "default": "1.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Bond radius = λ̄ × min(R1, R2) where R1, R2 are piece radii. Controls bond size relative to particle size. Typical: 0.5 - 1.0."
+        },
+        {
+          "keyword": "pb_kn",
+          "symbol": "k̄_n",
+          "description": "Parallel bond normal stiffness [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Stiffness per unit area of the bond. Effective bond stiffness = pb_kn × bond_area. Can be set directly or via pb_deformability method."
+        },
+        {
+          "keyword": "pb_ks",
+          "symbol": "k̄_s",
+          "description": "Parallel bond shear stiffness [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Stiffness per unit area of the bond. Effective bond stiffness = pb_ks × bond_area. Can be set directly or via pb_deformability method."
+        },
+        {
+          "keyword": "pb_mcf",
+          "symbol": "β̄",
+          "description": "Moment-contribution factor [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "1.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Scaling factor for moment transmission. 1.0 = full moment resistance, 0.0 = no moment (force-only like linearcbond). Use to reduce rotational constraint."
+        },
+        {
+          "keyword": "pb_ten",
+          "symbol": "σ̄_c",
+          "description": "Tensile strength [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Maximum tensile stress at bond periphery. Bond breaks when σ̄ > pb_ten. Typical: 1e6 - 1e8 Pa for rock-like materials."
+        },
+        {
+          "keyword": "pb_coh",
+          "symbol": "c̄",
+          "description": "Cohesion [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Cohesive component of shear strength. Part of Mohr-Coulomb criterion: τ̄_c = c̄ + σ̄ tan(φ̄). Typical: 1e6 - 1e8 Pa."
+        },
+        {
+          "keyword": "pb_fa",
+          "symbol": "φ̄",
+          "description": "Friction angle [degrees]",
+          "type": "FLT",
+          "range": "[0.0, 90.0)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Friction angle for shear strength criterion. Shear strength = c̄ + σ̄ tan(φ̄). Typical: 30-50° for rock-like materials. 0° means pure cohesion."
+        },
+        {
+          "keyword": "pb_state",
+          "symbol": "B̄",
+          "description": "Bond state [-]",
+          "type": "INT",
+          "range": "{0, 1, 2, 3}",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only state indicator showing current bond status and failure mode.",
+          "values": [
+            {
+              "value": 0,
+              "description": "unbonded - no bond present"
+            },
+            {
+              "value": 1,
+              "description": "unbonded & broke in tension - failed due to tensile stress"
+            },
+            {
+              "value": 2,
+              "description": "unbonded & broke in shear - failed due to shear stress"
+            },
+            {
+              "value": 3,
+              "description": "bonded - bond is currently active"
+            }
+          ]
+        },
+        {
+          "keyword": "pb_radius",
+          "symbol": "R̄",
+          "description": "Bond radius [length]",
+          "type": "FLT",
+          "range": "(0.0, +∞)",
+          "default": "N/A",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only. Calculated as R̄ = λ̄ × min(R1, R2). Determines bond cross-sectional area and moment of inertia."
+        },
+        {
+          "keyword": "pb_emod",
+          "symbol": "Ē*",
+          "description": "Bond effective modulus [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'pb_deformability' method to calculate pb_kn and pb_ks. Not a direct property - set via method argument."
+        },
+        {
+          "keyword": "pb_kratio",
+          "symbol": "κ̄*",
+          "description": "Bond normal-to-shear stiffness ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)*",
+          "default": "0.0*",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'pb_deformability' method. Defined as κ̄* ≡ k̄_n / k̄_s. By convention, κ̄* = 0.0 if either stiffness is 0."
+        },
+        {
+          "keyword": "pb_shear",
+          "symbol": "τ̄_c",
+          "description": "Bond shear strength [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only. Calculated from Mohr-Coulomb criterion: τ̄_c = c̄ + σ̄ tan(φ̄). Current shear strength at bond periphery."
+        },
+        {
+          "keyword": "pb_sigma",
+          "symbol": "σ̄",
+          "description": "Normal stress at bond periphery [stress]",
+          "type": "FLT",
+          "range": "ℝ",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only. Current normal stress at bond periphery. Positive = tension, negative = compression. Compared against pb_ten for failure."
+        },
+        {
+          "keyword": "pb_tau",
+          "symbol": "τ̄",
+          "description": "Shear stress at bond periphery [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only. Current maximum shear stress at bond periphery. Compared against pb_shear (τ̄_c) for failure."
+        },
+        {
+          "keyword": "pb_force",
+          "symbol": "F̄",
+          "description": "Parallel-bond force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Force from parallel bond only. Total force = lin_force + pb_force. In 2D: F̄_ss ≡ 0.",
+          "components": {
+            "2D": "(-F̄_n, F̄_st)",
+            "3D": "(-F̄_n, F̄_ss, F̄_st)"
+          }
+        },
+        {
+          "keyword": "pb_moment",
+          "symbol": "M̄",
+          "description": "Parallel-bond moment (contact plane coordinate system) [force×length]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Moment transmitted by parallel bond. Allows resistance to relative rotation. Scaled by pb_mcf. In 2D: M̄_s ≡ 0, M̄_t ≡ 0.",
+          "components": {
+            "2D": "(M̄_n, 0, 0)",
+            "3D": "(M̄_n, M̄_s, M̄_t)"
+          }
+        }
+      ]
+    }
+  ],
+
+  "energy_partitions": [
+    {
+      "name": "energy-strain",
+      "symbol": "E_k",
+      "description": "Strain energy stored in linear springs",
+      "range": "[0.0, +∞)",
+      "accumulated": false
+    },
+    {
+      "name": "energy-slip",
+      "symbol": "E_μ",
+      "description": "Energy dissipated by frictional slip (linear component)",
+      "range": "(-∞, 0.0]",
+      "accumulated": true
+    },
+    {
+      "name": "energy-dashpot",
+      "symbol": "E_β",
+      "description": "Energy dissipated by dashpots",
+      "range": "(-∞, 0.0]",
+      "accumulated": true
+    },
+    {
+      "name": "energy-pbstrain",
+      "symbol": "Ē_k",
+      "description": "Strain energy stored in parallel-bond springs",
+      "range": "[0.0, +∞)",
+      "accumulated": false
+    }
+  ],
+
+  "available_methods": [
+    {
+      "group": "Linear Group",
+      "methods": [
+        {
+          "name": "area",
+          "description": "Set or query user_area"
+        },
+        {
+          "name": "deformability",
+          "description": "Calculate kn and ks from emod and kratio",
+          "typical_args": ["emod", "kratio"]
+        }
+      ]
+    },
+    {
+      "group": "Parallel-Bond Group",
+      "methods": [
+        {
+          "name": "pb_deformability",
+          "description": "Calculate pb_kn and pb_ks from pb_emod and pb_kratio",
+          "typical_args": ["emod", "kratio"]
+        },
+        {
+          "name": "bond",
+          "description": "Activate parallel bond at contact",
+          "typical_args": ["gap (optional)"]
+        },
+        {
+          "name": "unbond",
+          "description": "Remove parallel bond from contact"
+        }
+      ]
+    }
+  ],
+
+  "common_usage_patterns": [
+    {
+      "use_case": "Basic parallel bond with direct stiffness specification",
+      "commands": [
+        "contact cmat default model linearpbond property kn 1e8 ks 5e7 pb_kn 1e9 pb_ks 5e8 pb_ten 1e7 pb_coh 5e6 pb_fa 30.0 pb_rmul 1.0",
+        "contact method bond range contact"
+      ],
+      "description": "Set all properties directly, then activate bonds"
+    },
+    {
+      "use_case": "Using deformability methods (recommended)",
+      "commands": [
+        "contact cmat default model linearpbond method deformability emod 5e9 kratio 1.5 method pb_deformability emod 5e10 kratio 1.5 property pb_ten 1e7 pb_coh 5e6 pb_fa 30.0",
+        "contact method bond range contact"
+      ],
+      "description": "Calculate stiffnesses from elastic moduli - more physically meaningful"
+    },
+    {
+      "use_case": "Reduced moment contribution",
+      "commands": [
+        "contact cmat default model linearpbond method pb_deformability emod 5e10 kratio 1.5 property pb_ten 1e7 pb_coh 5e6 pb_fa 30.0 pb_mcf 0.5"
+      ],
+      "description": "Use pb_mcf < 1.0 to reduce rotational constraint"
+    },
+    {
+      "use_case": "Pure cohesion (no friction angle)",
+      "commands": [
+        "contact cmat default model linearpbond property pb_kn 1e9 pb_ks 5e8 pb_ten 1e7 pb_coh 5e6 pb_fa 0.0"
+      ],
+      "description": "Set pb_fa = 0.0 for pure cohesive behavior"
+    }
+  ],
+
+  "typical_parameter_values": {
+    "rock_like_materials": {
+      "kn": "1e8 - 1e10 [N/m]",
+      "ks": "kn / 1.5 to kn / 2.5",
+      "pb_kn": "1e9 - 1e11 [Pa]",
+      "pb_ks": "pb_kn / 1.5 to pb_kn / 2.5",
+      "pb_ten": "1e6 - 1e8 [Pa]",
+      "pb_coh": "0.5 × pb_ten to 1.0 × pb_ten",
+      "pb_fa": "30 - 50 [degrees]",
+      "pb_rmul": "0.5 - 1.0"
+    },
+    "cemented_soils": {
+      "kn": "1e7 - 1e9 [N/m]",
+      "pb_kn": "1e8 - 1e10 [Pa]",
+      "pb_ten": "1e5 - 1e7 [Pa]",
+      "pb_coh": "1e5 - 1e7 [Pa]",
+      "pb_fa": "20 - 40 [degrees]"
+    }
+  },
+
+  "notes": [
+    "Parallel bond acts IN PARALLEL with linear component - both contribute to total force",
+    "Bond transmits BOTH force and moment (unlike linearcbond)",
+    "Bonds must be activated using 'contact method bond' command",
+    "Bond radius calculated as: R̄ = pb_rmul × min(R1, R2)",
+    "Strength criteria based on STRESS at bond periphery, not total force",
+    "Tensile failure: σ̄ > pb_ten",
+    "Shear failure: τ̄ > τ̄_c where τ̄_c = pb_coh + σ̄ × tan(pb_fa)",
+    "Use 'pb_deformability' method for physically meaningful parameter specification",
+    "pb_mcf allows tuning moment resistance: 1.0 = full, 0.0 = force-only",
+    "After bond breaks, behavior reverts to linear model with friction",
+    "Bond area and moment of inertia calculated automatically from pb_radius"
+  ],
+
+  "workflow": [
+    "1. Set contact model to linearpbond via CMAT or contact model assign",
+    "2. Set linear stiffnesses (kn, ks) - preferably via deformability method",
+    "3. Set parallel bond stiffnesses (pb_kn, pb_ks) - preferably via pb_deformability method",
+    "4. Set bond strengths (pb_ten, pb_coh, pb_fa) and radius multiplier (pb_rmul)",
+    "5. Optionally set moment-contribution factor (pb_mcf) if reduced rotation resistance needed",
+    "6. Activate bonds using 'contact method bond' command",
+    "7. Bonds break automatically when stresses exceed strength limits",
+    "8. After breaking, contact behaves like linear model with friction"
+  ],
+
+  "key_differences_from_linearcbond": {
+    "linearpbond": [
+      "Transmits force AND moment",
+      "Resists relative rotation",
+      "Finite-sized bond (area, moment of inertia)",
+      "Stress-based failure criteria",
+      "Acts in PARALLEL with linear component",
+      "More complex strength: tension + cohesion + friction angle"
+    ],
+    "linearcbond": [
+      "Transmits force ONLY (no moment)",
+      "Cannot resist rotation",
+      "Point contact bond",
+      "Force-based failure criteria",
+      "Acts as REPLACEMENT for linear component when bonded",
+      "Simpler strength: tensile force + shear force"
+    ]
+  },
+
+  "related_models": [
+    {
+      "model": "linear",
+      "description": "Base model - linearpbond includes linear behavior plus parallel bond"
+    },
+    {
+      "model": "linearcbond",
+      "description": "Simpler bond model without moment transmission"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "command": "wall history",
+  "category": "wall",
+  "search_keywords": [
+    "history",
+    "track",
+    "monitor"
+  ],
+  "description": "Adds a history of a wall value. A history is a table of floating point values assigned by sampling a model attribute periodically during a simulation. The history can be assigned a name for later reference with the optional name keyword, if not the history will be given a default name based on its internally assigned id number. Following one of the keywords given below, either 1) an additional 'id' keyword followed by an integer id, 2) an additional 'name' keyword followed by a string s, or 3) an additional 'position' keyword followed by a position vector v must be given to define the specific wall.",
+  "syntax": "wall history <name sid> <keyword> ...",
+  "keywords": [
+    {
+      "name": "displacement",
+      "syntax": "displacement id <i> | name <s> | position <v>",
+      "description": "Magnitude of accumulated wall displacement vector as a result of cycling"
+    },
+    {
+      "name": "displacement-x",
+      "syntax": "displacement-x id <i> | name <s> | position <v>",
+      "description": "X-component of accumulated displacement as a result of cycling"
+    },
+    {
+      "name": "displacement-y",
+      "syntax": "displacement-y id <i> | name <s> | position <v>",
+      "description": "Y-component of accumulated displacement as a result of cycling"
+    },
+    {
+      "name": "displacement-z",
+      "syntax": "displacement-z id <i> | name <s> | position <v>",
+      "description": "Z-component of accumulated displacement as a result of cycling (3D ONLY)"
+    },
+    {
+      "name": "euler-x",
+      "syntax": "euler-x id <i> | name <s> | position <v>",
+      "description": "X-euler angle (in degrees) of current wall orientation (3D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "euler-y",
+      "syntax": "euler-y id <i> | name <s> | position <v>",
+      "description": "Y-euler angle (in degrees) of current wall orientation (3D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "euler-z",
+      "syntax": "euler-z id <i> | name <s> | position <v>",
+      "description": "Z-euler angle (in degrees) of current wall orientation (3D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "extra",
+      "syntax": "extra index <i> type <typename> id <i> | name <s> | position <v>",
+      "description": "Track history of an extra variable. Use 'index' to specify extra index and 'type' to specify the type"
+    },
+    {
+      "name": "force-contact",
+      "syntax": "force-contact id <i> | name <s> | position <v>",
+      "description": "Magnitude of the force resulting from contacts"
+    },
+    {
+      "name": "force-contact-x",
+      "syntax": "force-contact-x id <i> | name <s> | position <v>",
+      "description": "X-component of the contact force"
+    },
+    {
+      "name": "force-contact-y",
+      "syntax": "force-contact-y id <i> | name <s> | position <v>",
+      "description": "Y-component of the contact force"
+    },
+    {
+      "name": "force-contact-z",
+      "syntax": "force-contact-z id <i> | name <s> | position <v>",
+      "description": "Z-component of the contact force (3D ONLY)"
+    },
+    {
+      "name": "moment-contact",
+      "syntax": "moment-contact id <i> | name <s> | position <v>",
+      "description": "{Value in 2D; Magnitude in 3D} of the sum of the contact moments"
+    },
+    {
+      "name": "moment-contact-x",
+      "syntax": "moment-contact-x id <i> | name <s> | position <v>",
+      "description": "X-component of the contact moment (3D ONLY)"
+    },
+    {
+      "name": "moment-contact-y",
+      "syntax": "moment-contact-y id <i> | name <s> | position <v>",
+      "description": "Y-component of the contact moment (3D ONLY)"
+    },
+    {
+      "name": "moment-contact-z",
+      "syntax": "moment-contact-z id <i> | name <s> | position <v>",
+      "description": "Z-component of the contact moment (3D ONLY)"
+    },
+    {
+      "name": "position-x",
+      "syntax": "position-x id <i> | name <s> | position <v>",
+      "description": "X-component of the location of wall centroid"
+    },
+    {
+      "name": "position-y",
+      "syntax": "position-y id <i> | name <s> | position <v>",
+      "description": "Y-component of the location of wall centroid"
+    },
+    {
+      "name": "position-z",
+      "syntax": "position-z id <i> | name <s> | position <v>",
+      "description": "Z-component of the location of wall centroid (3D ONLY)"
+    },
+    {
+      "name": "rotation",
+      "syntax": "rotation id <i> | name <s> | position <v>",
+      "description": "Current wall orientation (2D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "spin",
+      "syntax": "spin id <i> | name <s> | position <v>",
+      "description": "{Value in 2D; Magnitude in 3D} of the wall angular velocity in radians per second"
+    },
+    {
+      "name": "spin-x",
+      "syntax": "spin-x id <i> | name <s> | position <v>",
+      "description": "X-component of the wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "spin-y",
+      "syntax": "spin-y id <i> | name <s> | position <v>",
+      "description": "Y-component of the wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "spin-z",
+      "syntax": "spin-z id <i> | name <s> | position <v>",
+      "description": "Z-component of the wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "velocity",
+      "syntax": "velocity id <i> | name <s> | position <v>",
+      "description": "Magnitude of the wall translational velocity vector"
+    },
+    {
+      "name": "velocity-x",
+      "syntax": "velocity-x id <i> | name <s> | position <v>",
+      "description": "X-component of the wall velocity"
+    },
+    {
+      "name": "velocity-y",
+      "syntax": "velocity-y id <i> | name <s> | position <v>",
+      "description": "Y-component of the wall velocity"
+    },
+    {
+      "name": "velocity-z",
+      "syntax": "velocity-z id <i> | name <s> | position <v>",
+      "description": "Z-component of the wall velocity (3D ONLY)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall history name 'wall1_force' force-contact id 1",
+      "description": "Track contact force magnitude for wall ID 1, name history 'wall1_force'"
+    },
+    {
+      "command": "wall history displacement-z name 'platen'",
+      "description": "Track z-displacement for wall named 'platen' (3D)"
+    },
+    {
+      "command": "wall history velocity-x position (0,0,5)",
+      "description": "Track x-velocity for wall nearest to position (0,0,5)"
+    },
+    {
+      "command": "wall history name 'bottom_vel' velocity-z id 100",
+      "description": "Track z-velocity for wall ID 100, name history 'bottom_vel'"
+    },
+    {
+      "command": "wall history force-contact-x name 'boundary'",
+      "description": "Track x-component of contact force for wall named 'boundary'"
+    },
+    {
+      "command": "wall history spin-z id 5",
+      "description": "Track z-component of angular velocity for wall ID 5 (3D)"
+    },
+    {
+      "command": "wall history extra index 1 type float id 10",
+      "description": "Track extra variable at index 1 (float type) for wall ID 10"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall history ...') - Python SDK does not provide history recording. Use history commands for manipulation"
+  }
+}

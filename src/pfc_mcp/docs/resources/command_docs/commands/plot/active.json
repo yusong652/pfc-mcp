@@ -1,0 +1,45 @@
+{
+  "command": "plot active",
+  "category": "plot",
+  "search_keywords": [
+    "active",
+    "activate",
+    "deactivate",
+    "enable",
+    "disable",
+    "render"
+  ],
+  "description": "Activate or deactivate a plot. If a plot is inactive, nothing is rendered in the window except a message indicating as much. By default a plot is active. If an error occurs during rendering, the plot will be automatically deactivated to prevent the error from reoccurring on each screen refresh.",
+  "syntax": "plot <s> active <b>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "b",
+      "syntax": "<b>",
+      "description": "Boolean flag: true to activate, false to deactivate the plot."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot active true",
+      "description": "Activate the current plot"
+    },
+    {
+      "command": "plot active false",
+      "description": "Deactivate the current plot"
+    },
+    {
+      "command": "plot 'myplot' active true",
+      "description": "Activate a specific plot named 'myplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> active <bool>') - no direct Python SDK method"
+  }
+}

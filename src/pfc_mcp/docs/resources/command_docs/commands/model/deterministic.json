@@ -1,0 +1,68 @@
+{
+  "command": "model deterministic",
+  "category": "model",
+  "search_keywords": [
+    "deterministic",
+    "reproducible"
+  ],
+  "description": "Set the deterministic mode. When a calculation is performed in parallel over multiple CPUs or cores, the order in which specific computations occur can and will change. This can cause roundoff errors to accumulate differently. Deterministic mode sacrifices efficiency and memory to force the parallel computation to result in the same answer every time, regardless of the number of CPUs it is performed on or their relative speed. All results are equally valid as they are within the range of finite-precision floating point error, but deterministic mode ensures repeatability. Deterministic mode is reset to the default setting whenever a 'model new' command is given.",
+  "syntax": "model deterministic <default> <b>",
+  "keywords": [
+    {
+      "name": "default",
+      "syntax": "default <b>",
+      "description": "Set the default deterministic mode setting to b. This default is used when 'model new' is given. Can also be changed via 'Determinism by default' checkbox in Options Dialog"
+    }
+  ],
+  "notes": [
+    "On installation (prior to user changes), default determinism is ON",
+    "'model new' resets deterministic mode to the default setting",
+    "Default can be changed via 'Determinism by default' checkbox in Options Dialog",
+    "Parallel computation order changes can cause roundoff errors to accumulate differently",
+    "All results are equally valid (within floating point error), but may differ without determinism",
+    "Deterministic mode sacrifices efficiency and memory for repeatability",
+    "FLAC3D is ALWAYS deterministic - setting determinism off is ignored",
+    "Turning determinism OFF effects:",
+    "  - PFC runs ~15% faster",
+    "  - 3DEC runs ~10% faster",
+    "  - FLAC3D: no effect (always deterministic)",
+    "  - Results NOT repeatable - small changes can propagate to very different results",
+    "  - Data files/project bundles no longer reliably reproduce results",
+    "  - For archival: store resulting save files along with input data",
+    "  - Support issues may not be replicable - may need to rerun with determinism ON"
+  ],
+  "examples": [
+    {
+      "command": "model deterministic on",
+      "description": "Enable deterministic mode for current model (results repeatable)"
+    },
+    {
+      "command": "model deterministic off",
+      "description": "Disable deterministic mode - faster but non-repeatable results"
+    },
+    {
+      "command": "model deterministic default on",
+      "description": "Set default deterministic mode to ON (affects future 'model new')"
+    },
+    {
+      "command": "model deterministic default off",
+      "description": "Set default deterministic mode to OFF"
+    },
+    {
+      "command": "model new\n; determinism is reset to default here\nmodel deterministic on",
+      "description": "After model new, explicitly enable determinism"
+    },
+    {
+      "command": "model deterministic off\n; Run production simulation faster\nmodel cycle 100000",
+      "description": "Disable determinism for faster production runs (not for archival)"
+    },
+    {
+      "command": "model deterministic on\n; Run for support/debugging with repeatability\nmodel cycle 10000\nmodel save 'debug_state.sav'",
+      "description": "Enable determinism for debugging/support - ensures repeatable results"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model deterministic on') or itasca.command('model deterministic off') - Python SDK does not provide direct deterministic control"
+  }
+}

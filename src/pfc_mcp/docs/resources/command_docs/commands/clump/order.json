@@ -1,0 +1,32 @@
+{
+  "command": "clump order",
+  "category": "clump",
+  "search_keywords": [
+    "rotation",
+    "accuracy",
+    "EOM"
+  ],
+  "description": "Set the rotational EOM (Equations of Motion) order for clumps (3D ONLY). Either two or four are acceptable values. The fourth order method is outlined in Johnson et al. (2008) while the second order method is outlined in Buss (2000) (augmented second order method without energy conservation). Energy is much better conserved with the fourth order scheme, but the computational cost is significantly higher. The order will remain unchanged when a model new command is given but is set to four whenever the code is launched.",
+  "syntax": "clump order <i>",
+  "notes": [
+    "3D ONLY - not available in 2D simulations",
+    "Order 4: Better energy conservation, higher computational cost (Johnson et al. 2008)",
+    "Order 2: Lower computational cost, less energy conservation (Buss 2000, augmented second order without energy conservation)",
+    "Default at code launch: 4",
+    "Persists across 'model new' command (not reset to default)"
+  ],
+  "examples": [
+    {
+      "command": "clump order 4",
+      "description": "Use fourth-order rotational integration (default) - better energy conservation, higher computational cost"
+    },
+    {
+      "command": "clump order 2",
+      "description": "Use second-order rotational integration - faster computation, lower energy conservation"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump order <i>') - no direct Python SDK method to set rotational EOM order"
+  }
+}

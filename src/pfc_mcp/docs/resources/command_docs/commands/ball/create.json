@@ -1,0 +1,69 @@
+{
+  "command": "ball create",
+  "category": "ball",
+  "search_keywords": [
+    "create",
+    "single"
+  ],
+  "description": "Create a single ball with the specified attributes. A model domain must be specified prior to ball creation. While cycling, balls can only be created before cycle point 0 (i.e., when the timestep is calculated).",
+  "syntax": "ball create <keyword> ...",
+  "keywords": [
+    {
+      "name": "radius",
+      "syntax": "radius <f>",
+      "description": "Ball radius (f > 0)"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v>",
+      "description": "Ball centroid position as vector"
+    },
+    {
+      "name": "position-x",
+      "syntax": "position-x <f>",
+      "description": "X-component of ball position (default 0)"
+    },
+    {
+      "name": "position-y",
+      "syntax": "position-y <f>",
+      "description": "Y-component of ball position (default 0)"
+    },
+    {
+      "name": "position-z",
+      "syntax": "position-z <f>",
+      "description": "Z-component of ball position (default 0, 3D only)"
+    },
+    {
+      "name": "id",
+      "syntax": "id <i>",
+      "description": "Specify ball ID (auto-assigned if not given)"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s> slot <slot>",
+      "description": "Assign ball to group s in slot (default slot if not specified)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball create radius 0.5 position (1.0,2.0,3.0)",
+      "description": "Create ball at position (1,2,3) with radius 0.5"
+    },
+    {
+      "command": "ball create radius 1.0 position-x 5.0 position-y 5.0 id 100",
+      "description": "Create ball with ID 100 at position (5,5,0) with radius 1.0"
+    },
+    {
+      "command": "ball create radius 0.8 position (0,0,0) group 'mygroup'",
+      "description": "Create ball at origin in group 'mygroup'"
+    },
+    {
+      "command": "ball create position (2,3,4)",
+      "description": "Create ball at (2,3,4) with default radius (1/40th of domain extent)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "itasca.ball.create(radius, centroid, id=None) - creates single ball with specified parameters"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "command": "clump attribute",
+  "category": "clump",
+  "search_keywords": [
+    "attribute",
+    "set",
+    "density",
+    "velocity",
+    "position"
+  ],
+  "description": "Set the value of clump attributes. This command is a synonym for the clump initialize command. Individual attributes can be listed with the clump list command and all attributes can be visualized. Clump attributes are characteristics of the clumps such as position or size. These are distinct from clump properties (assigned with the clump property command) that are surface properties of the clumps that are used to fill contact model properties.",
+  "syntax": "clump attribute <keyword> <value> <range>",
+  "keywords": [
+    {
+      "name": "damp",
+      "syntax": "damp <f>",
+      "description": "Clump local damping coefficient where f > 0. Default: 0"
+    },
+    {
+      "name": "density",
+      "syntax": "density <f>",
+      "description": "Clump density where f > 0. Default: 0"
+    },
+    {
+      "name": "displacement",
+      "syntax": "displacement <v>",
+      "description": "Accumulated clump displacement vector as a result of cycling"
+    },
+    {
+      "name": "displacement-x/y/z",
+      "syntax": "displacement-x <f>",
+      "description": "Component of accumulated clump displacement as a result of cycling"
+    },
+    {
+      "name": "euler-x/y/z",
+      "syntax": "euler-x <f>",
+      "description": "Euler angle (in degrees) of current clump orientation (3D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "force-applied",
+      "syntax": "force-applied <v>",
+      "description": "Force vector applied to clumps (constant applied force, not updated during cycling)"
+    },
+    {
+      "name": "force-contact",
+      "syntax": "force-contact <v>",
+      "description": "Sum of contact force accumulated during previous force-displacement update. Modified during next update"
+    },
+    {
+      "name": "force-contact-x/y/z",
+      "syntax": "force-contact-x <f>",
+      "description": "Component of the contact force"
+    },
+    {
+      "name": "fragment",
+      "syntax": "fragment <i>",
+      "description": "Fragment ID (see Fragment documentation)"
+    },
+    {
+      "name": "moi-11/12/13/22/23/33",
+      "syntax": "moi-11 <f>",
+      "description": "Component of clump real moment of inertia tensor. When modified, only principal moments are changed. Sets moments to fixed state (not auto-updated when scaling/changing volume/density). Fix state modifiable via FISH (clump.moi.fix)"
+    },
+    {
+      "name": "moi-principal",
+      "syntax": "moi-principal <fprin11> <fprin22> <fprin33>",
+      "description": "Real principal moments of inertia (3D ONLY). When modified, only principal moments are changed. Sets moments to fixed state (not auto-updated when scaling/changing volume/density). Fix state modifiable via FISH (clump.moi.fix)"
+    },
+    {
+      "name": "moment-applied",
+      "syntax": "moment-applied <fx> <fy> <fz>",
+      "description": "Moment applied to clumps (y- and z-components 3D ONLY)"
+    },
+    {
+      "name": "moment-applied-x/y/z",
+      "syntax": "moment-applied-x <f>",
+      "description": "Component of moment applied to clumps (3D ONLY)"
+    },
+    {
+      "name": "moment-contact",
+      "syntax": "moment-contact <fx> <fy> <fz>",
+      "description": "Sum of contact moments accumulated during previous force-displacement update (y- and z-components 3D ONLY). Modified during next update"
+    },
+    {
+      "name": "moment-contact-x/y/z",
+      "syntax": "moment-contact-x <f>",
+      "description": "Component of the contact moment (3D ONLY)"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v>",
+      "description": "Location of clump centroid"
+    },
+    {
+      "name": "position-x/y/z",
+      "syntax": "position-x <f>",
+      "description": "Component of the location of clump centroids"
+    },
+    {
+      "name": "rotation",
+      "syntax": "rotation <f>",
+      "description": "Current clump orientation (2D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "spin",
+      "syntax": "spin <fspinx> <fspiny> <fspinz>",
+      "description": "Clump angular velocity in radians per second (y- and z-components 3D ONLY)"
+    },
+    {
+      "name": "spin-x/y/z",
+      "syntax": "spin-x <f>",
+      "description": "Component of clump angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "velocity",
+      "syntax": "velocity <v>",
+      "description": "Clump translational velocity vector"
+    },
+    {
+      "name": "velocity-x/y/z",
+      "syntax": "velocity-x <f>",
+      "description": "Component of the clump velocity"
+    },
+    {
+      "name": "volume",
+      "syntax": "volume <f>",
+      "description": "Clump volume. When modified, only mass and real mass are changed (not moment of inertia or pebble sizes). Sets moments to fixed state. Fix state modifiable via FISH (clump.moi.fix)"
+    }
+  ],
+  "modifiers": [
+    {
+      "name": "add",
+      "syntax": "add <f>",
+      "description": "Add value to existing attribute"
+    },
+    {
+      "name": "multiply",
+      "syntax": "multiply <f>",
+      "description": "Multiply existing attribute by value"
+    },
+    {
+      "name": "replace",
+      "syntax": "replace <f>",
+      "description": "Replace existing attribute with value (default)"
+    },
+    {
+      "name": "gradient",
+      "syntax": "gradient <v>",
+      "description": "Apply linear gradient in each axis direction starting at origin"
+    },
+    {
+      "name": "gradient-x/y/z",
+      "syntax": "gradient-x <f>",
+      "description": "Apply linear gradient in specific direction starting at origin"
+    }
+  ],
+  "notes": [
+    "Modification of clump geometry will fail if the resulting clump would not fall entirely within the model domain",
+    "Be aware of the distinction between attributes and properties! See tutorial 'Attributes and Properties' for details",
+    "Specifying moment of inertia or volume via command line sets them to fixed state (not auto-updated when scaling/changing density)"
+  ],
+  "examples": [
+    {
+      "command": "clump attribute density 1.0e3 damp 0.7",
+      "description": "Set density to 1000 and local damping coefficient to 0.7 for all clumps (most common usage)"
+    },
+    {
+      "command": "clump attribute vel (1e-2,1e-1) range id=102",
+      "description": "Set velocity for clump with ID 102"
+    },
+    {
+      "command": "clump attribute force-applied (0.0,0.0,-1.0) range group 'mygroup'",
+      "description": "Apply constant force to clumps in group (not updated during cycling)"
+    },
+    {
+      "command": "clump attribute volume 0.5 multiply 1.2 range id 1 100",
+      "description": "Multiply volume by 1.2 for clumps with ID 1-100 (sets moment of inertia to fixed state)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Use Clump.set_*() methods (e.g., Clump.set_density(), Clump.set_vel(), Clump.set_pos()) - requires iteration over clump range"
+  }
+}

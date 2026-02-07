@@ -1,0 +1,856 @@
+{
+  "module": "contact",
+  "description": "Natural language keywords for contact module API search",
+  "keywords": {
+    "count contacts": [
+      "itasca.contact.count"
+    ],
+    "number of contacts": [
+      "itasca.contact.count"
+    ],
+    "how many contacts": [
+      "itasca.contact.count"
+    ],
+    "contact count": [
+      "itasca.contact.count"
+    ],
+    "contact energy": [
+      "itasca.contact.Contact.energy"
+    ],
+    "energy from contacts": [
+      "itasca.contact.energy"
+    ],
+    "find contact": [
+      "itasca.contact.find"
+    ],
+    "get contact": [
+      "itasca.contact.find"
+    ],
+    "search contact": [
+      "itasca.contact.find"
+    ],
+    "list contacts": [
+      "itasca.contact.list"
+    ],
+    "iterate contacts": [
+      "itasca.contact.list"
+    ],
+    "all contacts": [
+      "itasca.contact.list"
+    ],
+    "contact iterator": [
+      "itasca.contact.list"
+    ],
+    "contact model property": [
+      "itasca.contact.model_prop_index"
+    ],
+    "contact property index": [
+      "itasca.contact.model_prop_index"
+    ],
+    "contact id": [
+      "itasca.contact.Contact.id"
+    ],
+    "get contact id": [
+      "itasca.contact.Contact.id"
+    ],
+    "contact identifier": [
+      "itasca.contact.Contact.id"
+    ],
+    "contact valid": [
+      "itasca.contact.Contact.valid"
+    ],
+    "check contact valid": [
+      "itasca.contact.Contact.valid"
+    ],
+    "is contact valid": [
+      "itasca.contact.Contact.valid"
+    ],
+    "contact exists": [
+      "itasca.contact.Contact.valid"
+    ],
+    "activate contact": [
+      "itasca.contact.Contact.activate"
+    ],
+    "set contact active": [
+      "itasca.contact.Contact.activate"
+    ],
+    "contact activated": [
+      "itasca.contact.Contact.activated"
+    ],
+    "is contact activated": [
+      "itasca.contact.Contact.activated"
+    ],
+    "check activated": [
+      "itasca.contact.Contact.activated"
+    ],
+    "contact active": [
+      "itasca.contact.Contact.active"
+    ],
+    "is contact active": [
+      "itasca.contact.Contact.active"
+    ],
+    "check active": [
+      "itasca.contact.Contact.active"
+    ],
+    "contact bonded": [
+      "itasca.contact.Contact.bonded"
+    ],
+    "is contact bonded": [
+      "itasca.contact.Contact.bonded"
+    ],
+    "bonded contact": [
+      "itasca.contact.Contact.bonded"
+    ],
+    "check bonded": [
+      "itasca.contact.Contact.bonded"
+    ],
+    "contact inhibit": [
+      "itasca.contact.Contact.inhibit"
+    ],
+    "is contact inhibited": [
+      "itasca.contact.Contact.inhibit"
+    ],
+    "check inhibit": [
+      "itasca.contact.Contact.inhibit"
+    ],
+    "set contact inhibit": [
+      "itasca.contact.Contact.set_inhibit"
+    ],
+    "inhibit contact": [
+      "itasca.contact.Contact.set_inhibit"
+    ],
+    "contact persist": [
+      "itasca.contact.Contact.persist"
+    ],
+    "contact persistence": [
+      "itasca.contact.Contact.persist"
+    ],
+    "is persistent": [
+      "itasca.contact.Contact.persist"
+    ],
+    "set contact persist": [
+      "itasca.contact.Contact.set_persist"
+    ],
+    "set persistence": [
+      "itasca.contact.Contact.set_persist"
+    ],
+    "first end": [
+      "itasca.contact.Contact.end1"
+    ],
+    "contact end1": [
+      "itasca.contact.Contact.end1"
+    ],
+    "get first end": [
+      "itasca.contact.Contact.end1"
+    ],
+    "second end": [
+      "itasca.contact.Contact.end2"
+    ],
+    "contact end2": [
+      "itasca.contact.Contact.end2"
+    ],
+    "get second end": [
+      "itasca.contact.Contact.end2"
+    ],
+    "contact ends": [
+      "itasca.contact.Contact.end1",
+      "itasca.contact.Contact.end2"
+    ],
+    "contact objects": [
+      "itasca.contact.Contact.end1",
+      "itasca.contact.Contact.end2"
+    ],
+    "contact branch": [
+      "itasca.contact.Contact.branch"
+    ],
+    "branch vector": [
+      "itasca.contact.Contact.branch"
+    ],
+    "get branch": [
+      "itasca.contact.Contact.branch"
+    ],
+    "branch vector x": [
+      "itasca.contact.Contact.branch_x"
+    ],
+    "branch x": [
+      "itasca.contact.Contact.branch_x"
+    ],
+    "x component branch": [
+      "itasca.contact.Contact.branch_x"
+    ],
+    "branch vector y": [
+      "itasca.contact.Contact.branch_y"
+    ],
+    "branch y": [
+      "itasca.contact.Contact.branch_y"
+    ],
+    "y component branch": [
+      "itasca.contact.Contact.branch_y"
+    ],
+    "branch vector z": [
+      "itasca.contact.Contact.branch_z"
+    ],
+    "branch z": [
+      "itasca.contact.Contact.branch_z"
+    ],
+    "z component branch": [
+      "itasca.contact.Contact.branch_z"
+    ],
+    "contact normal": [
+      "itasca.contact.Contact.normal"
+    ],
+    "normal vector": [
+      "itasca.contact.Contact.normal"
+    ],
+    "unit normal": [
+      "itasca.contact.Contact.normal"
+    ],
+    "get normal": [
+      "itasca.contact.Contact.normal"
+    ],
+    "normal x": [
+      "itasca.contact.Contact.normal_x"
+    ],
+    "normal vector x": [
+      "itasca.contact.Contact.normal_x"
+    ],
+    "x component normal": [
+      "itasca.contact.Contact.normal_x"
+    ],
+    "normal y": [
+      "itasca.contact.Contact.normal_y"
+    ],
+    "normal vector y": [
+      "itasca.contact.Contact.normal_y"
+    ],
+    "y component normal": [
+      "itasca.contact.Contact.normal_y"
+    ],
+    "normal z": [
+      "itasca.contact.Contact.normal_z"
+    ],
+    "normal vector z": [
+      "itasca.contact.Contact.normal_z"
+    ],
+    "z component normal": [
+      "itasca.contact.Contact.normal_z"
+    ],
+    "contact position": [
+      "itasca.contact.Contact.pos"
+    ],
+    "contact location": [
+      "itasca.contact.Contact.pos"
+    ],
+    "get contact position": [
+      "itasca.contact.Contact.pos"
+    ],
+    "contact position x": [
+      "itasca.contact.Contact.pos_x"
+    ],
+    "contact x coordinate": [
+      "itasca.contact.Contact.pos_x"
+    ],
+    "position x": [
+      "itasca.contact.Contact.pos_x"
+    ],
+    "contact position y": [
+      "itasca.contact.Contact.pos_y"
+    ],
+    "contact y coordinate": [
+      "itasca.contact.Contact.pos_y"
+    ],
+    "position y": [
+      "itasca.contact.Contact.pos_y"
+    ],
+    "contact position z": [
+      "itasca.contact.Contact.pos_z"
+    ],
+    "contact z coordinate": [
+      "itasca.contact.Contact.pos_z"
+    ],
+    "position z": [
+      "itasca.contact.Contact.pos_z"
+    ],
+    "contact offset": [
+      "itasca.contact.Contact.offset"
+    ],
+    "get offset": [
+      "itasca.contact.Contact.offset"
+    ],
+    "offset vector": [
+      "itasca.contact.Contact.offset"
+    ],
+    "offset x": [
+      "itasca.contact.Contact.offset_x"
+    ],
+    "x component offset": [
+      "itasca.contact.Contact.offset_x"
+    ],
+    "offset vector x": [
+      "itasca.contact.Contact.offset_x"
+    ],
+    "offset y": [
+      "itasca.contact.Contact.offset_y"
+    ],
+    "y component offset": [
+      "itasca.contact.Contact.offset_y"
+    ],
+    "offset vector y": [
+      "itasca.contact.Contact.offset_y"
+    ],
+    "offset z": [
+      "itasca.contact.Contact.offset_z"
+    ],
+    "z component offset": [
+      "itasca.contact.Contact.offset_z"
+    ],
+    "offset vector z": [
+      "itasca.contact.Contact.offset_z"
+    ],
+    "contact gap": [
+      "itasca.contact.Contact.gap"
+    ],
+    "get gap": [
+      "itasca.contact.Contact.gap"
+    ],
+    "gap distance": [
+      "itasca.contact.Contact.gap"
+    ],
+    "overlap distance": [
+      "itasca.contact.Contact.gap"
+    ],
+    "penetration depth": [
+      "itasca.contact.Contact.gap"
+    ],
+    "shear direction": [
+      "itasca.contact.Contact.shear"
+    ],
+    "contact shear": [
+      "itasca.contact.Contact.shear"
+    ],
+    "get shear direction": [
+      "itasca.contact.Contact.shear"
+    ],
+    "shear vector": [
+      "itasca.contact.Contact.shear"
+    ],
+    "shear x": [
+      "itasca.contact.Contact.shear_x"
+    ],
+    "shear direction x": [
+      "itasca.contact.Contact.shear_x"
+    ],
+    "x component shear": [
+      "itasca.contact.Contact.shear_x"
+    ],
+    "shear y": [
+      "itasca.contact.Contact.shear_y"
+    ],
+    "shear direction y": [
+      "itasca.contact.Contact.shear_y"
+    ],
+    "y component shear": [
+      "itasca.contact.Contact.shear_y"
+    ],
+    "shear z": [
+      "itasca.contact.Contact.shear_z"
+    ],
+    "shear direction z": [
+      "itasca.contact.Contact.shear_z"
+    ],
+    "z component shear": [
+      "itasca.contact.Contact.shear_z"
+    ],
+    "contact force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "get contact force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "individual contact force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "single contact force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "contact point force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "force at contact": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "force global": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "global force": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "contact force global": [
+      "itasca.contact.Contact.force_global"
+    ],
+    "force global x": [
+      "itasca.contact.Contact.force_global_x"
+    ],
+    "global force x": [
+      "itasca.contact.Contact.force_global_x"
+    ],
+    "x component force global": [
+      "itasca.contact.Contact.force_global_x"
+    ],
+    "contact force x": [
+      "itasca.contact.Contact.force_global_x"
+    ],
+    "force global y": [
+      "itasca.contact.Contact.force_global_y"
+    ],
+    "global force y": [
+      "itasca.contact.Contact.force_global_y"
+    ],
+    "y component force global": [
+      "itasca.contact.Contact.force_global_y"
+    ],
+    "contact force y": [
+      "itasca.contact.Contact.force_global_y"
+    ],
+    "force global z": [
+      "itasca.contact.Contact.force_global_z"
+    ],
+    "global force z": [
+      "itasca.contact.Contact.force_global_z"
+    ],
+    "z component force global": [
+      "itasca.contact.Contact.force_global_z"
+    ],
+    "contact force z": [
+      "itasca.contact.Contact.force_global_z"
+    ],
+    "force local": [
+      "itasca.contact.Contact.force_local"
+    ],
+    "local force": [
+      "itasca.contact.Contact.force_local"
+    ],
+    "contact force local": [
+      "itasca.contact.Contact.force_local"
+    ],
+    "force local x": [
+      "itasca.contact.Contact.force_local_x"
+    ],
+    "local force x": [
+      "itasca.contact.Contact.force_local_x"
+    ],
+    "x component force local": [
+      "itasca.contact.Contact.force_local_x"
+    ],
+    "force local y": [
+      "itasca.contact.Contact.force_local_y"
+    ],
+    "local force y": [
+      "itasca.contact.Contact.force_local_y"
+    ],
+    "y component force local": [
+      "itasca.contact.Contact.force_local_y"
+    ],
+    "force local z": [
+      "itasca.contact.Contact.force_local_z"
+    ],
+    "local force z": [
+      "itasca.contact.Contact.force_local_z"
+    ],
+    "z component force local": [
+      "itasca.contact.Contact.force_local_z"
+    ],
+    "normal force": [
+      "itasca.contact.Contact.force_normal"
+    ],
+    "get normal force": [
+      "itasca.contact.Contact.force_normal"
+    ],
+    "normal force magnitude": [
+      "itasca.contact.Contact.force_normal"
+    ],
+    "signed normal force": [
+      "itasca.contact.Contact.force_normal"
+    ],
+    "shear force": [
+      "itasca.contact.Contact.force_shear"
+    ],
+    "get shear force": [
+      "itasca.contact.Contact.force_shear"
+    ],
+    "shear force magnitude": [
+      "itasca.contact.Contact.force_shear"
+    ],
+    "tangential force": [
+      "itasca.contact.Contact.force_shear"
+    ],
+    "set contact force": [
+      "itasca.contact.Contact.set_force"
+    ],
+    "set force": [
+      "itasca.contact.Contact.set_force"
+    ],
+    "apply force": [
+      "itasca.contact.Contact.set_force"
+    ],
+    "apply contact force": [
+      "itasca.contact.Contact.set_force"
+    ],
+    "moment end1": [
+      "itasca.contact.Contact.moment1_global"
+    ],
+    "moment on end1": [
+      "itasca.contact.Contact.moment1_global"
+    ],
+    "first moment global": [
+      "itasca.contact.Contact.moment1_global"
+    ],
+    "moment1 global": [
+      "itasca.contact.Contact.moment1_global"
+    ],
+    "moment1 global x": [
+      "itasca.contact.Contact.moment1_global_x"
+    ],
+    "moment end1 x": [
+      "itasca.contact.Contact.moment1_global_x"
+    ],
+    "x component moment1 global": [
+      "itasca.contact.Contact.moment1_global_x"
+    ],
+    "moment1 global y": [
+      "itasca.contact.Contact.moment1_global_y"
+    ],
+    "moment end1 y": [
+      "itasca.contact.Contact.moment1_global_y"
+    ],
+    "y component moment1 global": [
+      "itasca.contact.Contact.moment1_global_y"
+    ],
+    "moment1 global z": [
+      "itasca.contact.Contact.moment1_global_z"
+    ],
+    "moment end1 z": [
+      "itasca.contact.Contact.moment1_global_z"
+    ],
+    "z component moment1 global": [
+      "itasca.contact.Contact.moment1_global_z"
+    ],
+    "moment1 local": [
+      "itasca.contact.Contact.moment1_local"
+    ],
+    "first moment local": [
+      "itasca.contact.Contact.moment1_local"
+    ],
+    "moment1 local x": [
+      "itasca.contact.Contact.moment1_local_x"
+    ],
+    "moment end1 local x": [
+      "itasca.contact.Contact.moment1_local_x"
+    ],
+    "x component moment1 local": [
+      "itasca.contact.Contact.moment1_local_x"
+    ],
+    "moment1 local y": [
+      "itasca.contact.Contact.moment1_local_y"
+    ],
+    "moment end1 local y": [
+      "itasca.contact.Contact.moment1_local_y"
+    ],
+    "y component moment1 local": [
+      "itasca.contact.Contact.moment1_local_y"
+    ],
+    "moment1 local z": [
+      "itasca.contact.Contact.moment1_local_z"
+    ],
+    "moment end1 local z": [
+      "itasca.contact.Contact.moment1_local_z"
+    ],
+    "z component moment1 local": [
+      "itasca.contact.Contact.moment1_local_z"
+    ],
+    "moment end2": [
+      "itasca.contact.Contact.moment2_global"
+    ],
+    "moment on end2": [
+      "itasca.contact.Contact.moment2_global"
+    ],
+    "second moment global": [
+      "itasca.contact.Contact.moment2_global"
+    ],
+    "moment2 global": [
+      "itasca.contact.Contact.moment2_global"
+    ],
+    "moment2 global x": [
+      "itasca.contact.Contact.moment2_global_x"
+    ],
+    "moment end2 x": [
+      "itasca.contact.Contact.moment2_global_x"
+    ],
+    "x component moment2 global": [
+      "itasca.contact.Contact.moment2_global_x"
+    ],
+    "moment2 global y": [
+      "itasca.contact.Contact.moment2_global_y"
+    ],
+    "moment end2 y": [
+      "itasca.contact.Contact.moment2_global_y"
+    ],
+    "y component moment2 global": [
+      "itasca.contact.Contact.moment2_global_y"
+    ],
+    "moment2 global z": [
+      "itasca.contact.Contact.moment2_global_z"
+    ],
+    "moment end2 z": [
+      "itasca.contact.Contact.moment2_global_z"
+    ],
+    "z component moment2 global": [
+      "itasca.contact.Contact.moment2_global_z"
+    ],
+    "moment2 local": [
+      "itasca.contact.Contact.moment2_local"
+    ],
+    "second moment local": [
+      "itasca.contact.Contact.moment2_local"
+    ],
+    "moment2 local x": [
+      "itasca.contact.Contact.moment2_local_x"
+    ],
+    "moment end2 local x": [
+      "itasca.contact.Contact.moment2_local_x"
+    ],
+    "x component moment2 local": [
+      "itasca.contact.Contact.moment2_local_x"
+    ],
+    "moment2 local y": [
+      "itasca.contact.Contact.moment2_local_y"
+    ],
+    "moment end2 local y": [
+      "itasca.contact.Contact.moment2_local_y"
+    ],
+    "y component moment2 local": [
+      "itasca.contact.Contact.moment2_local_y"
+    ],
+    "moment2 local z": [
+      "itasca.contact.Contact.moment2_local_z"
+    ],
+    "moment end2 local z": [
+      "itasca.contact.Contact.moment2_local_z"
+    ],
+    "z component moment2 local": [
+      "itasca.contact.Contact.moment2_local_z"
+    ],
+    "contact moment": [
+      "itasca.contact.Contact.moment1_global",
+      "itasca.contact.Contact.moment2_global"
+    ],
+    "contact energies": [
+      "itasca.contact.Contact.energies"
+    ],
+    "all energies": [
+      "itasca.contact.Contact.energies"
+    ],
+    "energy dictionary": [
+      "itasca.contact.Contact.energies"
+    ],
+    "get energies": [
+      "itasca.contact.Contact.energies"
+    ],
+    "get energy": [
+      "itasca.contact.Contact.energy"
+    ],
+    "energy partition": [
+      "itasca.contact.Contact.energy"
+    ],
+    "is energy": [
+      "itasca.contact.Contact.is_energy"
+    ],
+    "check energy": [
+      "itasca.contact.Contact.is_energy"
+    ],
+    "energy exists": [
+      "itasca.contact.Contact.is_energy"
+    ],
+    "contact model": [
+      "itasca.contact.Contact.model"
+    ],
+    "get contact model": [
+      "itasca.contact.Contact.model"
+    ],
+    "model name": [
+      "itasca.contact.Contact.model"
+    ],
+    "set contact model": [
+      "itasca.contact.Contact.set_model"
+    ],
+    "assign model": [
+      "itasca.contact.Contact.set_model"
+    ],
+    "change model": [
+      "itasca.contact.Contact.set_model"
+    ],
+    "contact method": [
+      "itasca.contact.Contact.method"
+    ],
+    "execute method": [
+      "itasca.contact.Contact.method"
+    ],
+    "call method": [
+      "itasca.contact.Contact.method"
+    ],
+    "run contact method": [
+      "itasca.contact.Contact.method"
+    ],
+    "has property": [
+      "itasca.contact.Contact.has_prop"
+    ],
+    "check property": [
+      "itasca.contact.Contact.has_prop"
+    ],
+    "property exists": [
+      "itasca.contact.Contact.has_prop"
+    ],
+    "get property": [
+      "itasca.contact.Contact.prop"
+    ],
+    "contact property": [
+      "itasca.contact.Contact.prop"
+    ],
+    "get property index": [
+      "itasca.contact.Contact.prop_index"
+    ],
+    "property index": [
+      "itasca.contact.Contact.prop_index"
+    ],
+    "all properties": [
+      "itasca.contact.Contact.props"
+    ],
+    "contact properties": [
+      "itasca.contact.Contact.props"
+    ],
+    "contact model properties": [
+      "itasca.contact.Contact.props"
+    ],
+    "get properties": [
+      "itasca.contact.Contact.props"
+    ],
+    "set property": [
+      "itasca.contact.Contact.set_prop"
+    ],
+    "set contact property": [
+      "itasca.contact.Contact.set_prop"
+    ],
+    "assign property": [
+      "itasca.contact.Contact.set_prop"
+    ],
+    "property inheritance": [
+      "itasca.contact.Contact.inherit"
+    ],
+    "get inheritance": [
+      "itasca.contact.Contact.inherit"
+    ],
+    "is inherited": [
+      "itasca.contact.Contact.inherit"
+    ],
+    "set inheritance": [
+      "itasca.contact.Contact.set_inherit"
+    ],
+    "set property inheritance": [
+      "itasca.contact.Contact.set_inherit"
+    ],
+    "contact group": [
+      "itasca.contact.Contact.group"
+    ],
+    "get contact group": [
+      "itasca.contact.Contact.group"
+    ],
+    "group name": [
+      "itasca.contact.Contact.group"
+    ],
+    "all groups": [
+      "itasca.contact.Contact.groups"
+    ],
+    "contact groups": [
+      "itasca.contact.Contact.groups"
+    ],
+    "get groups": [
+      "itasca.contact.Contact.groups"
+    ],
+    "in group": [
+      "itasca.contact.Contact.in_group"
+    ],
+    "check group": [
+      "itasca.contact.Contact.in_group"
+    ],
+    "belongs to group": [
+      "itasca.contact.Contact.in_group"
+    ],
+    "set contact group": [
+      "itasca.contact.Contact.set_group"
+    ],
+    "assign group": [
+      "itasca.contact.Contact.set_group"
+    ],
+    "add to group": [
+      "itasca.contact.Contact.set_group"
+    ],
+    "remove group": [
+      "itasca.contact.Contact.group_remove"
+    ],
+    "remove from group": [
+      "itasca.contact.Contact.group_remove"
+    ],
+    "contact extra": [
+      "itasca.contact.Contact.extra"
+    ],
+    "extra data": [
+      "itasca.contact.Contact.extra"
+    ],
+    "get extra": [
+      "itasca.contact.Contact.extra"
+    ],
+    "set contact extra": [
+      "itasca.contact.Contact.set_extra"
+    ],
+    "set extra data": [
+      "itasca.contact.Contact.set_extra"
+    ],
+    "fracture id": [
+      "itasca.contact.Contact.fid"
+    ],
+    "contact fid": [
+      "itasca.contact.Contact.fid"
+    ],
+    "get fracture id": [
+      "itasca.contact.Contact.fid"
+    ],
+    "to global": [
+      "itasca.contact.Contact.to_global"
+    ],
+    "local to global": [
+      "itasca.contact.Contact.to_global"
+    ],
+    "transform to global": [
+      "itasca.contact.Contact.to_global"
+    ],
+    "global coordinates": [
+      "itasca.contact.Contact.to_global"
+    ],
+    "to local": [
+      "itasca.contact.Contact.to_local"
+    ],
+    "global to local": [
+      "itasca.contact.Contact.to_local"
+    ],
+    "transform to local": [
+      "itasca.contact.Contact.to_local"
+    ],
+    "local coordinates": [
+      "itasca.contact.Contact.to_local"
+    ],
+    "coordinate transform": [
+      "itasca.contact.Contact.to_global",
+      "itasca.contact.Contact.to_local"
+    ]
+  }
+}

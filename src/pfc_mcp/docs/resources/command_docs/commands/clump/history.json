@@ -1,0 +1,194 @@
+{
+  "command": "clump history",
+  "category": "clump",
+  "search_keywords": [
+    "history",
+    "track",
+    "monitor"
+  ],
+  "description": "Add a history of a clump value. A history is a table of floating point values assigned by sampling a model attribute periodically during a simulation. The clump must be specified by either 'id' or 'position' keyword following the quantity keyword. The history can be assigned a name for later reference with the optional name keyword; if not, the history will be given a default name based on its internally assigned id number.",
+  "syntax": "clump history name <name> <keyword> id <i> or position <v>",
+  "quantity_categories": {
+    "position": [
+      "position-x",
+      "position-y",
+      "position-z",
+      "displacement",
+      "displacement-x/y/z"
+    ],
+    "velocity": [
+      "velocity",
+      "velocity-x",
+      "velocity-y",
+      "velocity-z",
+      "spin",
+      "spin-x/y/z (3D)"
+    ],
+    "orientation": [
+      "euler-x (3D)",
+      "euler-y (3D)",
+      "euler-z (3D)",
+      "rotation (2D)"
+    ],
+    "forces": [
+      "force-contact",
+      "force-contact-x/y/z",
+      "force-unbalanced",
+      "force-unbalanced-x/y/z"
+    ],
+    "moments": [
+      "moment-contact",
+      "moment-contact-x/y/z (3D)",
+      "moment-unbalanced",
+      "moment-unbalanced-x/y/z (3D)"
+    ],
+    "stress": [
+      "stress"
+    ],
+    "other": [
+      "extra"
+    ]
+  },
+  "keywords": [
+    {
+      "name": "id",
+      "syntax": "id <i>",
+      "description": "Specify clump by ID number"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v>",
+      "description": "Specify clump by position (finds nearest clump to position)"
+    },
+    {
+      "name": "displacement",
+      "syntax": "displacement id <i> or position <v>",
+      "description": "Magnitude of the accumulated clump displacement vector as a result of cycling"
+    },
+    {
+      "name": "displacement-x/y/z",
+      "syntax": "displacement-x id <i> or position <v>",
+      "description": "Component of accumulated displacement as a result of cycling"
+    },
+    {
+      "name": "euler-x/y/z",
+      "syntax": "euler-x id <i> or position <v>",
+      "description": "Euler angle (in degrees) of current clump orientation (3D ONLY). Orientation updated only when orientation tracking enabled"
+    },
+    {
+      "name": "force-contact",
+      "syntax": "force-contact id <i> or position <v>",
+      "description": "Magnitude of the force resulting from contacts"
+    },
+    {
+      "name": "force-contact-x/y/z",
+      "syntax": "force-contact-x id <i> or position <v>",
+      "description": "Component of the contact force"
+    },
+    {
+      "name": "force-unbalanced",
+      "syntax": "force-unbalanced id <i> or position <v>",
+      "description": "Magnitude of the unbalanced force (sum of applied, contact and gravitational forces)"
+    },
+    {
+      "name": "force-unbalanced-x/y/z",
+      "syntax": "force-unbalanced-x id <i> or position <v>",
+      "description": "Component of the unbalanced force"
+    },
+    {
+      "name": "moment-contact",
+      "syntax": "moment-contact id <i> or position <v>",
+      "description": "Value (2D) or magnitude (3D) of the sum of the contact moments"
+    },
+    {
+      "name": "moment-contact-x/y/z",
+      "syntax": "moment-contact-x id <i> or position <v>",
+      "description": "Component of the contact moment (3D ONLY)"
+    },
+    {
+      "name": "moment-unbalanced",
+      "syntax": "moment-unbalanced id <i> or position <v>",
+      "description": "Value (2D) or magnitude (3D) of the sum of the contact and applied moments"
+    },
+    {
+      "name": "moment-unbalanced-x/y/z",
+      "syntax": "moment-unbalanced-x id <i> or position <v>",
+      "description": "Component of the unbalanced moment (3D ONLY)"
+    },
+    {
+      "name": "position-x/y/z",
+      "syntax": "position-x id <i> or position <v>",
+      "description": "Component of the location of clump centroid"
+    },
+    {
+      "name": "rotation",
+      "syntax": "rotation id <i> or position <v>",
+      "description": "Current clump orientation (2D ONLY). Orientation updated only when orientation tracking enabled"
+    },
+    {
+      "name": "spin",
+      "syntax": "spin id <i> or position <v>",
+      "description": "Value (2D) or magnitude (3D) of the clump angular velocity in radians per second"
+    },
+    {
+      "name": "spin-x/y/z",
+      "syntax": "spin-x id <i> or position <v>",
+      "description": "Component of the clump angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "velocity",
+      "syntax": "velocity id <i> or position <v>",
+      "description": "Magnitude of the clump translational velocity vector"
+    },
+    {
+      "name": "velocity-x/y/z",
+      "syntax": "velocity-x id <i> or position <v>",
+      "description": "Component of the clump velocity"
+    },
+    {
+      "name": "extra",
+      "syntax": "extra index <i> type <typename> id <i> or position <v>",
+      "description": "Record extra variable at index i with specified type"
+    },
+    {
+      "name": "stress",
+      "syntax": "stress quantity <q> id <i> or position <v>",
+      "description": "Record clump stress. Use quantity keyword to specify the stress component to be recorded"
+    }
+  ],
+  "notes": [
+    "Following one of the quantity keywords, either 1) an 'id' keyword followed by an integer id, or 2) a 'position' keyword followed by a position vector must be given to define the specific clump",
+    "Review the common history commands for details regarding the manipulation of histories",
+    "Orientation tracking must be enabled (model orientation-tracking) to record euler angles or rotation"
+  ],
+  "examples": [
+    {
+      "command": "clump history name 'clump_pos' position-x id 1",
+      "description": "Record x-position of clump 1 with history name 'clump_pos'"
+    },
+    {
+      "command": "clump history velocity-z id 100",
+      "description": "Record z-velocity of clump 100 (auto-generated history name)"
+    },
+    {
+      "command": "clump history force-unbalanced id 5",
+      "description": "Record magnitude of unbalanced force on clump 5"
+    },
+    {
+      "command": "clump history name 'center_clump' displacement position (0,0,0)",
+      "description": "Record displacement magnitude of clump nearest to origin"
+    },
+    {
+      "command": "clump history extra index 1 type float id 10",
+      "description": "Record extra variable at index 1 (float type) for clump 10"
+    },
+    {
+      "command": "clump history stress quantity intermediate id 50",
+      "description": "Record intermediate principal stress of clump 50"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump history ...') or manually record values using itasca.set_callback() with Clump getter methods"
+  }
+}

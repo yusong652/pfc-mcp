@@ -1,0 +1,397 @@
+{
+  "command": "model history",
+  "category": "model",
+  "search_keywords": [
+    "history",
+    "track",
+    "monitor"
+  ],
+  "description": "Create a history of a model quantity. These quantities are mostly associated with a process. The keyword 'name' may be used to give the history a unique identifier for later reference. If name is not specified the history will be given a name automatically based on the internally assigned ID number. Histories allow monitoring and recording of model values during cycling for analysis and post-processing.",
+  "syntax": "model history <name <s>> <keyword>",
+  "keywords": [
+    {
+      "name": "creep",
+      "syntax": "creep <keyword>",
+      "description": "Values associated with the creep process",
+      "sub_keywords": [
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total",
+          "description": "The total number of cycles accumulated while this process is active"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total",
+          "description": "The total accumulated time while this process is active"
+        }
+      ]
+    },
+    {
+      "name": "damping",
+      "syntax": "damping",
+      "description": "Value of global damping parameter (3DEC)"
+    },
+    {
+      "name": "dynamic",
+      "syntax": "dynamic <keyword>",
+      "description": "Values associated with the dynamic process",
+      "sub_keywords": [
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total",
+          "description": "The total number of cycles accumulated while this process is active"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total",
+          "description": "The total accumulated time while this process is active"
+        }
+      ]
+    },
+    {
+      "name": "energy",
+      "syntax": "energy <keyword>",
+      "description": "Values associated with energy quantities in 3DEC",
+      "sub_keywords": [
+        {
+          "name": "block-kinetic",
+          "syntax": "block-kinetic",
+          "description": "The kinetic energy value in 3DEC"
+        },
+        {
+          "name": "block-potential",
+          "syntax": "block-potential",
+          "description": "The potential energy value in 3DEC"
+        },
+        {
+          "name": "block-strain",
+          "syntax": "block-strain",
+          "description": "The block strain in 3DEC"
+        },
+        {
+          "name": "block-strain-excavated",
+          "syntax": "block-strain-excavated",
+          "description": "The excavated block strain in 3DEC"
+        },
+        {
+          "name": "block-strain-fill",
+          "syntax": "block-strain-fill",
+          "description": "The fill strain value in 3DEC"
+        },
+        {
+          "name": "block-strain-plastic",
+          "syntax": "block-strain-plastic",
+          "description": "The plastic strain value in 3DEC"
+        },
+        {
+          "name": "block-volume-excavated",
+          "syntax": "block-volume-excavated",
+          "description": "The excavated block volume in 3DEC"
+        },
+        {
+          "name": "boundary-load",
+          "syntax": "boundary-load",
+          "description": "The boundary load in 3DEC"
+        },
+        {
+          "name": "boundary-viscous",
+          "syntax": "boundary-viscous",
+          "description": "The boundary viscous force in 3DEC"
+        },
+        {
+          "name": "damp-mass",
+          "syntax": "damp-mass",
+          "description": "The mass damping value in 3DEC"
+        },
+        {
+          "name": "joint-friction",
+          "syntax": "joint-friction",
+          "description": "The joint friction value in 3DEC"
+        },
+        {
+          "name": "joint-strain",
+          "syntax": "joint-strain",
+          "description": "The joint strain value in 3DEC"
+        },
+        {
+          "name": "joint-strain-compressive",
+          "syntax": "joint-strain-compressive",
+          "description": "The joint compressive strain value in 3DEC"
+        },
+        {
+          "name": "joint-strain-excavated",
+          "syntax": "joint-strain-excavated",
+          "description": "The joint strain excavated value in 3DEC"
+        },
+        {
+          "name": "joint-strain-shear",
+          "syntax": "joint-strain-shear",
+          "description": "The joint strain shear value in 3DEC"
+        },
+        {
+          "name": "joint-strain-tensile",
+          "syntax": "joint-strain-tensile",
+          "description": "The joint strain tensile value in 3DEC"
+        },
+        {
+          "name": "strain-excavated",
+          "syntax": "strain-excavated",
+          "description": "The excavated strain value in 3DEC"
+        },
+        {
+          "name": "strain-total",
+          "syntax": "strain-total",
+          "description": "The total strain value in 3DEC (joints + zones)"
+        },
+        {
+          "name": "total-released",
+          "syntax": "total-released",
+          "description": "The total released energy value in 3DEC"
+        },
+        {
+          "name": "total-stored",
+          "syntax": "total-stored",
+          "description": "The stored energy value in 3DEC"
+        }
+      ]
+    },
+    {
+      "name": "fluid",
+      "syntax": "fluid <keyword>",
+      "description": "Values associated with the fluid process",
+      "sub_keywords": [
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total",
+          "description": "The total number of cycles accumulated while this process is active"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total",
+          "description": "The total accumulated time while this process is active"
+        }
+      ]
+    },
+    {
+      "name": "mechanical",
+      "syntax": "mechanical <keyword>",
+      "description": "Values associated with the mechanical process",
+      "sub_keywords": [
+        {
+          "name": "convergence",
+          "syntax": "convergence",
+          "description": "The current mechanical value of convergence (see 'model solve mechanical convergence')"
+        },
+        {
+          "name": "cycle",
+          "syntax": "cycle",
+          "description": "The total number of mechanical cycles. (DEPRECATED; use cycles-total)"
+        },
+        {
+          "name": "cycles",
+          "syntax": "cycles",
+          "description": "The number of cycles this process has taken in this model solve command"
+        },
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total",
+          "description": "The total number of cycles accumulated while this process is active"
+        },
+        {
+          "name": "energy",
+          "syntax": "energy <keyword>",
+          "description": "The value of an energy partition in PFC",
+          "sub_sub_keywords": [
+            {
+              "name": "energy-adhesive",
+              "syntax": "energy-adhesive",
+              "description": "Adhesive energy stored in contacts"
+            },
+            {
+              "name": "energy-body",
+              "syntax": "energy-body",
+              "description": "Body based work energy"
+            },
+            {
+              "name": "energy-boundary",
+              "syntax": "energy-boundary",
+              "description": "Wall based work energy"
+            },
+            {
+              "name": "energy-damp",
+              "syntax": "energy-damp",
+              "description": "Local damping energy of bodies"
+            },
+            {
+              "name": "energy-dashpot",
+              "syntax": "energy-dashpot",
+              "description": "Viscous dashpot energy stored in contacts"
+            },
+            {
+              "name": "energy-kinetic",
+              "syntax": "energy-kinetic",
+              "description": "Kinetic energy of bodies"
+            },
+            {
+              "name": "energy-pbstrain",
+              "syntax": "energy-pbstrain",
+              "description": "Parallel bond strain energy stored in contacts"
+            },
+            {
+              "name": "energy-rrslip",
+              "syntax": "energy-rrslip",
+              "description": "Rolling resistance slip energy stored in contacts"
+            },
+            {
+              "name": "energy-rrstrain",
+              "syntax": "energy-rrstrain",
+              "description": "Rolling resistance strain energy stored in contacts"
+            },
+            {
+              "name": "energy-slip",
+              "syntax": "energy-slip",
+              "description": "Slip energy stored in contacts"
+            },
+            {
+              "name": "energy-strain",
+              "syntax": "energy-strain",
+              "description": "Strain energy stored in contacts"
+            }
+          ]
+        },
+        {
+          "name": "ratio",
+          "syntax": "ratio",
+          "description": "The value of the ratio currently being used. See the definition of ratios in 'Equilibrium' section"
+        },
+        {
+          "name": "ratio-average",
+          "syntax": "ratio-average",
+          "description": "The value of the average force ratio. See the definition of ratios in 'Equilibrium' section"
+        },
+        {
+          "name": "ratio-local",
+          "syntax": "ratio-local",
+          "description": "The value of the local force ratio. See the definition of ratios in 'Equilibrium' section"
+        },
+        {
+          "name": "ratio-maximum",
+          "syntax": "ratio-maximum",
+          "description": "The value of the maximum force ratio. See the definition of ratios in 'Equilibrium' section"
+        },
+        {
+          "name": "time",
+          "syntax": "time",
+          "description": "The accumulated time this process has done in this model solve command"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total",
+          "description": "The total accumulated time while this process is active"
+        },
+        {
+          "name": "unbalanced-maximum",
+          "syntax": "unbalanced-maximum",
+          "description": "The maximum unbalanced force in any object"
+        }
+      ]
+    },
+    {
+      "name": "thermal",
+      "syntax": "thermal <keyword>",
+      "description": "Values associated with the thermal process",
+      "sub_keywords": [
+        {
+          "name": "cycles-total",
+          "syntax": "cycles-total",
+          "description": "The total number of cycles accumulated while this process is active"
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total",
+          "description": "The total accumulated time while this process is active"
+        }
+      ]
+    },
+    {
+      "name": "timestep",
+      "syntax": "timestep",
+      "description": "The active timestep"
+    }
+  ],
+  "notes": [
+    "Histories record model quantities during cycling for monitoring and post-processing",
+    "Optional 'name' parameter provides unique identifier for later reference",
+    "Without 'name', history gets automatic ID-based name",
+    "Histories are commonly used to:",
+    "  - Monitor convergence during solve (ratio, unbalanced-maximum)",
+    "  - Track time and cycle counts",
+    "  - Record energy partitions",
+    "  - Analyze equilibrium state evolution",
+    "Most history quantities are process-specific (mechanical, thermal, creep, dynamic, fluid)",
+    "DEPRECATED: mechanical cycle keyword - use cycles-total instead",
+    "PFC energy partitions: adhesive, body, boundary, damp, dashpot, kinetic, pbstrain, rrslip, rrstrain, slip, strain",
+    "3DEC energy quantities: block-kinetic, block-potential, joint-friction, etc.",
+    "Common usage: track ratio-average to monitor equilibrium convergence",
+    "Histories can be exported, plotted, or queried via FISH",
+    "See 'history' commands for managing existing histories (export, delete, list, etc.)"
+  ],
+  "examples": [
+    {
+      "command": "model history mechanical ratio-average",
+      "description": "Create history of average force ratio (commonly used for equilibrium monitoring)"
+    },
+    {
+      "command": "model history name 'force_ratio' mechanical ratio-average",
+      "description": "Create named history for average force ratio"
+    },
+    {
+      "command": "model history mechanical unbalanced-maximum",
+      "description": "Track maximum unbalanced force over time"
+    },
+    {
+      "command": "model history mechanical cycles-total",
+      "description": "Record total mechanical cycles"
+    },
+    {
+      "command": "model history timestep",
+      "description": "Monitor active timestep during cycling"
+    },
+    {
+      "command": "model history mechanical energy energy-kinetic",
+      "description": "Track kinetic energy in PFC"
+    },
+    {
+      "command": "model history mechanical energy energy-strain",
+      "description": "Monitor strain energy stored in contacts (PFC)"
+    },
+    {
+      "command": "model history name 'mech_time' mechanical time-total",
+      "description": "Create named history for total mechanical time"
+    },
+    {
+      "command": "model history thermal cycles-total\nmodel history thermal time-total",
+      "description": "Create histories for thermal process monitoring"
+    },
+    {
+      "command": "model history name 'ratio' mechanical ratio-average\nmodel solve ratio 1e-5\nhistory export 1 table 'ratio_vs_time'",
+      "description": "Create history, solve to equilibrium, export to table"
+    },
+    {
+      "command": "model history mechanical ratio-average\nmodel history mechanical ratio-maximum\nmodel history mechanical unbalanced-maximum\nmodel solve",
+      "description": "Track multiple convergence metrics during solve"
+    },
+    {
+      "command": "model history energy block-kinetic",
+      "description": "Monitor block kinetic energy in 3DEC"
+    },
+    {
+      "command": "model history damping",
+      "description": "Track global damping parameter (3DEC)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model history mechanical ratio-average') - Python SDK does not provide direct history creation. For monitoring in Python, manually compute and store values in loops:\n\n# Example: track metrics over cycles\nhistory_data = []\nfor _ in range(100):\n    itasca.cycle(100)\n    # itasca.cycle() returns current cycle number\n    history_data.append({'cycle': itasca.cycle(), 'time': itasca.mech_age(), ...})"
+  }
+}

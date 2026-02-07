@@ -1,0 +1,107 @@
+{
+  "module": "itasca.clump.pebble",
+  "description": "Pebble object management - spherical components of clumps (overlapping spheres)",
+  "import_statement": "import itasca as it",
+  "note": "Pebbles are the spherical building blocks of clumps. They cannot exist independently and are always part of a clump.",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.clump.pebble.count() -> int",
+      "description": "Get total number of pebbles in the model. O(1) operation - very fast.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Number of pebbles currently in the model"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.clump.pebble.find(id: int) -> Pebble | None",
+      "description": "Find pebble by ID number. Returns None if pebble doesn't exist. Finding by ID is O(1) - very fast.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Pebble ID to search for"
+        }
+      ],
+      "returns": {
+        "type": "Pebble | None",
+        "description": "Pebble object if found, None if ID doesn't exist"
+      }
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.clump.pebble.inbox(lower_bound: vec, upper_bound: vec, intersect: bool = True) -> tuple[Pebble, ...]",
+      "description": "Get a tuple of pebbles with extents intersecting a box. The extent is the axis-aligned bounding box of the pebble. If intersect=False, only pebbles with positions falling in the box are returned.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the box (x, y, z)"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the box (x, y, z)"
+        },
+        {
+          "name": "intersect",
+          "type": "bool",
+          "required": false,
+          "description": "If True, return pebbles with extents intersecting box. If False, only pebbles with positions in box (default: True)"
+        }
+      ],
+      "returns": {
+        "type": "tuple[Pebble, ...]",
+        "description": "Tuple of pebble objects in the specified box"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.clump.pebble.list() -> Iterator[Pebble]",
+      "description": "Return an iterator over all pebbles in the model. Returns iterator (not list). Order not guaranteed. Use list(it.clump.pebble.list()) to create snapshot before modifying during iteration.",
+      "parameters": [],
+      "returns": {
+        "type": "Iterator[Pebble]",
+        "description": "Iterator yielding Pebble objects"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.clump.pebble.maxid() -> int",
+      "description": "Get the maximum pebble ID currently in the model.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum pebble ID"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.clump.pebble.near(point: vec, radius: float = 0.0) -> Pebble",
+      "description": "Find the closest pebble to a point. If radius is non-zero, only search within this radius.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to search from (x, y, z)"
+        },
+        {
+          "name": "radius",
+          "type": "float",
+          "required": false,
+          "description": "Search radius. If 0.0, search entire model (default: 0.0)"
+        }
+      ],
+      "returns": {
+        "type": "Pebble",
+        "description": "Closest pebble object, or None if no pebble found within radius"
+      }
+    }
+  ]
+}

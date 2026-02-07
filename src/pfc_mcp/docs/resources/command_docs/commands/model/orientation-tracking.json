@@ -1,0 +1,51 @@
+{
+  "command": "model orientation-tracking",
+  "category": "model",
+  "search_keywords": [
+    "orientation",
+    "tracking",
+    "euler"
+  ],
+  "description": "Specify the orientation tracking state. Orientation tracking applies to PFC entities (clumps and walls). When enabled, the orientation of objects is tracked during rotation, allowing access to Euler angles and orientation-based attributes.",
+  "syntax": "model orientation-tracking <b>",
+  "keywords": [],
+  "notes": [
+    "Applies to PFC entities: clumps and walls",
+    "When enabled: orientation of objects is tracked during rotation",
+    "Allows access to Euler angles (euler-x, euler-y, euler-z in 3D)",
+    "Allows access to orientation-based attributes",
+    "Must be enabled BEFORE rotating objects if Euler angles are needed",
+    "Adds computational overhead - only enable if orientation information is required",
+    "Related clump attributes (require orientation tracking enabled):",
+    "  - euler-x, euler-y, euler-z (3D only)",
+    "  - rotation (2D)",
+    "Default state: typically off (check documentation)",
+    "Orientation tracking state persists until changed or model new"
+  ],
+  "examples": [
+    {
+      "command": "model orientation-tracking on",
+      "description": "Enable orientation tracking for clumps and walls"
+    },
+    {
+      "command": "model orientation-tracking off",
+      "description": "Disable orientation tracking (reduces computational overhead)"
+    },
+    {
+      "command": "model orientation-tracking on\nclump replicate name 'rock1' position (0,0,0)\nclump rotate axis (0,0,1) angle 45 range id 1\nclump list euler",
+      "description": "Enable tracking, create and rotate clump, then list Euler angles"
+    },
+    {
+      "command": "model orientation-tracking on\nmodel domain extent -10 10\nclump generate number 100 radius 0.5\nmodel cycle 1000\nclump list euler range id 1 10",
+      "description": "Enable tracking before generating clumps to track orientation during cycling"
+    },
+    {
+      "command": "model orientation-tracking on\n; ... create and rotate objects ...\nfish define check_rotation\n  local euler_z = clump.euler.z(clump.find(1))\n  io.out('Clump 1 rotation about z: ' + string(euler_z))\nend\ncheck_rotation",
+      "description": "Enable tracking to access Euler angles in FISH"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model orientation-tracking on') or itasca.command('model orientation-tracking off') - Python SDK does not provide direct orientation tracking control"
+  }
+}

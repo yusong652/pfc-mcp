@@ -1,0 +1,39 @@
+{
+  "command": "plot title",
+  "category": "plot",
+  "search_keywords": [
+    "title",
+    "text",
+    "label",
+    "heading"
+  ],
+  "description": "Set the font and settings used to render the title at the top of the plot. If no plot name is specified, the current view is assumed.",
+  "syntax": "plot <s> title <text>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "text",
+      "syntax": "<text>",
+      "description": "Title text and font settings for the plot."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot title 'My Simulation'",
+      "description": "Set title of current plot to 'My Simulation'"
+    },
+    {
+      "command": "plot 'myplot' title 'Results'",
+      "description": "Set title of plot 'myplot' to 'Results'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> title <text>') - no direct Python SDK method"
+  }
+}

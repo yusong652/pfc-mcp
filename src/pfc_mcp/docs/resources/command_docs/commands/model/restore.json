@@ -1,0 +1,70 @@
+{
+  "command": "model restore",
+  "category": "model",
+  "search_keywords": [
+    "restore",
+    "load",
+    "file"
+  ],
+  "description": "Restore program-state information. The state information, resulting from a previous 'model save' command, is in the save file s. If s does not contain a file extension, then the extension '.f3sav' is added. The path to the save file can be included as part of s. All model state information (including any defined FISH functions/variables, histories, tables, or model components) is lost and replaced by the information contained in the file s. Information that is part of the project state (see 'project') or program state (see 'program') is not affected by a restore.",
+  "syntax": "model restore <s>",
+  "keywords": [],
+  "notes": [
+    "Restores state information from previous 'model save' command",
+    "Default file extension: '.f3sav' (added if not specified)",
+    "Path can be included in filename",
+    "ALL current model state is LOST and replaced by saved state",
+    "Model state information restored includes:",
+    "  - All FISH functions and variables",
+    "  - All histories",
+    "  - All tables",
+    "  - All model components (balls, clumps, walls, contacts, etc.)",
+    "  - Domain settings",
+    "  - Material properties",
+    "  - Gravity settings",
+    "  - All other model configuration",
+    "Project state (see 'project' command) is NOT affected",
+    "Program state (see 'program' command) is NOT affected",
+    "IMPORTANT: After restore, call 'model clean' before modifying extent tolerances",
+    "Use for: checkpoint recovery, continuing simulations, loading initial states",
+    "Complement command: 'model save' creates the save files"
+  ],
+  "examples": [
+    {
+      "command": "model restore 'checkpoint.f3sav'",
+      "description": "Restore model from checkpoint file (explicit extension)"
+    },
+    {
+      "command": "model restore 'checkpoint'",
+      "description": "Restore model from checkpoint (extension '.f3sav' added automatically)"
+    },
+    {
+      "command": "model restore 'C:/simulations/results/final_state.f3sav'",
+      "description": "Restore from file with absolute path"
+    },
+    {
+      "command": "model restore './saves/equilibrium'",
+      "description": "Restore from file with relative path (extension added)"
+    },
+    {
+      "command": "model restore 'initial_state'\nmodel cycle 5000\nmodel save 'after_5000_cycles'",
+      "description": "Restore checkpoint, run more cycles, save new state"
+    },
+    {
+      "command": "model restore 'base_configuration'\nmodel gravity 9.81\nmodel solve\nmodel save 'with_gravity'",
+      "description": "Restore base state, add gravity, solve, save new configuration"
+    },
+    {
+      "command": "model restore 'saved_state.sav'\nmodel clean\nclump tolerance extent 0.02",
+      "description": "After restore, must clean before modifying extent tolerances"
+    },
+    {
+      "command": "model restore 'problem1_equilibrium'\n; Continue simulation from equilibrium\nwall attribute velocity-y -0.1 range id 1\nmodel cycle 10000",
+      "description": "Restore equilibrium state and continue with new loading"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model restore \"filename.f3sav\"') - Python SDK does not provide direct restore function. Note: Use double quotes around filename in command string if path contains spaces"
+  }
+}

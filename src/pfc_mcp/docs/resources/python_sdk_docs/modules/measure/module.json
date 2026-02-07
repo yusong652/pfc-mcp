@@ -1,0 +1,89 @@
+{
+  "module": "itasca.measure",
+  "description": "Functions and classes for working with Itasca measurement spheres",
+  "import_statement": "import itasca as it",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.measure.count() -> int",
+      "description": "Get the number of measures. O(1) operation - very fast.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "The number of measurement objects in the model"
+      },
+      "examples": [
+        {
+          "description": "Get measurement count",
+          "code": "num_measures = itasca.measure.count()\nprint(f\"Total measurements: {num_measures}\")"
+        }
+      ]
+    },
+    {
+      "name": "find",
+      "signature": "itasca.measure.find(id: int) -> Measure",
+      "description": "Get the measure object with the given ID number. Returns None if no measurement with that ID exists.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "The ID number of the measurement object to find"
+        }
+      ],
+      "returns": {
+        "type": "Measure",
+        "description": "Measure object with the specified ID, or None if not found"
+      },
+      "examples": [
+        {
+          "description": "Find measure by ID",
+          "code": "measure = itasca.measure.find(1)\nif measure:\n    print(f\"Measure position: {measure.pos()}\")"
+        }
+      ]
+    },
+    {
+      "name": "list",
+      "signature": "itasca.measure.list() -> iterator",
+      "description": "Get a measure iterator object. Returns an iterator that yields all Measure objects in the model.",
+      "parameters": [],
+      "returns": {
+        "type": "iterator",
+        "description": "Iterator object that yields Measure instances"
+      },
+      "examples": [
+        {
+          "description": "Iterate all measurements",
+          "code": "for m in itasca.measure.list():\n    print(f\"Measure {m.id()}: pos={m.pos()}, stress={m.stress()}\")"
+        }
+      ],
+      "notes": [
+        "Use this to iterate over all measurement objects in the model",
+        "Iterator is efficient and does not create a list in memory"
+      ]
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.measure.maxid() -> int",
+      "description": "Get the maximum measure ID. Returns the highest ID number among all measurement objects in the model.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "The highest ID number among all measurement objects"
+      },
+      "examples": [
+        {
+          "description": "Get max measure ID",
+          "code": "max_id = itasca.measure.maxid()\nprint(f\"Highest measurement ID: {max_id}\")"
+        }
+      ]
+    }
+  ],
+  "classes": ["Measure"],
+  "usage_notes": [
+    "Measurement spheres are used to monitor local values of stress, strain rate, porosity, and coordination number",
+    "Create measurement objects using PFC commands (e.g., 'measure create')",
+    "Access measurement data through the Measure object methods",
+    "Measurements are calculated based on particles within the sphere radius"
+  ]
+}

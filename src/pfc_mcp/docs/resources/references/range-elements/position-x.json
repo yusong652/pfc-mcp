@@ -1,0 +1,30 @@
+{
+  "name": "position-x",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "position-x <f1> <f2>",
+  "alt_syntax": "position-x <f1> tolerance <f>",
+  "description": "Filter by X-coordinate range.",
+  "parameters": [
+    {
+      "name": "f1",
+      "type": "float",
+      "description": "Lower X bound"
+    },
+    {
+      "name": "f2",
+      "type": "float",
+      "description": "Upper X bound"
+    }
+  ],
+  "supports_extent": true,
+  "examples": [
+    "range position-x 0 10",
+    "range position-x 5 tolerance 2"
+  ],
+  "search_keywords": [
+    "position-x",
+    "position",
+    "x"
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "type": "range_elements",
+  "description": "Range elements are filtering syntax used after the 'range' keyword in PFC commands. They select subsets of objects (balls, walls, contacts, etc.) based on geometric regions, attributes, or logical conditions.",
+  "usage_pattern": {
+    "syntax": "<command> ... range <element1> [params] <element2> [params] ...",
+    "examples": [
+      "ball delete range position-x 0 10",
+      "ball attribute density 2650 range group 'sample'",
+      "contact property fric 0.5 range cylinder end-1 0 0 0 end-2 0 0 10 radius 5"
+    ],
+    "notes": [
+      "Multiple range elements create intersection (AND) by default",
+      "Use 'union' keyword for OR logic",
+      "Unspecified range affects all objects of target type"
+    ]
+  },
+  "categories": {
+    "geometric": {
+      "name": "Geometric Elements",
+      "description": "Select objects by spatial region",
+      "elements": [
+        "position",
+        "position-x",
+        "position-y",
+        "position-z",
+        "sphere",
+        "cylinder",
+        "annulus",
+        "plane",
+        "polygon",
+        "rectangle",
+        "ellipse"
+      ]
+    },
+    "attribute": {
+      "name": "Attribute Elements",
+      "description": "Select objects by ID, group, or other attributes",
+      "elements": [
+        "id",
+        "id-list",
+        "group",
+        "named-range"
+      ]
+    },
+    "pfc_specific": {
+      "name": "PFC-Specific Elements",
+      "description": "Elements specific to PFC (balls, walls, contacts)",
+      "elements": [
+        "contact"
+      ]
+    },
+    "user_defined": {
+      "name": "User-Defined Elements",
+      "description": "Custom filtering via extra variables or FISH",
+      "elements": [
+        "extra",
+        "extra-list",
+        "fish"
+      ]
+    },
+    "element_modifiers": {
+      "name": "Element Modifiers",
+      "description": "Modify behavior of individual range elements",
+      "elements": [
+        "not",
+        "extent",
+        "by"
+      ]
+    },
+    "phrase_modifiers": {
+      "name": "Phrase Modifiers",
+      "description": "Modify behavior of entire range phrase",
+      "elements": [
+        "union"
+      ]
+    }
+  },
+  "elements": [
+    {
+      "name": "position",
+      "file": "position.json",
+      "short_description": "Bounding box selection. Two vectors define opposit...",
+      "category": "geometric"
+    },
+    {
+      "name": "position-x",
+      "file": "position-x.json",
+      "short_description": "Filter by X-coordinate range.",
+      "category": "geometric"
+    },
+    {
+      "name": "position-y",
+      "file": "position-y.json",
+      "short_description": "Filter by Y-coordinate range.",
+      "category": "geometric"
+    },
+    {
+      "name": "position-z",
+      "file": "position-z.json",
+      "short_description": "Filter by Z-coordinate range.",
+      "category": "geometric"
+    },
+    {
+      "name": "sphere",
+      "file": "sphere.json",
+      "short_description": "Spherical region selection.",
+      "category": "geometric"
+    },
+    {
+      "name": "cylinder",
+      "file": "cylinder.json",
+      "short_description": "Cylindrical region. Two radii create annular (holl...",
+      "category": "geometric"
+    },
+    {
+      "name": "annulus",
+      "file": "annulus.json",
+      "short_description": "Spherical annulus (hollow sphere) selection.",
+      "category": "geometric"
+    },
+    {
+      "name": "plane",
+      "file": "plane.json",
+      "short_description": "Infinite plane selection. Use above/below or dista...",
+      "category": "geometric"
+    },
+    {
+      "name": "polygon",
+      "file": "polygon.json",
+      "short_description": "Polygonal cylinder extending perpendicular to poly...",
+      "category": "geometric"
+    },
+    {
+      "name": "rectangle",
+      "file": "rectangle.json",
+      "short_description": "Rectangular cylinder. Four vertices define the rec...",
+      "category": "geometric"
+    },
+    {
+      "name": "ellipse",
+      "file": "ellipse.json",
+      "short_description": "Ellipse inscribed in rectangle defined by four ver...",
+      "category": "geometric"
+    },
+    {
+      "name": "id",
+      "file": "id.json",
+      "short_description": "Select by ID range. Single value for exact match, ...",
+      "category": "attribute"
+    },
+    {
+      "name": "id-list",
+      "file": "id-list.json",
+      "short_description": "Select by explicit list of IDs. Non-sequential val...",
+      "category": "attribute"
+    },
+    {
+      "name": "group",
+      "file": "group.json",
+      "short_description": "Select by group membership. Supports slot specific...",
+      "category": "attribute"
+    },
+    {
+      "name": "named-range",
+      "file": "named-range.json",
+      "short_description": "Reference a previously created named range (via 'm...",
+      "category": "attribute"
+    },
+    {
+      "name": "contact",
+      "file": "contact.json",
+      "short_description": "Filter contacts by activity state, gap distance, c...",
+      "category": "pfc_specific"
+    },
+    {
+      "name": "extra",
+      "file": "extra.json",
+      "short_description": "Filter by extra variable value at specified index.",
+      "category": "user_defined"
+    },
+    {
+      "name": "extra-list",
+      "file": "extra-list.json",
+      "short_description": "Filter by extra variable matching integer list.",
+      "category": "user_defined"
+    },
+    {
+      "name": "fish",
+      "file": "fish.json",
+      "short_description": "Custom FISH function for filtering. Function recei...",
+      "category": "user_defined"
+    },
+    {
+      "name": "not",
+      "file": "not.json",
+      "short_description": "Invert the element's selection (exclude instead of...",
+      "category": "element_modifiers"
+    },
+    {
+      "name": "extent",
+      "file": "extent.json",
+      "short_description": "Require entire object extent inside region (not ju...",
+      "category": "element_modifiers"
+    },
+    {
+      "name": "by",
+      "file": "by.json",
+      "short_description": "Specify object hierarchy level for evaluation.",
+      "category": "element_modifiers"
+    },
+    {
+      "name": "union",
+      "file": "union.json",
+      "short_description": "Change from intersection (AND) to union (OR) logic...",
+      "category": "phrase_modifiers"
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Delete in region",
+      "example": "ball delete range position-x 0 10 position-y 0 10",
+      "description": "Delete balls in XY rectangle"
+    },
+    {
+      "name": "Set property by group",
+      "example": "ball attribute density 2650 range group 'sample'",
+      "description": "Set density for balls in group"
+    },
+    {
+      "name": "Cylindrical confining",
+      "example": "wall attribute velocity (0.001,0,0) range cylinder end-1 0 0 0 end-2 0 0 10 radius 5",
+      "description": "Set wall velocity in cylindrical region"
+    },
+    {
+      "name": "Exclude boundary",
+      "example": "ball fix velocity range group 'boundary' not",
+      "description": "Fix all balls except boundary group"
+    },
+    {
+      "name": "Named range reuse",
+      "example": "model range create 'core' cylinder end-1 0 0 0 end-2 0 0 10 radius 3\nball attribute density 2500 range named-range 'core'",
+      "description": "Create reusable named range"
+    }
+  ],
+  "notes": [
+    "Multiple range elements create intersection (AND) by default",
+    "Use 'union' keyword for OR logic",
+    "Unspecified range affects all objects of target type"
+  ],
+  "related_commands": [
+    "model range create",
+    "model range delete",
+    "model range list"
+  ],
+  "official_documentation": "https://docs.itascacg.com/pfc700/common/module/doc/manual/range_manual/range_commands/rangephrasereference.html"
+}

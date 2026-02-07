@@ -1,0 +1,73 @@
+{
+  "command": "wall import",
+  "category": "wall",
+  "search_keywords": [
+    "import",
+    "STL",
+    "DXF"
+  ],
+  "description": "Import a wall. Walls can be imported directly from files that are supported by the geometry logic (i.e., .stl or .dxf files) or from geometry objects directly. Wall importation is accomplished by stitching {vertex in 2D; edge in 3D} connected facets (i.e., {line segments in 2D; triangles in 3D}) starting with a seed facet. The seed facet is taken as the first {edge in 2D; polygon in 3D} that falls in the specified range unless the seed keyword is given. The surface must be manifold (i.e., no facets can interpenetrate or touch other facets) and orientable (i.e., the surface is {vertex connected in 2D; edge connected in 3D}). All facets must fall within the model domain. Note: A model domain must be specified prior to wall importation. While cycling, walls can only be created before cycle point 0 (i.e., when the timestep is calculated).",
+  "syntax": "wall import <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "filename",
+      "syntax": "filename <s>",
+      "description": "Name of file to import (.stl or .dxf). Creates temporary geometry set. If error occurs, geometry set remains for scrutiny"
+    },
+    {
+      "name": "from-geometry",
+      "syntax": "from-geometry <s> clean keepid seed <i>",
+      "description": "Import from geometry set named s. Optional: 'clean' to delete set after success, 'keepid' to preserve facet IDs from geometry, 'seed <i>' to specify starting {edge in 2D; polygon in 3D} ID"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s> slot <slot> facet",
+      "description": "Set group name s at slot (default: 'Default'). Optional 'facet' keyword assigns to facets instead of wall"
+    },
+    {
+      "name": "id",
+      "syntax": "id <id>",
+      "description": "Wall ID. If not specified, next available ID is used"
+    },
+    {
+      "name": "name",
+      "syntax": "name <s>",
+      "description": "Name of the wall. If not specified, uses file name or geometry set name"
+    },
+    {
+      "name": "skip-errors",
+      "syntax": "skip-errors",
+      "description": "Continue import despite non-manifold conditions or points outside model domain. Offending facets are ignored"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall import filename 'gear.stl' skip-errors id 100",
+      "description": "Import wall from STL file, skip errors, assign ID 100"
+    },
+    {
+      "command": "wall import filename 'container.stl' name 'vessel' group 'boundaries'",
+      "description": "Import wall from STL file, name it 'vessel', assign to group 'boundaries'"
+    },
+    {
+      "command": "wall import from-geometry 'myset' clean",
+      "description": "Import wall from geometry set 'myset', delete set after successful import"
+    },
+    {
+      "command": "wall import from-geometry 'complex' seed 10 keepid",
+      "description": "Import from geometry set starting at polygon ID 10, preserve facet IDs"
+    },
+    {
+      "command": "wall import filename 'hopper.dxf' id 50 group 'equipment' facet",
+      "description": "Import from DXF file, assign ID 50, assign group to facets"
+    },
+    {
+      "command": "wall import from-geometry 'temp_geo' skip-errors clean",
+      "description": "Import from geometry set, skip errors, clean up geometry set regardless"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall import ...') - Python SDK does not provide wall import functionality"
+  }
+}

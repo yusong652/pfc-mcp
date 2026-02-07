@@ -1,0 +1,109 @@
+{
+  "command": "ball list",
+  "category": "ball",
+  "search_keywords": [
+    "list",
+    "query"
+  ],
+  "description": "List ball information. By default, lists ball ID, radius, contact count, fixity, and position. Use keywords to list specific attributes, contacts, groups, properties, or results. Use model precision command to control floating point precision.",
+  "syntax": "ball list <keyword> <range>",
+  "keywords": [
+    {
+      "name": "attribute",
+      "syntax": "attribute <attr>",
+      "description": "List ball attributes. If no attribute specified, shows available attributes.",
+      "sub_keywords": {
+        "geometry": [
+          "radius",
+          "position",
+          "position-x/y/z"
+        ],
+        "kinematics": [
+          "velocity",
+          "velocity-x/y/z",
+          "spin",
+          "spin-x/y/z (3D)",
+          "displacement",
+          "displacement-x/y/z"
+        ],
+        "orientation": [
+          "euler",
+          "euler-x/y/z (3D)",
+          "rotation (2D)"
+        ],
+        "forces": [
+          "force-applied",
+          "force-applied-x/y/z",
+          "force-contact",
+          "force-contact-x/y/z"
+        ],
+        "moments": [
+          "moment-applied",
+          "moment-applied-x/y/z (3D)",
+          "moment-contact",
+          "moment-contact-x/y/z (3D)"
+        ],
+        "other": [
+          "damp",
+          "density",
+          "fragment"
+        ]
+      }
+    },
+    {
+      "name": "contact",
+      "syntax": "contact <all>",
+      "description": "List contacts with each ball (ID, type, activity, model). Use 'all' to include inactive contacts."
+    },
+    {
+      "name": "extra",
+      "syntax": "extra <i>",
+      "description": "List extra variable values at index i"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s>",
+      "description": "List group names at slot s"
+    },
+    {
+      "name": "property",
+      "syntax": "property <s>",
+      "description": "List ball properties (surface conditions for contact models). If no property specified, shows available properties for each ball."
+    },
+    {
+      "name": "result",
+      "syntax": "result",
+      "description": "List tabulated ball model results (see ball results command)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball list",
+      "description": "List default info (ID, radius, contacts, fixity, position) for all balls"
+    },
+    {
+      "command": "ball list attribute force-applied",
+      "description": "List applied force for all balls"
+    },
+    {
+      "command": "ball list extra 2",
+      "description": "List value of extra variable at index 2 for all balls"
+    },
+    {
+      "command": "ball list property 'kn'",
+      "description": "List normal stiffness property for all balls"
+    },
+    {
+      "command": "ball list attribute velocity range group 'active'",
+      "description": "List velocity for balls in 'active' group"
+    },
+    {
+      "command": "ball list contact all range id 1 100",
+      "description": "List all contacts (active and inactive) for balls 1-100"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Ball getter methods: Ball.pos(), Ball.vel(), Ball.radius(), Ball.density(), etc. - requires iteration: for b in itasca.ball.list(): print(b.pos())"
+  }
+}

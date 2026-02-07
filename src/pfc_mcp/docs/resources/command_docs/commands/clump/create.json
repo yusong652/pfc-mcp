@@ -1,0 +1,99 @@
+{
+  "command": "clump create",
+  "category": "clump",
+  "search_keywords": [
+    "create",
+    "single",
+    "pebble"
+  ],
+  "description": "Create a single clump with the specified attributes. A model domain must be specified prior to clump creation. The clump will not be available for replication and will not have a surface description associated with it. Unit density is assumed at creation unless the density keyword is specified. Either all inertial attributes must be specified (position, volume, inertia tensor) or the calculate keyword must be given to calculate them from the pebble distribution. Unless the real moment of inertia is modified via FISH or via the clump attribute command, this value will be updated in response to changes in volume and density.",
+  "syntax": "clump create <keyword> ...",
+  "keywords": [
+    {
+      "name": "pebbles",
+      "syntax": "pebbles <i> <f> <v> ...",
+      "description": "Number of pebbles in the clump (i), followed by i sets of pebble geometric parameters. Each set is the pebble radius (f) and position (v)"
+    },
+    {
+      "name": "calculate",
+      "syntax": "calculate <f>",
+      "description": "Specifies that clump position, volume, and inertia tensor will be calculated from pebble distribution assuming constant density. Space is recursively subdivided into boxes/cubes. Percentage difference f = 0.01 by default (min: 0.00005). Iterations cease when: 1) total cells reach 1e6 or 2) extrapolated and estimated volumes are within tolerance. Cannot be used with position/volume/inertia keywords"
+    },
+    {
+      "name": "density",
+      "syntax": "density <f>",
+      "description": "Clump density. Default: 1.0"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s> <slot slot> <pebble>",
+      "description": "Set group name at slot slot to s for newly created clump. Optional pebble keyword assigns group to pebbles instead of clump. If slot not specified, uses slot Default"
+    },
+    {
+      "name": "id",
+      "syntax": "id <i>",
+      "description": "Clump ID. If not specified, next available ID is used"
+    },
+    {
+      "name": "inertia",
+      "syntax": "inertia <fe11> <fe22> <fe33> <fe12> <fe13> <fe23>",
+      "description": "Set inertia tensor of clump in current configuration. In 2D: 1 float (polar moment of inertia). In 3D: 6 parameters in order e11,e22,e33,e12,e13,e23 using row/column convention. Must also specify volume. Cannot be used with calculate keyword"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v>",
+      "description": "Clump centroid position. Default: origin. Cannot be used with calculate keyword"
+    },
+    {
+      "name": "position-x",
+      "syntax": "position-x <f>",
+      "description": "X-component of clump centroid position. Default: 0. Cannot be used with calculate keyword"
+    },
+    {
+      "name": "position-y",
+      "syntax": "position-y <f>",
+      "description": "Y-component of clump centroid position. Default: 0. Cannot be used with calculate keyword"
+    },
+    {
+      "name": "position-z",
+      "syntax": "position-z <f>",
+      "description": "Z-component of clump centroid position (3D ONLY). Default: 0. Cannot be used with calculate keyword"
+    },
+    {
+      "name": "volume",
+      "syntax": "volume <f>",
+      "description": "Set volume (2D: per unit thickness; 3D: total volume) to f. Must also specify inertia tensor. Cannot be used with calculate keyword. Note: This parameter doesn't affect clump geometry - apparent geometric volume remains unchanged. This is the volume used to compute mass for law of motion"
+    }
+  ],
+  "notes": [
+    "A model domain must be specified prior to clump creation",
+    "While cycling, clumps can only be created before cycle point 0 (i.e., when the timestep is calculated)",
+    "Must specify either all inertial attributes (position, volume, inertia) OR use calculate keyword",
+    "Unit density (1.0) assumed unless density keyword specified",
+    "Clump will not be available for replication and will not have surface description",
+    "Real moment of inertia is auto-updated with volume/density changes unless modified via FISH or clump attribute command",
+    "For calculate keyword: lower tolerance values require more computational effort but provide more accuracy"
+  ],
+  "examples": [
+    {
+      "command": "clump create id 1 pebble 1 1.0 (0,0,5) calculate 0.1",
+      "description": "Create clump with single pebble at (0,0,5) with radius 1.0. Inertial attributes calculated with 10% tolerance"
+    },
+    {
+      "command": "clump create pebbles 1 0.5 (xpos,ypos,zpos) calculate",
+      "description": "Create clump with single pebble of radius 0.5 at specified position. Use default tolerance (1%)"
+    },
+    {
+      "command": "clump create id 1 position (0,0) pebbles 2 1.0 (-0.5,0.0) 1.0 (0.5,0.0) calculate 0.05",
+      "description": "Create clump with two pebbles (2D), each with radius 1.0, positioned symmetrically. Use 5% tolerance for inertial calculation"
+    },
+    {
+      "command": "clump create density 2500 pebbles 3 0.5 (0,0,0) 0.5 (1,0,0) 0.5 (0,1,0) calculate",
+      "description": "Create clump with three pebbles and density 2500. Inertial attributes calculated from pebble distribution"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump create ...') - Python SDK cannot directly create clumps with pebbles"
+  }
+}

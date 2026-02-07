@@ -1,0 +1,38 @@
+{
+  "command": "plot rename",
+  "category": "plot",
+  "search_keywords": [
+    "rename",
+    "name",
+    "change"
+  ],
+  "description": "Rename a plot. If no plot name is specified, the current view is assumed.",
+  "syntax": "plot <s> rename <sNew>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Current plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "sNew",
+      "syntax": "<sNew>",
+      "description": "New name for the plot."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot rename 'newname'",
+      "description": "Rename the current plot to 'newname'"
+    },
+    {
+      "command": "plot 'oldname' rename 'newname'",
+      "description": "Rename plot 'oldname' to 'newname'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> rename <newname>') - no direct Python SDK method"
+  }
+}

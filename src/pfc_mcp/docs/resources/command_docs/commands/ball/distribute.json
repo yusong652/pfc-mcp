@@ -1,0 +1,95 @@
+{
+  "command": "ball distribute",
+  "category": "ball",
+  "search_keywords": [
+    "distribute",
+    "porosity",
+    "overlap",
+    "packing"
+  ],
+  "description": "Distribute balls with overlaps until a target porosity is achieved. Ball positions and radii are drawn from uniform distributions (or Gaussian/FISH distributions). Significant ball overlaps will likely result from this operation. This command contrasts with ball generate where balls are generated without overlap.",
+  "syntax": "ball distribute <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "porosity",
+      "syntax": "porosity <f>",
+      "description": "Target porosity value (not accounting for overlap)"
+    },
+    {
+      "name": "box",
+      "syntax": "box <xmin> <xmax> <ymin> <ymax> <zmin> <zmax>",
+      "description": "Balls fully contained within box (won't overlap box faces/edges)"
+    },
+    {
+      "name": "number-bins",
+      "syntax": "number-bins <i>",
+      "description": "Number of size distribution bins"
+    },
+    {
+      "name": "bin",
+      "syntax": "bin <i> <keywords>...",
+      "description": "Specify distribution properties for bin i",
+      "sub_keywords": [
+        "radius",
+        "gauss",
+        "fish-distribution",
+        "volume-fraction",
+        "group"
+      ]
+    },
+    {
+      "name": "resolution",
+      "syntax": "resolution <f>",
+      "description": "Multiplicative factor for all generated ball radii"
+    }
+  ],
+  "bin_keywords": [
+    {
+      "name": "radius",
+      "syntax": "radius <radlow> <radhi>",
+      "description": "Radius range for uniform distribution (default: 1.0 1.0)"
+    },
+    {
+      "name": "gauss",
+      "syntax": "gauss <f>",
+      "description": "Use Gaussian distribution with mean=(radlow+radhi)/2, std=(radhi-radlow)/2. Optional f (default 0.1) sets minimum radius"
+    },
+    {
+      "name": "fish-distribution",
+      "syntax": "fish-distribution <function_name> <args...>",
+      "description": "Use FISH function to generate radii. Cannot be used with gauss or radius"
+    },
+    {
+      "name": "volume-fraction",
+      "syntax": "volume-fraction <f>",
+      "description": "Volume fraction for this bin (all bins must sum to 1.0)"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s> slot <slot>",
+      "description": "Assign generated balls to group"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball distribute radius 1.0 1.6 porosity 0.30",
+      "description": "Distribute balls with radius 1.0-1.6 to achieve 30% porosity (allows overlaps)"
+    },
+    {
+      "command": "ball distribute number-bins 2 bin 1 radius 0.5 1.0 volume-fraction 0.6 bin 2 radius 1.0 1.5 volume-fraction 0.4 porosity 0.35",
+      "description": "Two size distributions: 60% small balls (0.5-1.0), 40% large balls (1.0-1.5)"
+    },
+    {
+      "command": "ball distribute radius 1.0 1.5 gauss 0.1 porosity 0.32 box -10 10 -10 10 -5 5",
+      "description": "Gaussian distribution in specified box region"
+    },
+    {
+      "command": "ball distribute number-bins 1 bin 1 radius 0.8 1.2 group 'layer1' volume-fraction 1.0 porosity 0.38",
+      "description": "Single distribution assigned to group 'layer1'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball distribute ...') - no Python SDK equivalent for porosity-based distribution with overlaps"
+  }
+}

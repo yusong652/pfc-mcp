@@ -1,0 +1,15 @@
+{
+  "name": "id-list",
+  "category": "attribute",
+  "category_name": "Attribute Elements",
+  "syntax": "id-list <i1> <i2> ...",
+  "description": "Select by explicit list of IDs. Non-sequential values allowed.",
+  "examples": [
+    "range id-list 1 5 10 15 20"
+  ],
+  "search_keywords": [
+    "id-list",
+    "id",
+    "list"
+  ]
+}

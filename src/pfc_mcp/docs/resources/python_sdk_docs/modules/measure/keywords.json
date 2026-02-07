@@ -1,0 +1,405 @@
+{
+  "module": "measure",
+  "description": "Natural language keywords for measure module API search",
+  "keywords": {
+    "_comment_module_functions": "Module-level functions (itasca.measure.*)",
+    "measure count": [
+      "itasca.measure.count"
+    ],
+    "count measures": [
+      "itasca.measure.count"
+    ],
+    "number of measures": [
+      "itasca.measure.count"
+    ],
+    "how many measures": [
+      "itasca.measure.count"
+    ],
+    "measurement count": [
+      "itasca.measure.count"
+    ],
+    "total measures": [
+      "itasca.measure.count"
+    ],
+    "measure find": [
+      "itasca.measure.find"
+    ],
+    "find measure": [
+      "itasca.measure.find"
+    ],
+    "get measure": [
+      "itasca.measure.find"
+    ],
+    "search measure": [
+      "itasca.measure.find"
+    ],
+    "measure by id": [
+      "itasca.measure.find"
+    ],
+    "measure list": [
+      "itasca.measure.list"
+    ],
+    "list measures": [
+      "itasca.measure.list"
+    ],
+    "iterate measures": [
+      "itasca.measure.list"
+    ],
+    "all measures": [
+      "itasca.measure.list"
+    ],
+    "get measures": [
+      "itasca.measure.list"
+    ],
+    "measurement iterator": [
+      "itasca.measure.list"
+    ],
+    "measure maxid": [
+      "itasca.measure.maxid"
+    ],
+    "maxid measure": [
+      "itasca.measure.maxid"
+    ],
+    "max measure id": [
+      "itasca.measure.maxid"
+    ],
+    "_comment_identification": "Identification methods",
+    "measure id": [
+      "itasca.measure.Measure.id"
+    ],
+    "get measure id": [
+      "itasca.measure.Measure.id"
+    ],
+    "measurement id": [
+      "itasca.measure.Measure.id"
+    ],
+    "measure identifier": [
+      "itasca.measure.Measure.id"
+    ],
+    "check measure valid": [
+      "itasca.measure.Measure.valid"
+    ],
+    "is measure valid": [
+      "itasca.measure.Measure.valid"
+    ],
+    "measure valid": [
+      "itasca.measure.Measure.valid"
+    ],
+    "measure exists": [
+      "itasca.measure.Measure.valid"
+    ],
+    "measure live": [
+      "itasca.measure.Measure.valid"
+    ],
+    "measurement active": [
+      "itasca.measure.Measure.valid"
+    ],
+    "delete measure": [
+      "itasca.measure.Measure.delete"
+    ],
+    "remove measure": [
+      "itasca.measure.Measure.delete"
+    ],
+    "destroy measure": [
+      "itasca.measure.Measure.delete"
+    ],
+    "erase measure": [
+      "itasca.measure.Measure.delete"
+    ],
+    "_comment_position": "Position methods",
+    "measure position": [
+      "itasca.measure.Measure.pos"
+    ],
+    "measure location": [
+      "itasca.measure.Measure.pos"
+    ],
+    "get measure position": [
+      "itasca.measure.Measure.pos"
+    ],
+    "measurement location": [
+      "itasca.measure.Measure.pos"
+    ],
+    "sphere center": [
+      "itasca.measure.Measure.pos"
+    ],
+    "where is measure": [
+      "itasca.measure.Measure.pos"
+    ],
+    "measure coordinates": [
+      "itasca.measure.Measure.pos"
+    ],
+    "measure position x": [
+      "itasca.measure.Measure.pos_x"
+    ],
+    "measure x coordinate": [
+      "itasca.measure.Measure.pos_x"
+    ],
+    "position x": [
+      "itasca.measure.Measure.pos_x"
+    ],
+    "x coordinate": [
+      "itasca.measure.Measure.pos_x"
+    ],
+    "measure position y": [
+      "itasca.measure.Measure.pos_y"
+    ],
+    "measure y coordinate": [
+      "itasca.measure.Measure.pos_y"
+    ],
+    "position y": [
+      "itasca.measure.Measure.pos_y"
+    ],
+    "y coordinate": [
+      "itasca.measure.Measure.pos_y"
+    ],
+    "measure position z": [
+      "itasca.measure.Measure.pos_z"
+    ],
+    "measure z coordinate": [
+      "itasca.measure.Measure.pos_z"
+    ],
+    "position z": [
+      "itasca.measure.Measure.pos_z"
+    ],
+    "z coordinate": [
+      "itasca.measure.Measure.pos_z"
+    ],
+    "set measure position": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "move measure": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "change measure position": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "relocate measure": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "update measure position": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "move measurement sphere": [
+      "itasca.measure.Measure.set_pos"
+    ],
+    "set measure position x": [
+      "itasca.measure.Measure.set_pos_x"
+    ],
+    "set measure x": [
+      "itasca.measure.Measure.set_pos_x"
+    ],
+    "move measure x": [
+      "itasca.measure.Measure.set_pos_x"
+    ],
+    "change x coordinate": [
+      "itasca.measure.Measure.set_pos_x"
+    ],
+    "set measure position y": [
+      "itasca.measure.Measure.set_pos_y"
+    ],
+    "set measure y": [
+      "itasca.measure.Measure.set_pos_y"
+    ],
+    "move measure y": [
+      "itasca.measure.Measure.set_pos_y"
+    ],
+    "change y coordinate": [
+      "itasca.measure.Measure.set_pos_y"
+    ],
+    "set measure position z": [
+      "itasca.measure.Measure.set_pos_z"
+    ],
+    "set measure z": [
+      "itasca.measure.Measure.set_pos_z"
+    ],
+    "move measure z": [
+      "itasca.measure.Measure.set_pos_z"
+    ],
+    "change z coordinate": [
+      "itasca.measure.Measure.set_pos_z"
+    ],
+    "_comment_geometry": "Geometry methods",
+    "measure radius": [
+      "itasca.measure.Measure.radius"
+    ],
+    "measurement radius": [
+      "itasca.measure.Measure.radius"
+    ],
+    "sphere radius": [
+      "itasca.measure.Measure.radius"
+    ],
+    "get measure radius": [
+      "itasca.measure.Measure.radius"
+    ],
+    "measurement sphere size": [
+      "itasca.measure.Measure.radius"
+    ],
+    "set measure radius": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "change measure radius": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "resize measure": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "resize measurement sphere": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "update measure radius": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "set sphere size": [
+      "itasca.measure.Measure.set_radius"
+    ],
+    "_comment_stress": "Stress measurement methods",
+    "measure stress": [
+      "itasca.measure.Measure.stress"
+    ],
+    "get stress": [
+      "itasca.measure.Measure.stress"
+    ],
+    "stress tensor": [
+      "itasca.measure.Measure.stress"
+    ],
+    "stress measurement": [
+      "itasca.measure.Measure.stress"
+    ],
+    "local stress": [
+      "itasca.measure.Measure.stress"
+    ],
+    "symmetric stress": [
+      "itasca.measure.Measure.stress"
+    ],
+    "calculate stress": [
+      "itasca.measure.Measure.stress"
+    ],
+    "full stress": [
+      "itasca.measure.Measure.stress_full"
+    ],
+    "full stress tensor": [
+      "itasca.measure.Measure.stress_full"
+    ],
+    "nonsymmetric stress": [
+      "itasca.measure.Measure.stress_full"
+    ],
+    "complete stress": [
+      "itasca.measure.Measure.stress_full"
+    ],
+    "asymmetric stress": [
+      "itasca.measure.Measure.stress_full"
+    ],
+    "_comment_strainrate": "Strain rate measurement methods",
+    "measure strain rate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "get strain rate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "strain rate tensor": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "strainrate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "local strain rate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "symmetric strain rate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "deformation rate": [
+      "itasca.measure.Measure.strainrate"
+    ],
+    "full strain rate": [
+      "itasca.measure.Measure.strainrate_full"
+    ],
+    "full strainrate": [
+      "itasca.measure.Measure.strainrate_full"
+    ],
+    "nonsymmetric strain rate": [
+      "itasca.measure.Measure.strainrate_full"
+    ],
+    "complete strain rate": [
+      "itasca.measure.Measure.strainrate_full"
+    ],
+    "asymmetric strain rate": [
+      "itasca.measure.Measure.strainrate_full"
+    ],
+    "_comment_porosity": "Porosity measurement methods",
+    "measure porosity": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "get porosity": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "void ratio": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "porosity value": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "local porosity": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "voidage": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "measure void ratio": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "calculate porosity": [
+      "itasca.measure.Measure.porosity"
+    ],
+    "_comment_coordination": "Coordination number methods",
+    "measure coordination": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "coordination number": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "get coordination": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "average coordination": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "contacts per particle": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "coordination value": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "contact number": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "particle coordination": [
+      "itasca.measure.Measure.coordination"
+    ],
+    "_comment_size": "Size distribution methods",
+    "measure size": [
+      "itasca.measure.Measure.size"
+    ],
+    "size distribution": [
+      "itasca.measure.Measure.size"
+    ],
+    "get size distribution": [
+      "itasca.measure.Measure.size"
+    ],
+    "particle size distribution": [
+      "itasca.measure.Measure.size"
+    ],
+    "cumulative size": [
+      "itasca.measure.Measure.size"
+    ],
+    "grain size distribution": [
+      "itasca.measure.Measure.size"
+    ],
+    "PSD": [
+      "itasca.measure.Measure.size"
+    ],
+    "particle sizing": [
+      "itasca.measure.Measure.size"
+    ]
+  }
+}

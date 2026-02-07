@@ -1,0 +1,90 @@
+{
+  "command": "ball generate",
+  "category": "ball",
+  "search_keywords": [
+    "generate",
+    "packing",
+    "cubic",
+    "hexagonal"
+  ],
+  "description": "Generate non-overlapping balls. The process ceases when the target number of balls are created or when the number of attempts to place balls without overlap is achieved. This command contrasts with ball distribute where balls are distributed without regard for overlap until a target porosity is achieved.",
+  "syntax": "ball generate <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "radius",
+      "syntax": "radius <radlow> <radhi>",
+      "description": "Radius range for uniform distribution (default: 1.0)"
+    },
+    {
+      "name": "number",
+      "syntax": "number <i>",
+      "description": "Number of balls to generate (stopping criterion)"
+    },
+    {
+      "name": "box",
+      "syntax": "box <xmin> <xmax> <ymin> <ymax> <zmin> <zmax>",
+      "description": "Generation box (balls fully contained, no overlap with box faces)"
+    },
+    {
+      "name": "tries",
+      "syntax": "tries <i>",
+      "description": "Maximum placement attempts (default: 20,000)"
+    },
+    {
+      "name": "id",
+      "syntax": "id <idlow> <idhi>",
+      "description": "Starting ID (default: next available). If idhi given, number = idhi - idlow + 1"
+    },
+    {
+      "name": "cubic",
+      "syntax": "cubic",
+      "description": "Regular cubic packing. Uses radlow for spacing (2*radlow apart). Fills region completely"
+    },
+    {
+      "name": "hexagonal",
+      "syntax": "hexagonal",
+      "description": "Hexagonal (2D) / face-centered-cubic (3D) packing. Uses radhi for spacing, radlow-radhi for radii"
+    },
+    {
+      "name": "gauss",
+      "syntax": "gauss <f>",
+      "description": "Gaussian distribution: mean=(radlow+radhi)/2, std=(radhi-radlow)/2. Optional f (default 0.1) sets minimum radius"
+    },
+    {
+      "name": "fish-distribution",
+      "syntax": "fish-distribution <function_name> <args...>",
+      "description": "FISH function returns ball radius. Cannot use with cubic/hexagonal/gauss/radius"
+    },
+    {
+      "name": "group",
+      "syntax": "group <s> slot <slot>",
+      "description": "Assign generated balls to group s"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball generate radius 0.5 0.7 number 100 box -5.0 0.0 -5.0 5.0",
+      "description": "Generate 100 balls with radii 0.5-0.7 in left half of domain (non-overlapping)"
+    },
+    {
+      "command": "ball generate radius 0.25 cubic box -10 10 -10 10 -5 0",
+      "description": "Generate cubic packing with ball radius 0.25 (spacing = 0.5)"
+    },
+    {
+      "command": "ball generate radius 0.3 0.5 hexagonal box -10 10 -10 10 -10 10",
+      "description": "Generate hexagonal close packing with radii 0.3-0.5"
+    },
+    {
+      "command": "ball generate radius 1.0 1.5 gauss 0.1 number 500 tries 50000",
+      "description": "Generate 500 balls with Gaussian distribution, up to 50,000 attempts"
+    },
+    {
+      "command": "ball generate id 1 500 radius 0.5 group 'layer1'",
+      "description": "Generate balls with IDs 1-500, assign to group 'layer1'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball generate ...') - Python SDK only has itasca.ball.create() for single ball creation"
+  }
+}

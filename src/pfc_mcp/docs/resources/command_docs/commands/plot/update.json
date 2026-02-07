@@ -1,0 +1,42 @@
+{
+  "command": "plot update",
+  "category": "plot",
+  "search_keywords": [
+    "update",
+    "refresh",
+    "automatic"
+  ],
+  "description": "Control automatic plot updates. If set to off, the plot is not automatically updated when changes are made to the model. If no plot name is specified, the current view is assumed.",
+  "syntax": "plot <s> update <b>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "b",
+      "syntax": "<b>",
+      "description": "Boolean flag: true to enable automatic updates, false to disable."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot update off",
+      "description": "Disable automatic updates for current plot"
+    },
+    {
+      "command": "plot update on",
+      "description": "Enable automatic updates for current plot"
+    },
+    {
+      "command": "plot 'myplot' update off",
+      "description": "Disable automatic updates for plot 'myplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> update <bool>') - no direct Python SDK method"
+  }
+}

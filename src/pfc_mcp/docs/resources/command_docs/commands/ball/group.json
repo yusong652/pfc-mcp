@@ -1,0 +1,61 @@
+{
+  "command": "ball group",
+  "category": "ball",
+  "search_keywords": [
+    "group",
+    "assign"
+  ],
+  "description": "Specify ball group names. Groups are used to organize balls and apply commands to specific subsets. By default, the group name is assigned to the slot 'Default'. IMPORTANT: The 'add' and 'remove' keywords apply to ALL balls (or a previously active range), they cannot be combined with a 'range' keyword in the same command.",
+  "syntax": "ball group <s> <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "slot",
+      "syntax": "slot <s2>",
+      "description": "Assign group s to slot s2 (default slot: 'Default'). Can be combined with range"
+    },
+    {
+      "name": "add",
+      "syntax": "add",
+      "description": "Assign group s to next available slot for ALL balls (cannot be used with range in same command)"
+    },
+    {
+      "name": "remove",
+      "syntax": "remove",
+      "description": "Remove group s from all slots for ALL balls (cannot be used with range in same command)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball group 'top_grip' range position-y 0.049 0.05",
+      "description": "Assign balls in y-position range to group 'top_grip' (default slot, from official docs)"
+    },
+    {
+      "command": "ball group 'inclusions' range circle center -1.0 -3.0 radius 0.5",
+      "description": "Assign balls within circular region to group 'inclusions' (from official docs)"
+    },
+    {
+      "command": "ball group 'layer1' slot 'layer' range position-z -5 0",
+      "description": "Assign balls in z-range to group 'layer1' in slot 'layer'"
+    },
+    {
+      "command": "ball group 'active' range id 1 100",
+      "description": "Assign balls with IDs 1-100 to group 'active' in default slot"
+    },
+    {
+      "command": "ball group 'active' add",
+      "description": "Assign ALL balls to group 'active' in next available slot"
+    },
+    {
+      "command": "ball group 'old_group' remove",
+      "description": "Remove group 'old_group' from all balls in all slots"
+    },
+    {
+      "command": "ball group 'BackLeft' range position-x -5.0 0.0",
+      "description": "Assign balls in x-range to group 'BackLeft' (based on official docs pattern)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Ball.set_group(group_name, slot=None) - requires iteration: for b in itasca.ball.list(): b.set_group('name')"
+  }
+}

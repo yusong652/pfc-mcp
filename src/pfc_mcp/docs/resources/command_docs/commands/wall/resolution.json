@@ -1,0 +1,79 @@
+{
+  "command": "wall resolution",
+  "category": "wall",
+  "search_keywords": [
+    "resolution",
+    "contact",
+    "strategy"
+  ],
+  "description": "Modify the contact-resolution strategy for faceted walls. By default, the resolution strategy is set to the 'reduced' state. In all cases, contact activity based on contact with active/inactive facet sides (see wall active-sides) is determined. Note: Eliciting this command does not result in an automatic 'cleaning' of the model state. See 'Faceted Walls in PFC' section for detailed explanation of resolution strategies.",
+  "syntax": "wall resolution <keyword>",
+  "keywords": [
+    {
+      "name": "full",
+      "syntax": "full proximity <b>",
+      "description": "Full contact resolution. Checks sliver penetration conditions, cutoff angle active for contact-state propagation for convex/concave facet intersections. Proximity contacts created by default unless 'proximity false' specified. Most accurate but computationally expensive"
+    },
+    {
+      "name": "reduced",
+      "syntax": "reduced",
+      "description": "Reduced contact resolution (default). Does NOT check sliver penetration or propagate contact-state information. Applies associative logic for contact activity state. More computationally efficient than full. No proximity contacts created"
+    },
+    {
+      "name": "none",
+      "syntax": "none",
+      "description": "No contact resolution. Most computationally efficient but may result in many more active contacts (reducing overall performance). May cause unexpected responses for walls intended to be smooth"
+    }
+  ],
+  "resolution_comparison": [
+    {
+      "mode": "full",
+      "sliver_penetration": "Yes",
+      "cutoff_angle": "Active",
+      "proximity_contacts": "Yes (by default)",
+      "state_propagation": "Yes",
+      "performance": "Slow",
+      "accuracy": "High"
+    },
+    {
+      "mode": "reduced",
+      "sliver_penetration": "No",
+      "cutoff_angle": "Inactive",
+      "proximity_contacts": "No",
+      "state_propagation": "No",
+      "performance": "Medium",
+      "accuracy": "Medium"
+    },
+    {
+      "mode": "none",
+      "sliver_penetration": "No",
+      "cutoff_angle": "Inactive",
+      "proximity_contacts": "No",
+      "state_propagation": "No",
+      "performance": "Fast (but may create many contacts)",
+      "accuracy": "Low"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall resolution full",
+      "description": "Set full resolution mode - proximity contacts created, contact-state propagation for planar/convex wall sides"
+    },
+    {
+      "command": "wall resolution full proximity false",
+      "description": "Set full resolution mode but disable proximity contact creation"
+    },
+    {
+      "command": "wall resolution reduced",
+      "description": "Set reduced resolution mode (default) - intermediate state, no proximity contacts"
+    },
+    {
+      "command": "wall resolution none",
+      "description": "Turn off all contact resolution - all contacts with wall facets are active"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall resolution ...') - Python SDK does not provide wall resolution settings. This is a global contact resolution strategy"
+  }
+}

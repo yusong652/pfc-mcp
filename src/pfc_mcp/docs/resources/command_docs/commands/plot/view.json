@@ -1,0 +1,137 @@
+{
+  "command": "plot view",
+  "category": "plot",
+  "search_keywords": [
+    "view",
+    "camera",
+    "center",
+    "eye",
+    "zoom",
+    "magnification",
+    "projection",
+    "perspective",
+    "parallel",
+    "isometric",
+    "roll",
+    "rotation",
+    "clip",
+    "dip"
+  ],
+  "description": "Control the camera view of a plot. If no plot name is specified, the current view is assumed. The camera always points from the eye position to the view center.",
+  "syntax": "plot <s> view <keyword ...>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "center",
+      "syntax": "center <v>",
+      "description": "The center of the view (look-at point). The camera always points from the eye position to the view center. In model mode (default), the eye rotates around this center when the view is rotated."
+    },
+    {
+      "name": "clip-back",
+      "syntax": "clip-back <f>",
+      "description": "Limiting distance to the back clipping plane. Default is 1e10 (no constraint). Adjust to improve depth buffer resolution for distant objects."
+    },
+    {
+      "name": "clip-front",
+      "syntax": "clip-front <f>",
+      "description": "Limiting distance to the front clipping plane. Default is -1e10 (no constraint). Adjust to improve depth buffer resolution for close objects."
+    },
+    {
+      "name": "dip",
+      "syntax": "dip <f>",
+      "description": "Set view plane orientation by dip angle in degrees. Eye is rotated about the center while keeping center and distance constant."
+    },
+    {
+      "name": "dip-direction",
+      "syntax": "dip-direction <f>",
+      "description": "Set view plane orientation by dip direction in degrees. Eye is rotated about the center while keeping center and distance constant."
+    },
+    {
+      "name": "distance",
+      "syntax": "distance <f>",
+      "description": "Distance from eye to view center. The view direction is held constant, but eye is moved to achieve this distance."
+    },
+    {
+      "name": "eye",
+      "syntax": "eye <v>",
+      "description": "Set the camera eye position. Viewing direction is always from eye to view center. The 'up' direction is determined by current roll."
+    },
+    {
+      "name": "isometric",
+      "syntax": "isometric",
+      "description": "Reset to isometric view. Equivalent to keystroke [I]."
+    },
+    {
+      "name": "magnification",
+      "syntax": "magnification <f>",
+      "description": "Set view magnification (zoom). Default is 1.0 (45 degree field of view). Increasing magnification decreases field of view angle."
+    },
+    {
+      "name": "projection",
+      "syntax": "projection <keyword>",
+      "description": "Set projection mode: 'parallel' for orthographic projection (objects don't get smaller with distance), 'perspective' for perspective view based on eye position (default)."
+    },
+    {
+      "name": "reset",
+      "syntax": "reset",
+      "description": "Reset view settings to defaults and recalculate initial view. Plot items are not changed. Equivalent to keystroke Shift+[R]."
+    },
+    {
+      "name": "roll",
+      "syntax": "roll <f>",
+      "description": "Set camera roll angle in degrees. Roll defines which direction is towards the top of the screen. Measured from screen-top vector to global z direction projected onto screen."
+    },
+    {
+      "name": "rotation",
+      "syntax": "rotation <v>",
+      "description": "Rotate view by vector v where: first component is yaw angle, second is pitch angle, third is roll angle."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot view isometric",
+      "description": "Reset current plot to isometric view"
+    },
+    {
+      "command": "plot view center (0,0,0)",
+      "description": "Set view center to origin"
+    },
+    {
+      "command": "plot view eye (10,10,10)",
+      "description": "Set camera position to (10,10,10)"
+    },
+    {
+      "command": "plot view magnification 2.0",
+      "description": "Zoom in by factor of 2"
+    },
+    {
+      "command": "plot view projection parallel",
+      "description": "Switch to orthographic projection"
+    },
+    {
+      "command": "plot view projection perspective",
+      "description": "Switch to perspective projection"
+    },
+    {
+      "command": "plot view roll 45",
+      "description": "Roll camera 45 degrees"
+    },
+    {
+      "command": "plot 'myplot' view center (5,5,5) eye (15,15,15)",
+      "description": "Set both center and eye position for plot 'myplot'"
+    },
+    {
+      "command": "plot view reset",
+      "description": "Reset view to default settings"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot view <keyword> <value>') - no direct Python SDK method"
+  }
+}

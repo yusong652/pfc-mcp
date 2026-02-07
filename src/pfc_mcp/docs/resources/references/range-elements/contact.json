@@ -1,0 +1,59 @@
+{
+  "name": "contact",
+  "category": "pfc_specific",
+  "category_name": "PFC-Specific Elements",
+  "syntax": "contact [active | inactive | all] [gap <f1> [f2]] [model <s>] [type <s>]",
+  "description": "Select contacts by activity state, gap distance, contact model, or type. Multiple keywords can be combined.",
+  "parameters": [
+    {
+      "name": "active",
+      "type": "keyword",
+      "description": "Select only active contacts. Activity status depends on the contact model installed."
+    },
+    {
+      "name": "inactive",
+      "type": "keyword",
+      "description": "Select only inactive contacts. Activity status depends on the contact model installed."
+    },
+    {
+      "name": "all",
+      "type": "keyword",
+      "description": "Select all contacts (active and inactive).",
+      "default": true
+    },
+    {
+      "name": "gap",
+      "type": "float",
+      "description": "Select contacts based on gap. Single value f1: gap <= f1. Two values: f1 <= gap <= f2.",
+      "parameters": ["f1", "f2 (optional)"]
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "description": "Select contacts by contact model name (e.g., linear, hertz, linearpbond)."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "description": "Select contacts by type (e.g., ball-ball, ball-pebble, ball-wallfacet, ball-rblock)."
+    }
+  ],
+  "examples": [
+    "range contact active",
+    "range contact inactive",
+    "range contact gap 0.0 0.01",
+    "range contact model 'linear'",
+    "range contact model 'hertz'",
+    "range contact type 'ball-ball'",
+    "range contact type 'ball-wallfacet'",
+    "range contact active model 'linear' type 'ball-ball'"
+  ],
+  "search_keywords": [
+    "contact",
+    "active",
+    "inactive",
+    "gap",
+    "model",
+    "type"
+  ]
+}

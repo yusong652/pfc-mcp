@@ -1,0 +1,316 @@
+{
+  "class": "Facet",
+  "namespace": "itasca.wall.facet.Facet",
+  "description": "Wall facet object representing triangular faces of walls. Cannot be instantiated directly - obtain instances via itasca.wall.facet.list() or itasca.wall.facet.find().",
+  "instantiation": "Cannot be instantiated. Obtained via itasca.wall.facet.list() or itasca.wall.facet.find()",
+  "methods": [
+    {
+      "name": "active",
+      "signature": "facet.active() -> int",
+      "description": "Get the facet activity code. Codes: 0=both sides active, 1=top side active (normal direction), -1=bottom side active, 2=neither side active.",
+      "parameters": [],
+      "returns": {"type": "int", "description": "Activity code (0, 1, -1, or 2)"}
+    },
+    {
+      "name": "contact_count",
+      "signature": "facet.contact_count(all: bool = False, type: TypeObject = None) -> int",
+      "description": "Get number of contacts associated with this Facet. If type is given, count is limited to specified contact types. If all is True, count includes virtual contacts.",
+      "parameters": [
+        {"name": "all", "type": "bool", "required": false, "description": "If True, include virtual contacts"},
+        {"name": "type", "type": "TypeObject", "required": false, "description": "Contact type filter"}
+      ],
+      "returns": {"type": "int", "description": "Number of contacts"}
+    },
+    {
+      "name": "contacts",
+      "signature": "facet.contacts(piece: object = None, all: bool = False, type: TypeObject = None) -> tuple of Contact",
+      "description": "Get contacts associated with this Facet. Optional piece argument filters by Ball, Pebble or Facet. If type is given, list is limited to specified types. If all is True, includes virtual contacts.",
+      "parameters": [
+        {"name": "piece", "type": "object", "required": false, "description": "Filter by piece (Ball, Pebble, or Facet)"},
+        {"name": "all", "type": "bool", "required": false, "description": "If True, include virtual contacts"},
+        {"name": "type", "type": "TypeObject", "required": false, "description": "Contact type filter"}
+      ],
+      "returns": {"type": "tuple of Contact", "description": "Tuple of Contact objects"}
+    },
+    {
+      "name": "conveyor",
+      "signature": "facet.conveyor() -> vec",
+      "description": "Get the facet conveyor velocity.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Conveyor velocity vector"}
+    },
+    {
+      "name": "conveyor_x",
+      "signature": "facet.conveyor_x() -> float",
+      "description": "Get the x-component of the facet conveyor velocity.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of conveyor velocity"}
+    },
+    {
+      "name": "conveyor_y",
+      "signature": "facet.conveyor_y() -> float",
+      "description": "Get the y-component of the facet conveyor velocity.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of conveyor velocity"}
+    },
+    {
+      "name": "conveyor_z",
+      "signature": "facet.conveyor_z() -> float",
+      "description": "Get the z-component of the facet conveyor velocity.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of conveyor velocity"}
+    },
+    {
+      "name": "delete",
+      "signature": "facet.delete() -> None",
+      "description": "Delete a facet. The wall position is automatically updated.",
+      "parameters": [],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "edge_neighbors",
+      "signature": "facet.edge_neighbors() -> tuple of Facet",
+      "description": "Get neighboring facets sharing a vertex in 2D or edge in 3D. Tuple length is 2 in 2D, 3 in 3D. Each position contains a Facet object or None if no neighbor.",
+      "parameters": [],
+      "returns": {"type": "tuple of Facet", "description": "Tuple of neighboring facets (or None)"}
+    },
+    {
+      "name": "extra",
+      "signature": "facet.extra(slot: int) -> any",
+      "description": "Get the facet extra data in the given slot.",
+      "parameters": [
+        {"name": "slot", "type": "int", "required": true, "description": "Extra data slot index"}
+      ],
+      "returns": {"type": "any", "description": "Extra data value"}
+    },
+    {
+      "name": "group",
+      "signature": "facet.group(slot: str or int = None) -> str",
+      "description": "Get the facet group name in a given slot.",
+      "parameters": [
+        {"name": "slot", "type": "str or int", "required": false, "description": "Group slot identifier"}
+      ],
+      "returns": {"type": "str", "description": "Group name"}
+    },
+    {
+      "name": "group_remove",
+      "signature": "facet.group_remove(group_name: str or int, slot: str or int = None) -> bool",
+      "description": "Remove from the given group from all group slots of the facet.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to remove"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Specific slot to remove from"}
+      ],
+      "returns": {"type": "bool", "description": "True if group was removed from any slot"}
+    },
+    {
+      "name": "groups",
+      "signature": "facet.groups() -> dict",
+      "description": "Get a dictionary describing which groups this facet is part of. Keys are slot names, values are group names.",
+      "parameters": [],
+      "returns": {"type": "dict {slot: group_name}", "description": "Dictionary of slot to group name mappings"}
+    },
+    {
+      "name": "has_prop",
+      "signature": "facet.has_prop(property_name: str) -> bool",
+      "description": "Returns True if the facet has the given surface property.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name to check"}
+      ],
+      "returns": {"type": "bool", "description": "True if property exists"}
+    },
+    {
+      "name": "id",
+      "signature": "facet.id() -> int",
+      "description": "Get the facet id.",
+      "parameters": [],
+      "returns": {"type": "int", "description": "Facet ID"}
+    },
+    {
+      "name": "in_group",
+      "signature": "facet.in_group(group_name: str or int, slot: str or int = None) -> bool",
+      "description": "Test if the facet is part of a given group. If slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to check"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Specific slot to search"}
+      ],
+      "returns": {"type": "bool", "description": "True if facet is in the group"}
+    },
+    {
+      "name": "normal",
+      "signature": "facet.normal() -> vec",
+      "description": "Get the facet normal direction.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Normal vector"}
+    },
+    {
+      "name": "normal_x",
+      "signature": "facet.normal_x() -> float",
+      "description": "Get the x-component of the facet normal direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of normal"}
+    },
+    {
+      "name": "normal_y",
+      "signature": "facet.normal_y() -> float",
+      "description": "Get the y-component of the facet normal direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of normal"}
+    },
+    {
+      "name": "normal_z",
+      "signature": "facet.normal_z() -> float",
+      "description": "Get the z-component of the facet normal direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of normal"}
+    },
+    {
+      "name": "point_near",
+      "signature": "facet.point_near(point: vec) -> vec",
+      "description": "Get the closest point on the facet to another point.",
+      "parameters": [
+        {"name": "point", "type": "vec", "required": true, "description": "Point to find nearest location to"}
+      ],
+      "returns": {"type": "vec", "description": "Closest point on facet"}
+    },
+    {
+      "name": "pos",
+      "signature": "facet.pos() -> vec",
+      "description": "Get the facet location.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Position vector"}
+    },
+    {
+      "name": "pos_x",
+      "signature": "facet.pos_x() -> float",
+      "description": "Get the x-component of the facet location.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-coordinate"}
+    },
+    {
+      "name": "pos_y",
+      "signature": "facet.pos_y() -> float",
+      "description": "Get the y-component of the facet location.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-coordinate"}
+    },
+    {
+      "name": "pos_z",
+      "signature": "facet.pos_z() -> float",
+      "description": "Get the z-component of the facet location.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-coordinate"}
+    },
+    {
+      "name": "prop",
+      "signature": "facet.prop(property_name: str) -> any",
+      "description": "Get a surface property value of this facet.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name"}
+      ],
+      "returns": {"type": "any", "description": "Property value"}
+    },
+    {
+      "name": "props",
+      "signature": "facet.props() -> dict",
+      "description": "Get a dictionary of all the surface properties of this facet.",
+      "parameters": [],
+      "returns": {"type": "dict {str: any}", "description": "Dictionary of all surface properties"}
+    },
+    {
+      "name": "set_active",
+      "signature": "facet.set_active(activity_code: int) -> None",
+      "description": "Set facet activity. Codes: 0=both sides active, 1=top side active (normal direction), -1=bottom side active, 2=neither side active.",
+      "parameters": [
+        {"name": "activity_code", "type": "int", "required": true, "description": "Activity code (0, 1, -1, or 2)"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_conveyor",
+      "signature": "facet.set_conveyor(value: vec) -> None",
+      "description": "Set the facet conveyor velocity.",
+      "parameters": [
+        {"name": "value", "type": "vec", "required": true, "description": "Conveyor velocity vector"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_conveyor_x",
+      "signature": "facet.set_conveyor_x(value: float) -> None",
+      "description": "Set the x-component of the facet conveyor velocity.",
+      "parameters": [
+        {"name": "value", "type": "float", "required": true, "description": "X-component of conveyor velocity"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_conveyor_y",
+      "signature": "facet.set_conveyor_y(value: float) -> None",
+      "description": "Set the y-component of the facet conveyor velocity.",
+      "parameters": [
+        {"name": "value", "type": "float", "required": true, "description": "Y-component of conveyor velocity"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_conveyor_z",
+      "signature": "facet.set_conveyor_z(value: float) -> None",
+      "description": "Set the z-component of the facet conveyor velocity.",
+      "parameters": [
+        {"name": "value", "type": "float", "required": true, "description": "Z-component of conveyor velocity"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_extra",
+      "signature": "facet.set_extra(slot: int, value: any) -> None",
+      "description": "Set the facet extra data in the given slot.",
+      "parameters": [
+        {"name": "slot", "type": "int", "required": true, "description": "Extra data slot index"},
+        {"name": "value", "type": "any", "required": true, "description": "Value to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_group",
+      "signature": "facet.set_group(group_name: str or int, slot: str or int = None) -> None",
+      "description": "Set the facet group name in a given slot.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to set"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Slot to set group in"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_prop",
+      "signature": "facet.set_prop(property_name: str, value: any) -> None",
+      "description": "Set a surface property of this facet.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name"},
+        {"name": "value", "type": "any", "required": true, "description": "Property value"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "valid",
+      "signature": "facet.valid() -> bool",
+      "description": "Returns True if this facet is live.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if facet is live"}
+    },
+    {
+      "name": "vertices",
+      "signature": "facet.vertices() -> tuple of Vertex",
+      "description": "Get the facet vertices.",
+      "parameters": [],
+      "returns": {"type": "tuple of Vertex", "description": "Tuple of WallVertex objects forming this facet"}
+    },
+    {
+      "name": "wall",
+      "signature": "facet.wall() -> Wall",
+      "description": "Get the facet's wall.",
+      "parameters": [],
+      "returns": {"type": "Wall", "description": "Wall object that this facet belongs to"}
+    }
+  ]
+}

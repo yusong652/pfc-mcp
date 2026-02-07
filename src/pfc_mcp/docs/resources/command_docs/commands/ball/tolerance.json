@@ -1,0 +1,53 @@
+{
+  "command": "ball tolerance",
+  "category": "ball",
+  "search_keywords": [
+    "tolerance",
+    "contact-detection"
+  ],
+  "description": "Set contact detection tolerances. Controls the size of extent used when inserting balls into cell space for contact detection. The extent size includes: minimum extent + 2 × (max interaction distance + constant tolerance + extent tolerance × max extent length + velocity tolerance × max velocity component). Ball is remapped when cumulative translation exceeds this sum. See cycle operations 30.0 (Update Spatial Searching) and 35.0 (Create/delete Contacts) for details.",
+  "syntax": "ball tolerance <keyword> ...",
+  "keywords": [
+    {
+      "name": "constant",
+      "syntax": "constant <f> <range>",
+      "description": "Set constant contact-detection tolerance (per-ball setting, default: 0). Can be applied to ball range."
+    },
+    {
+      "name": "extent",
+      "syntax": "extent <f>",
+      "description": "Set extent contact-detection tolerance (global setting for all balls, default: 0.01). NOTE: After model restore, call model clean before modifying extent tolerance."
+    },
+    {
+      "name": "velocity",
+      "syntax": "velocity <f>",
+      "description": "Set velocity contact-detection tolerance (global setting for all balls, default: 0)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball tolerance constant 0.01",
+      "description": "Set constant tolerance to 0.01 for all balls"
+    },
+    {
+      "command": "ball tolerance constant 0.02 range group 'fine_particles'",
+      "description": "Set constant tolerance for specific ball group"
+    },
+    {
+      "command": "ball tolerance extent 0.02",
+      "description": "Set global extent tolerance to 0.02"
+    },
+    {
+      "command": "ball tolerance velocity 0.001",
+      "description": "Set global velocity tolerance for fast-moving simulations"
+    },
+    {
+      "command": "model clean; ball tolerance extent 0.015",
+      "description": "Clean model before changing extent tolerance (required after restore)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball tolerance ...') - Python SDK does not provide tolerance settings"
+  }
+}

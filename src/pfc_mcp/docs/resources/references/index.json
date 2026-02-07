@@ -1,0 +1,35 @@
+{
+  "type": "pfc_references",
+  "description": "Reference documentation for PFC syntax elements and model properties. These are not standalone commands but language elements used within commands.",
+
+  "categories": {
+    "contact-models": {
+      "name": "Contact Models",
+      "description": "Contact model properties (kn, ks, fric, pb_*, etc.)",
+      "directory": "contact-models",
+      "index_file": "contact-models/index.json",
+      "summary": "5 built-in models: linear, linearcbond, linearpbond, hertz, rrlinear",
+      "usage": "contact cmat add model <name> property <prop> <value>"
+    },
+    "range-elements": {
+      "name": "Range Elements",
+      "description": "Range filtering syntax (position, cylinder, group, id, etc.)",
+      "directory": "range-elements",
+      "index_file": "range-elements/index.json",
+      "summary": "Geometric, attribute, and logical range filters",
+      "usage": "<command> ... range <element> [params]"
+    }
+  },
+
+  "navigation": {
+    "root": "List all reference categories",
+    "category": "List items in category (e.g., 'contact-models')",
+    "item": "Full documentation (e.g., 'contact-models linear')"
+  },
+
+  "notes": [
+    "References are syntax elements used within commands, not standalone commands",
+    "Use pfc_browse_commands for command syntax",
+    "Use pfc_browse_reference for reference documentation"
+  ]
+}

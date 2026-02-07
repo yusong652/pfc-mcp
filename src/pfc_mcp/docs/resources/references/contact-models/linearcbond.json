@@ -1,0 +1,412 @@
+{
+  "model": "linearcbond",
+  "full_name": "Linear Contact Bond Model",
+  "search_keywords": ["linearcbond", "bond", "contact", "model"],
+  "description": "Linear contact bond model simulates a pair of elastic springs with constant normal and shear stiffnesses acting at the contact point. This model permits tensile forces while limiting shear forces through strength parameters rather than friction coefficients. When bonded, contacts can resist tension and prevent slip. When unbonded, behavior is equivalent to the linear model with Coulomb friction.",
+
+  "typical_applications": [
+    "Point-based bonds between particles",
+    "Adhesion simulation",
+    "Weak cementation",
+    "Contact-specific bonding (not parallel bonds)",
+    "Materials where bonds form at contact points"
+  ],
+
+  "key_characteristics": [
+    "Bonded behavior: prevents slip and allows tensile forces up to tensile strength limit",
+    "Unbonded behavior: equivalent to linear model with Coulomb friction and no tension",
+    "Bond breakage occurs when tensile force exceeds T_F or shear force magnitude exceeds S_F",
+    "Upon shear failure, shear forces are set to zero",
+    "Normal force becomes zero only if positive (tension) after bond breaks"
+  ],
+
+  "property_groups": [
+    {
+      "name": "Linear Group",
+      "description": "Core linear elastic and frictional properties (same as linear model)",
+      "properties": [
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Primary elastic property. Controls normal force-displacement relationship. Can be set directly or calculated via 'deformability' method using emod/kratio. Inheritance uses series formula: 1/kn = 1/kn(1) + 1/kn(2)."
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Primary elastic property. Controls shear force-displacement relationship. Can be set directly or calculated via 'deformability' method using emod/kratio. Inheritance uses series formula: 1/ks = 1/ks(1) + 1/ks(2)."
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Coulomb friction coefficient applied in unbonded state. Shear force limited to fric × |normal force|. Not used when bond is active. Inheritance uses minimum: fric = min(fric(1), fric(2))."
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap [length]",
+          "type": "FLT",
+          "range": "ℝ",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Reference surface gap. Used to define initial contact configuration."
+        },
+        {
+          "keyword": "lin_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode [-]",
+          "type": "INT",
+          "range": "{0, 1}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls how normal force is updated during contact.",
+          "values": [
+            {
+              "value": 0,
+              "description": "update is absolute - force recalculated each cycle"
+            },
+            {
+              "value": 1,
+              "description": "update is incremental - force accumulated incrementally"
+            }
+          ]
+        },
+        {
+          "keyword": "emod",
+          "symbol": "E*",
+          "description": "Effective modulus [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method to calculate kn and ks. Not a direct property - set via method argument."
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ*",
+          "description": "Normal-to-shear stiffness ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method to calculate kn and ks. Defined as κ* ≡ k_n / k_s."
+        },
+        {
+          "keyword": "lin_slip",
+          "symbol": "s",
+          "description": "Slip state [-]",
+          "type": "BOOL",
+          "range": "{false, true}",
+          "default": "false",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only state indicator. Relevant only in unbonded state.",
+          "values": [
+            {
+              "value": true,
+              "description": "slipping - shear force at friction limit"
+            },
+            {
+              "value": false,
+              "description": "not slipping - shear force below friction limit"
+            }
+          ]
+        },
+        {
+          "keyword": "lin_force",
+          "symbol": "F^l",
+          "description": "Linear force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Force vector in contact plane coordinates: (-F_n^l, F_ss^l, F_st^l). In 2D models: F_ss^l ≡ 0. Negative normal component indicates compression.",
+          "components": {
+            "2D": "(-F_n^l, F_st^l)",
+            "3D": "(-F_n^l, F_ss^l, F_st^l)"
+          }
+        },
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Constant area [length*length]",
+          "type": "FLT",
+          "range": "(0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "User-defined contact area. Can be used for stress-based strength calculations."
+        }
+      ]
+    },
+    {
+      "name": "Dashpot Group",
+      "description": "Viscous damping properties for energy dissipation (same as linear model)",
+      "properties": [
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Normal direction damping as fraction of critical damping. 0.0 = no damping, 1.0 = critical damping."
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Shear direction damping as fraction of critical damping. 0.0 = no damping, 1.0 = critical damping."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode [-]",
+          "type": "INT",
+          "range": "{0, 1, 2, 3}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls when dashpot forces are active.",
+          "values": [
+            {
+              "value": 0,
+              "description": "full normal & full shear - damping always active"
+            },
+            {
+              "value": 1,
+              "description": "no-tension normal & full shear - no normal damping in tension"
+            },
+            {
+              "value": 2,
+              "description": "full normal & slip-cut shear - no shear damping when slipping"
+            },
+            {
+              "value": 3,
+              "description": "no-tension normal & slip-cut shear - combined restrictions"
+            }
+          ]
+        },
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only dashpot force vector in contact plane coordinates: (-F_n^d, F_ss^d, F_st^d). In 2D models: F_ss^d ≡ 0.",
+          "components": {
+            "2D": "(-F_n^d, F_st^d)",
+            "3D": "(-F_n^d, F_ss^d, F_st^d)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact-Bond Group",
+      "description": "Contact bond strength properties and state tracking",
+      "properties": [
+        {
+          "keyword": "cb_tenf",
+          "symbol": "T_F",
+          "description": "Tensile strength [force]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Maximum tensile force the bond can sustain. Bond breaks when tensile force exceeds this value. Use this OR cb_tens (not both)."
+        },
+        {
+          "keyword": "cb_shearf",
+          "symbol": "S_F",
+          "description": "Shear strength [force]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Maximum shear force magnitude the bond can sustain. Bond breaks when shear force magnitude exceeds this value. Use this OR cb_shears (not both)."
+        },
+        {
+          "keyword": "cb_tens",
+          "symbol": "T_σ",
+          "description": "Tensile strength [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Stress-based tensile strength (requires user_area to be set). Read-only property. Use cb_tenf for force-based criterion instead."
+        },
+        {
+          "keyword": "cb_shears",
+          "symbol": "S_σ",
+          "description": "Shear strength [stress]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Stress-based shear strength (requires user_area to be set). Read-only property. Use cb_shearf for force-based criterion instead."
+        },
+        {
+          "keyword": "cb_state",
+          "symbol": "B",
+          "description": "Bond state [-]",
+          "type": "INT",
+          "range": "{0, 1, 2, 3}",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only state indicator showing current bond status.",
+          "values": [
+            {
+              "value": 0,
+              "description": "unbonded - no bond present"
+            },
+            {
+              "value": 1,
+              "description": "broke in tension - bond failed due to tensile force"
+            },
+            {
+              "value": 2,
+              "description": "broke in shear - bond failed due to shear force"
+            },
+            {
+              "value": 3,
+              "description": "bonded - bond is currently active"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "energy_partitions": [
+    {
+      "name": "energy-strain",
+      "symbol": "E_k",
+      "description": "Strain energy stored in linear springs",
+      "range": "[0.0, +∞)",
+      "accumulated": false
+    },
+    {
+      "name": "energy-slip",
+      "symbol": "E_μ",
+      "description": "Energy dissipated by frictional slip (unbonded state)",
+      "range": "(-∞, 0.0]",
+      "accumulated": true
+    },
+    {
+      "name": "energy-dashpot",
+      "symbol": "E_β",
+      "description": "Energy dissipated by dashpots",
+      "range": "(-∞, 0.0]",
+      "accumulated": true
+    }
+  ],
+
+  "common_usage_patterns": [
+    {
+      "use_case": "Create bonded contacts with force-based strength",
+      "commands": [
+        "contact cmat default model linearcbond property kn 1e8 ks 5e7 cb_tenf 1e4 cb_shearf 5e3",
+        "contact method bond range contact"
+      ],
+      "description": "Set stiffnesses and strengths, then activate bonds using 'bond' method"
+    },
+    {
+      "use_case": "Use deformability method for stiffness calculation",
+      "commands": [
+        "contact cmat default model linearcbond method deformability emod 5e9 kratio 1.5 property cb_tenf 1e4 cb_shearf 5e3"
+      ],
+      "description": "Calculate stiffnesses automatically from elastic modulus"
+    },
+    {
+      "use_case": "Stress-based strength criterion",
+      "commands": [
+        "contact cmat default model linearcbond property kn 1e8 ks 5e7 user_area 1e-6 cb_tens 1e7 cb_shears 5e6",
+        "contact method bond range contact"
+      ],
+      "description": "Use stress-based strengths (requires user_area to be set)"
+    }
+  ],
+
+  "typical_parameter_values": {
+    "weak_adhesion": {
+      "kn": "1e7 - 1e8 [N/m]",
+      "ks": "kn / 1.5 to kn / 2.5",
+      "cb_tenf": "1e3 - 1e5 [N] (weak bonding)",
+      "cb_shearf": "0.5 × cb_tenf to 1.0 × cb_tenf"
+    },
+    "moderate_cementation": {
+      "kn": "1e8 - 1e9 [N/m]",
+      "ks": "kn / 1.5 to kn / 2.5",
+      "cb_tenf": "1e4 - 1e6 [N]",
+      "cb_shearf": "0.5 × cb_tenf to 1.0 × cb_tenf"
+    }
+  },
+
+  "notes": [
+    "Bonds must be activated using 'contact method bond' command",
+    "Use force-based (cb_tenf, cb_shearf) OR stress-based (cb_tens, cb_shears) strength, not both",
+    "Stress-based strength requires user_area to be set",
+    "When bond breaks in shear, shear forces are set to zero",
+    "Normal force becomes zero only if positive (tension) after bond breaks",
+    "Unbonded behavior is equivalent to the linear model",
+    "Friction coefficient only applies in unbonded state",
+    "cb_state can be queried to track bond breakage patterns"
+  ],
+
+  "workflow": [
+    "1. Set contact model to linearcbond via CMAT or contact model assign",
+    "2. Set stiffnesses (kn, ks) directly or via deformability method",
+    "3. Set bond strengths (cb_tenf, cb_shearf) or stress-based (with user_area)",
+    "4. Activate bonds using 'contact method bond' command",
+    "5. Bonds break automatically when forces exceed strength limits",
+    "6. After breaking, contact behaves like linear model with friction"
+  ],
+
+  "related_models": [
+    {
+      "model": "linear",
+      "description": "Base model - linearcbond behaves like linear when unbonded"
+    },
+    {
+      "model": "linearpbond",
+      "description": "Parallel bond model - bonds act in parallel with base behavior, not at a point"
+    }
+  ]
+}

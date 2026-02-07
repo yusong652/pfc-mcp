@@ -1,0 +1,54 @@
+{
+  "command": "ball results",
+  "category": "ball",
+  "search_keywords": [
+    "results",
+    "post-processing",
+    "snapshot"
+  ],
+  "description": "Configure ball results logic for efficient post-processing. Creates lightweight snapshots of ball geometries and selected attributes at different time instances. IMPORTANT: Ball result files do NOT replace PFC model state files and should not be used to continue cycling. Use with model results command to control when/how result files are created and imported.",
+  "syntax": "ball results <keyword> ...",
+  "keywords": [
+    {
+      "name": "active",
+      "syntax": "active <b>",
+      "description": "Enable (true) or disable (false) ball result creation"
+    },
+    {
+      "name": "add-attribute",
+      "syntax": "add-attribute <s>",
+      "description": "Add ball attribute to be recorded in results. Use 'group' and 'extra' keywords for groups and extra variables. See ball attribute command for available attributes."
+    },
+    {
+      "name": "remove-attribute",
+      "syntax": "remove-attribute <s>",
+      "description": "Remove ball attribute from results recording. Use 'group' and 'extra' keywords for groups and extra variables."
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball results add-attribute velocity active true",
+      "description": "Enable results and record ball velocity"
+    },
+    {
+      "command": "ball results add-attribute displacement",
+      "description": "Add displacement to recorded attributes"
+    },
+    {
+      "command": "ball results add-attribute group add-attribute extra",
+      "description": "Record group assignments and extra variables"
+    },
+    {
+      "command": "ball results remove-attribute velocity",
+      "description": "Stop recording velocity in results"
+    },
+    {
+      "command": "ball results active false",
+      "description": "Disable ball results creation"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball results ...') - Python SDK does not provide results configuration"
+  }
+}

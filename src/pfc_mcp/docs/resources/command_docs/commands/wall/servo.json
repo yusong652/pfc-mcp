@@ -1,0 +1,116 @@
+{
+  "command": "wall servo",
+  "category": "wall",
+  "search_keywords": [
+    "servo",
+    "force",
+    "control"
+  ],
+  "description": "The wall servo provides the ability to control the translational velocity of select walls using a servo-mechanism in order to apply or maintain a desired force. The servo-mechanism uses a proportional controller with adaptive gain. IMPORTANT: Only the component of the velocity in the direction of the target servo force is adjusted by the servo control. The orthogonal velocity is not altered. The target load is expressed as a force instead of a stress because PFC cannot assess which region of a wall is effectively applying load on the particles.",
+  "syntax": "wall servo <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "activate",
+      "syntax": "activate <b>",
+      "description": "Set servo-control active status. Default: false. Use wall attribute velocity to reset wall velocity to zero if you want the wall to stop moving when deactivating"
+    },
+    {
+      "name": "force",
+      "syntax": "force <v>",
+      "description": "Set target force vector (expressed in global coordinate system)"
+    },
+    {
+      "name": "gain-factor",
+      "syntax": "gain-factor <f>",
+      "description": "Set gain relaxation factor α. Default: 0.8. Used to ensure stability"
+    },
+    {
+      "name": "gain-update",
+      "syntax": "gain-update <i>",
+      "description": "Set gain update interval (timesteps). Default: 1"
+    },
+    {
+      "name": "velocity-max",
+      "syntax": "velocity-max <f>",
+      "description": "Specify maximum velocity magnitude (cap velocity)"
+    },
+    {
+      "name": "force-x",
+      "syntax": "force-x <f>",
+      "description": "Set x-component of target force (global coordinates)"
+    },
+    {
+      "name": "force-y",
+      "syntax": "force-y <f>",
+      "description": "Set y-component of target force (global coordinates)"
+    },
+    {
+      "name": "force-z",
+      "syntax": "force-z <f>",
+      "description": "Set z-component of target force (global coordinates, 3D ONLY)"
+    }
+  ],
+  "servo_mechanism": {
+    "description": "Proportional controller with adaptive gain",
+    "velocity_adjustment": "v = v_s * n̂ + v_⊥, where v_s is adjusted in direction of target force n̂",
+    "control_equation": "v_s(new) = v_s(old) + G * (F_target - F_reaction)",
+    "gain_equation": "G = α * Δt / K_eff, where α=gain-factor (default 0.8), Δt=timestep, K_eff=sum of contact stiffnesses",
+    "stability": "Gain automatically evaluated to ensure stability based on contact stiffnesses"
+  },
+  "important_notes": [
+    "Only velocity component in direction of target force is adjusted - orthogonal velocity unchanged",
+    "Target load is force (not stress) - PFC cannot assess effective load region",
+    "Can activate/deactivate at any time during modeling",
+    "Reset wall velocity to zero with 'wall attribute velocity' when deactivating if wall should stop",
+    "Gain automatically evaluated for stability based on contact stiffnesses",
+    "Can superimpose orthogonal velocity while servo is active"
+  ],
+  "examples": [
+    {
+      "command": "wall servo force (0,1000,0) activate on range name 'top'",
+      "description": "Activate servo on top wall to apply 1000N force in y-direction"
+    },
+    {
+      "command": "wall servo force-y [p] activate on range set name 'topTop'",
+      "description": "Activate servo with force from FISH variable p (y-direction)"
+    },
+    {
+      "command": "wall servo activate off range name 'platen'",
+      "description": "Deactivate servo control on platen wall"
+    },
+    {
+      "command": "wall servo gain-factor 0.5 range id 1",
+      "description": "Set gain relaxation factor to 0.5 for wall ID 1 (more conservative)"
+    },
+    {
+      "command": "wall servo velocity-max 0.01 range group 'boundaries'",
+      "description": "Set maximum velocity cap to 0.01 for walls in group 'boundaries'"
+    },
+    {
+      "command": "wall servo force (0,-1000,0) gain-factor 0.9 gain-update 10 activate on",
+      "description": "Activate servo with custom gain settings (update every 10 steps)"
+    }
+  ],
+  "use_cases": [
+    {
+      "use_case": "Triaxial test",
+      "description": "Apply and maintain confining pressure on specimen walls"
+    },
+    {
+      "use_case": "Direct shear test",
+      "description": "Maintain normal force while applying shear displacement"
+    },
+    {
+      "use_case": "Compression test",
+      "description": "Apply constant force or stress on loading platen"
+    },
+    {
+      "use_case": "Isotropic loading",
+      "description": "Apply equal force on all boundary walls"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Wall.servo_set_active(bool), Wall.servo_set_force(vec), Wall.servo_set_gainfactor(float), Wall.servo_set_gainupdate(int), Wall.servo_set_vmax(float) - requires iteration: for w in itasca.wall.list(): w.servo_set_active(True)"
+  }
+}

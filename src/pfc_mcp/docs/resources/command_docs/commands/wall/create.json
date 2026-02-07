@@ -1,0 +1,67 @@
+{
+  "command": "wall create",
+  "category": "wall",
+  "search_keywords": [
+    "create",
+    "vertices",
+    "facet"
+  ],
+  "description": "Create a wall from vertices. IMPORTANT: In 3D, each facet must be a triangle (3 vertices). Rectangular surfaces require 2 triangular facets (6 vertices total). The number of vertex positions must be a multiple of {2 in 2D; 3 in 3D} and must represent {a vertex connected surface in 2D; an edge connected surface in 3D} that is manifold and orientable. The vertices can be input in any order as long as sets of {2 in 2D; 3 in 3D} represent a facet. In the absence of the id keyword, the next available ID is assigned. In the absence of the name keyword, the name is set to wallXX, where XX is the wall ID, provided that this name has not been previously specified. Note: A model domain must be specified prior to wall creation. All facets must fall within the model domain. While cycling, walls can only be created before cycle point 0 (i.e., when the timestep is calculated).",
+  "syntax": "wall create <keyword> ...",
+  "keywords": [
+    {
+      "name": "group",
+      "syntax": "group name <s> slot <slot> facet",
+      "description": "Assign group name s at slot (default: 'Default'). Optional 'facet' keyword assigns group to facets instead of wall"
+    },
+    {
+      "name": "id",
+      "syntax": "id <id>",
+      "description": "Wall ID. If not specified, next available ID is used"
+    },
+    {
+      "name": "name",
+      "syntax": "name <s>",
+      "description": "Wall name. If not specified, name is set to wallXX where XX is the ID"
+    },
+    {
+      "name": "vertices",
+      "syntax": "vertices <vert1> ...",
+      "description": "List of vertex positions. Given once followed by vertex list. Facet vertices taken in order: first {2 in 2D; 3 in 3D} positions form a facet, next {2 in 2D; 3 in 3D} form another facet, etc."
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall create vertices -0.25 0.0 0.0 0.25 0.0 0.0 0.0 0.0 0.25",
+      "description": "Create single triangular facet with three vertices (3D)"
+    },
+    {
+      "command": "wall create name 'bottom' vertices -3 -3 0 3 -3 0 3 3 0 -3 -3 0 3 3 0 -3 3 0",
+      "description": "Create rectangular base at z=0 (3D) using 2 triangular facets: triangle 1 (-3,-3,0)(3,-3,0)(3,3,0) and triangle 2 (-3,-3,0)(3,3,0)(-3,3,0). Total 6 vertices (2 facets × 3 vertices)"
+    },
+    {
+      "command": "wall create name 'mywall' id 100 vertices (0,0,0) (1,0,0) (0,1,0)",
+      "description": "Create wall with ID 100 and name 'mywall' using vector notation"
+    },
+    {
+      "command": "wall create name 'roof' group name 'boundary' vertices [x1] [y1] [z1] [x2] [y2] [z2] [x3] [y3] [z3]",
+      "description": "Create wall named 'roof' in group 'boundary' using FISH variables for vertex positions"
+    },
+    {
+      "command": "wall create group name 'walls' facet vertices -5 -5 0 5 -5 0 5 5 0 -5 5 0",
+      "description": "Create wall with group assigned to facets (not wall) - 2D example with 2 facets"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall create ...') - Python SDK does not provide wall creation from vertices"
+  },
+  "notes": [
+    "CRITICAL: In 3D, facets MUST be triangular (3 vertices each). You cannot create a rectangular wall with 4 vertices",
+    "Common error: Using 4 vertices for a rectangle → Error: 'number of vertices must be a multiple of 3'",
+    "Solution for rectangles: Divide into 2 triangles. Example: rectangle (-3,-3,0) to (3,3,0) becomes 6 vertices total",
+    "Triangle 1: (-3,-3,0)(3,-3,0)(3,3,0), Triangle 2: (-3,-3,0)(3,3,0)(-3,3,0)",
+    "For complex surfaces: Use 'wall generate box/plane/polygon' instead of manual vertex specification",
+    "Vertex order matters for facet normal direction - affects contact detection"
+  ]
+}

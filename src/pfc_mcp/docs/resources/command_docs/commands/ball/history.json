@@ -1,0 +1,100 @@
+{
+  "command": "ball history",
+  "category": "ball",
+  "search_keywords": [
+    "history",
+    "track",
+    "monitor"
+  ],
+  "description": "Add a history of a ball value. A history is a table of floating point values assigned by sampling a model attribute periodically during a simulation. The ball must be specified by either 'id' or 'position' keyword.",
+  "syntax": "ball history name <name> <keyword> id <i> or position <v>",
+  "quantity_categories": {
+    "position": [
+      "position-x",
+      "position-y",
+      "position-z",
+      "displacement",
+      "displacement-x/y/z"
+    ],
+    "velocity": [
+      "velocity",
+      "velocity-x",
+      "velocity-y",
+      "velocity-z",
+      "spin",
+      "spin-x/y/z"
+    ],
+    "orientation": [
+      "euler-x",
+      "euler-y",
+      "euler-z (3D)",
+      "rotation (2D)"
+    ],
+    "forces": [
+      "force-contact",
+      "force-contact-x/y/z",
+      "force-unbalanced",
+      "force-unbalanced-x/y/z"
+    ],
+    "moments": [
+      "moment-contact",
+      "moment-contact-x/y/z (3D)",
+      "moment-unbalanced",
+      "moment-unbalanced-x/y/z (3D)"
+    ],
+    "stress": [
+      "stress"
+    ],
+    "other": [
+      "extra"
+    ]
+  },
+  "keywords": [
+    {
+      "name": "id",
+      "syntax": "id <i>",
+      "description": "Specify ball by ID number"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v>",
+      "description": "Specify ball by position (finds nearest ball)"
+    },
+    {
+      "name": "extra",
+      "syntax": "extra index <i> type <typename>",
+      "description": "Record extra variable at index i with specified type"
+    },
+    {
+      "name": "stress",
+      "syntax": "stress quantity <q>",
+      "description": "Record stress component (use quantity keyword to specify component)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball history name 'ball_pos' position-x id 1",
+      "description": "Record x-position of ball 1 with history name 'ball_pos'"
+    },
+    {
+      "command": "ball history velocity-z id 100",
+      "description": "Record z-velocity of ball 100 (auto-generated history name)"
+    },
+    {
+      "command": "ball history force-unbalanced id 5",
+      "description": "Record magnitude of unbalanced force on ball 5"
+    },
+    {
+      "command": "ball history name 'center_ball' displacement position (0,0,0)",
+      "description": "Record displacement magnitude of ball nearest to origin"
+    },
+    {
+      "command": "ball history extra index 1 type float id 10",
+      "description": "Record extra variable at index 1 (float type) for ball 10"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball history ...') or manually record values using itasca.set_callback() with Ball getter methods"
+  }
+}

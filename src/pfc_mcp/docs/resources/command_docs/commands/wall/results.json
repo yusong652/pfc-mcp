@@ -1,0 +1,101 @@
+{
+  "command": "wall results",
+  "category": "wall",
+  "search_keywords": [
+    "results",
+    "post-processing",
+    "snapshot"
+  ],
+  "description": "Modify the usage of the wall results logic. This logic allows for a reduced version of the model state (i.e., wall geometries plus wall attributes) at different instances of time to be output as binary files. The wall result can be used to re-create the model state, acting as a utility for efficient post processing (e.g., movie generation, residence time calculations, etc.). IMPORTANT: A wall result file DOES NOT replace a PFC model state file and models re-created with this logic should not be cycled. See the model results command to specify when results files are created and how to import these files subsequently.",
+  "syntax": "wall results <keyword> ...",
+  "keywords": [
+    {
+      "name": "active",
+      "syntax": "active <b>",
+      "description": "Set the status of wall result creation. Use 'on' or 'true' to enable, 'off' or 'false' to disable"
+    },
+    {
+      "name": "add-attribute",
+      "syntax": "add-attribute <s>",
+      "description": "Add wall attribute s to be recorded in wall result. When result is re-created, this attribute will be filled. Use 'group' or 'extra' keywords for group/extra variables. See wall list attribute for all available attributes"
+    },
+    {
+      "name": "remove-attribute",
+      "syntax": "remove-attribute <s>",
+      "description": "Remove wall attribute s from being recorded in wall result. Use 'group' or 'extra' keywords for group/extra variables"
+    }
+  ],
+  "common_attributes": [
+    "position",
+    "position-x/y/z",
+    "displacement",
+    "displacement-x/y/z",
+    "velocity",
+    "velocity-x/y/z",
+    "spin",
+    "spin-x/y/z",
+    "rotation-center",
+    "euler (3D)",
+    "group (group variables)",
+    "extra (extra variables)"
+  ],
+  "use_cases": [
+    {
+      "use_case": "Movie generation",
+      "description": "Record wall positions and orientations at intervals to create visualization movies"
+    },
+    {
+      "use_case": "Residence time calculations",
+      "description": "Track wall attributes over time for post-processing analysis"
+    },
+    {
+      "use_case": "Efficient post-processing",
+      "description": "Save reduced model state (geometry + selected attributes) instead of full state files"
+    }
+  ],
+  "important_notes": [
+    "Wall result files are NOT full model state files",
+    "Models re-created from wall results should NOT be cycled",
+    "Use model results command to control when/how result files are created and imported",
+    "Only selected attributes are recorded (geometry + added attributes)",
+    "More efficient than full state saves for post-processing workflows"
+  ],
+  "examples": [
+    {
+      "command": "wall results active on",
+      "description": "Enable wall result creation"
+    },
+    {
+      "command": "wall results active off",
+      "description": "Disable wall result creation"
+    },
+    {
+      "command": "wall results add-attribute position",
+      "description": "Add wall position attribute to be recorded in results"
+    },
+    {
+      "command": "wall results add-attribute velocity",
+      "description": "Add wall velocity attribute to be recorded in results"
+    },
+    {
+      "command": "wall results add-attribute displacement-z",
+      "description": "Add z-displacement attribute to be recorded in results (3D)"
+    },
+    {
+      "command": "wall results add-attribute group",
+      "description": "Add wall group variables to be recorded in results"
+    },
+    {
+      "command": "wall results add-attribute extra",
+      "description": "Add wall extra variables to be recorded in results"
+    },
+    {
+      "command": "wall results remove-attribute velocity",
+      "description": "Remove velocity attribute from being recorded in results"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('wall results ...') - Python SDK does not provide wall results logic control. This is a global post-processing utility"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "module": "wall.facet",
+  "description": "Functions for working with wall facets (triangular faces)",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.wall.facet.count() -> int",
+      "description": "Get the number of facets.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Total number of wall facets"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.wall.facet.find(id: int) -> Facet",
+      "description": "Get the facet object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Facet ID number"
+        }
+      ],
+      "returns": {
+        "type": "Facet",
+        "description": "Facet object with the specified ID, or None if not found"
+      }
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.wall.facet.inbox(lower_bound: vec, upper_bound: vec, boundary: bool = False) -> tuple of Facet",
+      "description": "Get facets with extents intersecting a box. If boundary is True, only return facets inside the extent.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the bounding box"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the bounding box"
+        },
+        {
+          "name": "boundary",
+          "type": "bool",
+          "required": false,
+          "description": "If True, only return facets inside the extent"
+        }
+      ],
+      "returns": {
+        "type": "tuple of Facet",
+        "description": "Tuple of Facet objects within the specified box"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.wall.facet.list() -> Facet iterator",
+      "description": "Get a wall facet iterator object.",
+      "parameters": [],
+      "returns": {
+        "type": "Facet iterator",
+        "description": "Iterator over all wall facets"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.wall.facet.maxid() -> int",
+      "description": "Get the maximum facet ID.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum facet ID in use"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.wall.facet.near(point: vec) -> Facet",
+      "description": "Find the closest facet to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point coordinates to search from"
+        }
+      ],
+      "returns": {
+        "type": "Facet",
+        "description": "Closest Facet object to the specified point"
+      }
+    }
+  ]
+}

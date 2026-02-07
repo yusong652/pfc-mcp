@@ -1,0 +1,29 @@
+{
+  "command": "ball initialize",
+  "category": "ball",
+  "search_keywords": [
+    "initialize",
+    "attribute",
+    "set"
+  ],
+  "description": "Modify ball attributes. This is a synonym for the ball attribute command. See ball attribute for complete list of available keywords and modifiers.",
+  "syntax": "ball initialize <keyword> ... <range>",
+  "examples": [
+    {
+      "command": "ball initialize density 2650.0 range group 'material1'",
+      "description": "Set density for balls in group (same as ball attribute)"
+    },
+    {
+      "command": "ball initialize velocity (0,0,-1.0)",
+      "description": "Set velocity for all balls (same as ball attribute)"
+    },
+    {
+      "command": "ball initialize displacement multiply 0.0",
+      "description": "Reset displacement (same as ball attribute with multiply modifier)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Same as ball attribute: use Ball.set_*() methods - requires iteration"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "extra-list",
+  "category": "user_defined",
+  "category_name": "User-Defined Elements",
+  "syntax": "extra-list <index> <i1> <i2> ...",
+  "description": "Filter by extra variable matching integer list.",
+  "examples": [
+    "range extra-list 1 1 2 3 5 8"
+  ],
+  "search_keywords": [
+    "extra-list",
+    "extra",
+    "list"
+  ]
+}

@@ -1,0 +1,499 @@
+{
+  "class": "Pebble",
+  "description": "Pebble object representing a spherical component of a clump. Pebbles are overlapping spheres that form the rigid aggregate shape of a clump. Obtained via clump.pebbles(), itasca.clump.pebble.find(), or itasca.clump.pebble.list().",
+  "note": "Objects of this type should not be created (instantiated) directly in Python. Pebbles cannot exist independently and are always part of a clump. Use module functions that return instances.",
+  "method_groups": {
+    "identification": [
+      "id",
+      "valid",
+      "delete"
+    ],
+    "parent_clump": [
+      "clump",
+      "template"
+    ],
+    "position": [
+      "pos",
+      "pos_x",
+      "pos_y",
+      "pos_z",
+      "set_pos",
+      "set_pos_x",
+      "set_pos_y",
+      "set_pos_z"
+    ],
+    "velocity": [
+      "vel",
+      "vel_x",
+      "vel_y",
+      "vel_z"
+    ],
+    "geometry": [
+      "radius",
+      "set_radius"
+    ],
+    "contacts": [
+      "contacts"
+    ],
+    "groups": [
+      "group",
+      "groups",
+      "in_group",
+      "set_group",
+      "group_remove"
+    ],
+    "properties": [
+      "has_prop",
+      "prop",
+      "props",
+      "set_prop"
+    ],
+    "other": [
+      "extra",
+      "set_extra"
+    ]
+  },
+  "methods": [
+    {
+      "name": "id",
+      "signature": "pebble.id() -> int",
+      "description": "Get pebble ID number. Unique identifier for this pebble.",
+      "returns": {
+        "type": "int",
+        "description": "Pebble ID"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "pebble.valid() -> bool",
+      "description": "Check if this pebble is live (still exists in the model). Returns False if pebble has been deleted.",
+      "returns": {
+        "type": "bool",
+        "description": "True if pebble exists, False if deleted"
+      }
+    },
+    {
+      "name": "delete",
+      "signature": "pebble.delete() -> None",
+      "description": "Delete this pebble from its clump. This modifies the clump geometry and may affect clump inertial properties.",
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "clump",
+      "signature": "pebble.clump() -> Clump",
+      "description": "Get the clump object to which this pebble belongs. All pebbles are part of a clump.",
+      "returns": {
+        "type": "Clump",
+        "description": "Parent clump object"
+      }
+    },
+    {
+      "name": "template",
+      "signature": "pebble.template() -> Template | None",
+      "description": "Get the clump template this pebble belongs to. Returns None if clump is not associated with a template.",
+      "returns": {
+        "type": "Template | None",
+        "description": "Template object or None"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "pebble.pos() -> vec",
+      "description": "Get pebble location as vector (x, y, z).",
+      "returns": {
+        "type": "vec",
+        "description": "(x, y, z) position coordinates"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "pebble.pos_x() -> float",
+      "description": "Get X-component of pebble location.",
+      "returns": {
+        "type": "float",
+        "description": "X coordinate"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "pebble.pos_y() -> float",
+      "description": "Get Y-component of pebble location.",
+      "returns": {
+        "type": "float",
+        "description": "Y coordinate"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "pebble.pos_z() -> float",
+      "description": "Get Z-component of pebble location.",
+      "returns": {
+        "type": "float",
+        "description": "Z coordinate"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "pebble.set_pos(value: vec) -> None",
+      "description": "Set pebble location (vector). Modifies pebble position within its clump.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "(x, y, z) coordinates"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_x",
+      "signature": "pebble.set_pos_x(value: float) -> None",
+      "description": "Set X-component of pebble location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_y",
+      "signature": "pebble.set_pos_y(value: float) -> None",
+      "description": "Set Y-component of pebble location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_z",
+      "signature": "pebble.set_pos_z(value: float) -> None",
+      "description": "Set Z-component of pebble location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "pebble.vel() -> vec",
+      "description": "Get pebble velocity vector (vx, vy, vz). Pebble velocity is derived from parent clump motion.",
+      "returns": {
+        "type": "vec",
+        "description": "Velocity components"
+      }
+    },
+    {
+      "name": "vel_x",
+      "signature": "pebble.vel_x() -> float",
+      "description": "Get X-component of pebble velocity.",
+      "returns": {
+        "type": "float",
+        "description": "X velocity"
+      }
+    },
+    {
+      "name": "vel_y",
+      "signature": "pebble.vel_y() -> float",
+      "description": "Get Y-component of pebble velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Y velocity"
+      }
+    },
+    {
+      "name": "vel_z",
+      "signature": "pebble.vel_z() -> float",
+      "description": "Get Z-component of pebble velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Z velocity"
+      }
+    },
+    {
+      "name": "radius",
+      "signature": "pebble.radius() -> float",
+      "description": "Get pebble radius.",
+      "returns": {
+        "type": "float",
+        "description": "Pebble radius"
+      }
+    },
+    {
+      "name": "set_radius",
+      "signature": "pebble.set_radius(value: float) -> None",
+      "description": "Set pebble radius. Modifies the geometry of the parent clump.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "New radius"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "contacts",
+      "signature": "pebble.contacts(piece: object = None, all: bool = False, type: type = None) -> tuple[Contact, ...]",
+      "description": "Get tuple of contacts associated with this pebble. Can filter by piece (Ball/Pebble/Facet), type, and virtual contacts.",
+      "parameters": [
+        {
+          "name": "piece",
+          "type": "object",
+          "required": false,
+          "description": "Optional Ball, Pebble, or Facet to filter contacts"
+        },
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "Include virtual contacts (default: False)"
+        },
+        {
+          "name": "type",
+          "type": "type",
+          "required": false,
+          "description": "Filter by contact type (e.g., BallPebbleContact, PebblePebbleContact)"
+        }
+      ],
+      "returns": {
+        "type": "tuple[Contact, ...]",
+        "description": "Tuple of contact objects"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "pebble.group(slot: str | int = None) -> str",
+      "description": "Get pebble group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or index"
+        }
+      ],
+      "returns": {
+        "type": "str",
+        "description": "Group name"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "pebble.groups() -> dict[str, str]",
+      "description": "Get dictionary of all groups this pebble belongs to. Keys are slot names, values are group names.",
+      "returns": {
+        "type": "dict[str, str]",
+        "description": "Slot->group mapping"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "pebble.in_group(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Test if pebble is in a given group. If slot specified, only checks that slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name to check"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Optional slot to check"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if in group"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "pebble.set_group(group_name: str | int, slot: str | int = None) -> None",
+      "description": "Set pebble group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Slot name or index"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "pebble.group_remove(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Remove pebble from given group in all or specific slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name to remove"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Optional specific slot"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if group was removed"
+      }
+    },
+    {
+      "name": "has_prop",
+      "signature": "pebble.has_prop(property_name: str) -> bool",
+      "description": "Check if pebble has the given surface property.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Property name"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if property exists"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "pebble.prop(property_name: str) -> any",
+      "description": "Get a surface property value of this pebble.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Property name"
+        }
+      ],
+      "returns": {
+        "type": "any",
+        "description": "Property value"
+      }
+    },
+    {
+      "name": "props",
+      "signature": "pebble.props() -> dict[str, any]",
+      "description": "Get dictionary of all surface properties of this pebble.",
+      "returns": {
+        "type": "dict[str, any]",
+        "description": "All properties"
+      }
+    },
+    {
+      "name": "set_prop",
+      "signature": "pebble.set_prop(property_name: str, value: any) -> None",
+      "description": "Set a surface property of this pebble.",
+      "parameters": [
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true,
+          "description": "Property name"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true,
+          "description": "Property value"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "pebble.extra(slot: int) -> any",
+      "description": "Get pebble extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot"
+        }
+      ],
+      "returns": {
+        "type": "any",
+        "description": "Extra data value"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "pebble.set_extra(slot: int, value: any) -> None",
+      "description": "Set pebble extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true,
+          "description": "Value to store"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    }
+  ]
+}

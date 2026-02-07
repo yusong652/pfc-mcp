@@ -1,0 +1,640 @@
+{
+  "class": "Contact",
+  "namespace": "itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact, itasca.PebbleFacetContact",
+  "description": "Contact object representing interaction between objects in PFC. This interface is shared by all contact types: BallBallContact (ball-ball), BallFacetContact (ball-facet), BallPebbleContact (ball-pebble), PebblePebbleContact (pebble-pebble), and PebbleFacetContact (pebble-facet). Cannot be instantiated directly - obtain instances via itasca.contact.list() or itasca.contact.find().",
+  "instantiation": "Cannot be instantiated. Obtained via itasca.contact.list() or itasca.contact.find()",
+  "methods": [
+    {
+      "name": "activate",
+      "signature": "contact.activate(flag: bool) -> None",
+      "description": "Set the contact activated state. If a contact has been activated it is always active.",
+      "parameters": [
+        {"name": "flag", "type": "bool", "required": true, "description": "Activation state to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "activated",
+      "signature": "contact.activated() -> bool",
+      "description": "Get the contact activated state. If a contact has been activated it is always active.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact is activated"}
+    },
+    {
+      "name": "active",
+      "signature": "contact.active() -> bool",
+      "description": "Get the contact activity state.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact is currently active"}
+    },
+    {
+      "name": "bonded",
+      "signature": "contact.bonded() -> bool",
+      "description": "Get the contact bonded flag.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact is bonded"}
+    },
+    {
+      "name": "branch",
+      "signature": "contact.branch() -> vec",
+      "description": "Get the contact branch vector in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Branch vector"}
+    },
+    {
+      "name": "branch_x",
+      "signature": "contact.branch_x() -> float",
+      "description": "Get the x-component of the contact branch vector in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of branch vector"}
+    },
+    {
+      "name": "branch_y",
+      "signature": "contact.branch_y() -> float",
+      "description": "Get the y-component of the contact branch vector in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of branch vector"}
+    },
+    {
+      "name": "branch_z",
+      "signature": "contact.branch_z() -> float",
+      "description": "Get the z-component of the contact branch vector in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of branch vector"}
+    },
+    {
+      "name": "end1",
+      "signature": "contact.end1() -> any",
+      "description": "Get the object at the first end of this contact.",
+      "parameters": [],
+      "returns": {"type": "any", "description": "Object at first end (typically a Ball)"}
+    },
+    {
+      "name": "end2",
+      "signature": "contact.end2() -> any",
+      "description": "Get the object at the second end of this contact.",
+      "parameters": [],
+      "returns": {"type": "any", "description": "Object at second end (typically a Ball)"}
+    },
+    {
+      "name": "energies",
+      "signature": "contact.energies() -> dict",
+      "description": "Get the energy partitions as a dictionary.",
+      "parameters": [],
+      "returns": {"type": "dict {str: float}", "description": "Dictionary mapping energy names to values"}
+    },
+    {
+      "name": "energy",
+      "signature": "contact.energy(energy_name: str) -> float",
+      "description": "Get the current value of an energy partition.",
+      "parameters": [
+        {"name": "energy_name", "type": "str", "required": true, "description": "Name of the energy partition"}
+      ],
+      "returns": {"type": "float", "description": "Energy value"}
+    },
+    {
+      "name": "extra",
+      "signature": "contact.extra(slot: int) -> any",
+      "description": "Get the contact extra data in the given slot.",
+      "parameters": [
+        {"name": "slot", "type": "int", "required": true, "description": "Extra data slot index"}
+      ],
+      "returns": {"type": "any", "description": "Extra data value"}
+    },
+    {
+      "name": "fid",
+      "signature": "contact.fid() -> int",
+      "description": "Get the contact fracture ID.",
+      "parameters": [],
+      "returns": {"type": "int", "description": "Fracture ID"}
+    },
+    {
+      "name": "force_global",
+      "signature": "contact.force_global() -> vec",
+      "description": "Get the contact force in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Force vector in global coordinates"}
+    },
+    {
+      "name": "force_global_x",
+      "signature": "contact.force_global_x() -> float",
+      "description": "Get the x-component of the contact force in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of force"}
+    },
+    {
+      "name": "force_global_y",
+      "signature": "contact.force_global_y() -> float",
+      "description": "Get the y-component of the contact force in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of force"}
+    },
+    {
+      "name": "force_global_z",
+      "signature": "contact.force_global_z() -> float",
+      "description": "Get the z-component of the contact force in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of force"}
+    },
+    {
+      "name": "force_local",
+      "signature": "contact.force_local() -> vec",
+      "description": "Get the contact force in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Force vector in local coordinates"}
+    },
+    {
+      "name": "force_local_x",
+      "signature": "contact.force_local_x() -> float",
+      "description": "Get the x-component of the contact force in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of force in local coordinates"}
+    },
+    {
+      "name": "force_local_y",
+      "signature": "contact.force_local_y() -> float",
+      "description": "Get the y-component of the contact force in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of force in local coordinates"}
+    },
+    {
+      "name": "force_local_z",
+      "signature": "contact.force_local_z() -> float",
+      "description": "Get the z-component of the contact force in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of force in local coordinates"}
+    },
+    {
+      "name": "force_normal",
+      "signature": "contact.force_normal() -> float",
+      "description": "Get the contact signed magnitude of the normal force.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Normal force magnitude (signed)"}
+    },
+    {
+      "name": "force_shear",
+      "signature": "contact.force_shear() -> float",
+      "description": "Get the contact magnitude of the shear force.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Shear force magnitude"}
+    },
+    {
+      "name": "gap",
+      "signature": "contact.gap() -> float",
+      "description": "Get the contact gap.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Contact gap distance"}
+    },
+    {
+      "name": "group",
+      "signature": "contact.group(slot: str or int = None) -> str",
+      "description": "Get the contact group name in a given slot.",
+      "parameters": [
+        {"name": "slot", "type": "str or int", "required": false, "description": "Group slot identifier"}
+      ],
+      "returns": {"type": "str", "description": "Group name"}
+    },
+    {
+      "name": "group_remove",
+      "signature": "contact.group_remove(group_name: str or int, slot: str or int = None) -> bool",
+      "description": "Remove from the given group from all group slots of the contact.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to remove"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Specific slot to remove from"}
+      ],
+      "returns": {"type": "bool", "description": "True if group was removed from any slot"}
+    },
+    {
+      "name": "groups",
+      "signature": "contact.groups() -> dict",
+      "description": "Get a dictionary describing which groups this contact is part of. The keys are slot names and values are group names.",
+      "parameters": [],
+      "returns": {"type": "dict {slot: group_name}", "description": "Dictionary of slot to group name mappings"}
+    },
+    {
+      "name": "has_prop",
+      "signature": "contact.has_prop(property_name: str) -> bool",
+      "description": "Query the existence of a contact model property.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name to check"}
+      ],
+      "returns": {"type": "bool", "description": "True if property exists"}
+    },
+    {
+      "name": "id",
+      "signature": "contact.id() -> int",
+      "description": "Get the contact id.",
+      "parameters": [],
+      "returns": {"type": "int", "description": "Contact ID"}
+    },
+    {
+      "name": "in_group",
+      "signature": "contact.in_group(group_name: str or int, slot: str or int = None) -> bool",
+      "description": "Test if the contact is part of a given group. If slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to check"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Specific slot to search"}
+      ],
+      "returns": {"type": "bool", "description": "True if contact is in the group"}
+    },
+    {
+      "name": "inherit",
+      "signature": "contact.inherit(property_name: str) -> bool",
+      "description": "Get the property inheritance.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name"}
+      ],
+      "returns": {"type": "bool", "description": "True if property is inherited"}
+    },
+    {
+      "name": "inhibit",
+      "signature": "contact.inhibit() -> bool",
+      "description": "Get the contact inhibit flag.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact is inhibited"}
+    },
+    {
+      "name": "is_energy",
+      "signature": "contact.is_energy(energy_name: str) -> bool",
+      "description": "Query the existence of a contact model energy.",
+      "parameters": [
+        {"name": "energy_name", "type": "str", "required": true, "description": "Energy name to check"}
+      ],
+      "returns": {"type": "bool", "description": "True if energy exists"}
+    },
+    {
+      "name": "method",
+      "signature": "contact.method(method_name: str, args: dict = None) -> None",
+      "description": "Execute a contact model method. The first argument must be a string identifying a method that exists in the contact model assigned to the contact. The optional second argument should be a dictionary with string keys which give the contact model method arguments.",
+      "parameters": [
+        {"name": "method_name", "type": "str", "required": true, "description": "Method name to execute"},
+        {"name": "args", "type": "dict {str: any}", "required": false, "description": "Method arguments as dictionary"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "model",
+      "signature": "contact.model() -> str",
+      "description": "Get the contact model name.",
+      "parameters": [],
+      "returns": {"type": "str", "description": "Contact model name"}
+    },
+    {
+      "name": "moment1_global",
+      "signature": "contact.moment1_global() -> vec",
+      "description": "Get the contact moment acting on end1 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Moment vector on end1 in global coordinates"}
+    },
+    {
+      "name": "moment1_global_x",
+      "signature": "contact.moment1_global_x() -> float",
+      "description": "Get the x-component of the contact moment acting on end1 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of moment on end1"}
+    },
+    {
+      "name": "moment1_global_y",
+      "signature": "contact.moment1_global_y() -> float",
+      "description": "Get the y-component of the contact moment acting on end1 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of moment on end1"}
+    },
+    {
+      "name": "moment1_global_z",
+      "signature": "contact.moment1_global_z() -> float",
+      "description": "Get the z-component of the contact moment acting on end1 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of moment on end1"}
+    },
+    {
+      "name": "moment1_local",
+      "signature": "contact.moment1_local() -> vec",
+      "description": "Get the contact moment acting on end1 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Moment vector on end1 in local coordinates"}
+    },
+    {
+      "name": "moment1_local_x",
+      "signature": "contact.moment1_local_x() -> float",
+      "description": "Get the x-component of the contact moment acting on end1 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of moment on end1 in local coordinates"}
+    },
+    {
+      "name": "moment1_local_y",
+      "signature": "contact.moment1_local_y() -> float",
+      "description": "Get the y-component of the contact moment acting on end1 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of moment on end1 in local coordinates"}
+    },
+    {
+      "name": "moment1_local_z",
+      "signature": "contact.moment1_local_z() -> float",
+      "description": "Get the z-component of the contact moment acting on end1 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of moment on end1 in local coordinates"}
+    },
+    {
+      "name": "moment2_global",
+      "signature": "contact.moment2_global() -> vec",
+      "description": "Get the contact moment acting on end2 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Moment vector on end2 in global coordinates"}
+    },
+    {
+      "name": "moment2_global_x",
+      "signature": "contact.moment2_global_x() -> float",
+      "description": "Get the x-component of the contact moment acting on end2 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of moment on end2"}
+    },
+    {
+      "name": "moment2_global_y",
+      "signature": "contact.moment2_global_y() -> float",
+      "description": "Get the y-component of the contact moment acting on end2 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of moment on end2"}
+    },
+    {
+      "name": "moment2_global_z",
+      "signature": "contact.moment2_global_z() -> float",
+      "description": "Get the z-component of the contact moment acting on end2 in the global coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of moment on end2"}
+    },
+    {
+      "name": "moment2_local",
+      "signature": "contact.moment2_local() -> vec",
+      "description": "Get the contact moment acting on end2 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Moment vector on end2 in local coordinates"}
+    },
+    {
+      "name": "moment2_local_x",
+      "signature": "contact.moment2_local_x() -> float",
+      "description": "Get the x-component of the contact moment acting on end2 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of moment on end2 in local coordinates"}
+    },
+    {
+      "name": "moment2_local_y",
+      "signature": "contact.moment2_local_y() -> float",
+      "description": "Get the y-component of the contact moment acting on end2 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of moment on end2 in local coordinates"}
+    },
+    {
+      "name": "moment2_local_z",
+      "signature": "contact.moment2_local_z() -> float",
+      "description": "Get the z-component of the contact moment acting on end2 in the local coordinate system.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of moment on end2 in local coordinates"}
+    },
+    {
+      "name": "normal",
+      "signature": "contact.normal() -> vec",
+      "description": "Get the contact unit normal.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Unit normal vector"}
+    },
+    {
+      "name": "normal_x",
+      "signature": "contact.normal_x() -> float",
+      "description": "Get the x-component of the contact unit normal.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of unit normal"}
+    },
+    {
+      "name": "normal_y",
+      "signature": "contact.normal_y() -> float",
+      "description": "Get the y-component of the contact unit normal.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of unit normal"}
+    },
+    {
+      "name": "normal_z",
+      "signature": "contact.normal_z() -> float",
+      "description": "Get the z-component of the contact unit normal.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of unit normal"}
+    },
+    {
+      "name": "offset",
+      "signature": "contact.offset() -> vec",
+      "description": "Get the contact offset.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Offset vector"}
+    },
+    {
+      "name": "offset_x",
+      "signature": "contact.offset_x() -> float",
+      "description": "Get the x-component of the contact offset.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of offset"}
+    },
+    {
+      "name": "offset_y",
+      "signature": "contact.offset_y() -> float",
+      "description": "Get the y-component of the contact offset.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of offset"}
+    },
+    {
+      "name": "offset_z",
+      "signature": "contact.offset_z() -> float",
+      "description": "Get the z-component of the contact offset.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of offset"}
+    },
+    {
+      "name": "persist",
+      "signature": "contact.persist() -> bool",
+      "description": "Get the contact persistence flag.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact persists"}
+    },
+    {
+      "name": "pos",
+      "signature": "contact.pos() -> vec",
+      "description": "Get the contact position.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Contact position vector"}
+    },
+    {
+      "name": "pos_x",
+      "signature": "contact.pos_x() -> float",
+      "description": "Get the x-component of the contact position.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-coordinate of contact position"}
+    },
+    {
+      "name": "pos_y",
+      "signature": "contact.pos_y() -> float",
+      "description": "Get the y-component of the contact position.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-coordinate of contact position"}
+    },
+    {
+      "name": "pos_z",
+      "signature": "contact.pos_z() -> float",
+      "description": "Get the z-component of the contact position.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-coordinate of contact position"}
+    },
+    {
+      "name": "prop",
+      "signature": "contact.prop(property_name or index: str or int) -> any",
+      "description": "Get a contact model property.",
+      "parameters": [
+        {"name": "property_name or index", "type": "str or int", "required": true, "description": "Property name or index"}
+      ],
+      "returns": {"type": "any", "description": "Property value"}
+    },
+    {
+      "name": "prop_index",
+      "signature": "contact.prop_index(property_name: str) -> int",
+      "description": "Get a contact model property index.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name"}
+      ],
+      "returns": {"type": "int", "description": "Property index"}
+    },
+    {
+      "name": "props",
+      "signature": "contact.props() -> dict",
+      "description": "Get the contact model properties as a dictionary.",
+      "parameters": [],
+      "returns": {"type": "dict {str: any}", "description": "Dictionary of all contact properties"}
+    },
+    {
+      "name": "set_extra",
+      "signature": "contact.set_extra(slot: int, value: any) -> None",
+      "description": "Set the contact extra data in the given slot.",
+      "parameters": [
+        {"name": "slot", "type": "int", "required": true, "description": "Extra data slot index"},
+        {"name": "value", "type": "any", "required": true, "description": "Value to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_force",
+      "signature": "contact.set_force(value: vec) -> None",
+      "description": "Set the contact model force.",
+      "parameters": [
+        {"name": "value", "type": "vec", "required": true, "description": "Force vector to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_group",
+      "signature": "contact.set_group(group_name: str or int, slot: str or int = None) -> None",
+      "description": "Set the contact group name in a given slot.",
+      "parameters": [
+        {"name": "group_name", "type": "str or int", "required": true, "description": "Group name to set"},
+        {"name": "slot", "type": "str or int", "required": false, "description": "Slot to set group in"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_inherit",
+      "signature": "contact.set_inherit(property_name: str, inherit_flag: bool) -> None",
+      "description": "Set the property inheritance.",
+      "parameters": [
+        {"name": "property_name", "type": "str", "required": true, "description": "Property name"},
+        {"name": "inherit_flag", "type": "bool", "required": true, "description": "Inheritance flag"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_inhibit",
+      "signature": "contact.set_inhibit(flag: bool) -> None",
+      "description": "Set the contact inhibit flag.",
+      "parameters": [
+        {"name": "flag", "type": "bool", "required": true, "description": "Inhibit flag to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_model",
+      "signature": "contact.set_model(model_name: str = None) -> None",
+      "description": "Set the contact model for this contact.",
+      "parameters": [
+        {"name": "model_name", "type": "str", "required": false, "description": "Contact model name"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_persist",
+      "signature": "contact.set_persist(flag: bool) -> None",
+      "description": "Set the contact persistence flag.",
+      "parameters": [
+        {"name": "flag", "type": "bool", "required": true, "description": "Persistence flag to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "set_prop",
+      "signature": "contact.set_prop(property_name or index: str or int, value: any) -> None",
+      "description": "Set a contact model property.",
+      "parameters": [
+        {"name": "property_name or index", "type": "str or int", "required": true, "description": "Property name or index"},
+        {"name": "value", "type": "any", "required": true, "description": "Property value to set"}
+      ],
+      "returns": {"type": "None", "description": "No return value"}
+    },
+    {
+      "name": "shear",
+      "signature": "contact.shear() -> vec",
+      "description": "Get the contact shear direction.",
+      "parameters": [],
+      "returns": {"type": "vec", "description": "Shear direction vector"}
+    },
+    {
+      "name": "shear_x",
+      "signature": "contact.shear_x() -> float",
+      "description": "Get the x-component of the contact shear direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "X-component of shear direction"}
+    },
+    {
+      "name": "shear_y",
+      "signature": "contact.shear_y() -> float",
+      "description": "Get the y-component of the contact shear direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Y-component of shear direction"}
+    },
+    {
+      "name": "shear_z",
+      "signature": "contact.shear_z() -> float",
+      "description": "Get the z-component of the contact shear direction.",
+      "parameters": [],
+      "returns": {"type": "float", "description": "Z-component of shear direction"}
+    },
+    {
+      "name": "to_global",
+      "signature": "contact.to_global(value: vec) -> vec",
+      "description": "Transform a vector from the local to the global coordinate system.",
+      "parameters": [
+        {"name": "value", "type": "vec", "required": true, "description": "Vector in local coordinates"}
+      ],
+      "returns": {"type": "vec", "description": "Vector in global coordinates"}
+    },
+    {
+      "name": "to_local",
+      "signature": "contact.to_local(value: vec) -> vec",
+      "description": "Transform a vector from the global to the local coordinate system.",
+      "parameters": [
+        {"name": "value", "type": "vec", "required": true, "description": "Vector in global coordinates"}
+      ],
+      "returns": {"type": "vec", "description": "Vector in local coordinates"}
+    },
+    {
+      "name": "valid",
+      "signature": "contact.valid() -> bool",
+      "description": "Returns True if this contact is live.",
+      "parameters": [],
+      "returns": {"type": "bool", "description": "True if contact is live"}
+    }
+  ]
+}

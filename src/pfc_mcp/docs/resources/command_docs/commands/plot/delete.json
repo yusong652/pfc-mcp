@@ -1,0 +1,33 @@
+{
+  "command": "plot delete",
+  "category": "plot",
+  "search_keywords": [
+    "delete",
+    "remove",
+    "destroy"
+  ],
+  "description": "Delete the specified plot. If no plot name is specified, the current view is assumed.",
+  "syntax": "plot <s> delete",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Name of the plot to delete. If not specified, the current view is assumed.",
+      "optional": true
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot delete",
+      "description": "Delete the current plot"
+    },
+    {
+      "command": "plot 'myplot' delete",
+      "description": "Delete plot named 'myplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> delete') - no direct Python SDK method"
+  }
+}

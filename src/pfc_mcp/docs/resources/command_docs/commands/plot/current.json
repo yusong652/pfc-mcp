@@ -1,0 +1,29 @@
+{
+  "command": "plot current",
+  "category": "plot",
+  "search_keywords": [
+    "current",
+    "active",
+    "select",
+    "show"
+  ],
+  "description": "Make the specified plot the current (i.e., active) plot. This will show the plot if it is hidden.",
+  "syntax": "plot <s> current",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Name of the plot to make current."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot 'myplot' current",
+      "description": "Make plot 'myplot' the current active plot"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> current') - no direct Python SDK method"
+  }
+}

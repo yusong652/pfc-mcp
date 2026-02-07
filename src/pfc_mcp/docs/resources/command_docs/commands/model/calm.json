@@ -1,0 +1,44 @@
+{
+  "command": "model calm",
+  "category": "model",
+  "search_keywords": [
+    "calm",
+    "velocity",
+    "zero"
+  ],
+  "description": "Calm the model. For mechanical processes, all linear and rotational velocities are set to 0. This is useful for removing kinetic energy from the system and preparing for a new loading stage or when transitioning between different simulation phases.",
+  "syntax": "model calm",
+  "keywords": [],
+  "notes": [
+    "Sets all linear velocities to 0",
+    "Sets all rotational velocities (angular velocities/spin) to 0",
+    "Applies to all pieces: balls, clumps, and walls",
+    "Does not affect positions or forces",
+    "Useful for removing kinetic energy from system",
+    "Often used when transitioning between loading stages",
+    "Commonly used before changing boundary conditions or applying new loads",
+    "Does not reset stress or strain history"
+  ],
+  "examples": [
+    {
+      "command": "model calm",
+      "description": "Set all velocities (linear and rotational) to zero"
+    },
+    {
+      "command": "model cycle 1000\nmodel calm\nmodel cycle 2000",
+      "description": "Run cycles, calm velocities, then continue cycling"
+    },
+    {
+      "command": "model solve\nmodel calm\nwall attribute velocity-y -0.1 range id 1",
+      "description": "Solve to equilibrium, calm system, then apply new boundary velocity"
+    },
+    {
+      "command": "model calm\nball attribute velocity (0,0,0)",
+      "description": "Calm followed by explicit velocity assignment (calm is simpler for zeroing)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model calm') - Python SDK does not provide direct calm method"
+  }
+}

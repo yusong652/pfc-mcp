@@ -1,0 +1,64 @@
+{
+  "command": "clump rotate",
+  "category": "clump",
+  "search_keywords": [
+    "rotate",
+    "orientation",
+    "axis"
+  ],
+  "description": "Rotate clumps using right-hand rule. Application with the point keyword may also modify the center of mass location. Rotations follow the right-hand rule where the rotation axis in 2D is toward the viewer. Rotations are not allowed that rotate clumps so that pebble centroids fall outside the model domain. No clumps will be rotated if any clumps fail this test. Should orientation tracking be active, then the orientation is updated by default, though this can be disabled via the update-orientation keyword.",
+  "syntax": "clump rotate <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "axis",
+      "syntax": "axis <vaxis>",
+      "description": "Axis of rotation (required). Vector specifying the rotation axis"
+    },
+    {
+      "name": "angle",
+      "syntax": "angle <fang>",
+      "description": "Angle of rotation in degrees using the right-hand-rule (required)"
+    },
+    {
+      "name": "point",
+      "syntax": "point <vrot>",
+      "description": "Rotation occurs about the specified point. If absent, rotation occurs about the centroid of each clump. When used, may modify center of mass location"
+    },
+    {
+      "name": "update-orientation",
+      "syntax": "update-orientation <b>",
+      "description": "Explicitly set the orientation update status for this rotate command. Used if orientation tracking is enabled to update the orientation. Default: true (orientation is updated)"
+    }
+  ],
+  "notes": [
+    "Rotations follow the right-hand rule",
+    "In 2D, the rotation axis is toward the viewer",
+    "Rotations not allowed if pebble centroids would fall outside model domain",
+    "If ANY clump fails rotation test, NO clumps are rotated (all-or-nothing behavior)",
+    "When orientation tracking is active, orientation is updated by default",
+    "With point keyword: rotation center is specified point (may modify center of mass location)",
+    "Without point keyword: each clump rotates about its own centroid"
+  ],
+  "examples": [
+    {
+      "command": "clump rotate axis (0,1,0) angle 45",
+      "description": "Rotate all clumps 45° about y-axis through each clump's centroid"
+    },
+    {
+      "command": "clump rotate axis (0,0,1) angle 90 range id 1 100",
+      "description": "Rotate clumps 1-100 by 90° about z-axis"
+    },
+    {
+      "command": "clump rotate axis (1,0,0) angle 30 point (0,0,0)",
+      "description": "Rotate all clumps 30° about x-axis through origin (may change center of mass locations)"
+    },
+    {
+      "command": "clump rotate axis (0,1,0) angle 45 update-orientation false range group 'rock'",
+      "description": "Rotate clumps in 'rock' group without updating orientation tracking"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump rotate ...') - Python SDK does not provide direct clump rotation method"
+  }
+}

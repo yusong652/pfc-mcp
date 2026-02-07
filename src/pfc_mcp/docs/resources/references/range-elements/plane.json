@@ -1,0 +1,45 @@
+{
+  "name": "plane",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "plane origin <v> normal <v> above|below|distance <f>",
+  "alt_syntax": "plane origin <v> dip <f> dip-direction <f> above|below",
+  "description": "Infinite plane selection. Use above/below or distance from plane.",
+  "parameters": [
+    {
+      "name": "origin",
+      "type": "vector",
+      "description": "Point on plane"
+    },
+    {
+      "name": "normal",
+      "type": "vector",
+      "description": "Plane normal direction"
+    },
+    {
+      "name": "dip",
+      "type": "float",
+      "description": "Dip angle (degrees)"
+    },
+    {
+      "name": "dip-direction",
+      "type": "float",
+      "description": "Dip direction (degrees)"
+    },
+    {
+      "name": "distance",
+      "type": "float",
+      "description": "Distance from plane"
+    }
+  ],
+  "examples": [
+    "range plane origin (0,0,0) normal (0,0,1) above",
+    "range plane origin (0,0,5) normal (0,0,1) below"
+  ],
+  "search_keywords": [
+    "plane",
+    "planar",
+    "above",
+    "below"
+  ]
+}

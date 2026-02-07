@@ -1,0 +1,43 @@
+{
+  "command": "model configure",
+  "category": "model",
+  "search_keywords": [
+    "configure",
+    "settings"
+  ],
+  "description": "Configure an additional calculation mode. This command allows the user to specify that the model is using calculation modes that either require extra resources or are restricted by the current license. The model configure command can be given at any stage of an analysis, but it must be given before the calculation mode (model solve or model cycle) can be invoked.",
+  "syntax": "model configure <keyword> ...",
+  "keywords": [
+    {
+      "name": "cfd",
+      "syntax": "cfd",
+      "description": "Enable PFC CFD (Computational Fluid Dynamics) analysis mode"
+    }
+  ],
+  "notes": [
+    "Must be given BEFORE model solve or model cycle can be invoked",
+    "Can be given at any stage of an analysis",
+    "Configures calculation modes that require extra resources or license restrictions",
+    "CFD mode enables fluid-particle coupling simulations",
+    "Once configured, the mode remains active for the model",
+    "May affect available memory and computational resources"
+  ],
+  "examples": [
+    {
+      "command": "model configure cfd",
+      "description": "Enable CFD analysis mode for fluid-particle coupling"
+    },
+    {
+      "command": "model new\nmodel configure cfd\nmodel domain extent -10 10\nmodel cycle 1000",
+      "description": "Configure CFD before cycling - correct order"
+    },
+    {
+      "command": "model configure cfd\nball generate number 1000 radius 0.5\n; ... set up fluid domain ...\nmodel solve",
+      "description": "Configure CFD, create particles and fluid domain, then solve"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model configure cfd') - Python SDK does not provide direct configure method"
+  }
+}

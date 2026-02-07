@@ -1,0 +1,363 @@
+{
+  "module": "template",
+  "description": "Natural language keywords for template module API search",
+  "keywords": {
+    "count templates": [
+      "itasca.clump.template.count"
+    ],
+    "number of templates": [
+      "itasca.clump.template.count"
+    ],
+    "how many templates": [
+      "itasca.clump.template.count"
+    ],
+    "total templates": [
+      "itasca.clump.template.count"
+    ],
+    "find template": [
+      "itasca.clump.template.find"
+    ],
+    "get template": [
+      "itasca.clump.template.find"
+    ],
+    "search template": [
+      "itasca.clump.template.find"
+    ],
+    "template by name": [
+      "itasca.clump.template.find"
+    ],
+    "find template pebble": [
+      "itasca.clump.template.findpebble"
+    ],
+    "search template pebble": [
+      "itasca.clump.template.findpebble"
+    ],
+    "template pebble by id": [
+      "itasca.clump.template.findpebble"
+    ],
+    "list templates": [
+      "itasca.clump.template.list"
+    ],
+    "iterate templates": [
+      "itasca.clump.template.list"
+    ],
+    "all templates": [
+      "itasca.clump.template.list"
+    ],
+    "get templates": [
+      "itasca.clump.template.list"
+    ],
+    "loop templates": [
+      "itasca.clump.template.list"
+    ],
+    "make template": [
+      "itasca.clump.template.make"
+    ],
+    "create template": [
+      "itasca.clump.template.make"
+    ],
+    "template from clump": [
+      "itasca.clump.template.make"
+    ],
+    "save clump as template": [
+      "itasca.clump.template.make"
+    ],
+    "maximum template id": [
+      "itasca.clump.template.maxid"
+    ],
+    "max template id": [
+      "itasca.clump.template.maxid"
+    ],
+    "highest id": [
+      "itasca.clump.template.maxid"
+    ],
+    "clump definition": [
+      "itasca.clump.template"
+    ],
+    "reusable clump": [
+      "itasca.clump.template"
+    ],
+    "clump geometry": [
+      "itasca.clump.template"
+    ],
+    "template id": [
+      "itasca.clump.template.Template.id"
+    ],
+    "get template id": [
+      "itasca.clump.template.Template.id"
+    ],
+    "template identifier": [
+      "itasca.clump.template.Template.id"
+    ],
+    "template valid": [
+      "itasca.clump.template.Template.valid"
+    ],
+    "check template valid": [
+      "itasca.clump.template.Template.valid"
+    ],
+    "is template valid": [
+      "itasca.clump.template.Template.valid"
+    ],
+    "template exists": [
+      "itasca.clump.template.Template.valid"
+    ],
+    "delete template": [
+      "itasca.clump.template.Template.delete"
+    ],
+    "remove template": [
+      "itasca.clump.template.Template.delete"
+    ],
+    "destroy template": [
+      "itasca.clump.template.Template.delete"
+    ],
+    "template name": [
+      "itasca.clump.template.Template.name"
+    ],
+    "get template name": [
+      "itasca.clump.template.Template.name"
+    ],
+    "clone template": [
+      "itasca.clump.template.Template.clone"
+    ],
+    "copy template": [
+      "itasca.clump.template.Template.clone"
+    ],
+    "duplicate template": [
+      "itasca.clump.template.Template.clone"
+    ],
+    "template pebbles": [
+      "itasca.clump.template.Template.pebbles"
+    ],
+    "get template pebbles": [
+      "itasca.clump.template.Template.pebbles"
+    ],
+    "pebbles in template": [
+      "itasca.clump.template.Template.pebbles"
+    ],
+    "add template pebble": [
+      "itasca.clump.template.Template.add_pebble"
+    ],
+    "add pebble to template": [
+      "itasca.clump.template.Template.add_pebble"
+    ],
+    "insert pebble": [
+      "itasca.clump.template.Template.add_pebble"
+    ],
+    "delete template pebble": [
+      "itasca.clump.template.Template.delete_pebble"
+    ],
+    "remove template pebble": [
+      "itasca.clump.template.Template.delete_pebble"
+    ],
+    "remove pebble from template": [
+      "itasca.clump.template.Template.delete_pebble"
+    ],
+    "template position": [
+      "itasca.clump.template.Template.orig_pos"
+    ],
+    "original position": [
+      "itasca.clump.template.Template.orig_pos"
+    ],
+    "get template position": [
+      "itasca.clump.template.Template.orig_pos"
+    ],
+    "template origin": [
+      "itasca.clump.template.Template.orig_pos"
+    ],
+    "template x position": [
+      "itasca.clump.template.Template.orig_pos_x"
+    ],
+    "get template x": [
+      "itasca.clump.template.Template.orig_pos_x"
+    ],
+    "template origin x": [
+      "itasca.clump.template.Template.orig_pos_x"
+    ],
+    "original position x": [
+      "itasca.clump.template.Template.orig_pos_x"
+    ],
+    "template y position": [
+      "itasca.clump.template.Template.orig_pos_y"
+    ],
+    "get template y": [
+      "itasca.clump.template.Template.orig_pos_y"
+    ],
+    "template origin y": [
+      "itasca.clump.template.Template.orig_pos_y"
+    ],
+    "original position y": [
+      "itasca.clump.template.Template.orig_pos_y"
+    ],
+    "template z position": [
+      "itasca.clump.template.Template.orig_pos_z"
+    ],
+    "get template z": [
+      "itasca.clump.template.Template.orig_pos_z"
+    ],
+    "template origin z": [
+      "itasca.clump.template.Template.orig_pos_z"
+    ],
+    "original position z": [
+      "itasca.clump.template.Template.orig_pos_z"
+    ],
+    "set template position": [
+      "itasca.clump.template.Template.set_orig_pos"
+    ],
+    "set original position": [
+      "itasca.clump.template.Template.set_orig_pos"
+    ],
+    "move template origin": [
+      "itasca.clump.template.Template.set_orig_pos"
+    ],
+    "set template x": [
+      "itasca.clump.template.Template.set_orig_pos_x"
+    ],
+    "set template x position": [
+      "itasca.clump.template.Template.set_orig_pos_x"
+    ],
+    "set origin x": [
+      "itasca.clump.template.Template.set_orig_pos_x"
+    ],
+    "change template x": [
+      "itasca.clump.template.Template.set_orig_pos_x"
+    ],
+    "set template y": [
+      "itasca.clump.template.Template.set_orig_pos_y"
+    ],
+    "set template y position": [
+      "itasca.clump.template.Template.set_orig_pos_y"
+    ],
+    "set origin y": [
+      "itasca.clump.template.Template.set_orig_pos_y"
+    ],
+    "change template y": [
+      "itasca.clump.template.Template.set_orig_pos_y"
+    ],
+    "set template z": [
+      "itasca.clump.template.Template.set_orig_pos_z"
+    ],
+    "set template z position": [
+      "itasca.clump.template.Template.set_orig_pos_z"
+    ],
+    "set origin z": [
+      "itasca.clump.template.Template.set_orig_pos_z"
+    ],
+    "change template z": [
+      "itasca.clump.template.Template.set_orig_pos_z"
+    ],
+    "template moi": [
+      "itasca.clump.template.Template.moi"
+    ],
+    "template inertia": [
+      "itasca.clump.template.Template.moi"
+    ],
+    "moment of inertia": [
+      "itasca.clump.template.Template.moi"
+    ],
+    "set template moi": [
+      "itasca.clump.template.Template.set_moi"
+    ],
+    "set template inertia": [
+      "itasca.clump.template.Template.set_moi"
+    ],
+    "principal moi": [
+      "itasca.clump.template.Template.moi_prin"
+    ],
+    "principal moments": [
+      "itasca.clump.template.Template.moi_prin"
+    ],
+    "get principal moi": [
+      "itasca.clump.template.Template.moi_prin"
+    ],
+    "principal moi x": [
+      "itasca.clump.template.Template.moi_prin_x"
+    ],
+    "get principal moi x": [
+      "itasca.clump.template.Template.moi_prin_x"
+    ],
+    "moment of inertia x": [
+      "itasca.clump.template.Template.moi_prin_x"
+    ],
+    "moi x component": [
+      "itasca.clump.template.Template.moi_prin_x"
+    ],
+    "principal moi y": [
+      "itasca.clump.template.Template.moi_prin_y"
+    ],
+    "get principal moi y": [
+      "itasca.clump.template.Template.moi_prin_y"
+    ],
+    "moment of inertia y": [
+      "itasca.clump.template.Template.moi_prin_y"
+    ],
+    "moi y component": [
+      "itasca.clump.template.Template.moi_prin_y"
+    ],
+    "principal moi z": [
+      "itasca.clump.template.Template.moi_prin_z"
+    ],
+    "get principal moi z": [
+      "itasca.clump.template.Template.moi_prin_z"
+    ],
+    "moment of inertia z": [
+      "itasca.clump.template.Template.moi_prin_z"
+    ],
+    "moi z component": [
+      "itasca.clump.template.Template.moi_prin_z"
+    ],
+    "set principal moi": [
+      "itasca.clump.template.Template.set_moi_prin"
+    ],
+    "set principal moments": [
+      "itasca.clump.template.Template.set_moi_prin"
+    ],
+    "set principal moi x": [
+      "itasca.clump.template.Template.set_moi_prin_x"
+    ],
+    "set moment of inertia x": [
+      "itasca.clump.template.Template.set_moi_prin_x"
+    ],
+    "change moi x": [
+      "itasca.clump.template.Template.set_moi_prin_x"
+    ],
+    "set moi x": [
+      "itasca.clump.template.Template.set_moi_prin_x"
+    ],
+    "set principal moi y": [
+      "itasca.clump.template.Template.set_moi_prin_y"
+    ],
+    "set moment of inertia y": [
+      "itasca.clump.template.Template.set_moi_prin_y"
+    ],
+    "change moi y": [
+      "itasca.clump.template.Template.set_moi_prin_y"
+    ],
+    "set moi y": [
+      "itasca.clump.template.Template.set_moi_prin_y"
+    ],
+    "set principal moi z": [
+      "itasca.clump.template.Template.set_moi_prin_z"
+    ],
+    "set moment of inertia z": [
+      "itasca.clump.template.Template.set_moi_prin_z"
+    ],
+    "change moi z": [
+      "itasca.clump.template.Template.set_moi_prin_z"
+    ],
+    "set moi z": [
+      "itasca.clump.template.Template.set_moi_prin_z"
+    ],
+    "template volume": [
+      "itasca.clump.template.Template.vol"
+    ],
+    "get template volume": [
+      "itasca.clump.template.Template.vol"
+    ],
+    "set template volume": [
+      "itasca.clump.template.Template.set_vol"
+    ],
+    "change template volume": [
+      "itasca.clump.template.Template.set_vol"
+    ]
+  }
+}

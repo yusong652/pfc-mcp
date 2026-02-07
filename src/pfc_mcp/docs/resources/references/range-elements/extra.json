@@ -1,0 +1,39 @@
+{
+  "name": "extra",
+  "category": "user_defined",
+  "category_name": "User-Defined Elements",
+  "syntax": "extra <index> <f1> [f2] [tolerance <f>]",
+  "description": "Filter by extra variable value at specified index.",
+  "parameters": [
+    {
+      "name": "index",
+      "type": "int",
+      "description": "Extra variable index"
+    },
+    {
+      "name": "f1",
+      "type": "float",
+      "description": "Target value or lower bound"
+    },
+    {
+      "name": "f2",
+      "type": "float",
+      "description": "Upper bound (optional)"
+    },
+    {
+      "name": "tolerance",
+      "type": "float",
+      "description": "Matching tolerance"
+    }
+  ],
+  "examples": [
+    "range extra 1 2650",
+    "range extra 1 1000 2000",
+    "range extra 1 100 tolerance 5"
+  ],
+  "search_keywords": [
+    "extra",
+    "variable",
+    "attribute"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "command": "clump results",
+  "category": "clump",
+  "search_keywords": [
+    "results",
+    "post-processing",
+    "snapshot"
+  ],
+  "description": "Configure clump results logic for efficient post-processing. Creates lightweight snapshots of clump geometries and selected attributes at different time instances as binary files. This logic allows for a reduced version of the model state (clump geometries plus clump attributes) to be output and used to re-create the model state. IMPORTANT: Clump result files do NOT replace PFC model state files and models re-created with this logic should not be cycled. Use with model results command to control when/how result files are created and imported.",
+  "syntax": "clump results <keyword> ...",
+  "keywords": [
+    {
+      "name": "active",
+      "syntax": "active <b>",
+      "description": "Enable (true) or disable (false) clump result creation"
+    },
+    {
+      "name": "add-attribute",
+      "syntax": "add-attribute <s>",
+      "description": "Add clump attribute s to be recorded in results. When the result is re-created, this attribute will be filled. All clump attributes can be listed with the clump list attribute command. Use 'group' and 'extra' keywords for groups and extra variables. See clump attribute command for available attributes."
+    },
+    {
+      "name": "remove-attribute",
+      "syntax": "remove-attribute <s>",
+      "description": "Remove clump attribute s from results recording. Use 'group' and 'extra' keywords for groups and extra variables."
+    }
+  ],
+  "notes": [
+    "Clump result files are for efficient post-processing (e.g., movie generation, residence time calculations)",
+    "Clump results act as a utility for efficient post-processing, not for continuing simulations",
+    "Models re-created with clump results should NOT be cycled",
+    "Use model results command to specify when results files are created and how to import them",
+    "Result files contain reduced model state: clump geometries plus selected clump attributes"
+  ],
+  "examples": [
+    {
+      "command": "clump results active true add-attribute fragment",
+      "description": "Enable clump results and record fragment attribute"
+    },
+    {
+      "command": "clump results add-attribute velocity",
+      "description": "Add velocity to recorded attributes"
+    },
+    {
+      "command": "clump results add-attribute displacement add-attribute spin",
+      "description": "Record displacement and angular velocity (spin)"
+    },
+    {
+      "command": "clump results add-attribute group add-attribute extra",
+      "description": "Record group assignments and extra variables"
+    },
+    {
+      "command": "clump results remove-attribute velocity",
+      "description": "Stop recording velocity in results"
+    },
+    {
+      "command": "clump results active false",
+      "description": "Disable clump results creation"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump results ...') - Python SDK does not provide results configuration"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "command": "contact model",
+  "category": "contact",
+  "search_keywords": [
+    "model",
+    "assign",
+    "linear"
+  ],
+  "description": "Assign contact models to existing contacts. The selected contact model applies to contacts in the specified range. If no range is specified, then all contacts in the model are affected. This command replaces the contact model entirely - all information stored in the previous contact model is lost. The contact model can be a built-in model or a plug-in model registered with the program load command. By default, mechanical contacts are considered.",
+  "syntax": "contact model <keyword> <range>",
+  "keywords": [
+    {
+      "name": "mechanical",
+      "syntax": "mechanical",
+      "description": "Specify mechanical contacts (default behavior)"
+    },
+    {
+      "name": "thermal",
+      "syntax": "thermal",
+      "description": "Specify thermal contacts (instead of mechanical)"
+    },
+    {
+      "name": "linear",
+      "syntax": "linear",
+      "description": "Assign Linear Model - elastic and frictional behavior"
+    },
+    {
+      "name": "linearpbond",
+      "syntax": "linearpbond",
+      "description": "Assign Linear Parallel Bond Model - bonded material with moment transmission"
+    },
+    {
+      "name": "linearcbond",
+      "syntax": "linearcbond",
+      "description": "Assign Linear Contact Bond Model - contact-based bonds without moment"
+    },
+    {
+      "name": "hertz",
+      "syntax": "hertz",
+      "description": "Assign Hertz Model - nonlinear elastic contact based on Hertz theory"
+    },
+    {
+      "name": "rrlinear",
+      "syntax": "rrlinear",
+      "description": "Assign Rolling Resistance Linear Model - linear with rolling resistance torque"
+    },
+    {
+      "name": "arrlinear",
+      "syntax": "arrlinear",
+      "description": "Assign Adhesive Rolling Resistance Linear Model"
+    },
+    {
+      "name": "bilinear",
+      "syntax": "bilinear",
+      "description": "Assign Bilinear Contact Model"
+    },
+    {
+      "name": "burger",
+      "syntax": "burger",
+      "description": "Assign Burger's Model - viscoelastic behavior"
+    },
+    {
+      "name": "fish",
+      "syntax": "fish",
+      "description": "Assign FISH Model - custom user-defined contact model"
+    },
+    {
+      "name": "flatjoint",
+      "syntax": "flatjoint",
+      "description": "Assign Flat-Joint Model - smooth joint surfaces"
+    },
+    {
+      "name": "hysteretic",
+      "syntax": "hysteretic",
+      "description": "Assign Hysteretic Model - loading/unloading paths"
+    },
+    {
+      "name": "lineardipole",
+      "syntax": "lineardipole",
+      "description": "Assign Linear Dipole Model (3D ONLY)"
+    },
+    {
+      "name": "smoothjoint",
+      "syntax": "smoothjoint",
+      "description": "Assign Smooth-Joint Model - reduced interlocking"
+    },
+    {
+      "name": "softbond",
+      "syntax": "softbond",
+      "description": "Assign Soft-Bond Model - crushable bonds"
+    },
+    {
+      "name": "null",
+      "syntax": "null",
+      "description": "Assign Null Model - no force transmission, effectively disables contact"
+    }
+  ],
+  "examples": [
+    {
+      "command": "contact model null range group 'bottom-platen' match 2",
+      "description": "Disable contacts in 'bottom-platen' group with match count of 2 (from BBM example)",
+      "model": "null"
+    },
+    {
+      "command": "contact model 'linearpbond' range contact type 'ball-ball'",
+      "description": "Change all ball-ball contacts to linearpbond model (from CMAT example)",
+      "model": "linearpbond"
+    },
+    {
+      "command": "contact model flatjoint",
+      "description": "Assign flatjoint model to all contacts (from rock testing example)",
+      "model": "flatjoint"
+    },
+    {
+      "command": "contact model linear range group 'soil'",
+      "description": "Change contacts in 'soil' group to linear model",
+      "model": "linear"
+    },
+    {
+      "command": "contact model hertz range contact type 'ball-ball'",
+      "description": "Switch ball-ball contacts to nonlinear Hertz model",
+      "model": "hertz"
+    },
+    {
+      "command": "contact model linearcbond range contact",
+      "description": "Change all contacts to linearcbond model for point-based bonding",
+      "model": "linearcbond"
+    },
+    {
+      "command": "contact model mechanical linear",
+      "description": "Explicitly assign linear model to mechanical contacts",
+      "model": "linear"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "methods": [
+      {
+        "signature": "contact.set_model(model_name)",
+        "description": "Set contact model on a contact object",
+        "example": "for c in it.contact.list(): c.set_model('linear')"
+      },
+      {
+        "signature": "contact.model()",
+        "description": "Get current contact model name",
+        "example": "model_name = contact.model()"
+      }
+    ],
+    "notes": [
+      "Python SDK requires iteration over contacts - cannot assign model to all contacts in one call",
+      "Command interface is more efficient for bulk model assignment",
+      "Use range specification in command interface to avoid Python iteration"
+    ]
+  },
+  "model_properties_reference": {
+    "path": "model-properties/index.json",
+    "description": "After assigning a model, set its properties using 'contact property' command. See model-properties documentation for available properties.",
+    "quick_links": {
+      "linear": "model-properties/linear.json",
+      "linearcbond": "model-properties/linearcbond.json",
+      "linearpbond": "model-properties/linearpbond.json",
+      "hertz": "model-properties/hertz.json",
+      "rrlinear": "model-properties/rrlinear.json"
+    }
+  },
+  "related_commands": [
+    "contact property",
+    "contact cmat add",
+    "contact cmat default",
+    "contact cmat apply"
+  ],
+  "notes": [
+    "WARNING: Changing model COMPLETELY REPLACES the contact model - all previous model data is LOST",
+    "Affects EXISTING contacts, not future contact creation (unlike CMAT commands)",
+    "After changing model, you must set the new model's properties using 'contact property'",
+    "If no range specified, ALL contacts are affected",
+    "Can assign built-in models or custom plug-in models (registered with 'program load')",
+    "Use 'null' model to effectively disable contacts without deleting them",
+    "Model assignment takes effect immediately",
+    "More efficient than Python iteration for bulk model changes"
+  ],
+  "model_vs_cmat": {
+    "contact_model": {
+      "target": "EXISTING contacts",
+      "timing": "After contacts are created (runtime)",
+      "scope": "Replaces current contact models",
+      "use_case": "Change model type during simulation or after model creation",
+      "example": "contact model linearpbond range group 'soil'",
+      "data_retention": "All previous model data is LOST"
+    },
+    "contact_cmat": {
+      "target": "FUTURE contacts (rules)",
+      "timing": "Before contacts are created (setup)",
+      "scope": "Defines automatic model assignment rules",
+      "use_case": "Configure which model to use when contacts are created",
+      "example": "contact cmat add model linearpbond range group 'soil'",
+      "data_retention": "N/A - no existing data"
+    },
+    "workflow": "Use CMAT to configure initial model assignment, use 'contact model' if you need to change models during simulation"
+  },
+  "model_vs_property": {
+    "contact_model": {
+      "function": "Change the contact model TYPE",
+      "scope": "Replaces entire contact model",
+      "data_loss": "YES - all previous model-specific data lost",
+      "example": "contact model hertz → changes from linear to hertz",
+      "followed_by": "Must set new model's properties with 'contact property'"
+    },
+    "contact_property": {
+      "function": "Modify contact model PROPERTIES",
+      "scope": "Updates property values within current model",
+      "data_loss": "NO - only specified properties change",
+      "example": "contact property kn 1e8 → updates stiffness",
+      "followed_by": "N/A - properties directly updated"
+    },
+    "typical_sequence": "1. Assign model: contact model linearpbond\n2. Set properties: contact property pb_kn 1e9 pb_ks 5e8 pb_ten 1e7"
+  },
+  "common_use_cases": [
+    {
+      "use_case": "Switch from unbonded to bonded simulation",
+      "workflow": [
+        "1. Initial simulation with linear model",
+        "2. Decide to add bonds at certain point",
+        "3. Change model: contact model linearpbond range contact",
+        "4. Set bond properties: contact property pb_kn 1e9 pb_ks 5e8 pb_ten 1e7 pb_coh 5e6",
+        "5. Activate bonds: contact method bond range contact"
+      ],
+      "notes": "All linear model data (forces, slip state) is lost when changing to linearpbond"
+    },
+    {
+      "use_case": "Disable specific contacts",
+      "workflow": [
+        "1. Identify contacts to disable (e.g., platen-wall contacts)",
+        "2. Assign null model: contact model null range group 'platen' match 2",
+        "3. These contacts no longer transmit forces"
+      ],
+      "notes": "Contacts remain in the model but transmit no forces"
+    },
+    {
+      "use_case": "Change to nonlinear model for impact",
+      "workflow": [
+        "1. Initial quasi-static phase with linear model",
+        "2. Before impact phase, change to Hertz: contact model hertz range contact",
+        "3. Set Hertz properties: contact property hz_shear 2e9 hz_poiss 0.25",
+        "4. Run impact simulation with nonlinear elasticity"
+      ],
+      "notes": "Hertz model better captures impact mechanics but is more computationally expensive"
+    },
+    {
+      "use_case": "Different models for different contact types",
+      "workflow": [
+        "1. Assign different models to different types:",
+        "   contact model hertz range contact type 'ball-ball'",
+        "   contact model linear range contact type 'ball-facet'",
+        "2. Set properties for each model type using ranges"
+      ]
+    }
+  ],
+  "available_models_summary": {
+    "linear_based": [
+      "linear - Basic elastic-frictional",
+      "linearpbond - With parallel bonds (force + moment)",
+      "linearcbond - With contact bonds (force only)",
+      "rrlinear - With rolling resistance",
+      "arrlinear - With adhesive rolling resistance"
+    ],
+    "nonlinear": [
+      "hertz - Nonlinear elastic (Hertz theory)",
+      "hysteretic - Loading/unloading paths",
+      "burger - Viscoelastic"
+    ],
+    "specialized": [
+      "flatjoint - Smooth joint surfaces",
+      "smoothjoint - Reduced interlocking",
+      "softbond - Crushable bonds",
+      "bilinear - Bilinear response",
+      "lineardipole - Dipole model (3D only)"
+    ],
+    "custom": [
+      "fish - User-defined in FISH language",
+      "null - No force transmission"
+    ]
+  },
+  "typical_workflow": [
+    "1. Check current contact models (optional): list contacts or query model",
+    "2. Identify contacts to modify (use range if needed)",
+    "3. Execute 'contact model <name>' with desired model",
+    "4. WARNING: All previous model data is lost at this point",
+    "5. Set new model's properties using 'contact property'",
+    "6. If bonding model, activate bonds using 'contact method bond'",
+    "7. Verify changes (optional): check contact properties",
+    "8. Continue simulation - new model takes effect immediately"
+  ],
+  "range_specifications": {
+    "description": "Range limits which contacts are affected by the model change",
+    "common_ranges": {
+      "contact": "All contacts (default if omitted)",
+      "group <name>": "Contacts in specified group",
+      "type <type>": "Contacts of specific type (ball-ball, ball-facet, etc.)",
+      "model <model>": "Contacts currently using specific model",
+      "id <id1> <id2>": "Specific contact between two objects"
+    },
+    "examples": [
+      "contact model linear range group 'soil'",
+      "contact model hertz range contact type 'ball-ball'",
+      "contact model null range model linear"
+    ]
+  },
+  "warnings": [
+    {
+      "type": "data_loss",
+      "message": "Changing model DESTROYS all previous model-specific data (forces, moments, bond state, etc.)",
+      "severity": "HIGH",
+      "mitigation": "Save important contact data before changing models if needed. Consider using 'contact property' instead if only updating parameters."
+    },
+    {
+      "type": "immediate_effect",
+      "message": "Model change takes effect immediately - may cause sudden force changes or instability",
+      "severity": "MEDIUM",
+      "mitigation": "Consider changing models at equilibrium points or use careful parameter selection"
+    },
+    {
+      "type": "property_reset",
+      "message": "New model has default property values - must set properties explicitly after model change",
+      "severity": "MEDIUM",
+      "mitigation": "Always follow 'contact model' with 'contact property' to set appropriate values"
+    },
+    {
+      "type": "no_range_means_all",
+      "message": "If no range specified, ALL contacts are affected",
+      "severity": "LOW",
+      "mitigation": "Use range specification if you only want to change specific contacts"
+    }
+  ],
+  "troubleshooting": [
+    {
+      "issue": "Contacts have unexpected behavior after model change",
+      "solutions": [
+        "Check if you set properties for the new model - default values may be inappropriate",
+        "Use 'contact property' to set all required properties for the new model",
+        "Refer to model-properties documentation for required property values"
+      ]
+    },
+    {
+      "issue": "Forces suddenly changed or simulation became unstable",
+      "solutions": [
+        "Model change is destructive - previous forces are lost",
+        "New model may have very different stiffness characteristics",
+        "Consider reducing timestep temporarily after model change",
+        "Verify property values are appropriate for new model"
+      ]
+    },
+    {
+      "issue": "Changed to linearpbond but no bonding behavior",
+      "solutions": [
+        "Model assignment doesn't activate bonds automatically",
+        "Must set bond properties: contact property pb_kn pb_ks pb_ten pb_coh",
+        "Must activate bonds: contact method bond range contact"
+      ]
+    },
+    {
+      "issue": "Want to change model for contacts to be created",
+      "solutions": [
+        "Use 'contact cmat' commands instead - 'contact model' only affects existing contacts",
+        "Or change model after contacts are created using 'contact model'"
+      ]
+    }
+  ],
+  "performance_considerations": {
+    "command_interface": "Very fast - bulk model assignment in C++ core",
+    "python_iteration": "Slower - Python loop overhead",
+    "model_complexity": "Different models have different computational costs (linear < hertz < linearpbond)",
+    "recommendation": "Use command interface for bulk changes, Python for selective/conditional changes"
+  }
+}

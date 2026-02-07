@@ -1,0 +1,1407 @@
+{
+  "module": "clump",
+  "description": "Natural language keywords for clump module API search",
+  "keywords": {
+    "clump containing point": [
+      "itasca.clump.containing"
+    ],
+    "point in clump": [
+      "itasca.clump.containing"
+    ],
+    "which clump contains": [
+      "itasca.clump.containing"
+    ],
+    "count clumps": [
+      "itasca.clump.count"
+    ],
+    "number of clumps": [
+      "itasca.clump.count"
+    ],
+    "how many clumps": [
+      "itasca.clump.count"
+    ],
+    "total clumps": [
+      "itasca.clump.count"
+    ],
+    "all energies": [
+      "itasca.clump.energies"
+    ],
+    "energy dictionary": [
+      "itasca.clump.energies"
+    ],
+    "list energies": [
+      "itasca.clump.energies"
+    ],
+    "clump energy": [
+      "itasca.clump.energy"
+    ],
+    "kinetic energy": [
+      "itasca.clump.energy"
+    ],
+    "total energy": [
+      "itasca.clump.energy"
+    ],
+    "body energy": [
+      "itasca.clump.energy"
+    ],
+    "damp energy": [
+      "itasca.clump.energy"
+    ],
+    "find clump": [
+      "itasca.clump.find"
+    ],
+    "get clump": [
+      "itasca.clump.find"
+    ],
+    "search clump": [
+      "itasca.clump.find"
+    ],
+    "clump by id": [
+      "itasca.clump.find"
+    ],
+    "clumps in box": [
+      "itasca.clump.inbox"
+    ],
+    "clumps in region": [
+      "itasca.clump.inbox"
+    ],
+    "spatial query": [
+      "itasca.clump.inbox"
+    ],
+    "list clumps": [
+      "itasca.clump.list"
+    ],
+    "iterate clumps": [
+      "itasca.clump.list"
+    ],
+    "all clumps": [
+      "itasca.clump.list"
+    ],
+    "get clumps": [
+      "itasca.clump.list"
+    ],
+    "loop clumps": [
+      "itasca.clump.list"
+    ],
+    "maximum clump id": [
+      "itasca.clump.maxid"
+    ],
+    "max clump id": [
+      "itasca.clump.maxid"
+    ],
+    "highest id": [
+      "itasca.clump.maxid"
+    ],
+    "nearest clump": [
+      "itasca.clump.near"
+    ],
+    "closest clump": [
+      "itasca.clump.near"
+    ],
+    "clump near point": [
+      "itasca.clump.near"
+    ],
+    "find nearest": [
+      "itasca.clump.near"
+    ],
+    "create clump": [
+      "itasca.command('clump generate')"
+    ],
+    "create clumps": [
+      "itasca.command('clump generate')"
+    ],
+    "new clump": [
+      "itasca.command('clump generate')"
+    ],
+    "make clump": [
+      "itasca.command('clump generate')"
+    ],
+    "add clump": [
+      "itasca.command('clump generate')"
+    ],
+    "generate clump": [
+      "itasca.command('clump generate')"
+    ],
+    "clump template": [
+      "itasca.clump.Clump.template"
+    ],
+    "complex particle": [
+      "itasca.clump"
+    ],
+    "rigid aggregate": [
+      "itasca.clump"
+    ],
+    "pebble aggregate": [
+      "itasca.clump"
+    ],
+    "clump id": [
+      "itasca.clump.Clump.id"
+    ],
+    "get id": [
+      "itasca.clump.Clump.id"
+    ],
+    "clump identifier": [
+      "itasca.clump.Clump.id"
+    ],
+    "clump valid": [
+      "itasca.clump.Clump.valid"
+    ],
+    "check valid": [
+      "itasca.clump.Clump.valid"
+    ],
+    "is valid": [
+      "itasca.clump.Clump.valid"
+    ],
+    "clump exists": [
+      "itasca.clump.Clump.valid"
+    ],
+    "delete clump": [
+      "itasca.clump.Clump.delete"
+    ],
+    "remove clump": [
+      "itasca.clump.Clump.delete"
+    ],
+    "destroy clump": [
+      "itasca.clump.Clump.delete"
+    ],
+    "clump position": [
+      "itasca.clump.Clump.pos"
+    ],
+    "get position": [
+      "itasca.clump.Clump.pos"
+    ],
+    "clump location": [
+      "itasca.clump.Clump.pos"
+    ],
+    "centroid": [
+      "itasca.clump.Clump.pos"
+    ],
+    "mass center": [
+      "itasca.clump.Clump.pos"
+    ],
+    "position x": [
+      "itasca.clump.Clump.pos_x"
+    ],
+    "clump x coordinate": [
+      "itasca.clump.Clump.pos_x"
+    ],
+    "x position": [
+      "itasca.clump.Clump.pos_x"
+    ],
+    "horizontal position": [
+      "itasca.clump.Clump.pos_x"
+    ],
+    "position y": [
+      "itasca.clump.Clump.pos_y"
+    ],
+    "clump y coordinate": [
+      "itasca.clump.Clump.pos_y"
+    ],
+    "y position": [
+      "itasca.clump.Clump.pos_y"
+    ],
+    "position z": [
+      "itasca.clump.Clump.pos_z"
+    ],
+    "clump z coordinate": [
+      "itasca.clump.Clump.pos_z"
+    ],
+    "z position": [
+      "itasca.clump.Clump.pos_z"
+    ],
+    "vertical position": [
+      "itasca.clump.Clump.pos_z"
+    ],
+    "clump height": [
+      "itasca.clump.Clump.pos_z"
+    ],
+    "set position": [
+      "itasca.clump.Clump.set_pos"
+    ],
+    "move clump": [
+      "itasca.clump.Clump.set_pos"
+    ],
+    "set location": [
+      "itasca.clump.Clump.set_pos"
+    ],
+    "relocate clump": [
+      "itasca.clump.Clump.set_pos"
+    ],
+    "set position x": [
+      "itasca.clump.Clump.set_pos_x"
+    ],
+    "set x coordinate": [
+      "itasca.clump.Clump.set_pos_x"
+    ],
+    "move clump x": [
+      "itasca.clump.Clump.set_pos_x"
+    ],
+    "set position y": [
+      "itasca.clump.Clump.set_pos_y"
+    ],
+    "set y coordinate": [
+      "itasca.clump.Clump.set_pos_y"
+    ],
+    "move clump y": [
+      "itasca.clump.Clump.set_pos_y"
+    ],
+    "set position z": [
+      "itasca.clump.Clump.set_pos_z"
+    ],
+    "set z coordinate": [
+      "itasca.clump.Clump.set_pos_z"
+    ],
+    "move clump z": [
+      "itasca.clump.Clump.set_pos_z"
+    ],
+    "set height": [
+      "itasca.clump.Clump.set_pos_z"
+    ],
+    "clump orientation": [
+      "itasca.clump.Clump.euler"
+    ],
+    "get orientation": [
+      "itasca.clump.Clump.euler"
+    ],
+    "euler angles": [
+      "itasca.clump.Clump.euler"
+    ],
+    "rotation angles": [
+      "itasca.clump.Clump.euler"
+    ],
+    "orientation x": [
+      "itasca.clump.Clump.euler_x"
+    ],
+    "euler x": [
+      "itasca.clump.Clump.euler_x"
+    ],
+    "rotation about x": [
+      "itasca.clump.Clump.euler_x"
+    ],
+    "x euler angle": [
+      "itasca.clump.Clump.euler_x"
+    ],
+    "orientation y": [
+      "itasca.clump.Clump.euler_y"
+    ],
+    "euler y": [
+      "itasca.clump.Clump.euler_y"
+    ],
+    "rotation about y": [
+      "itasca.clump.Clump.euler_y"
+    ],
+    "y euler angle": [
+      "itasca.clump.Clump.euler_y"
+    ],
+    "orientation z": [
+      "itasca.clump.Clump.euler_z"
+    ],
+    "euler z": [
+      "itasca.clump.Clump.euler_z"
+    ],
+    "rotation about z": [
+      "itasca.clump.Clump.euler_z"
+    ],
+    "z euler angle": [
+      "itasca.clump.Clump.euler_z"
+    ],
+    "set orientation": [
+      "itasca.clump.Clump.set_euler"
+    ],
+    "set euler": [
+      "itasca.clump.Clump.set_euler"
+    ],
+    "rotate clump": [
+      "itasca.clump.Clump.rotate"
+    ],
+    "change orientation": [
+      "itasca.clump.Clump.set_euler"
+    ],
+    "set orientation x": [
+      "itasca.clump.Clump.set_euler_x"
+    ],
+    "set euler x": [
+      "itasca.clump.Clump.set_euler_x"
+    ],
+    "set rotation x": [
+      "itasca.clump.Clump.set_euler_x"
+    ],
+    "set orientation y": [
+      "itasca.clump.Clump.set_euler_y"
+    ],
+    "set euler y": [
+      "itasca.clump.Clump.set_euler_y"
+    ],
+    "set rotation y": [
+      "itasca.clump.Clump.set_euler_y"
+    ],
+    "set orientation z": [
+      "itasca.clump.Clump.set_euler_z"
+    ],
+    "set euler z": [
+      "itasca.clump.Clump.set_euler_z"
+    ],
+    "set rotation z": [
+      "itasca.clump.Clump.set_euler_z"
+    ],
+    "clump displacement": [
+      "itasca.clump.Clump.disp"
+    ],
+    "get displacement": [
+      "itasca.clump.Clump.disp"
+    ],
+    "displacement vector": [
+      "itasca.clump.Clump.disp"
+    ],
+    "total displacement": [
+      "itasca.clump.Clump.disp"
+    ],
+    "displacement x": [
+      "itasca.clump.Clump.disp_x"
+    ],
+    "x displacement": [
+      "itasca.clump.Clump.disp_x"
+    ],
+    "horizontal displacement": [
+      "itasca.clump.Clump.disp_x"
+    ],
+    "displacement y": [
+      "itasca.clump.Clump.disp_y"
+    ],
+    "y displacement": [
+      "itasca.clump.Clump.disp_y"
+    ],
+    "displacement z": [
+      "itasca.clump.Clump.disp_z"
+    ],
+    "z displacement": [
+      "itasca.clump.Clump.disp_z"
+    ],
+    "vertical displacement": [
+      "itasca.clump.Clump.disp_z"
+    ],
+    "set displacement": [
+      "itasca.clump.Clump.set_disp"
+    ],
+    "change displacement": [
+      "itasca.clump.Clump.set_disp"
+    ],
+    "set displacement x": [
+      "itasca.clump.Clump.set_disp_x"
+    ],
+    "set x displacement": [
+      "itasca.clump.Clump.set_disp_x"
+    ],
+    "set displacement y": [
+      "itasca.clump.Clump.set_disp_y"
+    ],
+    "set y displacement": [
+      "itasca.clump.Clump.set_disp_y"
+    ],
+    "set displacement z": [
+      "itasca.clump.Clump.set_disp_z"
+    ],
+    "set z displacement": [
+      "itasca.clump.Clump.set_disp_z"
+    ],
+    "clump velocity": [
+      "itasca.clump.Clump.vel"
+    ],
+    "get velocity": [
+      "itasca.clump.Clump.vel"
+    ],
+    "linear velocity": [
+      "itasca.clump.Clump.vel"
+    ],
+    "velocity vector": [
+      "itasca.clump.Clump.vel"
+    ],
+    "velocity x": [
+      "itasca.clump.Clump.vel_x"
+    ],
+    "x velocity": [
+      "itasca.clump.Clump.vel_x"
+    ],
+    "horizontal velocity": [
+      "itasca.clump.Clump.vel_x"
+    ],
+    "clump vel x": [
+      "itasca.clump.Clump.vel_x"
+    ],
+    "velocity y": [
+      "itasca.clump.Clump.vel_y"
+    ],
+    "y velocity": [
+      "itasca.clump.Clump.vel_y"
+    ],
+    "clump vel y": [
+      "itasca.clump.Clump.vel_y"
+    ],
+    "velocity z": [
+      "itasca.clump.Clump.vel_z"
+    ],
+    "z velocity": [
+      "itasca.clump.Clump.vel_z"
+    ],
+    "vertical velocity": [
+      "itasca.clump.Clump.vel_z"
+    ],
+    "clump vel z": [
+      "itasca.clump.Clump.vel_z"
+    ],
+    "set velocity": [
+      "itasca.clump.Clump.set_vel"
+    ],
+    "change velocity": [
+      "itasca.clump.Clump.set_vel"
+    ],
+    "update velocity": [
+      "itasca.clump.Clump.set_vel"
+    ],
+    "set velocity x": [
+      "itasca.clump.Clump.set_vel_x"
+    ],
+    "set x velocity": [
+      "itasca.clump.Clump.set_vel_x"
+    ],
+    "change x velocity": [
+      "itasca.clump.Clump.set_vel_x"
+    ],
+    "set velocity y": [
+      "itasca.clump.Clump.set_vel_y"
+    ],
+    "set y velocity": [
+      "itasca.clump.Clump.set_vel_y"
+    ],
+    "change y velocity": [
+      "itasca.clump.Clump.set_vel_y"
+    ],
+    "set velocity z": [
+      "itasca.clump.Clump.set_vel_z"
+    ],
+    "set z velocity": [
+      "itasca.clump.Clump.set_vel_z"
+    ],
+    "change z velocity": [
+      "itasca.clump.Clump.set_vel_z"
+    ],
+    "clump spin": [
+      "itasca.clump.Clump.spin"
+    ],
+    "angular velocity": [
+      "itasca.clump.Clump.spin"
+    ],
+    "rotation velocity": [
+      "itasca.clump.Clump.spin"
+    ],
+    "get spin": [
+      "itasca.clump.Clump.spin"
+    ],
+    "spin vector": [
+      "itasca.clump.Clump.spin"
+    ],
+    "spin x": [
+      "itasca.clump.Clump.spin_x"
+    ],
+    "angular velocity x": [
+      "itasca.clump.Clump.spin_x"
+    ],
+    "rotation rate x": [
+      "itasca.clump.Clump.spin_x"
+    ],
+    "spin about x": [
+      "itasca.clump.Clump.spin_x"
+    ],
+    "spin y": [
+      "itasca.clump.Clump.spin_y"
+    ],
+    "angular velocity y": [
+      "itasca.clump.Clump.spin_y"
+    ],
+    "rotation rate y": [
+      "itasca.clump.Clump.spin_y"
+    ],
+    "spin about y": [
+      "itasca.clump.Clump.spin_y"
+    ],
+    "spin z": [
+      "itasca.clump.Clump.spin_z"
+    ],
+    "angular velocity z": [
+      "itasca.clump.Clump.spin_z"
+    ],
+    "rotation rate z": [
+      "itasca.clump.Clump.spin_z"
+    ],
+    "spin about z": [
+      "itasca.clump.Clump.spin_z"
+    ],
+    "set spin": [
+      "itasca.clump.Clump.set_spin"
+    ],
+    "set angular velocity": [
+      "itasca.clump.Clump.set_spin"
+    ],
+    "change spin": [
+      "itasca.clump.Clump.set_spin"
+    ],
+    "set spin x": [
+      "itasca.clump.Clump.set_spin_x"
+    ],
+    "set angular velocity x": [
+      "itasca.clump.Clump.set_spin_x"
+    ],
+    "set rotation rate x": [
+      "itasca.clump.Clump.set_spin_x"
+    ],
+    "set spin y": [
+      "itasca.clump.Clump.set_spin_y"
+    ],
+    "set angular velocity y": [
+      "itasca.clump.Clump.set_spin_y"
+    ],
+    "set rotation rate y": [
+      "itasca.clump.Clump.set_spin_y"
+    ],
+    "set spin z": [
+      "itasca.clump.Clump.set_spin_z"
+    ],
+    "set angular velocity z": [
+      "itasca.clump.Clump.set_spin_z"
+    ],
+    "set rotation rate z": [
+      "itasca.clump.Clump.set_spin_z"
+    ],
+    "applied force": [
+      "itasca.clump.Clump.force_app"
+    ],
+    "get applied force": [
+      "itasca.clump.Clump.force_app"
+    ],
+    "external force": [
+      "itasca.clump.Clump.force_app"
+    ],
+    "force applied": [
+      "itasca.clump.Clump.force_app"
+    ],
+    "applied force x": [
+      "itasca.clump.Clump.force_app_x"
+    ],
+    "force app x": [
+      "itasca.clump.Clump.force_app_x"
+    ],
+    "x applied force": [
+      "itasca.clump.Clump.force_app_x"
+    ],
+    "applied force y": [
+      "itasca.clump.Clump.force_app_y"
+    ],
+    "force app y": [
+      "itasca.clump.Clump.force_app_y"
+    ],
+    "y applied force": [
+      "itasca.clump.Clump.force_app_y"
+    ],
+    "applied force z": [
+      "itasca.clump.Clump.force_app_z"
+    ],
+    "force app z": [
+      "itasca.clump.Clump.force_app_z"
+    ],
+    "z applied force": [
+      "itasca.clump.Clump.force_app_z"
+    ],
+    "set applied force": [
+      "itasca.clump.Clump.set_force_app"
+    ],
+    "apply force": [
+      "itasca.clump.Clump.set_force_app"
+    ],
+    "set external force": [
+      "itasca.clump.Clump.set_force_app"
+    ],
+    "set applied force x": [
+      "itasca.clump.Clump.set_force_app_x"
+    ],
+    "set force app x": [
+      "itasca.clump.Clump.set_force_app_x"
+    ],
+    "apply force x": [
+      "itasca.clump.Clump.set_force_app_x"
+    ],
+    "set applied force y": [
+      "itasca.clump.Clump.set_force_app_y"
+    ],
+    "set force app y": [
+      "itasca.clump.Clump.set_force_app_y"
+    ],
+    "apply force y": [
+      "itasca.clump.Clump.set_force_app_y"
+    ],
+    "set applied force z": [
+      "itasca.clump.Clump.set_force_app_z"
+    ],
+    "set force app z": [
+      "itasca.clump.Clump.set_force_app_z"
+    ],
+    "apply force z": [
+      "itasca.clump.Clump.set_force_app_z"
+    ],
+    "total contact force": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "get total contact force": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "sum contact forces": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "clump contact force sum": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "total force from contacts": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "force from contacts": [
+      "itasca.clump.Clump.force_contact"
+    ],
+    "total contact force x": [
+      "itasca.clump.Clump.force_contact_x"
+    ],
+    "total force contact x": [
+      "itasca.clump.Clump.force_contact_x"
+    ],
+    "x total contact force": [
+      "itasca.clump.Clump.force_contact_x"
+    ],
+    "total contact force y": [
+      "itasca.clump.Clump.force_contact_y"
+    ],
+    "total force contact y": [
+      "itasca.clump.Clump.force_contact_y"
+    ],
+    "y total contact force": [
+      "itasca.clump.Clump.force_contact_y"
+    ],
+    "total contact force z": [
+      "itasca.clump.Clump.force_contact_z"
+    ],
+    "total force contact z": [
+      "itasca.clump.Clump.force_contact_z"
+    ],
+    "z total contact force": [
+      "itasca.clump.Clump.force_contact_z"
+    ],
+    "set contact force": [
+      "itasca.clump.Clump.set_force_contact"
+    ],
+    "change contact force": [
+      "itasca.clump.Clump.set_force_contact"
+    ],
+    "set contact force x": [
+      "itasca.clump.Clump.set_force_contact_x"
+    ],
+    "set force contact x": [
+      "itasca.clump.Clump.set_force_contact_x"
+    ],
+    "set contact force y": [
+      "itasca.clump.Clump.set_force_contact_y"
+    ],
+    "set force contact y": [
+      "itasca.clump.Clump.set_force_contact_y"
+    ],
+    "set contact force z": [
+      "itasca.clump.Clump.set_force_contact_z"
+    ],
+    "set force contact z": [
+      "itasca.clump.Clump.set_force_contact_z"
+    ],
+    "unbalanced force": [
+      "itasca.clump.Clump.force_unbal"
+    ],
+    "net force": [
+      "itasca.clump.Clump.force_unbal"
+    ],
+    "resultant force": [
+      "itasca.clump.Clump.force_unbal"
+    ],
+    "residual force": [
+      "itasca.clump.Clump.force_unbal"
+    ],
+    "out of balance force": [
+      "itasca.clump.Clump.force_unbal"
+    ],
+    "unbalanced force x": [
+      "itasca.clump.Clump.force_unbal_x"
+    ],
+    "net force x": [
+      "itasca.clump.Clump.force_unbal_x"
+    ],
+    "force unbal x": [
+      "itasca.clump.Clump.force_unbal_x"
+    ],
+    "unbalanced force y": [
+      "itasca.clump.Clump.force_unbal_y"
+    ],
+    "net force y": [
+      "itasca.clump.Clump.force_unbal_y"
+    ],
+    "force unbal y": [
+      "itasca.clump.Clump.force_unbal_y"
+    ],
+    "unbalanced force z": [
+      "itasca.clump.Clump.force_unbal_z"
+    ],
+    "net force z": [
+      "itasca.clump.Clump.force_unbal_z"
+    ],
+    "force unbal z": [
+      "itasca.clump.Clump.force_unbal_z"
+    ],
+    "applied moment": [
+      "itasca.clump.Clump.moment_app"
+    ],
+    "applied torque": [
+      "itasca.clump.Clump.moment_app"
+    ],
+    "get moment": [
+      "itasca.clump.Clump.moment_app"
+    ],
+    "external moment": [
+      "itasca.clump.Clump.moment_app"
+    ],
+    "applied moment x": [
+      "itasca.clump.Clump.moment_app_x"
+    ],
+    "moment app x": [
+      "itasca.clump.Clump.moment_app_x"
+    ],
+    "torque x": [
+      "itasca.clump.Clump.moment_app_x"
+    ],
+    "x applied moment": [
+      "itasca.clump.Clump.moment_app_x"
+    ],
+    "applied moment y": [
+      "itasca.clump.Clump.moment_app_y"
+    ],
+    "moment app y": [
+      "itasca.clump.Clump.moment_app_y"
+    ],
+    "torque y": [
+      "itasca.clump.Clump.moment_app_y"
+    ],
+    "y applied moment": [
+      "itasca.clump.Clump.moment_app_y"
+    ],
+    "applied moment z": [
+      "itasca.clump.Clump.moment_app_z"
+    ],
+    "moment app z": [
+      "itasca.clump.Clump.moment_app_z"
+    ],
+    "torque z": [
+      "itasca.clump.Clump.moment_app_z"
+    ],
+    "z applied moment": [
+      "itasca.clump.Clump.moment_app_z"
+    ],
+    "set moment": [
+      "itasca.clump.Clump.set_moment_app"
+    ],
+    "apply moment": [
+      "itasca.clump.Clump.set_moment_app"
+    ],
+    "apply torque": [
+      "itasca.clump.Clump.set_moment_app"
+    ],
+    "set applied moment": [
+      "itasca.clump.Clump.set_moment_app"
+    ],
+    "set applied moment x": [
+      "itasca.clump.Clump.set_moment_app_x"
+    ],
+    "set moment app x": [
+      "itasca.clump.Clump.set_moment_app_x"
+    ],
+    "apply moment x": [
+      "itasca.clump.Clump.set_moment_app_x"
+    ],
+    "set torque x": [
+      "itasca.clump.Clump.set_moment_app_x"
+    ],
+    "set applied moment y": [
+      "itasca.clump.Clump.set_moment_app_y"
+    ],
+    "set moment app y": [
+      "itasca.clump.Clump.set_moment_app_y"
+    ],
+    "apply moment y": [
+      "itasca.clump.Clump.set_moment_app_y"
+    ],
+    "set torque y": [
+      "itasca.clump.Clump.set_moment_app_y"
+    ],
+    "set applied moment z": [
+      "itasca.clump.Clump.set_moment_app_z"
+    ],
+    "set moment app z": [
+      "itasca.clump.Clump.set_moment_app_z"
+    ],
+    "apply moment z": [
+      "itasca.clump.Clump.set_moment_app_z"
+    ],
+    "set torque z": [
+      "itasca.clump.Clump.set_moment_app_z"
+    ],
+    "contact moment": [
+      "itasca.clump.Clump.moment_contact"
+    ],
+    "contact torque": [
+      "itasca.clump.Clump.moment_contact"
+    ],
+    "total contact moment": [
+      "itasca.clump.Clump.moment_contact"
+    ],
+    "get contact moment": [
+      "itasca.clump.Clump.moment_contact"
+    ],
+    "contact moment x": [
+      "itasca.clump.Clump.moment_contact_x"
+    ],
+    "moment contact x": [
+      "itasca.clump.Clump.moment_contact_x"
+    ],
+    "x contact moment": [
+      "itasca.clump.Clump.moment_contact_x"
+    ],
+    "contact moment y": [
+      "itasca.clump.Clump.moment_contact_y"
+    ],
+    "moment contact y": [
+      "itasca.clump.Clump.moment_contact_y"
+    ],
+    "y contact moment": [
+      "itasca.clump.Clump.moment_contact_y"
+    ],
+    "contact moment z": [
+      "itasca.clump.Clump.moment_contact_z"
+    ],
+    "moment contact z": [
+      "itasca.clump.Clump.moment_contact_z"
+    ],
+    "z contact moment": [
+      "itasca.clump.Clump.moment_contact_z"
+    ],
+    "set contact moment": [
+      "itasca.clump.Clump.set_moment_contact"
+    ],
+    "change contact moment": [
+      "itasca.clump.Clump.set_moment_contact"
+    ],
+    "set contact moment x": [
+      "itasca.clump.Clump.set_moment_contact_x"
+    ],
+    "set moment contact x": [
+      "itasca.clump.Clump.set_moment_contact_x"
+    ],
+    "set contact moment y": [
+      "itasca.clump.Clump.set_moment_contact_y"
+    ],
+    "set moment contact y": [
+      "itasca.clump.Clump.set_moment_contact_y"
+    ],
+    "set contact moment z": [
+      "itasca.clump.Clump.set_moment_contact_z"
+    ],
+    "set moment contact z": [
+      "itasca.clump.Clump.set_moment_contact_z"
+    ],
+    "unbalanced moment": [
+      "itasca.clump.Clump.moment_unbal"
+    ],
+    "net moment": [
+      "itasca.clump.Clump.moment_unbal"
+    ],
+    "resultant moment": [
+      "itasca.clump.Clump.moment_unbal"
+    ],
+    "residual moment": [
+      "itasca.clump.Clump.moment_unbal"
+    ],
+    "out of balance moment": [
+      "itasca.clump.Clump.moment_unbal"
+    ],
+    "unbalanced moment x": [
+      "itasca.clump.Clump.moment_unbal_x"
+    ],
+    "net moment x": [
+      "itasca.clump.Clump.moment_unbal_x"
+    ],
+    "moment unbal x": [
+      "itasca.clump.Clump.moment_unbal_x"
+    ],
+    "unbalanced moment y": [
+      "itasca.clump.Clump.moment_unbal_y"
+    ],
+    "net moment y": [
+      "itasca.clump.Clump.moment_unbal_y"
+    ],
+    "moment unbal y": [
+      "itasca.clump.Clump.moment_unbal_y"
+    ],
+    "unbalanced moment z": [
+      "itasca.clump.Clump.moment_unbal_z"
+    ],
+    "net moment z": [
+      "itasca.clump.Clump.moment_unbal_z"
+    ],
+    "moment unbal z": [
+      "itasca.clump.Clump.moment_unbal_z"
+    ],
+    "clump mass": [
+      "itasca.clump.Clump.mass"
+    ],
+    "get mass": [
+      "itasca.clump.Clump.mass"
+    ],
+    "inertial mass": [
+      "itasca.clump.Clump.mass"
+    ],
+    "real mass": [
+      "itasca.clump.Clump.mass_real"
+    ],
+    "gravitational mass": [
+      "itasca.clump.Clump.mass_real"
+    ],
+    "clump density": [
+      "itasca.clump.Clump.density"
+    ],
+    "get density": [
+      "itasca.clump.Clump.density"
+    ],
+    "set density": [
+      "itasca.clump.Clump.set_density"
+    ],
+    "change density": [
+      "itasca.clump.Clump.set_density"
+    ],
+    "clump volume": [
+      "itasca.clump.Clump.vol"
+    ],
+    "get volume": [
+      "itasca.clump.Clump.vol"
+    ],
+    "set volume": [
+      "itasca.clump.Clump.set_vol"
+    ],
+    "clump damping": [
+      "itasca.clump.Clump.damp"
+    ],
+    "local damping": [
+      "itasca.clump.Clump.damp"
+    ],
+    "get damping": [
+      "itasca.clump.Clump.damp"
+    ],
+    "set damping": [
+      "itasca.clump.Clump.set_damp"
+    ],
+    "moment of inertia": [
+      "itasca.clump.Clump.moi"
+    ],
+    "inertia tensor": [
+      "itasca.clump.Clump.moi"
+    ],
+    "get moi": [
+      "itasca.clump.Clump.moi"
+    ],
+    "rotational inertia": [
+      "itasca.clump.Clump.moi"
+    ],
+    "real moi": [
+      "itasca.clump.Clump.moi_real"
+    ],
+    "real moment of inertia": [
+      "itasca.clump.Clump.moi_real"
+    ],
+    "gravitational moi": [
+      "itasca.clump.Clump.moi_real"
+    ],
+    "set moi": [
+      "itasca.clump.Clump.set_moi_real"
+    ],
+    "set real moi": [
+      "itasca.clump.Clump.set_moi_real"
+    ],
+    "set moment of inertia": [
+      "itasca.clump.Clump.set_moi_real"
+    ],
+    "principal moi": [
+      "itasca.clump.Clump.moi_prin"
+    ],
+    "principal moments": [
+      "itasca.clump.Clump.moi_prin"
+    ],
+    "principal inertia": [
+      "itasca.clump.Clump.moi_prin"
+    ],
+    "moi prin x": [
+      "itasca.clump.Clump.moi_prin_x"
+    ],
+    "principal moi x": [
+      "itasca.clump.Clump.moi_prin_x"
+    ],
+    "Ixx": [
+      "itasca.clump.Clump.moi_prin_x"
+    ],
+    "moment about x": [
+      "itasca.clump.Clump.moi_prin_x"
+    ],
+    "moi prin y": [
+      "itasca.clump.Clump.moi_prin_y"
+    ],
+    "principal moi y": [
+      "itasca.clump.Clump.moi_prin_y"
+    ],
+    "Iyy": [
+      "itasca.clump.Clump.moi_prin_y"
+    ],
+    "moment about y": [
+      "itasca.clump.Clump.moi_prin_y"
+    ],
+    "moi prin z": [
+      "itasca.clump.Clump.moi_prin_z"
+    ],
+    "principal moi z": [
+      "itasca.clump.Clump.moi_prin_z"
+    ],
+    "Izz": [
+      "itasca.clump.Clump.moi_prin_z"
+    ],
+    "moment about z": [
+      "itasca.clump.Clump.moi_prin_z"
+    ],
+    "real principal moi": [
+      "itasca.clump.Clump.moi_prin_real"
+    ],
+    "real principal moments": [
+      "itasca.clump.Clump.moi_prin_real"
+    ],
+    "moi prin real x": [
+      "itasca.clump.Clump.moi_prin_real_x"
+    ],
+    "real principal moi x": [
+      "itasca.clump.Clump.moi_prin_real_x"
+    ],
+    "real Ixx": [
+      "itasca.clump.Clump.moi_prin_real_x"
+    ],
+    "moi prin real y": [
+      "itasca.clump.Clump.moi_prin_real_y"
+    ],
+    "real principal moi y": [
+      "itasca.clump.Clump.moi_prin_real_y"
+    ],
+    "real Iyy": [
+      "itasca.clump.Clump.moi_prin_real_y"
+    ],
+    "moi prin real z": [
+      "itasca.clump.Clump.moi_prin_real_z"
+    ],
+    "real principal moi z": [
+      "itasca.clump.Clump.moi_prin_real_z"
+    ],
+    "real Izz": [
+      "itasca.clump.Clump.moi_prin_real_z"
+    ],
+    "set principal moi": [
+      "itasca.clump.Clump.set_moi_prin_real"
+    ],
+    "set real principal moi": [
+      "itasca.clump.Clump.set_moi_prin_real"
+    ],
+    "set principal moments": [
+      "itasca.clump.Clump.set_moi_prin_real"
+    ],
+    "set moi prin real x": [
+      "itasca.clump.Clump.set_moi_prin_real_x"
+    ],
+    "set real principal moi x": [
+      "itasca.clump.Clump.set_moi_prin_real_x"
+    ],
+    "set Ixx": [
+      "itasca.clump.Clump.set_moi_prin_real_x"
+    ],
+    "set moi prin real y": [
+      "itasca.clump.Clump.set_moi_prin_real_y"
+    ],
+    "set real principal moi y": [
+      "itasca.clump.Clump.set_moi_prin_real_y"
+    ],
+    "set Iyy": [
+      "itasca.clump.Clump.set_moi_prin_real_y"
+    ],
+    "set moi prin real z": [
+      "itasca.clump.Clump.set_moi_prin_real_z"
+    ],
+    "set real principal moi z": [
+      "itasca.clump.Clump.set_moi_prin_real_z"
+    ],
+    "set Izz": [
+      "itasca.clump.Clump.set_moi_prin_real_z"
+    ],
+    "moi fix": [
+      "itasca.clump.Clump.moi_fix"
+    ],
+    "moi fixed": [
+      "itasca.clump.Clump.moi_fix"
+    ],
+    "is moi fixed": [
+      "itasca.clump.Clump.moi_fix"
+    ],
+    "moi fixity": [
+      "itasca.clump.Clump.moi_fix"
+    ],
+    "fix moi": [
+      "itasca.clump.Clump.set_moi_fix"
+    ],
+    "lock moi": [
+      "itasca.clump.Clump.set_moi_fix"
+    ],
+    "set moi fixity": [
+      "itasca.clump.Clump.set_moi_fix"
+    ],
+    "freeze moi": [
+      "itasca.clump.Clump.set_moi_fix"
+    ],
+    "clump pebbles": [
+      "itasca.clump.Clump.pebbles"
+    ],
+    "get pebbles": [
+      "itasca.clump.Clump.pebbles"
+    ],
+    "iterate pebbles": [
+      "itasca.clump.Clump.pebbles"
+    ],
+    "add pebble": [
+      "itasca.clump.Clump.add_pebble"
+    ],
+    "create pebble": [
+      "itasca.clump.Clump.add_pebble"
+    ],
+    "insert pebble": [
+      "itasca.clump.Clump.add_pebble"
+    ],
+    "delete pebble": [
+      "itasca.clump.Clump.delete_pebble"
+    ],
+    "remove pebble": [
+      "itasca.clump.Clump.delete_pebble"
+    ],
+    "clump contacts": [
+      "itasca.clump.Clump.contacts"
+    ],
+    "get contacts": [
+      "itasca.clump.Clump.contacts"
+    ],
+    "contact list": [
+      "itasca.clump.Clump.contacts"
+    ],
+    "contact count": [
+      "itasca.clump.Clump.contact_count"
+    ],
+    "number of contacts": [
+      "itasca.clump.Clump.contact_count"
+    ],
+    "how many contacts": [
+      "itasca.clump.Clump.contact_count"
+    ],
+    "clump group": [
+      "itasca.clump.Clump.group"
+    ],
+    "get group": [
+      "itasca.clump.Clump.group"
+    ],
+    "group name": [
+      "itasca.clump.Clump.group"
+    ],
+    "all groups": [
+      "itasca.clump.Clump.groups"
+    ],
+    "get groups": [
+      "itasca.clump.Clump.groups"
+    ],
+    "in group": [
+      "itasca.clump.Clump.in_group"
+    ],
+    "check group": [
+      "itasca.clump.Clump.in_group"
+    ],
+    "belongs to group": [
+      "itasca.clump.Clump.in_group"
+    ],
+    "set group": [
+      "itasca.clump.Clump.set_group"
+    ],
+    "assign group": [
+      "itasca.clump.Clump.set_group"
+    ],
+    "add to group": [
+      "itasca.clump.Clump.set_group"
+    ],
+    "remove group": [
+      "itasca.clump.Clump.group_remove"
+    ],
+    "remove from group": [
+      "itasca.clump.Clump.group_remove"
+    ],
+    "get template": [
+      "itasca.clump.Clump.template"
+    ],
+    "associated template": [
+      "itasca.clump.Clump.template"
+    ],
+    "which template": [
+      "itasca.clump.Clump.template"
+    ],
+    "template orientation": [
+      "itasca.clump.Clump.template_euler"
+    ],
+    "template euler": [
+      "itasca.clump.Clump.template_euler"
+    ],
+    "template rotation": [
+      "itasca.clump.Clump.template_euler"
+    ],
+    "relative orientation": [
+      "itasca.clump.Clump.template_euler"
+    ],
+    "template euler x": [
+      "itasca.clump.Clump.template_euler_x"
+    ],
+    "template orientation x": [
+      "itasca.clump.Clump.template_euler_x"
+    ],
+    "template rotation x": [
+      "itasca.clump.Clump.template_euler_x"
+    ],
+    "template euler y": [
+      "itasca.clump.Clump.template_euler_y"
+    ],
+    "template orientation y": [
+      "itasca.clump.Clump.template_euler_y"
+    ],
+    "template rotation y": [
+      "itasca.clump.Clump.template_euler_y"
+    ],
+    "template euler z": [
+      "itasca.clump.Clump.template_euler_z"
+    ],
+    "template orientation z": [
+      "itasca.clump.Clump.template_euler_z"
+    ],
+    "template rotation z": [
+      "itasca.clump.Clump.template_euler_z"
+    ],
+    "template scale": [
+      "itasca.clump.Clump.template_scale"
+    ],
+    "template scaling": [
+      "itasca.clump.Clump.template_scale"
+    ],
+    "template scale factor": [
+      "itasca.clump.Clump.template_scale"
+    ],
+    "relative scale": [
+      "itasca.clump.Clump.template_scale"
+    ],
+    "calculate properties": [
+      "itasca.clump.Clump.calculate"
+    ],
+    "calculate inertia": [
+      "itasca.clump.Clump.calculate"
+    ],
+    "recalculate": [
+      "itasca.clump.Clump.calculate"
+    ],
+    "rotate about axis": [
+      "itasca.clump.Clump.rotate"
+    ],
+    "scale to sphere": [
+      "itasca.clump.Clump.scale_sphere"
+    ],
+    "equivalent sphere": [
+      "itasca.clump.Clump.scale_sphere"
+    ],
+    "scale volume": [
+      "itasca.clump.Clump.scale_vol"
+    ],
+    "scale to volume": [
+      "itasca.clump.Clump.scale_vol"
+    ],
+    "to global": [
+      "itasca.clump.Clump.to_global"
+    ],
+    "local to global": [
+      "itasca.clump.Clump.to_global"
+    ],
+    "transform to global": [
+      "itasca.clump.Clump.to_global"
+    ],
+    "to principal": [
+      "itasca.clump.Clump.to_prin"
+    ],
+    "global to local": [
+      "itasca.clump.Clump.to_prin"
+    ],
+    "to local": [
+      "itasca.clump.Clump.to_prin"
+    ],
+    "clump fix": [
+      "itasca.clump.Clump.fix"
+    ],
+    "get fixity": [
+      "itasca.clump.Clump.fix"
+    ],
+    "is fixed": [
+      "itasca.clump.Clump.fix"
+    ],
+    "set fixity": [
+      "itasca.clump.Clump.set_fix"
+    ],
+    "fix dof": [
+      "itasca.clump.Clump.set_fix"
+    ],
+    "lock dof": [
+      "itasca.clump.Clump.set_fix"
+    ],
+    "extra data": [
+      "itasca.clump.Clump.extra"
+    ],
+    "get extra": [
+      "itasca.clump.Clump.extra"
+    ],
+    "set extra": [
+      "itasca.clump.Clump.set_extra"
+    ],
+    "clump fragment": [
+      "itasca.clump.Clump.fragment"
+    ],
+    "fragment id": [
+      "itasca.clump.Clump.fragment"
+    ],
+    "set fragment": [
+      "itasca.clump.Clump.set_fragment"
+    ],
+    "point inside": [
+      "itasca.clump.Clump.inside"
+    ],
+    "inside clump": [
+      "itasca.clump.Clump.inside"
+    ],
+    "contains point": [
+      "itasca.clump.Clump.inside"
+    ]
+  }
+}

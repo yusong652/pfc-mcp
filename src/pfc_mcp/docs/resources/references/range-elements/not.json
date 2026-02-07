@@ -1,0 +1,15 @@
+{
+  "name": "not",
+  "category": "element_modifiers",
+  "category_name": "Element Modifiers",
+  "syntax": "<element> ... not",
+  "description": "Invert the element's selection (exclude instead of include).",
+  "examples": [
+    "range group 'boundary' not"
+  ],
+  "search_keywords": [
+    "not",
+    "invert",
+    "exclude"
+  ]
+}

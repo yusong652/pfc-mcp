@@ -1,0 +1,38 @@
+{
+  "command": "clump initialize",
+  "category": "clump",
+  "search_keywords": [
+    "initialize",
+    "attribute",
+    "set"
+  ],
+  "description": "Modify clump attributes. This is a synonym for the clump attribute command. See clump attribute for complete list of available keywords, modifiers, and detailed documentation.",
+  "syntax": "clump initialize <keyword> ... <range>",
+  "notes": [
+    "This command is a synonym for clump attribute",
+    "Refer to clump attribute command for complete documentation",
+    "All keywords, modifiers, and behaviors are identical to clump attribute"
+  ],
+  "examples": [
+    {
+      "command": "clump initialize density 2650.0 range group 'material1'",
+      "description": "Set density for clumps in group (same as clump attribute)"
+    },
+    {
+      "command": "clump initialize velocity (0,0,-1.0)",
+      "description": "Set velocity for all clumps (same as clump attribute)"
+    },
+    {
+      "command": "clump initialize displacement multiply 0.0",
+      "description": "Reset displacement (same as clump attribute with multiply modifier)"
+    },
+    {
+      "command": "clump initialize spin 0 0 0.5 range id 1 100",
+      "description": "Set angular velocity for clumps 1-100 (same as clump attribute)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Same as clump attribute: use Clump.set_*() methods (e.g., Clump.set_density(), Clump.set_vel(), Clump.set_pos()) - requires iteration over clump range"
+  }
+}

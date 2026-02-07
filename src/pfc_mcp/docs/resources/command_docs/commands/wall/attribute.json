@@ -1,0 +1,227 @@
+{
+  "command": "wall attribute",
+  "category": "wall",
+  "search_keywords": [
+    "attribute",
+    "set",
+    "velocity",
+    "displacement"
+  ],
+  "description": "Set the value of wall attributes. This command is a synonym for the wall initialize command. Individual attributes can be listed with the wall list command and all attributes can be visualized. The optional vertex keyword can be used with the velocity keywords to set the vertex velocities for vertices in the specified range. The optional facet keyword can be used with the conveyor velocity keywords to set the facet conveyor velocities for facets in the specified range. Note: Be aware of the distinction between attributes and properties! The tutorial example 'Attributes and Properties' discusses this issue in detail.",
+  "syntax": "wall attribute <facet> <vertex> <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "cutoff-angle",
+      "syntax": "cutoff-angle <f> [modifier]",
+      "description": "Set the cutoff angle (in degrees) for walls. Default: 0. Controls contact state information propagation"
+    },
+    {
+      "name": "displacement",
+      "syntax": "displacement <v> [modifier]",
+      "description": "Accumulated wall displacement vector as a result of cycling"
+    },
+    {
+      "name": "displacement-x",
+      "syntax": "displacement-x <f> [modifier]",
+      "description": "X-component of accumulated wall displacement as a result of cycling"
+    },
+    {
+      "name": "displacement-y",
+      "syntax": "displacement-y <f> [modifier]",
+      "description": "Y-component of accumulated wall displacement as a result of cycling"
+    },
+    {
+      "name": "displacement-z",
+      "syntax": "displacement-z <f> [modifier]",
+      "description": "Z-component of accumulated wall displacement as a result of cycling (3D ONLY)"
+    },
+    {
+      "name": "euler",
+      "syntax": "euler <v> [modifier]",
+      "description": "Current orientation of Euler angles following X,Y,Z convention in degrees (3D ONLY). Updated only when orientation tracking is enabled"
+    },
+    {
+      "name": "euler-x",
+      "syntax": "euler-x <f> [modifier]",
+      "description": "X-euler angle (in degrees) of current wall orientation (3D ONLY)"
+    },
+    {
+      "name": "euler-y",
+      "syntax": "euler-y <f> [modifier]",
+      "description": "Y-euler angle (in degrees) of current wall orientation (3D ONLY)"
+    },
+    {
+      "name": "euler-z",
+      "syntax": "euler-z <f> [modifier]",
+      "description": "Z-euler angle (in degrees) of current wall orientation (3D ONLY)"
+    },
+    {
+      "name": "fragment",
+      "syntax": "fragment <i>",
+      "description": "Fragment ID (see Fragment documentation)"
+    },
+    {
+      "name": "position",
+      "syntax": "position <v> [modifier]",
+      "description": "Wall location vector (average position of all vertices). Center of rotation is not modified"
+    },
+    {
+      "name": "position-x",
+      "syntax": "position-x <f> [modifier]",
+      "description": "X-component of wall location (average position of all vertices). Center of rotation is not modified"
+    },
+    {
+      "name": "position-y",
+      "syntax": "position-y <f> [modifier]",
+      "description": "Y-component of wall location (average position of all vertices). Center of rotation is not modified"
+    },
+    {
+      "name": "position-z",
+      "syntax": "position-z <f> [modifier]",
+      "description": "Z-component of wall location (average position of all vertices). Center of rotation is not modified"
+    },
+    {
+      "name": "rotation-center",
+      "syntax": "rotation-center <v> [modifier]",
+      "description": "Center of rotation for walls. Position about which rotations occur when angular velocity is supplied. Default: origin"
+    },
+    {
+      "name": "rotation-center-x",
+      "syntax": "rotation-center-x <f> [modifier]",
+      "description": "X-component of center of rotation. Default: origin"
+    },
+    {
+      "name": "rotation-center-y",
+      "syntax": "rotation-center-y <f> [modifier]",
+      "description": "Y-component of center of rotation. Default: origin"
+    },
+    {
+      "name": "rotation-center-z",
+      "syntax": "rotation-center-z <f> [modifier]",
+      "description": "Z-component of center of rotation (3D ONLY). Default: origin"
+    },
+    {
+      "name": "spin",
+      "syntax": "spin <fx> <fy> <fz> [modifier]",
+      "description": "Wall angular velocity in radians per second. Walls rotate around their center of rotation (y- and z-components 3D ONLY)"
+    },
+    {
+      "name": "spin-x",
+      "syntax": "spin-x <f> [modifier]",
+      "description": "X-component of wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "spin-y",
+      "syntax": "spin-y <f> [modifier]",
+      "description": "Y-component of wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "spin-z",
+      "syntax": "spin-z <f> [modifier]",
+      "description": "Z-component of wall angular velocity in radians per second (3D ONLY)"
+    },
+    {
+      "name": "velocity",
+      "syntax": "velocity <v> [modifier]",
+      "description": "Wall translational velocity vector. With 'vertex' keyword, sets vertex velocity (range applies to vertices)"
+    },
+    {
+      "name": "velocity-x",
+      "syntax": "velocity-x <f> [modifier]",
+      "description": "X-component of wall translational velocity. With 'vertex' keyword, sets vertex velocity (range applies to vertices)"
+    },
+    {
+      "name": "velocity-y",
+      "syntax": "velocity-y <f> [modifier]",
+      "description": "Y-component of wall translational velocity. With 'vertex' keyword, sets vertex velocity (range applies to vertices)"
+    },
+    {
+      "name": "velocity-z",
+      "syntax": "velocity-z <f> [modifier]",
+      "description": "Z-component of wall translational velocity (3D ONLY). With 'vertex' keyword, sets vertex velocity (range applies to vertices)"
+    },
+    {
+      "name": "velocity-conveyor",
+      "syntax": "velocity-conveyor <v> [modifier]",
+      "description": "Facet conveyor velocity vector. Fictitious velocity added to wall velocity for relative velocity calculation. Cannot be active with vertex velocities"
+    },
+    {
+      "name": "velocity-conveyor-x",
+      "syntax": "velocity-conveyor-x <f> [modifier]",
+      "description": "X-component of facet conveyor velocity. Cannot be active with vertex velocities"
+    },
+    {
+      "name": "velocity-conveyor-y",
+      "syntax": "velocity-conveyor-y <f> [modifier]",
+      "description": "Y-component of facet conveyor velocity. Cannot be active with vertex velocities"
+    },
+    {
+      "name": "velocity-conveyor-z",
+      "syntax": "velocity-conveyor-z <f> [modifier]",
+      "description": "Z-component of facet conveyor velocity (3D ONLY). Cannot be active with vertex velocities"
+    }
+  ],
+  "modifiers": [
+    {
+      "name": "add",
+      "syntax": "add <f>",
+      "description": "Add f to the existing value"
+    },
+    {
+      "name": "gradient",
+      "syntax": "gradient <v>",
+      "description": "Apply a linear gradient in each of the axes directions starting at the origin"
+    },
+    {
+      "name": "gradient-x",
+      "syntax": "gradient-x <f>",
+      "description": "Apply a linear gradient in the x-direction starting at the origin"
+    },
+    {
+      "name": "gradient-y",
+      "syntax": "gradient-y <f>",
+      "description": "Apply a linear gradient in the y-direction starting at the origin"
+    },
+    {
+      "name": "gradient-z",
+      "syntax": "gradient-z <f>",
+      "description": "Apply a linear gradient in the z-direction starting at the origin (3D ONLY)"
+    },
+    {
+      "name": "multiply",
+      "syntax": "multiply <f>",
+      "description": "Multiply the existing value by f"
+    },
+    {
+      "name": "replace",
+      "syntax": "replace <f>",
+      "description": "Replace the existing value with f"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall attribute velocity-z [platenVel] range name 'platenBottom'",
+      "description": "Set the z-component of velocity for the wall named platenBottom"
+    },
+    {
+      "command": "wall attribute velocity-z 0.0 range id 100 by wall",
+      "description": "Set the z-component of velocity for the wall with ID 100"
+    },
+    {
+      "command": "wall attribute rotation-center [rp_] range group 'wallassembly'",
+      "description": "Set the center of rotation for walls in group wallassembly"
+    },
+    {
+      "command": "wall attribute velocity (1.0,0,0) range id 1",
+      "description": "Set wall translational velocity vector for wall ID 1"
+    },
+    {
+      "command": "wall attribute spin 0 0 0.5 range name 'rotating_drum'",
+      "description": "Set angular velocity (spinning around z-axis) for wall named rotating_drum"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Wall.set_*() methods (e.g., Wall.set_vel(), Wall.set_spin(), Wall.set_pos(), Wall.set_disp(), Wall.set_rotation_center()) - requires iteration over wall range"
+  }
+}

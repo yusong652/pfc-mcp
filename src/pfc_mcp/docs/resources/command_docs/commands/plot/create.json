@@ -1,0 +1,33 @@
+{
+  "command": "plot create",
+  "category": "plot",
+  "search_keywords": [
+    "create",
+    "new",
+    "make"
+  ],
+  "description": "Create a new plot and make it the current (i.e., active) plot. If no name is specified, one is assigned by default.",
+  "syntax": "plot create <s>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Name for the new plot. If not specified, a default name is assigned.",
+      "optional": true
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot create",
+      "description": "Create a new plot with a default name"
+    },
+    {
+      "command": "plot create 'myplot'",
+      "description": "Create a new plot named 'myplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot create <name>') - no direct Python SDK method"
+  }
+}

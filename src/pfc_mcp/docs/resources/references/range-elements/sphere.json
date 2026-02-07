@@ -1,0 +1,28 @@
+{
+  "name": "sphere",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "sphere center <v> radius <f>",
+  "description": "Spherical region selection.",
+  "parameters": [
+    {
+      "name": "center",
+      "type": "vector",
+      "description": "Sphere center, default (0,0,0)"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "description": "Sphere radius"
+    }
+  ],
+  "supports_extent": true,
+  "examples": [
+    "range sphere center (0,0,0) radius 5"
+  ],
+  "search_keywords": [
+    "sphere",
+    "spherical",
+    "ball"
+  ]
+}

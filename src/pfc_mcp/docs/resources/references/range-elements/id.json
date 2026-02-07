@@ -1,0 +1,28 @@
+{
+  "name": "id",
+  "category": "attribute",
+  "category_name": "Attribute Elements",
+  "syntax": "id <i1> [i2]",
+  "description": "Select by ID range. Single value for exact match, two values for inclusive range.",
+  "parameters": [
+    {
+      "name": "i1",
+      "type": "int",
+      "description": "Lower ID bound (or exact ID)"
+    },
+    {
+      "name": "i2",
+      "type": "int",
+      "description": "Upper ID bound (optional)"
+    }
+  ],
+  "examples": [
+    "range id 1 100",
+    "range id 42"
+  ],
+  "search_keywords": [
+    "id",
+    "identifier",
+    "number"
+  ]
+}

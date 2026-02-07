@@ -1,0 +1,52 @@
+{
+  "command": "wall delete",
+  "category": "wall",
+  "search_keywords": [
+    "delete",
+    "remove"
+  ],
+  "description": "Delete walls and/or facets. If neither the walls nor facets keywords are given, then facets are deleted. When facets are deleted, walls without facets are automatically deleted as well.",
+  "syntax": "wall delete <keyword> <range>",
+  "keywords": [
+    {
+      "name": "facets",
+      "syntax": "facets",
+      "description": "Delete facets. Walls without facets are automatically deleted"
+    },
+    {
+      "name": "walls",
+      "syntax": "walls",
+      "description": "Delete entire walls"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall delete",
+      "description": "Delete all facets (and thus all walls, since walls without facets are deleted)"
+    },
+    {
+      "command": "wall delete range id 4",
+      "description": "Delete the wall facet with ID 4"
+    },
+    {
+      "command": "wall delete walls range set name 'topBottom'",
+      "description": "Delete walls named 'topBottom'"
+    },
+    {
+      "command": "wall delete range set id 3",
+      "description": "Delete the entire wall with ID 3"
+    },
+    {
+      "command": "wall delete range set id 1 2 not",
+      "description": "Delete all walls except those with IDs 1 and 2"
+    },
+    {
+      "command": "wall delete facets range group 'boundary'",
+      "description": "Delete all facets in group 'boundary'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Wall.delete() or Facet.delete() methods - requires iteration: for w in itasca.wall.list(): w.delete() or for f in itasca.wall.facet.list(): f.delete()"
+  }
+}

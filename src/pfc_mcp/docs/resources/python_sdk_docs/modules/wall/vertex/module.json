@@ -1,0 +1,99 @@
+{
+  "module": "wall.vertex",
+  "description": "Functions for working with wall vertices",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.wall.vertex.count() -> int",
+      "description": "Get the number of wall vertices.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Total number of wall vertices"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.wall.vertex.find(id: int) -> WallVertex",
+      "description": "Get the WallVertex object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Wall vertex ID number"
+        }
+      ],
+      "returns": {
+        "type": "WallVertex",
+        "description": "WallVertex object with the specified ID, or None if not found"
+      }
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.wall.vertex.inbox(lower_bound: vec, upper_bound: vec, boundary: bool = False) -> tuple of WallVertex",
+      "description": "Get vertices with extents intersecting a box. If boundary is True, only return vertices inside the extent.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the bounding box"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the bounding box"
+        },
+        {
+          "name": "boundary",
+          "type": "bool",
+          "required": false,
+          "description": "If True, only return vertices inside the extent"
+        }
+      ],
+      "returns": {
+        "type": "tuple of WallVertex",
+        "description": "Tuple of WallVertex objects within the specified box"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.wall.vertex.list() -> WallVertex iterator",
+      "description": "Get a WallVertex iterator object.",
+      "parameters": [],
+      "returns": {
+        "type": "WallVertex iterator",
+        "description": "Iterator over all wall vertices"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.wall.vertex.maxid() -> int",
+      "description": "Get the maximum vertex ID.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum wall vertex ID in use"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.wall.vertex.near(point: vec) -> WallVertex",
+      "description": "Find the closest vertex to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point coordinates to search from"
+        }
+      ],
+      "returns": {
+        "type": "WallVertex",
+        "description": "Closest WallVertex object to the specified point"
+      }
+    }
+  ]
+}

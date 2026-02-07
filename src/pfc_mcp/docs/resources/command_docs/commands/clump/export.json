@@ -1,0 +1,78 @@
+{
+  "command": "clump export",
+  "category": "clump",
+  "search_keywords": [
+    "export",
+    "geometry",
+    "STL"
+  ],
+  "description": "Export clumps to geometry sets for post-processing or STL export. If no range is specified, all clumps in the model are exported. Currently only supports export to geometry sets. Clumps with surface descriptions will use those surfaces; otherwise, a geometrical representation of each pebble is exported.",
+  "syntax": "clump export <keyword> <range>",
+  "keywords": [
+    {
+      "name": "geometry",
+      "description": "Export clumps as triangulated geometry",
+      "sub_keywords": [
+        "set",
+        "resolution",
+        "split",
+        "surfaces"
+      ]
+    }
+  ],
+  "geometry_keywords": [
+    {
+      "name": "set",
+      "syntax": "set <s>",
+      "description": "Geometry set base name (default: 'set'). With 'split', creates sets named '<s>_clump<id>' for each clump. Without 'split', all clumps exported to one set with name <s>. Existing geometry objects in the set are not deleted (unless using split, which overrides existing sets with same name)"
+    },
+    {
+      "name": "resolution",
+      "syntax": "resolution <f>",
+      "description": "Facet edge resolution factor for pebble representations. Edge length < f * R where R is the ball radius (default: 0.25)"
+    },
+    {
+      "name": "split",
+      "syntax": "split",
+      "description": "Export each clump to dedicated geometry set (default: all clumps in one set). When specified, each clump is exported into a set named '<basename>_clump<id>'. Existing sets with the same name are overridden"
+    },
+    {
+      "name": "surfaces",
+      "syntax": "surfaces <b>",
+      "description": "If set to true, clump surface descriptions will be exported (when available) in place of a geometric representation of the clump pebbles. Default: true"
+    }
+  ],
+  "notes": [
+    "Clumps with surface descriptions use those surfaces when exported (if surfaces=true)",
+    "Clumps without surface descriptions export geometrical representation of each pebble",
+    "Geometry sets can be exported as STL files for use in third-party CAD software",
+    "With split keyword: existing sets with same name are overridden",
+    "Without split keyword: existing geometry objects in the set are not deleted"
+  ],
+  "examples": [
+    {
+      "command": "clump export geometry",
+      "description": "Export all clumps as geometry to default set 'set'. Uses surface descriptions when available, otherwise exports pebbles with default resolution 0.25"
+    },
+    {
+      "command": "clump export geometry set 'clumps' resolution 0.1",
+      "description": "Export clumps with higher resolution (0.1) for pebble representations to geometry set 'clumps'"
+    },
+    {
+      "command": "clump export geometry split set 'rock'",
+      "description": "Export each clump to separate geometry set (e.g., 'rock_clump1', 'rock_clump2'). Existing sets with same names are overridden"
+    },
+    {
+      "command": "clump export geometry surfaces false resolution 0.5",
+      "description": "Force export of pebble geometries (ignore surface descriptions) with coarser triangulation (0.5)"
+    },
+    {
+      "command": "clump export geometry set 'assembly' range group 'aggregate'",
+      "description": "Export only clumps in 'aggregate' group to single geometry set 'assembly'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump export geometry ...') - no Python SDK equivalent for geometry export"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "command": "clump delete",
+  "category": "clump",
+  "search_keywords": [
+    "delete",
+    "remove"
+  ],
+  "description": "Delete clumps and/or pebbles. If neither the clumps nor pebbles keywords are given, then clumps are deleted by default.",
+  "syntax": "clump delete <keyword> <range>",
+  "keywords": [
+    {
+      "name": "clumps",
+      "syntax": "clumps",
+      "description": "Delete clumps (default behavior if no keyword specified)"
+    },
+    {
+      "name": "pebbles",
+      "syntax": "pebbles",
+      "description": "Delete pebbles from clumps. The clumps no longer refer to clump templates (see the clump template command). Clumps without pebbles are deleted"
+    }
+  ],
+  "notes": [
+    "Default behavior (no keyword): deletes clumps",
+    "When pebbles keyword used: clumps without pebbles are automatically deleted",
+    "When pebbles are deleted: clumps lose their template reference"
+  ],
+  "examples": [
+    {
+      "command": "clump delete",
+      "description": "Delete all clumps (default behavior)"
+    },
+    {
+      "command": "clump delete range fish inBlender not",
+      "description": "Delete all clumps that are identified as not being within the area of interest defined by the FISH function inBlender"
+    },
+    {
+      "command": "clump delete range plane origin (-671.673,780.009,620.539) normal (0.220853,-0.560137,0.798418) below",
+      "description": "Delete all clumps below the specified plane (from Ribbon Blender example)"
+    },
+    {
+      "command": "clump delete clumps range id 1 100",
+      "description": "Delete clumps with IDs 1 to 100"
+    },
+    {
+      "command": "clump delete pebbles range group 'mygroup'",
+      "description": "Delete pebbles from clumps in 'mygroup'. Clumps without remaining pebbles will be deleted"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Use Clump.delete() method - requires iteration over clump range to delete multiple clumps"
+  }
+}

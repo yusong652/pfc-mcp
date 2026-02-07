@@ -1,0 +1,42 @@
+{
+  "command": "plot background",
+  "category": "plot",
+  "search_keywords": [
+    "background",
+    "color",
+    "bgcolor"
+  ],
+  "description": "Specifies the background color of the plot. If a plot name is not specified, the current view is assumed.",
+  "syntax": "plot <s> background <color>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Plot name. If not specified, the current view is assumed.",
+      "optional": true
+    },
+    {
+      "name": "color",
+      "syntax": "<color>",
+      "description": "Background color specification. Accepts multiple formats: (1) color name (e.g., white, black, red, or any SVG color keyword); (2) hex RGB 'colRRGGBB' (e.g., colFFFFFF for white, col000000 for black); (3) 'rgb ir ig ib' with integers 0-255 (e.g., rgb 255 255 255 for white); (4) 'hsv ih is iv' where ih is 0-359, is and iv are 0-255 (e.g., hsv 0 0 255 for white)."
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot background white",
+      "description": "Set current plot background to white"
+    },
+    {
+      "command": "plot background black",
+      "description": "Set current plot background to black"
+    },
+    {
+      "command": "plot 'myplot' background gray",
+      "description": "Set background color of plot 'myplot' to gray"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> background <color>') - no direct Python SDK method"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "module": "itasca.ball",
+  "description": "Ball object management in PFC - primary objects for discrete element simulations",
+  "import_statement": "import itasca as it",
+  "functions": [
+    {
+      "name": "create",
+      "signature": "itasca.ball.create(radius: float, centroid: vec, id: int = None) -> Ball",
+      "description": "Create a single ball at specified position with given radius. Modifies model state immediately. Created balls are assigned default properties from contact model.",
+      "parameters": [
+        {
+          "name": "radius",
+          "type": "float",
+          "required": true,
+          "description": "Ball radius (must be positive)"
+        },
+        {
+          "name": "centroid",
+          "type": "vec",
+          "required": true,
+          "description": "Position vector (x, y, z)"
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "required": false,
+          "description": "Optional ball ID. If not provided, auto-assigned"
+        }
+      ],
+      "returns": {
+        "type": "Ball",
+        "description": "Created ball object"
+      },
+      "limitations": "For batch creation with packing patterns (cubic, hexagonal) or large numbers of balls, use itasca.command('ball generate ...') for better performance",
+      "fallback_commands": ["ball generate"]
+    },
+    {
+      "name": "containing",
+      "signature": "itasca.ball.containing(point: vec) -> Ball",
+      "description": "Find the ball containing the point. Returns the ball whose volume contains the given point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to check (x, y, z)"
+        }
+      ],
+      "returns": {
+        "type": "Ball",
+        "description": "Ball object containing the point, or None if no ball contains it"
+      }
+    },
+    {
+      "name": "energy",
+      "signature": "itasca.ball.energy(energy_name: str) -> float",
+      "description": "Get the ball total energy contribution. Sum of energy values across all balls. Energy tracking must be enabled with 'model energy' command before use.",
+      "parameters": [
+        {
+          "name": "energy_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of energy partition. Valid values: 'energy-body' (body forces/gravity), 'energy-damp' (local damping dissipation), 'energy-kinetic' (kinetic energy)"
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "Total energy contribution summed across all balls"
+      },
+      "notes": [
+        "Energy tracking must be enabled with 'itasca.command(\"model energy on\")' before calling this function",
+        "Energy values are accumulated each cycle for balls, clumps, walls, and contacts",
+        "Use 'energy-body' for energy from gravity/applied forces, 'energy-damp' for damping dissipation, 'energy-kinetic' for kinetic energy"
+      ],
+      "examples": [
+        {
+          "code": "# Enable energy tracking first\nitasca.command('model energy on')\n\n# Get total kinetic energy of all balls\nke = itasca.ball.energy('energy-kinetic')\nprint(f'Total kinetic energy: {ke}')\n\n# Get energy dissipated by damping\ndamp_energy = itasca.ball.energy('energy-damp')\n\n# Get energy from body forces\nbody_energy = itasca.ball.energy('energy-body')",
+          "description": "Query different energy types for all balls"
+        }
+      ]
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.ball.inbox(lower_bound: vec, upper_bound: vec, intersect: bool = True) -> tuple of Ball",
+      "description": "Get a tuple of balls with extents intersecting a box. The extent is the axis-aligned bounding box of the ball. If intersect=False, only balls with positions falling in the box are returned.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the box (x, y, z)"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the box (x, y, z)"
+        },
+        {
+          "name": "intersect",
+          "type": "bool",
+          "required": false,
+          "description": "If True, return balls with extents intersecting box. If False, only balls with positions in box (default: True)"
+        }
+      ],
+      "returns": {
+        "type": "tuple of Ball",
+        "description": "Tuple of ball objects in the specified box"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.ball.maxid() -> int",
+      "description": "Get the maximum ball ID currently in the model.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum ball ID"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.ball.near(point: vec, radius: float = 0.0) -> Ball",
+      "description": "Find the closest ball to a point. If radius is non-zero, only search within this radius.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to search from (x, y, z)"
+        },
+        {
+          "name": "radius",
+          "type": "float",
+          "required": false,
+          "description": "Search radius. If 0.0, search entire model (default: 0.0)"
+        }
+      ],
+      "returns": {
+        "type": "Ball",
+        "description": "Closest ball object, or None if no ball found within radius"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.ball.list() -> Iterator[Ball]",
+      "description": "Return an iterator over all balls in the model. Returns iterator (not list). Order not guaranteed. Use list(it.ball.list()) to create snapshot before modifying during iteration.",
+      "parameters": [],
+      "returns": {
+        "type": "Iterator[Ball]",
+        "description": "Iterator yielding Ball objects"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.ball.find(id: int) -> Ball | None",
+      "description": "Find ball by ID number. Returns None if ball doesn't exist. Finding by ID is O(1) - very fast.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Ball ID to search for"
+        }
+      ],
+      "returns": {
+        "type": "Ball | None",
+        "description": "Ball object if found, None if ID doesn't exist"
+      }
+    },
+    {
+      "name": "count",
+      "signature": "itasca.ball.count() -> int",
+      "description": "Get total number of balls in the model. O(1) operation - very fast.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Number of balls currently in the model"
+      }
+    }
+  ]
+}

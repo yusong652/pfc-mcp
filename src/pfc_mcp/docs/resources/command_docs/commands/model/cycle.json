@@ -1,0 +1,59 @@
+{
+  "command": "model cycle",
+  "category": "model",
+  "search_keywords": [
+    "cycle",
+    "timestep",
+    "step"
+  ],
+  "description": "Execute timesteps. The synonym 'model step' may also be used. This is the equivalent of calling 'model solve' with the cycles keyword set to i. i timesteps are executed unless processing is interrupted by pressing Shift + Esc, which will terminate cycling, exit the current data file (and all levels of nested data files that may have been used to call it), and return input to the command prompt after the current step is completed. The optional calm keyword is used in mechanical processes to reset the linear and angular velocities to zero every i2 cycles.",
+  "syntax": "model cycle <i> <calm <i2>>",
+  "keywords": [
+    {
+      "name": "calm",
+      "syntax": "calm <i2>",
+      "description": "Reset linear and angular velocities to zero every i2 cycles during mechanical processes"
+    }
+  ],
+  "notes": [
+    "Synonym: 'model step' can be used instead of 'model cycle'",
+    "Equivalent to 'model solve cycles <i>'",
+    "Interruption: Press Shift + Esc to terminate cycling after current step completes",
+    "Interruption exits current data file and all nested data files, returns to command prompt",
+    "calm keyword: periodically removes kinetic energy during cycling",
+    "calm is useful for quasi-static simulations to prevent dynamic effects",
+    "Each cycle advances simulation by one timestep (dt)",
+    "Timestep can be automatic (model timestep auto) or fixed (model timestep fix)"
+  ],
+  "examples": [
+    {
+      "command": "model cycle 1000",
+      "description": "Execute 1000 timesteps"
+    },
+    {
+      "command": "model step 5000",
+      "description": "Execute 5000 timesteps (using synonym 'step')"
+    },
+    {
+      "command": "model cycle 10000 calm 100",
+      "description": "Execute 10000 timesteps, reset all velocities to zero every 100 cycles"
+    },
+    {
+      "command": "model cycle 5000 calm 50",
+      "description": "Quasi-static simulation: cycle with frequent velocity damping"
+    },
+    {
+      "command": "model solve\nmodel cycle 1000\nmodel solve",
+      "description": "Solve to equilibrium, run fixed cycles, solve again"
+    },
+    {
+      "command": "ball generate number 1000 radius 0.5\nmodel clean\nmodel cycle 2000",
+      "description": "Generate balls, clean to create contacts, then cycle"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "python_code": "itasca.cycle(1000)",
+    "notes": "Python SDK provides itasca.cycle(n) function. calm keyword not available in Python - use periodic itasca.command('model calm') in loop if needed"
+  }
+}

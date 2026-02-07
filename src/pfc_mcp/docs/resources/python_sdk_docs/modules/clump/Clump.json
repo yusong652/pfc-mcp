@@ -1,0 +1,1995 @@
+{
+  "class": "Clump",
+  "description": "Clump object representing a rigid aggregate of pebbles (overlapping spheres) in PFC. Clumps model complex particle shapes. Obtained via itasca.clump.find(), itasca.clump.list(), or created with itasca.command('clump generate').",
+  "note": "Objects of this type should not be created (instantiated) directly in Python. Use module functions that return instances.",
+  "method_groups": {
+    "identification": [
+      "id",
+      "valid",
+      "delete"
+    ],
+    "position_orientation": [
+      "pos",
+      "pos_x",
+      "pos_y",
+      "pos_z",
+      "set_pos",
+      "set_pos_x",
+      "set_pos_y",
+      "set_pos_z",
+      "euler",
+      "euler_x",
+      "euler_y",
+      "euler_z",
+      "set_euler",
+      "set_euler_x",
+      "set_euler_y",
+      "set_euler_z",
+      "disp",
+      "disp_x",
+      "disp_y",
+      "disp_z",
+      "set_disp",
+      "set_disp_x",
+      "set_disp_y",
+      "set_disp_z"
+    ],
+    "kinematics": [
+      "vel",
+      "vel_x",
+      "vel_y",
+      "vel_z",
+      "set_vel",
+      "set_vel_x",
+      "set_vel_y",
+      "set_vel_z",
+      "spin",
+      "spin_x",
+      "spin_y",
+      "spin_z",
+      "set_spin",
+      "set_spin_x",
+      "set_spin_y",
+      "set_spin_z"
+    ],
+    "forces": [
+      "force_app",
+      "force_app_x",
+      "force_app_y",
+      "force_app_z",
+      "set_force_app",
+      "set_force_app_x",
+      "set_force_app_y",
+      "set_force_app_z",
+      "force_contact",
+      "force_contact_x",
+      "force_contact_y",
+      "force_contact_z",
+      "set_force_contact",
+      "set_force_contact_x",
+      "set_force_contact_y",
+      "set_force_contact_z",
+      "force_unbal",
+      "force_unbal_x",
+      "force_unbal_y",
+      "force_unbal_z"
+    ],
+    "moments": [
+      "moment_app",
+      "moment_app_x",
+      "moment_app_y",
+      "moment_app_z",
+      "set_moment_app",
+      "set_moment_app_x",
+      "set_moment_app_y",
+      "set_moment_app_z",
+      "moment_contact",
+      "moment_contact_x",
+      "moment_contact_y",
+      "moment_contact_z",
+      "set_moment_contact",
+      "set_moment_contact_x",
+      "set_moment_contact_y",
+      "set_moment_contact_z",
+      "moment_unbal",
+      "moment_unbal_x",
+      "moment_unbal_y",
+      "moment_unbal_z"
+    ],
+    "physical_properties": [
+      "mass",
+      "mass_real",
+      "density",
+      "set_density",
+      "vol",
+      "set_vol",
+      "damp",
+      "set_damp"
+    ],
+    "inertia": [
+      "moi",
+      "moi_real",
+      "set_moi_real",
+      "moi_prin",
+      "moi_prin_x",
+      "moi_prin_y",
+      "moi_prin_z",
+      "moi_prin_real",
+      "moi_prin_real_x",
+      "moi_prin_real_y",
+      "moi_prin_real_z",
+      "set_moi_prin_real",
+      "set_moi_prin_real_x",
+      "set_moi_prin_real_y",
+      "set_moi_prin_real_z",
+      "moi_fix",
+      "set_moi_fix"
+    ],
+    "pebble_management": [
+      "pebbles",
+      "add_pebble",
+      "delete_pebble"
+    ],
+    "contacts": [
+      "contacts",
+      "contact_count"
+    ],
+    "groups": [
+      "group",
+      "groups",
+      "in_group",
+      "set_group",
+      "group_remove"
+    ],
+    "template": [
+      "template",
+      "template_euler",
+      "template_euler_x",
+      "template_euler_y",
+      "template_euler_z",
+      "template_scale"
+    ],
+    "operations": [
+      "calculate",
+      "rotate",
+      "scale_sphere",
+      "scale_vol"
+    ],
+    "transformations": [
+      "to_global",
+      "to_prin"
+    ],
+    "fixity": [
+      "fix",
+      "set_fix"
+    ],
+    "other": [
+      "extra",
+      "set_extra",
+      "fragment",
+      "set_fragment",
+      "inside"
+    ]
+  },
+  "methods": [
+    {
+      "name": "id",
+      "signature": "clump.id() -> int",
+      "description": "Get the clump ID number. Unique identifier for this clump.",
+      "returns": {
+        "type": "int",
+        "description": "Clump ID"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "clump.valid() -> bool",
+      "description": "Check if this clump is live (still exists in the model). Returns False if clump has been deleted.",
+      "returns": {
+        "type": "bool",
+        "description": "True if clump exists, False if deleted"
+      }
+    },
+    {
+      "name": "delete",
+      "signature": "clump.delete() -> None",
+      "description": "Delete this clump from the model. All pebbles in the clump are also deleted. References to this object become invalid.",
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "clump.pos() -> vec",
+      "description": "Get clump centroid location as vector (x, y, z). This is the mass center of the clump.",
+      "returns": {
+        "type": "vec",
+        "description": "(x, y, z) centroid coordinates"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "clump.pos_x() -> float",
+      "description": "Get X-component of clump centroid location.",
+      "returns": {
+        "type": "float",
+        "description": "X coordinate"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "clump.pos_y() -> float",
+      "description": "Get Y-component of clump centroid location.",
+      "returns": {
+        "type": "float",
+        "description": "Y coordinate"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "clump.pos_z() -> float",
+      "description": "Get Z-component of clump centroid location.",
+      "returns": {
+        "type": "float",
+        "description": "Z coordinate"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "clump.set_pos(value: vec) -> None",
+      "description": "Set clump centroid location. Moves entire clump (all pebbles) to new position. May cause overlaps.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "(x, y, z) coordinates"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_x",
+      "signature": "clump.set_pos_x(value: float) -> None",
+      "description": "Set X-component of clump centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_y",
+      "signature": "clump.set_pos_y(value: float) -> None",
+      "description": "Set Y-component of clump centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_pos_z",
+      "signature": "clump.set_pos_z(value: float) -> None",
+      "description": "Set Z-component of clump centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z coordinate"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "euler",
+      "signature": "clump.euler() -> vec",
+      "description": "Get clump orientation as Euler angles (vector). Defines rotation from reference configuration.",
+      "returns": {
+        "type": "vec",
+        "description": "Euler angles (rx, ry, rz)"
+      }
+    },
+    {
+      "name": "euler_x",
+      "signature": "clump.euler_x() -> float",
+      "description": "Get X-component of clump orientation (Euler angle).",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about X axis"
+      }
+    },
+    {
+      "name": "euler_y",
+      "signature": "clump.euler_y() -> float",
+      "description": "Get Y-component of clump orientation (Euler angle).",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about Y axis"
+      }
+    },
+    {
+      "name": "euler_z",
+      "signature": "clump.euler_z() -> float",
+      "description": "Get Z-component of clump orientation (Euler angle).",
+      "returns": {
+        "type": "float",
+        "description": "Rotation about Z axis"
+      }
+    },
+    {
+      "name": "set_euler",
+      "signature": "clump.set_euler(value: vec) -> None",
+      "description": "Set clump orientation using Euler angles. Rotates entire clump.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Euler angles (rx, ry, rz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_x",
+      "signature": "clump.set_euler_x(value: float) -> None",
+      "description": "Set X-component of clump orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about X axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_y",
+      "signature": "clump.set_euler_y(value: float) -> None",
+      "description": "Set Y-component of clump orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about Y axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_euler_z",
+      "signature": "clump.set_euler_z(value: float) -> None",
+      "description": "Set Z-component of clump orientation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Rotation about Z axis"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "clump.disp() -> vec",
+      "description": "Get clump displacement vector from initial position.",
+      "returns": {
+        "type": "vec",
+        "description": "Displacement (dx, dy, dz)"
+      }
+    },
+    {
+      "name": "disp_x",
+      "signature": "clump.disp_x() -> float",
+      "description": "Get X-component of clump displacement.",
+      "returns": {
+        "type": "float",
+        "description": "X displacement"
+      }
+    },
+    {
+      "name": "disp_y",
+      "signature": "clump.disp_y() -> float",
+      "description": "Get Y-component of clump displacement.",
+      "returns": {
+        "type": "float",
+        "description": "Y displacement"
+      }
+    },
+    {
+      "name": "disp_z",
+      "signature": "clump.disp_z() -> float",
+      "description": "Get Z-component of clump displacement.",
+      "returns": {
+        "type": "float",
+        "description": "Z displacement"
+      }
+    },
+    {
+      "name": "set_disp",
+      "signature": "clump.set_disp(value: vec) -> None",
+      "description": "Set clump displacement vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Displacement (dx, dy, dz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_disp_x",
+      "signature": "clump.set_disp_x(value: float) -> None",
+      "description": "Set X-component of clump displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_disp_y",
+      "signature": "clump.set_disp_y(value: float) -> None",
+      "description": "Set Y-component of clump displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_disp_z",
+      "signature": "clump.set_disp_z(value: float) -> None",
+      "description": "Set Z-component of clump displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z displacement"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "clump.vel() -> vec",
+      "description": "Get clump velocity vector (vx, vy, vz).",
+      "returns": {
+        "type": "vec",
+        "description": "Velocity components"
+      }
+    },
+    {
+      "name": "vel_x",
+      "signature": "clump.vel_x() -> float",
+      "description": "Get X-component of clump velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Velocity in X direction"
+      }
+    },
+    {
+      "name": "vel_y",
+      "signature": "clump.vel_y() -> float",
+      "description": "Get Y-component of clump velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Velocity in Y direction"
+      }
+    },
+    {
+      "name": "vel_z",
+      "signature": "clump.vel_z() -> float",
+      "description": "Get Z-component of clump velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Velocity in Z direction"
+      }
+    },
+    {
+      "name": "set_vel",
+      "signature": "clump.set_vel(value: vec) -> None",
+      "description": "Set clump velocity vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Velocity (vx, vy, vz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_vel_x",
+      "signature": "clump.set_vel_x(value: float) -> None",
+      "description": "Set X-component of clump velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_vel_y",
+      "signature": "clump.set_vel_y(value: float) -> None",
+      "description": "Set Y-component of clump velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_vel_z",
+      "signature": "clump.set_vel_z(value: float) -> None",
+      "description": "Set Z-component of clump velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z velocity"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "spin",
+      "signature": "clump.spin() -> vec",
+      "description": "Get clump angular velocity vector (wx, wy, wz).",
+      "returns": {
+        "type": "vec",
+        "description": "Angular velocity components"
+      }
+    },
+    {
+      "name": "spin_x",
+      "signature": "clump.spin_x() -> float",
+      "description": "Get X-component of clump angular velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Angular velocity about X axis"
+      }
+    },
+    {
+      "name": "spin_y",
+      "signature": "clump.spin_y() -> float",
+      "description": "Get Y-component of clump angular velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Angular velocity about Y axis"
+      }
+    },
+    {
+      "name": "spin_z",
+      "signature": "clump.spin_z() -> float",
+      "description": "Get Z-component of clump angular velocity.",
+      "returns": {
+        "type": "float",
+        "description": "Angular velocity about Z axis"
+      }
+    },
+    {
+      "name": "set_spin",
+      "signature": "clump.set_spin(value: vec) -> None",
+      "description": "Set clump angular velocity vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Angular velocity (wx, wy, wz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_spin_x",
+      "signature": "clump.set_spin_x(value: float) -> None",
+      "description": "Set X-component of clump angular velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Angular velocity about X"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_spin_y",
+      "signature": "clump.set_spin_y(value: float) -> None",
+      "description": "Set Y-component of clump angular velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Angular velocity about Y"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_spin_z",
+      "signature": "clump.set_spin_z(value: float) -> None",
+      "description": "Set Z-component of clump angular velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Angular velocity about Z"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "force_app",
+      "signature": "clump.force_app() -> vec",
+      "description": "Get clump applied force vector. External force applied to clump.",
+      "returns": {
+        "type": "vec",
+        "description": "Applied force (fx, fy, fz)"
+      }
+    },
+    {
+      "name": "force_app_x",
+      "signature": "clump.force_app_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X-component of applied force"
+      },
+      "description": "Get X-component of applied force"
+    },
+    {
+      "name": "force_app_y",
+      "signature": "clump.force_app_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y-component of applied force"
+      },
+      "description": "Get Y-component of applied force"
+    },
+    {
+      "name": "force_app_z",
+      "signature": "clump.force_app_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z-component of applied force"
+      },
+      "description": "Get Z-component of applied force"
+    },
+    {
+      "name": "set_force_app",
+      "signature": "clump.set_force_app(value: vec) -> None",
+      "description": "Set clump applied force vector.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Applied force (fx, fy, fz)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_force_app_x",
+      "signature": "clump.set_force_app_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of applied force"
+    },
+    {
+      "name": "set_force_app_y",
+      "signature": "clump.set_force_app_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of applied force"
+    },
+    {
+      "name": "set_force_app_z",
+      "signature": "clump.set_force_app_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of applied force"
+    },
+    {
+      "name": "force_contact",
+      "signature": "clump.force_contact() -> vec",
+      "description": "Get total contact force on clump. Sum of forces from all contacts.",
+      "returns": {
+        "type": "vec",
+        "description": "Contact force (fx, fy, fz)"
+      }
+    },
+    {
+      "name": "force_contact_x",
+      "signature": "clump.force_contact_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X-component of contact force"
+      },
+      "description": "Get X-component of contact force"
+    },
+    {
+      "name": "force_contact_y",
+      "signature": "clump.force_contact_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y-component of contact force"
+      },
+      "description": "Get Y-component of contact force"
+    },
+    {
+      "name": "force_contact_z",
+      "signature": "clump.force_contact_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z-component of contact force"
+      },
+      "description": "Get Z-component of contact force"
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "clump.set_force_contact(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Contact force vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set contact force vector"
+    },
+    {
+      "name": "set_force_contact_x",
+      "signature": "clump.set_force_contact_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of contact force"
+    },
+    {
+      "name": "set_force_contact_y",
+      "signature": "clump.set_force_contact_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of contact force"
+    },
+    {
+      "name": "set_force_contact_z",
+      "signature": "clump.set_force_contact_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z force component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of contact force"
+    },
+    {
+      "name": "force_unbal",
+      "signature": "clump.force_unbal() -> vec",
+      "description": "Get clump unbalanced force. Net force after all forces applied.",
+      "returns": {
+        "type": "vec",
+        "description": "Unbalanced force (fx, fy, fz)"
+      }
+    },
+    {
+      "name": "force_unbal_x",
+      "signature": "clump.force_unbal_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X-component of unbalanced force"
+      },
+      "description": "Get X-component of unbalanced force"
+    },
+    {
+      "name": "force_unbal_y",
+      "signature": "clump.force_unbal_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y-component of unbalanced force"
+      },
+      "description": "Get Y-component of unbalanced force"
+    },
+    {
+      "name": "force_unbal_z",
+      "signature": "clump.force_unbal_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z-component of unbalanced force"
+      },
+      "description": "Get Z-component of unbalanced force"
+    },
+    {
+      "name": "moment_app",
+      "signature": "clump.moment_app() -> vec",
+      "description": "Get clump applied moment (torque) vector.",
+      "returns": {
+        "type": "vec",
+        "description": "Applied moment (mx, my, mz)"
+      }
+    },
+    {
+      "name": "moment_app_x",
+      "signature": "clump.moment_app_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X applied moment"
+      },
+      "description": "Get X-component of applied moment"
+    },
+    {
+      "name": "moment_app_y",
+      "signature": "clump.moment_app_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y applied moment"
+      },
+      "description": "Get Y-component of applied moment"
+    },
+    {
+      "name": "moment_app_z",
+      "signature": "clump.moment_app_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z applied moment"
+      },
+      "description": "Get Z-component of applied moment"
+    },
+    {
+      "name": "set_moment_app",
+      "signature": "clump.set_moment_app(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Applied moment vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set clump applied moment vector"
+    },
+    {
+      "name": "set_moment_app_x",
+      "signature": "clump.set_moment_app_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of applied moment"
+    },
+    {
+      "name": "set_moment_app_y",
+      "signature": "clump.set_moment_app_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of applied moment"
+    },
+    {
+      "name": "set_moment_app_z",
+      "signature": "clump.set_moment_app_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of applied moment"
+    },
+    {
+      "name": "moment_contact",
+      "signature": "clump.moment_contact() -> vec",
+      "description": "Get total contact moment on clump from all contacts.",
+      "returns": {
+        "type": "vec",
+        "description": "Contact moment (mx, my, mz)"
+      }
+    },
+    {
+      "name": "moment_contact_x",
+      "signature": "clump.moment_contact_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X contact moment"
+      },
+      "description": "Get X-component of contact moment"
+    },
+    {
+      "name": "moment_contact_y",
+      "signature": "clump.moment_contact_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y contact moment"
+      },
+      "description": "Get Y-component of contact moment"
+    },
+    {
+      "name": "moment_contact_z",
+      "signature": "clump.moment_contact_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z contact moment"
+      },
+      "description": "Get Z-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "clump.set_moment_contact(value: vec) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Contact moment vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set contact moment vector"
+    },
+    {
+      "name": "set_moment_contact_x",
+      "signature": "clump.set_moment_contact_x(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set X-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact_y",
+      "signature": "clump.set_moment_contact_y(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Y-component of contact moment"
+    },
+    {
+      "name": "set_moment_contact_z",
+      "signature": "clump.set_moment_contact_z(value: float) -> None",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z moment component"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      },
+      "description": "Set Z-component of contact moment"
+    },
+    {
+      "name": "moment_unbal",
+      "signature": "clump.moment_unbal() -> vec",
+      "description": "Get clump unbalanced moment. Net moment after all moments applied.",
+      "returns": {
+        "type": "vec",
+        "description": "Unbalanced moment (mx, my, mz)"
+      }
+    },
+    {
+      "name": "moment_unbal_x",
+      "signature": "clump.moment_unbal_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X unbalanced moment"
+      },
+      "description": "Get X-component of unbalanced moment"
+    },
+    {
+      "name": "moment_unbal_y",
+      "signature": "clump.moment_unbal_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y unbalanced moment"
+      },
+      "description": "Get Y-component of unbalanced moment"
+    },
+    {
+      "name": "moment_unbal_z",
+      "signature": "clump.moment_unbal_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z unbalanced moment"
+      },
+      "description": "Get Z-component of unbalanced moment"
+    },
+    {
+      "name": "mass",
+      "signature": "clump.mass() -> float",
+      "description": "Get clump inertial mass (used in calculations).",
+      "returns": {
+        "type": "float",
+        "description": "Inertial mass"
+      }
+    },
+    {
+      "name": "mass_real",
+      "signature": "clump.mass_real() -> float",
+      "description": "Get clump real (gravitational) mass.",
+      "returns": {
+        "type": "float",
+        "description": "Real mass"
+      }
+    },
+    {
+      "name": "density",
+      "signature": "clump.density() -> float",
+      "description": "Get clump density.",
+      "returns": {
+        "type": "float",
+        "description": "Density"
+      }
+    },
+    {
+      "name": "set_density",
+      "signature": "clump.set_density(value: float) -> None",
+      "description": "Set clump density. Updates mass automatically unless MOI is fixed.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "New density"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "vol",
+      "signature": "clump.vol() -> float",
+      "description": "Get clump volume. In 2D this is volume per unit thickness.",
+      "returns": {
+        "type": "float",
+        "description": "Volume"
+      }
+    },
+    {
+      "name": "set_vol",
+      "signature": "clump.set_vol(value: float) -> None",
+      "description": "Set clump volume. In 2D this is volume per unit thickness. Setting volume manually activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "New volume"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "damp",
+      "signature": "clump.damp() -> float",
+      "description": "Get clump local damping coefficient.",
+      "returns": {
+        "type": "float",
+        "description": "Damping coefficient"
+      }
+    },
+    {
+      "name": "set_damp",
+      "signature": "clump.set_damp(value: float) -> None",
+      "description": "Set clump local damping coefficient.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Damping coefficient"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "moi",
+      "signature": "clump.moi() -> tensor",
+      "description": "Get clump moment of inertia tensor. In 2D returns float (polar moment).",
+      "returns": {
+        "type": "tensor",
+        "description": "Moment of inertia tensor (or float in 2D)"
+      }
+    },
+    {
+      "name": "moi_real",
+      "signature": "clump.moi_real() -> tensor",
+      "description": "Get clump real moment of inertia. In 2D returns float (polar moment).",
+      "returns": {
+        "type": "tensor",
+        "description": "Real moment of inertia (or float in 2D)"
+      }
+    },
+    {
+      "name": "set_moi_real",
+      "signature": "clump.set_moi_real(value: tensor) -> None",
+      "description": "Set clump real moment of inertia. Setting manually activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "tensor",
+          "required": true,
+          "description": "MOI tensor"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "moi_prin",
+      "signature": "clump.moi_prin() -> vec",
+      "description": "Get clump principal moment of inertia as vector.",
+      "returns": {
+        "type": "vec",
+        "description": "Principal moments (Ixx, Iyy, Izz)"
+      }
+    },
+    {
+      "name": "moi_prin_x",
+      "signature": "clump.moi_prin_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Principal MOI about X"
+      },
+      "description": "Get X-component of principal moment of inertia"
+    },
+    {
+      "name": "moi_prin_y",
+      "signature": "clump.moi_prin_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Principal MOI about Y"
+      },
+      "description": "Get Y-component of principal moment of inertia"
+    },
+    {
+      "name": "moi_prin_z",
+      "signature": "clump.moi_prin_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Principal MOI about Z"
+      },
+      "description": "Get Z-component of principal moment of inertia"
+    },
+    {
+      "name": "moi_prin_real",
+      "signature": "clump.moi_prin_real() -> vec",
+      "description": "Get clump real principal moment of inertia.",
+      "returns": {
+        "type": "vec",
+        "description": "Real principal moments"
+      }
+    },
+    {
+      "name": "moi_prin_real_x",
+      "signature": "clump.moi_prin_real_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X real principal moment of inertia"
+      },
+      "description": "Get X-component of real principal moment of inertia"
+    },
+    {
+      "name": "moi_prin_real_y",
+      "signature": "clump.moi_prin_real_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y real principal moment of inertia"
+      },
+      "description": "Get Y-component of real principal moment of inertia"
+    },
+    {
+      "name": "moi_prin_real_z",
+      "signature": "clump.moi_prin_real_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z real principal moment of inertia"
+      },
+      "description": "Get Z-component of real principal moment of inertia"
+    },
+    {
+      "name": "set_moi_prin_real",
+      "signature": "clump.set_moi_prin_real(value: vec) -> None",
+      "description": "Set real principal MOI. Other attributes unchanged. Activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Principal moment of inertia vector"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_moi_prin_real_x",
+      "signature": "clump.set_moi_prin_real_x(value: float) -> None",
+      "description": "Set X-component of real principal MOI. Activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "X principal moment of inertia"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_moi_prin_real_y",
+      "signature": "clump.set_moi_prin_real_y(value: float) -> None",
+      "description": "Set Y-component of real principal MOI. Activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Y principal moment of inertia"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_moi_prin_real_z",
+      "signature": "clump.set_moi_prin_real_z(value: float) -> None",
+      "description": "Set Z-component of real principal MOI. Activates MOI fix state.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Z principal moment of inertia"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "moi_fix",
+      "signature": "clump.moi_fix() -> bool",
+      "description": "Get MOI fixity state. When True, MOI not auto-updated on scaling/density changes.",
+      "returns": {
+        "type": "bool",
+        "description": "True if MOI is fixed"
+      }
+    },
+    {
+      "name": "set_moi_fix",
+      "signature": "clump.set_moi_fix(fixity: bool) -> None",
+      "description": "Set MOI fixity state. Controls auto-update behavior.",
+      "parameters": [
+        {
+          "name": "fixity",
+          "type": "bool",
+          "required": true,
+          "description": "True to fix MOI"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "pebbles",
+      "signature": "clump.pebbles() -> Iterator[Pebble]",
+      "description": "Get iterator over all pebbles in this clump.",
+      "returns": {
+        "type": "Iterator[Pebble]",
+        "description": "Pebble iterator"
+      }
+    },
+    {
+      "name": "add_pebble",
+      "signature": "clump.add_pebble(pebble_radius: float, pebble_centroid: vec, id: int = None) -> Pebble",
+      "description": "Add a pebble to this clump. No impact on inertial attributes. Clump no longer refers to template. Pebble must be within domain.",
+      "parameters": [
+        {
+          "name": "pebble_radius",
+          "type": "float",
+          "required": true,
+          "description": "Pebble radius"
+        },
+        {
+          "name": "pebble_centroid",
+          "type": "vec",
+          "required": true,
+          "description": "Pebble center (x,y,z)"
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "required": false,
+          "description": "Optional pebble ID"
+        }
+      ],
+      "returns": {
+        "type": "Pebble",
+        "description": "Created pebble object"
+      }
+    },
+    {
+      "name": "delete_pebble",
+      "signature": "clump.delete_pebble(pebble: Pebble) -> None",
+      "description": "Delete a pebble from this clump. No impact on inertial attributes. Clump no longer refers to template.",
+      "parameters": [
+        {
+          "name": "pebble",
+          "type": "Pebble",
+          "required": true,
+          "description": "Pebble to delete"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "contacts",
+      "signature": "clump.contacts(piece: object = None, all: bool = False, type: type = None) -> tuple[Contact, ...]",
+      "description": "Get tuple of contacts associated with this clump. Can filter by piece (Ball/Pebble/Facet), type, and virtual contacts.",
+      "parameters": [
+        {
+          "name": "piece",
+          "type": "object",
+          "required": false,
+          "description": "Optional Ball, Pebble, or Facet to filter contacts"
+        },
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "Include virtual contacts (default: False)"
+        },
+        {
+          "name": "type",
+          "type": "type",
+          "required": false,
+          "description": "Filter by contact type (e.g., BallBallContact)"
+        }
+      ],
+      "returns": {
+        "type": "tuple[Contact, ...]",
+        "description": "Tuple of contact objects"
+      }
+    },
+    {
+      "name": "contact_count",
+      "signature": "clump.contact_count(all: bool = False, type: type = None) -> int",
+      "description": "Get number of contacts associated with this clump. Can filter by type and include virtual contacts.",
+      "parameters": [
+        {
+          "name": "all",
+          "type": "bool",
+          "required": false,
+          "description": "Include virtual contacts (default: False)"
+        },
+        {
+          "name": "type",
+          "type": "type",
+          "required": false,
+          "description": "Filter by contact type"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Number of contacts"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "clump.group(slot: str | int = None) -> str",
+      "description": "Get clump group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Group slot name or index"
+        }
+      ],
+      "returns": {
+        "type": "str",
+        "description": "Group name"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "clump.groups() -> dict[str, str]",
+      "description": "Get dictionary of all groups this clump belongs to. Keys are slot names, values are group names.",
+      "returns": {
+        "type": "dict[str, str]",
+        "description": "Slot->group mapping"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "clump.in_group(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Test if clump is in a given group. If slot specified, only checks that slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name to check"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Optional slot to check"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if in group"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "clump.set_group(group_name: str | int, slot: str | int = None) -> None",
+      "description": "Set clump group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Slot name or index"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "clump.group_remove(group_name: str | int, slot: str | int = None) -> bool",
+      "description": "Remove clump from given group in all or specific slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str | int",
+          "required": true,
+          "description": "Group name to remove"
+        },
+        {
+          "name": "slot",
+          "type": "str | int",
+          "required": false,
+          "description": "Optional specific slot"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if group was removed"
+      }
+    },
+    {
+      "name": "template",
+      "signature": "clump.template() -> Template | None",
+      "description": "Get the template associated with this clump. Returns None if no template.",
+      "returns": {
+        "type": "Template | None",
+        "description": "Template object or None"
+      }
+    },
+    {
+      "name": "template_euler",
+      "signature": "clump.template_euler() -> vec",
+      "description": "Get clump template relative orientation (Euler angles).",
+      "returns": {
+        "type": "vec",
+        "description": "Template relative orientation"
+      }
+    },
+    {
+      "name": "template_euler_x",
+      "signature": "clump.template_euler_x() -> float",
+      "returns": {
+        "type": "float",
+        "description": "X template Euler angle"
+      },
+      "description": "Get X-component of template orientation"
+    },
+    {
+      "name": "template_euler_y",
+      "signature": "clump.template_euler_y() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Y template Euler angle"
+      },
+      "description": "Get Y-component of template orientation"
+    },
+    {
+      "name": "template_euler_z",
+      "signature": "clump.template_euler_z() -> float",
+      "returns": {
+        "type": "float",
+        "description": "Z template Euler angle"
+      },
+      "description": "Get Z-component of template orientation"
+    },
+    {
+      "name": "template_scale",
+      "signature": "clump.template_scale() -> float",
+      "description": "Get clump template relative scaling factor.",
+      "returns": {
+        "type": "float",
+        "description": "Template scale factor"
+      }
+    },
+    {
+      "name": "calculate",
+      "signature": "clump.calculate(error_percentage: float = 0.01) -> None",
+      "description": "Calculate clump inertial properties using voxelation approach. Error should be in range 0.0005 < x < 1. Pebbles not translated but centroid may move. MOI will update unless fixed.",
+      "parameters": [
+        {
+          "name": "error_percentage",
+          "type": "float",
+          "required": false,
+          "description": "Calculation error tolerance (default: 0.01)"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "rotate",
+      "signature": "clump.rotate(axis: vec, rotation_angle: float) -> None",
+      "description": "Rotate clump about given axis (right-handed) by angle in degrees. Rotation point is clump position.",
+      "parameters": [
+        {
+          "name": "axis",
+          "type": "vec",
+          "required": true,
+          "description": "Rotation axis vector"
+        },
+        {
+          "name": "rotation_angle",
+          "type": "float",
+          "required": true,
+          "description": "Rotation angle in degrees"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "scale_sphere",
+      "signature": "clump.scale_sphere(diameter: float) -> None",
+      "description": "Scale clump to equivalent sphere. Clump scaled so its volume equals sphere of given diameter. Pebbles scaled and repositioned. All must remain in domain. MOI updates unless fixed.",
+      "parameters": [
+        {
+          "name": "diameter",
+          "type": "float",
+          "required": true,
+          "description": "Target sphere diameter"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "scale_vol",
+      "signature": "clump.scale_vol(volume: float) -> None",
+      "description": "Scale clump to specified volume. Pebbles scaled and repositioned. All must remain in domain. MOI updates unless fixed.",
+      "parameters": [
+        {
+          "name": "volume",
+          "type": "float",
+          "required": true,
+          "description": "Target volume"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "to_global",
+      "signature": "clump.to_global(value: vec) -> vec",
+      "description": "Rotate vector from principal (local) coordinate system to global system.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Vector in principal system"
+        }
+      ],
+      "returns": {
+        "type": "vec",
+        "description": "Vector in global system"
+      }
+    },
+    {
+      "name": "to_prin",
+      "signature": "clump.to_prin(value: vec) -> vec",
+      "description": "Rotate vector from global coordinate system to principal (local) system.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "Vector in global system"
+        }
+      ],
+      "returns": {
+        "type": "vec",
+        "description": "Vector in principal system"
+      }
+    },
+    {
+      "name": "fix",
+      "signature": "clump.fix(component: int) -> bool",
+      "description": "Get clump fixity condition for DOF. 3D: 0-2=xyz velocity, 3-5=xyz angular velocity. 2D: 0-1=xy velocity, 2=angular velocity.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true,
+          "description": "DOF index"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "False=free, True=fixed"
+      }
+    },
+    {
+      "name": "set_fix",
+      "signature": "clump.set_fix(component: int, fixity: bool) -> None",
+      "description": "Set clump fixity condition for DOF. 3D: 1-3=xyz velocity, 4-6=xyz angular velocity. 2D: 1-2=xy velocity, 3=angular velocity.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true,
+          "description": "DOF index (1-based)"
+        },
+        {
+          "name": "fixity",
+          "type": "bool",
+          "required": true,
+          "description": "False=free, True=fixed"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "clump.extra(slot: int) -> any",
+      "description": "Get clump extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot"
+        }
+      ],
+      "returns": {
+        "type": "any",
+        "description": "Extra data value"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "clump.set_extra(slot: int, value: any) -> None",
+      "description": "Set clump extra data in given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "Extra data slot"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true,
+          "description": "Value to store"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "fragment",
+      "signature": "clump.fragment() -> int",
+      "description": "Get clump fragment ID.",
+      "returns": {
+        "type": "int",
+        "description": "Fragment ID"
+      }
+    },
+    {
+      "name": "set_fragment",
+      "signature": "clump.set_fragment(id: int) -> None",
+      "description": "Set clump fragment ID.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true,
+          "description": "Fragment ID"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "inside",
+      "signature": "clump.inside(point: vec) -> bool",
+      "description": "Test whether a point is inside this clump volume.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point to test (x,y,z)"
+        }
+      ],
+      "returns": {
+        "type": "bool",
+        "description": "True if point inside clump"
+      }
+    }
+  ]
+}

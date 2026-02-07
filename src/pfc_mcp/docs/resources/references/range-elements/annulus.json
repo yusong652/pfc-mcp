@@ -1,0 +1,28 @@
+{
+  "name": "annulus",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "annulus center <v> radius <f1> <f2>",
+  "description": "Spherical annulus (hollow sphere) selection.",
+  "parameters": [
+    {
+      "name": "center",
+      "type": "vector",
+      "description": "Center point"
+    },
+    {
+      "name": "radius",
+      "type": "float",
+      "description": "Inner and outer radii"
+    }
+  ],
+  "supports_extent": true,
+  "examples": [
+    "range annulus center (0,0,0) radius 3 5"
+  ],
+  "search_keywords": [
+    "annulus",
+    "spherical",
+    "ring"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "command": "ball delete",
+  "category": "ball",
+  "search_keywords": [
+    "delete",
+    "remove"
+  ],
+  "description": "Delete balls. If no range is specified, then all balls in the model are deleted.",
+  "syntax": "ball delete <range>",
+  "examples": [
+    {
+      "command": "ball delete",
+      "description": "Delete all balls in the model"
+    },
+    {
+      "command": "ball delete range id 1 100",
+      "description": "Delete balls with ID 1 through 100"
+    },
+    {
+      "command": "ball delete range group 'tunnel'",
+      "description": "Delete all balls in group 'tunnel'"
+    },
+    {
+      "command": "ball delete range cylinder end-1 -3.0 -16.0 0.0 end-2 -3.0 16.0 0.0 radius 3.0",
+      "description": "Delete balls within cylindrical region (creating tunnel)"
+    },
+    {
+      "command": "ball delete range box -5 5 -5 5 -10 0",
+      "description": "Delete balls within box region"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Ball.delete() method - requires iteration: for b in itasca.ball.list(): b.delete()"
+  }
+}

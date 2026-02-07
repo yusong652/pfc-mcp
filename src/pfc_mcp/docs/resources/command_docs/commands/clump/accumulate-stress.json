@@ -1,0 +1,25 @@
+{
+  "command": "clump accumulate-stress",
+  "category": "clump",
+  "search_keywords": [
+    "stress",
+    "accumulate",
+    "performance"
+  ],
+  "description": "Specify that stresses are accumulated and stored during cycling. This slows performance by ~15% but allows the current stress state to be queried and used in contact models during force-displacement computations. By default, the clump stresses are not accumulated but are computed when queried.",
+  "syntax": "clump accumulate-stress <bool>",
+  "examples": [
+    {
+      "command": "clump accumulate-stress on",
+      "description": "Enable stress accumulation - allows stress queries during contact model calculations (reduces performance by ~15%)"
+    },
+    {
+      "command": "clump accumulate-stress off",
+      "description": "Disable stress accumulation - default behavior, stresses computed on demand when queried"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('clump accumulate-stress <bool>')"
+  }
+}

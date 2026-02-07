@@ -1,0 +1,67 @@
+{
+  "command": "plot copy",
+  "category": "plot",
+  "search_keywords": [
+    "copy",
+    "duplicate",
+    "clone",
+    "settings",
+    "items"
+  ],
+  "description": "Copy a plot to another plot. If the source plot name is not specified, the current plot is assumed. If the destination does not exist, a new plot will be created. Otherwise the existing plot will be overwritten. If a new plot is created, it is made the active plot. Plot settings include the current camera view settings.",
+  "syntax": "plot <s> copy <sDest> <keyword>",
+  "keywords": [
+    {
+      "name": "s",
+      "syntax": "<s>",
+      "description": "Source plot name. If not specified, the current plot is assumed.",
+      "optional": true
+    },
+    {
+      "name": "sDest",
+      "syntax": "<sDest>",
+      "description": "Destination plot name. If not specified, a new plot will be created with a default name.",
+      "optional": true
+    },
+    {
+      "name": "both",
+      "syntax": "both",
+      "description": "Copy both the plot items and the plot settings to the destination. This is the default option.",
+      "optional": true
+    },
+    {
+      "name": "items",
+      "syntax": "items",
+      "description": "Copy only the list of plot items to the destination.",
+      "optional": true
+    },
+    {
+      "name": "settings",
+      "syntax": "settings",
+      "description": "Copy only the current plot settings to the destination.",
+      "optional": true
+    }
+  ],
+  "examples": [
+    {
+      "command": "plot copy 'newplot'",
+      "description": "Copy current plot to a new plot named 'newplot'"
+    },
+    {
+      "command": "plot 'source' copy 'dest'",
+      "description": "Copy plot 'source' to plot 'dest'"
+    },
+    {
+      "command": "plot copy 'newplot' items",
+      "description": "Copy only plot items from current plot to 'newplot'"
+    },
+    {
+      "command": "plot copy 'newplot' settings",
+      "description": "Copy only plot settings from current plot to 'newplot'"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('plot <name> copy <dest> <keyword>') - no direct Python SDK method"
+  }
+}

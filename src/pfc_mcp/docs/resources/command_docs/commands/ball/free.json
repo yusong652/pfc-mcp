@@ -1,0 +1,67 @@
+{
+  "command": "ball free",
+  "category": "ball",
+  "search_keywords": [
+    "free",
+    "velocity",
+    "spin"
+  ],
+  "description": "Free the specified ball velocities. As a result, ball motion reflects the forces acting upon them (velocities are updated during cycling according to equations of motion).",
+  "syntax": "ball free <keyword> ... <range>",
+  "keywords": [
+    {
+      "name": "velocity",
+      "description": "Free all components of translational velocity"
+    },
+    {
+      "name": "velocity-x",
+      "description": "Free x-component of translational velocity"
+    },
+    {
+      "name": "velocity-y",
+      "description": "Free y-component of translational velocity"
+    },
+    {
+      "name": "velocity-z",
+      "description": "Free z-component of translational velocity (3D only)"
+    },
+    {
+      "name": "spin",
+      "description": "Free all components of angular velocity"
+    },
+    {
+      "name": "spin-x",
+      "description": "Free x-component of angular velocity (3D only)"
+    },
+    {
+      "name": "spin-y",
+      "description": "Free y-component of angular velocity (3D only)"
+    },
+    {
+      "name": "spin-z",
+      "description": "Free z-component of angular velocity (3D only)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball free velocity spin",
+      "description": "Free all translational and angular velocity components for all balls"
+    },
+    {
+      "command": "ball free velocity-x range group 'left_balls'",
+      "description": "Free x-velocity for balls in 'left_balls' group"
+    },
+    {
+      "command": "ball free velocity-z range position-y -5 5",
+      "description": "Free z-velocity for balls in y-position range (allow vertical motion)"
+    },
+    {
+      "command": "ball free velocity range id 1 100",
+      "description": "Free all translational velocities for balls 1-100"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Ball.set_fix(component, False) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration"
+  }
+}

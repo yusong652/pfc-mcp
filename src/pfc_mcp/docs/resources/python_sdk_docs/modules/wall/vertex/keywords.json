@@ -1,0 +1,352 @@
+{
+  "module": "wall.vertex",
+  "description": "Natural language keywords for wall.vertex module API search",
+  "keywords": {
+    "count vertices": [
+      "itasca.wall.vertex.count"
+    ],
+    "number of vertices": [
+      "itasca.wall.vertex.count"
+    ],
+    "how many vertices": [
+      "itasca.wall.vertex.count"
+    ],
+    "vertex count": [
+      "itasca.wall.vertex.count"
+    ],
+    "total vertices": [
+      "itasca.wall.vertex.count"
+    ],
+    "find vertex": [
+      "itasca.wall.vertex.find"
+    ],
+    "get vertex": [
+      "itasca.wall.vertex.find"
+    ],
+    "search vertex": [
+      "itasca.wall.vertex.find"
+    ],
+    "vertex by id": [
+      "itasca.wall.vertex.find"
+    ],
+    "vertices in box": [
+      "itasca.wall.vertex.inbox"
+    ],
+    "vertices in region": [
+      "itasca.wall.vertex.inbox"
+    ],
+    "spatial vertex query": [
+      "itasca.wall.vertex.inbox"
+    ],
+    "list vertices": [
+      "itasca.wall.vertex.list"
+    ],
+    "iterate vertices": [
+      "itasca.wall.vertex.list"
+    ],
+    "all vertices": [
+      "itasca.wall.vertex.list"
+    ],
+    "vertex iterator": [
+      "itasca.wall.vertex.list"
+    ],
+    "get vertices": [
+      "itasca.wall.vertex.list"
+    ],
+    "maximum vertex id": [
+      "itasca.wall.vertex.maxid"
+    ],
+    "max vertex id": [
+      "itasca.wall.vertex.maxid"
+    ],
+    "highest vertex id": [
+      "itasca.wall.vertex.maxid"
+    ],
+    "nearest vertex": [
+      "itasca.wall.vertex.near"
+    ],
+    "closest vertex": [
+      "itasca.wall.vertex.near"
+    ],
+    "vertex near point": [
+      "itasca.wall.vertex.near"
+    ],
+    "find nearest vertex": [
+      "itasca.wall.vertex.near"
+    ],
+    "_comment_identification": "Identification methods",
+    "vertex id": [
+      "itasca.wall.vertex.Vertex.id"
+    ],
+    "get vertex id": [
+      "itasca.wall.vertex.Vertex.id"
+    ],
+    "vertex identifier": [
+      "itasca.wall.vertex.Vertex.id"
+    ],
+    "check vertex valid": [
+      "itasca.wall.vertex.Vertex.valid"
+    ],
+    "is vertex valid": [
+      "itasca.wall.vertex.Vertex.valid"
+    ],
+    "vertex valid": [
+      "itasca.wall.vertex.Vertex.valid"
+    ],
+    "vertex exists": [
+      "itasca.wall.vertex.Vertex.valid"
+    ],
+    "vertex live": [
+      "itasca.wall.vertex.Vertex.valid"
+    ],
+    "delete vertex": [
+      "itasca.wall.vertex.Vertex.delete"
+    ],
+    "remove vertex": [
+      "itasca.wall.vertex.Vertex.delete"
+    ],
+    "destroy vertex": [
+      "itasca.wall.vertex.Vertex.delete"
+    ],
+    "erase vertex": [
+      "itasca.wall.vertex.Vertex.delete"
+    ],
+    "_comment_position": "Position methods",
+    "vertex position": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "vertex location": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "get vertex position": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "where is vertex": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "vertex coordinates": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "vertex point": [
+      "itasca.wall.vertex.Vertex.pos"
+    ],
+    "vertex position x": [
+      "itasca.wall.vertex.Vertex.pos_x"
+    ],
+    "vertex x coordinate": [
+      "itasca.wall.vertex.Vertex.pos_x"
+    ],
+    "position x": [
+      "itasca.wall.vertex.Vertex.pos_x"
+    ],
+    "x coordinate": [
+      "itasca.wall.vertex.Vertex.pos_x"
+    ],
+    "vertex position y": [
+      "itasca.wall.vertex.Vertex.pos_y"
+    ],
+    "vertex y coordinate": [
+      "itasca.wall.vertex.Vertex.pos_y"
+    ],
+    "position y": [
+      "itasca.wall.vertex.Vertex.pos_y"
+    ],
+    "y coordinate": [
+      "itasca.wall.vertex.Vertex.pos_y"
+    ],
+    "vertex position z": [
+      "itasca.wall.vertex.Vertex.pos_z"
+    ],
+    "vertex z coordinate": [
+      "itasca.wall.vertex.Vertex.pos_z"
+    ],
+    "position z": [
+      "itasca.wall.vertex.Vertex.pos_z"
+    ],
+    "z coordinate": [
+      "itasca.wall.vertex.Vertex.pos_z"
+    ],
+    "vertex height": [
+      "itasca.wall.vertex.Vertex.pos_z"
+    ],
+    "set vertex position": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "move vertex": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "change vertex position": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "relocate vertex": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "update vertex position": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "control wall geometry": [
+      "itasca.wall.vertex.Vertex.set_pos"
+    ],
+    "set vertex position x": [
+      "itasca.wall.vertex.Vertex.set_pos_x"
+    ],
+    "set vertex x": [
+      "itasca.wall.vertex.Vertex.set_pos_x"
+    ],
+    "move vertex x": [
+      "itasca.wall.vertex.Vertex.set_pos_x"
+    ],
+    "change x coordinate": [
+      "itasca.wall.vertex.Vertex.set_pos_x"
+    ],
+    "set vertex position y": [
+      "itasca.wall.vertex.Vertex.set_pos_y"
+    ],
+    "set vertex y": [
+      "itasca.wall.vertex.Vertex.set_pos_y"
+    ],
+    "move vertex y": [
+      "itasca.wall.vertex.Vertex.set_pos_y"
+    ],
+    "change y coordinate": [
+      "itasca.wall.vertex.Vertex.set_pos_y"
+    ],
+    "set vertex position z": [
+      "itasca.wall.vertex.Vertex.set_pos_z"
+    ],
+    "set vertex z": [
+      "itasca.wall.vertex.Vertex.set_pos_z"
+    ],
+    "move vertex z": [
+      "itasca.wall.vertex.Vertex.set_pos_z"
+    ],
+    "change z coordinate": [
+      "itasca.wall.vertex.Vertex.set_pos_z"
+    ],
+    "set vertex height": [
+      "itasca.wall.vertex.Vertex.set_pos_z"
+    ],
+    "_comment_velocity": "Velocity methods",
+    "vertex velocity": [
+      "itasca.wall.vertex.Vertex.vel"
+    ],
+    "get vertex velocity": [
+      "itasca.wall.vertex.Vertex.vel"
+    ],
+    "vertex speed": [
+      "itasca.wall.vertex.Vertex.vel"
+    ],
+    "velocity vector": [
+      "itasca.wall.vertex.Vertex.vel"
+    ],
+    "vertex motion": [
+      "itasca.wall.vertex.Vertex.vel"
+    ],
+    "vertex velocity x": [
+      "itasca.wall.vertex.Vertex.vel_x"
+    ],
+    "velocity x": [
+      "itasca.wall.vertex.Vertex.vel_x"
+    ],
+    "x velocity": [
+      "itasca.wall.vertex.Vertex.vel_x"
+    ],
+    "horizontal velocity": [
+      "itasca.wall.vertex.Vertex.vel_x"
+    ],
+    "vertex velocity y": [
+      "itasca.wall.vertex.Vertex.vel_y"
+    ],
+    "velocity y": [
+      "itasca.wall.vertex.Vertex.vel_y"
+    ],
+    "y velocity": [
+      "itasca.wall.vertex.Vertex.vel_y"
+    ],
+    "vertex velocity z": [
+      "itasca.wall.vertex.Vertex.vel_z"
+    ],
+    "velocity z": [
+      "itasca.wall.vertex.Vertex.vel_z"
+    ],
+    "z velocity": [
+      "itasca.wall.vertex.Vertex.vel_z"
+    ],
+    "vertical velocity": [
+      "itasca.wall.vertex.Vertex.vel_z"
+    ],
+    "set vertex velocity": [
+      "itasca.wall.vertex.Vertex.set_vel"
+    ],
+    "change vertex velocity": [
+      "itasca.wall.vertex.Vertex.set_vel"
+    ],
+    "update vertex velocity": [
+      "itasca.wall.vertex.Vertex.set_vel"
+    ],
+    "set velocity": [
+      "itasca.wall.vertex.Vertex.set_vel"
+    ],
+    "vertex motion control": [
+      "itasca.wall.vertex.Vertex.set_vel"
+    ],
+    "set vertex velocity x": [
+      "itasca.wall.vertex.Vertex.set_vel_x"
+    ],
+    "set velocity x": [
+      "itasca.wall.vertex.Vertex.set_vel_x"
+    ],
+    "set x velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_x"
+    ],
+    "change x velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_x"
+    ],
+    "set vertex velocity y": [
+      "itasca.wall.vertex.Vertex.set_vel_y"
+    ],
+    "set velocity y": [
+      "itasca.wall.vertex.Vertex.set_vel_y"
+    ],
+    "set y velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_y"
+    ],
+    "change y velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_y"
+    ],
+    "set vertex velocity z": [
+      "itasca.wall.vertex.Vertex.set_vel_z"
+    ],
+    "set velocity z": [
+      "itasca.wall.vertex.Vertex.set_vel_z"
+    ],
+    "set z velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_z"
+    ],
+    "change z velocity": [
+      "itasca.wall.vertex.Vertex.set_vel_z"
+    ],
+    "_comment_topology": "Topology methods",
+    "vertex facets": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "facets sharing vertex": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "get vertex facets": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "facets at vertex": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "connected facets": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "adjacent facets": [
+      "itasca.wall.vertex.Vertex.facets"
+    ],
+    "vertex neighbors": [
+      "itasca.wall.vertex.Vertex.facets"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "command": "ball export",
+  "category": "ball",
+  "search_keywords": [
+    "export",
+    "geometry",
+    "STL"
+  ],
+  "description": "Export balls to geometry sets for post-processing or STL export. If no range is specified, all balls in the model are exported. Currently only supports export to geometry sets.",
+  "syntax": "ball export <keyword> <range>",
+  "keywords": [
+    {
+      "name": "geometry",
+      "description": "Export balls as triangulated geometry",
+      "sub_keywords": [
+        "set",
+        "resolution",
+        "split",
+        "positions"
+      ]
+    }
+  ],
+  "geometry_keywords": [
+    {
+      "name": "set",
+      "syntax": "set <s>",
+      "description": "Geometry set base name (default: 'balls'). With 'split', creates sets named '<s>_ball<id>'"
+    },
+    {
+      "name": "resolution",
+      "syntax": "resolution <f>",
+      "description": "Facet edge resolution factor. Edge length < f * R where R is ball radius (default: 0.25)"
+    },
+    {
+      "name": "split",
+      "syntax": "split",
+      "description": "Export each ball to dedicated geometry set (default: all balls in one set)"
+    },
+    {
+      "name": "positions",
+      "syntax": "positions",
+      "description": "Create only geometry nodes from ball positions (no triangulated surfaces)"
+    }
+  ],
+  "examples": [
+    {
+      "command": "ball export geometry",
+      "description": "Export all balls as triangulated geometry to set 'balls' with default resolution 0.25"
+    },
+    {
+      "command": "ball export geometry set 'my_balls' resolution 0.1",
+      "description": "Export balls with higher resolution (0.1) to geometry set 'my_balls'"
+    },
+    {
+      "command": "ball export geometry split set 'ball_group'",
+      "description": "Export each ball to separate geometry set (e.g., 'ball_group_ball1', 'ball_group_ball2')"
+    },
+    {
+      "command": "ball export geometry positions range group 'layer1'",
+      "description": "Export only ball center positions as geometry nodes for balls in 'layer1' group"
+    },
+    {
+      "command": "ball export geometry resolution 0.5 range id 1 100",
+      "description": "Export balls 1-100 with lower resolution (coarser triangulation)"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('ball export geometry ...') - no Python SDK equivalent for geometry export"
+  }
+}

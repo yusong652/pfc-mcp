@@ -1,0 +1,294 @@
+{
+  "model": "linear",
+  "full_name": "Linear Model",
+  "search_keywords": ["linear", "contact", "model"],
+  "description": "Linear elastic-frictional contact model with optional viscous damping. This is the default general-purpose contact model in PFC, providing linear elastic behavior in both normal and shear directions, with Coulomb friction and optional dashpot damping.",
+
+  "typical_applications": [
+    "General granular material simulations",
+    "Soil mechanics",
+    "Rock mechanics without bonding",
+    "Default contact behavior",
+    "Quick exploratory simulations"
+  ],
+
+  "property_groups": [
+    {
+      "name": "Linear Group",
+      "description": "Core linear elastic and frictional properties",
+      "properties": [
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Primary elastic property. Controls normal force-displacement relationship. Can be set directly or calculated via 'deformability' method using emod/kratio. Inheritance uses series formula: 1/kn = 1/kn(1) + 1/kn(2)."
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness [force/length]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Primary elastic property. Controls shear force-displacement relationship. Can be set directly or calculated via 'deformability' method using emod/kratio. Inheritance uses series formula: 1/ks = 1/ks(1) + 1/ks(2)."
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": "Coulomb friction coefficient. Shear force limited to fric × |normal force|. Value of 0.0 means frictionless contact. Inheritance uses minimum: fric = min(fric(1), fric(2))."
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap [length]",
+          "type": "FLT",
+          "range": "ℝ",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Reference surface gap. Used to define initial contact configuration. Typically 0.0 for initially touching contacts."
+        },
+        {
+          "keyword": "lin_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode [-]",
+          "type": "INT",
+          "range": "{0, 1}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls how normal force is updated during contact.",
+          "values": [
+            {
+              "value": 0,
+              "description": "update is absolute - force recalculated each cycle"
+            },
+            {
+              "value": 1,
+              "description": "update is incremental - force accumulated incrementally"
+            }
+          ]
+        },
+        {
+          "keyword": "emod",
+          "symbol": "E*",
+          "description": "Effective modulus [force/area]",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0.0",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method to calculate kn and ks. Not a direct property - set via method argument. Represents effective elastic modulus of the contact."
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ*",
+          "description": "Normal-to-shear stiffness ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, +∞)*",
+          "default": "0.0*",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Used with 'deformability' method to calculate kn and ks. Defined as κ* ≡ k_n / k_s. By convention, κ* = 0.0 if either normal or shear stiffness is 0."
+        },
+        {
+          "keyword": "lin_slip",
+          "symbol": "s",
+          "description": "Slip state [-]",
+          "type": "BOOL",
+          "range": "{false, true}",
+          "default": "false",
+          "modifiable": false,
+          "inheritable": "N/A",
+          "notes": "Read-only state indicator. True when contact is slipping (shear force at friction limit), false when not slipping.",
+          "values": [
+            {
+              "value": true,
+              "description": "slipping - shear force at friction limit"
+            },
+            {
+              "value": false,
+              "description": "not slipping - shear force below friction limit"
+            }
+          ]
+        },
+        {
+          "keyword": "lin_force",
+          "symbol": "F^l",
+          "description": "Linear force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Force vector in contact plane coordinates: (-F_n^l, F_ss^l, F_st^l). In 2D models: F_ss^l ≡ 0. Negative normal component indicates compression.",
+          "components": {
+            "2D": "(-F_n^l, F_st^l)",
+            "3D": "(-F_n^l, F_ss^l, F_st^l)"
+          }
+        },
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Constant area [length*length]",
+          "type": "FLT",
+          "range": "(0.0, +∞)",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "User-defined contact area. Used for stress calculations or custom contact behavior. Does not affect default force calculations."
+        }
+      ]
+    },
+    {
+      "name": "Dashpot Group",
+      "description": "Viscous damping properties for energy dissipation",
+      "properties": [
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Normal direction damping as fraction of critical damping. 0.0 = no damping, 1.0 = critical damping. Typical values: 0.5-0.8 for quasi-static simulations."
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio [-]",
+          "type": "FLT",
+          "range": "[0.0, 1.0]",
+          "default": "0.0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Shear direction damping as fraction of critical damping. 0.0 = no damping, 1.0 = critical damping. Typical values: 0.5-0.8 for quasi-static simulations."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode [-]",
+          "type": "INT",
+          "range": "{0, 1, 2, 3}",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "Controls when dashpot forces are active (tension vs compression, slipping vs not slipping).",
+          "values": [
+            {
+              "value": 0,
+              "description": "full normal & full shear - damping always active"
+            },
+            {
+              "value": 1,
+              "description": "no-tension normal & full shear - no normal damping in tension"
+            },
+            {
+              "value": 2,
+              "description": "full normal & slip-cut shear - no shear damping when slipping"
+            },
+            {
+              "value": 3,
+              "description": "no-tension normal & slip-cut shear - combined restrictions"
+            }
+          ]
+        },
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force (contact plane coordinate system) [force]",
+          "type": "VEC",
+          "range": "ℝ³",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "Read-only dashpot force vector in contact plane coordinates: (-F_n^d, F_ss^d, F_st^d). In 2D models: F_ss^d ≡ 0. Automatically calculated based on dp_nratio, dp_sratio, and dp_mode.",
+          "components": {
+            "2D": "(-F_n^d, F_st^d)",
+            "3D": "(-F_n^d, F_ss^d, F_st^d)"
+          }
+        }
+      ]
+    }
+  ],
+
+  "common_usage_patterns": [
+    {
+      "use_case": "Direct stiffness specification",
+      "commands": [
+        "contact cmat default model linear property kn 1e8 ks 5e7 fric 0.5"
+      ],
+      "description": "Set stiffnesses directly. Simple and explicit."
+    },
+    {
+      "use_case": "Deformability method (automatic stiffness calculation)",
+      "commands": [
+        "contact cmat default model linear method deformability emod 5e9 kratio 1.5 property fric 0.5"
+      ],
+      "description": "Calculate stiffnesses from elastic modulus and stiffness ratio. More physically meaningful."
+    },
+    {
+      "use_case": "With damping for quasi-static simulation",
+      "commands": [
+        "contact cmat default model linear property kn 1e8 ks 5e7 fric 0.5 dp_nratio 0.7 dp_mode 1"
+      ],
+      "description": "Add normal damping (no-tension mode) to dissipate energy and reach equilibrium faster."
+    },
+    {
+      "use_case": "Frictionless contact",
+      "commands": [
+        "contact cmat default model linear property kn 1e8 ks 5e7 fric 0.0"
+      ],
+      "description": "Zero friction coefficient for frictionless sliding."
+    }
+  ],
+
+  "typical_parameter_values": {
+    "granular_materials": {
+      "kn": "1e7 - 1e9 [N/m] depending on particle size and material stiffness",
+      "ks": "kn / 1.5 to kn / 2.5",
+      "fric": "0.3 - 0.7 for typical granular materials",
+      "dp_nratio": "0.5 - 0.8 for quasi-static simulations",
+      "dp_mode": "1 (no-tension normal damping) is common"
+    }
+  },
+
+  "notes": [
+    "By convention, κ* = 0.0 if either the normal or the shear stiffness is 0",
+    "The 'deformability' method is preferred over direct stiffness specification for physically meaningful parameters",
+    "Damping is critical for quasi-static simulations to dissipate kinetic energy",
+    "Use dp_mode=1 (no-tension normal) to avoid artificial attraction forces",
+    "Friction coefficient of 0.0 creates frictionless contacts (free sliding)",
+    "Contact forces are in contact plane coordinate system (normal is negative for compression)"
+  ],
+
+  "related_models": [
+    {
+      "model": "linearpbond",
+      "description": "Extends linear model with parallel bonds for cemented materials"
+    },
+    {
+      "model": "rrlinear",
+      "description": "Extends linear model with rolling resistance"
+    },
+    {
+      "model": "hertz",
+      "description": "Non-linear alternative with Hertzian contact mechanics"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "module": "itasca.clump.template",
+  "description": "Clump template management - reusable clump definitions for efficient clump generation",
+  "import_statement": "import itasca as it",
+  "note": "Templates define clump geometries that can be instantiated multiple times. They store pebble configurations and inertial properties.",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.clump.template.count() -> int",
+      "description": "Get total number of clump templates. O(1) operation - very fast.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Number of clump templates currently defined"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.clump.template.find(template_name: str) -> Template | None",
+      "description": "Find a clump template by name. Returns None if template doesn't exist.",
+      "parameters": [
+        {
+          "name": "template_name",
+          "type": "str",
+          "required": true,
+          "description": "Name of the template to search for"
+        }
+      ],
+      "returns": {
+        "type": "Template | None",
+        "description": "Template object if found, None if name doesn't exist"
+      }
+    },
+    {
+      "name": "findpebble",
+      "signature": "itasca.clump.template.findpebble(pebble_id: int) -> TemplatePebble | None",
+      "description": "Find the clump template pebble with the given ID, in the clump template.",
+      "parameters": [
+        {
+          "name": "pebble_id",
+          "type": "int",
+          "required": true,
+          "description": "ID of the template pebble to search for"
+        }
+      ],
+      "returns": {
+        "type": "TemplatePebble | None",
+        "description": "TemplatePebble object if found, None if ID doesn't exist"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.clump.template.list() -> Iterator[Template]",
+      "description": "Return an iterator over all clump templates. Returns iterator (not list). Order not guaranteed.",
+      "parameters": [],
+      "returns": {
+        "type": "Iterator[Template]",
+        "description": "Iterator yielding Template objects"
+      }
+    },
+    {
+      "name": "make",
+      "signature": "itasca.clump.template.make(clump_template: Template, template_name: str) -> Template",
+      "description": "Make a clump template from a clump. No clumps refer to the created clump template. Useful for saving clump configurations for reuse.",
+      "parameters": [
+        {
+          "name": "clump_template",
+          "type": "Template",
+          "required": true,
+          "description": "Source clump template to copy from"
+        },
+        {
+          "name": "template_name",
+          "type": "str",
+          "required": true,
+          "description": "Name for the new template"
+        }
+      ],
+      "returns": {
+        "type": "Template",
+        "description": "Newly created template object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.clump.template.maxid() -> int",
+      "description": "Get the maximum clump template ID currently defined.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum template ID"
+      }
+    }
+  ]
+}

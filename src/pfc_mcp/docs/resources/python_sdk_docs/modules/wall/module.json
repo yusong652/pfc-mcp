@@ -1,0 +1,116 @@
+{
+  "module": "wall",
+  "description": "Functions for working with walls",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.wall.count() -> int",
+      "description": "Get the number of walls.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Total number of walls"
+      }
+    },
+    {
+      "name": "energy",
+      "signature": "itasca.wall.energy(energy_name: str) -> float",
+      "description": "Get the wall total energy contribution. The string argument is the energy name, 'energy-boundary' is the only energy type defined.",
+      "parameters": [
+        {
+          "name": "energy_name",
+          "type": "str",
+          "required": true,
+          "description": "Energy name (typically 'energy-boundary')"
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "Total energy contribution for the specified energy type"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.wall.find(id: int or str) -> Wall",
+      "description": "Get the Wall object with the given ID number or name.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int or str",
+          "required": true,
+          "description": "Wall ID number or name"
+        }
+      ],
+      "returns": {
+        "type": "Wall",
+        "description": "Wall object with the specified ID or name, or None if not found"
+      }
+    },
+    {
+      "name": "inbox",
+      "signature": "itasca.wall.inbox(lower_bound: vec, upper_bound: vec, boundary: bool = False) -> tuple of Wall",
+      "description": "Get walls with extents intersecting a box. If boundary is True, only return walls inside the extent.",
+      "parameters": [
+        {
+          "name": "lower_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Lower bound of the bounding box"
+        },
+        {
+          "name": "upper_bound",
+          "type": "vec",
+          "required": true,
+          "description": "Upper bound of the bounding box"
+        },
+        {
+          "name": "boundary",
+          "type": "bool",
+          "required": false,
+          "description": "If True, only return walls inside the extent"
+        }
+      ],
+      "returns": {
+        "type": "tuple of Wall",
+        "description": "Tuple of Wall objects within the specified box"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.wall.list() -> Wall iterator",
+      "description": "Get a wall iterator object.",
+      "parameters": [],
+      "returns": {
+        "type": "Wall iterator",
+        "description": "Iterator over all walls"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.wall.maxid() -> int",
+      "description": "Get the maximum wall ID.",
+      "parameters": [],
+      "returns": {
+        "type": "int",
+        "description": "Maximum wall ID in use"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.wall.near(point: vec) -> Wall",
+      "description": "Find the closest wall to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true,
+          "description": "Point coordinates to search from"
+        }
+      ],
+      "returns": {
+        "type": "Wall",
+        "description": "Closest Wall object to the specified point"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "command": "wall active-sides",
+  "category": "wall",
+  "search_keywords": [
+    "active-sides",
+    "facet",
+    "one-sided"
+  ],
+  "description": "Specify which side(s) of facets are active. An inactive side will allow balls or pebbles to pass through it without being repelled. Both sides of all facets are active by default. The range is applied to facets. Use the set range element to filter by walls. One can visualize the normal vector with the wall arrow plot to assess the orientations of facet normals. Note: No effort is made to mitigate large forces that develop when balls or pebbles migrate from the inactive to active sides of walls. Thus large velocities may result in these situations.",
+  "syntax": "wall active-sides <keyword> <range>",
+  "keywords": [
+    {
+      "name": "both",
+      "syntax": "both",
+      "description": "Set both sides as active"
+    },
+    {
+      "name": "bottom",
+      "syntax": "bottom",
+      "description": "Set the side opposite the direction of the facet normal vector as active"
+    },
+    {
+      "name": "neither",
+      "syntax": "neither",
+      "description": "Set both sides as inactive. No forces will occur"
+    },
+    {
+      "name": "top",
+      "syntax": "top",
+      "description": "Set the side in the direction of the facet normal vector as active"
+    }
+  ],
+  "examples": [
+    {
+      "command": "wall active-sides both",
+      "description": "Set both sides of all facets as active (default behavior)"
+    },
+    {
+      "command": "wall active-sides top range id 1 10",
+      "description": "Set only the top side (normal direction) active for facets with IDs 1-10"
+    },
+    {
+      "command": "wall active-sides bottom",
+      "description": "Set the bottom side (opposite to normal direction) active for all facets"
+    },
+    {
+      "command": "wall active-sides neither range group 'boundary'",
+      "description": "Deactivate both sides for facets in group 'boundary' - no forces will occur"
+    }
+  ],
+  "python_sdk_alternative": {
+    "available": true,
+    "workaround": "Facet.set_active(code) - codes: 0=both, 1=top (normal dir), -1=bottom, 2=neither. Requires iteration over facets"
+  }
+}

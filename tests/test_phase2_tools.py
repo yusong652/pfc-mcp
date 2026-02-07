@@ -1,6 +1,7 @@
 import asyncio
 
 from pfc_mcp.server import mcp
+from pfc_mcp.tools.error_messages import format_bridge_unavailable
 from pfc_mcp.tools.task_formatting import normalize_status, paginate_output
 from pfc_mcp.utils import validate_script_path
 
@@ -9,12 +10,12 @@ def test_phase2_tools_registered() -> None:
     tools = asyncio.run(mcp._tool_manager.get_tools())
     expected = {
         "pfc_execute_task",
-        "pfc_execute_code",
         "pfc_check_task_status",
         "pfc_list_tasks",
         "pfc_interrupt_task",
     }
     assert expected.issubset(set(tools.keys()))
+    assert "pfc_execute_code" not in tools
 
 
 def test_status_mapping_and_pagination() -> None:
@@ -43,3 +44,13 @@ def test_validate_script_path_requires_absolute() -> None:
         assert "absolute path" in str(exc)
     else:
         raise AssertionError("relative path should raise ValueError")
+
+
+def test_bridge_error_message_is_friendly() -> None:
+    err = OSError("Multiple exceptions: [Errno 61] Connect call failed")
+    msg = format_bridge_unavailable("pfc_list_tasks", err)
+
+    assert msg["status"] == "bridge_unavailable"
+    assert msg["reason"] == "cannot connect to bridge service"
+    assert msg["action"] == "start pfc-bridge in PFC GUI, then retry"
+    assert "Multiple exceptions" not in msg["display"]

@@ -5,6 +5,7 @@ import asyncio
 from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
+from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
 from pfc_mcp.tools.task_formatting import format_unix_timestamp, normalize_status, paginate_output
 from pfc_mcp.utils import FilterText, OutputLimit, SkipNewestLines, TaskId, WaitSeconds
 
@@ -19,20 +20,24 @@ def register(mcp: FastMCP) -> None:
         limit: OutputLimit = 64,
         filter: FilterText = None,
         wait_seconds: WaitSeconds = 1,
-    ) -> str:
+    ) -> str | dict[str, str]:
         """Check status and output for a submitted PFC task."""
         await asyncio.sleep(wait_seconds)
 
-        client = await get_bridge_client()
-        response = await client.check_task_status(task_id)
+        try:
+            client = await get_bridge_client()
+            response = await client.check_task_status(task_id)
+        except Exception as exc:
+            return format_bridge_unavailable("pfc_check_task_status", exc, task_id=task_id)
 
         status = response.get("status", "unknown")
         if status == "not_found":
-            return (
-                "Task not found\n"
-                f"- task_id: {task_id}\n"
-                "- status: not_found\n"
-                "The task may have expired or the task ID is invalid."
+            return format_operation_error(
+                "pfc_check_task_status",
+                status="not_found",
+                message="Task not found",
+                task_id=task_id,
+                action="Verify task_id or submit a new task",
             )
 
         data = response.get("data") or {}

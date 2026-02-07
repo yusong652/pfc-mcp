@@ -4,6 +4,7 @@ from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
+from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
 from pfc_mcp.utils import RunInBackground, ScriptPath, TaskDescription, TimeoutMs
 
 
@@ -16,16 +17,18 @@ def register(mcp: FastMCP) -> None:
         description: TaskDescription,
         timeout: TimeoutMs = None,
         run_in_background: RunInBackground = True,
-    ) -> str:
+    ) -> str | dict[str, str]:
         """Submit a PFC script task for asynchronous execution.
 
         This MCP tool is stateless and optimized for background execution.
         Use pfc_check_task_status to monitor progress.
         """
         if not run_in_background:
-            return (
-                "run_in_background=false is not supported in pfc-mcp phase2. "
-                "Please run in background and use pfc_check_task_status for polling."
+            return format_operation_error(
+                "pfc_execute_task",
+                status="unsupported_mode",
+                message="run_in_background=false is not supported",
+                action="Set run_in_background=true and poll with pfc_check_task_status",
             )
 
         config = get_bridge_config()
@@ -36,16 +39,20 @@ def register(mcp: FastMCP) -> None:
             description=description,
         )
 
-        client = await get_bridge_client()
-        response = await client.execute_task(
-            script_path=entry_script,
-            description=description,
-            task_id=task_id,
-            session_id=config.default_session_id,
-            timeout_ms=timeout,
-            run_in_background=True,
-            source="agent",
-        )
+        try:
+            client = await get_bridge_client()
+            response = await client.execute_task(
+                script_path=entry_script,
+                description=description,
+                task_id=task_id,
+                session_id=config.default_session_id,
+                timeout_ms=timeout,
+                run_in_background=True,
+                source="agent",
+            )
+        except Exception as exc:
+            task_manager.update_status(task_id, "failed")
+            return format_bridge_unavailable("pfc_execute_task", exc, task_id=task_id)
 
         status = response.get("status", "unknown")
         message = response.get("message", "")
@@ -53,11 +60,12 @@ def register(mcp: FastMCP) -> None:
 
         if status != "pending":
             task_manager.update_status(task_id, "failed")
-            return (
-                "Task submission failed\n"
-                f"- task_id: {task_id}\n"
-                f"- status: {status}\n"
-                f"- message: {message or 'unknown error'}"
+            return format_operation_error(
+                "pfc_execute_task",
+                status=status or "submission_failed",
+                message=message or "Task submission rejected by bridge",
+                task_id=task_id,
+                action="Check script path and bridge logs, then retry",
             )
 
         task_manager.update_status(task_id, "running")

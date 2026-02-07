@@ -202,6 +202,18 @@ class PFCBridgeClient:
             operation_name="check_task_status",
         )
 
+    async def execute_diagnostic(self, script_path: str, timeout_ms: int = 30000) -> Dict[str, Any]:
+        timeout_s = max(self.request_timeout_s, timeout_ms / 1000.0 + 5.0)
+        return await self._request_with_retry(
+            {
+                "type": "diagnostic_execute",
+                "script_path": script_path,
+                "timeout_ms": timeout_ms,
+            },
+            operation_name="diagnostic_execute",
+            timeout_s=timeout_s,
+        )
+
     async def list_tasks(self, session_id: Optional[str], offset: int, limit: Optional[int]) -> Dict[str, Any]:
         return await self._request_with_retry(
             {

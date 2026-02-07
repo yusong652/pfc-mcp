@@ -40,6 +40,8 @@ class BridgeConfig:
     request_timeout_s: float
     workspace_path: str | None
     auto_reconnect: bool
+    diagnostic_timeout_ms: int
+    diagnostic_file_wait_s: float
 
 
 def get_bridge_config() -> BridgeConfig:
@@ -53,4 +55,6 @@ def get_bridge_config() -> BridgeConfig:
         request_timeout_s=max(1.0, _env_float("PFC_MCP_REQUEST_TIMEOUT_S", 10.0)),
         workspace_path=workspace if workspace else None,
         auto_reconnect=_env_bool("PFC_MCP_AUTO_RECONNECT", True),
+        diagnostic_timeout_ms=max(1000, _env_int("PFC_MCP_DIAGNOSTIC_TIMEOUT_MS", 30000)),
+        diagnostic_file_wait_s=max(0.0, _env_float("PFC_MCP_DIAGNOSTIC_FILE_WAIT_S", 3.0)),
     )

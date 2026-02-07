@@ -1,4 +1,9 @@
-"""PFC user console execution tool backed by pfc-bridge."""
+"""PFC user console execution tool backed by pfc-bridge.
+
+TODO(phase4): keep this implementation internal for backend console orchestration
+and do not expose it to LLM-facing tool lists. Waiting behavior should be handled
+by backend-side polling on top of pfc_execute_task + pfc_check_task_status.
+"""
 
 import os
 
@@ -7,6 +12,7 @@ from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
+from pfc_mcp.tools.error_messages import format_bridge_unavailable
 from pfc_mcp.tools.task_formatting import format_unix_timestamp, normalize_status
 from pfc_mcp.utils import ConsoleCode, ConsoleTimeoutMs
 
@@ -22,7 +28,7 @@ def register(mcp: FastMCP) -> None:
             default=False,
             description="When true, return task_id immediately and poll with pfc_check_task_status.",
         ),
-    ) -> str:
+    ) -> str | dict[str, str]:
         """Execute Python code in the PFC user console environment."""
         config = get_bridge_config()
         task_manager = get_task_manager()
@@ -32,22 +38,26 @@ def register(mcp: FastMCP) -> None:
             description=code.splitlines()[0][:120],
         )
 
-        client = await get_bridge_client()
+        try:
+            client = await get_bridge_client()
 
-        workspace_path = config.workspace_path
-        if not workspace_path:
-            workspace_path = await client.get_working_directory()
-        if not workspace_path:
-            workspace_path = os.getcwd()
+            workspace_path = config.workspace_path
+            if not workspace_path:
+                workspace_path = await client.get_working_directory()
+            if not workspace_path:
+                workspace_path = os.getcwd()
 
-        response = await client.execute_code(
-            code=code,
-            workspace_path=workspace_path,
-            task_id=task_id,
-            session_id=config.default_session_id,
-            timeout_ms=timeout_ms,
-            run_in_background=run_in_background,
-        )
+            response = await client.execute_code(
+                code=code,
+                workspace_path=workspace_path,
+                task_id=task_id,
+                session_id=config.default_session_id,
+                timeout_ms=timeout_ms,
+                run_in_background=run_in_background,
+            )
+        except Exception as exc:
+            task_manager.update_status(task_id, "failed")
+            return format_bridge_unavailable("pfc_execute_code", exc, task_id=task_id)
 
         status = response.get("status", "unknown")
         message = response.get("message", "")

@@ -5,7 +5,11 @@ PFC Bridge Startup Script
 Runs WebSocket server in background thread while keeping IPython interactive.
 Commands execute in main thread via queue for thread safety.
 
-Usage: %run "/path/to/pfc-mcp/pfc-bridge/start_bridge.py"
+Usage (PFC IPython):
+    # replace /path/to/pfc-mcp with your pfc-mcp root path
+    %run /path/to/pfc-mcp/pfc-bridge/start_bridge.py
+
+Tip: use forward slashes and avoid wrapping the path with extra quotes.
 """
 
 import sys
@@ -26,7 +30,7 @@ except ImportError:
     if not _script_dir:
         try:
             import itasca as it
-            _script_dir = it.fish.get('_pfc_server_path')
+            _script_dir = it.fish.get('_pfc_bridge_path') or it.fish.get('_pfc_server_path')
         except:
             pass
 
@@ -101,8 +105,7 @@ def _setup_workspace_git():
 
     # Skip development project directories
     if (
-        os.path.exists(os.path.join(cwd, 'services', 'pfc-server', 'server'))
-        or os.path.exists(os.path.join(cwd, 'pfc-mcp', 'pfc-bridge', 'server'))
+        os.path.exists(os.path.join(cwd, 'pfc-mcp', 'pfc-bridge', 'server'))
         or os.path.exists(os.path.join(cwd, 'pfc-bridge', 'server'))
     ):
         result["issue"] = "dev-project (skipped)"
@@ -170,7 +173,6 @@ def _create_gitignore(cwd, gitignore_path, result):
             os.path.join(path, "workspace_template", ".gitignore"),
             os.path.join(path, "pfc-bridge", "workspace_template", ".gitignore"),
             os.path.join(path, "pfc-mcp", "pfc-bridge", "workspace_template", ".gitignore"),
-            os.path.join(path, "services", "pfc-server", "workspace_template", ".gitignore"),
         ]
         for candidate in candidates:
             if os.path.exists(candidate):

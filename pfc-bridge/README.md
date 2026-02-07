@@ -67,7 +67,21 @@ The agent will automatically set up the environment, generate startup scripts, a
 **Method 2: Manual %run**
 ```python
 # In PFC GUI IPython console
-%run "C:/path/to/pfc-mcp/pfc-bridge/start_bridge.py"
+# replace /path/to/pfc-mcp with your pfc-mcp root path
+%run /path/to/pfc-mcp/pfc-bridge/start_bridge.py
+```
+
+If your path contains spaces, wrap it once with double quotes:
+
+```python
+%run "/path/to/pfc-mcp with spaces/pfc-bridge/start_bridge.py"
+```
+
+Avoid nested quotes from copy/paste. For example, this will fail because the quote
+characters become part of the filename:
+
+```python
+%run '"/path/to/pfc-mcp/pfc-bridge/start_bridge.py"'
 ```
 
 You'll see:
@@ -562,6 +576,18 @@ Tasks are persisted to disk in `.nagisa/tasks/` directory:
 >>> subprocess.run(["pip", "install", "websockets==9.1"])
 ```
 
+If you see an error like:
+
+```
+File `'"C:\\...\\start_bridge.py"'.py'` not found
+```
+
+Your `%run` path is over-quoted. Use:
+
+```python
+%run /path/to/pfc-mcp/pfc-bridge/start_bridge.py
+```
+
 ### Tasks not processing
 
 ```python
@@ -614,11 +640,12 @@ Then poll with `check_task_status`.
 
 ## Testing
 
-If using with toyoura-nagisa, run the integration demo:
+If using with toyoura-nagisa, verify integration with a minimal tool workflow:
 
 ```bash
-# From toyoura-nagisa root (with PFC server running)
-uv run python examples/pfc_integration/DEMo.py
+# 1) pfc_list_tasks        (connectivity and task store)
+# 2) pfc_execute_task      (small foreground/background script)
+# 3) pfc_check_task_status (progress and completion states)
 ```
 
 Tests: script execution, background tasks, status queries, WebSocket responsiveness, task completion, git snapshots.
@@ -648,7 +675,7 @@ Tests: script execution, background tasks, status queries, WebSocket responsiven
 
 - **[ITASCA PFC Documentation](https://www.itascacg.com/software/pfc)**: Official PFC docs
 - **Client Implementation**: If using toyoura-nagisa, see `packages/backend/infrastructure/pfc/` for WebSocket client
-- **PFC Tools**: See `packages/backend/application/tools/pfc/` for agent tool implementations
+- **PFC MCP Tools**: See `pfc-mcp/src/pfc_mcp/tools/` for MCP tool implementations
 
 ---
 

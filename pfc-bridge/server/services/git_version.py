@@ -6,7 +6,7 @@ creating commits on a dedicated branch without affecting the working directory.
 
 Python 3.6 compatible implementation.
 
-TODO: Consider auto-initializing git repository on pfc-server startup
+TODO: Consider auto-initializing git repository on pfc-bridge startup
       if the PFC project directory is not yet a git repository.
 """
 

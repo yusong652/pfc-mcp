@@ -2,7 +2,7 @@
 PFC WebSocket Server - Lightweight server to run in PFC GUI IPython shell.
 
 This module provides WebSocket server components for remote PFC control.
-Server startup should be done via start_server.py script.
+Server startup should be done via start_bridge.py script.
 """
 
 import asyncio

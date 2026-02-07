@@ -160,7 +160,7 @@ def _build_ball_color_by_command(color_by: Optional[str], quantity: str) -> str:
         return f'color-by text-attribute "{color_by}" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \'Any\' color-options named maximum-names 1000000 name-controls true"
+        return "color-by text-attribute \"group\" \\\'Any\\\' color-options named maximum-names 1000000 name-controls true"
 
     return ""
 
@@ -187,7 +187,7 @@ def _build_wall_color_by_command(color_by: Optional[str], quantity: str) -> str:
         return 'color-by text-attribute "name" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \'Any\' piece off color-options named maximum-names 1000000 name-controls true"
+        return "color-by text-attribute \"group\" \\\'Any\\\' piece off color-options named maximum-names 1000000 name-controls true"
 
     return ""
 
@@ -221,7 +221,7 @@ def _build_contact_color_by_command(color_by: Optional[str], quantity: str) -> s
         return f'color-by text-attribute "{name}" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \'Any\' color-options named maximum-names 1000000 name-controls true"
+        return "color-by text-attribute \"group\" \\\'Any\\\' color-options named maximum-names 1000000 name-controls true"
 
     return ""
 

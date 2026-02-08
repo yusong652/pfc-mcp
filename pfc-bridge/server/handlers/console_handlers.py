@@ -74,8 +74,6 @@ async def handle_user_console(ctx, data):
             description=code_preview,
             timeout_ms=timeout_ms,
             run_in_background=run_in_background,
-            source="user_console",
-            enable_git_snapshot=False,
             task_id=task_id
         )
 

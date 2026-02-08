@@ -1,6 +1,7 @@
 """Task listing tool backed by pfc-bridge."""
 
 from typing import Optional
+from typing import Any
 
 from fastmcp import FastMCP
 from pydantic import Field
@@ -22,7 +23,7 @@ def register(mcp: FastMCP) -> None:
         ),
         skip_newest: SkipNewestTasks = 0,
         limit: TaskListLimit = 32,
-    ) -> str | dict[str, str]:
+    ) -> dict[str, Any]:
         """List tracked PFC tasks with pagination."""
         try:
             client = await get_bridge_client()
@@ -50,7 +51,18 @@ def register(mcp: FastMCP) -> None:
         has_more = pagination.get("has_more", False)
 
         if total_count == 0:
-            return "No tracked tasks found."
+            return {
+                "operation": "pfc_list_tasks",
+                "status": "success",
+                "total_count": 0,
+                "displayed_count": 0,
+                "skip_newest": skip_newest,
+                "limit": limit,
+                "has_more": False,
+                "session_filter": session_id,
+                "tasks": [],
+                "display": "No tracked tasks found.",
+            }
 
         lines = [
             "Tracked tasks",
@@ -63,25 +75,49 @@ def register(mcp: FastMCP) -> None:
             "",
         ]
 
+        normalized_tasks: list[dict[str, Any]] = []
+
         for task in tasks:
             raw_status = task.get("status", "unknown")
             checked = task.get("checked")
             if checked is None and "notified" in task:
                 checked = task.get("notified")
 
+            normalized_task = {
+                "task_id": task.get("task_id"),
+                "status": normalize_status(raw_status),
+                "source": task.get("source", "agent"),
+                "elapsed_time": task.get("elapsed_time"),
+                "checked": checked,
+                "entry_script": task.get("entry_script") or task.get("name"),
+                "description": task.get("description"),
+            }
+            normalized_tasks.append(normalized_task)
+
             lines.append(
                 (
-                    f"- task_id={task.get('task_id', 'unknown')} "
-                    f"status={normalize_status(raw_status)} "
-                    f"source={task.get('source', 'agent')} "
-                    f"elapsed={task.get('elapsed_time', 'n/a')} "
+                    f"- task_id={normalized_task.get('task_id', 'unknown')} "
+                    f"status={normalized_task.get('status', 'unknown')} "
+                    f"source={normalized_task.get('source', 'agent')} "
+                    f"elapsed={normalized_task.get('elapsed_time', 'n/a')} "
                     f"checked={checked if checked is not None else 'n/a'}"
                 )
             )
-            lines.append(f"  entry_script={task.get('entry_script') or task.get('name') or 'n/a'}")
-            lines.append(f"  description={task.get('description') or 'n/a'}")
+            lines.append(f"  entry_script={normalized_task.get('entry_script') or 'n/a'}")
+            lines.append(f"  description={normalized_task.get('description') or 'n/a'}")
 
         if has_more:
             lines.extend(["", f"Next: pfc_list_tasks(skip_newest={skip_newest + displayed_count}, limit={limit})"])
 
-        return "\n".join(lines)
+        return {
+            "operation": "pfc_list_tasks",
+            "status": "success",
+            "total_count": total_count,
+            "displayed_count": displayed_count,
+            "skip_newest": skip_newest,
+            "limit": limit,
+            "has_more": has_more,
+            "session_filter": session_id,
+            "tasks": normalized_tasks,
+            "display": "\n".join(lines),
+        }

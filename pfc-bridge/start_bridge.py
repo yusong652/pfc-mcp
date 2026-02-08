@@ -73,8 +73,6 @@ _init_status = {
     "pfc_state": False,
     "interrupt": False,
     "diagnostic": False,
-    "git": False,
-    "git_issue": None
 }
 
 # Create main thread executor and stop event
@@ -94,122 +92,6 @@ except ImportError:
     pass
 except Exception as e:
     logging.warning("Failed to configure PFC: {}".format(e))
-
-# Setup workspace git
-def _setup_workspace_git():
-    """Initialize git repository and .gitignore if needed."""
-    import subprocess
-
-    result = {"git_initialized": False, "gitignore_created": False, "issue": None}
-    cwd = os.getcwd()
-
-    # Skip development project directories
-    if (
-        os.path.exists(os.path.join(cwd, 'pfc-mcp', 'pfc-bridge', 'server'))
-        or os.path.exists(os.path.join(cwd, 'pfc-bridge', 'server'))
-    ):
-        result["issue"] = "dev-project (skipped)"
-        return result
-
-    # Windows subprocess configuration
-    subprocess_kwargs = {"creationflags": 0x08000000} if sys.platform == "win32" else {}
-
-    def run_git(cmd):
-        return subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                            cwd=cwd, **subprocess_kwargs)
-
-    # Check git availability
-    try:
-        if run_git(["git", "--version"]).returncode != 0:
-            result["issue"] = "git not installed"
-            return result
-    except FileNotFoundError:
-        result["issue"] = "git not found in PATH"
-        return result
-
-    # Check if git repository exists
-    git_check = run_git(["git", "rev-parse", "--git-dir"])
-
-    if git_check.returncode != 0:
-        stderr = git_check.stderr.decode('utf-8', errors='replace').strip()
-        if "dubious ownership" in stderr:
-            result["issue"] = "ownership"
-            return result
-
-        # Initialize git
-        if run_git(["git", "init"]).returncode != 0:
-            result["issue"] = "git init failed"
-            return result
-
-        result["git_initialized"] = True
-        logging.info("Initialized git repository in: {}".format(cwd))
-
-        # Create .gitignore before initial commit
-        gitignore_path = os.path.join(cwd, ".gitignore")
-        if not os.path.exists(gitignore_path):
-            _create_gitignore(cwd, gitignore_path, result)
-
-        # Create initial commit
-        run_git(["git", "add", "-A"])
-        if run_git(["git", "commit", "--allow-empty", "-m", "Initial PFC workspace setup"]).returncode == 0:
-            logging.info("Created initial commit")
-    else:
-        # Git exists - check .gitignore
-        gitignore_path = os.path.join(cwd, ".gitignore")
-        if not os.path.exists(gitignore_path):
-            _create_gitignore(cwd, gitignore_path, result)
-
-    return result
-
-
-def _create_gitignore(cwd, gitignore_path, result):
-    """Create .gitignore file from template or minimal inline version."""
-    import shutil
-
-    # Find template in sys.path
-    template_found = None
-    for path in sys.path:
-        candidates = [
-            os.path.join(path, "workspace_template", ".gitignore"),
-            os.path.join(path, "pfc-bridge", "workspace_template", ".gitignore"),
-            os.path.join(path, "pfc-mcp", "pfc-bridge", "workspace_template", ".gitignore"),
-        ]
-        for candidate in candidates:
-            if os.path.exists(candidate):
-                template_found = candidate
-                break
-        if template_found:
-            break
-
-    # Try template first, fallback to minimal inline
-    try:
-        if template_found:
-            shutil.copy(template_found, gitignore_path)
-            logging.info("Created .gitignore from template")
-        else:
-            with open(gitignore_path, 'w', encoding='utf-8') as f:
-                f.write("# PFC Runtime Files\nerrorlog.txt\n*.dmp\n*.temp\n"
-                       ".user_console/\n.nagisa/\n")
-            logging.info("Created minimal .gitignore")
-        result["gitignore_created"] = True
-    except Exception as e:
-        logging.warning("Failed to create .gitignore: {}".format(e))
-
-
-# Run workspace git setup
-try:
-    _git_setup = _setup_workspace_git()
-    if _git_setup["issue"]:
-        _init_status["git"] = False
-        _init_status["git_issue"] = {"message": _git_setup["issue"], "action": None}
-    else:
-        _init_status["git"] = True
-        if _git_setup["git_initialized"]:
-            _init_status["git_auto_init"] = True
-        if _git_setup["gitignore_created"]:
-            _init_status["gitignore_created"] = True
-except Exception as e:
-    _init_status["git_issue"] = {"message": str(e), "action": None}
 
 # Create and start server
 pfc_server = create_server(main_executor=main_executor, host=HOST, port=PORT,
@@ -301,18 +183,9 @@ def _print_startup_summary():
         ("PFC", _init_status["pfc_state"]),
         ("Interrupt", _init_status["interrupt"]),
         ("Diagnostic", _init_status["diagnostic"]),
-        ("Git", _init_status["git"])
     ] if enabled]
     if features:
         print("  Features:  {}".format(", ".join(features)))
-
-    # Auto-setup notifications
-    setup = [name for name, created in [
-        ("git init", _init_status.get("git_auto_init")),
-        (".gitignore", _init_status.get("gitignore_created"))
-    ] if created]
-    if setup:
-        print("  Setup:     Auto-created: {}".format(", ".join(setup)))
 
     # Warnings
     warnings = []
@@ -320,8 +193,6 @@ def _print_startup_summary():
         warnings.append("config.py not found (using defaults)")
     if not _init_status["pfc_state"]:
         warnings.append("itasca module not available")
-    if _init_status["git_issue"]:
-        warnings.append("Git: {}".format(_init_status["git_issue"].get("message", "unavailable")))
 
     if warnings:
         print("-" * 60)

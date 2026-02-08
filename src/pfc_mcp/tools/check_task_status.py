@@ -1,6 +1,7 @@
 """Task status query tool backed by pfc-bridge."""
 
 import asyncio
+from typing import Any
 
 from fastmcp import FastMCP
 
@@ -20,7 +21,7 @@ def register(mcp: FastMCP) -> None:
         limit: OutputLimit = 64,
         filter: FilterText = None,
         wait_seconds: WaitSeconds = 1,
-    ) -> str | dict[str, str]:
+    ) -> dict[str, Any]:
         """Check status and output for a submitted PFC task."""
         await asyncio.sleep(wait_seconds)
 
@@ -65,7 +66,6 @@ def register(mcp: FastMCP) -> None:
             f"- elapsed_time: {data.get('elapsed_time', 'n/a')}",
             f"- entry_script: {data.get('entry_script') or data.get('script_path') or 'n/a'}",
             f"- description: {data.get('description') or 'n/a'}",
-            f"- git_commit: {(data.get('git_commit') or 'n/a')[:8] if data.get('git_commit') else 'n/a'}",
             f"- checked: {checked if checked is not None else 'n/a'}",
         ]
 
@@ -94,4 +94,26 @@ def register(mcp: FastMCP) -> None:
         if next_hints:
             lines.extend(["", "Next: " + " | ".join(next_hints)])
 
-        return "\n".join(lines)
+        return {
+            "operation": "pfc_check_task_status",
+            "status": normalized_status,
+            "task_id": task_id,
+            "start_time": data.get("start_time"),
+            "end_time": data.get("end_time"),
+            "elapsed_time": data.get("elapsed_time"),
+            "entry_script": data.get("entry_script") or data.get("script_path"),
+            "description": data.get("description"),
+            "checked": checked,
+            "result": data.get("result"),
+            "error": data.get("error"),
+            "output": output_text,
+            "output_mode": "windowed_snapshot",
+            "pagination": pagination,
+            "query": {
+                "skip_newest": skip_newest,
+                "limit": limit,
+                "filter": filter,
+                "wait_seconds": wait_seconds,
+            },
+            "display": "\n".join(lines),
+        }

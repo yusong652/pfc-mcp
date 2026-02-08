@@ -1,5 +1,7 @@
 """PFC task execution tool backed by pfc-bridge."""
 
+from typing import Any
+
 from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
@@ -17,7 +19,7 @@ def register(mcp: FastMCP) -> None:
         description: TaskDescription,
         timeout: TimeoutSeconds = None,
         run_in_background: RunInBackground = True,
-    ) -> str | dict[str, str]:
+    ) -> dict[str, Any]:
         """Submit a PFC script task for asynchronous execution.
 
         This MCP tool is stateless and optimized for background execution.
@@ -68,7 +70,7 @@ def register(mcp: FastMCP) -> None:
 
         task_manager.update_status(task_id, "running")
 
-        return (
+        display = (
             "Task submitted\n"
             f"- task_id: {task_id}\n"
             "- status: pending\n"
@@ -77,3 +79,14 @@ def register(mcp: FastMCP) -> None:
             f"- message: {message or 'submitted'}\n\n"
             f'Next: call pfc_check_task_status(task_id="{task_id}")'
         )
+
+        return {
+            "operation": "pfc_execute_task",
+            "status": "pending",
+            "task_id": task_id,
+            "entry_script": entry_script,
+            "description": description,
+            "message": message or "submitted",
+            "run_in_background": True,
+            "display": display,
+        }

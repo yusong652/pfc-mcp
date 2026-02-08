@@ -58,7 +58,6 @@ async def handle_reset_workspace(ctx, data):
     Resets:
     1. User console (deletes temporary scripts)
     2. Task history (clears all tasks)
-    3. Git execution branch (removes execution commits)
 
     Args:
         ctx: Server context with dependencies
@@ -92,19 +91,6 @@ async def handle_reset_workspace(ctx, data):
         task_result = ctx.task_manager.clear_all_tasks()
         results.append(task_result)
 
-        # 3. Reset git execution branch
-        from ..services import get_git_manager
-        if workspace_path:
-            git_manager = get_git_manager(workspace_path)
-            git_result = git_manager.reset_execution_branch()
-            results.append(git_result)
-        else:
-            results.append({
-                "success": True,
-                "message": "No workspace path provided, skipping git reset",
-                "deleted_commits": 0
-            })
-
         # Build summary
         all_success = all(r.get("success", False) for r in results)
         summary_parts = [r.get("message", "") for r in results]
@@ -122,7 +108,6 @@ async def handle_reset_workspace(ctx, data):
             "data": {
                 "user_console": results[0],
                 "tasks": results[1],
-                "git": results[2]
             }
         }
 

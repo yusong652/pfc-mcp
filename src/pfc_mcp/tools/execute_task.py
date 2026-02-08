@@ -34,7 +34,6 @@ def register(mcp: FastMCP) -> None:
         config = get_bridge_config()
         task_manager = get_task_manager()
         task_id = task_manager.create_task(
-            source="agent",
             entry_script=entry_script,
             description=description,
         )
@@ -48,7 +47,6 @@ def register(mcp: FastMCP) -> None:
                 session_id=config.default_session_id,
                 timeout_ms=int(timeout * 1000) if timeout else None,
                 run_in_background=True,
-                source="agent",
             )
         except Exception as exc:
             task_manager.update_status(task_id, "failed")
@@ -70,15 +68,12 @@ def register(mcp: FastMCP) -> None:
 
         task_manager.update_status(task_id, "running")
 
-        git_commit = data.get("git_commit")
-        git_line = f"\n- git_commit: {git_commit[:8]}" if git_commit else ""
         return (
             "Task submitted\n"
             f"- task_id: {task_id}\n"
             "- status: pending\n"
             f"- entry_script: {entry_script}\n"
-            f"- description: {description}"
-            f"{git_line}\n"
+            f"- description: {description}\n"
             f"- message: {message or 'submitted'}\n\n"
             f'Next: call pfc_check_task_status(task_id="{task_id}")'
         )

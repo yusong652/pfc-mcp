@@ -82,23 +82,19 @@ class TaskPersistence:
         # Common fields
         task_data = {
             "task_id": task.task_id,
-            "session_id": task.session_id,  # Add session ID
+            "session_id": task.session_id,
             "task_type": task.task_type,
-            "source": getattr(task, "source", "agent"),  # Task source (default: agent)
             "description": task.description,
             "status": task.status,
             "start_time": task.start_time,
             "end_time": task.end_time,
-            "notified": getattr(task, "notified", False)  # Notification status (default: False)
+            "notified": getattr(task, "notified", False),
         }
 
         # Script task fields
         task_data["script_name"] = task.script_name
-        task_data["entry_script"] = task.entry_script  # Unified field name
-        task_data["git_commit"] = getattr(task, "git_commit", None)  # Git version snapshot
-        # Save log file path (output is read from file on demand)
+        task_data["entry_script"] = task.entry_script
         task_data["log_path"] = getattr(task, "log_path", None)
-        # Save error message (for failed tasks)
         task_data["error"] = getattr(task, "error", None)
 
         return task_data
@@ -303,21 +299,18 @@ class HistoricalTask:
         """
         # Restore common fields
         self.task_id = task_data["task_id"]
-        self.session_id = task_data.get("session_id", "default")  # Session ID with default fallback
+        self.session_id = task_data.get("session_id", "default")
         self.task_type = task_data["task_type"]
-        self.source = task_data.get("source", "agent")  # Task source (default: agent)
         self.description = task_data["description"]
         self.status = task_data["status"]
         self.start_time = task_data["start_time"]
-        self.end_time = task_data.get("end_time")  # Optional
-        self.notified = task_data.get("notified", False)  # Notification status (default: False)
+        self.end_time = task_data.get("end_time")
+        self.notified = task_data.get("notified", False)
 
         # Restore script task fields
         self.script_name = task_data.get("script_name", "")
-        # Support both new (entry_script) and old (script_path) field names
         self.entry_script = task_data.get("entry_script") or task_data.get("script_path") or ""  # type: str
-        self.git_commit = task_data.get("git_commit")  # Git version snapshot
-        self.log_path = task_data.get("log_path")  # Path to output log file
+        self.log_path = task_data.get("log_path")
         # Backward compatibility: support old format with inline output
         self._output_snapshot = task_data.get("output", "")
         self.error = task_data.get("error")  # Error message (for failed tasks)
@@ -373,7 +366,6 @@ class HistoricalTask:
                 "data": {
                     "task_id": self.task_id,
                     "task_type": self.task_type,
-                    "source": self.source,
                     "script_name": self.script_name,
                     "entry_script": self.entry_script,
                     "description": self.description,
@@ -381,7 +373,6 @@ class HistoricalTask:
                     "start_time": self.start_time,
                     "end_time": self.end_time,
                     "output": output if output else "",
-                    "git_commit": self.git_commit,
                     "historical": True
                 }
             }
@@ -398,7 +389,6 @@ class HistoricalTask:
                 "data": {
                     "task_id": self.task_id,
                     "task_type": self.task_type,
-                    "source": self.source,
                     "script_name": self.script_name,
                     "entry_script": self.entry_script,
                     "description": self.description,
@@ -406,7 +396,6 @@ class HistoricalTask:
                     "start_time": self.start_time,
                     "end_time": self.end_time,
                     "output": output if output else "",
-                    "git_commit": self.git_commit,
                     "historical": True
                 }
             }
@@ -424,7 +413,6 @@ class HistoricalTask:
                 "data": {
                     "task_id": self.task_id,
                     "task_type": self.task_type,
-                    "source": self.source,
                     "script_name": self.script_name,
                     "entry_script": self.entry_script,
                     "description": self.description,
@@ -433,7 +421,6 @@ class HistoricalTask:
                     "end_time": self.end_time,
                     "output": output if output else "",
                     "error": error_msg,
-                    "git_commit": self.git_commit,
                     "historical": True
                 }
             }
@@ -445,7 +432,6 @@ class HistoricalTask:
             "task_id": self.task_id,
             "session_id": self.session_id,
             "task_type": self.task_type,
-            "source": self.source,  # Task source: "agent" or "user_console"
             "description": self.description,
             "status": self.status,
             "elapsed_time": self.get_elapsed_time(),
@@ -455,7 +441,6 @@ class HistoricalTask:
             # Script task fields
             "name": self.script_name,
             "entry_script": self.entry_script,
-            "git_commit": self.git_commit
         }
 
         # Add end_time if available

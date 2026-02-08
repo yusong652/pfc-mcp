@@ -18,8 +18,7 @@ class TaskDataBuilder:
     ensuring consistent field naming across all response points.
 
     Example:
-        data = (TaskDataBuilder(task_id, "script", source, script_name, entry_script, description)
-            .with_git_commit(git_commit)
+        data = (TaskDataBuilder(task_id, "script", script_name, entry_script, description)
             .with_timing(start_time, end_time, elapsed_time)
             .with_output(output_text)
             .with_result(result)
@@ -30,7 +29,6 @@ class TaskDataBuilder:
         self,
         task_id,  # type: str
         task_type,  # type: str
-        source,  # type: str
         script_name,  # type: str
         entry_script,  # type: str
         description,  # type: str
@@ -42,7 +40,6 @@ class TaskDataBuilder:
         Args:
             task_id: Unique task identifier
             task_type: Task type (e.g., "script")
-            source: Task source ("agent", "user_console", "diagnostic")
             script_name: Script file name (e.g., "main.py")
             entry_script: Absolute path to entry script
             description: Task description from agent
@@ -50,7 +47,6 @@ class TaskDataBuilder:
         self._data = {
             "task_id": task_id,
             "task_type": task_type,
-            "source": source,
             "script_name": script_name,
             "entry_script": entry_script,
             "description": description,
@@ -60,12 +56,6 @@ class TaskDataBuilder:
         # type: (str) -> TaskDataBuilder
         """Add session_id field."""
         self._data["session_id"] = session_id
-        return self
-
-    def with_git_commit(self, git_commit):
-        # type: (Optional[str]) -> TaskDataBuilder
-        """Add git_commit field."""
-        self._data["git_commit"] = git_commit
         return self
 
     def with_timing(

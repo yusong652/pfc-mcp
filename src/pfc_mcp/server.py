@@ -8,6 +8,7 @@ from pfc_mcp.tools import (
     browse_reference,
     capture_plot,
     check_task_status,
+    execute_code,
     execute_task,
     interrupt_task,
     list_tasks,
@@ -33,19 +34,16 @@ query_python_api.register(mcp)
 
 # Register execution tools
 execute_task.register(mcp)
+execute_code.register(mcp)
 check_task_status.register(mcp)
 list_tasks.register(mcp)
 interrupt_task.register(mcp)
 capture_plot.register(mcp)
 
-# TODO(phase4): do not expose pfc_execute_code to LLM clients.
-# User console waiting semantics should be implemented by backend polling
-# on top of pfc_execute_task + pfc_check_task_status.
-
 
 def main():
     """Entry point for the PFC MCP server."""
-    mcp.run()
+    mcp.run(transport="stdio", show_banner=False)
 
 
 if __name__ == "__main__":

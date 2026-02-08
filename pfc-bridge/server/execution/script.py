@@ -4,9 +4,6 @@ PFC Script Executor - Executes Python SDK scripts with direct API access.
 This module provides script execution functionality using PFC Python SDK via
 main thread queue, enabling queries and operations that return values.
 
-Includes git-based version tracking: creates execution snapshots on
-pfc-executions branch before each script execution.
-
 Python 3.6 compatible implementation.
 """
 
@@ -22,7 +19,6 @@ from typing import Any, Dict, Optional
 
 from .main_thread import MainThreadExecutor
 from ..utils import path_to_llm_format, FileBuffer, TaskDataBuilder, build_response
-from ..services import get_git_manager
 from ..signals import set_current_task, clear_current_task, clear_interrupt
 
 # Module logger
@@ -223,8 +219,8 @@ class ScriptRunner:
             clear_current_task()
             clear_interrupt(task_id)
 
-    async def run(self, session_id, script_path, description, timeout_ms=None, run_in_background=True, source="agent", enable_git_snapshot=True, task_id=None):
-        # type: (str, str, str, Optional[int], bool, str, bool, Optional[str]) -> Dict[str, Any]
+    async def run(self, session_id, script_path, description, timeout_ms=None, run_in_background=True, task_id=None):
+        # type: (str, str, str, Optional[int], bool, Optional[str]) -> Dict[str, Any]
         """
         Run script (submit to main thread queue, optionally wait for completion).
 
@@ -235,23 +231,9 @@ class ScriptRunner:
         Args:
             session_id: Session identifier for task isolation and persistence
             script_path: Absolute path to Python script file
-                Example: "/path/to/pfc_project/scripts/analyze_balls.py"
             description: Task description from PFC agent (LLM-provided)
-                Example: "Phase 2: Settling simulation with 50k particles"
             timeout_ms: Script execution timeout in milliseconds (only for synchronous mode)
-                - None (default): No timeout limit for production simulations
-                - 1000-600000: Custom timeout (1 second to 10 minutes) for testing
             run_in_background: Background execution control (default: True - production mode)
-                - True: Asynchronous - return task_id immediately, query via check_task_status
-                - False: Synchronous - wait for completion, return result directly
-            source: Task source identifier (default: "agent")
-                - "agent": Script created/executed by LLM agent (git snapshot enabled)
-                - "user_console": Script from user Python console (no git snapshot)
-                - "diagnostic": Diagnostic tool operation like plot capture (no git snapshot)
-            enable_git_snapshot: Whether to create git snapshot before execution (default: True)
-                - True: Create git commit on pfc-executions branch (for agent scripts)
-                - False: Skip git snapshot (for quick console commands and diagnostic tools)
-                - Note: Automatically set to False for source="user_console" or "diagnostic"
             task_id: Optional client-generated task ID (6-char hex)
                 - If provided: Use this task_id (backend-managed task lifecycle)
                 - If None: Generate new task_id (backward compatible)
@@ -283,7 +265,6 @@ class ScriptRunner:
             }
 
         output_buffer = None
-        git_commit = None
         script_name = os.path.basename(script_path)
 
         try:
@@ -312,20 +293,6 @@ class ScriptRunner:
             log_path = os.path.join(log_dir, "task_{}.log".format(task_id))
             output_buffer = FileBuffer(log_path)
 
-            # Create git execution snapshot (before running script)
-            # This captures the exact code state that will be executed
-            # Skip for quick console commands (enable_git_snapshot=False)
-            # Use script_path to find the correct git repository (user's PFC project)
-            git_commit = None
-            if enable_git_snapshot:
-                git_manager = get_git_manager(script_path)
-                if git_manager.is_git_available():
-                    git_commit = git_manager.create_execution_commit(
-                        task_id=task_id,
-                        description=description,
-                        entry_script=script_path
-                    )
-
             # Submit to main thread queue
             future = self.main_executor.submit(
                 self._execute,
@@ -344,15 +311,12 @@ class ScriptRunner:
                 script_path,
                 output_buffer,
                 description,
-                git_commit,
-                source,
                 task_id
             )
 
             if run_in_background:
                 # Asynchronous: return immediately
-                data = (TaskDataBuilder(task_id, "script", source, script_name, script_path, description)
-                    .with_git_commit(git_commit)
+                data = (TaskDataBuilder(task_id, "script", script_name, script_path, description)
                     .with_timing(submit_time)
                     .build())
                 return build_response("pending", "Script submitted: {}".format(script_name), data)
@@ -381,8 +345,7 @@ class ScriptRunner:
             # (error info is in 'message' field when status is 'error')
             error_msg = result_dict.get("message") if result_dict.get("status") == "error" else None
 
-            data = (TaskDataBuilder(task_id, "script", source, script_name, script_path, description)
-                .with_git_commit(git_commit)
+            data = (TaskDataBuilder(task_id, "script", script_name, script_path, description)
                 .with_timing(start_time, end_time, elapsed_time)
                 .with_output(full_output)
                 .with_result(result_dict.get("result"))
@@ -410,8 +373,7 @@ class ScriptRunner:
                     timeout_ms, script_name
                 )
 
-                data = (TaskDataBuilder(task_id or "unknown", "script", source, script_name, script_path, description)
-                    .with_git_commit(git_commit)
+                data = (TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
                     .with_timing(
                         task.start_time if task else None,
                         elapsed_time=task.get_elapsed_time() if task else None
@@ -431,8 +393,7 @@ class ScriptRunner:
             end_time = task.end_time if task else None
             elapsed_time = (end_time - start_time) if (start_time and end_time) else None
 
-            data = (TaskDataBuilder(task_id or "unknown", "script", source, script_name, script_path, description)
-                .with_git_commit(git_commit)
+            data = (TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
                 .with_timing(start_time, end_time, elapsed_time)
                 .with_output(output_text)
                 .with_error(error_message)

@@ -10,7 +10,6 @@ import uuid
 @dataclass
 class TaskRecord:
     task_id: str
-    source: str
     entry_script: str
     description: str
     created_at: datetime
@@ -24,14 +23,13 @@ class BridgeTaskManager:
         self._tasks: Dict[str, TaskRecord] = {}
         self._lock = Lock()
 
-    def create_task(self, source: str, entry_script: str, description: str) -> str:
+    def create_task(self, entry_script: str, description: str) -> str:
         task_id = uuid.uuid4().hex[:6]
         with self._lock:
             while task_id in self._tasks:
                 task_id = uuid.uuid4().hex[:6]
             self._tasks[task_id] = TaskRecord(
                 task_id=task_id,
-                source=source,
                 entry_script=entry_script,
                 description=description,
                 created_at=datetime.now(),

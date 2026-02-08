@@ -16,10 +16,6 @@ from ..utils import TaskDataBuilder, build_response
 # Module logger
 logger = logging.getLogger("PFC-Server")
 
-# Valid source values for task origin
-VALID_SOURCES = ("agent", "user_console")
-
-
 class ScriptTask(Task):
     """
     Task for Python script execution.
@@ -27,11 +23,10 @@ class ScriptTask(Task):
     Enhanced task type with real-time output capture via FileBuffer,
     suitable for long-running simulations with progress monitoring.
     Output is written directly to disk for complete preservation.
-    Includes git-based version tracking via git_commit.
     """
 
-    def __init__(self, task_id, session_id, future, script_name, entry_script, output_buffer=None, description=None, on_status_change=None, git_commit=None, source="agent"):
-        # type: (str, str, Any, str, str, Any, Optional[str], Any, Optional[str], str) -> None
+    def __init__(self, task_id, session_id, future, script_name, entry_script, output_buffer=None, description=None, on_status_change=None):
+        # type: (str, str, Any, str, str, Any, Optional[str], Any) -> None
         """
         Initialize script task.
 
@@ -44,16 +39,12 @@ class ScriptTask(Task):
             output_buffer: Optional FileBuffer for output capture (writes to disk)
             description: Task description from PFC agent (LLM-provided)
             on_status_change: Optional callback function(task) called when task status changes
-            git_commit: Git commit hash on pfc-executions branch (version snapshot)
-            source: Task source identifier ("agent" or "user_console")
         """
         # Use agent-provided description (default to empty string if None)
         super(ScriptTask, self).__init__(task_id, session_id, future, description or "", "script", on_status_change)
         self.script_name = script_name
         self.entry_script = entry_script  # type: str  # Entry script path
         self.output_buffer = output_buffer
-        self.git_commit = git_commit  # Git version snapshot
-        self.source = source  # Task source: "agent" or "user_console"
 
         # Extract log path from FileBuffer for persistence
         self.log_path = None  # type: Optional[str]
@@ -79,11 +70,10 @@ class ScriptTask(Task):
         # type: () -> TaskDataBuilder
         """Create pre-configured TaskDataBuilder with common fields."""
         return (TaskDataBuilder(
-                self.task_id, self.task_type, self.source,
+                self.task_id, self.task_type,
                 self.script_name, self.entry_script, self.description
             )
-            .with_session(self.session_id)
-            .with_git_commit(self.git_commit))
+            .with_session(self.session_id))
 
     def _build_pending_response(self, elapsed_time):
         # type: (float) -> Dict[str, Any]
@@ -228,9 +218,7 @@ class ScriptTask(Task):
         """Get script task summary for listing."""
         info = super(ScriptTask, self).get_task_info()
         info.update({
-            "source": self.source,  # Task source: "agent" or "user_console"
             "name": self.script_name,  # Script file name (for backward compatibility)
             "entry_script": self.entry_script,  # Entry script path
-            "git_commit": self.git_commit,  # Git version snapshot
         })
         return info

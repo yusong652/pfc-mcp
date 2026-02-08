@@ -73,8 +73,8 @@ class TaskManager:
         except Exception as e:
             logger.error("Failed to load historical tasks: {}".format(e))
 
-    def create_script_task(self, session_id, future, script_name, entry_script, output_buffer=None, description=None, git_commit=None, source="agent", task_id=None):
-        # type: (str, Any, str, str, Any, Optional[str], Optional[str], str, Optional[str]) -> str
+    def create_script_task(self, session_id, future, script_name, entry_script, output_buffer=None, description=None, task_id=None):
+        # type: (str, Any, str, str, Any, Optional[str], Optional[str]) -> str
         """
         Register a new long-running Python script task.
 
@@ -85,8 +85,6 @@ class TaskManager:
             entry_script: Full path to entry script
             output_buffer: Optional FileBuffer for output capture (writes to disk)
             description: Task description from PFC agent (LLM-provided)
-            git_commit: Git commit hash on pfc-executions branch (version snapshot)
-            source: Task source identifier ("agent" or "user_console")
             task_id: Optional pre-generated task ID (if None, generates new one)
 
         Returns:
@@ -98,7 +96,6 @@ class TaskManager:
         task = ScriptTask(
             task_id, session_id, future, script_name, entry_script,
             output_buffer, description, on_status_change=self._on_task_status_change,
-            git_commit=git_commit, source=source
         )
         self.tasks[task_id] = task
 
@@ -148,14 +145,13 @@ class TaskManager:
 
         return task.get_status_response()
 
-    def list_all_tasks(self, session_id=None, source=None, offset=0, limit=None):
-        # type: (Optional[str], Optional[str], int, Optional[int]) -> Dict[str, Any]
+    def list_all_tasks(self, session_id=None, offset=0, limit=None):
+        # type: (Optional[str], int, Optional[int]) -> Dict[str, Any]
         """
-        List currently tracked tasks, optionally filtered by session and source with pagination.
+        List currently tracked tasks, optionally filtered by session with pagination.
 
         Args:
             session_id: Optional session ID to filter tasks
-            source: Optional source to filter tasks ("agent", "user_console", "diagnostic")
             offset: Skip N most recent tasks (0 = most recent, default: 0)
             limit: Maximum tasks to return (None = all tasks, default: None)
 
@@ -165,13 +161,8 @@ class TaskManager:
                 - message: Summary message
                 - data: List of task info dictionaries (paginated)
                 - pagination: Pagination metadata
-                    - total_count: Total tasks available
-                    - displayed_count: Tasks in this response
-                    - offset: Current offset
-                    - limit: Current limit
-                    - has_more: Whether more tasks exist
         """
-        # Filter tasks by session and source if specified
+        # Filter tasks by session if specified
         # Support both full UUID and 8-char prefix matching for session_id
         filtered_tasks = list(self.tasks.values())
 
@@ -180,13 +171,6 @@ class TaskManager:
             filtered_tasks = [
                 task for task in filtered_tasks
                 if task.session_id == session_id or task.session_id.startswith(session_id)
-            ]
-
-        # Apply source filter
-        if source:
-            filtered_tasks = [
-                task for task in filtered_tasks
-                if getattr(task, 'source', 'agent') == source
             ]
 
         # Sort by start_time descending (most recent first)

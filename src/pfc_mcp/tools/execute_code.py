@@ -1,9 +1,4 @@
-"""PFC user console execution tool backed by pfc-bridge.
-
-TODO(phase4): keep this implementation internal for backend console orchestration
-and do not expose it to LLM-facing tool lists. Waiting behavior should be handled
-by backend-side polling on top of pfc_execute_task + pfc_check_task_status.
-"""
+"""PFC user console execution tool backed by pfc-bridge."""
 
 import os
 
@@ -33,7 +28,6 @@ def register(mcp: FastMCP) -> None:
         config = get_bridge_config()
         task_manager = get_task_manager()
         task_id = task_manager.create_task(
-            source="user_console",
             entry_script="<user_console>",
             description=code.splitlines()[0][:120],
         )

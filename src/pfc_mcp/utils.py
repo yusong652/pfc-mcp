@@ -17,9 +17,9 @@ MAX_OUTPUT_LINES = 200
 DEFAULT_TASK_LIST_LIMIT = 32
 MAX_TASK_LIST_LIMIT = 100
 
-# Timeout constraints (milliseconds)
-MIN_TIMEOUT_MS = 1000
-MAX_TIMEOUT_MS = 600000
+# Timeout constraints (seconds)
+MIN_TIMEOUT_S = 1
+MAX_TIMEOUT_S = 600
 
 # Wait constraints (seconds)
 MIN_WAIT_SECONDS = 1
@@ -128,13 +128,13 @@ TaskDescription = Annotated[
     Field(..., min_length=1, max_length=DESCRIPTION_MAX_LENGTH, description="Brief task purpose"),
 ]
 
-TimeoutMs = Annotated[
+TimeoutSeconds = Annotated[
     Optional[int],
     Field(
         default=None,
-        ge=MIN_TIMEOUT_MS,
-        le=MAX_TIMEOUT_MS,
-        description="Execution timeout in milliseconds. Null means no timeout.",
+        ge=MIN_TIMEOUT_S,
+        le=MAX_TIMEOUT_S,
+        description="Execution timeout in seconds. Null means no timeout.",
     ),
 ]
 
@@ -184,9 +184,9 @@ ConsoleCode = Annotated[
     Field(..., min_length=1, description="Python code to execute in PFC user console"),
 ]
 
-ConsoleTimeoutMs = Annotated[
+ConsoleTimeoutSeconds = Annotated[
     int,
-    Field(default=30000, ge=MIN_TIMEOUT_MS, le=MAX_TIMEOUT_MS, description="Console execution timeout in milliseconds"),
+    Field(default=30, ge=MIN_TIMEOUT_S, le=MAX_TIMEOUT_S, description="Console execution timeout in seconds"),
 ]
 
 PlotOutputPath = Annotated[

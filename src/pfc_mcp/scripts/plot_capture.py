@@ -18,8 +18,8 @@ DEFAULT_IMAGE_SIZE = (720, 480)
 class CutPlane(BaseModel):
     """Cut plane definition for clipping plot items."""
 
-    origin: List[float] = Field(min_length=3, max_length=3)
-    normal: List[float] = Field(min_length=3, max_length=3)
+    origin: List[float] = Field(min_length=3, max_length=3, description="Point on the cut plane [x, y, z]")
+    normal: List[float] = Field(min_length=3, max_length=3, description="Plane normal direction [x, y, z]")
 
 
 _EXTRA_FLEX_PATTERN = re.compile(r"^extra[\s_-]*(\d+)$", re.IGNORECASE)

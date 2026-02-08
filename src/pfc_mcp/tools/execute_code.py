@@ -14,7 +14,7 @@ from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
 from pfc_mcp.tools.error_messages import format_bridge_unavailable
 from pfc_mcp.tools.task_formatting import format_unix_timestamp, normalize_status
-from pfc_mcp.utils import ConsoleCode, ConsoleTimeoutMs
+from pfc_mcp.utils import ConsoleCode, ConsoleTimeoutSeconds
 
 
 def register(mcp: FastMCP) -> None:
@@ -23,7 +23,7 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool()
     async def pfc_execute_code(
         code: ConsoleCode,
-        timeout_ms: ConsoleTimeoutMs = 30000,
+        timeout: ConsoleTimeoutSeconds = 30,
         run_in_background: bool = Field(
             default=False,
             description="When true, return task_id immediately and poll with pfc_check_task_status.",
@@ -52,7 +52,7 @@ def register(mcp: FastMCP) -> None:
                 workspace_path=workspace_path,
                 task_id=task_id,
                 session_id=config.default_session_id,
-                timeout_ms=timeout_ms,
+                timeout_ms=int(timeout * 1000),
                 run_in_background=run_in_background,
             )
         except Exception as exc:

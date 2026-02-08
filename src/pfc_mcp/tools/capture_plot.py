@@ -74,7 +74,7 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool()
     async def pfc_capture_plot(
         output_path: PlotOutputPath,
-        size: Annotated[list[int], Field(min_length=2, max_length=2)] = Field(default_factory=lambda: list(DEFAULT_IMAGE_SIZE)),
+        size: Annotated[list[int], Field(min_length=2, max_length=2, description="Image size in pixels [width, height]")] = Field(default_factory=lambda: list(DEFAULT_IMAGE_SIZE)),
         include_ball: bool = True,
         ball_shape: BallShapeType = "sphere",
         ball_color_by: Optional[str] = Field(
@@ -104,15 +104,15 @@ def register(mcp: FastMCP) -> None:
         ),
         contact_color_by_quantity: VectorQuantityType = "mag",
         contact_scale_by_force: bool = True,
-        center: Optional[Annotated[list[float], Field(min_length=3, max_length=3)]] = None,
-        eye: Optional[Annotated[list[float], Field(min_length=3, max_length=3)]] = None,
-        roll: float = 0.0,
-        magnification: float = 1.0,
+        center: Optional[Annotated[list[float], Field(min_length=3, max_length=3, description="Camera look-at point in model coordinates [x, y, z]")]] = None,
+        eye: Optional[Annotated[list[float], Field(min_length=3, max_length=3, description="Camera position in model coordinates [x, y, z]")]] = None,
+        roll: Annotated[float, Field(description="Camera roll angle in degrees")] = 0.0,
+        magnification: Annotated[float, Field(description="Zoom factor (1.0 = fit model, >1 = zoom in)")] = 1.0,
         projection: Literal["perspective", "parallel"] = "perspective",
         ball_cut: Optional[CutPlane] = None,
         wall_cut: Optional[CutPlane] = None,
         contact_cut: Optional[CutPlane] = None,
-        timeout_ms: Annotated[int, Field(ge=1000, le=120000)] = 30000,
+        timeout: Annotated[int, Field(ge=1, le=120, description="Capture timeout in seconds")] = 30,
     ) -> list[ImageContent | TextContent] | str | dict[str, str]:
         """Capture a PFC plot image and return MCP-native image content."""
         config = get_bridge_config()
@@ -172,7 +172,7 @@ def register(mcp: FastMCP) -> None:
             try:
                 response = await client.execute_diagnostic(
                     script_path=_to_pfc_path(str(script_path)),
-                    timeout_ms=timeout_ms or config.diagnostic_timeout_ms,
+                    timeout_ms=timeout * 1000 if timeout else config.diagnostic_timeout_ms,
                 )
             finally:
                 _cleanup_script(script_path)
@@ -214,7 +214,7 @@ def register(mcp: FastMCP) -> None:
                 status="timeout",
                 message="Capture timed out",
                 reason=str(exc),
-                action="Increase timeout_ms or inspect bridge responsiveness",
+                action="Increase timeout or inspect bridge responsiveness",
             )
         except ValueError as exc:
             return format_operation_error(

@@ -7,7 +7,7 @@ from fastmcp import FastMCP
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
 from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
-from pfc_mcp.utils import RunInBackground, ScriptPath, TaskDescription, TimeoutSeconds
+from pfc_mcp.utils import ScriptPath, TaskDescription, TimeoutSeconds
 
 
 def register(mcp: FastMCP) -> None:
@@ -18,21 +18,12 @@ def register(mcp: FastMCP) -> None:
         entry_script: ScriptPath,
         description: TaskDescription,
         timeout: TimeoutSeconds = None,
-        run_in_background: RunInBackground = True,
     ) -> dict[str, Any]:
         """Submit a PFC script task for asynchronous execution.
 
         This MCP tool is stateless and optimized for background execution.
         Use pfc_check_task_status to monitor progress.
         """
-        if not run_in_background:
-            return format_operation_error(
-                "pfc_execute_task",
-                status="unsupported_mode",
-                message="run_in_background=false is not supported",
-                action="Set run_in_background=true and poll with pfc_check_task_status",
-            )
-
         config = get_bridge_config()
         task_manager = get_task_manager()
         task_id = task_manager.create_task(
@@ -87,6 +78,5 @@ def register(mcp: FastMCP) -> None:
             "entry_script": entry_script,
             "description": description,
             "message": message or "submitted",
-            "run_in_background": True,
             "display": display,
         }

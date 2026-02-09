@@ -8,7 +8,6 @@ from pfc_mcp.tools import (
     browse_reference,
     capture_plot,
     check_task_status,
-    execute_code,
     execute_task,
     interrupt_task,
     list_tasks,
@@ -34,7 +33,6 @@ query_python_api.register(mcp)
 
 # Register execution tools
 execute_task.register(mcp)
-execute_code.register(mcp)
 check_task_status.register(mcp)
 list_tasks.register(mcp)
 interrupt_task.register(mcp)

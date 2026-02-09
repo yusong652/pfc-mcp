@@ -7,7 +7,6 @@ main thread queue, enabling queries and operations that return values.
 Python 3.6 compatible implementation.
 """
 
-
 import asyncio
 import concurrent.futures
 import logging
@@ -42,6 +41,7 @@ class ScriptRunner:
 
         try:
             import itasca  # type: ignore
+
             self.itasca = itasca
         except ImportError:
             logger.warning("ITASCA SDK not available for script execution")
@@ -83,6 +83,7 @@ class ScriptRunner:
             # - if __name__ == "__main__": works correctly
             # - Scripts share state with IPython Console
             import __main__
+
             exec_globals = __main__.__dict__
 
             # Ensure itasca is available in global namespace
@@ -92,18 +93,23 @@ class ScriptRunner:
             # Set __file__ to current script path (updates each execution)
             exec_globals["__file__"] = script_path
 
+            # Prevent stale result leakage across script runs.
+            # `result` is a reserved output channel for task return payloads,
+            # so each execution should start with a clean value.
+            exec_globals.pop("result", None)
+
             # Try to execute as expression first (single line, returns value)
             try:
                 # Use compile() with script_path for better traceback
-                code_obj = compile(script_content, script_path, 'eval')
+                code_obj = compile(script_content, script_path, "eval")
                 result = eval(code_obj, exec_globals, exec_globals)
             except SyntaxError:
                 # If eval fails, try exec (multi-line script)
                 # Use compile() with script_path to show actual file path in traceback
-                code_obj = compile(script_content, script_path, 'exec')
+                code_obj = compile(script_content, script_path, "exec")
                 exec(code_obj, exec_globals, exec_globals)
                 # Look for 'result' variable in global namespace
-                result = exec_globals.get('result', None)
+                result = exec_globals.get("result", None)
 
             # Get captured output from shared buffer
             output_text = output_buffer.getvalue()
@@ -114,9 +120,7 @@ class ScriptRunner:
             # Build message with result
             script_name = os.path.basename(script_path)
             if serialized_result is not None:
-                message = "Script executed: {}\nResult: {}".format(
-                    script_name, serialized_result
-                )
+                message = "Script executed: {}\nResult: {}".format(script_name, serialized_result)
             else:
                 message = "Script executed: {}".format(script_name)
 
@@ -124,7 +128,7 @@ class ScriptRunner:
                 "status": "success",
                 "message": message,
                 "result": serialized_result,
-                "output": output_text  # Include captured output
+                "output": output_text,  # Include captured output
             }
 
         except InterruptedError as e:
@@ -136,7 +140,7 @@ class ScriptRunner:
                 "status": "interrupted",
                 "message": "Script interrupted by user: {}".format(str(e)),
                 "result": None,
-                "output": output_text  # Include output up to interruption point
+                "output": output_text,  # Include output up to interruption point
             }
 
         except BaseException as e:
@@ -154,7 +158,7 @@ class ScriptRunner:
                         "status": "interrupted",
                         "message": "Script interrupted by user",
                         "result": None,
-                        "output": output_text
+                        "output": output_text,
                     }
 
             # Capture complete stack trace for server logging (debugging)
@@ -176,13 +180,15 @@ class ScriptRunner:
                 # Normalize filename for comparison (handles G:/ vs G:\ differences)
                 normalized_filename = os.path.normpath(filename)
                 # Only include frames from user script (not server code)
-                if normalized_filename == normalized_script_path or filename == '<string>':
-                    user_frames.append((
-                        filename,
-                        tb.tb_lineno,
-                        frame.f_code.co_name,
-                        None  # No source line (not available for dynamic code)
-                    ))
+                if normalized_filename == normalized_script_path or filename == "<string>":
+                    user_frames.append(
+                        (
+                            filename,
+                            tb.tb_lineno,
+                            frame.f_code.co_name,
+                            None,  # No source line (not available for dynamic code)
+                        )
+                    )
                 tb = tb.tb_next
 
             # Build user-facing error message with filtered traceback
@@ -194,22 +200,18 @@ class ScriptRunner:
                 error_parts = ["Script execution failed:\n"]
                 for filename, lineno, name, line in user_frames:
                     # Use absolute path with forward slashes for cross-platform consistency
-                    error_parts.append('  File "{}", line {}, in {}\n'.format(
-                        display_path, lineno, name
-                    ))
+                    error_parts.append('  File "{}", line {}, in {}\n'.format(display_path, lineno, name))
                 error_parts.append("{}: {}".format(type(e).__name__, str(e)))
                 error_message = "".join(error_parts)
             else:
                 # Fallback if no user frames found (shouldn't happen)
-                error_message = "Script execution failed: {}: {}".format(
-                    type(e).__name__, str(e)
-                )
+                error_message = "Script execution failed: {}: {}".format(type(e).__name__, str(e))
 
             return {
                 "status": "error",
                 "message": error_message,
                 "result": None,
-                "output": output_text  # Include output up to error point
+                "output": output_text,  # Include output up to error point
             }
 
         finally:
@@ -258,31 +260,19 @@ class ScriptRunner:
         """
         # Validate task_id is provided (backend must generate all task IDs)
         if not task_id:
-            return {
-                "status": "error",
-                "message": "task_id is required (must be generated by backend)",
-                "data": None
-            }
+            return {"status": "error", "message": "task_id is required (must be generated by backend)", "data": None}
 
         output_buffer = None
         script_name = os.path.basename(script_path)
 
         try:
             # Read script file
-            with open(script_path, 'r', encoding='utf-8') as f:
+            with open(script_path, "r", encoding="utf-8") as f:
                 script_content = f.read()
         except FileNotFoundError:
-            return {
-                "status": "error",
-                "message": "Script file not found: {}".format(script_path),
-                "data": None
-            }
+            return {"status": "error", "message": "Script file not found: {}".format(script_path), "data": None}
         except Exception as e:
-            return {
-                "status": "error",
-                "message": "Failed to read script file: {}".format(str(e)),
-                "data": None
-            }
+            return {"status": "error", "message": "Failed to read script file: {}".format(str(e)), "data": None}
 
         try:
             # task_id is provided by backend (no generation here)
@@ -294,45 +284,33 @@ class ScriptRunner:
             output_buffer = FileBuffer(log_path)
 
             # Submit to main thread queue
-            future = self.main_executor.submit(
-                self._execute,
-                script_path,
-                script_content,
-                output_buffer,
-                task_id
-            )
+            future = self.main_executor.submit(self._execute, script_path, script_content, output_buffer, task_id)
 
             # Register task with manager (both modes need this)
             submit_time = time.time()
             self.task_manager.create_script_task(
-                session_id,
-                future,
-                script_name,
-                script_path,
-                output_buffer,
-                description,
-                task_id
+                session_id, future, script_name, script_path, output_buffer, description, task_id
             )
 
             if run_in_background:
                 # Asynchronous: return immediately
-                data = (TaskDataBuilder(task_id, "script", script_name, script_path, description)
+                data = (
+                    TaskDataBuilder(task_id, "script", script_name, script_path, description)
                     .with_timing(submit_time)
-                    .build())
+                    .build()
+                )
                 return build_response("pending", "Script submitted: {}".format(script_name), data)
 
             # Synchronous: wait for completion
             timeout_seconds = timeout_ms / 1000.0 if timeout_ms else None
-            logger.debug("Executing script synchronously: {} [timeout={}s]".format(
-                script_name, timeout_seconds if timeout_seconds else "None"
-            ))
+            logger.debug(
+                "Executing script synchronously: {} [timeout={}s]".format(
+                    script_name, timeout_seconds if timeout_seconds else "None"
+                )
+            )
 
             loop = asyncio.get_event_loop()
-            result_dict = await loop.run_in_executor(
-                None,
-                future.result,
-                timeout_seconds
-            )
+            result_dict = await loop.run_in_executor(None, future.result, timeout_seconds)
 
             # Get result and timing info
             full_output = output_buffer.getvalue()
@@ -345,16 +323,16 @@ class ScriptRunner:
             # (error info is in 'message' field when status is 'error')
             error_msg = result_dict.get("message") if result_dict.get("status") == "error" else None
 
-            data = (TaskDataBuilder(task_id, "script", script_name, script_path, description)
+            data = (
+                TaskDataBuilder(task_id, "script", script_name, script_path, description)
                 .with_timing(start_time, end_time, elapsed_time)
                 .with_output(full_output)
                 .with_result(result_dict.get("result"))
                 .with_error(error_msg)
-                .build())
+                .build()
+            )
             return build_response(
-                result_dict.get("status", "success"),
-                result_dict.get("message", "Script executed"),
-                data
+                result_dict.get("status", "success"), result_dict.get("message", "Script executed"), data
             )
 
         except Exception as e:
@@ -366,20 +344,23 @@ class ScriptRunner:
                 # Script execution timed out but task is still running in background
                 # Return "pending" status to unify with background mode handling
                 # This allows the tool layer to use the same code path for both cases
-                logger.warning("Script execution timed out (still running): {} (timeout: {}ms)".format(script_path, timeout_ms))
+                logger.warning(
+                    "Script execution timed out (still running): {} (timeout: {}ms)".format(script_path, timeout_ms)
+                )
 
                 task = self.task_manager.tasks.get(task_id) if task_id else None
                 timeout_message = "Foreground wait timed out after {}ms. Task '{}' continues in background.".format(
                     timeout_ms, script_name
                 )
 
-                data = (TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
+                data = (
+                    TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
                     .with_timing(
-                        task.start_time if task else None,
-                        elapsed_time=task.get_elapsed_time() if task else None
+                        task.start_time if task else None, elapsed_time=task.get_elapsed_time() if task else None
                     )
                     .with_output(output_buffer.getvalue() if output_buffer else "")
-                    .build())
+                    .build()
+                )
                 return build_response("pending", timeout_message, data)
 
             # General error handling
@@ -393,11 +374,13 @@ class ScriptRunner:
             end_time = task.end_time if task else None
             elapsed_time = (end_time - start_time) if (start_time and end_time) else None
 
-            data = (TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
+            data = (
+                TaskDataBuilder(task_id or "unknown", "script", script_name, script_path, description)
                 .with_timing(start_time, end_time, elapsed_time)
                 .with_output(output_text)
                 .with_error(error_message)
-                .build())
+                .build()
+            )
             return build_response("error", error_message, data)
 
     def _serialize_result(self, result: Any) -> Any:

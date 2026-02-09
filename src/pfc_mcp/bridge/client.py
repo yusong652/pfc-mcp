@@ -87,7 +87,7 @@ class PFCBridgeClient:
             async for raw_message in self._websocket:
                 payload = json.loads(raw_message)
                 msg_type = payload.get("type")
-                if msg_type not in {"result", "user_console_result", "diagnostic_result"}:
+                if msg_type not in {"result", "diagnostic_result"}:
                     continue
                 request_id = payload.get("request_id")
                 if not request_id:
@@ -169,30 +169,6 @@ class PFCBridgeClient:
                 "source": source,
             },
             operation_name="pfc_task",
-            timeout_s=timeout_s,
-        )
-
-    async def execute_code(
-        self,
-        code: str,
-        workspace_path: str,
-        task_id: str,
-        session_id: str,
-        timeout_ms: int,
-        run_in_background: bool,
-    ) -> Dict[str, Any]:
-        timeout_s = 10.0 if run_in_background else max(self.request_timeout_s, timeout_ms / 1000.0 + 5.0)
-        return await self._request_with_retry(
-            {
-                "type": "user_console",
-                "task_id": task_id,
-                "session_id": session_id,
-                "workspace_path": workspace_path,
-                "code": code,
-                "timeout_ms": timeout_ms,
-                "run_in_background": run_in_background,
-            },
-            operation_name="user_console",
             timeout_s=timeout_s,
         )
 

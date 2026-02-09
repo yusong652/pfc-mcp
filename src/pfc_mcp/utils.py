@@ -113,7 +113,7 @@ SearchLimit = Annotated[
 TaskId = Annotated[
     str,
     AfterValidator(validate_non_empty_string),
-    Field(..., description="Task ID returned by pfc_execute_task or pfc_execute_code"),
+    Field(..., description="Task ID returned by pfc_execute_task"),
 ]
 
 ScriptPath = Annotated[

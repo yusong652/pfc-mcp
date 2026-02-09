@@ -14,8 +14,7 @@ MCP server for ITASCA PFC simulation control and documentation.
 - Documentation: `pfc_browse_commands`, `pfc_browse_python_api`, `pfc_browse_reference`, `pfc_query_command`, `pfc_query_python_api`
 - Execution: `pfc_execute_task`, `pfc_check_task_status`, `pfc_list_tasks`, `pfc_interrupt_task`, `pfc_capture_plot`
 
-`pfc_execute_code` implementation is kept in codebase but intentionally not registered to the MCP server for now.
-TODO: implement user-console waiting via backend-side polling on top of `pfc_execute_task` + `pfc_check_task_status`.
+User console execution should use backend-side polling on top of `pfc_execute_task` + `pfc_check_task_status`.
 
 `pfc_capture_plot` returns MCP-native `image` content (PNG base64) when image files are readable locally.
 

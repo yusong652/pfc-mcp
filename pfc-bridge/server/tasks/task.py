@@ -4,9 +4,13 @@ Script Task - Lifecycle management for long-running PFC script execution.
 This module provides the ScriptTask class that tracks task state,
 captures real-time output, and generates status responses.
 
+Supports both active tasks (with Future and FileBuffer) and
+historical tasks restored from persistence (no Future/buffer).
+
 Python 3.6 compatible implementation.
 """
 
+import os
 import time
 import logging
 from typing import Any, Dict, Optional
@@ -62,19 +66,34 @@ class ScriptTask:
             script_name, task_id, session_id
         )
 
+    @classmethod
+    def from_persisted(cls, task_data):
+        # type: (Dict[str, Any]) -> ScriptTask
+        """Create a task from persisted data (no Future or buffer)."""
+        task = cls.__new__(cls)
+        task.task_id = task_data["task_id"]
+        task.session_id = task_data.get("session_id", "default")
+        task.description = task_data["description"]
+        task.script_name = task_data.get("script_name", "")
+        task.entry_script = task_data.get("entry_script") or task_data.get("script_path") or ""
+        task._status = task_data["status"]
+        task.start_time = task_data["start_time"]
+        task.end_time = task_data.get("end_time")
+        task.notified = task_data.get("notified", False)
+        task.log_path = task_data.get("log_path")
+        task.error = task_data.get("error")
+        task.future = None
+        task.output_buffer = None
+        task.on_status_change = None
+        # Backward compatibility: old format stored output inline in JSON
+        task._output_snapshot = task_data.get("output", "")
+        return task
+
     @property
     def status(self):
         # type: () -> str
-        """Get current task status by checking future state."""
-        if self._status in ("completed", "failed", "interrupted"):
-            return self._status
-
-        if self.future.done():
-            return self._status
-        elif self.future.running():
-            return "running"
-        else:
-            return "pending"
+        """Get current task status."""
+        return self._status
 
     @status.setter
     def status(self, value):
@@ -113,17 +132,36 @@ class ScriptTask:
         """Calculate elapsed time since task start."""
         if self.end_time is not None:
             return self.end_time - self.start_time
+        if self.future is None:
+            return 0.0
         return time.time() - self.start_time
 
     def get_current_output(self):
         # type: () -> Optional[str]
-        """Get current output from buffer (for running scripts)."""
+        """Get current output from log file.
+
+        For active tasks, flushes the write buffer first to ensure
+        all data is on disk before reading.
+        """
+        # Flush active write buffer to disk
         if self.output_buffer:
             try:
-                return self.output_buffer.getvalue()
+                self.output_buffer.flush()
+            except Exception:
+                pass
+
+        # Read from log file
+        if self.log_path:
+            try:
+                if os.path.exists(self.log_path):
+                    with open(self.log_path, 'r', encoding='utf-8') as f:
+                        return f.read()
             except Exception as e:
-                logger.warning("Failed to read output buffer: {}".format(e))
-        return None
+                logger.warning("Failed to read log file: {}".format(e))
+
+        # Backward compatibility: old persisted format with inline output
+        snapshot = getattr(self, '_output_snapshot', None)
+        return snapshot if snapshot else None
 
     def _create_data_builder(self):
         # type: () -> TaskDataBuilder
@@ -183,25 +221,21 @@ class ScriptTask:
 
     def _build_completed_response(self, elapsed_time):
         # type: (float) -> Dict[str, Any]
-        logger.info(
-            "Task completed: %s (id=%s, time=%.2fs)",
-            self.description, self.task_id, elapsed_time
-        )
-
         output_text = self.get_current_output()
 
-        # Extract result from future
+        # Extract result from future (active tasks only)
         result_data = None
         result_status = "success"
-        try:
-            result = self.future.result(timeout=0)
-            if isinstance(result, dict):
-                result_data = result.get("result")
-                result_status = result.get("status", "success")
-            else:
-                result_data = result
-        except Exception:
-            pass
+        if self.future:
+            try:
+                result = self.future.result(timeout=0)
+                if isinstance(result, dict):
+                    result_data = result.get("result")
+                    result_status = result.get("status", "success")
+                else:
+                    result_data = result
+            except Exception:
+                pass
 
         serialized_result = self._serialize_result(result_data)
 
@@ -228,11 +262,6 @@ class ScriptTask:
 
     def _build_interrupted_response(self, elapsed_time):
         # type: (float) -> Dict[str, Any]
-        logger.info(
-            "Script task interrupted: %s (id=%s, time=%.2fs)",
-            self.description, self.task_id, elapsed_time
-        )
-
         output_text = self.get_current_output()
 
         if output_text:
@@ -253,8 +282,6 @@ class ScriptTask:
 
     def _build_failed_response(self, elapsed_time):
         # type: (float) -> Dict[str, Any]
-        logger.error("Script task failed: %s (id=%s)", self.description, self.task_id)
-
         output_text = self.get_current_output()
         error_msg = self.error or "Task execution failed"
 

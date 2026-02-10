@@ -1,103 +1,75 @@
 """
-Task Manager - Registry and lifecycle management for long-running tasks.
+Task Manager - Registry, lifecycle, and persistence for long-running tasks.
 
-This module provides the main TaskManager class that acts as a registry
-for all tracked tasks, delegating type-specific behavior to Task objects.
+Provides the TaskManager class that acts as a registry for all tracked tasks,
+with disk persistence organized by session.
+
+Persistence layout:
+    .nagisa/sessions/{session_id}/tasks.json
 
 Python 3.6 compatible implementation.
 """
 
+import json
+import os
 import uuid
+import shutil
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from .task import ScriptTask
-from .persistence import TaskPersistence
 
 # Module logger
 logger = logging.getLogger("PFC-Server")
 
+# Persistence constants
+DATA_DIR = ".nagisa"
+SESSIONS_DIR = os.path.join(DATA_DIR, "sessions")
+TASKS_FILENAME = "tasks.json"
+
 
 class TaskManager:
     """
-    Manage long-running task tracking and status queries.
-
-    This class is separate from ScriptRunner to maintain clear
-    separation of concerns: runner runs scripts, task manager
-    tracks their lifecycle.
+    Manage long-running task tracking, status queries, and disk persistence.
 
     Tasks are represented as ScriptTask objects for Python script execution.
+    Task history is persisted to disk organized by session for crash recovery.
     """
 
     def __init__(self):
         # type: () -> None
-        """Initialize task manager with empty task registry."""
-        # Task registry: {task_id: Task}
+        """Initialize task manager, load historical tasks from disk."""
         self.tasks = {}  # type: Dict[str, ScriptTask]
 
-        # Persistence manager
-        self.persistence = TaskPersistence()
-        self._load_historical_tasks()
+        # Ensure persistence directory exists
+        if not os.path.exists(SESSIONS_DIR):
+            os.makedirs(SESSIONS_DIR)
 
+        self._load_historical_tasks()
         logger.info("TaskManager initialized")
 
-    def _load_historical_tasks(self):
-        # type: () -> None
-        """Load historical tasks from disk on startup."""
-        try:
-            tasks_data = self.persistence.load_tasks()
-            for task_data in tasks_data:
-                historical_task = self.persistence.restore_task_as_historical(task_data)
-                if historical_task:
-                    self.tasks[historical_task.task_id] = historical_task
-
-            logger.info("Loaded %d historical task(s)", len(tasks_data))
-        except Exception as e:
-            logger.error("Failed to load historical tasks: {}".format(e))
+    # ── Task lifecycle ──────────────────────────────────────────
 
     def create_script_task(self, session_id, future, script_name, entry_script, output_buffer=None, description=None, task_id=None):
         # type: (str, Any, str, str, Any, Optional[str], Optional[str]) -> str
-        """
-        Register a new long-running Python script task.
-
-        Args:
-            session_id: Session identifier for task isolation
-            future: asyncio Future object for the task
-            script_name: Name of the script file (e.g., "main.py")
-            entry_script: Full path to entry script
-            output_buffer: Optional FileBuffer for output capture (writes to disk)
-            description: Task description from PFC agent (LLM-provided)
-            task_id: Optional pre-generated task ID (if None, generates new one)
+        """Register a new long-running Python script task.
 
         Returns:
             str: Unique task ID for tracking
         """
         if task_id is None:
             task_id = uuid.uuid4().hex[:8]
-        # Pass save callback for automatic persistence on status change
         task = ScriptTask(
             task_id, session_id, future, script_name, entry_script,
             output_buffer, description, on_status_change=self._on_task_status_change,
         )
         self.tasks[task_id] = task
-
-        # Save to disk immediately
         self._save_tasks()
-
         return task_id
 
     def has_running_tasks(self):
         # type: () -> bool
-        """
-        Check if any task is currently running.
-
-        Used to determine execution path for diagnostic scripts:
-        - If tasks are running: queue is blocked, use callback execution
-        - If no tasks running: queue is available, use queue execution
-
-        Returns:
-            bool: True if at least one task has status "running"
-        """
+        """Check if any task is currently running."""
         for task in self.tasks.values():
             if task.status == "running":
                 return True
@@ -105,72 +77,34 @@ class TaskManager:
 
     def get_task_status(self, task_id):
         # type: (str) -> Dict[str, Any]
-        """
-        Query task status (non-blocking).
-
-        Delegates to polymorphic task objects for type-specific handling.
-
-        Args:
-            task_id: Task ID to query
-
-        Returns:
-            Dict with status information (format depends on task type)
-        """
+        """Query task status (non-blocking)."""
         task = self.tasks.get(task_id)
-
         if not task:
             return {
                 "status": "not_found",
                 "message": "Task ID not found: {}".format(task_id),
                 "data": None
             }
-
         return task.get_status_response()
 
     def list_all_tasks(self, session_id=None, offset=0, limit=None):
         # type: (Optional[str], int, Optional[int]) -> Dict[str, Any]
-        """
-        List currently tracked tasks, optionally filtered by session with pagination.
-
-        Args:
-            session_id: Optional session ID to filter tasks
-            offset: Skip N most recent tasks (0 = most recent, default: 0)
-            limit: Maximum tasks to return (None = all tasks, default: None)
-
-        Returns:
-            Dict with task list:
-                - status: "success"
-                - message: Summary message
-                - data: List of task info dictionaries (paginated)
-                - pagination: Pagination metadata
-        """
-        # Filter tasks by session if specified
-        # Support both full UUID and 8-char prefix matching for session_id
+        """List tracked tasks, optionally filtered by session with pagination."""
         filtered_tasks = list(self.tasks.values())
 
-        # Apply session filter
         if session_id:
             filtered_tasks = [
                 task for task in filtered_tasks
                 if task.session_id == session_id or task.session_id.startswith(session_id)
             ]
 
-        # Sort by start_time descending (most recent first)
-        sorted_tasks = sorted(
-            filtered_tasks,
-            key=lambda t: t.start_time,
-            reverse=True
-        )
+        sorted_tasks = sorted(filtered_tasks, key=lambda t: t.start_time, reverse=True)
 
-        # Apply pagination
         total_count = len(sorted_tasks)
-        start_idx = offset
-        end_idx = start_idx + limit if limit else total_count
-
-        paginated_tasks = sorted_tasks[start_idx:end_idx]
+        end_idx = offset + limit if limit else total_count
+        paginated_tasks = sorted_tasks[offset:end_idx]
         tasks_info = [task.get_task_info() for task in paginated_tasks]
 
-        # Build message
         if session_id:
             message = "Found {} tracked task(s) for session {} (showing {} of {})".format(
                 len(tasks_info), session_id, len(tasks_info), total_count
@@ -180,98 +114,181 @@ class TaskManager:
                 total_count, len(tasks_info), total_count
             )
 
-        # Pagination metadata
-        pagination = {
-            "total_count": total_count,
-            "displayed_count": len(tasks_info),
-            "offset": offset,
-            "limit": limit,
-            "has_more": end_idx < total_count
-        }
-
         return {
             "status": "success",
             "message": message,
             "data": tasks_info,
-            "pagination": pagination
+            "pagination": {
+                "total_count": total_count,
+                "displayed_count": len(tasks_info),
+                "offset": offset,
+                "limit": limit,
+                "has_more": end_idx < total_count
+            }
         }
 
     def mark_task_notified(self, task_id):
         # type: (str) -> Dict[str, Any]
-        """
-        Mark a task as notified (completion notification sent to LLM).
-
-        This prevents repeated notifications for the same task completion.
-        The notified flag is persisted across server restarts.
-
-        Args:
-            task_id: Task ID to mark as notified
-
-        Returns:
-            Dict with operation status:
-                - status: "success" or "not_found"
-                - message: Result message
-        """
+        """Mark a task as notified (completion notification sent to LLM)."""
         task = self.tasks.get(task_id)
-
         if not task:
             return {
                 "status": "not_found",
                 "message": "Task ID not found: {}".format(task_id)
             }
-
-        # Mark as notified
         task.notified = True
-
-        # Save to disk
         self._save_tasks()
-
         return {
             "status": "success",
             "message": "Task {} marked as notified".format(task_id)
         }
 
-    def _save_tasks(self):
-        # type: () -> None
-        """Save current tasks to disk."""
-        self.persistence.save_tasks(self.tasks)
-
-    def _on_task_status_change(self, task):
-        # type: (ScriptTask) -> None
-        """
-        Callback invoked when a task's status changes (completion/failure).
-
-        Automatically saves task state to disk for persistence.
-
-        Args:
-            task: Task that changed status
-        """
-        logger.debug("Task {} status changed to: {}".format(task.task_id, task.status))
-        # Save tasks to disk
-        self._save_tasks()
-
     def clear_all_tasks(self):
         # type: () -> int
-        """
-        Clear all tasks from memory and disk storage.
-
-        WARNING: This permanently deletes task history. Use for testing/reset only.
-
-        Returns:
-            int: Number of tasks cleared
-        """
-        import os
-        import shutil
-
+        """Clear all tasks from memory and disk. Returns count cleared."""
         cleared_count = len(self.tasks)
         self.tasks.clear()
 
-        # Delete all session directories from disk
-        if os.path.exists(self.persistence.sessions_dir):
-            for session_name in os.listdir(self.persistence.sessions_dir):
-                session_path = os.path.join(self.persistence.sessions_dir, session_name)
-                if os.path.isdir(session_path):
-                    shutil.rmtree(session_path)
+        if os.path.exists(SESSIONS_DIR):
+            for name in os.listdir(SESSIONS_DIR):
+                path = os.path.join(SESSIONS_DIR, name)
+                if os.path.isdir(path):
+                    shutil.rmtree(path)
 
         logger.info("Cleared all %d task(s)", cleared_count)
         return cleared_count
+
+    # ── Persistence ─────────────────────────────────────────────
+
+    def _on_task_status_change(self, task):
+        # type: (ScriptTask) -> None
+        """Callback invoked when a task's status changes."""
+        logger.debug("Task {} status changed to: {}".format(task.task_id, task.status))
+        self._save_tasks()
+
+    def _save_tasks(self):
+        # type: () -> None
+        """Save all tasks to disk, grouped by session."""
+        try:
+            tasks_by_session = {}  # type: Dict[str, List[Dict[str, Any]]]
+            for task in self.tasks.values():
+                sid = task.session_id
+                if sid not in tasks_by_session:
+                    tasks_by_session[sid] = []
+                tasks_by_session[sid].append(self._serialize_task(task))
+
+            for sid, session_tasks in tasks_by_session.items():
+                self._save_session(sid, session_tasks)
+
+        except Exception as e:
+            logger.error("Failed to save tasks: {}".format(e))
+
+    def _load_historical_tasks(self):
+        # type: () -> None
+        """Load historical tasks from disk on startup."""
+        try:
+            all_data = self._load_all_sessions()
+            for task_data in all_data:
+                task = self._restore_task(task_data)
+                if task:
+                    self.tasks[task.task_id] = task
+            logger.info("Loaded %d historical task(s)", len(all_data))
+        except Exception as e:
+            logger.error("Failed to load historical tasks: {}".format(e))
+
+    @staticmethod
+    def _serialize_task(task):
+        # type: (ScriptTask) -> Dict[str, Any]
+        """Serialize a ScriptTask to JSON-compatible dict."""
+        return {
+            "task_id": task.task_id,
+            "session_id": task.session_id,
+            "task_type": "script",
+            "description": task.description,
+            "status": task.status,
+            "start_time": task.start_time,
+            "end_time": task.end_time,
+            "notified": task.notified,
+            "script_name": task.script_name,
+            "entry_script": task.entry_script,
+            "log_path": task.log_path,
+            "error": task.error,
+        }
+
+    @staticmethod
+    def _restore_task(task_data):
+        # type: (Dict[str, Any]) -> Optional[ScriptTask]
+        """Restore a ScriptTask from persisted data.
+
+        Running tasks are marked as failed since they can't be resumed.
+        """
+        try:
+            if task_data.get("status") == "running":
+                task_data["status"] = "failed"
+                logger.warning(
+                    "Marked previously running task {} as failed (cannot resume)".format(
+                        task_data.get("task_id")
+                    )
+                )
+            return ScriptTask.from_persisted(task_data)
+        except Exception as e:
+            logger.error("Failed to restore task {}: {}".format(
+                task_data.get("task_id"), e
+            ))
+            return None
+
+    # ── Disk I/O helpers ────────────────────────────────────────
+
+    @staticmethod
+    def _session_filepath(session_id):
+        # type: (str) -> str
+        """Get filepath for a session's tasks.json, creating dir if needed."""
+        session_dir = os.path.join(SESSIONS_DIR, session_id)
+        if not os.path.exists(session_dir):
+            os.makedirs(session_dir)
+        return os.path.join(session_dir, TASKS_FILENAME)
+
+    @staticmethod
+    def _save_session(session_id, tasks_data):
+        # type: (str, List[Dict[str, Any]]) -> None
+        """Atomically save tasks for a session."""
+        filepath = TaskManager._session_filepath(session_id)
+        temp = filepath + ".tmp"
+        try:
+            with open(temp, 'w') as f:
+                json.dump(tasks_data, f, indent=2)
+            os.replace(temp, filepath)
+        except Exception as e:
+            logger.error("Failed to save session {} tasks: {}".format(session_id, e))
+
+    @staticmethod
+    def _load_session(session_id):
+        # type: (str) -> List[Dict[str, Any]]
+        """Load tasks for a single session."""
+        filepath = TaskManager._session_filepath(session_id)
+        if not os.path.exists(filepath):
+            return []
+        try:
+            with open(filepath, 'r') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error("Failed to load session {} tasks: {}".format(session_id, e))
+            return []
+
+    @staticmethod
+    def _load_all_sessions():
+        # type: () -> List[Dict[str, Any]]
+        """Load tasks from all sessions."""
+        if not os.path.exists(SESSIONS_DIR):
+            return []
+
+        all_tasks = []  # type: List[Dict[str, Any]]
+        try:
+            for name in os.listdir(SESSIONS_DIR):
+                session_dir = os.path.join(SESSIONS_DIR, name)
+                if os.path.isdir(session_dir):
+                    all_tasks.extend(TaskManager._load_session(name))
+            logger.info("Loaded %d task(s) from disk", len(all_tasks))
+        except Exception as e:
+            logger.error("Failed to load tasks: {}".format(e))
+        return all_tasks

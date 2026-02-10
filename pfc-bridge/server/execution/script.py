@@ -60,6 +60,11 @@ class ScriptRunner:
                 - result: Script result (from 'result' variable)
                 - output: Captured stdout content (print statements)
         """
+        # Mark task as running
+        task = self.task_manager.tasks.get(task_id)
+        if task:
+            task.status = "running"
+
         # Use shared output buffer for stdout capture
         old_stdout = sys.stdout
         sys.stdout = output_buffer

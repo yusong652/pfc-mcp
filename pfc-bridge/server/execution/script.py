@@ -39,14 +39,6 @@ class ScriptRunner:
         self.main_executor = main_executor
         self.task_manager = task_manager
 
-        try:
-            import itasca  # type: ignore
-
-            self.itasca = itasca
-        except ImportError:
-            logger.warning("ITASCA SDK not available for script execution")
-            self.itasca = None
-
     def _execute(self, script_path, script_content, output_buffer, task_id):
         # type: (str, str, Any, str) -> Dict[str, Any]
         """
@@ -85,10 +77,6 @@ class ScriptRunner:
             import __main__
 
             exec_globals = __main__.__dict__
-
-            # Ensure itasca is available in global namespace
-            if "itasca" not in exec_globals:
-                exec_globals["itasca"] = self.itasca
 
             # Set __file__ to current script path (updates each execution)
             exec_globals["__file__"] = script_path

@@ -26,7 +26,6 @@ from .handlers import (
     handle_mark_task_notified,
     handle_user_console,
     handle_diagnostic_execute,
-    handle_reset_workspace,
     handle_get_working_directory,
     handle_ping,
     handle_interrupt_task,
@@ -69,8 +68,8 @@ class PFCWebSocketServer:
         self.port = port
         self.ping_interval = ping_interval
         self.ping_timeout = ping_timeout
-        self.task_manager = TaskManager()
-        self.script_runner = ScriptRunner(main_executor, self.task_manager)
+        task_manager = TaskManager()
+        self.script_runner = ScriptRunner(main_executor, task_manager)
         self.active_connections = set()
         self.server = None
         self._cleanup_task = None  # type: Optional[asyncio.Task]
@@ -80,7 +79,7 @@ class PFCWebSocketServer:
 
         # Create server context for handlers
         self._context = ServerContext(
-            task_manager=self.task_manager,
+            task_manager=task_manager,
             script_runner=self.script_runner,
             main_executor=self.main_executor,
             user_console_managers=self._user_console_managers,
@@ -96,7 +95,6 @@ class PFCWebSocketServer:
             "user_console": handle_user_console,
             "interrupt_task": handle_interrupt_task,
             "diagnostic_execute": handle_diagnostic_execute,
-            "reset_workspace": handle_reset_workspace,
             "ping": handle_ping,
         }
 

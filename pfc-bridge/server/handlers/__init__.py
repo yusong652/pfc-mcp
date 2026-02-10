@@ -14,10 +14,7 @@ from .task_handlers import (
 )
 from .console_handlers import handle_user_console
 from .diagnostic_handlers import handle_diagnostic_execute
-from .workspace_handlers import (
-    handle_reset_workspace,
-    handle_get_working_directory,
-)
+from .workspace_handlers import handle_get_working_directory
 from .utility_handlers import (
     handle_ping,
     handle_interrupt_task,
@@ -36,7 +33,6 @@ __all__ = [
     # Diagnostic handlers
     "handle_diagnostic_execute",
     # Workspace handlers
-    "handle_reset_workspace",
     "handle_get_working_directory",
     # Utility handlers
     "handle_ping",

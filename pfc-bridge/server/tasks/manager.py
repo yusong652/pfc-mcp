@@ -11,8 +11,7 @@ import uuid
 import logging
 from typing import Any, Dict, Optional
 
-from .task_base import Task
-from .task_types import ScriptTask
+from .task import ScriptTask
 from .persistence import TaskPersistence
 
 # Module logger
@@ -27,41 +26,24 @@ class TaskManager:
     separation of concerns: runner runs scripts, task manager
     tracks their lifecycle.
 
-    Tasks are represented as ScriptTask objects for Python script execution,
-    enabling clean extension and type-specific behavior.
+    Tasks are represented as ScriptTask objects for Python script execution.
     """
 
-    def __init__(self, enable_persistence=True):
-        # type: (bool,) -> None
-        """
-        Initialize task manager with empty task registry.
-
-        Args:
-            enable_persistence: Enable task persistence to disk (default: True)
-        """
+    def __init__(self):
+        # type: () -> None
+        """Initialize task manager with empty task registry."""
         # Task registry: {task_id: Task}
-        self.tasks = {}  # type: Dict[str, Task]
+        self.tasks = {}  # type: Dict[str, ScriptTask]
 
         # Persistence manager
-        self.enable_persistence = enable_persistence
-        if enable_persistence:
-            self.persistence = TaskPersistence()
-            # Load historical tasks from disk
-            self._load_historical_tasks()
-        else:
-            self.persistence = None
+        self.persistence = TaskPersistence()
+        self._load_historical_tasks()
 
-        logger.info(
-            "TaskManager initialized (persistence=%s)",
-            "enabled" if enable_persistence else "disabled"
-        )
+        logger.info("TaskManager initialized")
 
     def _load_historical_tasks(self):
         # type: () -> None
         """Load historical tasks from disk on startup."""
-        if not self.persistence:
-            return
-
         try:
             tasks_data = self.persistence.load_tasks()
             for task_data in tasks_data:
@@ -214,48 +196,6 @@ class TaskManager:
             "pagination": pagination
         }
 
-    def cleanup_completed_tasks(self, session_id=None):
-        # type: (Optional[str]) -> int
-        """
-        Manually remove completed/failed/interrupted tasks from tracking.
-
-        By default, completed, failed, and interrupted tasks are kept as historical context.
-        Use this method to explicitly clean up old tasks when memory management
-        is needed or when the task history becomes too large.
-
-        Args:
-            session_id: Optional session ID to clean up. If None, cleans all sessions.
-
-        Returns:
-            int: Number of tasks cleaned up
-        """
-        if session_id:
-            # Clean up specific session (support both full UUID and 8-char prefix)
-            tasks_to_remove = [
-                task_id for task_id, task in self.tasks.items()
-                if (task.session_id == session_id or task.session_id.startswith(session_id))
-                and task.status in ["completed", "failed", "interrupted"]
-            ]
-        else:
-            # Clean up all sessions
-            tasks_to_remove = [
-                task_id for task_id, task in self.tasks.items()
-                if task.status in ["completed", "failed", "interrupted"]
-            ]
-
-        for task_id in tasks_to_remove:
-            del self.tasks[task_id]
-
-        if tasks_to_remove:
-            logger.info("Cleaned up {} completed task(s) {}".format(
-                len(tasks_to_remove),
-                "for session {}".format(session_id) if session_id else "across all sessions"
-            ))
-            # Save changes to disk
-            self._save_tasks()
-
-        return len(tasks_to_remove)
-
     def mark_task_notified(self, task_id):
         # type: (str) -> Dict[str, Any]
         """
@@ -293,13 +233,11 @@ class TaskManager:
 
     def _save_tasks(self):
         # type: () -> None
-        """Save current tasks to disk (if persistence enabled)."""
-        if self.persistence:
-            # Save asynchronously to avoid blocking
-            self.persistence.save_tasks(self.tasks)
+        """Save current tasks to disk."""
+        self.persistence.save_tasks(self.tasks)
 
     def _on_task_status_change(self, task):
-        # type: (Task) -> None
+        # type: (ScriptTask) -> None
         """
         Callback invoked when a task's status changes (completion/failure).
 
@@ -312,78 +250,28 @@ class TaskManager:
         # Save tasks to disk
         self._save_tasks()
 
-    def clear_all_tasks(self, session_id=None):
-        # type: (Optional[str]) -> Dict[str, Any]
+    def clear_all_tasks(self):
+        # type: () -> int
         """
         Clear all tasks from memory and disk storage.
 
         WARNING: This permanently deletes task history. Use for testing/reset only.
 
-        Args:
-            session_id: Optional session ID to clear. If None, clears ALL tasks.
-
         Returns:
-            Dict with:
-                - success: bool
-                - message: str
-                - cleared_count: int
+            int: Number of tasks cleared
         """
         import os
         import shutil
 
-        try:
-            if session_id:
-                # Clear specific session (support both full UUID and 8-char prefix)
-                tasks_to_remove = [
-                    task_id for task_id, task in self.tasks.items()
-                    if task.session_id == session_id or task.session_id.startswith(session_id)
-                ]
-                for task_id in tasks_to_remove:
-                    del self.tasks[task_id]
+        cleared_count = len(self.tasks)
+        self.tasks.clear()
 
-                # Delete session directory from disk
-                if self.persistence:
-                    session_dir = os.path.join(self.persistence.sessions_dir, session_id)
-                    if os.path.exists(session_dir):
-                        shutil.rmtree(session_dir)
+        # Delete all session directories from disk
+        if os.path.exists(self.persistence.sessions_dir):
+            for session_name in os.listdir(self.persistence.sessions_dir):
+                session_path = os.path.join(self.persistence.sessions_dir, session_name)
+                if os.path.isdir(session_path):
+                    shutil.rmtree(session_path)
 
-                logger.info(
-                    "Cleared %d task(s) for session %s",
-                    len(tasks_to_remove), session_id
-                )
-
-                return {
-                    "success": True,
-                    "message": "Cleared {} task(s) for session {}".format(
-                        len(tasks_to_remove), session_id
-                    ),
-                    "cleared_count": len(tasks_to_remove)
-                }
-
-            else:
-                # Clear ALL tasks
-                cleared_count = len(self.tasks)
-                self.tasks.clear()
-
-                # Delete all session directories from disk
-                if self.persistence and os.path.exists(self.persistence.sessions_dir):
-                    for session_name in os.listdir(self.persistence.sessions_dir):
-                        session_path = os.path.join(self.persistence.sessions_dir, session_name)
-                        if os.path.isdir(session_path):
-                            shutil.rmtree(session_path)
-
-                logger.info("Cleared all %d task(s) across all sessions", cleared_count)
-
-                return {
-                    "success": True,
-                    "message": "Cleared all {} task(s)".format(cleared_count),
-                    "cleared_count": cleared_count
-                }
-
-        except Exception as e:
-            logger.error("Failed to clear tasks: {}".format(e))
-            return {
-                "success": False,
-                "message": "Error: {}".format(str(e)),
-                "cleared_count": 0
-            }
+        logger.info("Cleared all %d task(s)", cleared_count)
+        return cleared_count

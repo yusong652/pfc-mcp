@@ -143,16 +143,12 @@ asyncio.run(test_connection())
 |  +--------------------+----------------------+--------------------+   |
 |                       |                      |                        |
 |  +--------------------v------+  +------------v------------------+    |
-|  |  Handlers (handlers/)     |  |  Services (services/)         |    |
-|  |  - task_handlers          |  |  - git_version (snapshots)    |    |
-|  |  - console_handlers       |  |  - user_console (> commands)  |    |
-|  |  - diagnostic_handlers    |  +-------------------------------+    |
-|  |  - workspace_handlers     |                                       |
-|  |  - utility_handlers       |  +-------------------------------+    |
-|  +--------------------+------+  |  Signals (signals/)           |    |
-|                       |         |  - interrupt (task control)   |    |
-|                       |         |  - diagnostic (callbacks)     |    |
-|                       |         +-------------------------------+    |
+|  |  Handlers (handlers/)     |  |  Signals (signals/)           |    |
+|  |  - task_handlers          |  |  - interrupt (task control)   |    |
+|  |  - diagnostic_handlers    |  |  - diagnostic (callbacks)     |    |
+|  |  - workspace_handlers     |  +-------------------------------+    |
+|  |  - utility_handlers       |                                       |
+|  +--------------------+------+                                       |
 |  +--------------------v------------------------------------------+   |
 |  |  Execution (execution/)                                       |   |
 |  |  - MainThreadExecutor: Queue-based main thread execution      |   |
@@ -216,7 +212,7 @@ Execute a Python script file with PFC commands.
 | `description` | No | `""` | Task description (shown in task list) |
 | `timeout_ms` | No | `null` | Timeout in milliseconds |
 | `run_in_background` | No | `true` | If true, returns immediately with task_id |
-| `source` | No | `"agent"` | Task source: `"agent"` or `"user_console"` |
+| `source` | No | `"agent"` | Task source identifier |
 
 **Response (Background Task)**:
 ```json
@@ -247,45 +243,7 @@ Execute a Python script file with PFC commands.
 }
 ```
 
-#### 2. User Console (`user_console`)
-
-Execute Python code from user console (> prefix commands).
-
-**Request**:
-```json
-{
-  "type": "user_console",
-  "request_id": "unique-id",
-  "task_id": "def456",
-  "session_id": "session-001",
-  "workspace_path": "/absolute/path/to/workspace",
-  "code": "print(ball.count())",
-  "timeout_ms": 30000,
-  "run_in_background": false
-}
-```
-
-| Field | Required | Default | Description |
-|-------|----------|---------|-------------|
-| `workspace_path` | Yes | - | Absolute path to PFC workspace |
-| `code` | Yes | - | Python code to execute |
-| `run_in_background` | No | `false` | If true, supports ctrl+b backgrounding |
-
-**Response**:
-```json
-{
-  "type": "user_console_result",
-  "request_id": "unique-id",
-  "status": "success",
-  "message": "Executed: print(ball.count())",
-  "data": {
-    "output": "1000\n",
-    "code_preview": "print(ball.count())"
-  }
-}
-```
-
-#### 3. Diagnostic Execute (`diagnostic_execute`)
+#### 2. Diagnostic Execute (`diagnostic_execute`)
 
 Execute diagnostic scripts (e.g., plot capture) with smart execution path selection.
 
@@ -501,13 +459,9 @@ pfc-bridge/
 │   ├── signals/                      # Inter-process communication
 │   │   ├── interrupt.py              # Task interruption control + callback
 │   │   └── diagnostic.py             # Callback-based diagnostic execution
-│   ├── services/                     # Business services
-│   │   ├── git_version.py            # Git snapshot management
-│   │   └── user_console.py           # User console script management
 │   ├── handlers/                     # Message handlers
 │   │   ├── context.py                # Server context (shared state)
 │   │   ├── task_handlers.py          # pfc_task, check_task_status, list_tasks
-│   │   ├── console_handlers.py       # user_console execution
 │   │   ├── diagnostic_handlers.py    # diagnostic_execute
 │   │   ├── workspace_handlers.py     # reset_workspace, get_working_directory
 │   │   ├── utility_handlers.py       # ping, interrupt_task
@@ -516,7 +470,6 @@ pfc-bridge/
 │       ├── file_buffer.py            # File-backed output buffer
 │       ├── path_utils.py             # Path utilities
 │       └── response.py               # Response formatting
-├── workspace_template/               # Template for new PFC workspaces
 │   ├── .gitignore                    # Default gitignore for PFC projects
 │   └── README.md                     # Workspace documentation
 ├── start_bridge.py                   # Startup script

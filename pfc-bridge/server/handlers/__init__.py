@@ -12,7 +12,6 @@ from .task_handlers import (
     handle_list_tasks,
     handle_mark_task_notified,
 )
-from .console_handlers import handle_user_console
 from .diagnostic_handlers import handle_diagnostic_execute
 from .workspace_handlers import handle_get_working_directory
 from .utility_handlers import (
@@ -28,8 +27,6 @@ __all__ = [
     "handle_check_task_status",
     "handle_list_tasks",
     "handle_mark_task_notified",
-    # Console handlers
-    "handle_user_console",
     # Diagnostic handlers
     "handle_diagnostic_execute",
     # Workspace handlers

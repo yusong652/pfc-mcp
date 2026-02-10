@@ -8,7 +8,6 @@ Server startup should be done via start_bridge.py script.
 import asyncio
 import json
 import logging
-from datetime import datetime
 from typing import Any, Dict, Optional
 
 import websockets
@@ -16,7 +15,6 @@ from websockets.server import WebSocketServerProtocol  # type: ignore
 
 from .execution import ScriptRunner, MainThreadExecutor
 from .tasks import TaskManager
-from .services import UserConsoleManager
 from .signals import cleanup_stale_flags
 from .handlers import (
     ServerContext,
@@ -24,7 +22,6 @@ from .handlers import (
     handle_check_task_status,
     handle_list_tasks,
     handle_mark_task_notified,
-    handle_user_console,
     handle_diagnostic_execute,
     handle_get_working_directory,
     handle_ping,
@@ -74,15 +71,11 @@ class PFCWebSocketServer:
         self.server = None
         self._cleanup_task = None  # type: Optional[asyncio.Task]
 
-        # User console managers cache (workspace_path -> UserConsoleManager)
-        self._user_console_managers = {}  # type: Dict[str, UserConsoleManager]
-
         # Create server context for handlers
         self._context = ServerContext(
             task_manager=task_manager,
             script_runner=self.script_runner,
             main_executor=self.main_executor,
-            user_console_managers=self._user_console_managers,
         )
 
         # Message handlers registry (all handlers are async with unified signature)
@@ -92,7 +85,6 @@ class PFCWebSocketServer:
             "list_tasks": handle_list_tasks,
             "mark_task_notified": handle_mark_task_notified,
             "get_working_directory": handle_get_working_directory,
-            "user_console": handle_user_console,
             "interrupt_task": handle_interrupt_task,
             "diagnostic_execute": handle_diagnostic_execute,
             "ping": handle_ping,
@@ -206,36 +198,6 @@ class PFCWebSocketServer:
             if pending_tasks:
                 await asyncio.gather(*pending_tasks, return_exceptions=True)
             self.active_connections.discard(websocket)
-
-    async def broadcast_event(self, event_type: str, data: Dict[str, Any]):
-        """
-        Broadcast event to all connected clients.
-
-        Args:
-            event_type: Type of event (e.g., "simulation_progress")
-            data: Event data dictionary
-        """
-        if not self.active_connections:
-            return
-
-        message = json.dumps({
-            "type": "event",
-            "event_type": event_type,
-            "data": data,
-            "timestamp": datetime.now().isoformat()
-        })
-
-        # Send to all connected clients
-        disconnected = set()
-        for websocket in self.active_connections:
-            try:
-                await websocket.send(message)
-            except Exception as e:
-                logger.error(f"Failed to send event to client: {e}")
-                disconnected.add(websocket)
-
-        # Remove disconnected clients
-        self.active_connections -= disconnected
 
     async def start(self):
         """Start the WebSocket server (non-blocking)."""

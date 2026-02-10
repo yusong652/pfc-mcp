@@ -19,29 +19,22 @@ import logging
 import threading
 import time
 
-# Add script directory to sys.path
-try:
-    import server
-except ImportError:
-    _script_dir = None
-    if '__file__' in dir():
-        _script_dir = os.path.dirname(os.path.abspath(__file__))
+# ── Configuration ──────────────────────────────────────────
+HOST = "localhost"
+PORT = 9001
+PING_INTERVAL = 120   # seconds between ping frames
+PING_TIMEOUT = 300    # seconds to wait for pong before disconnect
 
-    if not _script_dir:
-        try:
-            import itasca as it
-            _script_dir = it.fish.get('_pfc_bridge_path') or it.fish.get('_pfc_server_path')
-        except:
-            pass
+# Add script directory to sys.path so `from server.xxx import ...` works
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+if _script_dir not in sys.path:
+    sys.path.insert(0, _script_dir)
 
-    if _script_dir and _script_dir not in sys.path:
-        sys.path.insert(0, _script_dir)
-
-# Configure logging to .nagisa/server.log
-nagisa_dir = os.path.join(os.getcwd(), ".nagisa")
-if not os.path.exists(nagisa_dir):
-    os.makedirs(nagisa_dir)
-log_file = os.path.join(nagisa_dir, "server.log")
+# Configure logging to .pfc-bridge/bridge.log in workspace
+bridge_dir = os.path.join(os.getcwd(), ".pfc-bridge")
+if not os.path.exists(bridge_dir):
+    os.makedirs(bridge_dir)
+log_file = os.path.join(bridge_dir, "bridge.log")
 
 root_logger = logging.getLogger()
 root_logger.setLevel(logging.INFO)
@@ -57,19 +50,8 @@ for handler in [logging.StreamHandler(sys.stdout),
 from server.execution import MainThreadExecutor
 from server.server import create_server
 
-# Load configuration with fallback to defaults
-try:
-    from config import WEBSOCKET_HOST as HOST, WEBSOCKET_PORT as PORT, \
-                       PING_INTERVAL as PING_INT, PING_TIMEOUT as PING_TO, \
-                       AUTO_START_TASK_LOOP as AUTO_START  # type: ignore
-    _config_loaded = True
-except ImportError:
-    HOST, PORT, PING_INT, PING_TO, AUTO_START = "localhost", 9001, 120, 300, True
-    _config_loaded = False
-
 # Track initialization status for summary
 _init_status = {
-    "config": _config_loaded,
     "pfc_state": False,
     "interrupt": False,
     "diagnostic": False,
@@ -95,7 +77,7 @@ except Exception as e:
 
 # Create and start server
 pfc_server = create_server(main_executor=main_executor, host=HOST, port=PORT,
-                           ping_interval=PING_INT, ping_timeout=PING_TO)
+                           ping_interval=PING_INTERVAL, ping_timeout=PING_TIMEOUT)
 
 def run_server_background():
     """Run WebSocket server in background thread."""
@@ -115,18 +97,6 @@ server_thread = threading.Thread(target=run_server_background, daemon=True)
 server_thread.start()
 time.sleep(0.5)
 
-# Register IPython hook for auto task processing
-try:
-    from IPython import get_ipython  # type: ignore
-    ip = get_ipython()
-    if ip:
-        ip.events.register('post_execute', main_executor.process_tasks)
-        processing_mode = "hook"
-    else:
-        processing_mode = "manual"
-except ImportError:
-    processing_mode = "manual"
-
 # Utility functions
 def run_task_loop(interval=0.01):
     """Run continuous task processing loop. Press Ctrl+C to stop."""
@@ -141,72 +111,32 @@ def run_task_loop(interval=0.01):
     finally:
         stop_event.clear()
 
-def get_queue_size():
-    """Get current task queue size."""
-    return main_executor.queue_size()
-
-def stop_task_loop():
-    """Stop the running task loop gracefully."""
-    if stop_event.is_set():
-        print("Task loop is not running or already stopping")
-    else:
-        print("Stopping task loop...")
-        stop_event.set()
-
 def server_status():
-    """Display server status and usage information."""
+    """Display server status."""
+    features = [name for name, ok in [
+        ("PFC", _init_status["pfc_state"]),
+        ("Interrupt", _init_status["interrupt"]),
+        ("Diagnostic", _init_status["diagnostic"]),
+    ] if ok]
+
     print("\n" + "=" * 60)
     print("PFC Bridge Server")
     print("=" * 60)
     print("  URL:         ws://{}:{}".format(HOST, PORT))
+    print("  Log:         {}".format(log_file))
     print("  Running:     {}".format(server_thread.is_alive()))
     print("  Connections: {}".format(len(pfc_server.active_connections)))
     print("  Queue:       {} pending".format(main_executor.queue_size()))
-    print("  Mode:        {}".format(processing_mode))
-    print("-" * 60)
-    print("Commands:")
-    print("  server_status()   - Show this status")
-    print("  run_task_loop()   - Continuous processing (Ctrl+C to stop)")
-    print("=" * 60 + "\n")
-
-# Startup summary
-def _print_startup_summary():
-    """Print startup summary with status indicators."""
-    print("\n" + "=" * 60)
-    print("PFC Bridge Server")
-    print("=" * 60)
-    print("  URL:       ws://{}:{}".format(HOST, PORT))
-    print("  Log:       {}".format(log_file))
-
-    # Feature status
-    features = [name for name, enabled in [
-        ("PFC", _init_status["pfc_state"]),
-        ("Interrupt", _init_status["interrupt"]),
-        ("Diagnostic", _init_status["diagnostic"]),
-    ] if enabled]
     if features:
-        print("  Features:  {}".format(", ".join(features)))
-
-    # Warnings
-    warnings = []
-    if not _init_status["config"]:
-        warnings.append("config.py not found (using defaults)")
+        print("  Features:    {}".format(", ".join(features)))
     if not _init_status["pfc_state"]:
-        warnings.append("itasca module not available")
-
-    if warnings:
-        print("-" * 60)
-        for w in warnings:
-            print("  [!] {}".format(w))
-
-    print("-" * 60)
-    print("Commands:  server_status()  run_task_loop()")
+        print("  [!] itasca module not available")
     print("=" * 60 + "\n")
 
-_print_startup_summary()
-
-# Auto-start task loop if enabled
-if AUTO_START and processing_mode == "hook":
-    print("Auto-starting task loop... (Ctrl+C to stop)")
-    time.sleep(0.5)
-    run_task_loop()
+# ── Startup ───────────────────────────────────────────────
+server_status()
+print("Task loop will now start on the main thread.")
+print("There may be brief initial lag, but WebSocket")
+print("requests are accepted immediately.")
+input("\nPress Enter to start task loop...")
+run_task_loop()

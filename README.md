@@ -46,6 +46,8 @@ uv run pfc-mcp
 ## Test
 
 ```bash
-uv run pytest pfc-mcp/tests/test_phase2_tools.py --no-cov
-uv run pytest pfc-mcp/tests/test_phase3_capture_plot.py --no-cov
+uv sync --group dev
+uv run pytest tests/test_phase2_tools.py
+uv run pytest tests/test_phase3_capture_plot.py
+uv run pytest tests/test_tool_contracts.py
 ```

@@ -6,8 +6,8 @@ from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
-from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
-from pfc_mcp.utils import ScriptPath, TaskDescription, TimeoutSeconds
+from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error
+from pfc_mcp.utils import ScriptPath, TaskDescription
 
 
 def register(mcp: FastMCP) -> None:
@@ -17,7 +17,6 @@ def register(mcp: FastMCP) -> None:
     async def pfc_execute_task(
         entry_script: ScriptPath,
         description: TaskDescription,
-        timeout: TimeoutSeconds = None,
     ) -> dict[str, Any]:
         """Submit a PFC script task for asynchronous execution.
 
@@ -38,8 +37,6 @@ def register(mcp: FastMCP) -> None:
                 description=description,
                 task_id=task_id,
                 session_id=config.default_session_id,
-                timeout_ms=int(timeout * 1000) if timeout else None,
-                run_in_background=True,
             )
         except Exception as exc:
             task_manager.update_status(task_id, "failed")
@@ -47,7 +44,6 @@ def register(mcp: FastMCP) -> None:
 
         status = response.get("status", "unknown")
         message = response.get("message", "")
-        data = response.get("data") or {}
 
         if status != "pending":
             task_manager.update_status(task_id, "failed")

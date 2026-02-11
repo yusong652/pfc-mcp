@@ -76,44 +76,6 @@ def submit_diagnostic(script_path):
     return future
 
 
-def get_pending_count():
-    # type: () -> int
-    """Get number of pending diagnostic requests."""
-    return _pending_queue.qsize()
-
-
-def is_diagnostic_pending():
-    # type: () -> bool
-    """Check if any diagnostic script is pending execution."""
-    return not _pending_queue.empty()
-
-
-def clear_pending_diagnostics():
-    # type: () -> int
-    """
-    Clear all pending diagnostics (for cleanup/reset).
-
-    Returns:
-        int: Number of diagnostics cleared
-    """
-    cleared = 0
-    while True:
-        try:
-            script_path, future = _pending_queue.get_nowait()
-            if not future.done():
-                future.set_exception(
-                    RuntimeError("Diagnostic cleared before execution")
-                )
-            cleared += 1
-        except Empty:
-            break
-
-    if cleared > 0:
-        logger.info("Cleared %d pending diagnostic(s)", cleared)
-
-    return cleared
-
-
 # =============================================================================
 # PFC Callback Function (Executed in main thread during cycle gaps)
 # =============================================================================
@@ -246,34 +208,6 @@ def register_diagnostic_callback(itasca_module, position=51.0):
 
     except Exception as e:
         logger.error("Failed to register diagnostic callback: %s", e)
-        return False
-
-
-def unregister_diagnostic_callback(itasca_module, position=51.0):
-    # type: (Any, float) -> bool
-    """
-    Unregister diagnostic callback from PFC.
-
-    Args:
-        itasca_module: The itasca module
-        position: Same position used in registration
-
-    Returns:
-        bool: True if unregistered successfully
-    """
-    global _callback_registered
-
-    if not _callback_registered:
-        return False
-
-    try:
-        itasca_module.remove_callback("_pfc_diagnostic_callback", position)
-        _callback_registered = False
-        logger.info("Diagnostic callback unregistered")
-        return True
-
-    except Exception as e:
-        logger.error("Failed to unregister diagnostic callback: %s", e)
         return False
 
 

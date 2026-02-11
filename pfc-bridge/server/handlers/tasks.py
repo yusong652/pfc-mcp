@@ -22,8 +22,6 @@ async def handle_pfc_task(ctx, data):
             - session_id: Session identifier (default: "default")
             - script_path: Path to Python script
             - description: Task description
-            - timeout_ms: Optional timeout in milliseconds
-            - run_in_background: Whether to run async (default: True)
             - task_id: Required backend-generated task ID (6-char hex)
 
     Returns:
@@ -42,12 +40,9 @@ async def handle_pfc_task(ctx, data):
 
     session_id = data.get("session_id", "default")
     description = data.get("description", "")
-    timeout_ms = data.get("timeout_ms", None)
-    run_in_background = data.get("run_in_background", True)
 
     result = await ctx.script_runner.run(
-        session_id, script_path, description, timeout_ms, run_in_background,
-        task_id=task_id
+        session_id, script_path, description, task_id=task_id
     )
 
     # Truncate message before sending
@@ -155,3 +150,70 @@ async def handle_mark_task_notified(ctx, data):
         "request_id": request_id,
         **result
     }
+
+
+async def handle_interrupt_task(ctx, data):
+    # type: (ServerContext, Dict[str, Any]) -> Dict[str, Any]
+    """
+    Handle interrupt_task message - request interrupt for a running task.
+
+    Only sets interrupt flag for tasks that are actually running or pending.
+    Returns error for completed/failed/interrupted tasks to prevent flag leaks.
+
+    Args:
+        ctx: Server context with dependencies
+        data: Message data containing:
+            - request_id: Request identifier
+            - task_id: Task ID to interrupt
+
+    Returns:
+        Response dict with interrupt request result
+    """
+    from ..signals import request_interrupt
+
+    request_id = data.get("request_id", "unknown")
+
+    task_id, err = require_field(data, "task_id", request_id)
+    if err:
+        return err
+
+    # Check if task exists and is interruptible
+    task = ctx.task_manager.tasks.get(task_id)
+    if not task:
+        return {
+            "type": "result",
+            "request_id": request_id,
+            "status": "error",
+            "message": "Task not found: {}".format(task_id),
+            "data": {"task_id": task_id, "interrupt_requested": False}
+        }
+
+    # Only allow interrupt for pending/running tasks
+    task_status = task.status
+    if task_status not in ("pending", "running"):
+        return {
+            "type": "result",
+            "request_id": request_id,
+            "status": "error",
+            "message": "Task already in terminal state: {} (status: {})".format(task_id, task_status),
+            "data": {"task_id": task_id, "status": task_status, "interrupt_requested": False}
+        }
+
+    # Request interrupt (will be checked by PFC callback)
+    success = request_interrupt(task_id)
+    if success:
+        return {
+            "type": "result",
+            "request_id": request_id,
+            "status": "success",
+            "message": "Interrupt requested for task: {}".format(task_id),
+            "data": {"task_id": task_id, "interrupt_requested": True}
+        }
+    else:
+        return {
+            "type": "result",
+            "request_id": request_id,
+            "status": "error",
+            "message": "Failed to request interrupt",
+            "data": None
+        }

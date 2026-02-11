@@ -128,21 +128,6 @@ TaskDescription = Annotated[
     Field(..., min_length=1, max_length=DESCRIPTION_MAX_LENGTH, description="Brief task purpose"),
 ]
 
-TimeoutSeconds = Annotated[
-    Optional[int],
-    Field(
-        default=None,
-        ge=MIN_TIMEOUT_S,
-        le=MAX_TIMEOUT_S,
-        description="Execution timeout in seconds. Null means no timeout.",
-    ),
-]
-
-RunInBackground = Annotated[
-    bool,
-    Field(default=True, description="Return immediately with task ID when true"),
-]
-
 SkipNewestTasks = Annotated[
     int,
     Field(default=0, ge=0, description="Skip N most recent tasks before listing"),

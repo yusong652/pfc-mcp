@@ -19,9 +19,8 @@ Python 3.6 compatible implementation.
 """
 
 import threading
-import time
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 # Module logger
 logger = logging.getLogger("PFC-Server")
@@ -31,13 +30,9 @@ logger = logging.getLogger("PFC-Server")
 # Interrupt Flag Management (Thread-safe)
 # =============================================================================
 
-# Interrupt flags with timestamps: {task_id: timestamp}
-# Timestamp enables cleanup of stale flags (fallback protection)
-_interrupt_flags = {}  # type: Dict[str, float]
+# Interrupt flags: set of task IDs with pending interrupt requests
+_interrupt_flags = set()  # type: set
 _flags_lock = threading.Lock()
-
-# Maximum age for interrupt flags (1 hour) - stale flags are cleaned up
-_FLAG_MAX_AGE_SECONDS = 3600.0
 
 
 def request_interrupt(task_id):
@@ -46,7 +41,6 @@ def request_interrupt(task_id):
     Request interrupt for a running task.
 
     Called from WebSocket handler thread when user requests cancellation.
-    Stores timestamp for stale flag cleanup.
 
     Args:
         task_id: Task ID to interrupt
@@ -58,7 +52,7 @@ def request_interrupt(task_id):
         return False
 
     with _flags_lock:
-        _interrupt_flags[task_id] = time.time()
+        _interrupt_flags.add(task_id)
 
     logger.info("Interrupt requested: %s", task_id)
     return True
@@ -78,8 +72,7 @@ def check_interrupt(task_id):
     Returns:
         bool: True if interrupt requested, False otherwise
     """
-    # Fast path: dict.get() is atomic in CPython due to GIL
-    # We only check existence, not timestamp (for speed)
+    # Fast path: set membership is atomic in CPython due to GIL
     return task_id in _interrupt_flags
 
 
@@ -95,54 +88,8 @@ def clear_interrupt(task_id):
     """
     with _flags_lock:
         if task_id in _interrupt_flags:
-            del _interrupt_flags[task_id]
+            _interrupt_flags.discard(task_id)
             logger.debug("Cleared interrupt flag: %s", task_id)
-
-
-def cleanup_stale_flags(max_age_seconds=None):
-    # type: (Optional[float]) -> int
-    """
-    Remove interrupt flags older than max_age_seconds.
-
-    This is a fallback protection against memory leaks from flags that
-    were never consumed (e.g., task completed before callback ran).
-
-    Args:
-        max_age_seconds: Maximum age in seconds (default: _FLAG_MAX_AGE_SECONDS)
-
-    Returns:
-        int: Number of stale flags removed
-    """
-    if max_age_seconds is None:
-        max_age_seconds = _FLAG_MAX_AGE_SECONDS
-
-    now = time.time()
-    stale_ids = []
-
-    with _flags_lock:
-        for task_id, timestamp in list(_interrupt_flags.items()):
-            if now - timestamp > max_age_seconds:
-                stale_ids.append(task_id)
-
-        for task_id in stale_ids:
-            del _interrupt_flags[task_id]
-
-    if stale_ids:
-        logger.info("Cleaned up %d stale interrupt flag(s): %s", len(stale_ids), stale_ids)
-
-    return len(stale_ids)
-
-
-def get_pending_interrupts():
-    # type: () -> Dict[str, float]
-    """
-    Get all pending interrupt requests with timestamps (for debugging).
-
-    Returns:
-        Dict of task_id -> timestamp for all pending interrupts
-    """
-    with _flags_lock:
-        return dict(_interrupt_flags)
 
 
 # =============================================================================
@@ -182,17 +129,6 @@ def clear_current_task():
         logger.debug("Current task cleared: %s", prev_task)
 
 
-def get_current_task():
-    # type: () -> Optional[str]
-    """
-    Get current task ID (for debugging).
-
-    Returns:
-        Current task ID or None if no task executing
-    """
-    return _current_task_id
-
-
 # =============================================================================
 # Global Interrupt Check Function (Registered with PFC)
 # =============================================================================
@@ -221,9 +157,6 @@ def _pfc_interrupt_check():
 # =============================================================================
 # PFC Callback Registration
 # =============================================================================
-
-_callback_registered = False
-
 
 def _re_register_callback(itasca_module, position=50.0):
     # type: (Any, float) -> None
@@ -273,14 +206,8 @@ def register_interrupt_callback(itasca_module, position=50.0):
             - 45.0+: after cycle completion
 
     Returns:
-        bool: True if registered successfully, False if already registered
+        bool: True if registered successfully
     """
-    global _callback_registered
-
-    if _callback_registered:
-        logger.warning("Interrupt callback already registered")
-        return False
-
     try:
         # Inject function into __main__ namespace (required for PFC lookup)
         import __main__
@@ -305,44 +232,9 @@ def register_interrupt_callback(itasca_module, position=50.0):
 
         itasca_module.command = _wrapped_command
 
-        _callback_registered = True
         logger.info("Interrupt callback registered (position=%.1f)", position)
         return True
 
     except Exception as e:
         logger.error("Failed to register interrupt callback: %s", e)
         return False
-
-
-def unregister_interrupt_callback(itasca_module, position=50.0):
-    # type: (Any, float) -> bool
-    """
-    Unregister interrupt callback from PFC.
-
-    Args:
-        itasca_module: The itasca module
-        position: Same position used in registration
-
-    Returns:
-        bool: True if unregistered successfully
-    """
-    global _callback_registered
-
-    if not _callback_registered:
-        return False
-
-    try:
-        itasca_module.remove_callback("_pfc_interrupt_check", position)
-        _callback_registered = False
-        logger.info("Interrupt callback unregistered")
-        return True
-
-    except Exception as e:
-        logger.error("Failed to unregister interrupt callback: %s", e)
-        return False
-
-
-def is_callback_registered():
-    # type: () -> bool
-    """Check if interrupt callback is registered."""
-    return _callback_registered

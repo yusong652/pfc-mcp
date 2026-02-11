@@ -152,11 +152,8 @@ class PFCBridgeClient:
         description: str,
         task_id: str,
         session_id: str,
-        timeout_ms: Optional[int],
-        run_in_background: bool,
         source: str = "agent",
     ) -> Dict[str, Any]:
-        timeout_s = 10.0 if run_in_background else max(self.request_timeout_s, (timeout_ms or 30000) / 1000.0 + 5.0)
         return await self._request_with_retry(
             {
                 "type": "pfc_task",
@@ -164,12 +161,10 @@ class PFCBridgeClient:
                 "session_id": session_id,
                 "script_path": script_path,
                 "description": description,
-                "timeout_ms": timeout_ms,
-                "run_in_background": run_in_background,
                 "source": source,
             },
             operation_name="pfc_task",
-            timeout_s=timeout_s,
+            timeout_s=10.0,
         )
 
     async def check_task_status(self, task_id: str) -> Dict[str, Any]:

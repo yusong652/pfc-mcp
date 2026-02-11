@@ -15,7 +15,6 @@ from websockets.server import WebSocketServerProtocol  # type: ignore
 
 from .execution import ScriptRunner, MainThreadExecutor
 from .tasks import TaskManager
-from .signals import cleanup_stale_flags
 from .handlers import (
     ServerContext,
     handle_pfc_task,
@@ -69,7 +68,6 @@ class PFCWebSocketServer:
         self.script_runner = ScriptRunner(main_executor, task_manager)
         self.active_connections = set()
         self.server = None
-        self._cleanup_task = None  # type: Optional[asyncio.Task]
 
         # Create server context for handlers
         self._context = ServerContext(
@@ -212,9 +210,6 @@ class PFCWebSocketServer:
                 ping_timeout=self.ping_timeout
             )
 
-            # Start background cleanup task for stale interrupt flags
-            self._cleanup_task = asyncio.ensure_future(self._cleanup_loop())
-
             # Note: Server is now running in the background
             # websockets.serve() automatically handles connections via the event loop
             # No need to block here - the server will continue running as long as
@@ -224,37 +219,8 @@ class PFCWebSocketServer:
             logger.error(f"Server error: {e}")
             raise
 
-    async def _cleanup_loop(self):
-        # type: () -> None
-        """Background task to periodically clean up stale interrupt flags.
-
-        Runs every 30 minutes to remove flags older than 1 hour.
-        This is a fallback protection against memory leaks.
-        """
-        cleanup_interval = 1800  # 30 minutes
-        try:
-            while True:
-                await asyncio.sleep(cleanup_interval)
-                try:
-                    removed = cleanup_stale_flags()
-                    if removed > 0:
-                        logger.info("Cleanup task removed %d stale interrupt flags", removed)
-                except Exception as e:
-                    logger.warning("Cleanup task error: %s", e)
-        except asyncio.CancelledError:
-            logger.debug("Cleanup task cancelled")
-            raise
-
     async def wait_closed(self):
         """Wait for server to close (for graceful shutdown)."""
-        # Cancel cleanup task
-        if self._cleanup_task:
-            self._cleanup_task.cancel()
-            try:
-                await self._cleanup_task
-            except asyncio.CancelledError:
-                pass
-        # Wait for server to close
         if self.server:
             await self.server.wait_closed()
 

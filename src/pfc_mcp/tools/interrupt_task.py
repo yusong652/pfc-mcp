@@ -3,7 +3,7 @@
 from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client
-from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
+from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error
 from pfc_mcp.utils import TaskId
 
 

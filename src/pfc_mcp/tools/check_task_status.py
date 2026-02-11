@@ -6,8 +6,13 @@ from typing import Any
 from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
-from pfc_mcp.tools.error_messages import format_bridge_unavailable, format_operation_error
-from pfc_mcp.tools.task_formatting import format_unix_timestamp, normalize_status, paginate_output
+from pfc_mcp.formatting import (
+    format_bridge_unavailable,
+    format_operation_error,
+    format_unix_timestamp,
+    normalize_status,
+    paginate_output,
+)
 from pfc_mcp.utils import FilterText, OutputLimit, SkipNewestLines, TaskId, WaitSeconds
 
 

@@ -10,7 +10,6 @@ from .tasks import (
     handle_pfc_task,
     handle_check_task_status,
     handle_list_tasks,
-    handle_mark_task_notified,
     handle_interrupt_task,
 )
 from .diagnostics import handle_diagnostic_execute
@@ -24,7 +23,6 @@ __all__ = [
     "handle_pfc_task",
     "handle_check_task_status",
     "handle_list_tasks",
-    "handle_mark_task_notified",
     "handle_interrupt_task",
     # Diagnostics
     "handle_diagnostic_execute",

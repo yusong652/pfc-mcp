@@ -49,7 +49,6 @@ class ScriptTask:
         self.start_time = time.time()
         self.end_time = None  # type: Optional[float]
         self._status = "pending"  # type: str
-        self.notified = False  # type: bool
         self.on_status_change = on_status_change
         self.error = None  # type: Optional[str]
 
@@ -79,7 +78,6 @@ class ScriptTask:
         task._status = task_data["status"]
         task.start_time = task_data["start_time"]
         task.end_time = task_data.get("end_time")
-        task.notified = task_data.get("notified", False)
         task.log_path = task_data.get("log_path")
         task.error = task_data.get("error")
         task.future = None
@@ -313,7 +311,6 @@ class ScriptTask:
             "status": self.status,
             "elapsed_time": self.get_elapsed_time(),
             "start_time": self.start_time,
-            "notified": self.notified,
             "name": self.script_name,
             "entry_script": self.entry_script,
         }

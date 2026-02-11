@@ -56,10 +56,6 @@ def register(mcp: FastMCP) -> None:
             filter_text=filter,
         )
 
-        checked = data.get("checked")
-        if checked is None and "notified" in data:
-            checked = data.get("notified")
-
         get_task_manager().update_status(task_id, normalized_status)
 
         lines = [
@@ -71,7 +67,6 @@ def register(mcp: FastMCP) -> None:
             f"- elapsed_time: {data.get('elapsed_time', 'n/a')}",
             f"- entry_script: {data.get('entry_script') or data.get('script_path') or 'n/a'}",
             f"- description: {data.get('description') or 'n/a'}",
-            f"- checked: {checked if checked is not None else 'n/a'}",
         ]
 
         if data.get("result") is not None:
@@ -108,7 +103,6 @@ def register(mcp: FastMCP) -> None:
             "elapsed_time": data.get("elapsed_time"),
             "entry_script": data.get("entry_script") or data.get("script_path"),
             "description": data.get("description"),
-            "checked": checked,
             "result": data.get("result"),
             "error": data.get("error"),
             "output": output_text,

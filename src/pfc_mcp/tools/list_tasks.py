@@ -78,16 +78,12 @@ def register(mcp: FastMCP) -> None:
 
         for task in tasks:
             raw_status = task.get("status", "unknown")
-            checked = task.get("checked")
-            if checked is None and "notified" in task:
-                checked = task.get("notified")
 
             normalized_task = {
                 "task_id": task.get("task_id"),
                 "status": normalize_status(raw_status),
                 "source": task.get("source", "agent"),
                 "elapsed_time": task.get("elapsed_time"),
-                "checked": checked,
                 "entry_script": task.get("entry_script") or task.get("name"),
                 "description": task.get("description"),
             }
@@ -98,8 +94,7 @@ def register(mcp: FastMCP) -> None:
                     f"- task_id={normalized_task.get('task_id', 'unknown')} "
                     f"status={normalized_task.get('status', 'unknown')} "
                     f"source={normalized_task.get('source', 'agent')} "
-                    f"elapsed={normalized_task.get('elapsed_time', 'n/a')} "
-                    f"checked={checked if checked is not None else 'n/a'}"
+                    f"elapsed={normalized_task.get('elapsed_time', 'n/a')}"
                 )
             )
             lines.append(f"  entry_script={normalized_task.get('entry_script') or 'n/a'}")

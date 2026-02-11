@@ -123,35 +123,6 @@ async def handle_list_tasks(ctx, data):
     }
 
 
-async def handle_mark_task_notified(ctx, data):
-    # type: (ServerContext, Dict[str, Any]) -> Dict[str, Any]
-    """
-    Handle mark_task_notified message.
-
-    Args:
-        ctx: Server context with dependencies
-        data: Message data containing:
-            - request_id: Request identifier
-            - task_id: Task ID to mark as notified
-
-    Returns:
-        Response dict with operation result
-    """
-    request_id = data.get("request_id", "unknown")
-
-    task_id, err = require_field(data, "task_id", request_id)
-    if err:
-        return err
-
-    result = ctx.task_manager.mark_task_notified(task_id)
-
-    return {
-        "type": "result",
-        "request_id": request_id,
-        **result
-    }
-
-
 async def handle_interrupt_task(ctx, data):
     # type: (ServerContext, Dict[str, Any]) -> Dict[str, Any]
     """

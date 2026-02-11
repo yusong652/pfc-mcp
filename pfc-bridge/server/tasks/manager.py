@@ -127,22 +127,6 @@ class TaskManager:
             }
         }
 
-    def mark_task_notified(self, task_id):
-        # type: (str) -> Dict[str, Any]
-        """Mark a task as notified (completion notification sent to LLM)."""
-        task = self.tasks.get(task_id)
-        if not task:
-            return {
-                "status": "not_found",
-                "message": "Task ID not found: {}".format(task_id)
-            }
-        task.notified = True
-        self._save_tasks()
-        return {
-            "status": "success",
-            "message": "Task {} marked as notified".format(task_id)
-        }
-
     def clear_all_tasks(self):
         # type: () -> int
         """Clear all tasks from memory and disk. Returns count cleared."""
@@ -208,7 +192,6 @@ class TaskManager:
             "status": task.status,
             "start_time": task.start_time,
             "end_time": task.end_time,
-            "notified": task.notified,
             "script_name": task.script_name,
             "entry_script": task.entry_script,
             "log_path": task.log_path,

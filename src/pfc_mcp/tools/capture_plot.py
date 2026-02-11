@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import base64
 from pathlib import Path
 import time
@@ -52,21 +51,6 @@ def _cleanup_script(script_path: Path) -> None:
         pass
 
 
-async def _wait_local_file(path: Path, max_wait_s: float) -> bool:
-    if path.exists():
-        return True
-    if max_wait_s <= 0:
-        return False
-
-    elapsed = 0.0
-    step = 0.1
-    while elapsed < max_wait_s:
-        await asyncio.sleep(step)
-        elapsed += step
-        if path.exists():
-            return True
-    return False
-
 
 def register(mcp: FastMCP) -> None:
     """Register pfc_capture_plot tool."""
@@ -114,7 +98,9 @@ def register(mcp: FastMCP) -> None:
         contact_cut: Optional[CutPlane] = None,
         timeout: Annotated[int, Field(ge=1, le=120, description="Capture timeout in seconds")] = 30,
     ) -> list[ImageContent | TextContent] | str | dict[str, str]:
-        """Capture a PFC plot image and return MCP-native image content."""
+        """Capture a PFC plot image. The image is saved to output_path and returned for visual inspection.
+
+        ALWAYS use this tool for plot visualization. Do NOT write PFC plot commands manually via pfc_execute_task — the PFC plot command syntax is complex and error-prone. This tool handles all plot setup, camera, coloring, and export internally."""
         config = get_bridge_config()
 
         try:
@@ -189,18 +175,17 @@ def register(mcp: FastMCP) -> None:
 
             data = response.get("data") or {}
             result_path = Path(data.get("output_path") or output_path)
-            file_ready = await _wait_local_file(result_path, config.diagnostic_file_wait_s)
 
-            if not file_ready:
+            try:
+                image_data = base64.b64encode(result_path.read_bytes()).decode("ascii")
+            except FileNotFoundError:
                 return format_operation_error(
                     "pfc_capture_plot",
                     status="output_unavailable",
                     message="Capture completed but image is not readable locally",
                     reason=f"output_path={result_path}",
-                    action="If MCP server and bridge are on different machines, transfer file or return base64 from bridge",
+                    action="Ensure MCP server and bridge share the same filesystem",
                 )
-
-            image_data = base64.b64encode(result_path.read_bytes()).decode("ascii")
             return [
                 ImageContent(type="image", data=image_data, mimeType="image/png"),
                 TextContent(type="text", text=f"Plot captured: {result_path}"),

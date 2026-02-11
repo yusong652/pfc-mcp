@@ -18,20 +18,20 @@
 - **External Dependency**: Similar to PostgreSQL or Redis for client applications
 - **Production-Grade**: Non-blocking task management, auto-reconnect, thread-safe execution
 - **Script-Only Workflow**: All PFC operations via Python scripts using `itasca.command()`
-- **Git Version Tracking**: Automatic code snapshots on dedicated `pfc-executions` branch
+- **Stateless Execution**: Pure script execution and task lifecycle, no application-layer concerns
 
 ### Architecture Position
 
 ```
 +-------------------+     WebSocket      +------------------+     API       +------------+
 |  Client Apps      | <----------------- |  PFC Server      | <------------ | ITASCA SDK |
-| (toyoura-nagisa)  |     ws://9001      |  (This Project)  |   itasca.*    |   (PFC)    |
+| (Any MCP Client)  |     ws://9001      |  (This Project)  |   itasca.*    |   (PFC)    |
 +-------------------+                    +------------------+               +------------+
      Python 3.11+                             Python 3.6+                    Main Thread
      Any machine                              PFC GUI Process                Thread-Sensitive
 ```
 
-**Not part of toyoura-nagisa runtime** - This server is an external dependency that happens to be distributed with toyoura-nagisa for convenience.
+**Independent service** — runs in PFC GUI's Python environment and can be used by any WebSocket client.
 
 ---
 
@@ -55,16 +55,7 @@ subprocess.run(["pip", "install", "websockets==9.1"])
 
 **Step 2: Start the server**
 
-Choose one of the following methods:
-
-**Method 1: Ask Agent (Recommended)**
-
-If using toyoura-nagisa, simply ask the agent:
-> "Start PFC server" or "Connect to PFC"
-
-The agent will automatically set up the environment, generate startup scripts, and launch PFC with pfc-bridge.
-
-**Method 2: Manual %run**
+In PFC GUI IPython console:
 ```python
 # In PFC GUI IPython console
 # replace /path/to/pfc-mcp with your pfc-mcp root path
@@ -91,7 +82,7 @@ PFC Bridge Server
 ============================================================
   URL:       ws://localhost:9001
   Log:       C:\PFC\project\.nagisa\server.log
-  Features:  PFC, Interrupt, Diagnostic, Git
+  Features:  PFC, Interrupt, Diagnostic
 ------------------------------------------------------------
 Commands:  server_status()  run_task_loop()
 ============================================================
@@ -115,8 +106,7 @@ async def test_connection():
             "task_id": "abc123",
             "session_id": "session-001",
             "script_path": "/path/to/simulation.py",
-            "description": "Run particle generation",
-            "run_in_background": True
+            "description": "Run particle generation"
         }))
 
         # Receive result
@@ -174,8 +164,7 @@ asyncio.run(test_connection())
 2. **Script-Only Execution**: All PFC operations via Python scripts using `itasca.command()` pattern
 3. **Non-blocking**: Long tasks return task_id immediately, query progress separately
 4. **Thread Safety**: All PFC SDK calls go through main thread queue
-5. **Git Snapshots**: Each execution creates a version snapshot on `pfc-executions` branch
-6. **Dual Execution Path**: Queue execution for idle PFC, callback execution for diagnostics/interrupt during cycles
+5. **Dual Execution Path**: Queue execution for idle PFC, callback execution for diagnostics/interrupt during cycles
 
 ---
 
@@ -195,10 +184,7 @@ Execute a Python script file with PFC commands.
   "task_id": "abc123",
   "session_id": "session-001",
   "script_path": "/absolute/path/to/script.py",
-  "description": "Task description from agent",
-  "timeout_ms": 30000,
-  "run_in_background": true,
-  "source": "agent"
+  "description": "Task description from agent"
 }
 ```
 
@@ -210,38 +196,25 @@ Execute a Python script file with PFC commands.
 | `session_id` | No | `"default"` | Session identifier for task isolation |
 | `script_path` | Yes | - | Absolute path to Python script |
 | `description` | No | `""` | Task description (shown in task list) |
-| `timeout_ms` | No | `null` | Timeout in milliseconds |
-| `run_in_background` | No | `true` | If true, returns immediately with task_id |
-| `source` | No | `"agent"` | Task source identifier |
 
-**Response (Background Task)**:
+**Response**:
 ```json
 {
   "type": "result",
   "request_id": "unique-id",
   "status": "pending",
-  "message": "Task submitted for background execution",
+  "message": "Script submitted: simulation.py",
   "data": {
     "task_id": "abc123",
+    "type": "script",
     "script_name": "simulation.py",
-    "git_commit": "a1b2c3d4"
+    "script_path": "/absolute/path/to/simulation.py",
+    "description": "Task description from agent"
   }
 }
 ```
 
-**Response (Foreground Task)**:
-```json
-{
-  "type": "result",
-  "request_id": "unique-id",
-  "status": "success",
-  "message": "Script executed successfully",
-  "data": {
-    "task_id": "abc123",
-    "output": "Cycle 1000: unbalanced=1.2e-5\n..."
-  }
-}
-```
+All tasks are submitted for background execution and return immediately. Use `check_task_status` to poll for progress and results.
 
 #### 2. Diagnostic Execute (`diagnostic_execute`)
 
@@ -335,8 +308,7 @@ List tracked tasks with optional filtering and pagination.
       "script_name": "simulation.py",
       "description": "Run gravity settling",
       "start_time": "2025-01-11T10:30:00",
-      "elapsed_time": 45.2,
-      "git_commit": "a1b2c3d4"
+      "elapsed_time": 45.2
     }
   ],
   "pagination": {
@@ -349,20 +321,7 @@ List tracked tasks with optional filtering and pagination.
 }
 ```
 
-#### 6. Mark Task Notified (`mark_task_notified`)
-
-Mark a task as notified (prevents repeated completion notifications).
-
-**Request**:
-```json
-{
-  "type": "mark_task_notified",
-  "request_id": "unique-id",
-  "task_id": "abc123"
-}
-```
-
-#### 7. Interrupt Task (`interrupt_task`)
+#### 6. Interrupt Task (`interrupt_task`)
 
 Request interruption of a running task.
 
@@ -375,7 +334,7 @@ Request interruption of a running task.
 }
 ```
 
-#### 8. Workspace Operations
+#### 7. Workspace Operations
 
 **Get Working Directory**:
 ```json
@@ -385,15 +344,7 @@ Request interruption of a running task.
 }
 ```
 
-**Reset Workspace** (clears git execution branch):
-```json
-{
-  "type": "reset_workspace",
-  "request_id": "unique-id"
-}
-```
-
-#### 9. Ping (`ping`)
+#### 8. Ping (`ping`)
 
 Health check / keepalive.
 
@@ -482,16 +433,6 @@ pfc-bridge/
 
 ## Features
 
-### Git Version Tracking
-
-Each `pfc_task` execution (from agent) creates a git snapshot on the `pfc-executions` branch:
-
-- **Automatic**: No manual git commands needed
-- **Non-disruptive**: Uses `git commit-tree` to avoid branch switching
-- **Traceable**: Each task includes `git_commit` in response
-
-**Important**: Never checkout or work on the `pfc-executions` branch directly. This branch is automatically managed by the server.
-
 ### Task Interruption
 
 Tasks can be interrupted during execution:
@@ -554,21 +495,6 @@ Your `%run` path is over-quoted. Use:
 >>> get_queue_size()
 ```
 
-### Git snapshots not working
-
-Check server startup log for git status:
-```
-  Features:  PFC, Interrupt, Diagnostic, Git  # Git should be listed
-```
-
-If git is not listed:
-```python
-# Initialize git in your PFC workspace
->>> !git init
->>> !git add -A
->>> !git commit -m "Initial commit"
-```
-
 ### Connection failed
 
 - Check server is running: `server_status()`
@@ -578,30 +504,21 @@ If git is not listed:
 
 ### Task timeout
 
-Long-running tasks should use `run_in_background=True`:
-```json
-{
-  "type": "pfc_task",
-  "run_in_background": true,
-  ...
-}
-```
-
-Then poll with `check_task_status`.
+All tasks run in background. Use `check_task_status` to poll for progress and results.
 
 ---
 
 ## Testing
 
-If using with toyoura-nagisa, verify integration with a minimal tool workflow:
+Verify integration with a minimal WebSocket workflow:
 
 ```bash
 # 1) pfc_list_tasks        (connectivity and task store)
-# 2) pfc_execute_task      (small foreground/background script)
+# 2) pfc_execute_task      (small script, verify execution)
 # 3) pfc_check_task_status (progress and completion states)
 ```
 
-Tests: script execution, background tasks, status queries, WebSocket responsiveness, task completion, git snapshots.
+Tests: script execution, task lifecycle, status queries, WebSocket responsiveness, task completion.
 
 ---
 
@@ -609,17 +526,14 @@ Tests: script execution, background tasks, status queries, WebSocket responsiven
 
 ### DO
 
-- Use `run_in_background=True` for long simulations
-- Query task status instead of blocking
+- Use `check_task_status` to poll for task progress and results
 - Use script files for all PFC operations
-- Let server auto-initialize git in workspaces
 - Use `task_id` generated by backend for tracking
 
 ### DON'T
 
 - Execute raw PFC commands directly (use scripts)
 - Wait indefinitely for long tasks (use task_id + check_status)
-- Work on the `pfc-executions` branch manually
 - Generate `task_id` on the server side
 
 ---
@@ -627,14 +541,13 @@ Tests: script execution, background tasks, status queries, WebSocket responsiven
 ## Additional Resources
 
 - **[ITASCA PFC Documentation](https://www.itascacg.com/software/pfc)**: Official PFC docs
-- **Client Implementation**: If using toyoura-nagisa, see `packages/backend/infrastructure/pfc/` for WebSocket client
 - **PFC MCP Tools**: See `pfc-mcp/src/pfc_mcp/tools/` for MCP tool implementations
 
 ---
 
 ## License
 
-Same as parent toyoura-nagisa project - see LICENSE file in repository root.
+MIT License - see LICENSE file in repository root.
 
 ---
 
@@ -643,8 +556,3 @@ Same as parent toyoura-nagisa project - see LICENSE file in repository root.
 **Architecture & Design**: Nagisa Toyoura
 **Implementation**: Claude (Anthropic)
 **ITASCA SDK**: ITASCA Consulting Group, Inc.
-
----
-
-**This is an independent service, not a module of toyoura-nagisa.**
-It runs in PFC GUI's Python environment and can be used by any WebSocket client.

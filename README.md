@@ -16,7 +16,7 @@ MCP server for ITASCA PFC simulation control and documentation.
 
 User console execution should use backend-side polling on top of `pfc_execute_task` + `pfc_check_task_status`.
 
-`pfc_capture_plot` returns MCP-native `image` content (PNG base64) when image files are readable locally.
+`pfc_capture_plot` saves the image to `output_path` and returns it for visual inspection (via MCP `ImageContent` when the file is locally readable).
 
 ## Configuration
 
@@ -28,7 +28,6 @@ Environment variables:
 - `PFC_MCP_MAX_RETRIES` (default: `2`)
 - `PFC_MCP_AUTO_RECONNECT` (default: `true`)
 - `PFC_MCP_DIAGNOSTIC_TIMEOUT_MS` (default: `30000`)
-- `PFC_MCP_DIAGNOSTIC_FILE_WAIT_S` (default: `3.0`)
 
 ## Run
 

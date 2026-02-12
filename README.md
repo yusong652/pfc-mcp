@@ -1,53 +1,108 @@
 # pfc-mcp
 
-MCP server for ITASCA PFC simulation control and documentation.
+MCP server for [ITASCA PFC](https://www.itascacg.com/software/pfc) (Particle Flow Code) discrete element simulation control and documentation.
 
-## Components
+Provides 10 tools for browsing PFC documentation and controlling simulations through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-- `src/pfc_mcp/`: MCP server package (docs + execution tools)
-- `pfc-bridge/`: bridge runtime for PFC GUI environment (`websockets==9.1`)
+## Quick Start
 
-`pfc-bridge/` is intentionally not under `src/` because it runs in a different Python environment than the MCP server.
+### Run with uvx (no install)
+
+```bash
+uvx pfc-mcp
+```
+
+### Or install and run
+
+```bash
+pip install pfc-mcp
+pfc-mcp
+```
+
+### MCP Client Configuration
+
+Add to your MCP client config (e.g. `claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "pfc-mcp": {
+      "command": "uvx",
+      "args": ["pfc-mcp"]
+    }
+  }
+}
+```
 
 ## Tools
 
-- Documentation: `pfc_browse_commands`, `pfc_browse_python_api`, `pfc_browse_reference`, `pfc_query_command`, `pfc_query_python_api`
-- Execution: `pfc_execute_task`, `pfc_check_task_status`, `pfc_list_tasks`, `pfc_interrupt_task`, `pfc_capture_plot`
+### Documentation (5 tools)
 
-User console execution should use backend-side polling on top of `pfc_execute_task` + `pfc_check_task_status`.
+| Tool | Description |
+|------|-------------|
+| `pfc_browse_commands` | Browse PFC command documentation by path |
+| `pfc_browse_python_api` | Browse PFC Python SDK documentation by path |
+| `pfc_browse_reference` | Browse reference docs (contact models, range elements) |
+| `pfc_query_command` | Search PFC commands by keywords |
+| `pfc_query_python_api` | Search PFC Python SDK by keywords |
 
-`pfc_capture_plot` saves the image to `output_path` and returns it for visual inspection (via MCP `ImageContent` when the file is locally readable).
+### Execution (5 tools)
+
+| Tool | Description |
+|------|-------------|
+| `pfc_execute_task` | Submit a Python script for execution in PFC |
+| `pfc_check_task_status` | Check status and output of a running/completed task |
+| `pfc_list_tasks` | List tracked tasks with pagination |
+| `pfc_interrupt_task` | Request graceful interruption of a running task |
+| `pfc_capture_plot` | Capture a PFC plot image with configurable camera and coloring |
+
+## Architecture
+
+```
++-------------------+       stdio        +-------------------+    WebSocket    +------------------+
+|  MCP Client       | <----------------> |  pfc-mcp          | <------------> |  pfc-mcp-bridge  |
+|  (Claude, etc.)   |       MCP          |  (this package)   |   ws://9001    |  (in PFC GUI)    |
++-------------------+                    +-------------------+                +------------------+
+                                          Python 3.10+                         Python 3.6+
+                                          Any machine                          PFC GUI process
+```
+
+- **pfc-mcp** (this package): MCP server with documentation tools and WebSocket client for execution
+- **[pfc-mcp-bridge](pfc-bridge/)**: WebSocket server that runs inside PFC GUI for thread-safe simulation control
+
+Documentation tools work standalone. Execution tools require a running pfc-mcp-bridge instance.
 
 ## Configuration
 
 Environment variables:
 
-- `PFC_MCP_BRIDGE_URL` (default: `ws://localhost:9001`)
-- `PFC_MCP_WORKSPACE_PATH` (optional)
-- `PFC_MCP_REQUEST_TIMEOUT_S` (default: `10.0`)
-- `PFC_MCP_MAX_RETRIES` (default: `2`)
-- `PFC_MCP_AUTO_RECONNECT` (default: `true`)
-- `PFC_MCP_DIAGNOSTIC_TIMEOUT_MS` (default: `30000`)
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `PFC_MCP_BRIDGE_URL` | `ws://localhost:9001` | WebSocket URL of pfc-mcp-bridge |
+| `PFC_MCP_WORKSPACE_PATH` | _(none)_ | Working directory for script execution |
+| `PFC_MCP_REQUEST_TIMEOUT_S` | `10.0` | WebSocket request timeout (seconds) |
+| `PFC_MCP_MAX_RETRIES` | `2` | Connection retry attempts |
+| `PFC_MCP_AUTO_RECONNECT` | `true` | Auto-reconnect on connection loss |
+| `PFC_MCP_DIAGNOSTIC_TIMEOUT_MS` | `30000` | Timeout for diagnostic operations (ms) |
 
-## Run
-
-From this repository root:
-
-```bash
-uv run python -m pfc_mcp.server
-```
-
-Or via script entry point:
+## Development
 
 ```bash
+# Install with dev dependencies
+uv sync --group dev
+
+# Run tests
+uv run pytest
+
+# Run server locally
 uv run pfc-mcp
 ```
 
-## Test
+## Requirements
 
-```bash
-uv sync --group dev
-uv run pytest tests/test_phase2_tools.py
-uv run pytest tests/test_phase3_capture_plot.py
-uv run pytest tests/test_tool_contracts.py
-```
+- Python >= 3.10
+- For execution tools: a running [pfc-mcp-bridge](pfc-bridge/) instance in PFC GUI
+
+## License
+
+MIT - see [LICENSE](LICENSE).

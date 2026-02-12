@@ -9,7 +9,7 @@ description = "WebSocket bridge for ITASCA PFC - runs inside PFC GUI to enable r
 requires-python = ">=3.6"
 license = { text = "MIT" }
 authors = [{ name= "Yusong Han", email = "yusong.han.652@gmail.com" }, { name = "Nagisa Toyoura", email = "nagisa.toyoura@gmail.com" }]
-keywords = ["pfc", "itasca", "simulation", "discrete-element", "websocket", "bridge"]
+keywords = ["pfc", "itasca", "itasca-software", "flac", "3dec", "mcp", "simulation", "discrete-element", "dem", "websocket", "bridge"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Topic :: Scientific/Engineering",

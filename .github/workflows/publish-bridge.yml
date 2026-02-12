@@ -1,0 +1,20 @@
+name: Publish pfc-mcp-bridge
+
+on:
+  push:
+    tags:
+      - "bridge-v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi-bridge
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: cd pfc-bridge && uv build
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: pfc-bridge/dist/

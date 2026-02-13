@@ -6,22 +6,13 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ## Quick Start
 
-### Run with uvx (no install)
+### Prerequisite
 
-```bash
-uvx pfc-mcp
-```
+Install `uv` first (required for `uvx`):
 
-### Or install and run
+- https://docs.astral.sh/uv/getting-started/installation/
 
-```bash
-pip install pfc-mcp
-pfc-mcp
-```
-
-### MCP Client Configuration
-
-Add to your MCP client config (e.g. `claude_desktop_config.json`):
+### 1) Configure your MCP client
 
 ```json
 {
@@ -33,6 +24,26 @@ Add to your MCP client config (e.g. `claude_desktop_config.json`):
   }
 }
 ```
+
+### 2) Start `pfc-mcp-bridge` in PFC GUI (execution tools only)
+
+Execution tools require a running bridge in the PFC process.
+
+```python
+import subprocess
+subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+
+import pfc_mcp_bridge
+pfc_mcp_bridge.start()
+```
+
+Documentation tools work without the bridge.
+
+### 3) Verify
+
+Reconnect your MCP client and call a documentation tool such as `pfc_browse_commands`.
+
+If `uvx` is not found, install `uv` or use a fallback command (`pip install pfc-mcp` and set MCP command to `pfc-mcp`).
 
 ## Tools
 
@@ -56,34 +67,44 @@ Add to your MCP client config (e.g. `claude_desktop_config.json`):
 | `pfc_interrupt_task` | Request graceful interruption of a running task |
 | `pfc_capture_plot` | Capture a PFC plot image with configurable camera and coloring |
 
-## Architecture
+## Runtime Model
+
+- **pfc-mcp** (this package): MCP server with documentation tools and execution tool entrypoints.
+- **[pfc-mcp-bridge](pfc-bridge/)**: bridge process that runs inside PFC GUI for simulation execution.
+- Documentation tools work standalone; execution tools require a running bridge.
+
+## Bridge in PFC GUI
+
+Start `pfc-mcp-bridge` from the PFC GUI Python console when you need execution tools.
+
+Expected startup output:
 
 ```
-+-------------------+       stdio        +-------------------+    WebSocket    +------------------+
-|  MCP Client       | <----------------> |  pfc-mcp          | <------------> |  pfc-mcp-bridge  |
-|  (Claude, etc.)   |       MCP          |  (this package)   |   ws://9001    |  (in PFC GUI)    |
-+-------------------+                    +-------------------+                +------------------+
-                                          Python 3.10+                         Python 3.6+
-                                          Any machine                          PFC GUI process
+============================================================
+PFC Bridge Server
+============================================================
+  URL:         ws://localhost:9001
+  Log:         /your-working-dir/.pfc-bridge/bridge.log
+  Running:     True
+  Features:    PFC, Interrupt, Diagnostic
+============================================================
+
+Task loop running (Ctrl+C to stop)...
 ```
 
-- **pfc-mcp** (this package): MCP server with documentation tools and WebSocket client for execution
-- **[pfc-mcp-bridge](pfc-bridge/)**: WebSocket server that runs inside PFC GUI for thread-safe simulation control
+The task loop starts immediately after startup (no Enter confirmation step).
 
-Documentation tools work standalone. Execution tools require a running pfc-mcp-bridge instance.
+### Bridge Troubleshooting
 
-## Configuration
+- `Server won't start`: install bridge dependency in PFC Python:
 
-Environment variables:
+```python
+import subprocess
+subprocess.run(["pip", "install", "websockets==9.1"])
+```
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PFC_MCP_BRIDGE_URL` | `ws://localhost:9001` | WebSocket URL of pfc-mcp-bridge |
-| `PFC_MCP_WORKSPACE_PATH` | _(none)_ | Working directory for script execution |
-| `PFC_MCP_REQUEST_TIMEOUT_S` | `10.0` | WebSocket request timeout (seconds) |
-| `PFC_MCP_MAX_RETRIES` | `2` | Connection retry attempts |
-| `PFC_MCP_AUTO_RECONNECT` | `true` | Auto-reconnect on connection loss |
-| `PFC_MCP_DIAGNOSTIC_TIMEOUT_MS` | `30000` | Timeout for diagnostic operations (ms) |
+- `Tasks not processing`: ensure `pfc_mcp_bridge.start()` is running in the PFC process.
+- `Connection failed`: verify bridge is running, port `9001` is free, and check `.pfc-bridge/bridge.log`.
 
 ## Development
 
@@ -100,8 +121,8 @@ uv run pfc-mcp
 
 ## Requirements
 
-- Python >= 3.10
-- For execution tools: a running [pfc-mcp-bridge](pfc-bridge/) instance in PFC GUI
+- MCP server runtime: Python >= 3.10
+- Bridge runtime (inside PFC): Python >= 3.6, ITASCA PFC 7.0+, `websockets==9.1`
 
 ## License
 

@@ -8,10 +8,10 @@ Usage (in PFC GUI Python console):
     pfc_mcp_bridge.start()
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
-def start(host="localhost", port=9001, ping_interval=120, ping_timeout=300):
+def start(host="localhost", port=9001, ping_interval=120, ping_timeout=300, wait_for_enter=True):
     """Start the PFC Bridge server.
 
     Starts a WebSocket server in a background thread and runs the main-thread
@@ -22,6 +22,7 @@ def start(host="localhost", port=9001, ping_interval=120, ping_timeout=300):
         port: Server port number.
         ping_interval: Seconds between WebSocket ping frames.
         ping_timeout: Seconds to wait for pong before disconnect.
+        wait_for_enter: If True, wait for Enter before starting task loop.
     """
     import sys
     import os
@@ -116,6 +117,16 @@ def start(host="localhost", port=9001, ping_interval=120, ping_timeout=300):
     print("=" * 60 + "\n")
 
     # ── Main-thread task loop (blocking) ──────────────────────
+    if wait_for_enter:
+        print("Press Enter to start task loop (the GUI may pause briefly)...")
+        try:
+            input()
+        except EOFError:
+            print("No interactive stdin detected; starting task loop automatically.")
+        except KeyboardInterrupt:
+            print("\nStartup cancelled before task loop.")
+            return
+
     print("Task loop running (Ctrl+C to stop)...")
     stop_event.clear()
     try:

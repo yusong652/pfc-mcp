@@ -31,7 +31,7 @@ PFC Bridge Server
 Task loop running (Ctrl+C to stop)...
 ```
 
-The task loop starts immediately after startup (no Enter confirmation step).
+After startup banner, press Enter in the PFC Python console to start the task loop.
 
 ## Requirements
 

@@ -8,6 +8,7 @@ Use this profile when the client is OpenCode.
 
 Default target: workspace-level config `<workspace>/opencode.json`.
 Use global config `~/.config/opencode/opencode.json` only if user explicitly asks for global sharing.
+Prefer editing the workspace-relative file `./opencode.json` directly to avoid absolute-path mistakes.
 
 Add/merge this MCP entry:
 

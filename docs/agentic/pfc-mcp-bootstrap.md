@@ -27,11 +27,13 @@ Use the client-specific Step 1 guide:
 
 - OpenCode: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md
 - Claude Code / Codex: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude-codex.md
+- Gemini CLI: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-gemini.md
 
 If raw URL fetch is unavailable, use repository-relative paths:
 
 - `docs/agentic/pfc-mcp-bootstrap-opencode.md`
 - `docs/agentic/pfc-mcp-bootstrap-claude-codex.md`
+- `docs/agentic/pfc-mcp-bootstrap-gemini.md`
 
 Shared MCP launch contract (apply in client-native format):
 
@@ -132,10 +134,22 @@ Check current package:
 "{pfc_path}/exe64/python36/python.exe" -m pip show pfc-mcp-bridge
 ```
 
+PowerShell form (recommended on Windows shells):
+
+```powershell
+& "{pfc_path}/exe64/python36/python.exe" -m pip show pfc-mcp-bridge
+```
+
 Install/upgrade to required version:
 
 ```bash
 "{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+```
+
+PowerShell form (recommended on Windows shells):
+
+```powershell
+& "{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
 ```
 
 Verify import and version:
@@ -144,12 +158,24 @@ Verify import and version:
 "{pfc_path}/exe64/python36/python.exe" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
 ```
 
+PowerShell form (recommended on Windows shells):
+
+```powershell
+& "{pfc_path}/exe64/python36/python.exe" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
+```
+
 Ignore pip upgrade warnings in this environment. PFC embedded Python 3.6 commonly uses older pip.
 
 If websocket dependency errors appear, install:
 
 ```bash
 "{pfc_path}/exe64/python36/python.exe" -m pip install --user websockets==9.1
+```
+
+PowerShell form (recommended on Windows shells):
+
+```powershell
+& "{pfc_path}/exe64/python36/python.exe" -m pip install --user websockets==9.1
 ```
 
 ## Step 4 - Start Bridge in PFC GUI
@@ -165,7 +191,7 @@ powershell -NoProfile -Command "$gui=Get-ChildItem '{pfc_path}/exe64' -Filter 'p
 Confirm PFC process is running:
 
 ```bash
-powershell -NoProfile -Command "tasklist | findstr /I pfc"
+powershell -NoProfile -Command "$procs=Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^pfc(2d|3d)\\d+_gui\\.exe$' }; if($procs){$procs | Select-Object Name,ProcessId | Format-Table -AutoSize} else {Write-Output 'No PFC GUI process found'}"
 ```
 
 If both `pfc2d*_gui.exe` and `pfc3d*_gui.exe` are available and user did not specify, prefer 3D (`pfc3d`) by default.
@@ -182,6 +208,8 @@ pfc_mcp_bridge.start()
 ```
 
 2) If `mcp_config_changed = true` from Step 1, restart client session now (Claude Code / Codex / OpenCode).
+
+3) For Gemini CLI: run `/reload` after Step 1 config changes, then continue to Step 5.
 
 Expected output includes:
 
@@ -201,6 +229,8 @@ If `pfc_*` MCP tools are not visible in the client, ask user to restart/reload c
 
 For OpenCode, run `opencode mcp list` after restart to confirm `pfc-mcp` is loaded.
 
+For Gemini CLI, run `gemini mcp list` after `/reload` and confirm `pfc-mcp` is `Connected` before retrying tools.
+
 Success example (shape may vary by client):
 
 ```json
@@ -210,7 +240,7 @@ Success example (shape may vary by client):
 }
 ```
 
-If call succeeds, setup is complete.
+`status: success` means verification passed. `data` can be empty or contain existing tasks, both are normal.
 
 ## Troubleshooting
 
@@ -225,6 +255,10 @@ If call succeeds, setup is complete.
 - `pip` upgrade warning after install:
   - Usually safe to ignore if package install completed successfully.
 - Need to confirm GUI process from terminal:
-  - Run `powershell -NoProfile -Command "tasklist | findstr /I pfc"`.
+  - Run the exact GUI filter command from Step 4 (matches `pfc2d*_gui.exe` / `pfc3d*_gui.exe`).
 - `pfc_*` tools missing in client after setup:
   - MCP config was likely changed but client session did not reload. Restart/reload the client and retry Step 5.
+- Gemini error `missing httpUrl, url, and command`:
+  - MCP config entry is malformed or `command` is missing. Fix `.gemini/settings.json` using `command` + `args` fields.
+- PowerShell error `Unexpected token '-m'`:
+  - Quoted executable path was not invoked with `&`. Use `& "{pfc_path}/exe64/python36/python.exe" -m ...`.

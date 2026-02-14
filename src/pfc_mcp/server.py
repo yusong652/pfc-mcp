@@ -1,6 +1,10 @@
 """PFC MCP Server - ITASCA PFC tools exposed over MCP."""
 
+import asyncio
+import logging
+
 from fastmcp import FastMCP
+from pfc_mcp.bridge import close_bridge_client
 
 from pfc_mcp.tools import (
     browse_commands,
@@ -24,6 +28,8 @@ mcp = FastMCP(
     ),
 )
 
+logger = logging.getLogger("pfc-mcp.server")
+
 # Register documentation tools
 browse_commands.register(mcp)
 browse_python_api.register(mcp)
@@ -41,7 +47,13 @@ capture_plot.register(mcp)
 
 def main():
     """Entry point for the PFC MCP server."""
-    mcp.run(transport="stdio", show_banner=False)
+    try:
+        mcp.run(transport="stdio", show_banner=False)
+    finally:
+        try:
+            asyncio.run(close_bridge_client())
+        except Exception as exc:
+            logger.debug("Bridge client cleanup skipped: %s", exc)
 
 
 if __name__ == "__main__":

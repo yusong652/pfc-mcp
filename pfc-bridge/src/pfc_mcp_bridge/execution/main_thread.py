@@ -11,7 +11,7 @@ import queue
 import logging
 import threading
 from concurrent.futures import Future
-from typing import Callable, Any
+from typing import Callable, Any, Optional
 
 # Module logger
 logger = logging.getLogger("PFC-Server")
@@ -61,8 +61,7 @@ class MainThreadExecutor:
         )
         return future
 
-    def process_tasks(self):
-        # type: () -> int
+    def process_tasks(self, max_tasks: Optional[int] = None) -> int:
         """
         Process all pending tasks in queue (called from main thread).
 
@@ -70,12 +69,26 @@ class MainThreadExecutor:
         - Via post_execute hook (automatic after each IPython command)
         - Via manual loop (run_task_loop())
 
+        Args:
+            max_tasks: Optional maximum number of tasks to process in this call.
+                - None (default): process all pending tasks
+                - int > 0: process up to max_tasks then return
+
         Returns:
             int: Number of tasks processed
 
         Note:
             Non-blocking - processes all available tasks and returns.
         """
+        task_limit = None  # type: Optional[int]
+        if max_tasks is not None:
+            try:
+                parsed = int(max_tasks)
+            except (TypeError, ValueError):
+                parsed = 1
+            if parsed > 0:
+                task_limit = parsed
+
         # Check if we're in the main thread
         current_thread_id = threading.current_thread().ident
         current_thread_name = threading.current_thread().name
@@ -93,6 +106,8 @@ class MainThreadExecutor:
 
         # Process all pending tasks
         while True:
+            if task_limit is not None and processed_count >= task_limit:
+                break
             try:
                 # Non-blocking get
                 func, args, kwargs, future = self.task_queue.get_nowait()
@@ -101,7 +116,7 @@ class MainThreadExecutor:
                 # Log thread information for first task
                 if processed_count == 1:
                     thread_status = "main_thread" if is_main_thread else "wrong_thread"
-                    logger.info(
+                    logger.debug(
                         "Processing tasks (thread=%s, name=%s, id=%s)",
                         thread_status, current_thread_name, current_thread_id
                     )
@@ -128,7 +143,7 @@ class MainThreadExecutor:
                 break
 
         if processed_count > 0:
-            logger.info("Processed %d task(s)", processed_count)
+            logger.debug("Processed %d task(s)", processed_count)
 
         return processed_count
 

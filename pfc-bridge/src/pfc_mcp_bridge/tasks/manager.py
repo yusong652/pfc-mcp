@@ -71,6 +71,7 @@ class TaskManager:
         # type: () -> bool
         """Check if any task is currently running."""
         for task in self.tasks.values():
+            self._refresh_runtime_status(task)
             if task.status == "running":
                 return True
         return False
@@ -85,11 +86,15 @@ class TaskManager:
                 "message": "Task ID not found: {}".format(task_id),
                 "data": None
             }
+        self._refresh_runtime_status(task)
         return task.get_status_response()
 
     def list_all_tasks(self, session_id=None, offset=0, limit=None):
         # type: (Optional[str], int, Optional[int]) -> Dict[str, Any]
         """List tracked tasks, optionally filtered by session with pagination."""
+        for task in self.tasks.values():
+            self._refresh_runtime_status(task)
+
         filtered_tasks = list(self.tasks.values())
 
         if session_id:
@@ -126,6 +131,29 @@ class TaskManager:
                 "has_more": end_idx < total_count
             }
         }
+
+    def _refresh_runtime_status(self, task):
+        # type: (ScriptTask) -> None
+        """Promote pending task to running when Future already started.
+
+        Race condition scenario:
+        - main thread starts executing a submitted future
+        - ScriptTask has not yet observed running state
+        - status remains pending even though output is already produced
+        """
+        if task.status != "pending":
+            return
+        future = getattr(task, "future", None)
+        if future is None:
+            return
+        try:
+            if future.running():
+                task.status = "running"
+                if task.on_status_change:
+                    task.on_status_change(task)
+        except Exception:
+            # Best-effort status refresh; ignore transient future state errors.
+            return
 
     def clear_all_tasks(self):
         # type: () -> int

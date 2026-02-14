@@ -266,6 +266,17 @@ class ScriptRunner:
                 session_id, future, script_name, script_path, output_buffer, description, task_id
             )
 
+            # If execution already started before task registration, sync status.
+            task = self.task_manager.tasks.get(task_id)
+            if task and task.status == "pending":
+                try:
+                    if future.running():
+                        task.status = "running"
+                        if task.on_status_change:
+                            task.on_status_change(task)
+                except Exception:
+                    pass
+
             data = (
                 TaskDataBuilder(task_id, "script", script_name, script_path, description)
                 .with_timing(submit_time)

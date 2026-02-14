@@ -24,14 +24,14 @@ PFC Bridge Server
 ============================================================
   URL:         ws://localhost:9001
   Log:         /your-working-dir/.pfc-bridge/bridge.log
-  Running:     True
-  Features:    PFC, Interrupt, Diagnostic
+  Callbacks:   Interrupt, Diagnostic (registered)
 ============================================================
 
-Task loop running (Ctrl+C to stop)...
+Task loop running via Qt timer (interval=20ms, max_tasks_per_tick=1)
+Bridge started in non-blocking mode (GUI remains responsive).
 ```
 
-After startup banner, press Enter in the PFC Python console to start the task loop.
+No Enter confirmation is required.
 
 ## Requirements
 

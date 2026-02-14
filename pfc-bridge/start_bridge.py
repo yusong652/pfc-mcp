@@ -10,13 +10,24 @@ This script is kept for backward compatibility with:
     %run /path/to/pfc-mcp/pfc-bridge/start_bridge.py
 """
 
-import sys
 import os
+import sys
 
-_src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
-if _src not in sys.path:
-    sys.path.insert(0, _src)
 
-import pfc_mcp_bridge
+def _ensure_local_src_on_path():
+    src_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "src")
+    if src_dir not in sys.path:
+        sys.path.insert(0, src_dir)
 
-pfc_mcp_bridge.start()
+
+_ensure_local_src_on_path()
+
+import pfc_mcp_bridge  # type: ignore  # noqa: E402
+
+
+def main():
+    pfc_mcp_bridge.start()
+
+
+if __name__ == "__main__":
+    main()

@@ -35,7 +35,16 @@ Ensure MCP client config includes:
 Client config path notes:
 
 - Claude Code: workspace `.mcp.json` (or user-level MCP config if configured that way)
-- Other clients (codex / gemini-cli / toyoura-nagisa): use each client's MCP config file format/path
+- Other clients (codex / opencode / gemini-cli / toyoura-nagisa): use each client's MCP config file format/path
+
+When editing MCP config, use this order:
+
+1. If config file does not exist, create it.
+2. If config exists but has no `pfc-mcp` entry, merge/add only that entry.
+3. If `pfc-mcp` already exists, validate/update only `type`, `command`, and `args`.
+4. Do not overwrite unrelated MCP servers.
+
+If this is the first time MCP is configured for this workspace, fully restart the client before final verification (Claude Code / Codex / OpenCode).
 
 If `uvx` is unavailable, install `uv` first, then use fallback command:
 
@@ -54,6 +63,17 @@ If `uvx` is unavailable, install `uv` first, then use fallback command:
 ## Step 2 - Resolve `pfc_path`
 
 `pfc_path` should be the PFC install directory containing `exe64/pfc*_gui.exe`.
+
+### 2.0 Quick probe (fast path)
+
+Try lightweight checks first:
+
+```bash
+ls "C:/Program Files/Itasca"
+ls "D:/Program Files/Itasca"
+```
+
+If obvious install folders are found, check `exe64` inside those folders before running the full PowerShell lookup.
 
 ### 2.1 Bounded common-path lookup (recommended)
 
@@ -136,6 +156,18 @@ If websocket dependency errors appear, install:
 
 ## Step 4 - Start Bridge in PFC GUI
 
+If PFC GUI is not open yet, start it from terminal (do not rely on command exit code to infer startup success):
+
+```bash
+powershell -NoProfile -Command "$gui=Get-ChildItem '{pfc_path}/exe64' -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName; if(-not $gui){ throw 'No pfc*_gui.exe found under exe64' }; Start-Process $gui"
+```
+
+Confirm PFC process is running:
+
+```bash
+tasklist | findstr /I pfc
+```
+
 In PFC GUI Python console:
 
 ```python
@@ -151,7 +183,9 @@ Expected output includes:
 
 ## Step 5 - Verify from MCP Client
 
-Reconnect MCP client and call:
+If this is first-time MCP setup for the current workspace, fully restart the client/session first (Claude Code / Codex / OpenCode).
+
+Then reconnect MCP client and call:
 
 - `pfc_list_tasks`
 
@@ -167,3 +201,7 @@ If it succeeds, setup is complete.
   - Install `websockets==9.1` in PFC embedded Python.
 - `status remains pending / plot diagnostic timeout during solve`:
   - Upgrade to `pfc-mcp-bridge >= 0.1.2`.
+- `pip` upgrade warning after install:
+  - Usually safe to ignore if package install completed successfully.
+- Need to confirm GUI process from terminal:
+  - Run `tasklist | findstr /I pfc`.

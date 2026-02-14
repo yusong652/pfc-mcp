@@ -8,12 +8,14 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ### Agentic Quick Start (Recommended)
 
-Copy this instruction to your AI coding agent (Claude code / codex / gemini-cli / toyoura-nagisa):
+Copy this instruction to your AI coding agent (Claude code / codex / opencode / gemini-cli / toyoura-nagisa):
 
 ```text
 Fetch and follow this guide to initialize pfc-mcp end-to-end on this machine:
 https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
 ```
+
+If this is first-time MCP setup in your workspace, restart your client session (for example Claude Code / Codex / OpenCode) before verifying tools.
 
 Detailed guide (human-readable):
 

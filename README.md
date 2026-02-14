@@ -8,7 +8,7 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ### Agentic Quick Start (Recommended)
 
-Copy this instruction to your AI coding agent (Nagisa/OpenCode/Codex):
+Copy this instruction to your AI coding agent (Claude code / codex / gemini-cli / toyoura-nagisa):
 
 ```text
 Fetch and follow this guide to initialize pfc-mcp end-to-end on this machine:

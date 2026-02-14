@@ -15,8 +15,13 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 - Prefer PFC embedded interpreter for package install:
   - `"{pfc_path}/exe64/python36/python.exe" -m pip ...`
 - If a step fails, report the exact command and output, then apply the next fallback.
+- Respect step ownership labels:
+  - `[AGENT]` means the agent should execute the action.
+  - `[USER ACTION REQUIRED]` means the user must execute it manually.
 
 ## Step 1 - Configure MCP Client
+
+[AGENT]
 
 Ensure MCP client config includes:
 
@@ -44,8 +49,6 @@ When editing MCP config, use this order:
 3. If `pfc-mcp` already exists, validate/update only `type`, `command`, and `args`.
 4. Do not overwrite unrelated MCP servers.
 
-If this is the first time MCP is configured for this workspace, fully restart the client before final verification (Claude Code / Codex / OpenCode).
-
 If `uvx` is unavailable, install `uv` first, then use fallback command:
 
 ```json
@@ -61,6 +64,8 @@ If `uvx` is unavailable, install `uv` first, then use fallback command:
 ```
 
 ## Step 2 - Resolve `pfc_path`
+
+[AGENT]
 
 `pfc_path` should be the PFC install directory containing `exe64/pfc*_gui.exe`.
 
@@ -130,6 +135,8 @@ If still unresolved, ask user to provide exact `pfc_path`.
 
 ## Step 3 - Install/Upgrade Bridge in PFC Python
 
+[AGENT]
+
 Check current package:
 
 ```bash
@@ -156,6 +163,8 @@ If websocket dependency errors appear, install:
 
 ## Step 4 - Start Bridge in PFC GUI
 
+[AGENT]
+
 If PFC GUI is not open yet, start it from terminal (do not rely on command exit code to infer startup success):
 
 ```bash
@@ -165,9 +174,10 @@ powershell -NoProfile -Command "$gui=Get-ChildItem '{pfc_path}/exe64' -Filter 'p
 Confirm PFC process is running:
 
 ```bash
-tasklist | findstr /I pfc
+powershell -NoProfile -Command "tasklist | findstr /I pfc"
 ```
 
+[USER ACTION REQUIRED]
 In PFC GUI Python console:
 
 ```python
@@ -181,15 +191,30 @@ Expected output includes:
 - `ws://localhost:9001`
 - `Bridge started in non-blocking mode`
 
+## Step 4.5 - Restart MCP Client Session (First-Time Setup)
+
+[USER ACTION REQUIRED]
+
+⚠️ If this is first-time MCP setup for the current workspace, fully restart your client/session now before verification (Claude Code / Codex / OpenCode).
+
 ## Step 5 - Verify from MCP Client
 
-If this is first-time MCP setup for the current workspace, fully restart the client/session first (Claude Code / Codex / OpenCode).
+[AGENT]
 
 Then reconnect MCP client and call:
 
 - `pfc_list_tasks`
 
-If it succeeds, setup is complete.
+Success example (shape may vary by client):
+
+```json
+{
+  "status": "success",
+  "data": []
+}
+```
+
+If call succeeds, setup is complete.
 
 ## Troubleshooting
 
@@ -204,4 +229,4 @@ If it succeeds, setup is complete.
 - `pip` upgrade warning after install:
   - Usually safe to ignore if package install completed successfully.
 - Need to confirm GUI process from terminal:
-  - Run `tasklist | findstr /I pfc`.
+  - Run `powershell -NoProfile -Command "tasklist | findstr /I pfc"`.

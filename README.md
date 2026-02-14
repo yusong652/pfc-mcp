@@ -8,35 +8,16 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ### Agentic Quick Start (Recommended)
 
-If you use an AI coding agent (Nagisa/OpenCode/Codex), paste this instruction first:
+Copy this instruction to your AI coding agent (Nagisa/OpenCode/Codex):
 
 ```text
-Set up pfc-mcp end-to-end on this machine.
-
-Goals:
-1) Configure MCP client for pfc-mcp with:
-{
-  "mcpServers": {
-    "pfc-mcp": {
-      "command": "uvx",
-      "args": ["pfc-mcp"]
-    }
-  }
-}
-2) Verify uv is installed; if missing, install it.
-3) Detect pfc_path (directory containing exe64/pfc3d700_gui.exe).
-4) Install/upgrade bridge in PFC embedded Python:
-   "{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
-5) In PFC GUI Python console, run:
-   import pfc_mcp_bridge
-   pfc_mcp_bridge.start()
-6) Reconnect MCP client and verify execution tools with pfc_list_tasks.
-If any step fails, report the exact command/output and apply the next fix.
+Fetch and follow this guide to initialize pfc-mcp end-to-end on this machine:
+https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
 ```
 
-For fetch-based agents, raw URLs are often more reliable than GitHub HTML pages:
+Detailed guide (human-readable):
 
-- https://raw.githubusercontent.com/yusong652/pfc-mcp/main/README.md
+- [docs/agentic/pfc-mcp-bootstrap.md](docs/agentic/pfc-mcp-bootstrap.md)
 
 ### Prerequisite
 

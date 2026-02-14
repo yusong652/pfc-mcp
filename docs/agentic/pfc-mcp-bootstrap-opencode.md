@@ -40,8 +40,6 @@ If `uvx` is unavailable, fallback to:
 }
 ```
 
-Set `mcp_config_changed = true` if file was created or modified; otherwise `false`.
-
 Optional verification:
 
 ```bash

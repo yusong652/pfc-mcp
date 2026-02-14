@@ -35,19 +35,11 @@ If `uvx` is unavailable, fallback to:
 }
 ```
 
-Set `mcp_config_changed = true` if `.gemini/settings.json` was created or modified; otherwise `false`.
-
 [USER ACTION REQUIRED]
 
-If `mcp_config_changed = true`, run `/reload` in Gemini before continuing.
+Always close and reopen Gemini CLI session before continuing.
 
-Optional verification:
-
-```bash
-gemini mcp list
-```
-
-Confirm `pfc-mcp` is listed as `Connected`.
+Then continue to Step 2 and verify with `pfc_list_tasks` at the end of bootstrap.
 
 ## Continue with common bootstrap
 

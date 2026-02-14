@@ -1,8 +1,10 @@
-# pfc-mcp Bootstrap (Claude Code / Codex)
+# pfc-mcp Bootstrap (Claude Code)
 
 Use this profile when the client uses `.mcp.json` style MCP config.
 
-## Step 1 (Claude/Codex) - Configure MCP
+For Codex, use `docs/agentic/pfc-mcp-bootstrap-codex.md` instead.
+
+## Step 1 (Claude Code) - Configure MCP
 
 [AGENT]
 
@@ -36,8 +38,6 @@ If `uvx` is unavailable, fallback to:
   }
 }
 ```
-
-Set `mcp_config_changed = true` if file was created or modified; otherwise `false`.
 
 ## Continue with common bootstrap
 

@@ -23,36 +23,36 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 
 [AGENT]
 
-Use the client-specific Step 1 guide:
+Use the client-specific Step 1 profile:
 
 - OpenCode: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md
-- Claude Code / Codex: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude-codex.md
+- Claude Code: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude.md
+- Codex: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-codex.md
 - Gemini CLI: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-gemini.md
+- toyoura-nagisa: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md
 
 If raw URL fetch is unavailable, use repository-relative paths:
 
 - `docs/agentic/pfc-mcp-bootstrap-opencode.md`
-- `docs/agentic/pfc-mcp-bootstrap-claude-codex.md`
+- `docs/agentic/pfc-mcp-bootstrap-claude.md`
+- `docs/agentic/pfc-mcp-bootstrap-codex.md`
 - `docs/agentic/pfc-mcp-bootstrap-gemini.md`
+- `docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md`
 
-Shared MCP launch contract (apply in client-native format):
+Apply this MCP launch contract in your client's native config format:
 
 - server id/name: `pfc-mcp`
 - primary launch command: `uvx pfc-mcp`
 - fallback launch command: `uv tool run pfc-mcp`
 - enable server in client config
+- prefer workspace-level config by default; use global config only if user explicitly requests it
 
 When editing MCP config, use this order:
 
 1. If config file does not exist, create it.
 2. If config exists but has no `pfc-mcp` entry, merge/add only that entry.
-3. If `pfc-mcp` already exists, validate/update only MCP launch fields (`type`, `command`, `args`/`enabled`).
+3. If `pfc-mcp` already exists, validate/update only MCP launch fields (`command`, `args`, and client-specific extras).
 4. Do not overwrite unrelated MCP servers.
-
-Set a local flag for later verification:
-
-- `mcp_config_changed = true` if target MCP config file was created or modified in this step.
-- `mcp_config_changed = false` if no config changes were needed.
 
 ## Step 2 - Resolve `pfc_path`
 
@@ -207,9 +207,7 @@ import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-2) If `mcp_config_changed = true` from Step 1, restart client session now (Claude Code / Codex / OpenCode).
-
-3) For Gemini CLI: run `/reload` after Step 1 config changes, then continue to Step 5.
+2) Restart client session now (close and reopen) before Step 5 verification.
 
 Expected output includes:
 
@@ -225,11 +223,7 @@ Then reconnect MCP client and call:
 
 - `pfc_list_tasks`
 
-If `pfc_*` MCP tools are not visible in the client, ask user to restart/reload client session first, then retry.
-
-For OpenCode, run `opencode mcp list` after restart to confirm `pfc-mcp` is loaded.
-
-For Gemini CLI, run `gemini mcp list` after `/reload` and confirm `pfc-mcp` is `Connected` before retrying tools.
+If `pfc_*` MCP tools are not visible in the client, ask user to fully restart client session first, then retry.
 
 Success example (shape may vary by client):
 
@@ -257,8 +251,6 @@ Success example (shape may vary by client):
 - Need to confirm GUI process from terminal:
   - Run the exact GUI filter command from Step 4 (matches `pfc2d*_gui.exe` / `pfc3d*_gui.exe`).
 - `pfc_*` tools missing in client after setup:
-  - MCP config was likely changed but client session did not reload. Restart/reload the client and retry Step 5.
-- Gemini error `missing httpUrl, url, and command`:
-  - MCP config entry is malformed or `command` is missing. Fix `.gemini/settings.json` using `command` + `args` fields.
+  - Client session was not fully restarted after Step 1. Close/reopen client session and retry Step 5.
 - PowerShell error `Unexpected token '-m'`:
   - Quoted executable path was not invoked with `&`. Use `& "{pfc_path}/exe64/python36/python.exe" -m ...`.

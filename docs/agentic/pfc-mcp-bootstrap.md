@@ -24,6 +24,7 @@ Ensure MCP client config includes:
 {
   "mcpServers": {
     "pfc-mcp": {
+      "type": "stdio",
       "command": "uvx",
       "args": ["pfc-mcp"]
     }
@@ -31,13 +32,60 @@ Ensure MCP client config includes:
 }
 ```
 
-If `uvx` is unavailable, install `uv` first.
+Client config path notes:
+
+- Claude Code: workspace `.mcp.json` (or user-level MCP config if configured that way)
+- Other clients (codex / gemini-cli / toyoura-nagisa): use each client's MCP config file format/path
+
+If `uvx` is unavailable, install `uv` first, then use fallback command:
+
+```json
+{
+  "mcpServers": {
+    "pfc-mcp": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["tool", "run", "pfc-mcp"]
+    }
+  }
+}
+```
 
 ## Step 2 - Resolve `pfc_path`
 
-`pfc_path` should be the PFC install directory containing `exe64/pfc3d700_gui.exe`.
+`pfc_path` should be the PFC install directory containing `exe64/pfc*_gui.exe`.
 
-### 2.1 Fast registry lookup
+### 2.1 Bounded common-path lookup (recommended)
+
+Run in PowerShell (not bash) to avoid `$` variable expansion issues:
+
+```powershell
+$roots=@('C:\Program Files\Itasca','D:\Program Files\Itasca','C:\Itasca','D:\Itasca');
+$hits=@();
+foreach($r in $roots){
+  if(Test-Path $r){
+    Get-ChildItem -Path $r -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+      $exeDir=Join-Path $_.FullName 'exe64';
+      if(Test-Path $exeDir){
+        Get-ChildItem -Path $exeDir -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
+          $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName }
+        }
+      }
+    }
+  }
+}
+$hits | Sort-Object gui_exe -Unique | Select-Object -First 5
+```
+
+If the agent shell is bash on Windows, wrap the PowerShell script in single quotes:
+
+```bash
+powershell -NoProfile -Command '& {$roots=@("C:\Program Files\Itasca","D:\Program Files\Itasca","C:\Itasca","D:\Itasca"); $hits=@(); foreach($r in $roots){ if(Test-Path $r){ Get-ChildItem -Path $r -Directory -ErrorAction SilentlyContinue | ForEach-Object { $exeDir=Join-Path $_.FullName "exe64"; if(Test-Path $exeDir){ Get-ChildItem -Path $exeDir -Filter "pfc*_gui.exe" -File -ErrorAction SilentlyContinue | ForEach-Object { $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName } } } } } }; $hits | Sort-Object gui_exe -Unique | Select-Object -First 5 }'
+```
+
+### 2.2 Optional registry lookup (fallback)
+
+Some installations are not registered in Windows uninstall keys; treat this as optional.
 
 ```powershell
 $keys=@('HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*','HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*');
@@ -47,28 +95,15 @@ foreach($k in $keys){
     Where-Object { $_.DisplayName -match 'PFC|Itasca' } |
     ForEach-Object {
       if($_.InstallLocation){
-        $exe=Join-Path $_.InstallLocation 'exe64\pfc3d700_gui.exe';
-        if(Test-Path $exe){ $hits+=$exe }
+        $exeDir=Join-Path $_.InstallLocation 'exe64';
+        Get-ChildItem -Path $exeDir -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
+          $exe=$_.FullName;
+          $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$exe }
+        }
       }
     }
 }
-$hits | Select-Object -Unique | Select-Object -First 3
-```
-
-### 2.2 Bounded common-path lookup
-
-```powershell
-$roots=@('C:\Program Files\Itasca','D:\Program Files\Itasca','C:\Itasca','D:\Itasca');
-$hits=@();
-foreach($r in $roots){
-  if(Test-Path $r){
-    Get-ChildItem $r -Directory -ErrorAction SilentlyContinue | ForEach-Object {
-      $exe=Join-Path $_.FullName 'exe64\pfc3d700_gui.exe';
-      if(Test-Path $exe){ $hits+=$exe }
-    }
-  }
-}
-$hits | Select-Object -Unique | Select-Object -First 3
+$hits | Sort-Object gui_exe -Unique | Select-Object -First 5
 ```
 
 If still unresolved, ask user to provide exact `pfc_path`.

@@ -31,6 +31,7 @@ Install `uv` first (required for `uvx`):
 {
   "mcpServers": {
     "pfc-mcp": {
+      "type": "stdio",
       "command": "uvx",
       "args": ["pfc-mcp"]
     }
@@ -61,7 +62,7 @@ Documentation tools work without the bridge.
 
 Reconnect your MCP client and call a documentation tool such as `pfc_browse_commands`.
 
-If `uvx` is not found, install `uv` or use a fallback command (`pip install pfc-mcp` and set MCP command to `pfc-mcp`).
+If `uvx` is not found, install `uv` or use fallback command `uv tool run pfc-mcp`.
 
 ## Tools
 

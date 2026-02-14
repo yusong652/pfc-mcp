@@ -49,6 +49,11 @@ When editing MCP config, use this order:
 3. If `pfc-mcp` already exists, validate/update only `type`, `command`, and `args`.
 4. Do not overwrite unrelated MCP servers.
 
+Set a local flag for later verification:
+
+- `mcp_config_changed = true` if `.mcp.json` was created or modified in this step.
+- `mcp_config_changed = false` if no config changes were needed.
+
 If `uvx` is unavailable, install `uv` first, then use fallback command:
 
 ```json
@@ -78,7 +83,7 @@ ls "C:/Program Files/Itasca"
 ls "D:/Program Files/Itasca"
 ```
 
-If obvious install folders are found, check `exe64` inside those folders before running the full PowerShell lookup.
+If obvious install folders are found, immediately drill into those folders and check `exe64/pfc*_gui.exe` before running the full PowerShell lookup.
 
 ### 2.1 Bounded common-path lookup (recommended)
 
@@ -155,6 +160,8 @@ Verify import and version:
 "{pfc_path}/exe64/python36/python.exe" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
 ```
 
+Ignore pip upgrade warnings in this environment. PFC embedded Python 3.6 commonly uses older pip.
+
 If websocket dependency errors appear, install:
 
 ```bash
@@ -177,25 +184,26 @@ Confirm PFC process is running:
 powershell -NoProfile -Command "tasklist | findstr /I pfc"
 ```
 
+If both `pfc2d*_gui.exe` and `pfc3d*_gui.exe` are available and user did not specify, prefer 3D (`pfc3d`) by default.
+
 [USER ACTION REQUIRED]
-In PFC GUI Python console:
+
+Complete these in order:
+
+1) In PFC GUI Python console:
 
 ```python
 import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
+2) If `mcp_config_changed = true` from Step 1, restart client session now (Claude Code / Codex / OpenCode).
+
 Expected output includes:
 
 - `PFC Bridge Server`
 - `ws://localhost:9001`
 - `Bridge started in non-blocking mode`
-
-## Step 4.5 - Restart MCP Client Session (First-Time Setup)
-
-[USER ACTION REQUIRED]
-
-⚠️ If this is first-time MCP setup for the current workspace, fully restart your client/session now before verification (Claude Code / Codex / OpenCode).
 
 ## Step 5 - Verify from MCP Client
 
@@ -204,6 +212,8 @@ Expected output includes:
 Then reconnect MCP client and call:
 
 - `pfc_list_tasks`
+
+If `pfc_*` MCP tools are not visible in the client, ask user to restart/reload client session first, then retry.
 
 Success example (shape may vary by client):
 
@@ -230,3 +240,5 @@ If call succeeds, setup is complete.
   - Usually safe to ignore if package install completed successfully.
 - Need to confirm GUI process from terminal:
   - Run `powershell -NoProfile -Command "tasklist | findstr /I pfc"`.
+- `pfc_*` tools missing in client after setup:
+  - MCP config was likely changed but client session did not reload. Restart/reload the client and retry Step 5.

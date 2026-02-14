@@ -6,6 +6,38 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ## Quick Start
 
+### Agentic Quick Start (Recommended)
+
+If you use an AI coding agent (Nagisa/OpenCode/Codex), paste this instruction first:
+
+```text
+Set up pfc-mcp end-to-end on this machine.
+
+Goals:
+1) Configure MCP client for pfc-mcp with:
+{
+  "mcpServers": {
+    "pfc-mcp": {
+      "command": "uvx",
+      "args": ["pfc-mcp"]
+    }
+  }
+}
+2) Verify uv is installed; if missing, install it.
+3) Detect pfc_path (directory containing exe64/pfc3d700_gui.exe).
+4) Install/upgrade bridge in PFC embedded Python:
+   "{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+5) In PFC GUI Python console, run:
+   import pfc_mcp_bridge
+   pfc_mcp_bridge.start()
+6) Reconnect MCP client and verify execution tools with pfc_list_tasks.
+If any step fails, report the exact command/output and apply the next fix.
+```
+
+For fetch-based agents, raw URLs are often more reliable than GitHub HTML pages:
+
+- https://raw.githubusercontent.com/yusong652/pfc-mcp/main/README.md
+
 ### Prerequisite
 
 Install `uv` first (required for `uvx`):
@@ -29,10 +61,15 @@ Install `uv` first (required for `uvx`):
 
 Execution tools require a running bridge in the PFC process.
 
-```python
-import subprocess
-subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+Install/upgrade bridge package in PFC Python first (`>=0.1.2` recommended):
 
+```bash
+"{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+```
+
+Then start bridge in PFC GUI Python console:
+
+```python
 import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
@@ -99,8 +136,8 @@ No Enter confirmation is required.
 - `Server won't start`: install bridge dependency in PFC Python:
 
 ```python
-import subprocess
-subprocess.run(["pip", "install", "websockets==9.1"])
+import pip
+pip.main(['install', '--user', 'websockets==9.1'])
 ```
 
 - `Tasks not processing`: ensure `pfc_mcp_bridge.start()` is running in the PFC process.

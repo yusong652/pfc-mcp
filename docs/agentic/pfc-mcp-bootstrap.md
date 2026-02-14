@@ -23,50 +23,34 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 
 [AGENT]
 
-Ensure MCP client config includes:
+Use the client-specific Step 1 guide:
 
-```json
-{
-  "mcpServers": {
-    "pfc-mcp": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": ["pfc-mcp"]
-    }
-  }
-}
-```
+- OpenCode: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md
+- Claude Code / Codex: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude-codex.md
 
-Client config path notes:
+If raw URL fetch is unavailable, use repository-relative paths:
 
-- Claude Code: workspace `.mcp.json` (or user-level MCP config if configured that way)
-- Other clients (codex / opencode / gemini-cli / toyoura-nagisa): use each client's MCP config file format/path
+- `docs/agentic/pfc-mcp-bootstrap-opencode.md`
+- `docs/agentic/pfc-mcp-bootstrap-claude-codex.md`
+
+Shared MCP launch contract (apply in client-native format):
+
+- server id/name: `pfc-mcp`
+- primary launch command: `uvx pfc-mcp`
+- fallback launch command: `uv tool run pfc-mcp`
+- enable server in client config
 
 When editing MCP config, use this order:
 
 1. If config file does not exist, create it.
 2. If config exists but has no `pfc-mcp` entry, merge/add only that entry.
-3. If `pfc-mcp` already exists, validate/update only `type`, `command`, and `args`.
+3. If `pfc-mcp` already exists, validate/update only MCP launch fields (`type`, `command`, `args`/`enabled`).
 4. Do not overwrite unrelated MCP servers.
 
 Set a local flag for later verification:
 
-- `mcp_config_changed = true` if `.mcp.json` was created or modified in this step.
+- `mcp_config_changed = true` if target MCP config file was created or modified in this step.
 - `mcp_config_changed = false` if no config changes were needed.
-
-If `uvx` is unavailable, install `uv` first, then use fallback command:
-
-```json
-{
-  "mcpServers": {
-    "pfc-mcp": {
-      "type": "stdio",
-      "command": "uv",
-      "args": ["tool", "run", "pfc-mcp"]
-    }
-  }
-}
-```
 
 ## Step 2 - Resolve `pfc_path`
 
@@ -214,6 +198,8 @@ Then reconnect MCP client and call:
 - `pfc_list_tasks`
 
 If `pfc_*` MCP tools are not visible in the client, ask user to restart/reload client session first, then retry.
+
+For OpenCode, run `opencode mcp list` after restart to confirm `pfc-mcp` is loaded.
 
 Success example (shape may vary by client):
 

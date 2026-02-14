@@ -8,10 +8,10 @@ Provides 10 tools for browsing PFC documentation and controlling simulations thr
 
 ### Agentic Quick Start (Recommended)
 
-Copy this instruction to your AI coding agent (Claude code / codex / opencode / gemini-cli / toyoura-nagisa):
+Copy this instruction to your AI coding agent:
 
 ```text
-Fetch and follow this guide to initialize pfc-mcp end-to-end on this machine:
+Fetch and follow this bootstrap guide end-to-end:
 https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
 ```
 
@@ -29,17 +29,13 @@ Install `uv` first (required for `uvx`):
 
 ### 1) Configure your MCP client
 
-```json
-{
-  "mcpServers": {
-    "pfc-mcp": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": ["pfc-mcp"]
-    }
-  }
-}
-```
+Follow Step 1 in `docs/agentic/pfc-mcp-bootstrap.md`.
+
+Shared launch contract:
+
+- server id/name: `pfc-mcp`
+- primary launch command: `uvx pfc-mcp`
+- fallback launch command: `uv tool run pfc-mcp`
 
 ### 2) Start `pfc-mcp-bridge` in PFC GUI (execution tools only)
 

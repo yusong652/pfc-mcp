@@ -70,7 +70,7 @@ If `uvx` is not found, install `uv` or use a fallback command (`pip install pfc-
 ## Runtime Model
 
 - **pfc-mcp** (this package): MCP server with documentation tools and execution tool entrypoints.
-- **[pfc-mcp-bridge](pfc-bridge/)**: bridge process that runs inside PFC GUI for simulation execution.
+- **[pfc-mcp-bridge](https://pypi.org/project/pfc-mcp-bridge/)**: bridge process that runs inside PFC GUI for simulation execution.
 - Documentation tools work standalone; execution tools require a running bridge.
 
 ## Bridge in PFC GUI
@@ -126,4 +126,4 @@ uv run pfc-mcp
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT - see [LICENSE](https://github.com/yusong652/pfc-mcp/blob/main/LICENSE).

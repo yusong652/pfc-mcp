@@ -45,6 +45,6 @@ After startup banner, press Enter in the PFC Python console to start the task lo
 - `Connection failed`: check the bridge is running and port `9001` is available
 - `No task execution`: keep `pfc_mcp_bridge.start()` running in the PFC process
 
-For full MCP client setup, see the main README: [../README.md](../README.md).
+For full MCP client setup, see the main package page: [pfc-mcp](https://pypi.org/project/pfc-mcp/).
 
-License: MIT ([../LICENSE](../LICENSE)).
+License: MIT ([LICENSE](https://github.com/yusong652/pfc-mcp/blob/main/LICENSE)).

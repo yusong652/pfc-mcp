@@ -23,6 +23,8 @@ Detailed guide (human-readable):
 
 ### Prerequisite
 
+- ITASCA PFC 7.0 must be installed (PFC 2D/3D 700 GUI, e.g. `pfc2d700_gui.exe` or `pfc3d700_gui.exe`).
+
 Install `uv` first (required for `uvx`):
 
 - https://docs.astral.sh/uv/getting-started/installation/

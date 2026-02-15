@@ -11,3 +11,8 @@ build/
 # Environments
 .venv/
 *.env
+
+# Local agent/MCP config
+.mcp.json
+.claude/
+.codex/

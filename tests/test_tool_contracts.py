@@ -274,6 +274,8 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
         assert "task_id" in task
         assert "status" in task
         assert "entry_script" in task
+        assert "start_time" in task
+        assert "end_time" in task
         assert "has_more" in parsed
 
 

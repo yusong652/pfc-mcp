@@ -7,7 +7,7 @@ from fastmcp import FastMCP
 from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client
-from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error, normalize_status
+from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error, format_unix_timestamp, normalize_status
 from pfc_mcp.utils import SkipNewestTasks, TaskListLimit
 
 
@@ -56,6 +56,8 @@ def register(mcp: FastMCP) -> None:
                 "task_id": task.get("task_id"),
                 "status": normalize_status(task.get("status", "unknown")),
                 "source": task.get("source", "agent"),
+                "start_time": format_unix_timestamp(task.get("start_time")),
+                "end_time": format_unix_timestamp(task.get("end_time")),
                 "elapsed_time": task.get("elapsed_time"),
                 "entry_script": task.get("entry_script") or task.get("name"),
                 "description": task.get("description"),

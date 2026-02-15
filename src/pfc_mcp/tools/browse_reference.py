@@ -1,11 +1,12 @@
 """PFC Reference Browse Tool - Navigate syntax elements and model properties."""
 
-from typing import Optional, cast, Dict, Any
+from typing import Optional, cast, Dict, Any, List
 
 from fastmcp import FastMCP
 from pydantic import Field
 
-from pfc_mcp.docs.references import ReferenceLoader, ReferenceFormatter
+from pfc_mcp.contracts import build_docs_data, build_error, build_ok
+from pfc_mcp.docs.references import ReferenceLoader
 from pfc_mcp.utils import normalize_input
 
 
@@ -27,7 +28,7 @@ def register(mcp: FastMCP):
                 "- 'range-elements group': Group range syntax"
             )
         )
-    ) -> str:
+    ) -> Dict[str, Any]:
         """Browse PFC reference documentation (syntax elements, model properties).
 
         References are language elements used within commands, not standalone commands.
@@ -50,59 +51,152 @@ def register(mcp: FastMCP):
         topic_str = normalize_input(topic, lowercase=True)
 
         if not topic_str:
-            return _browse_references_root()
+            return build_ok(_browse_references_root())
 
         parts = topic_str.split()
         category = parts[0]
 
         if len(parts) == 1:
-            return _browse_category(category)
+            payload = _browse_category(category)
         else:
             item = " ".join(parts[1:])
-            return _browse_item(category, item)
+            payload = _browse_item(category, item)
+        return _wrap_payload(payload)
 
 
-def _browse_references_root() -> str:
+def _browse_references_root() -> Dict[str, Any]:
     refs_index = ReferenceLoader.load_index()
     categories = refs_index.get("categories", {})
-    return ReferenceFormatter.format_root(categories)
+    category_items: List[Dict[str, Any]] = []
+
+    for category_name, category_data in categories.items():
+        items = ReferenceLoader.get_item_list(category_name)
+        category_items.append(
+            {
+                "name": category_name,
+                "description": category_data.get("description", ""),
+                "item_count": len(items),
+            }
+        )
+
+    return build_docs_data(
+        source="reference",
+        action="browse",
+        entries=category_items,
+        summary={"count": len(category_items)},
+    )
 
 
-def _browse_category(category: str) -> str:
+def _browse_category(category: str) -> Dict[str, Any]:
     refs_index = ReferenceLoader.load_index()
     categories = refs_index.get("categories", {})
 
     if category not in categories:
-        available = ", ".join(categories.keys())
-        error_msg = f"Category '{category}' not found. Available: {available}"
-        root_content = ReferenceFormatter.format_root(categories)
-        return ReferenceFormatter.format_with_error(error_msg, root_content)
+        return {
+            "source": "reference",
+            "action": "browse",
+            "error": {
+                "code": "category_not_found",
+                "message": f"Category '{category}' not found.",
+            },
+            "input": {"category": category},
+            "available_categories": sorted(categories.keys()),
+        }
 
     cat_index = cast(Dict[str, Any], ReferenceLoader.load_category_index(category))
-    return ReferenceFormatter.format_index(category, cat_index)
+    if not cat_index:
+        return {
+            "source": "reference",
+            "action": "browse",
+            "error": {
+                "code": "category_index_not_found",
+                "message": f"Category index not found for '{category}'.",
+            },
+            "input": {"category": category},
+        }
+    items = []
+    if category == "contact-models":
+        for model in cat_index.get("models", []):
+            items.append(
+                {
+                    "name": model.get("name", ""),
+                    "full_name": model.get("full_name"),
+                    "description": model.get("description", ""),
+                }
+            )
+    elif category == "range-elements":
+        for element in cat_index.get("elements", []):
+            items.append(
+                {
+                    "name": element.get("name", ""),
+                    "category": element.get("category"),
+                    "description": element.get("description", ""),
+                }
+            )
+
+    return build_docs_data(
+        source="reference",
+        action="browse",
+        entries=items,
+        summary={
+            "count": len(items),
+            "category": category,
+        },
+    )
 
 
-def _browse_item(category: str, item: str) -> str:
+def _browse_item(category: str, item: str) -> Dict[str, Any]:
+    refs_index = ReferenceLoader.load_index()
+    categories = refs_index.get("categories", {})
+    if category not in categories:
+        return {
+            "source": "reference",
+            "action": "browse",
+            "error": {
+                "code": "category_not_found",
+                "message": f"Category '{category}' not found.",
+            },
+            "input": {"category": category, "item": item},
+            "available_categories": sorted(categories.keys()),
+        }
+
     item_doc = ReferenceLoader.load_item_doc(category, item)
 
     if not item_doc:
         items = ReferenceLoader.get_item_list(category)
         available = [i.get("name", "") for i in items]
-        error_msg = f"Item '{item}' not found in '{category}'. Available: {', '.join(available[:15])}{'...' if len(available) > 15 else ''}"
+        return {
+            "source": "reference",
+            "action": "browse",
+            "error": {
+                "code": "item_not_found",
+                "message": f"Item '{item}' not found in '{category}'.",
+            },
+            "input": {"category": category, "item": item},
+            "available_items": available,
+        }
 
-        cat_index = ReferenceLoader.load_category_index(category)
-        if cat_index:
-            category_content = ReferenceFormatter.format_index(category, cat_index)
-            return ReferenceFormatter.format_with_error(error_msg, category_content)
-        else:
-            refs_index = ReferenceLoader.load_index()
-            categories = refs_index.get("categories", {})
-            root_content = ReferenceFormatter.format_root(categories)
-            return ReferenceFormatter.format_with_error(error_msg, root_content)
+    return build_docs_data(
+        source="reference",
+        action="browse",
+        entries=[
+            {
+                "category": category,
+                "item": item,
+                "doc": item_doc,
+            }
+        ],
+        summary={"count": 1},
+    )
 
-    if category == "contact-models":
-        return ReferenceFormatter.format_contact_model(item_doc)
-    elif category == "range-elements":
-        return ReferenceFormatter.format_range_element(item_doc)
-    else:
-        return f"Category '{category}' not yet implemented"
+
+def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+    if "error" in payload:
+        err = payload.get("error") or {}
+        details = {k: v for k, v in payload.items() if k != "error"}
+        return build_error(
+            code=str(err.get("code") or "browse_error"),
+            message=str(err.get("message") or "Browse failed"),
+            details=details or None,
+        )
+    return build_ok(payload)

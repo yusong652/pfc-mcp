@@ -1,7 +1,10 @@
 """PFC Python API Query Tool - Keyword search for SDK documentation."""
 
+from typing import Any, Dict, List
+
 from fastmcp import FastMCP
 
+from pfc_mcp.contracts import build_docs_data, build_ok
 from pfc_mcp.docs.python_api import DocumentationLoader, APIDocFormatter
 from pfc_mcp.docs.query import APISearch
 from pfc_mcp.utils import PythonAPISearchQuery, SearchLimit
@@ -14,7 +17,7 @@ def register(mcp: FastMCP):
     def pfc_query_python_api(
         query: PythonAPISearchQuery,
         limit: SearchLimit = 10,
-    ) -> str:
+    ) -> Dict[str, Any]:
         """Search PFC Python SDK documentation by keywords (like grep).
 
         Returns matching API paths with signatures. Use pfc_browse_python_api for full documentation.
@@ -28,24 +31,38 @@ def register(mcp: FastMCP):
         - pfc_query_command: Search PFC commands by keywords
         """
         matches = APISearch.search(query, top_k=limit)
+        results_payload: List[Dict[str, Any]] = []
+        for result in matches:
+            api_path = result.document.name
+            sig = APIDocFormatter.format_signature(api_path, result.document.metadata)
+            results_payload.append(
+                {
+                    "api_path": api_path,
+                    "signature": sig,
+                    "category": result.document.category,
+                    "description": result.document.description,
+                    "score": result.score,
+                    "rank": result.rank,
+                    "metadata": result.document.metadata,
+                }
+            )
 
-        if not matches:
+        payload: Dict[str, Any] = build_docs_data(
+            source="python_api",
+            action="query",
+            entries=results_payload,
+            summary={
+                "count": len(results_payload),
+            },
+        )
+
+        if not results_payload:
             index = DocumentationLoader.load_index()
             hints = []
             for hint_key, hint_msg in index.get("fallback_hints", {}).items():
                 if hint_key in query.lower():
                     hints.append(hint_msg)
+            if hints:
+                payload["summary"]["hints"] = hints
 
-            return APIDocFormatter.format_no_results_response(query, hints)
-
-        result_lines = [f"Found {len(matches)} API(s) for '{query}':", ""]
-
-        for result in matches:
-            api_path = result.document.name
-            sig = APIDocFormatter.format_signature(api_path, result.document.metadata)
-            if sig:
-                result_lines.append(f"- {api_path}: {sig}")
-            else:
-                result_lines.append(f"- {api_path}")
-
-        return "\n".join(result_lines)
+        return build_ok(payload)

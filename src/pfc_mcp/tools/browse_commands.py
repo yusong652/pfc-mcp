@@ -1,11 +1,12 @@
 """PFC Command Browse Tool - Navigate and retrieve command documentation."""
 
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 from fastmcp import FastMCP
 from pydantic import Field
 
-from pfc_mcp.docs.commands import CommandLoader, CommandFormatter
+from pfc_mcp.contracts import build_docs_data, build_error, build_ok
+from pfc_mcp.docs.commands import CommandLoader
 from pfc_mcp.utils import normalize_input
 
 
@@ -25,7 +26,7 @@ def register(mcp: FastMCP):
                 "- 'contact property': Get contact property command documentation"
             )
         )
-    ) -> str:
+    ) -> Dict[str, Any]:
         """Browse PFC command documentation by path (like glob + cat).
 
         Navigation levels:
@@ -44,41 +45,92 @@ def register(mcp: FastMCP):
         cmd = normalize_input(command)
 
         if not cmd:
-            return _browse_root()
+            return build_ok(_browse_root())
 
         parts = cmd.split()
 
         if len(parts) == 1:
-            return _browse_category(parts[0])
+            payload = _browse_category(parts[0])
         else:
             category = parts[0]
             command_name = " ".join(parts[1:])
-            return _browse_command(category, command_name)
+            payload = _browse_command(category, command_name)
+        return _wrap_payload(payload)
 
 
-def _browse_root() -> str:
+def _browse_root() -> Dict[str, Any]:
     """Level 0: Return overview of all command categories."""
     index = CommandLoader.load_index()
     categories = index.get("categories", {})
-    return CommandFormatter.format_root(categories)
+    category_items: List[Dict[str, Any]] = []
+    total_commands = 0
+
+    for category_name, category_data in categories.items():
+        commands = category_data.get("commands", [])
+        command_count = len(commands)
+        total_commands += command_count
+        category_items.append(
+            {
+                "name": category_name,
+                "description": category_data.get("description", ""),
+                "command_count": command_count,
+            }
+        )
+
+    return build_docs_data(
+        source="commands",
+        action="browse",
+        entries=category_items,
+        summary={
+            "count": len(category_items),
+            "total_commands": total_commands,
+        },
+    )
 
 
-def _browse_category(category: str) -> str:
+def _browse_category(category: str) -> Dict[str, Any]:
     """Level 1: Return list of commands in a category."""
     index = CommandLoader.load_index()
     categories = index.get("categories", {})
 
     if category not in categories:
-        available = ", ".join(categories.keys())
-        error_msg = f"Category '{category}' not found. Available: {available}"
-        root_content = CommandFormatter.format_root(categories)
-        return CommandFormatter.format_with_error(error_msg, root_content)
+        return {
+            "source": "commands",
+            "action": "browse",
+            "error": {
+                "code": "category_not_found",
+                "message": f"Category '{category}' not found.",
+            },
+            "input": {"category": category},
+            "available_categories": sorted(categories.keys()),
+        }
 
     cat_data = categories[category]
-    return CommandFormatter.format_category(category, cat_data)
+    commands = cat_data.get("commands", [])
+    command_items: List[Dict[str, Any]] = []
+    for cmd in commands:
+        command_items.append(
+            {
+                "name": cmd.get("name", ""),
+                "short_description": cmd.get("short_description", ""),
+                "syntax": cmd.get("syntax"),
+                "python_available": bool(cmd.get("python_available", False)),
+            }
+        )
+
+    return build_docs_data(
+        source="commands",
+        action="browse",
+        entries=command_items,
+        summary={
+            "count": len(command_items),
+            "category": category,
+            "description": cat_data.get("description", ""),
+        },
+    )
 
 
-def _browse_command(category: str, command_name: str) -> str:
+def _browse_command(category: str, command_name: str) -> Dict[str, Any]:
     """Level 2: Return full documentation for a specific command."""
     cmd_doc = CommandLoader.load_command_doc(category, command_name)
 
@@ -87,19 +139,53 @@ def _browse_command(category: str, command_name: str) -> str:
         categories = index.get("categories", {})
 
         if category not in categories:
-            available_cats = ", ".join(categories.keys())
-            error_msg = f"Category '{category}' not found. Available: {available_cats}"
-            root_content = CommandFormatter.format_root(categories)
-            return CommandFormatter.format_with_error(error_msg, root_content)
+            return {
+                "source": "commands",
+                "action": "browse",
+                "error": {
+                    "code": "category_not_found",
+                    "message": f"Category '{category}' not found.",
+                },
+                "input": {"category": category, "command": command_name},
+                "available_categories": sorted(categories.keys()),
+            }
 
         cat_data = categories[category]
         commands = cat_data.get("commands", [])
         available_cmds = [cmd.get("name") for cmd in commands]
-        error_msg = (
-            f"Command '{command_name}' not found in '{category}'. "
-            f"Available: {', '.join(available_cmds[:10])}{'...' if len(available_cmds) > 10 else ''}"
-        )
-        category_content = CommandFormatter.format_category(category, cat_data)
-        return CommandFormatter.format_with_error(error_msg, category_content)
+        return {
+            "source": "commands",
+            "action": "browse",
+            "error": {
+                "code": "command_not_found",
+                "message": f"Command '{command_name}' not found in '{category}'.",
+            },
+            "input": {"category": category, "command": command_name},
+            "available_commands": available_cmds,
+        }
 
-    return CommandFormatter.format_command(cmd_doc, category)
+    return build_docs_data(
+        source="commands",
+        action="browse",
+        entries=[
+            {
+                "category": category,
+                "command": command_name,
+                "doc": cmd_doc,
+            }
+        ],
+        summary={"count": 1},
+    )
+
+
+def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """Wrap tool payload into unified envelope."""
+    if "error" in payload:
+        err = payload.get("error") or {}
+        details = {k: v for k, v in payload.items() if k != "error"}
+        return build_error(
+            code=str(err.get("code") or "browse_error"),
+            message=str(err.get("message") or "Browse failed"),
+            details=details or None,
+        )
+    return build_ok(payload)

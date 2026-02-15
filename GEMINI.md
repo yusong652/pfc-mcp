@@ -19,7 +19,7 @@ Treat these as separate deployment targets even though they live in one reposito
 
 - Exposes documentation tools and execution tools through FastMCP
 - Communicates with bridge via WebSocket client (`pfc_mcp.bridge.client`)
-- Returns structured tool payloads (`status`, `operation`, `display`, etc.)
+- Returns a unified tool envelope: `ok`, `data`, `error`
 - Uses script-first execution model (`pfc_execute_task` + `pfc_check_task_status`)
 
 ### Bridge side (`pfc-bridge`)
@@ -69,7 +69,18 @@ uv run pytest tests/test_tool_contracts.py
 
 3. Maintain structured tool contracts.
    - Prefer stable machine-readable keys over ad-hoc text parsing.
-   - Keep `display` human-friendly, but keep `status` authoritative.
+   - Use the unified envelope for all tool business payloads:
+     - success: `{"ok": true, "data": ...}`
+     - error: `{"ok": false, "error": {"code": str, "message": str, "details"?: object}}`
+   - Enforce coherence: `ok=true` must not include `error`; `ok=false` must include `error`.
+   - Do not require duplicate presentation fields (for example, `display`) when they mirror structured data.
+   - Let clients render human-facing formatting from structured fields.
+   - Documentation tools must keep `data` consistent as:
+     - `source`: `"commands" | "python_api" | "reference"`
+     - `action`: `"browse" | "query"`
+     - `entries`: `list[object]`
+     - `summary`: `object` (counts/hints/context)
+   - Keep query/path/input echo minimal; prefer putting necessary context in `summary` or `error.details.input`.
 
 4. Keep compatibility when practical.
    - If moving shared helpers, keep thin compatibility re-exports when tests or downstream code rely on old import paths.

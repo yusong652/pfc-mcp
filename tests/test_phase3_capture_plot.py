@@ -119,6 +119,10 @@ async def test_capture_plot_end_to_end_with_mock_bridge(tmp_path: Path) -> None:
 
         assert output_path.exists()
         assert any(isinstance(item, ImageContent) for item in result.content)
+        structured = result.model_extra.get("structuredContent") if hasattr(result, "model_extra") else None
+        if structured:
+            assert structured["ok"] is True
+            assert structured["data"]["output_path"] == str(output_path)
     finally:
         await close_bridge_client()
         for key, value in prev.items():

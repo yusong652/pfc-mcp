@@ -182,13 +182,13 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
     parsed = json.loads(text) if text.startswith("{") else None
 
     if parsed:
-        assert parsed["operation"] == "pfc_execute_task"
-        assert parsed["status"] == "pending"
-        assert "task_id" in parsed
-        assert len(parsed["task_id"]) == 6
-        assert "entry_script" in parsed
-        assert "description" in parsed
-        assert "message" in parsed
+        assert parsed["ok"] is True
+        data = parsed["data"]
+        assert "task_id" in data
+        assert len(data["task_id"]) == 6
+        assert "entry_script" in data
+        assert "description" in data
+        assert "message" in data
 
 
 # ── pfc_check_task_status ────────────────────────────────
@@ -206,7 +206,7 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     )
     exec_text = exec_result.content[0].text
     exec_data = json.loads(exec_text) if exec_text.startswith("{") else {}
-    task_id = exec_data.get("task_id", list(TASK_STORE.keys())[0])
+    task_id = exec_data.get("data", {}).get("task_id", list(TASK_STORE.keys())[0])
 
     result = await mcp._tool_manager.call_tool(
         "pfc_check_task_status",
@@ -217,13 +217,14 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     parsed = json.loads(text) if text.startswith("{") else None
 
     if parsed:
-        assert parsed["operation"] == "pfc_check_task_status"
-        assert parsed["status"] in ("pending", "running", "completed", "failed", "interrupted")
-        assert parsed["task_id"] == task_id
-        assert "output" in parsed
+        assert parsed["ok"] is True
+        data = parsed["data"]
+        assert data["task_status"] in ("pending", "running", "completed", "failed", "interrupted")
+        assert data["task_id"] == task_id
+        assert "output" in data
         # Pagination
-        assert "pagination" in parsed
-        pag = parsed["pagination"]
+        assert "pagination" in data
+        pag = data["pagination"]
         assert "total_lines" in pag
         assert "line_range" in pag
         assert "has_older" in pag
@@ -241,7 +242,8 @@ async def test_check_task_status_not_found(mock_bridge):
     parsed = json.loads(text) if text.startswith("{") else None
 
     if parsed:
-        assert parsed["status"] == "not_found"
+        assert parsed["ok"] is False
+        assert parsed["error"]["code"] == "not_found"
 
 
 # ── pfc_list_tasks ───────────────────────────────────────
@@ -263,20 +265,20 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
     parsed = json.loads(text) if text.startswith("{") else None
 
     if parsed:
-        assert parsed["operation"] == "pfc_list_tasks"
-        assert parsed["status"] == "success"
-        assert isinstance(parsed["total_count"], int)
-        assert parsed["total_count"] >= 1
-        assert isinstance(parsed["tasks"], list)
-        assert len(parsed["tasks"]) >= 1
+        assert parsed["ok"] is True
+        data = parsed["data"]
+        assert isinstance(data["total_count"], int)
+        assert data["total_count"] >= 1
+        assert isinstance(data["tasks"], list)
+        assert len(data["tasks"]) >= 1
         # Task fields
-        task = parsed["tasks"][0]
+        task = data["tasks"][0]
         assert "task_id" in task
         assert "status" in task
         assert "entry_script" in task
         assert "start_time" in task
         assert "end_time" in task
-        assert "has_more" in parsed
+        assert "has_more" in data
 
 
 @pytest.mark.asyncio
@@ -288,7 +290,7 @@ async def test_list_tasks_empty(mock_bridge):
     parsed = json.loads(text) if text.startswith("{") else None
 
     if parsed:
-        assert parsed["operation"] == "pfc_list_tasks"
-        assert parsed["status"] == "success"
-        assert parsed["total_count"] == 0
-        assert parsed["tasks"] == []
+        assert parsed["ok"] is True
+        data = parsed["data"]
+        assert data["total_count"] == 0
+        assert data["tasks"] == []

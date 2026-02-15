@@ -1,11 +1,12 @@
 """PFC Python API Browse Tool - Navigate and retrieve Python SDK documentation."""
 
-from typing import Optional, Dict, Any
+from typing import Any, Dict, List, Optional
 
 from fastmcp import FastMCP
 from pydantic import Field
 
-from pfc_mcp.docs.python_api import APILoader, APIFormatter
+from pfc_mcp.contracts import build_docs_data, build_error, build_ok
+from pfc_mcp.docs.python_api import APILoader
 
 
 def register(mcp: FastMCP):
@@ -27,58 +28,48 @@ def register(mcp: FastMCP):
                 "- 'itasca.wall.facet.Facet': Facet object in wall.facet module"
             )
         )
-    ) -> str:
-        """Browse PFC Python SDK documentation by path (like glob + cat).
-
-        Paths use Python dot notation starting from 'itasca'.
-
-        Navigation levels:
-        - Root (no api): All modules and objects overview
-        - Module (itasca.ball): Module functions list
-        - Function (itasca.ball.create): Full function documentation
-        - Object (itasca.ball.Ball): Object method groups
-        - Method (itasca.ball.Ball.pos): Full method documentation
-
-        When to use:
-        - You know the API path (module.function or module.Object.method)
-        - You want to explore available functions/methods
-
-        Related tools:
-        - pfc_query_python_api: Search API by keywords (when path unknown)
-        - pfc_browse_commands: PFC command syntax documentation
-        """
+    ) -> Dict[str, Any]:
+        """Browse PFC Python SDK documentation by path (like glob + cat)."""
         normalized = _normalize_api_path(api)
 
         if not normalized:
-            return _browse_root()
+            return build_ok(_browse_root())
 
         if normalized == "itasca":
-            return _browse_module("itasca")
+            return _wrap_payload(_browse_module("itasca"))
 
         parsed = _parse_api_path(normalized)
 
         if parsed["type"] == "error":
-            return _browse_with_fallback(parsed)
+            return _wrap_payload(_browse_with_fallback(parsed, normalized))
 
         if parsed["type"] == "module":
-            return _browse_module(parsed["module_path"])
-        elif parsed["type"] == "function":
-            return _browse_function(parsed["module_path"], parsed["name"])
-        elif parsed["type"] == "object":
-            return _browse_object(
+            payload = _browse_module(parsed["module_path"])
+            return _wrap_payload(payload)
+        if parsed["type"] == "function":
+            payload = _browse_function(parsed["module_path"], parsed["name"])
+            return _wrap_payload(payload)
+        if parsed["type"] == "object":
+            payload = _browse_object(
                 parsed["module_path"],
                 parsed["name"],
-                parsed.get("display_name")
+                parsed.get("display_name"),
             )
-        elif parsed["type"] == "method":
-            return _browse_method(
+            return _wrap_payload(payload)
+        if parsed["type"] == "method":
+            payload = _browse_method(
                 parsed["module_path"],
                 parsed["object_name"],
                 parsed["name"],
-                parsed.get("display_name")
+                parsed.get("display_name"),
             )
-        else:
-            return f"Unknown parse result type: {parsed['type']}"
+            return _wrap_payload(payload)
+
+        return build_error(
+            code="unknown_parse_type",
+            message=f"Unknown parse result type: {parsed['type']}",
+            details={"path": normalized},
+        )
 
 
 def _normalize_api_path(api: Optional[str]) -> str:
@@ -92,7 +83,7 @@ def _parse_api_path(api: str) -> Dict[str, Any]:
         return {
             "type": "error",
             "error": f"Path must start with 'itasca', got: {api}",
-            "fallback_path": ""
+            "fallback_path": "",
         }
 
     parts = api.split(".")
@@ -121,7 +112,7 @@ def _parse_api_path(api: str) -> Dict[str, Any]:
                 return {
                     "type": "error",
                     "error": f"Object '{object_name}' not found",
-                    "fallback_path": module_path
+                    "fallback_path": module_path,
                 }
 
         if len(parts) == object_index + 1:
@@ -129,41 +120,41 @@ def _parse_api_path(api: str) -> Dict[str, Any]:
                 "type": "object",
                 "module_path": module_path,
                 "name": actual_object_name,
-                "display_name": object_name
-            }
-        else:
-            method_name = parts[object_index + 1]
-            return {
-                "type": "method",
-                "module_path": module_path,
-                "object_name": actual_object_name,
                 "display_name": object_name,
-                "name": method_name
             }
-    else:
-        for length in range(len(parts), 0, -1):
-            candidate = ".".join(parts[:length])
-            index_key = _path_to_index_key(candidate)
 
-            if index_key in modules:
-                if length == len(parts):
-                    return {
-                        "type": "module",
-                        "module_path": candidate
-                    }
-                else:
-                    func_name = parts[length]
-                    return {
-                        "type": "function",
-                        "module_path": candidate,
-                        "name": func_name
-                    }
-
+        method_name = parts[object_index + 1]
         return {
-            "type": "error",
-            "error": f"Module path not found: {api}",
-            "fallback_path": ".".join(parts[:-1]) if len(parts) > 1 else ""
+            "type": "method",
+            "module_path": module_path,
+            "object_name": actual_object_name,
+            "display_name": object_name,
+            "name": method_name,
         }
+
+    for length in range(len(parts), 0, -1):
+        candidate = ".".join(parts[:length])
+        index_key = _path_to_index_key(candidate)
+
+        if index_key in modules:
+            if length == len(parts):
+                return {
+                    "type": "module",
+                    "module_path": candidate,
+                }
+
+            func_name = parts[length]
+            return {
+                "type": "function",
+                "module_path": candidate,
+                "name": func_name,
+            }
+
+    return {
+        "type": "error",
+        "error": f"Module path not found: {api}",
+        "fallback_path": ".".join(parts[:-1]) if len(parts) > 1 else "",
+    }
 
 
 def _path_to_index_key(full_path: str) -> str:
@@ -174,19 +165,79 @@ def _path_to_index_key(full_path: str) -> str:
     return full_path
 
 
-def _browse_root() -> str:
+def _format_module_path(index_key: str) -> str:
+    if index_key == "itasca":
+        return "itasca"
+    return f"itasca.{index_key}"
+
+
+def _extract_function_names(functions: List[Any]) -> List[str]:
+    names: List[str] = []
+    for func in functions:
+        if isinstance(func, dict):
+            name = func.get("name")
+            if name:
+                names.append(name)
+        elif isinstance(func, str):
+            names.append(func)
+    return names
+
+
+def _browse_root() -> Dict[str, Any]:
     index = APILoader.load_index()
     modules = index.get("modules", {})
     objects = index.get("objects", {})
-    return APIFormatter.format_root(modules, objects)
+
+    module_items: List[Dict[str, Any]] = []
+    for module_key, module_info in modules.items():
+        module_items.append(
+            {
+                "entry_type": "module",
+                "path": _format_module_path(module_key),
+                "description": module_info.get("description", ""),
+                "function_count": len(module_info.get("functions", [])),
+            }
+        )
+
+    object_items: List[Dict[str, Any]] = []
+    for object_name, object_info in objects.items():
+        object_items.append(
+            {
+                "entry_type": "object",
+                "name": object_name,
+                "description": object_info.get("description", ""),
+                "file": object_info.get("file"),
+                "types": object_info.get("types"),
+            }
+        )
+
+    entries = module_items + object_items
+    return build_docs_data(
+        source="python_api",
+        action="browse",
+        entries=entries,
+        summary={
+            "count": len(entries),
+            "total_modules": len(module_items),
+            "total_objects": len(object_items),
+        },
+    )
 
 
-def _browse_module(module_path: str) -> str:
+def _browse_module(module_path: str) -> Dict[str, Any]:
     index_key = _path_to_index_key(module_path)
     module_data = APILoader.load_module(index_key)
 
     if not module_data:
-        return f"Module not found: {module_path}"
+        return {
+            "source": "python_api",
+            "action": "browse",
+            "error": {
+                "code": "module_not_found",
+                "message": f"Module not found: {module_path}",
+            },
+            "input": {"module_path": module_path},
+        }
 
     index = APILoader.load_index()
     objects = index.get("objects", {})
@@ -196,92 +247,159 @@ def _browse_module(module_path: str) -> str:
         if index_key in file_path or (index_key == "itasca" and "/" not in file_path):
             related_objects.append(obj_name)
 
-    return APIFormatter.format_module(module_path, module_data, related_objects)
+    functions = module_data.get("functions", [])
+    function_names = _extract_function_names(functions)
+
+    return build_docs_data(
+        source="python_api",
+        action="browse",
+        entries=[{"entry_type": "function", "name": name} for name in function_names],
+        summary={
+            "count": len(function_names),
+            "module_path": module_path,
+            "module": module_data,
+            "related_objects": sorted(related_objects),
+        },
+    )
 
 
-def _browse_function(module_path: str, func_name: str) -> str:
+def _browse_function(module_path: str, func_name: str) -> Dict[str, Any]:
     index_key = _path_to_index_key(module_path)
     func_doc = APILoader.load_function(index_key, func_name)
 
     if not func_doc:
-        error_msg = f"Function '{func_name}' not found in {module_path}"
-        module_data = APILoader.load_module(index_key)
-        if module_data:
-            module_content = APIFormatter.format_module(module_path, module_data)
-            return APIFormatter.format_with_error(error_msg, module_content)
-        return error_msg
+        module_data = APILoader.load_module(index_key) or {}
+        available_functions = _extract_function_names(module_data.get("functions", []))
+        return {
+            "source": "python_api",
+            "action": "browse",
+            "error": {
+                "code": "function_not_found",
+                "message": f"Function '{func_name}' not found in {module_path}",
+            },
+            "input": {"module_path": module_path, "function": func_name},
+            "available_functions": available_functions,
+        }
 
-    return APIFormatter.format_function(func_doc, module_path)
+    return build_docs_data(
+        source="python_api",
+        action="browse",
+        entries=[
+            {
+                "module_path": module_path,
+                "function": func_name,
+                "doc": func_doc,
+            }
+        ],
+        summary={"count": 1},
+    )
 
 
-def _browse_object(module_path: str, object_name: str, display_name: Optional[str] = None) -> str:
+def _browse_object(module_path: str, object_name: str, display_name: Optional[str] = None) -> Dict[str, Any]:
     object_doc = APILoader.load_object(object_name)
+    shown_name = display_name or object_name
 
     if not object_doc:
-        return f"Object not found: {object_name}"
+        index = APILoader.load_index()
+        available_objects = sorted(index.get("objects", {}).keys())
+        return {
+            "source": "python_api",
+            "action": "browse",
+            "error": {
+                "code": "object_not_found",
+                "message": f"Object not found: {shown_name}",
+            },
+            "input": {"module_path": module_path, "object": shown_name},
+            "available_objects": available_objects,
+        }
 
-    return APIFormatter.format_object(module_path, object_name, object_doc, display_name)
+    return build_docs_data(
+        source="python_api",
+        action="browse",
+        entries=[
+            {
+                "module_path": module_path,
+                "object": shown_name,
+                "actual_object": object_name,
+                "doc": object_doc,
+            }
+        ],
+        summary={"count": 1},
+    )
 
 
-def _browse_method(module_path: str, object_name: str, method_name: str, display_name: Optional[str] = None) -> str:
+def _browse_method(
+    module_path: str,
+    object_name: str,
+    method_name: str,
+    display_name: Optional[str] = None,
+) -> Dict[str, Any]:
     method_doc = APILoader.load_method(object_name, method_name)
-
     shown_name = display_name or object_name
 
     if not method_doc:
-        error_msg = f"Method '{method_name}' not found in {shown_name}"
-        object_doc = APILoader.load_object(object_name)
-        if object_doc:
-            object_content = APIFormatter.format_object(module_path, object_name, object_doc, display_name)
-            return APIFormatter.format_with_error(error_msg, object_content)
-        return error_msg
+        object_doc = APILoader.load_object(object_name) or {}
+        method_names = _extract_function_names(object_doc.get("methods", []))
+        return {
+            "source": "python_api",
+            "action": "browse",
+            "error": {
+                "code": "method_not_found",
+                "message": f"Method '{method_name}' not found in {shown_name}",
+            },
+            "input": {
+                "module_path": module_path,
+                "object": shown_name,
+                "actual_object": object_name,
+                "method": method_name,
+            },
+            "available_methods": method_names,
+        }
 
-    return APIFormatter.format_method(method_doc, shown_name, actual_object_name=object_name)
+    return build_docs_data(
+        source="python_api",
+        action="browse",
+        entries=[
+            {
+                "module_path": module_path,
+                "object": shown_name,
+                "actual_object": object_name,
+                "method": method_name,
+                "doc": method_doc,
+            }
+        ],
+        summary={"count": 1},
+    )
 
 
-def _browse_with_fallback(parsed: Dict[str, Any]) -> str:
+def _browse_with_fallback(parsed: Dict[str, Any], requested_api: str) -> Dict[str, Any]:
     error_msg = parsed.get("error", "Unknown error")
     fallback_path = parsed.get("fallback_path", "")
 
-    if not fallback_path:
-        index = APILoader.load_index()
-        modules = index.get("modules", {})
-        objects = index.get("objects", {})
-        fallback_content = APIFormatter.format_root(modules, objects)
-    else:
-        normalized = _normalize_api_path(fallback_path)
-        if not normalized or normalized == "itasca":
-            index = APILoader.load_index()
-            modules = index.get("modules", {})
-            objects = index.get("objects", {})
-            fallback_content = APIFormatter.format_root(modules, objects)
-        else:
-            re_parsed = _parse_api_path(normalized)
-            if re_parsed["type"] == "module":
-                index_key = _path_to_index_key(re_parsed["module_path"])
-                module_data = APILoader.load_module(index_key)
-                if module_data:
-                    fallback_content = APIFormatter.format_module(re_parsed["module_path"], module_data)
-                else:
-                    index = APILoader.load_index()
-                    modules = index.get("modules", {})
-                    objects = index.get("objects", {})
-                    fallback_content = APIFormatter.format_root(modules, objects)
-            elif re_parsed["type"] == "object":
-                object_doc = APILoader.load_object(re_parsed["name"])
-                if object_doc:
-                    fallback_content = APIFormatter.format_object(
-                        re_parsed["module_path"], re_parsed["name"], object_doc
-                    )
-                else:
-                    index = APILoader.load_index()
-                    modules = index.get("modules", {})
-                    objects = index.get("objects", {})
-                    fallback_content = APIFormatter.format_root(modules, objects)
-            else:
-                index = APILoader.load_index()
-                modules = index.get("modules", {})
-                objects = index.get("objects", {})
-                fallback_content = APIFormatter.format_root(modules, objects)
+    index = APILoader.load_index()
+    modules = index.get("modules", {})
+    available_modules = sorted(_format_module_path(module_key) for module_key in modules.keys())
 
-    return APIFormatter.format_with_error(error_msg, fallback_content)
+    return {
+        "source": "python_api",
+        "action": "browse",
+        "error": {
+            "code": "invalid_path",
+            "message": error_msg,
+        },
+        "input": {"api": requested_api},
+        "fallback_path": fallback_path or "itasca",
+        "available_modules": available_modules,
+    }
+
+
+def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+    if "error" in payload:
+        err = payload.get("error") or {}
+        details = {k: v for k, v in payload.items() if k != "error"}
+        return build_error(
+            code=str(err.get("code") or "browse_error"),
+            message=str(err.get("message") or "Browse failed"),
+            details=details or None,
+        )
+    return build_ok(payload)

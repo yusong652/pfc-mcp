@@ -102,12 +102,4 @@ def _browse_command(category: str, command_name: str) -> str:
         category_content = CommandFormatter.format_category(category, cat_data)
         return CommandFormatter.format_with_error(error_msg, category_content)
 
-    formatted_doc = CommandFormatter.format_command(cmd_doc, category)
-
-    navigation = f"""
-
-Navigation:
-- pfc_browse_commands(command="{category}") for {category} commands list
-- pfc_browse_commands() for categories overview
-"""
-    return formatted_doc + navigation
+    return CommandFormatter.format_command(cmd_doc, category)

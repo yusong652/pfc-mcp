@@ -67,13 +67,7 @@ class CommandFormatter:
             parts.append(f"- {cat_name} ({cmd_count}): {description}")
 
         parts.append("")
-        parts.append("Navigation:")
-        parts.append('- pfc_browse_commands(command="<category>") to list commands')
-        parts.append('- pfc_browse_commands(command="<category> <cmd>") for full doc')
-        parts.append("")
-        parts.append("Search: pfc_query_command(query=\"...\") for keyword search")
-        parts.append("")
-        parts.append('Contact Models: pfc_browse_reference(topic="contact-models") for model properties')
+        parts.append(CommandFormatter.format_navigation("root"))
 
         return "\n".join(parts)
 
@@ -120,16 +114,7 @@ class CommandFormatter:
         parts.append("")
         parts.append("[py] = Python SDK available, [py:partial] = partial support")
         parts.append("")
-        parts.append("Navigation:")
-        parts.append(f'- pfc_browse_commands(command="{category} <cmd>") for full doc')
-        parts.append("- pfc_browse_commands() for categories overview")
-
-        if category == "contact":
-            parts.append("")
-            parts.append('Contact Models: pfc_browse_reference(topic="contact-models") for model properties')
-
-        if related:
-            parts.append(f"Related: {', '.join(related)}")
+        parts.append(CommandFormatter.format_navigation("category", category, cat_data))
 
         return "\n".join(parts)
 
@@ -243,7 +228,54 @@ class CommandFormatter:
                 parts.append(f"- {rel_cmd}")
             parts.append("")
 
+        parts.append(CommandFormatter.format_navigation("command", category))
+
         return "\n".join(parts)
+
+    @staticmethod
+    def format_navigation(level: str, category: str = None, cat_data: Dict[str, Any] = None) -> str:
+        """Generate navigation hints for a given browse level.
+
+        Args:
+            level: One of "root", "category", or "command"
+            category: Category name (required for category/command levels)
+            cat_data: Category data dict (optional, used at category level
+                      for related_categories and contact detection)
+
+        Returns:
+            Formatted navigation hint string
+        """
+        lines = []
+
+        if level == "root":
+            lines.append("Navigation:")
+            lines.append('- pfc_browse_commands(command="<category>") to list commands')
+            lines.append('- pfc_browse_commands(command="<category> <cmd>") for full doc')
+            lines.append("")
+            lines.append('Search: pfc_query_command(query="...") for keyword search')
+            lines.append("")
+            lines.append('Contact Models: pfc_browse_reference(topic="contact-models") for model properties')
+
+        elif level == "category":
+            lines.append("Navigation:")
+            lines.append(f'- pfc_browse_commands(command="{category} <cmd>") for full doc')
+            lines.append("- pfc_browse_commands() for categories overview")
+
+            if category == "contact":
+                lines.append("")
+                lines.append('Contact Models: pfc_browse_reference(topic="contact-models") for model properties')
+
+            if cat_data:
+                related = cat_data.get("related_categories", [])
+                if related:
+                    lines.append(f"Related: {', '.join(related)}")
+
+        elif level == "command":
+            lines.append("Navigation:")
+            lines.append(f'- pfc_browse_commands(command="{category}") for {category} commands list')
+            lines.append("- pfc_browse_commands() for categories overview")
+
+        return "\n".join(lines)
 
     @staticmethod
     def format_search_results(results: List[CommandSearchResult]) -> str:

@@ -57,16 +57,6 @@ def register(mcp: FastMCP) -> None:
 
         task_manager.update_status(task_id, "running")
 
-        display = (
-            "Task submitted\n"
-            f"- task_id: {task_id}\n"
-            "- status: pending\n"
-            f"- entry_script: {entry_script}\n"
-            f"- description: {description}\n"
-            f"- message: {message or 'submitted'}\n\n"
-            f'Next: call pfc_check_task_status(task_id="{task_id}")'
-        )
-
         return {
             "operation": "pfc_execute_task",
             "status": "pending",
@@ -74,5 +64,4 @@ def register(mcp: FastMCP) -> None:
             "entry_script": entry_script,
             "description": description,
             "message": message or "submitted",
-            "display": display,
         }

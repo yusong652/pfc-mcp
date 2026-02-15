@@ -36,15 +36,6 @@ def register(mcp: FastMCP):
         result_lines = [f"Found {len(results)} command(s) for '{query}':", ""]
 
         for result in results:
-            title = result.document.title
-            category = result.document.category
-
-            cmd_parts = title.split(maxsplit=1)
-            cmd_name = cmd_parts[1] if len(cmd_parts) > 1 else title
-            browse_path = f"{category} {cmd_name}" if category else title
-            result_lines.append(f"- {title}: pfc_browse_commands(command=\"{browse_path}\")")
-
-        result_lines.append("")
-        result_lines.append("Use pfc_browse_commands(command=\"...\") for full documentation")
+            result_lines.append(f"- {result.document.title}")
 
         return "\n".join(result_lines)

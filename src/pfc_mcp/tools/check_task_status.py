@@ -58,61 +58,22 @@ def register(mcp: FastMCP) -> None:
 
         get_task_manager().update_status(task_id, normalized_status)
 
-        lines = [
-            "Task status",
-            f"- task_id: {task_id}",
-            f"- status: {normalized_status}",
-            f"- start_time: {format_unix_timestamp(data.get('start_time'))}",
-            f"- end_time: {format_unix_timestamp(data.get('end_time'))}",
-            f"- elapsed_time: {data.get('elapsed_time', 'n/a')}",
-            f"- entry_script: {data.get('entry_script') or data.get('script_path') or 'n/a'}",
-            f"- description: {data.get('description') or 'n/a'}",
-        ]
-
-        if data.get("result") is not None:
-            lines.append(f"- result: {data.get('result')}")
-        if data.get("error"):
-            lines.append(f"- error: {data.get('error')}")
-
-        lines.extend(
-            [
-                "",
-                (
-                    "Output "
-                    f"({pagination['total_lines']} lines, showing {pagination['line_range']}, "
-                    f"has_newer={pagination['has_newer']}, has_older={pagination['has_older']}):"
-                ),
-                output_text,
-            ]
-        )
-
-        next_hints = []
-        if pagination["has_newer"]:
-            next_hints.append(f"newer: skip_newest={max(0, skip_newest - limit)}")
-        if pagination["has_older"]:
-            next_hints.append(f"older: skip_newest={skip_newest + limit}")
-        if next_hints:
-            lines.extend(["", "Next: " + " | ".join(next_hints)])
-
-        return {
+        result = {
             "operation": "pfc_check_task_status",
             "status": normalized_status,
             "task_id": task_id,
-            "start_time": data.get("start_time"),
-            "end_time": data.get("end_time"),
+            "start_time": format_unix_timestamp(data.get("start_time")),
+            "end_time": format_unix_timestamp(data.get("end_time")),
             "elapsed_time": data.get("elapsed_time"),
             "entry_script": data.get("entry_script") or data.get("script_path"),
             "description": data.get("description"),
-            "result": data.get("result"),
-            "error": data.get("error"),
             "output": output_text,
-            "output_mode": "windowed_snapshot",
             "pagination": pagination,
-            "query": {
-                "skip_newest": skip_newest,
-                "limit": limit,
-                "filter": filter,
-                "wait_seconds": wait_seconds,
-            },
-            "display": "\n".join(lines),
         }
+
+        if data.get("result") is not None:
+            result["result"] = data["result"]
+        if data.get("error"):
+            result["error"] = data["error"]
+
+        return result

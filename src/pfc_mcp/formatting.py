@@ -109,26 +109,17 @@ def format_bridge_unavailable(operation: str, exc: Exception, task_id: str | Non
     cfg = get_bridge_config()
     reason = _summarize_bridge_error(exc)
 
-    display_lines = [
-        f"PFC bridge unavailable ({operation})",
-        "- status: bridge_unavailable",
-        f"- bridge_url: {cfg.url}",
-        f"- reason: {reason}",
-        "- action: start pfc-bridge in PFC GUI, then retry",
-    ]
-    if task_id:
-        display_lines.append(f"- task_id: {task_id}")
-
-    return {
+    result: dict[str, str] = {
         "status": "bridge_unavailable",
         "operation": operation,
         "message": "PFC bridge unavailable",
         "bridge_url": cfg.url,
         "reason": reason,
         "action": "start pfc-bridge in PFC GUI, then retry",
-        "task_id": task_id or "",
-        "display": "\n".join(display_lines),
     }
+    if task_id:
+        result["task_id"] = task_id
+    return result
 
 
 def format_operation_error(
@@ -139,25 +130,16 @@ def format_operation_error(
     task_id: str | None = None,
     action: str | None = None,
 ) -> dict[str, str]:
-    """Return structured operation error payload with human-readable display."""
-    display_lines = [
-        f"{operation} failed",
-        f"- status: {status}",
-        f"- message: {message}",
-    ]
-    if reason:
-        display_lines.append(f"- reason: {reason}")
-    if task_id:
-        display_lines.append(f"- task_id: {task_id}")
-    if action:
-        display_lines.append(f"- action: {action}")
-
-    return {
+    """Return structured operation error payload."""
+    result: dict[str, str] = {
         "status": status,
         "operation": operation,
         "message": message,
-        "reason": reason or "",
-        "task_id": task_id or "",
-        "action": action or "",
-        "display": "\n".join(display_lines),
     }
+    if reason:
+        result["reason"] = reason
+    if task_id:
+        result["task_id"] = task_id
+    if action:
+        result["action"] = action
+    return result

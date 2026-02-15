@@ -53,4 +53,4 @@ def test_bridge_error_message_is_friendly() -> None:
     assert msg["status"] == "bridge_unavailable"
     assert msg["reason"] == "cannot connect to bridge service"
     assert msg["action"] == "start pfc-bridge in PFC GUI, then retry"
-    assert "Multiple exceptions" not in msg["display"]
+    assert "display" not in msg

@@ -48,7 +48,4 @@ def register(mcp: FastMCP):
             else:
                 result_lines.append(f"- {api_path}")
 
-        result_lines.append("")
-        result_lines.append("Use pfc_browse_python_api(api=\"<path>\") for full documentation")
-
         return "\n".join(result_lines)

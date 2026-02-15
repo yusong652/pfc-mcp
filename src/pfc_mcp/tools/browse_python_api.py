@@ -211,15 +211,7 @@ def _browse_function(module_path: str, func_name: str) -> str:
             return APIFormatter.format_with_error(error_msg, module_content)
         return error_msg
 
-    content = APIFormatter.format_function(func_doc, module_path)
-
-    navigation = f"""
-
-Navigation:
-- pfc_browse_python_api(api="{module_path}") for module overview
-- pfc_browse_python_api() for root
-"""
-    return content + navigation
+    return APIFormatter.format_function(func_doc, module_path)
 
 
 def _browse_object(module_path: str, object_name: str, display_name: Optional[str] = None) -> str:
@@ -244,16 +236,7 @@ def _browse_method(module_path: str, object_name: str, method_name: str, display
             return APIFormatter.format_with_error(error_msg, object_content)
         return error_msg
 
-    content = APIFormatter.format_method(method_doc, shown_name, actual_object_name=object_name)
-
-    full_path = f"{module_path}.{shown_name}"
-    navigation = f"""
-
-Navigation:
-- pfc_browse_python_api(api="{full_path}") for object overview
-- pfc_browse_python_api(api="{module_path}") for module overview
-"""
-    return content + navigation
+    return APIFormatter.format_method(method_doc, shown_name, actual_object_name=object_name)
 
 
 def _browse_with_fallback(parsed: Dict[str, Any]) -> str:

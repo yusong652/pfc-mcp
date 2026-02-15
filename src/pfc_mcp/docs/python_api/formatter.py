@@ -119,15 +119,6 @@ class APIDocFormatter:
         parts.append("")
         parts.append(f"Objects ({len(object_lines)}):")
         parts.append("\n".join(object_lines))
-        parts.append("")
-        parts.append("Navigation:")
-        parts.append('- pfc_browse_python_api(api="itasca.ball") for module functions')
-        parts.append('- pfc_browse_python_api(api="itasca.ball.Ball") for object methods')
-        parts.append('- pfc_browse_python_api(api="itasca.ball.create") for function doc')
-        parts.append('- pfc_browse_python_api(api="itasca.ball.Ball.pos") for method doc')
-        parts.append("")
-        parts.append('Search: pfc_query_python_api(query="...") for keyword search')
-
         return "\n".join(parts)
 
     @staticmethod
@@ -175,11 +166,6 @@ class APIDocFormatter:
             obj_paths = [f"{module_path}.{obj}" for obj in related_objects]
             parts.append("")
             parts.append(f"Related Objects: {', '.join(obj_paths)}")
-
-        parts.append("")
-        parts.append("Navigation:")
-        parts.append(f'- pfc_browse_python_api(api="{module_path}.<func>") for function doc')
-        parts.append("- pfc_browse_python_api() for root overview")
 
         return "\n".join(parts)
 
@@ -243,11 +229,6 @@ class APIDocFormatter:
         parts.append("")
         parts.append("Method Groups:")
         parts.append("\n".join(method_lines))
-        parts.append("")
-        parts.append("Navigation:")
-        parts.append(f'- pfc_browse_python_api(api="{full_path}.<method>") for method doc')
-        parts.append(f'- pfc_browse_python_api(api="{module_path}") for module overview')
-
         return "\n".join(parts)
 
     @staticmethod
@@ -349,11 +330,11 @@ class APIDocFormatter:
         description_lines = api_doc['description'].strip().split('\n')
         brief_desc = description_lines[0].strip()
 
-        # Get return type if available
-        return_info = ""
-        if api_doc.get('returns'):
+        # Build signature - check if return type already in signature string
+        signature = api_doc['signature']
+        if '->' not in signature and api_doc.get('returns'):
             return_type = api_doc['returns']['type']
-            return_info = f" -> {return_type}"
+            signature = f"{signature} -> {return_type}"
 
         # Add Contact type support information if available
         contact_suffix = ""
@@ -367,7 +348,7 @@ class APIDocFormatter:
             components = metadata["has_components"]
             component_suffix = f" [has _{', _'.join(components)} components]"
 
-        return f"`{api_doc['signature']}`{return_info} - {brief_desc}{contact_suffix}{component_suffix}"
+        return f"`{signature}` - {brief_desc}{contact_suffix}{component_suffix}"
 
     @staticmethod
     def format_full_doc(
@@ -563,13 +544,9 @@ class APIDocFormatter:
 
             **Next Step**: Use pfc_query_command tool to search for PFC commands instead
         """
-        hint_text = f"Note: {hints[0]}\n\n" if hints else ""
+        hint_text = f"\nNote: {hints[0]}" if hints else ""
 
-        return (
-            f"**Python SDK**: Not available for this operation\n\n"
-            f"{hint_text}"
-            f"**Next Step**: Use pfc_query_command tool to search for PFC commands instead"
-        )
+        return f"**Python SDK**: Not available for '{query}'{hint_text}"
 
     @staticmethod
     def format_function(func_doc: Dict[str, Any], module_path: str) -> str:

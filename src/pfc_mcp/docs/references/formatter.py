@@ -61,15 +61,6 @@ class ReferenceFormatter:
             if summary:
                 parts.append(f"  ({summary})")
 
-        parts.append("")
-        parts.append("Navigation:")
-        parts.append('- pfc_browse_reference(topic="<category>") to list items')
-        parts.append('- pfc_browse_reference(topic="<category> <item>") for full doc')
-        parts.append("")
-        parts.append("Related:")
-        parts.append("- pfc_browse_commands: Command syntax")
-        parts.append("- pfc_query_command: Search commands by keywords")
-
         return "\n".join(parts)
 
     @staticmethod
@@ -132,11 +123,6 @@ class ReferenceFormatter:
                 else:
                     parts.append(f"- {name}: {desc}")
             parts.append("")
-
-        # Navigation
-        parts.append("Navigation:")
-        parts.append(f'- pfc_browse_reference(topic="{category} <name>") for details')
-        parts.append("")
 
         return "\n".join(parts)
 

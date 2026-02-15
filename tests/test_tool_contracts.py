@@ -188,7 +188,6 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
         assert len(parsed["task_id"]) == 6
         assert "entry_script" in parsed
         assert "description" in parsed
-        assert "display" in parsed
         assert "message" in parsed
 
 
@@ -222,8 +221,6 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
         assert parsed["status"] in ("pending", "running", "completed", "failed", "interrupted")
         assert parsed["task_id"] == task_id
         assert "output" in parsed
-        assert "output_mode" in parsed
-        assert parsed["output_mode"] == "windowed_snapshot"
         # Pagination
         assert "pagination" in parsed
         pag = parsed["pagination"]
@@ -231,9 +228,6 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
         assert "line_range" in pag
         assert "has_older" in pag
         assert "has_newer" in pag
-        # Query echo
-        assert "query" in parsed
-        assert "display" in parsed
 
 
 @pytest.mark.asyncio
@@ -248,7 +242,6 @@ async def test_check_task_status_not_found(mock_bridge):
 
     if parsed:
         assert parsed["status"] == "not_found"
-        assert "display" in parsed
 
 
 # ── pfc_list_tasks ───────────────────────────────────────
@@ -282,7 +275,6 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
         assert "status" in task
         assert "entry_script" in task
         assert "has_more" in parsed
-        assert "display" in parsed
 
 
 @pytest.mark.asyncio
@@ -298,4 +290,3 @@ async def test_list_tasks_empty(mock_bridge):
         assert parsed["status"] == "success"
         assert parsed["total_count"] == 0
         assert parsed["tasks"] == []
-        assert "display" in parsed

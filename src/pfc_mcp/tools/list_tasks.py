@@ -49,39 +49,12 @@ def register(mcp: FastMCP) -> None:
         displayed_count = pagination.get("displayed_count", len(tasks))
         has_more = pagination.get("has_more", False)
 
-        if total_count == 0:
-            return {
-                "operation": "pfc_list_tasks",
-                "status": "success",
-                "total_count": 0,
-                "displayed_count": 0,
-                "skip_newest": skip_newest,
-                "limit": limit,
-                "has_more": False,
-                "session_filter": session_id,
-                "tasks": [],
-                "display": "No tracked tasks found.",
-            }
-
-        lines = [
-            "Tracked tasks",
-            f"- total_count: {total_count}",
-            f"- displayed_count: {displayed_count}",
-            f"- skip_newest: {skip_newest}",
-            f"- limit: {limit}",
-            f"- has_more: {has_more}",
-            f"- session_filter: {session_id or 'none'}",
-            "",
-        ]
-
         normalized_tasks: list[dict[str, Any]] = []
 
         for task in tasks:
-            raw_status = task.get("status", "unknown")
-
             normalized_task = {
                 "task_id": task.get("task_id"),
-                "status": normalize_status(raw_status),
+                "status": normalize_status(task.get("status", "unknown")),
                 "source": task.get("source", "agent"),
                 "elapsed_time": task.get("elapsed_time"),
                 "entry_script": task.get("entry_script") or task.get("name"),
@@ -89,29 +62,10 @@ def register(mcp: FastMCP) -> None:
             }
             normalized_tasks.append(normalized_task)
 
-            lines.append(
-                (
-                    f"- task_id={normalized_task.get('task_id', 'unknown')} "
-                    f"status={normalized_task.get('status', 'unknown')} "
-                    f"source={normalized_task.get('source', 'agent')} "
-                    f"elapsed={normalized_task.get('elapsed_time', 'n/a')}"
-                )
-            )
-            lines.append(f"  entry_script={normalized_task.get('entry_script') or 'n/a'}")
-            lines.append(f"  description={normalized_task.get('description') or 'n/a'}")
-
-        if has_more:
-            lines.extend(["", f"Next: pfc_list_tasks(skip_newest={skip_newest + displayed_count}, limit={limit})"])
-
         return {
             "operation": "pfc_list_tasks",
             "status": "success",
             "total_count": total_count,
-            "displayed_count": displayed_count,
-            "skip_newest": skip_newest,
-            "limit": limit,
             "has_more": has_more,
-            "session_filter": session_id,
             "tasks": normalized_tasks,
-            "display": "\n".join(lines),
         }

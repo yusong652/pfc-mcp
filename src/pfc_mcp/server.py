@@ -1,9 +1,11 @@
 """PFC MCP Server - ITASCA PFC tools exposed over MCP."""
 
+import argparse
 import asyncio
 import logging
 
 from fastmcp import FastMCP
+from pfc_mcp import __version__
 from pfc_mcp.bridge import close_bridge_client
 
 from pfc_mcp.tools import (
@@ -47,6 +49,15 @@ capture_plot.register(mcp)
 
 def main():
     """Entry point for the PFC MCP server."""
+    parser = argparse.ArgumentParser(
+        prog="pfc-mcp",
+        description="PFC MCP Server - ITASCA PFC tools exposed over MCP",
+    )
+    parser.add_argument(
+        "--version", "-v", action="version", version=f"pfc-mcp {__version__}"
+    )
+    parser.parse_args()
+
     try:
         mcp.run(transport="stdio", show_banner=False)
     finally:

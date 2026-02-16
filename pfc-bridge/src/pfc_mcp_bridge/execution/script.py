@@ -15,7 +15,7 @@ import traceback
 from typing import Any, Dict, Optional
 
 from .main_thread import MainThreadExecutor
-from ..utils import path_to_llm_format, FileBuffer, TaskDataBuilder, build_response
+from ..utils import path_to_llm_format, FileBuffer, TaskDataBuilder, build_response, preprocess_script
 from ..signals import set_current_task, clear_current_task, clear_interrupt
 
 # Module logger
@@ -88,6 +88,10 @@ class ScriptRunner:
             # `result` is a reserved output channel for task return payloads,
             # so each execution should start with a clean value.
             exec_globals.pop("result", None)
+
+            # Split multi-line itasca.command() calls into individual calls
+            # to prevent GIL being held for the entire batch.
+            script_content = preprocess_script(script_content)
 
             # Try to execute as expression first (single line, returns value)
             try:

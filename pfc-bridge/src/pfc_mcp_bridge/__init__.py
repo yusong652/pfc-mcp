@@ -144,6 +144,20 @@ def start(
     if not diagnostic_registered:
         raise RuntimeError("Failed to register diagnostic callback")
 
+    # ── Port availability check ──────────────────────────────
+    import socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        sock.bind((host, port))
+    except OSError:
+        raise RuntimeError(
+            "Port {} is already in use. "
+            "Another bridge may be running, or another process is using this port.\n"
+            "Try: pfc_mcp_bridge.start(port={})".format(port, port + 1)
+        )
+    finally:
+        sock.close()
+
     # ── Start WebSocket server ────────────────────────────────
     pfc_server = create_server(
         main_executor=main_executor, host=host, port=port,

@@ -22,5 +22,8 @@ classifiers = [
 dependencies = ["websockets==9.1"]
 readme = "README.md"
 
+[project.scripts]
+pfc-mcp-bridge = "pfc_mcp_bridge.__main__:main"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/pfc_mcp_bridge"]

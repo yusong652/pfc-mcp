@@ -1,12 +1,12 @@
 # pfc-mcp-bridge
 
-`pfc-mcp-bridge` is the runtime bridge that runs inside a PFC process and enables execution tools used by `pfc-mcp`.
+[![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/)
 
-Use this package when you want MCP clients to run scripts and diagnostics in a live PFC session.
+Runtime bridge that runs inside a PFC process and enables execution tools for [pfc-mcp](https://pypi.org/project/pfc-mcp/).
 
 ## Quick Start
 
-Install and run in a PFC Python environment:
+Install and run in PFC Python console:
 
 ```python
 import subprocess
@@ -16,31 +16,11 @@ import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-Mode options:
+The bridge auto-detects the runtime: Qt timer in GUI, blocking loop in console.
 
-- `mode="auto"` (default): try GUI/Qt first, fall back to blocking console pump
-- `mode="gui"`: GUI/Qt only (non-blocking, required for plot capture)
-- `mode="console"`: blocking console pump (task execution works; plot commands are unsupported)
+Expected output:
 
-Examples:
-
-```python
-# GUI mode (recommended when you need capture_plot)
-pfc_mcp_bridge.start(mode="gui")
-
-# Console mode
-pfc_mcp_bridge.start(mode="console")
-```
-
-CLI:
-
-```bash
-pfc-mcp-bridge --mode auto --port 9001
-```
-
-Expected startup output:
-
-```
+```text
 ============================================================
 PFC Bridge Server
 ============================================================
@@ -48,26 +28,23 @@ PFC Bridge Server
   Log:         /your-working-dir/.pfc-bridge/bridge.log
   Callbacks:   Interrupt, Diagnostic (registered)
 ============================================================
-
-Task loop running via Qt timer (interval=20ms, max_tasks_per_tick=1)
-Bridge started in non-blocking mode (GUI remains responsive).
 ```
-
-No Enter confirmation is required.
 
 ## Requirements
 
 - Python >= 3.6 (PFC embedded Python)
-- ITASCA PFC 7.0+ with Python support
+- ITASCA PFC 7.0+
 - `websockets==9.1`
 
 ## Troubleshooting
 
-- `Server won't start`: in PFC Python, run `pip install websockets==9.1`
-- `Connection failed`: check the bridge is running and port `9001` is available
-- `No task execution`: keep `pfc_mcp_bridge.start()` running in the PFC process
-- `pfc_capture_plot returns unsupported_in_console`: restart bridge in GUI mode (`pfc_mcp_bridge.start(mode="gui")`)
+| Symptom | Fix |
+|---------|-----|
+| Server won't start | `pip install websockets==9.1` in PFC Python |
+| Port in use | Use `pfc_mcp_bridge.start(port=9002)` or `pfc-mcp-bridge --port 9002` |
+| Connection failed | Check bridge is running, port is available, see `.pfc-bridge/bridge.log` |
+| No task execution | Ensure `pfc_mcp_bridge.start()` is running in PFC |
 
-For full MCP client setup, see the main package page: [pfc-mcp](https://pypi.org/project/pfc-mcp/).
+For full MCP client setup, see [pfc-mcp](https://pypi.org/project/pfc-mcp/).
 
 License: MIT ([LICENSE](https://github.com/yusong652/pfc-mcp/blob/main/LICENSE)).

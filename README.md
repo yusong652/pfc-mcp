@@ -69,22 +69,6 @@ import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-Bridge modes:
-
-- `auto` (default): try GUI/Qt task pump first, fall back to console blocking pump
-- `gui`: GUI/Qt only (non-blocking, required for plot capture)
-- `console`: console blocking pump (task execution works, plot commands are unsupported)
-
-Examples:
-
-```python
-# Force GUI mode (recommended for capture_plot)
-pfc_mcp_bridge.start(mode="gui")
-
-# Force console mode
-pfc_mcp_bridge.start(mode="console")
-```
-
 ![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/init.png)
 
 **Verify** - reconnect your MCP client and ask the agent to call `pfc_list_tasks` to verify the full MCP + bridge connection.
@@ -111,7 +95,7 @@ Documentation tools work standalone. Execution tools require a running bridge.
 | `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or use `uv tool run pfc-mcp` |
 | Bridge won't start | Install dependency in PFC Python: `pip install websockets==9.1` |
 | Tasks not processing | Ensure `pfc_mcp_bridge.start()` is running in PFC |
-| `pfc_capture_plot` returns `unsupported_in_console` | Start bridge in GUI mode: `pfc_mcp_bridge.start(mode="gui")` |
+| `pfc_capture_plot` unsupported | Plot capture requires PFC GUI; console mode does not support it |
 | Connection failed | Check bridge is running, port 9001 is free, see `.pfc-bridge/bridge.log` |
 
 ## Development

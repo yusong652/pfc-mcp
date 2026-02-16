@@ -6,6 +6,10 @@ as a remote WebSocket API for MCP clients and other tools.
 Usage (in PFC GUI Python console):
     import pfc_mcp_bridge
     pfc_mcp_bridge.start()
+
+Usage (in PFC console CLI):
+    import pfc_mcp_bridge
+    pfc_mcp_bridge.start(mode="console")
 """
 
 __version__ = "0.1.3"
@@ -18,6 +22,77 @@ DEFAULT_TIMER_INTERVAL_MS = 20
 DEFAULT_MAX_TASKS_PER_TICK = 1
 
 
+def _start_qt_pump(main_executor, interval_ms, max_tasks_per_tick, logger):
+    # type: (...) -> bool
+    """Try to attach task processing to Qt event loop. Returns True on success."""
+    global _qt_task_timer
+
+    try:
+        from PySide2 import QtCore  # type: ignore
+    except Exception:
+        return False
+
+    app = QtCore.QCoreApplication.instance()
+    if app is None:
+        return False
+
+    # Stop previous timer if start() is called multiple times.
+    if _qt_task_timer is not None:
+        try:
+            _qt_task_timer.stop()
+        except Exception:
+            pass
+
+    per_tick = None
+    if max_tasks_per_tick is not None:
+        try:
+            value = int(max_tasks_per_tick)
+            if value > 0:
+                per_tick = value
+        except Exception:
+            per_tick = 1
+
+    def _process_tick():
+        try:
+            main_executor.process_tasks(max_tasks=per_tick)
+        except Exception as e:
+            logger.error("Task pump tick failed: {}".format(e))
+
+    timer = QtCore.QTimer()
+    timer.setInterval(interval_ms)
+    timer.timeout.connect(_process_tick)
+    timer.start()
+
+    _qt_task_timer = timer
+    return True
+
+
+def _run_blocking_pump(main_executor, interval_ms, max_tasks_per_tick, logger):
+    # type: (...) -> None
+    """Block the main thread and poll task queue. Used in console mode."""
+    import time
+
+    per_tick = None
+    if max_tasks_per_tick is not None:
+        try:
+            value = int(max_tasks_per_tick)
+            if value > 0:
+                per_tick = value
+        except Exception:
+            per_tick = 1
+
+    sleep_s = interval_ms / 1000.0
+    try:
+        while True:
+            try:
+                main_executor.process_tasks(max_tasks=per_tick)
+            except Exception as e:
+                logger.error("Task pump tick failed: {}".format(e))
+            time.sleep(sleep_s)
+    except KeyboardInterrupt:
+        logger.info("Bridge stopped by user")
+
+
 def start(
     host="localhost",
     port=9001,
@@ -25,20 +100,23 @@ def start(
     ping_timeout=300,
     timer_interval_ms=DEFAULT_TIMER_INTERVAL_MS,
     max_tasks_per_tick=DEFAULT_MAX_TASKS_PER_TICK,
+    mode="auto",
 ):
     """Start the PFC Bridge server.
 
     Starts a WebSocket server in a background thread, then starts the main-thread
-    task pump in Qt-timer mode (non-blocking).
+    task pump.
 
     Args:
         host: Server host address.
         port: Server port number.
         ping_interval: Seconds between WebSocket ping frames.
         ping_timeout: Seconds to wait for pong before disconnect.
-        timer_interval_ms: Qt timer interval in milliseconds.
-        max_tasks_per_tick: Max queued tasks handled per timer tick.
+        timer_interval_ms: Timer/poll interval in milliseconds.
+        max_tasks_per_tick: Max queued tasks handled per tick.
             Set <=0 to process all pending tasks each tick.
+        mode: Task pump mode - "auto" (try Qt, fall back to blocking),
+            "gui" (Qt only), or "console" (blocking only).
     """
     import sys
     import os
@@ -76,50 +154,6 @@ def start(
     from .server import create_server
 
     main_executor = MainThreadExecutor()
-
-    def _start_qt_task_loop():
-        # type: () -> tuple
-        """Attach task processing to Qt event loop via QTimer."""
-        global _qt_task_timer
-
-        try:
-            from PySide2 import QtCore  # type: ignore
-        except Exception as e:
-            return False, "PySide2 import failed: {}".format(e)
-
-        app = QtCore.QCoreApplication.instance()
-        if app is None:
-            return False, "QCoreApplication.instance() is None"
-
-        # Stop previous timer if start() is called multiple times.
-        if _qt_task_timer is not None:
-            try:
-                _qt_task_timer.stop()
-            except Exception:
-                pass
-
-        per_tick = None
-        if max_tasks_per_tick is not None:
-            try:
-                value = int(max_tasks_per_tick)
-                if value > 0:
-                    per_tick = value
-            except Exception:
-                per_tick = 1
-
-        def _process_tick():
-            try:
-                main_executor.process_tasks(max_tasks=per_tick)
-            except Exception as e:
-                logger.error("Task pump tick failed: {}".format(e))
-
-        timer = QtCore.QTimer()
-        timer.setInterval(interval_ms)
-        timer.timeout.connect(_process_tick)
-        timer.start()
-
-        _qt_task_timer = timer
-        return True, "qt_timer"
 
     # ── PFC configuration (required) ──────────────────────────
     try:
@@ -193,9 +227,20 @@ def start(
     print("  Callbacks:   Interrupt, Diagnostic (registered)")
     print("=" * 60 + "\n")
 
-    # ── Main-thread task loop ─────────────────────────────────
-    started, detail = _start_qt_task_loop()
-    if not started:
-        raise RuntimeError("Qt timer startup failed: {}".format(detail))
+    # ── Main-thread task pump ─────────────────────────────────
+    use_qt = mode in ("auto", "gui")
+    use_blocking = mode in ("auto", "console")
 
-    print("Bridge started in non-blocking mode (GUI remains responsive).")
+    if use_qt and _start_qt_pump(main_executor, interval_ms, max_tasks_per_tick, logger):
+        print("Task loop running via Qt timer (interval={}ms, max_tasks_per_tick={})".format(
+            interval_ms, max_tasks_per_tick))
+        print("Bridge started in non-blocking mode (GUI remains responsive).")
+        return
+
+    if mode == "gui":
+        raise RuntimeError("Qt is not available; cannot start in gui mode")
+
+    if use_blocking:
+        print("Task loop running via blocking poll (interval={}ms)".format(interval_ms))
+        print("Bridge started in blocking mode (console). Press Ctrl+C to stop.")
+        _run_blocking_pump(main_executor, interval_ms, max_tasks_per_tick, logger)

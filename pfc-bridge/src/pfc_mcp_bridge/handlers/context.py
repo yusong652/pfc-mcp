@@ -23,6 +23,7 @@ class ServerContext:
         task_manager: Manages task lifecycle and status tracking
         script_runner: Runs PFC Python scripts via main thread queue
         main_executor: Queue-based main thread execution
+        runtime_mode: Active bridge runtime mode ("gui" or "console")
     """
 
     def __init__(
@@ -30,8 +31,10 @@ class ServerContext:
         task_manager,  # type: TaskManager
         script_runner,  # type: ScriptRunner
         main_executor,  # type: MainThreadExecutor
+        runtime_mode="unknown",  # type: str
     ):
         # type: (...) -> None
         self.task_manager = task_manager
         self.script_runner = script_runner
         self.main_executor = main_executor
+        self.runtime_mode = runtime_mode

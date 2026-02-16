@@ -43,7 +43,8 @@ class PFCWebSocketServer:
         host="localhost",  # type: str
         port=9001,  # type: int
         ping_interval=120,  # type: int
-        ping_timeout=300  # type: int
+        ping_timeout=300,  # type: int
+        runtime_mode="unknown",  # type: str
     ):
         # type: (...) -> None
         """
@@ -73,6 +74,7 @@ class PFCWebSocketServer:
             task_manager=task_manager,
             script_runner=self.script_runner,
             main_executor=self.main_executor,
+            runtime_mode=runtime_mode,
         )
 
         # Message handlers registry (all handlers are async with unified signature)
@@ -222,6 +224,11 @@ class PFCWebSocketServer:
         if self.server:
             await self.server.wait_closed()
 
+    def set_runtime_mode(self, runtime_mode):
+        # type: (str) -> None
+        """Update active runtime mode exposed to handlers."""
+        self._context.runtime_mode = runtime_mode
+
 
 # Module-level utility function for creating server instances
 def create_server(
@@ -229,7 +236,8 @@ def create_server(
     host="localhost",  # type: str
     port=9001,  # type: int
     ping_interval=120,  # type: int
-    ping_timeout=300  # type: int
+    ping_timeout=300,  # type: int
+    runtime_mode="unknown",  # type: str
 ):
     # type: (...) -> PFCWebSocketServer
     """
@@ -254,4 +262,11 @@ def create_server(
         >>> server = create_server(executor, host="localhost", port=9001)
         >>> # Use with startup script
     """
-    return PFCWebSocketServer(main_executor, host, port, ping_interval, ping_timeout)
+    return PFCWebSocketServer(
+        main_executor,
+        host,
+        port,
+        ping_interval,
+        ping_timeout,
+        runtime_mode=runtime_mode,
+    )

@@ -8,6 +8,7 @@ import asyncio
 import concurrent.futures
 import logging
 import os
+import re
 from io import StringIO
 from typing import Any, Callable, Dict, Optional, Tuple
 
@@ -15,6 +16,16 @@ from .context import ServerContext
 from .helpers import require_field
 
 logger = logging.getLogger("PFC-Server")
+_PLOT_COMMAND_PATTERN = re.compile(
+    r"\bplot\s+(?:create|item|export|background|view|clear|copy)\b",
+    flags=re.IGNORECASE,
+)
+
+
+def _contains_plot_command(script_content: str) -> bool:
+    # type: (str) -> bool
+    """Return True when script content appears to issue PLOT commands."""
+    return bool(_PLOT_COMMAND_PATTERN.search(script_content))
 
 
 async def _wait_for_file(
@@ -208,6 +219,25 @@ async def handle_diagnostic_execute(ctx, data):
         with open(script_path, 'r', encoding='utf-8') as f:
             script_content = f.read()
 
+        # PLOT commands require GUI plot subsystem; console runtime cannot export plots.
+        runtime_mode = getattr(ctx, "runtime_mode", "unknown")
+        if runtime_mode == "console" and _contains_plot_command(script_content):
+            return {
+                "type": "diagnostic_result",
+                "request_id": request_id,
+                "status": "error",
+                "message": "PLOT commands are not supported in console runtime",
+                "error": {
+                    "code": "unsupported_in_console",
+                    "message": "PLOT commands are not supported in pfc_console interface",
+                    "details": {
+                        "runtime_mode": runtime_mode,
+                        "action": "Run bridge in GUI runtime mode for plot capture",
+                    },
+                },
+                "data": None,
+            }
+
         task_id = uuid.uuid4().hex[:8]
         output_buffer = StringIO()
 
@@ -237,6 +267,10 @@ async def handle_diagnostic_execute(ctx, data):
             "request_id": request_id,
             "status": "timeout",
             "message": "Diagnostic timed out after {}ms".format(timeout_ms),
+            "error": {
+                "code": "timeout",
+                "message": "Diagnostic timed out after {}ms".format(timeout_ms),
+            },
             "data": None
         }
 
@@ -247,5 +281,9 @@ async def handle_diagnostic_execute(ctx, data):
             "request_id": request_id,
             "status": "error",
             "message": str(e),
+            "error": {
+                "code": "diagnostic_execute_failed",
+                "message": str(e),
+            },
             "data": None
         }

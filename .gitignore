@@ -16,3 +16,8 @@ build/
 .mcp.json
 .claude/
 .codex/
+
+# Local runtime/temp artifacts
+.pfc-bridge/
+.tmp/
+.pytest_tmp/

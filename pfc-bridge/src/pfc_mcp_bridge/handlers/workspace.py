@@ -33,7 +33,8 @@ async def handle_get_working_directory(ctx, data):
             "status": "success",
             "message": f"PFC working directory: {cwd}",
             "data": {
-                "working_directory": cwd
+                "working_directory": cwd,
+                "runtime_mode": getattr(ctx, "runtime_mode", "unknown"),
             }
         }
     except Exception as e:

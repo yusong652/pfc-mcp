@@ -170,12 +170,27 @@ def register(mcp: FastMCP) -> None:
             status = response.get("status", "error")
             message = response.get("message", "")
             if status != "success":
+                err_obj = response.get("error") if isinstance(response.get("error"), dict) else {}
+                error_code = err_obj.get("code") or status or "diagnostic_failed"
+                error_message = err_obj.get("message") or message or "Diagnostic execution failed"
+                details = err_obj.get("details") if isinstance(err_obj.get("details"), dict) else None
+                reason = None
+                if details:
+                    parts: list[str] = []
+                    runtime_mode = details.get("runtime_mode")
+                    action = details.get("action")
+                    if runtime_mode:
+                        parts.append(f"runtime_mode={runtime_mode}")
+                    if action:
+                        parts.append(str(action))
+                    reason = " | ".join(parts) if parts else None
                 return build_error_from_legacy(
                     format_operation_error(
                         "pfc_capture_plot",
-                        status=status or "diagnostic_failed",
-                        message=message or "Diagnostic execution failed",
-                        action="Check bridge diagnostic logs and retry",
+                        status=error_code,
+                        message=error_message,
+                        reason=reason,
+                        action="Run bridge in GUI mode for plot capture" if error_code == "unsupported_in_console" else "Check bridge diagnostic logs and retry",
                     )
                 )
 

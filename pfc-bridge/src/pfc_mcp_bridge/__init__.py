@@ -8,7 +8,7 @@ Usage (in PFC GUI Python console):
     pfc_mcp_bridge.start()
 """
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 
 # Keep global references to avoid Qt timer/callback garbage collection.

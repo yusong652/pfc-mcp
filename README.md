@@ -1,148 +1,110 @@
 # pfc-mcp
 
-MCP server for [ITASCA PFC](https://www.itascacg.com/software/pfc) (Particle Flow Code) discrete element simulation control and documentation.
+[![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 
-Provides 10 tools for browsing PFC documentation and controlling simulations through the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
+**MCP server that gives AI agents full access to [ITASCA PFC](https://www.itascacg.com/software/pfc) — browse documentation, run simulations, capture plots, all through natural conversation.**
+
+Built on the [Model Context Protocol](https://modelcontextprotocol.io/), pfc-mcp turns any MCP-compatible AI client (Claude Code, Codex CLI, Gemini CLI, OpenCode, toyoura-nagisa, etc.) into a PFC co-pilot that can look up commands, execute scripts, monitor long-running simulations, and capture visualizations.
+
+![pfc-mcp demo](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/pfc-mcp.gif)
+
+## Tools (10)
+
+### Documentation (5) — no bridge required
+
+- Browse PFC command tree, Python SDK reference, and reference docs (contact models, range elements)
+- Search commands and Python APIs by keyword (BM25 ranked)
+
+### Execution (5) — requires bridge in PFC GUI
+
+- Submit Python scripts and poll status/output in real time
+- List and manage tasks across sessions
+- Interrupt running simulations
+- Capture PFC plot images with configurable camera, coloring, and cut planes
 
 ## Quick Start
 
-### Agentic Quick Start (Recommended)
+### Prerequisites
 
-Copy this instruction to your AI coding agent:
+- **ITASCA PFC 7.0** installed (`pfc2d700_gui.exe` or `pfc3d700_gui.exe`)
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)** installed (for `uvx`)
+
+### Agentic Setup (Recommended)
+
+Copy this to your AI agent and let it self-configure:
 
 ```text
 Fetch and follow this bootstrap guide end-to-end:
 https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
 ```
 
-If this is first-time MCP setup in your workspace, restart your client session (for example Claude Code / Codex / OpenCode) before verifying tools.
+### Manual Setup
 
-Detailed guide (human-readable):
+**1. Register the MCP server** in your client config:
 
-- [docs/agentic/pfc-mcp-bootstrap.md](docs/agentic/pfc-mcp-bootstrap.md)
-
-### Prerequisite
-
-- ITASCA PFC 7.0 must be installed (PFC 2D/3D 700 GUI, e.g. `pfc2d700_gui.exe` or `pfc3d700_gui.exe`).
-
-Install `uv` first (required for `uvx`):
-
-- https://docs.astral.sh/uv/getting-started/installation/
-
-### 1) Configure your MCP client
-
-Follow Step 1 in `docs/agentic/pfc-mcp-bootstrap.md`.
-
-Shared launch contract:
-
-- server id/name: `pfc-mcp`
-- primary launch command: `uvx pfc-mcp`
-- fallback launch command: `uv tool run pfc-mcp`
-
-### 2) Start `pfc-mcp-bridge` in PFC GUI (execution tools only)
-
-Execution tools require a running bridge in the PFC process.
-
-Install/upgrade bridge package in PFC Python first (`>=0.1.2` recommended):
-
-```bash
-"{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+```json
+{
+  "mcpServers": {
+    "pfc-mcp": {
+      "command": "uvx",
+      "args": ["pfc-mcp"]
+    }
+  }
+}
 ```
 
-Then start bridge in PFC GUI Python console:
+**2. Install dependency:**
+
+```python
+import subprocess
+subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+```
+
+### Start Bridge & Verify
 
 ```python
 import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-Documentation tools work without the bridge.
+![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/init.png)
 
-### 3) Verify
+**Verify** — reconnect your MCP client and ask the agent to call `pfc_list_tasks` to verify the full MCP + bridge connection.
 
-Reconnect your MCP client and call a documentation tool such as `pfc_browse_commands`.
+## Design Highlights
 
-If `uvx` is not found, install `uv` or use fallback command `uv tool run pfc-mcp`.
-
-## Tools
-
-### Documentation (5 tools)
-
-| Tool | Description |
-|------|-------------|
-| `pfc_browse_commands` | Browse PFC command documentation by path |
-| `pfc_browse_python_api` | Browse PFC Python SDK documentation by path |
-| `pfc_browse_reference` | Browse reference docs (contact models, range elements) |
-| `pfc_query_command` | Search PFC commands by keywords |
-| `pfc_query_python_api` | Search PFC Python SDK by keywords |
-
-### Execution (5 tools)
-
-| Tool | Description |
-|------|-------------|
-| `pfc_execute_task` | Submit a Python script for execution in PFC |
-| `pfc_check_task_status` | Check status and output of a running/completed task |
-| `pfc_list_tasks` | List tracked tasks with pagination |
-| `pfc_interrupt_task` | Request graceful interruption of a running task |
-| `pfc_capture_plot` | Capture a PFC plot image with configurable camera and coloring |
+- **Documentation as a boundary map** — browse and search tools let agents discover what PFC can do, reducing hallucinated commands
+- **Task queue with live status** — scripts are queued and executed sequentially; agents can poll output and status in real time
+- **Callback-based control** — gracefully interrupt long-running `cycle()` calls, and capture plots mid-simulation without pausing it
 
 ## Runtime Model
 
-- **pfc-mcp** (this package): MCP server with documentation tools and execution tool entrypoints.
-- **[pfc-mcp-bridge](https://pypi.org/project/pfc-mcp-bridge/)**: bridge process that runs inside PFC GUI for simulation execution.
-- Documentation tools work standalone; execution tools require a running bridge.
+| Component | PyPI | Python | Role |
+|-----------|------|--------|------|
+| **pfc-mcp** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/) | >= 3.10 | MCP server (documentation + execution client) |
+| **pfc-mcp-bridge** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/) | >= 3.6 | WebSocket bridge inside PFC GUI |
 
-## Bridge in PFC GUI
+Documentation tools work standalone. Execution tools require a running bridge.
 
-Start `pfc-mcp-bridge` from the PFC GUI Python console when you need execution tools.
+## Troubleshooting
 
-Expected startup output:
-
-```
-============================================================
-PFC Bridge Server
-============================================================
-  URL:         ws://localhost:9001
-  Log:         /your-working-dir/.pfc-bridge/bridge.log
-  Callbacks:   Interrupt, Diagnostic (registered)
-============================================================
-
-Task loop running via Qt timer (interval=20ms, max_tasks_per_tick=1)
-Bridge started in non-blocking mode (GUI remains responsive).
-```
-
-No Enter confirmation is required.
-
-### Bridge Troubleshooting
-
-- `Server won't start`: install bridge dependency in PFC Python:
-
-```python
-import pip
-pip.main(['install', '--user', 'websockets==9.1'])
-```
-
-- `Tasks not processing`: ensure `pfc_mcp_bridge.start()` is running in the PFC process.
-- `Connection failed`: verify bridge is running, port `9001` is free, and check `.pfc-bridge/bridge.log`.
+| Symptom | Fix |
+|---------|-----|
+| `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or use `uv tool run pfc-mcp` |
+| Bridge won't start | Install dependency in PFC Python: `pip install websockets==9.1` |
+| Tasks not processing | Ensure `pfc_mcp_bridge.start()` is running in PFC |
+| Connection failed | Check bridge is running, port 9001 is free, see `.pfc-bridge/bridge.log` |
 
 ## Development
 
 ```bash
-# Install with dev dependencies
-uv sync --group dev
-
-# Run tests
-uv run pytest
-
-# Run server locally
-uv run pfc-mcp
+uv sync --group dev    # Install with dev dependencies
+uv run pytest          # Run tests
+uv run pfc-mcp         # Run server locally
 ```
-
-## Requirements
-
-- MCP server runtime: Python >= 3.10
-- Bridge runtime (inside PFC): Python >= 3.6, ITASCA PFC 7.0+, `websockets==9.1`
 
 ## License
 
-MIT - see [LICENSE](https://github.com/yusong652/pfc-mcp/blob/main/LICENSE).
+MIT — see [LICENSE](LICENSE).

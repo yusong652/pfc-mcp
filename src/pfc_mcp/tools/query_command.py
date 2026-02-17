@@ -10,7 +10,7 @@ from pfc_mcp.docs.query import CommandSearch
 from pfc_mcp.utils import SearchLimit, SearchQuery
 
 
-def register(mcp: FastMCP):
+def register(mcp: FastMCP) -> None:
     """Register pfc_query_command tool with the MCP server."""
 
     @mcp.tool()

@@ -11,7 +11,7 @@ Responsibilities:
 
 import json
 from functools import lru_cache
-from typing import Any
+from typing import Any, cast
 
 from pfc_mcp.docs.config import PFC_REFERENCES_ROOT
 
@@ -46,7 +46,7 @@ class ReferenceLoader:
             return {}
 
         with open(index_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def load_category_index(category: str) -> dict[str, Any] | None:
@@ -82,7 +82,7 @@ class ReferenceLoader:
             return None
 
         with open(index_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def load_item_doc(category: str, item_name: str) -> dict[str, Any] | None:
@@ -118,7 +118,7 @@ class ReferenceLoader:
             return None
 
         with open(doc_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def get_item_list(category: str) -> list[dict[str, Any]]:
@@ -144,14 +144,14 @@ class ReferenceLoader:
 
         # contact-models uses "models" key, range-elements uses "elements" key
         if "models" in index:
-            return index["models"]
+            return cast(list[dict[str, Any]], index["models"])
         elif "elements" in index:
-            return index["elements"]
+            return cast(list[dict[str, Any]], index["elements"])
         else:
             return []
 
     @staticmethod
-    def clear_cache():
+    def clear_cache() -> None:
         """Clear all cached data.
 
         Useful for testing or when documentation files are updated.

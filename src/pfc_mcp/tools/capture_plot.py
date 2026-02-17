@@ -173,9 +173,10 @@ def register(mcp: FastMCP) -> None:
             message = response.get("message", "")
             if status != "success":
                 err_obj = response.get("error") if isinstance(response.get("error"), dict) else {}
-                error_code = err_obj.get("code") or status or "diagnostic_failed"
-                error_message = err_obj.get("message") or message or "Diagnostic execution failed"
-                details = err_obj.get("details") if isinstance(err_obj.get("details"), dict) else None
+                err_dict = err_obj or {}
+                error_code = err_dict.get("code") or status or "diagnostic_failed"
+                error_message = err_dict.get("message") or message or "Diagnostic execution failed"
+                details = err_dict.get("details") if isinstance(err_dict.get("details"), dict) else None
                 reason = None
                 if details:
                     parts: list[str] = []

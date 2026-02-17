@@ -10,7 +10,7 @@ from pfc_mcp.docs.query import APISearch
 from pfc_mcp.utils import PythonAPISearchQuery, SearchLimit
 
 
-def register(mcp: FastMCP):
+def register(mcp: FastMCP) -> None:
     """Register pfc_query_python_api tool with the MCP server."""
 
     @mcp.tool()

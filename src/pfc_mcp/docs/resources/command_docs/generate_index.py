@@ -296,7 +296,7 @@ def generate_index(commands_dir: Path) -> dict[str, Any]:
         # Get category metadata
         if category_name not in CATEGORY_METADATA:
             print(f"Warning: No metadata defined for category '{category_name}'")
-            category_meta = {
+            category_meta: dict[str, Any] = {
                 "full_name": f"{category_name.title()} Commands",
                 "description": f"Commands for {category_name}",
                 "command_prefix": category_name,
@@ -323,7 +323,7 @@ def generate_index(commands_dir: Path) -> dict[str, Any]:
     return index
 
 
-def main():
+def main() -> int:
     """Main entry point."""
     script_dir = Path(__file__).parent
     commands_dir = script_dir / "commands"

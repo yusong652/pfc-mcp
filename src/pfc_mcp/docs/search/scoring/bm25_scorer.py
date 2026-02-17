@@ -138,7 +138,7 @@ class BM25Scorer:
 
         return total_score, match_info
 
-    def _score_field(self, query_tokens: set, doc_id: str, field: str) -> tuple[float, dict[str, Any]]:
+    def _score_field(self, query_tokens: set[str], doc_id: str, field: str) -> tuple[float, dict[str, Any]]:
         """Score query against a specific document field.
 
         Args:
@@ -169,7 +169,7 @@ class BM25Scorer:
         # Note: Name field requires exact matching only (no partial matches for API paths)
         if field == "name":
             # Disable partial matching for name field (API paths should match exactly)
-            partial_matches = set()
+            partial_matches: set[tuple[str, str]] = set()
             quality = 1.0
         else:
             # Enable partial matching for description and keywords fields
@@ -289,7 +289,7 @@ class BM25Scorer:
         weight_name: float | None = None,
         weight_desc: float | None = None,
         weight_kw: float | None = None,
-    ):
+    ) -> None:
         """Set BM25 hyperparameters and field weights.
 
         Args:

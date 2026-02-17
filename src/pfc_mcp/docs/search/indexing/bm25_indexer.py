@@ -11,6 +11,7 @@ Multi-Field Design:
 
 import math
 from collections import Counter
+from typing import Any
 
 from pfc_mcp.docs.models.document import SearchDocument
 from pfc_mcp.docs.search.preprocessing.tokenizer import TextTokenizer
@@ -52,7 +53,7 @@ class BM25Indexer:
         >>> desc_tf = indexer.get_term_freq("itasca.ball.Ball.vel", "velocity", field="description")
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize empty multi-field BM25 index."""
         # Name field index
         self.name_documents: dict[str, list[str]] = {}  # doc_id → tokens
@@ -329,7 +330,7 @@ class BM25Indexer:
         # Clear common
         self.doc_count = 0
 
-    def get_stats(self) -> dict:
+    def get_stats(self) -> dict[str, Any]:
         """Get index statistics for debugging.
 
         Returns:

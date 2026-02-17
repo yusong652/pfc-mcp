@@ -9,7 +9,7 @@ from pfc_mcp.contracts import build_docs_data, build_error, build_ok
 from pfc_mcp.docs.python_api import APILoader
 
 
-def register(mcp: FastMCP):
+def register(mcp: FastMCP) -> None:
     """Register pfc_browse_python_api tool with the MCP server."""
 
     @mcp.tool()

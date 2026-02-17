@@ -128,7 +128,7 @@ def find_partial_matches(
 
     for q_word in unmatched_query_words:
         best_match = None
-        best_quality = 0
+        best_quality: float = 0
 
         for k_word in unmatched_keyword_words:
             quality = word_match_quality(q_word, k_word)

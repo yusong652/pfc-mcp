@@ -10,7 +10,7 @@ from pfc_mcp.docs.commands import CommandLoader
 from pfc_mcp.utils import normalize_input
 
 
-def register(mcp: FastMCP):
+def register(mcp: FastMCP) -> None:
     """Register pfc_browse_commands tool with the MCP server."""
 
     @mcp.tool()

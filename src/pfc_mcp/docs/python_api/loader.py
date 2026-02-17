@@ -14,7 +14,7 @@ import json
 from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from pfc_mcp.docs.config import PFC_DOCS_SOURCE
 
@@ -98,7 +98,7 @@ class DocumentationLoader:
             ["itasca.BallBallContact.gap", "itasca.BallFacetContact.gap", ...]
         """
         # Use defaultdict to automatically handle merging
-        all_keywords = defaultdict(list)
+        all_keywords: defaultdict[str, list[str]] = defaultdict(list)
 
         # Load itasca top-level keywords
         itasca_keywords_path = PFC_DOCS_SOURCE / "itasca_keywords.json"
@@ -190,11 +190,11 @@ class DocumentationLoader:
         if "methods" in doc:
             for method in doc["methods"]:
                 if method["name"] == anchor:
-                    return method
+                    return cast(dict[str, Any], method)
         elif "functions" in doc:
             for func in doc["functions"]:
                 if func["name"] == anchor:
-                    return func
+                    return cast(dict[str, Any], func)
 
         return None
 
@@ -372,7 +372,7 @@ class DocumentationLoader:
         }
 
     @staticmethod
-    def _expand_contact_keywords(all_keywords: defaultdict) -> defaultdict:
+    def _expand_contact_keywords(all_keywords: defaultdict[str, list[str]]) -> defaultdict[str, list[str]]:
         """Expand itasca.contact.Contact.* entries in keywords to all Contact type variants.
 
         This ensures keywords.json entries like "itasca.contact.Contact.gap" are
@@ -423,7 +423,7 @@ class DocumentationLoader:
         return expanded_keywords
 
     @staticmethod
-    def _merge_keywords(target: defaultdict, source: dict[str, list]) -> None:
+    def _merge_keywords(target: defaultdict[str, list[str]], source: dict[str, list[str]]) -> None:
         """Merge keywords from source into target without overwriting.
 
         When a keyword exists in both target and source, their API lists
@@ -445,7 +445,7 @@ class DocumentationLoader:
             target[keyword] = list(dict.fromkeys(target[keyword]))
 
     @staticmethod
-    def _load_keywords_recursive(directory: Path, all_keywords: defaultdict) -> None:
+    def _load_keywords_recursive(directory: Path, all_keywords: defaultdict[str, list[str]]) -> None:
         """Recursively load keywords from a directory tree.
 
         Scans the given directory and all subdirectories for keywords.json files
@@ -517,7 +517,7 @@ class DocumentationLoader:
             }
 
         with open(doc_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def load_function(module_key: str, func_name: str) -> dict[str, Any] | None:
@@ -589,15 +589,15 @@ class DocumentationLoader:
 
         if not file_path:
             # Return basic info from index
-            return object_info
+            return cast(dict[str, Any], object_info)
 
         # Load full object documentation
         doc_path = PFC_DOCS_SOURCE / file_path
         if not doc_path.exists():
-            return object_info
+            return cast(dict[str, Any], object_info)
 
         with open(doc_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def load_method(object_name: str, method_name: str) -> dict[str, Any] | None:
@@ -634,7 +634,7 @@ class DocumentationLoader:
         return None
 
     @staticmethod
-    def clear_cache():
+    def clear_cache() -> None:
         """Clear all cached data.
 
         Useful for testing or when documentation files are updated.

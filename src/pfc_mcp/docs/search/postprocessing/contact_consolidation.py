@@ -78,7 +78,7 @@ def consolidate_contact_apis(results: list[SearchResult]) -> list[SearchResult]:
         return results
 
     consolidated = []
-    seen_methods = {}  # Track Contact methods: {method_name: index_in_consolidated}
+    seen_methods: dict[str, int] = {}  # Track Contact methods: {method_name: index_in_consolidated}
 
     for result in results:
         doc_name = result.document.name

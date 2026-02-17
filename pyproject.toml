@@ -31,6 +31,7 @@ pfc-mcp = "pfc_mcp.server:main"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.19.1",
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
     "ruff>=0.9.0",
@@ -55,6 +56,11 @@ ignore = [
     "B008",    # function call in defaults — needed for FastMCP tool signatures
     "B905",    # zip strict — internal code with guaranteed equal lengths
 ]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+ignore_missing_imports = true
 
 [tool.hatch.version]
 path = "src/pfc_mcp/__init__.py"

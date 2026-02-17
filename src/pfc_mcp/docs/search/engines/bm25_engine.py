@@ -137,6 +137,7 @@ class BM25SearchEngine(BaseSearchEngine):
             return []
 
         # Score all documents using BM25
+        assert self.scorer is not None
         scored_results = self.scorer.batch_score(query, self.documents)
 
         # Convert to SearchResult objects with ranks

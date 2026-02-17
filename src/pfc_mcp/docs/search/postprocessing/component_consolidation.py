@@ -75,7 +75,7 @@ def consolidate_component_apis(results: list[SearchResult]) -> list[SearchResult
     COMPONENT_PATTERN = re.compile(r"^(.+)_(x|y|z)$")
 
     # Pass 1: Identify all base methods and their components
-    base_methods: dict[str, set] = {}
+    base_methods: dict[str, set[str]] = {}
     # {base_api_name: set of components ('x', 'y', 'z')}
 
     for result in results:

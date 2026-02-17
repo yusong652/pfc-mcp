@@ -98,7 +98,7 @@ class SearchDocument:
     examples: list[dict[str, str]] | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate and normalize fields after initialization."""
         # Ensure metadata is initialized
         if self.metadata is None:

@@ -57,7 +57,7 @@ class SearchResult:
     rank: int
     score_breakdown: dict[str, float] | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate and normalize fields after initialization."""
         if self.score_breakdown is None:
             self.score_breakdown = {}

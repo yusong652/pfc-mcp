@@ -11,7 +11,7 @@ Responsibilities:
 
 import json
 from functools import lru_cache
-from typing import Any
+from typing import Any, cast
 
 from pfc_mcp.docs.config import PFC_COMMAND_DOCS_ROOT
 
@@ -53,7 +53,7 @@ class CommandLoader:
             raise FileNotFoundError(f"Command index file not found: {index_path}")
 
         with open(index_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def load_command_doc(category: str, command_name: str) -> dict[str, Any] | None:
@@ -109,7 +109,7 @@ class CommandLoader:
             return None
 
         with open(doc_path, encoding="utf-8") as f:
-            return json.load(f)
+            return cast(dict[str, Any], json.load(f))
 
     @staticmethod
     def get_all_commands() -> list[dict[str, Any]]:
@@ -142,7 +142,7 @@ class CommandLoader:
         return all_commands
 
     @staticmethod
-    def clear_cache():
+    def clear_cache() -> None:
         """Clear all cached data.
 
         Useful for testing or when documentation files are updated.

@@ -3,6 +3,7 @@
 import argparse
 import asyncio
 import logging
+from typing import Any
 
 from fastmcp import FastMCP
 
@@ -48,7 +49,7 @@ interrupt_task.register(mcp)
 capture_plot.register(mcp)
 
 
-def main():
+def main() -> None:
     """Entry point for the PFC MCP server."""
     parser = argparse.ArgumentParser(
         prog="pfc-mcp",
@@ -92,7 +93,7 @@ def main():
     logging.getLogger("uvicorn").setLevel(uvicorn_level)
     logging.getLogger("uvicorn.error").setLevel(uvicorn_level)
 
-    run_kwargs: dict = {"transport": args.transport, "show_banner": False}
+    run_kwargs: dict[str, Any] = {"transport": args.transport, "show_banner": False}
     if args.transport in ("http", "sse"):
         run_kwargs["host"] = args.host
         run_kwargs["port"] = args.port

@@ -170,7 +170,7 @@ class APIDocumentAdapter:
         return parts[0] if parts else "unknown"
 
     @staticmethod
-    def load_by_id(doc_id: str) -> SearchDocument:
+    def load_by_id(doc_id: str) -> SearchDocument | None:
         """Load a specific API document by ID.
 
         Args:

@@ -6,10 +6,10 @@ from typing import Any
 from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
-from pfc_mcp.contracts import build_error_from_legacy, build_ok
+from pfc_mcp.contracts import build_ok
 from pfc_mcp.formatting import (
-    format_bridge_unavailable,
-    format_operation_error,
+    build_bridge_error,
+    build_operation_error,
     format_unix_timestamp,
     normalize_status,
     paginate_output,
@@ -35,20 +35,15 @@ def register(mcp: FastMCP) -> None:
             client = await get_bridge_client()
             response = await client.check_task_status(task_id)
         except Exception as exc:
-            return build_error_from_legacy(
-                format_bridge_unavailable("pfc_check_task_status", exc, task_id=task_id)
-            )
+            return build_bridge_error(exc, task_id=task_id)
 
         status = response.get("status", "unknown")
         if status == "not_found":
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_check_task_status",
-                    status="not_found",
-                    message="Task not found",
-                    task_id=task_id,
-                    action="Verify task_id or submit a new task",
-                )
+            return build_operation_error(
+                "not_found",
+                "Task not found",
+                task_id=task_id,
+                action="Verify task_id or submit a new task",
             )
 
         data = response.get("data") or {}

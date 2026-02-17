@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Any, Optional
 
 from pfc_mcp.config import get_bridge_config
+from pfc_mcp.contracts import build_error
 
 
 # =============================================================================
@@ -99,47 +100,34 @@ def _summarize_bridge_error(exc: Exception) -> str:
     return text.splitlines()[0]
 
 
-def format_bridge_unavailable(operation: str, exc: Exception, task_id: str | None = None) -> dict[str, str]:
-    """Return structured bridge connectivity error payload.
-
-    The dict is returned directly from MCP tools so FastMCP can expose
-    `structuredContent.status`, allowing backend to parse errors by status
-    instead of brittle text matching.
-    """
+def build_bridge_error(exc: Exception, *, task_id: str | None = None) -> dict[str, Any]:
+    """Build a unified error envelope for bridge connectivity failures."""
     cfg = get_bridge_config()
     reason = _summarize_bridge_error(exc)
-
-    result: dict[str, str] = {
-        "status": "bridge_unavailable",
-        "operation": operation,
-        "message": "PFC bridge unavailable",
+    details: dict[str, Any] = {
         "bridge_url": cfg.url,
         "reason": reason,
         "action": "start pfc-bridge in PFC GUI, then retry",
     }
     if task_id:
-        result["task_id"] = task_id
-    return result
+        details["task_id"] = task_id
+    return build_error("bridge_unavailable", "PFC bridge unavailable", details)
 
 
-def format_operation_error(
-    operation: str,
-    status: str,
+def build_operation_error(
+    code: str,
     message: str,
+    *,
     reason: str | None = None,
     task_id: str | None = None,
     action: str | None = None,
-) -> dict[str, str]:
-    """Return structured operation error payload."""
-    result: dict[str, str] = {
-        "status": status,
-        "operation": operation,
-        "message": message,
-    }
+) -> dict[str, Any]:
+    """Build a unified error envelope for operation failures."""
+    details: dict[str, Any] = {}
     if reason:
-        result["reason"] = reason
+        details["reason"] = reason
     if task_id:
-        result["task_id"] = task_id
+        details["task_id"] = task_id
     if action:
-        result["action"] = action
-    return result
+        details["action"] = action
+    return build_error(code, message, details or None)

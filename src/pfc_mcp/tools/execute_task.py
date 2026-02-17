@@ -6,8 +6,8 @@ from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client, get_task_manager
 from pfc_mcp.config import get_bridge_config
-from pfc_mcp.contracts import build_error_from_legacy, build_ok
-from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error
+from pfc_mcp.contracts import build_ok
+from pfc_mcp.formatting import build_bridge_error, build_operation_error
 from pfc_mcp.utils import ScriptPath, TaskDescription
 
 
@@ -41,23 +41,18 @@ def register(mcp: FastMCP) -> None:
             )
         except Exception as exc:
             task_manager.update_status(task_id, "failed")
-            return build_error_from_legacy(
-                format_bridge_unavailable("pfc_execute_task", exc, task_id=task_id)
-            )
+            return build_bridge_error(exc, task_id=task_id)
 
         status = response.get("status", "unknown")
         message = response.get("message", "")
 
         if status != "pending":
             task_manager.update_status(task_id, "failed")
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_execute_task",
-                    status=status or "submission_failed",
-                    message=message or "Task submission rejected by bridge",
-                    task_id=task_id,
-                    action="Check script path and bridge logs, then retry",
-                )
+            return build_operation_error(
+                status or "submission_failed",
+                message or "Task submission rejected by bridge",
+                task_id=task_id,
+                action="Check script path and bridge logs, then retry",
             )
 
         task_manager.update_status(task_id, "running")

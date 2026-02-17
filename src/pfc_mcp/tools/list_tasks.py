@@ -7,8 +7,8 @@ from fastmcp import FastMCP
 from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client
-from pfc_mcp.contracts import build_error_from_legacy, build_ok
-from pfc_mcp.formatting import format_bridge_unavailable, format_operation_error, format_unix_timestamp, normalize_status
+from pfc_mcp.contracts import build_ok
+from pfc_mcp.formatting import build_bridge_error, build_operation_error, format_unix_timestamp, normalize_status
 from pfc_mcp.utils import SkipNewestTasks, TaskListLimit
 
 
@@ -33,17 +33,14 @@ def register(mcp: FastMCP) -> None:
                 limit=limit,
             )
         except Exception as exc:
-            return build_error_from_legacy(format_bridge_unavailable("pfc_list_tasks", exc))
+            return build_bridge_error(exc)
 
         status = response.get("status", "unknown")
         if status != "success":
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_list_tasks",
-                    status=status or "list_failed",
-                    message=response.get("message", "Failed to list tasks"),
-                    action="Check bridge state and retry",
-                )
+            return build_operation_error(
+                status or "list_failed",
+                response.get("message", "Failed to list tasks"),
+                action="Check bridge state and retry",
             )
 
         tasks = response.get("data") or []

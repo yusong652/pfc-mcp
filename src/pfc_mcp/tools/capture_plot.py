@@ -14,10 +14,10 @@ from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client
 from pfc_mcp.config import get_bridge_config
-from pfc_mcp.contracts import build_error_from_legacy, build_ok
+from pfc_mcp.contracts import build_ok
 from pfc_mcp.formatting import (
-    format_bridge_unavailable,
-    format_operation_error,
+    build_bridge_error,
+    build_operation_error,
     is_bridge_connectivity_error,
 )
 from pfc_mcp.scripts import (
@@ -149,13 +149,10 @@ def register(mcp: FastMCP) -> None:
             client = await get_bridge_client()
             working_dir = config.workspace_path or await client.get_working_directory()
             if not working_dir:
-                return build_error_from_legacy(
-                    format_operation_error(
-                        "pfc_capture_plot",
-                        status="workspace_unavailable",
-                        message="Cannot resolve pfc-bridge working directory",
-                        action="Set PFC_MCP_WORKSPACE_PATH or ensure bridge has an active workspace",
-                    )
+                return build_operation_error(
+                    "workspace_unavailable",
+                    "Cannot resolve pfc-bridge working directory",
+                    action="Set PFC_MCP_WORKSPACE_PATH or ensure bridge has an active workspace",
                 )
 
             script_path = _create_temp_script(working_dir, script_content)
@@ -184,14 +181,11 @@ def register(mcp: FastMCP) -> None:
                     if action:
                         parts.append(str(action))
                     reason = " | ".join(parts) if parts else None
-                return build_error_from_legacy(
-                    format_operation_error(
-                        "pfc_capture_plot",
-                        status=error_code,
-                        message=error_message,
-                        reason=reason,
-                        action="Run bridge in GUI mode for plot capture" if error_code == "unsupported_in_console" else "Check bridge diagnostic logs and retry",
-                    )
+                return build_operation_error(
+                    error_code,
+                    error_message,
+                    reason=reason,
+                    action="Run bridge in GUI mode for plot capture" if error_code == "unsupported_in_console" else "Check bridge diagnostic logs and retry",
                 )
 
             data = response.get("data") or {}
@@ -200,14 +194,11 @@ def register(mcp: FastMCP) -> None:
             try:
                 image_data = base64.b64encode(result_path.read_bytes()).decode("ascii")
             except FileNotFoundError:
-                return build_error_from_legacy(
-                    format_operation_error(
-                        "pfc_capture_plot",
-                        status="output_unavailable",
-                        message="Capture completed but image is not readable locally",
-                        reason=f"output_path={result_path}",
-                        action="Ensure MCP server and bridge share the same filesystem",
-                    )
+                return build_operation_error(
+                    "output_unavailable",
+                    "Capture completed but image is not readable locally",
+                    reason=f"output_path={result_path}",
+                    action="Ensure MCP server and bridge share the same filesystem",
                 )
             content = [
                 ImageContent(type="image", data=image_data, mimeType="image/png"),
@@ -223,34 +214,25 @@ def register(mcp: FastMCP) -> None:
             return ToolResult(content=content, structured_content=structured)
 
         except ConnectionError as exc:
-            return build_error_from_legacy(format_bridge_unavailable("pfc_capture_plot", exc))
+            return build_bridge_error(exc)
         except TimeoutError as exc:
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_capture_plot",
-                    status="timeout",
-                    message="Capture timed out",
-                    reason=str(exc),
-                    action="Increase timeout or inspect bridge responsiveness",
-                )
+            return build_operation_error(
+                "timeout",
+                "Capture timed out",
+                reason=str(exc),
+                action="Increase timeout or inspect bridge responsiveness",
             )
         except ValueError as exc:
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_capture_plot",
-                    status="validation_error",
-                    message="Parameter validation failed",
-                    reason=str(exc),
-                )
+            return build_operation_error(
+                "validation_error",
+                "Parameter validation failed",
+                reason=str(exc),
             )
         except Exception as exc:
             if is_bridge_connectivity_error(exc):
-                return build_error_from_legacy(format_bridge_unavailable("pfc_capture_plot", exc))
-            return build_error_from_legacy(
-                format_operation_error(
-                    "pfc_capture_plot",
-                    status="internal_error",
-                    message="Capture failed",
-                    reason=str(exc),
-                )
+                return build_bridge_error(exc)
+            return build_operation_error(
+                "internal_error",
+                "Capture failed",
+                reason=str(exc),
             )

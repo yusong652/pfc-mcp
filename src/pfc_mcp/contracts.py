@@ -6,7 +6,7 @@ shapes stay consistent across documentation and execution tools.
 
 from __future__ import annotations
 
-from typing import Any, Literal, Mapping
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -82,19 +82,3 @@ def build_docs_data(
     ).model_dump(exclude_none=True)
 
 
-def build_error_from_legacy(
-    payload: Mapping[str, Any],
-    *,
-    default_code: str = "operation_error",
-    include_data: Any | None = None,
-) -> dict[str, Any]:
-    """Adapt legacy {status/message/...} payloads to unified envelope."""
-    code = str(payload.get("status") or default_code)
-    message = str(payload.get("message") or default_code)
-
-    details = {
-        str(k): v
-        for k, v in payload.items()
-        if k not in {"status", "message"}
-    }
-    return build_error(code, message, details or None, data=include_data)

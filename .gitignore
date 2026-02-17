@@ -7,6 +7,7 @@ build/
 
 # Testing
 .pytest_cache/
+.coverage
 
 # Environments
 .venv/

@@ -5,8 +5,8 @@ from typing import Any
 from fastmcp import FastMCP
 
 from pfc_mcp.contracts import build_docs_data, build_ok
-from pfc_mcp.docs.commands import CommandLoader
-from pfc_mcp.docs.query import CommandSearch
+from pfc_mcp.knowledge.commands import CommandLoader
+from pfc_mcp.knowledge.query import CommandSearch
 from pfc_mcp.utils import SearchLimit, SearchQuery
 
 

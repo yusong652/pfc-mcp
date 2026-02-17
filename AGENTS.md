@@ -35,7 +35,7 @@ Treat these as separate deployment targets even though they live in one reposito
 pfc-mcp/
 ├── src/pfc_mcp/
 │   ├── bridge/          # MCP-side bridge client/task manager
-│   ├── docs/            # command/API/reference search system
+│   ├── knowledge/       # command/API/reference search system
 │   ├── tools/           # MCP tool implementations
 │   ├── scripts/         # generated script helpers (plot capture, etc.)
 │   ├── formatting.py    # shared response formatting
@@ -103,9 +103,9 @@ Mock bridge based tests are preferred for deterministic CI.
 
 PFC searchable docs live under:
 
-- `src/pfc_mcp/docs/resources/command_docs/`
-- `src/pfc_mcp/docs/resources/python_sdk_docs/`
-- `src/pfc_mcp/docs/resources/references/`
+- `src/pfc_mcp/knowledge/resources/command_docs/`
+- `src/pfc_mcp/knowledge/resources/python_sdk_docs/`
+- `src/pfc_mcp/knowledge/resources/references/`
 
 When changing schema/content shape, verify browse/query tool behavior remains consistent.
 

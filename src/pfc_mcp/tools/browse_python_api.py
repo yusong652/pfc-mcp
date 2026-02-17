@@ -6,7 +6,7 @@ from fastmcp import FastMCP
 from pydantic import Field
 
 from pfc_mcp.contracts import build_docs_data, build_error, build_ok
-from pfc_mcp.docs.python_api import APILoader
+from pfc_mcp.knowledge.python_api import APILoader
 
 
 def register(mcp: FastMCP) -> None:

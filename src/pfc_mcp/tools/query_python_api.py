@@ -5,8 +5,8 @@ from typing import Any
 from fastmcp import FastMCP
 
 from pfc_mcp.contracts import build_docs_data, build_ok
-from pfc_mcp.docs.python_api import APIDocFormatter, DocumentationLoader
-from pfc_mcp.docs.query import APISearch
+from pfc_mcp.knowledge.python_api import APIDocFormatter, DocumentationLoader
+from pfc_mcp.knowledge.query import APISearch
 from pfc_mcp.utils import PythonAPISearchQuery, SearchLimit
 
 

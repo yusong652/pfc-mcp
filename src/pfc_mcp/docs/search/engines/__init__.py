@@ -8,6 +8,6 @@ from pfc_mcp.docs.search.engines.base_engine import BaseSearchEngine
 from pfc_mcp.docs.search.engines.bm25_engine import BM25SearchEngine
 
 __all__ = [
-    'BaseSearchEngine',
-    'BM25SearchEngine',
+    "BaseSearchEngine",
+    "BM25SearchEngine",
 ]

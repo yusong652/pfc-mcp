@@ -6,7 +6,7 @@ command and Python API documentation systems.
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Dict, Any
+from typing import Any
 
 
 class DocumentType(Enum):
@@ -17,6 +17,7 @@ class DocumentType(Enum):
     - MODEL_PROPERTY: Contact model properties (e.g., "linear", "rrlinear")
     - API: Python SDK APIs (e.g., "itasca.ball.create", "Ball.pos")
     """
+
     COMMAND = "command"
     MODEL_PROPERTY = "model_property"
     API = "api"
@@ -30,6 +31,7 @@ class SearchStrategy(Enum):
     - KEYWORD: Keyword-based matching (multi-word, partial matching)
     - SEMANTIC: Future embedding-based semantic search
     """
+
     PATH = "path"
     KEYWORD = "keyword"
     SEMANTIC = "semantic"
@@ -104,12 +106,13 @@ class SearchResult:
                 }
             )
     """
+
     name: str
     score: int
     doc_type: DocumentType
     category: str
     strategy: SearchStrategy
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: dict[str, Any] | None = None
 
 
 # Backward compatibility aliases

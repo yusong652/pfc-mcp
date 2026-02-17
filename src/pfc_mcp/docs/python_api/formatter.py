@@ -9,7 +9,8 @@ LLM-friendly markdown format. It handles:
 - Search result responses (no results, low confidence)
 """
 
-from typing import Optional, Dict, Any, List
+from typing import Any
+
 from pfc_mcp.docs.python_api.loader import DocumentationLoader
 from pfc_mcp.docs.python_api.types.mappings import CLASS_TO_MODULE
 
@@ -50,7 +51,7 @@ class APIDocFormatter:
         return f"itasca.{index_key}"
 
     @staticmethod
-    def format_root(modules: Dict[str, Any], objects: Dict[str, Any]) -> str:
+    def format_root(modules: dict[str, Any], objects: dict[str, Any]) -> str:
         """Format root overview of all modules and objects.
 
         Args:
@@ -122,11 +123,7 @@ class APIDocFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_module(
-        module_path: str,
-        module_data: Dict[str, Any],
-        related_objects: Optional[List[str]] = None
-    ) -> str:
+    def format_module(module_path: str, module_data: dict[str, Any], related_objects: list[str] | None = None) -> str:
         """Format module overview with its functions.
 
         Args:
@@ -171,10 +168,7 @@ class APIDocFormatter:
 
     @staticmethod
     def format_object(
-        module_path: str,
-        object_name: str,
-        object_doc: Dict[str, Any],
-        display_name: Optional[str] = None
+        module_path: str, object_name: str, object_doc: dict[str, Any], display_name: str | None = None
     ) -> str:
         """Format object overview with its method groups.
 
@@ -204,7 +198,7 @@ class APIDocFormatter:
                 if isinstance(group_methods, list):
                     method_list = ", ".join(group_methods[:5])
                     if len(group_methods) > 5:
-                        method_list += f", ... (+{len(group_methods)-5})"
+                        method_list += f", ... (+{len(group_methods) - 5})"
                     method_lines.append(f"- {group_name}: {method_list}")
                 else:
                     method_lines.append(f"- {group_name}: {group_methods}")
@@ -216,7 +210,7 @@ class APIDocFormatter:
                 else:
                     method_names.append(str(m))
             for i in range(0, len(method_names), 5):
-                chunk = method_names[i:i+5]
+                chunk = method_names[i : i + 5]
                 method_lines.append(f"  {', '.join(chunk)}")
 
         parts.append(f"## {full_path}")
@@ -232,7 +226,7 @@ class APIDocFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def _detect_component_methods(object_name: str, method_name: str) -> List[str]:
+    def _detect_component_methods(object_name: str, method_name: str) -> list[str]:
         """Detect if a method has component alternatives (_x, _y, _z).
 
         Checks the object's method_groups or methods list to see if component
@@ -284,11 +278,11 @@ class APIDocFormatter:
             if has_base:
                 components = []
                 if has_x:
-                    components.append('x')
+                    components.append("x")
                 if has_y:
-                    components.append('y')
+                    components.append("y")
                 if has_z:
-                    components.append('z')
+                    components.append("z")
 
                 return components
 
@@ -299,7 +293,7 @@ class APIDocFormatter:
             return []
 
     @staticmethod
-    def format_signature(api_name: str, metadata: Optional[Dict[str, Any]] = None) -> Optional[str]:
+    def format_signature(api_name: str, metadata: dict[str, Any] | None = None) -> str | None:
         """Format brief one-liner signature for quick reference.
 
         Args:
@@ -327,13 +321,13 @@ class APIDocFormatter:
             return None
 
         # Extract first line of description (usually the summary)
-        description_lines = api_doc['description'].strip().split('\n')
+        description_lines = api_doc["description"].strip().split("\n")
         brief_desc = description_lines[0].strip()
 
         # Build signature - check if return type already in signature string
-        signature = api_doc['signature']
-        if '->' not in signature and api_doc.get('returns'):
-            return_type = api_doc['returns']['type']
+        signature = api_doc["signature"]
+        if "->" not in signature and api_doc.get("returns"):
+            return_type = api_doc["returns"]["type"]
             signature = f"{signature} -> {return_type}"
 
         # Add Contact type support information if available
@@ -351,11 +345,7 @@ class APIDocFormatter:
         return f"`{signature}` - {brief_desc}{contact_suffix}{component_suffix}"
 
     @staticmethod
-    def format_full_doc(
-        api_doc: Dict[str, Any],
-        api_name: str,
-        metadata: Optional[Dict[str, Any]] = None
-    ) -> str:
+    def format_full_doc(api_doc: dict[str, Any], api_name: str, metadata: dict[str, Any] | None = None) -> str:
         """Format complete API documentation with Contact type support.
 
         Generates structured markdown with clear sections for LLM consumption:
@@ -401,19 +391,19 @@ class APIDocFormatter:
         lines.append("")
 
         # Add Contact type availability info
-        if metadata and 'all_contact_types' in metadata:
-            all_types = metadata['all_contact_types']
+        if metadata and "all_contact_types" in metadata:
+            all_types = metadata["all_contact_types"]
             lines.append(f"**Available for**: {', '.join(all_types)}")
             lines.append("")
 
         # Add component access info if available
-        if metadata and 'has_components' in metadata:
-            components = metadata['has_components']
-            method_name = api_name.split('.')[-1]
-            component_list = ', '.join([f"`{method_name}_{c}()`" for c in components])
+        if metadata and "has_components" in metadata:
+            components = metadata["has_components"]
+            method_name = api_name.split(".")[-1]
+            component_list = ", ".join([f"`{method_name}_{c}()`" for c in components])
             lines.append(f"**Component Access**: {component_list}")
             lines.append("")
-            lines.append(f"This method returns a vector. Individual components can be accessed via:")
+            lines.append("This method returns a vector. Individual components can be accessed via:")
             for c in components:
                 lines.append(f"- `{method_name}_{c}()` - Get {c}-component only")
             lines.append("")
@@ -423,73 +413,67 @@ class APIDocFormatter:
         lines.append("")
 
         # Description
-        lines.append(api_doc['description'])
+        lines.append(api_doc["description"])
         lines.append("")
 
         # Parameters
-        if api_doc.get('parameters'):
+        if api_doc.get("parameters"):
             lines.append("## Parameters")
-            for param in api_doc['parameters']:
-                required = "**required**" if param['required'] else "*optional*"
-                lines.append(
-                    f"- **`{param['name']}`** ({param['type']}, {required}): "
-                    f"{param['description']}"
-                )
+            for param in api_doc["parameters"]:
+                required = "**required**" if param["required"] else "*optional*"
+                lines.append(f"- **`{param['name']}`** ({param['type']}, {required}): {param['description']}")
             lines.append("")
 
         # Returns
-        if api_doc.get('returns'):
-            ret = api_doc['returns']
+        if api_doc.get("returns"):
+            ret = api_doc["returns"]
             lines.append("## Returns")
             lines.append(f"**`{ret['type']}`**: {ret['description']}")
             lines.append("")
 
         # Examples
-        if api_doc.get('examples'):
+        if api_doc.get("examples"):
             lines.append("## Examples")
-            for i, ex in enumerate(api_doc['examples'], 1):
+            for i, ex in enumerate(api_doc["examples"], 1):
                 lines.append(f"### Example {i}: {ex['description']}")
                 lines.append("```python")
-                lines.append(ex['code'])
+                lines.append(ex["code"])
                 lines.append("```")
                 lines.append("")
 
         # Limitations (IMPORTANT - guides LLM to command fallback)
-        if api_doc.get('limitations'):
+        if api_doc.get("limitations"):
             lines.append("## Limitations")
-            lines.append(api_doc['limitations'])
+            lines.append(api_doc["limitations"])
             lines.append("")
 
-            if api_doc.get('fallback_commands'):
-                lines.append(
-                    f"**When to use commands instead**: "
-                    f"{', '.join(api_doc['fallback_commands'])}"
-                )
+            if api_doc.get("fallback_commands"):
+                lines.append(f"**When to use commands instead**: {', '.join(api_doc['fallback_commands'])}")
                 lines.append("")
 
         # Best Practices
-        if api_doc.get('best_practices'):
+        if api_doc.get("best_practices"):
             lines.append("## Best Practices")
-            for bp in api_doc['best_practices']:
+            for bp in api_doc["best_practices"]:
                 lines.append(f"- {bp}")
             lines.append("")
 
         # Notes
-        if api_doc.get('notes'):
+        if api_doc.get("notes"):
             lines.append("## Notes")
-            for note in api_doc['notes']:
+            for note in api_doc["notes"]:
                 lines.append(f"- {note}")
             lines.append("")
 
         # See Also
-        if api_doc.get('see_also'):
+        if api_doc.get("see_also"):
             lines.append(f"**See Also**: {', '.join(api_doc['see_also'])}")
             lines.append("")
 
         return "\n".join(lines)
 
     @staticmethod
-    def _get_display_path(api_name: str, metadata: Optional[Dict[str, Any]]) -> str:
+    def _get_display_path(api_name: str, metadata: dict[str, Any] | None) -> str:
         """Generate official API path for display.
 
         Handles three cases:
@@ -513,14 +497,14 @@ class APIDocFormatter:
             "itasca.ball.create"
         """
         # Case 1: Contact types
-        if metadata and 'contact_type' in metadata:
-            contact_type = metadata['contact_type']
-            method_name = api_name.split('.')[-1]  # Extract method from "Contact.gap"
+        if metadata and "contact_type" in metadata:
+            contact_type = metadata["contact_type"]
+            method_name = api_name.split(".")[-1]  # Extract method from "Contact.gap"
             return f"itasca.{contact_type}.{method_name}"
 
         # Case 2: Object methods (e.g., "Ball.vel", "Wall.vel")
-        if '.' in api_name and not api_name.startswith('itasca.'):
-            class_name = api_name.split('.')[0]
+        if "." in api_name and not api_name.startswith("itasca."):
+            class_name = api_name.split(".")[0]
             if class_name in CLASS_TO_MODULE:
                 module_name = CLASS_TO_MODULE[class_name]
                 return f"itasca.{module_name}.{api_name}"
@@ -529,7 +513,7 @@ class APIDocFormatter:
         return api_name
 
     @staticmethod
-    def format_no_results_response(query: str, hints: Optional[List[str]] = None) -> str:
+    def format_no_results_response(query: str, hints: list[str] | None = None) -> str:
         """Format LLM content when no Python SDK API found.
 
         Args:
@@ -549,7 +533,7 @@ class APIDocFormatter:
         return f"**Python SDK**: Not available for '{query}'{hint_text}"
 
     @staticmethod
-    def format_function(func_doc: Dict[str, Any], module_path: str) -> str:
+    def format_function(func_doc: dict[str, Any], module_path: str) -> str:
         """Format function documentation for browse tool.
 
         Args:
@@ -610,7 +594,7 @@ class APIDocFormatter:
         return "\n".join(lines)
 
     @staticmethod
-    def format_method(method_doc: Dict[str, Any], object_name: str, actual_object_name: Optional[str] = None) -> str:
+    def format_method(method_doc: dict[str, Any], object_name: str, actual_object_name: str | None = None) -> str:
         """Format method documentation for browse tool.
 
         Args:
@@ -668,7 +652,7 @@ class APIDocFormatter:
         lookup_name = actual_object_name or object_name
         components = APIDocFormatter._detect_component_methods(lookup_name, name)
         if components:
-            component_list = ', '.join([f"`{name}_{c}()`" for c in components])
+            component_list = ", ".join([f"`{name}_{c}()`" for c in components])
             lines.append(f"Component Access: {component_list}")
             lines.append("")
             lines.append("This method returns a vector. Individual components can be accessed via:")
@@ -685,4 +669,3 @@ class APIDocFormatter:
             lines.append("```")
 
         return "\n".join(lines)
-

@@ -33,10 +33,28 @@ pfc-mcp = "pfc_mcp.server:main"
 dev = [
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
+    "ruff>=0.9.0",
 ]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "N"]
+ignore = [
+    "E501",    # line too long (handled by line-length setting)
+    "SIM105",  # contextlib.suppress — less clear for async code
+    "SIM102",  # nested if — sometimes more readable
+    "SIM103",  # return condition directly
+    "SIM108",  # ternary — not always clearer for long expressions
+    "N806",    # uppercase variable in function — used for constants
+    "B008",    # function call in defaults — needed for FastMCP tool signatures
+    "B905",    # zip strict — internal code with guaranteed equal lengths
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pfc_mcp"]

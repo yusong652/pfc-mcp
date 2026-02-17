@@ -6,8 +6,8 @@ and API documentation.
 """
 
 from dataclasses import dataclass
-from typing import Optional, Dict, Any, List
 from enum import Enum
+from typing import Any
 
 
 class SearchStrategy(Enum):
@@ -18,6 +18,7 @@ class SearchStrategy(Enum):
     - KEYWORD: Natural language keyword search
     - SEMANTIC: Future embedding-based semantic search
     """
+
     PATH = "path"
     KEYWORD = "keyword"
     SEMANTIC = "semantic"
@@ -38,10 +39,11 @@ class SearchResult:
         >>> SearchResult("Contact.gap", 999, SearchStrategy.PATH,
         ...              {"contact_type": "BallBallContact"})
     """
+
     api_name: str
     score: int
     strategy: SearchStrategy
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: dict[str, Any] | None = None
 
 
 @dataclass
@@ -64,14 +66,15 @@ class APIDocumentation:
         notes: Additional notes (optional)
         see_also: Related APIs (optional)
     """
+
     api_name: str
     signature: str
     description: str
-    parameters: List[Dict[str, Any]]
-    returns: Optional[Dict[str, str]] = None
-    examples: Optional[List[Dict[str, str]]] = None
-    limitations: Optional[str] = None
-    fallback_commands: Optional[List[str]] = None
-    best_practices: Optional[List[str]] = None
-    notes: Optional[List[str]] = None
-    see_also: Optional[List[str]] = None
+    parameters: list[dict[str, Any]]
+    returns: dict[str, str] | None = None
+    examples: list[dict[str, str]] | None = None
+    limitations: str | None = None
+    fallback_commands: list[str] | None = None
+    best_practices: list[str] | None = None
+    notes: list[str] | None = None
+    see_also: list[str] | None = None

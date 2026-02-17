@@ -1,13 +1,13 @@
 """PFC Command Query Tool - Keyword search for command documentation."""
 
-from typing import Any, Dict, List
+from typing import Any
 
 from fastmcp import FastMCP
 
 from pfc_mcp.contracts import build_docs_data, build_ok
 from pfc_mcp.docs.commands import CommandLoader
 from pfc_mcp.docs.query import CommandSearch
-from pfc_mcp.utils import SearchQuery, SearchLimit
+from pfc_mcp.utils import SearchLimit, SearchQuery
 
 
 def register(mcp: FastMCP):
@@ -17,7 +17,7 @@ def register(mcp: FastMCP):
     def pfc_query_command(
         query: SearchQuery,
         limit: SearchLimit = 10,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Search PFC command documentation by keywords (like grep).
 
         Returns matching command paths. Use pfc_browse_commands for full documentation.
@@ -32,7 +32,7 @@ def register(mcp: FastMCP):
         - pfc_query_python_api: Search Python SDK by keywords
         """
         results = CommandSearch.search_commands_only(query, top_k=limit)
-        matches: List[Dict[str, Any]] = []
+        matches: list[dict[str, Any]] = []
         for result in results:
             metadata = result.document.metadata or {}
             matches.append(
@@ -47,7 +47,7 @@ def register(mcp: FastMCP):
                 }
             )
 
-        payload: Dict[str, Any] = build_docs_data(
+        payload: dict[str, Any] = build_docs_data(
             source="commands",
             action="query",
             entries=matches,

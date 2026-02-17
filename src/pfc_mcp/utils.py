@@ -1,11 +1,10 @@
 """Validation models and utilities for PFC MCP tools."""
 
 from pathlib import PurePosixPath, PureWindowsPath
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import Field
 from pydantic.functional_validators import AfterValidator
-
 
 # Search limits
 DEFAULT_SEARCH_LIMIT = 10
@@ -29,7 +28,7 @@ MAX_WAIT_SECONDS = 3600
 DESCRIPTION_MAX_LENGTH = 200
 
 
-def normalize_input(value: Optional[str], lowercase: bool = False) -> str:
+def normalize_input(value: str | None, lowercase: bool = False) -> str:
     """Normalize user input: collapse whitespace, optionally lowercase."""
     if value is None:
         return ""
@@ -149,7 +148,7 @@ OutputLimit = Annotated[
 ]
 
 FilterText = Annotated[
-    Optional[str],
+    str | None,
     Field(default=None, description="Only keep output lines containing this text"),
 ]
 

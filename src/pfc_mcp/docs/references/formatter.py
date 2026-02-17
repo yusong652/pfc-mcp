@@ -9,7 +9,7 @@ Formatting Goals:
 - Highlight key syntax and examples
 """
 
-from typing import Dict, Any
+from typing import Any
 
 
 class ReferenceFormatter:
@@ -36,7 +36,7 @@ class ReferenceFormatter:
         return f"Error: {error_msg}\n\n{fallback_content}"
 
     @staticmethod
-    def format_root(categories: Dict[str, Any]) -> str:
+    def format_root(categories: dict[str, Any]) -> str:
         """Format reference categories overview as markdown.
 
         Args:
@@ -64,7 +64,7 @@ class ReferenceFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_index(category: str, index: Dict[str, Any]) -> str:
+    def format_index(category: str, index: dict[str, Any]) -> str:
         """Format a reference category index as markdown.
 
         Unified formatter for both contact-models and range-elements indexes.
@@ -127,7 +127,7 @@ class ReferenceFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_contact_model(doc: Dict[str, Any]) -> str:
+    def format_contact_model(doc: dict[str, Any]) -> str:
         """Format a complete contact model documentation as markdown.
 
         Args:
@@ -199,16 +199,16 @@ class ReferenceFormatter:
 
         # Usage Examples
         parts.append("## Usage")
-        parts.append(f"Set properties for this model using:")
+        parts.append("Set properties for this model using:")
         parts.append(f"- Command: `contact cmat add model {model_name} property <prop> <value>`")
-        parts.append(f"- Command: `contact property <prop> <value> range ...`")
-        parts.append(f"- Python: `contact.set_prop('<prop>', value)`")
+        parts.append("- Command: `contact property <prop> <value> range ...`")
+        parts.append("- Python: `contact.set_prop('<prop>', value)`")
         parts.append("")
 
         return "\n".join(parts)
 
     @staticmethod
-    def format_range_element(doc: Dict[str, Any]) -> str:
+    def format_range_element(doc: dict[str, Any]) -> str:
         """Format a range element documentation as markdown.
 
         Args:
@@ -295,7 +295,7 @@ class ReferenceFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_model_property(doc: Dict[str, Any], property_keyword: str) -> str:
+    def format_model_property(doc: dict[str, Any], property_keyword: str) -> str:
         """Format a contact model property documentation as markdown.
 
         Args:

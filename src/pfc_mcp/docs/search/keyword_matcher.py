@@ -5,14 +5,8 @@ command search and Python API search systems. The algorithms are inspired
 by BM25 principles with support for partial matching (prefix/substring).
 """
 
-from typing import Set, Tuple
 
-
-def calculate_relevance_score(
-    keyword_words: Set[str],
-    query_words: Set[str],
-    matching_words: Set[str]
-) -> int:
+def calculate_relevance_score(keyword_words: set[str], query_words: set[str], matching_words: set[str]) -> int:
     """Calculate relevance score using multi-factor ranking with partial matching.
 
     This scoring algorithm is inspired by BM25 and considers three factors:
@@ -56,10 +50,7 @@ def calculate_relevance_score(
     """
     # Calculate exact and partial matches
     exact_matches = matching_words
-    partial_matches, partial_quality = find_partial_matches(
-        query_words - exact_matches,
-        keyword_words - exact_matches
-    )
+    partial_matches, partial_quality = find_partial_matches(query_words - exact_matches, keyword_words - exact_matches)
 
     # Calculate effective coverage including partial matches
     # Partial matches contribute based on their quality (0.6-0.8 weight)
@@ -84,18 +75,17 @@ def calculate_relevance_score(
 
     # Combined score (weighted sum)
     score = int(
-        keyword_coverage * 1000 +  # Primary: complete matches rank highest
-        query_precision * 100 +     # Secondary: focused queries rank higher
-        match_count                 # Tie-breaker: exact matches > partial
+        keyword_coverage * 1000  # Primary: complete matches rank highest
+        + query_precision * 100  # Secondary: focused queries rank higher
+        + match_count  # Tie-breaker: exact matches > partial
     )
 
     return score
 
 
 def find_partial_matches(
-    unmatched_query_words: Set[str],
-    unmatched_keyword_words: Set[str]
-) -> Tuple[Set[Tuple[str, str]], float]:
+    unmatched_query_words: set[str], unmatched_keyword_words: set[str]
+) -> tuple[set[tuple[str, str]], float]:
     """Find partial matches between unmatched query and keyword words.
 
     Uses prefix and substring matching to handle abbreviations:

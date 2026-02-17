@@ -1,7 +1,7 @@
 """Runtime configuration for PFC MCP server."""
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 
 
 def _env_bool(name: str, default: bool) -> bool:

@@ -8,8 +8,8 @@ Components:
     - ReferenceFormatter: Format reference documentation as markdown
 """
 
-from pfc_mcp.docs.references.loader import ReferenceLoader
 from pfc_mcp.docs.references.formatter import ReferenceFormatter
+from pfc_mcp.docs.references.loader import ReferenceLoader
 
 __all__ = [
     "ReferenceLoader",

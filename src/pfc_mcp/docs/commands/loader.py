@@ -9,9 +9,9 @@ Responsibilities:
 - Cache loaded data to avoid repeated I/O
 """
 
-from typing import Dict, Any, Optional, List
-from functools import lru_cache
 import json
+from functools import lru_cache
+from typing import Any
 
 from pfc_mcp.docs.config import PFC_COMMAND_DOCS_ROOT
 
@@ -25,7 +25,7 @@ class CommandLoader:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def load_index() -> Dict[str, Any]:
+    def load_index() -> dict[str, Any]:
         """Load the main command index file with caching.
 
         The index file contains:
@@ -52,11 +52,11 @@ class CommandLoader:
         if not index_path.exists():
             raise FileNotFoundError(f"Command index file not found: {index_path}")
 
-        with open(index_path, 'r', encoding='utf-8') as f:
+        with open(index_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def load_command_doc(category: str, command_name: str) -> Optional[Dict[str, Any]]:
+    def load_command_doc(category: str, command_name: str) -> dict[str, Any] | None:
         """Load documentation for a specific command.
 
         Args:
@@ -108,11 +108,11 @@ class CommandLoader:
         if not doc_path.exists():
             return None
 
-        with open(doc_path, 'r', encoding='utf-8') as f:
+        with open(doc_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def get_all_commands() -> List[Dict[str, Any]]:
+    def get_all_commands() -> list[dict[str, Any]]:
         """Get all commands from all categories.
 
         Returns:
@@ -137,10 +137,7 @@ class CommandLoader:
         all_commands = []
         for category_name, category_data in categories.items():
             for cmd in category_data.get("commands", []):
-                all_commands.append({
-                    **cmd,
-                    "category": category_name
-                })
+                all_commands.append({**cmd, "category": category_name})
 
         return all_commands
 

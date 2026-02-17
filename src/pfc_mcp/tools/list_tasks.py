@@ -1,6 +1,5 @@
 """Task listing tool backed by pfc-bridge."""
 
-from typing import Optional
 from typing import Any
 
 from fastmcp import FastMCP
@@ -17,7 +16,7 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     async def pfc_list_tasks(
-        session_id: Optional[str] = Field(
+        session_id: str | None = Field(
             default=None,
             description="Optional session filter. Omit to list all sessions.",
         ),

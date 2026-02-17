@@ -5,7 +5,7 @@ ensuring a consistent interface across different search implementations.
 """
 
 from abc import ABC, abstractmethod
-from typing import List
+
 from pfc_mcp.docs.search.legacy_models import SearchResult
 
 
@@ -18,7 +18,7 @@ class SearchStrategy(ABC):
     """
 
     @abstractmethod
-    def search(self, query: str, top_n: int = 3) -> List[SearchResult]:
+    def search(self, query: str, top_n: int = 3) -> list[SearchResult]:
         """Execute search with this strategy.
 
         Args:

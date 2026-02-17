@@ -15,7 +15,6 @@ import websockets
 from pfc_mcp.bridge.client import close_bridge_client
 from pfc_mcp.server import mcp
 
-
 # ── Mock Bridge ──────────────────────────────────────────
 
 
@@ -170,8 +169,6 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
     )
 
     data = result.content[0].text if hasattr(result.content[0], "text") else json.loads(result.content[0].text)
-    # structuredContent holds the dict
-    sc = result.model_extra.get("structuredContent") if hasattr(result, "model_extra") else None
     # For fastmcp, the tool returns a dict which gets serialized
     # Just verify the raw result has the right structure
     assert result is not None

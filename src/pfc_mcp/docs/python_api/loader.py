@@ -10,11 +10,11 @@ Responsibilities:
 - Cache loaded data for performance
 """
 
-from typing import Dict, Any, Optional, List
-from functools import lru_cache
-from collections import defaultdict
-from pathlib import Path
 import json
+from collections import defaultdict
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
 
 from pfc_mcp.docs.config import PFC_DOCS_SOURCE
 
@@ -28,7 +28,7 @@ class DocumentationLoader:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def load_index() -> Dict[str, Any]:
+    def load_index() -> dict[str, Any]:
         """Load the main index file with caching.
 
         The index file contains:
@@ -58,7 +58,7 @@ class DocumentationLoader:
         if not index_path.exists():
             raise FileNotFoundError(f"Index file not found: {index_path}")
 
-        with open(index_path, 'r', encoding='utf-8') as f:
+        with open(index_path, encoding="utf-8") as f:
             index = json.load(f)
 
         # Expand Contact.* entries to all Contact type variants
@@ -71,7 +71,7 @@ class DocumentationLoader:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def load_all_keywords() -> Dict[str, List[str]]:
+    def load_all_keywords() -> dict[str, list[str]]:
         """Load keywords from all modules with caching and merging.
 
         Aggregates keywords from:
@@ -103,7 +103,7 @@ class DocumentationLoader:
         # Load itasca top-level keywords
         itasca_keywords_path = PFC_DOCS_SOURCE / "itasca_keywords.json"
         if itasca_keywords_path.exists():
-            with open(itasca_keywords_path, 'r', encoding='utf-8') as f:
+            with open(itasca_keywords_path, encoding="utf-8") as f:
                 data = json.load(f)
                 DocumentationLoader._merge_keywords(all_keywords, data.get("keywords", {}))
 
@@ -119,7 +119,7 @@ class DocumentationLoader:
         return dict(all_keywords)
 
     @staticmethod
-    def load_api_doc(api_name: str) -> Optional[Dict[str, Any]]:
+    def load_api_doc(api_name: str) -> dict[str, Any] | None:
         """Load documentation for a specific API or module.
 
         Args:
@@ -175,13 +175,13 @@ class DocumentationLoader:
 
         # Parse file path and anchor
         # Format: "file_name.json#function_name"
-        file_name, anchor = ref.split('#')
+        file_name, anchor = ref.split("#")
         doc_path = PFC_DOCS_SOURCE / file_name
 
         if not doc_path.exists():
             return None
 
-        with open(doc_path, 'r', encoding='utf-8') as f:
+        with open(doc_path, encoding="utf-8") as f:
             doc = json.load(f)
 
         # Find the specific function or method
@@ -199,7 +199,7 @@ class DocumentationLoader:
         return None
 
     @staticmethod
-    def _expand_contact_types(index: Dict[str, Any]) -> Dict[str, Any]:
+    def _expand_contact_types(index: dict[str, Any]) -> dict[str, Any]:
         """Expand Contact.* entries to all Contact type variants.
 
         PFC has multiple Contact types (BallBallContact, BallFacetContact, etc.)
@@ -261,7 +261,7 @@ class DocumentationLoader:
         return index
 
     @staticmethod
-    def _expand_object_methods(index: Dict[str, Any]) -> Dict[str, Any]:
+    def _expand_object_methods(index: dict[str, Any]) -> dict[str, Any]:
         """Expand object method entries to full official paths.
 
         Object methods like "Ball.vel", "Wall.pos" are stored in index as short paths.
@@ -297,8 +297,8 @@ class DocumentationLoader:
                 continue
 
             # Check if it's an object method (Class.method format)
-            if '.' in api_name:
-                class_name = api_name.split('.')[0]
+            if "." in api_name:
+                class_name = api_name.split(".")[0]
                 # Check if it's a known class with module mapping
                 if class_name in CLASS_TO_MODULE:
                     object_methods[api_name] = file_ref
@@ -306,7 +306,7 @@ class DocumentationLoader:
 
         # Expand each object method to full path
         for short_path, file_ref in object_methods.items():
-            class_name = short_path.split('.')[0]
+            class_name = short_path.split(".")[0]
             module_name = CLASS_TO_MODULE[class_name]
             # Create full official path: Ball.vel → itasca.ball.Ball.vel
             full_path = f"itasca.{module_name}.{short_path}"
@@ -319,7 +319,7 @@ class DocumentationLoader:
         return index
 
     @staticmethod
-    def _load_module_doc(api_name: str, index: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def _load_module_doc(api_name: str, index: dict[str, Any]) -> dict[str, Any] | None:
         """Load module-level documentation.
 
         Args:
@@ -368,7 +368,7 @@ class DocumentationLoader:
             "usage_note": (
                 f"Query specific functions (e.g., '{available_functions[0] if available_functions else 'function_name'}') "
                 "for detailed documentation including parameters, return types, and examples."
-            )
+            ),
         }
 
     @staticmethod
@@ -423,7 +423,7 @@ class DocumentationLoader:
         return expanded_keywords
 
     @staticmethod
-    def _merge_keywords(target: defaultdict, source: Dict[str, list]) -> None:
+    def _merge_keywords(target: defaultdict, source: dict[str, list]) -> None:
         """Merge keywords from source into target without overwriting.
 
         When a keyword exists in both target and source, their API lists
@@ -460,18 +460,15 @@ class DocumentationLoader:
                 # Load keywords.json in this directory if it exists
                 keywords_file = item / "keywords.json"
                 if keywords_file.exists():
-                    with open(keywords_file, 'r', encoding='utf-8') as f:
+                    with open(keywords_file, encoding="utf-8") as f:
                         data = json.load(f)
-                        DocumentationLoader._merge_keywords(
-                            all_keywords,
-                            data.get("keywords", {})
-                        )
+                        DocumentationLoader._merge_keywords(all_keywords, data.get("keywords", {}))
 
                 # Recursively process subdirectories
                 DocumentationLoader._load_keywords_recursive(item, all_keywords)
 
     @staticmethod
-    def load_module(module_key: str) -> Optional[Dict[str, Any]]:
+    def load_module(module_key: str) -> dict[str, Any] | None:
         """Load module documentation by index key.
 
         Args:
@@ -506,7 +503,7 @@ class DocumentationLoader:
             return {
                 "module": f"itasca.{module_key}" if module_key != "itasca" else "itasca",
                 "description": module_info.get("description", ""),
-                "functions": module_info.get("functions", [])
+                "functions": module_info.get("functions", []),
             }
 
         # Load full module documentation
@@ -516,14 +513,14 @@ class DocumentationLoader:
             return {
                 "module": f"itasca.{module_key}" if module_key != "itasca" else "itasca",
                 "description": module_info.get("description", ""),
-                "functions": module_info.get("functions", [])
+                "functions": module_info.get("functions", []),
             }
 
-        with open(doc_path, 'r', encoding='utf-8') as f:
+        with open(doc_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def load_function(module_key: str, func_name: str) -> Optional[Dict[str, Any]]:
+    def load_function(module_key: str, func_name: str) -> dict[str, Any] | None:
         """Load function documentation from a module.
 
         Args:
@@ -558,7 +555,7 @@ class DocumentationLoader:
         return None
 
     @staticmethod
-    def load_object(object_name: str) -> Optional[Dict[str, Any]]:
+    def load_object(object_name: str) -> dict[str, Any] | None:
         """Load object documentation by class name.
 
         Args:
@@ -599,11 +596,11 @@ class DocumentationLoader:
         if not doc_path.exists():
             return object_info
 
-        with open(doc_path, 'r', encoding='utf-8') as f:
+        with open(doc_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def load_method(object_name: str, method_name: str) -> Optional[Dict[str, Any]]:
+    def load_method(object_name: str, method_name: str) -> dict[str, Any] | None:
         """Load method documentation from an object.
 
         Args:

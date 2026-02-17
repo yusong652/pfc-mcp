@@ -4,9 +4,10 @@ This module provides a simple, user-friendly API for searching PFC commands.
 Model properties are handled separately via pfc_browse_reference tool.
 """
 
-from typing import List, Optional, Dict, Any
-from pfc_mcp.docs.models.search_result import SearchResult
+from typing import Any
+
 from pfc_mcp.docs.adapters.command_adapter import CommandDocumentAdapter
+from pfc_mcp.docs.models.search_result import SearchResult
 from pfc_mcp.docs.search.engines.bm25_engine import BM25SearchEngine
 
 
@@ -37,7 +38,7 @@ class CommandSearch:
     """
 
     # Singleton instance
-    _engine: Optional[BM25SearchEngine] = None
+    _engine: BM25SearchEngine | None = None
 
     @classmethod
     def _get_engine(cls) -> BM25SearchEngine:
@@ -47,21 +48,15 @@ class CommandSearch:
             BM25SearchEngine instance (shared across all calls)
         """
         if cls._engine is None:
-            cls._engine = BM25SearchEngine(
-                document_loader=CommandDocumentAdapter.load_commands
-            )
+            cls._engine = BM25SearchEngine(document_loader=CommandDocumentAdapter.load_commands)
             cls._engine.build()
 
         return cls._engine
 
     @classmethod
     def search(
-        cls,
-        query: str,
-        top_k: int = 10,
-        category: Optional[str] = None,
-        min_score: Optional[float] = None
-    ) -> List[SearchResult]:
+        cls, query: str, top_k: int = 10, category: str | None = None, min_score: float | None = None
+    ) -> list[SearchResult]:
         """Search for PFC commands.
 
         Args:
@@ -88,7 +83,7 @@ class CommandSearch:
         engine = cls._get_engine()
 
         # Build filter dictionary
-        filters: Dict[str, Any] = {}
+        filters: dict[str, Any] = {}
 
         if category is not None:
             filters["category"] = category
@@ -97,21 +92,12 @@ class CommandSearch:
             filters["min_score"] = min_score
 
         # Execute search
-        results = engine.search(
-            query=query,
-            top_k=top_k,
-            filters=filters if filters else None
-        )
+        results = engine.search(query=query, top_k=top_k, filters=filters if filters else None)
 
         return results
 
     @classmethod
-    def search_commands_only(
-        cls,
-        query: str,
-        top_k: int = 10,
-        category: Optional[str] = None
-    ) -> List[SearchResult]:
+    def search_commands_only(cls, query: str, top_k: int = 10, category: str | None = None) -> list[SearchResult]:
         """Search for commands (alias for search method).
 
         Kept for backward compatibility.
@@ -127,11 +113,7 @@ class CommandSearch:
         return cls.search(query=query, top_k=top_k, category=category)
 
     @classmethod
-    def get_by_category(
-        cls,
-        category: str,
-        top_k: int = 20
-    ) -> List[SearchResult]:
+    def get_by_category(cls, category: str, top_k: int = 20) -> list[SearchResult]:
         """Get all commands in a specific category.
 
         Args:
@@ -161,7 +143,7 @@ class CommandSearch:
             cls._engine.rebuild()
 
     @classmethod
-    def get_index_stats(cls) -> Dict[str, Any]:
+    def get_index_stats(cls) -> dict[str, Any]:
         """Get search index statistics.
 
         Returns:

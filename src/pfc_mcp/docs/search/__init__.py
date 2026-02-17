@@ -6,11 +6,11 @@ and Python API search systems.
 
 from pfc_mcp.docs.search.base import SearchStrategy
 from pfc_mcp.docs.search.legacy_models import (
-    SearchResult,
+    CommandSearchResult,  # Backward compatibility alias
     DocumentType,
-    SearchStrategy as SearchStrategyEnum,
-    CommandSearchResult  # Backward compatibility alias
+    SearchResult,
 )
+from pfc_mcp.docs.search.legacy_models import SearchStrategy as SearchStrategyEnum
 
 __all__ = [
     "SearchStrategy",

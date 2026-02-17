@@ -23,8 +23,8 @@ CLASS_TO_MODULE = {
     "Clump": "clump",
     "Measure": "measure",
     "Wall": "wall",
-    "Facet": "wall",           # Facet is under wall module
-    "Vertex": "wall.vertex",   # Vertex is under wall.vertex submodule
-    "Pebble": "clump",         # Pebble is under clump module
+    "Facet": "wall",  # Facet is under wall module
+    "Vertex": "wall.vertex",  # Vertex is under wall.vertex submodule
+    "Pebble": "clump",  # Pebble is under clump module
     "Template": "clump.template",  # Template is under clump.template submodule
 }

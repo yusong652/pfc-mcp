@@ -19,12 +19,9 @@ Note:
     - pfc_mcp.docs.query.CommandSearch (BM25-based search)
 """
 
-from pfc_mcp.docs.commands.loader import CommandLoader
 from pfc_mcp.docs.commands.formatter import CommandFormatter
-from pfc_mcp.docs.commands.models import (
-    CommandSearchResult,
-    DocumentType
-)
+from pfc_mcp.docs.commands.loader import CommandLoader
+from pfc_mcp.docs.commands.models import CommandSearchResult, DocumentType
 
 __all__ = [
     # Core components
@@ -32,5 +29,5 @@ __all__ = [
     "CommandFormatter",
     # Data models
     "CommandSearchResult",
-    "DocumentType"
+    "DocumentType",
 ]

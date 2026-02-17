@@ -1,4 +1,3 @@
-import asyncio
 import base64
 import json
 import os
@@ -13,10 +12,7 @@ from pfc_mcp.bridge.client import close_bridge_client
 from pfc_mcp.scripts.plot_capture import DEFAULT_IMAGE_SIZE, generate_plot_capture_script, normalize_ball_color_by
 from pfc_mcp.server import mcp
 
-
-_PNG_1X1_BASE64 = (
-    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
-)
+_PNG_1X1_BASE64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII="
 
 
 def test_generate_plot_script_has_export_command() -> None:
@@ -42,7 +38,7 @@ def test_generate_plot_script_has_export_command() -> None:
         wall_cut=None,
         contact_cut=None,
     )
-    assert 'plot item create ball active on' in script
+    assert "plot item create ball active on" in script
     assert 'plot "{plot_name}" export bitmap' in script
 
 

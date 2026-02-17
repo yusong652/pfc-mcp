@@ -1,6 +1,6 @@
 """PFC Reference Browse Tool - Navigate syntax elements and model properties."""
 
-from typing import Optional, cast, Dict, Any, List
+from typing import Any, cast
 
 from fastmcp import FastMCP
 from pydantic import Field
@@ -15,7 +15,7 @@ def register(mcp: FastMCP):
 
     @mcp.tool()
     def pfc_browse_reference(
-        topic: Optional[str] = Field(
+        topic: str | None = Field(
             None,
             description=(
                 "Reference topic to browse (space-separated path). Examples:\n"
@@ -26,9 +26,9 @@ def register(mcp: FastMCP):
                 "- 'range-elements position': Position range syntax\n"
                 "- 'range-elements cylinder': Cylinder range syntax\n"
                 "- 'range-elements group': Group range syntax"
-            )
-        )
-    ) -> Dict[str, Any]:
+            ),
+        ),
+    ) -> dict[str, Any]:
         """Browse PFC reference documentation (syntax elements, model properties).
 
         References are language elements used within commands, not standalone commands.
@@ -64,10 +64,10 @@ def register(mcp: FastMCP):
         return _wrap_payload(payload)
 
 
-def _browse_references_root() -> Dict[str, Any]:
+def _browse_references_root() -> dict[str, Any]:
     refs_index = ReferenceLoader.load_index()
     categories = refs_index.get("categories", {})
-    category_items: List[Dict[str, Any]] = []
+    category_items: list[dict[str, Any]] = []
 
     for category_name, category_data in categories.items():
         items = ReferenceLoader.get_item_list(category_name)
@@ -87,7 +87,7 @@ def _browse_references_root() -> Dict[str, Any]:
     )
 
 
-def _browse_category(category: str) -> Dict[str, Any]:
+def _browse_category(category: str) -> dict[str, Any]:
     refs_index = ReferenceLoader.load_index()
     categories = refs_index.get("categories", {})
 
@@ -103,7 +103,7 @@ def _browse_category(category: str) -> Dict[str, Any]:
             "available_categories": sorted(categories.keys()),
         }
 
-    cat_index = cast(Dict[str, Any], ReferenceLoader.load_category_index(category))
+    cat_index = cast(dict[str, Any], ReferenceLoader.load_category_index(category))
     if not cat_index:
         return {
             "source": "reference",
@@ -145,7 +145,7 @@ def _browse_category(category: str) -> Dict[str, Any]:
     )
 
 
-def _browse_item(category: str, item: str) -> Dict[str, Any]:
+def _browse_item(category: str, item: str) -> dict[str, Any]:
     refs_index = ReferenceLoader.load_index()
     categories = refs_index.get("categories", {})
     if category not in categories:
@@ -190,7 +190,7 @@ def _browse_item(category: str, item: str) -> Dict[str, Any]:
     )
 
 
-def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _wrap_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if "error" in payload:
         err = payload.get("error") or {}
         details = {k: v for k, v in payload.items() if k != "error"}

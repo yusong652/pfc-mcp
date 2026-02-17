@@ -4,7 +4,9 @@ This module implements a complete search engine using BM25 algorithm with
 multi-field scoring, providing a high-level interface for document search.
 """
 
-from typing import List, Dict, Any, Optional, Callable
+from collections.abc import Callable
+from typing import Any
+
 from pfc_mcp.docs.models.document import SearchDocument
 from pfc_mcp.docs.models.search_result import SearchResult
 from pfc_mcp.docs.search.engines.base_engine import BaseSearchEngine
@@ -43,7 +45,7 @@ class BM25SearchEngine(BaseSearchEngine):
         ...     print(f"  Field scores: {result.match_info['field_scores']}")
     """
 
-    def __init__(self, document_loader: Callable[[], List[SearchDocument]]):
+    def __init__(self, document_loader: Callable[[], list[SearchDocument]]):
         """Initialize BM25 search engine with multi-field support.
 
         Args:
@@ -56,7 +58,7 @@ class BM25SearchEngine(BaseSearchEngine):
         """
         super().__init__(document_loader)
         self.indexer = BM25Indexer()
-        self.scorer: Optional[BM25Scorer] = None
+        self.scorer: BM25Scorer | None = None
 
     def build(self) -> None:
         """Build multi-field BM25 index from loaded documents.
@@ -92,12 +94,7 @@ class BM25SearchEngine(BaseSearchEngine):
         # Mark as built
         self._is_built = True
 
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-        filters: Optional[Dict[str, Any]] = None
-    ) -> List[SearchResult]:
+    def search(self, query: str, top_k: int = 10, filters: dict[str, Any] | None = None) -> list[SearchResult]:
         """Execute BM25 search with optional filtering.
 
         Args:
@@ -145,12 +142,7 @@ class BM25SearchEngine(BaseSearchEngine):
         # Convert to SearchResult objects with ranks
         search_results = []
         for rank, (document, score, match_info) in enumerate(scored_results, start=1):
-            search_results.append(SearchResult(
-                document=document,
-                score=score,
-                match_info=match_info,
-                rank=rank
-            ))
+            search_results.append(SearchResult(document=document, score=score, match_info=match_info, rank=rank))
 
         # Apply filters if provided
         if filters:
@@ -161,7 +153,7 @@ class BM25SearchEngine(BaseSearchEngine):
 
         return search_results[:top_k]
 
-    def get_index_stats(self) -> Dict[str, Any]:
+    def get_index_stats(self) -> dict[str, Any]:
         """Get multi-field BM25 index statistics.
 
         Returns:
@@ -203,10 +195,7 @@ class BM25SearchEngine(BaseSearchEngine):
         return self.indexer.get_stats()
 
     def set_field_weights(
-        self,
-        weight_name: float | None = None,
-        weight_desc: float | None = None,
-        weight_kw: float | None = None
+        self, weight_name: float | None = None, weight_desc: float | None = None, weight_kw: float | None = None
     ) -> None:
         """Update field weights for scoring.
 
@@ -225,8 +214,4 @@ class BM25SearchEngine(BaseSearchEngine):
             >>> # Balance keywords and description more evenly
             >>> engine.set_field_weights(weight_name=0.5, weight_desc=0.25, weight_kw=0.25)
         """
-        BM25Scorer.set_parameters(
-            weight_name=weight_name,
-            weight_desc=weight_desc,
-            weight_kw=weight_kw
-        )
+        BM25Scorer.set_parameters(weight_name=weight_name, weight_desc=weight_desc, weight_kw=weight_kw)

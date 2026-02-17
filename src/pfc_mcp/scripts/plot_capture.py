@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List, Literal, Optional, Tuple
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
-
 
 BallShapeType = Literal["sphere", "arrow"]
 VectorQuantityType = Literal["mag", "x", "y", "z"]
@@ -18,8 +17,8 @@ DEFAULT_IMAGE_SIZE = (720, 480)
 class CutPlane(BaseModel):
     """Cut plane definition for clipping plot items."""
 
-    origin: List[float] = Field(min_length=3, max_length=3, description="Point on the cut plane [x, y, z]")
-    normal: List[float] = Field(min_length=3, max_length=3, description="Plane normal direction [x, y, z]")
+    origin: list[float] = Field(min_length=3, max_length=3, description="Point on the cut plane [x, y, z]")
+    normal: list[float] = Field(min_length=3, max_length=3, description="Plane normal direction [x, y, z]")
 
 
 _EXTRA_FLEX_PATTERN = re.compile(r"^extra[\s_-]*(\d+)$", re.IGNORECASE)
@@ -79,7 +78,7 @@ _CONTACT_ALIASES = {
 }
 
 
-def _canonicalize(value: str, aliases: Dict[str, str]) -> str:
+def _canonicalize(value: str, aliases: dict[str, str]) -> str:
     raw = value.strip().lower()
     compact = _SEPARATOR_PATTERN.sub("", raw)
 
@@ -93,7 +92,7 @@ def _canonicalize(value: str, aliases: Dict[str, str]) -> str:
     return raw
 
 
-def _validate_color_by(value: Optional[str], allowed: set[str], aliases: Dict[str, str], label: str) -> Optional[str]:
+def _validate_color_by(value: str | None, allowed: set[str], aliases: dict[str, str], label: str) -> str | None:
     if value is None:
         return None
     normalized = _canonicalize(value, aliases)
@@ -102,15 +101,15 @@ def _validate_color_by(value: Optional[str], allowed: set[str], aliases: Dict[st
     raise ValueError(f"Invalid {label}: {value}")
 
 
-def normalize_ball_color_by(value: Optional[str]) -> Optional[str]:
+def normalize_ball_color_by(value: str | None) -> str | None:
     return _validate_color_by(value, _BALL_VECTOR | _BALL_SCALAR | _BALL_TEXT, _BALL_ALIASES, "ball_color_by")
 
 
-def normalize_wall_color_by(value: Optional[str]) -> Optional[str]:
+def normalize_wall_color_by(value: str | None) -> str | None:
     return _validate_color_by(value, _WALL_VECTOR | _WALL_TEXT, _WALL_ALIASES, "wall_color_by")
 
 
-def normalize_contact_color_by(value: Optional[str]) -> Optional[str]:
+def normalize_contact_color_by(value: str | None) -> str | None:
     return _validate_color_by(
         value,
         _CONTACT_VECTOR | _CONTACT_TEXT | _CONTACT_NUMERIC,
@@ -124,7 +123,7 @@ def _normalize_quantity(quantity: str) -> str:
     return q if q in _VECTOR_QUANTITIES else "mag"
 
 
-def _build_cut_command(cut: Optional[CutPlane]) -> str:
+def _build_cut_command(cut: CutPlane | None) -> str:
     if cut is None:
         return ""
     o = cut.origin
@@ -132,7 +131,7 @@ def _build_cut_command(cut: Optional[CutPlane]) -> str:
     return f"cut active on type plane surface on front on back off origin ({o[0]},{o[1]},{o[2]}) normal ({n[0]},{n[1]},{n[2]})"
 
 
-def _build_ball_color_by_command(color_by: Optional[str], quantity: str) -> str:
+def _build_ball_color_by_command(color_by: str | None, quantity: str) -> str:
     if not color_by:
         return ""
 
@@ -160,12 +159,14 @@ def _build_ball_color_by_command(color_by: Optional[str], quantity: str) -> str:
         return f'color-by text-attribute "{color_by}" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \\\'Any\\\' color-options named maximum-names 1000000 name-controls true"
+        return (
+            "color-by text-attribute \"group\" \\'Any\\' color-options named maximum-names 1000000 name-controls true"
+        )
 
     return ""
 
 
-def _build_wall_color_by_command(color_by: Optional[str], quantity: str) -> str:
+def _build_wall_color_by_command(color_by: str | None, quantity: str) -> str:
     if not color_by:
         return ""
 
@@ -187,12 +188,12 @@ def _build_wall_color_by_command(color_by: Optional[str], quantity: str) -> str:
         return 'color-by text-attribute "name" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \\\'Any\\\' piece off color-options named maximum-names 1000000 name-controls true"
+        return "color-by text-attribute \"group\" \\'Any\\' piece off color-options named maximum-names 1000000 name-controls true"
 
     return ""
 
 
-def _build_contact_color_by_command(color_by: Optional[str], quantity: str) -> str:
+def _build_contact_color_by_command(color_by: str | None, quantity: str) -> str:
     if not color_by:
         return ""
 
@@ -221,16 +222,18 @@ def _build_contact_color_by_command(color_by: Optional[str], quantity: str) -> s
         return f'color-by text-attribute "{name}" color-options named maximum-names 1000000 name-controls true'
 
     if color_by == "group":
-        return "color-by text-attribute \"group\" \\\'Any\\\' color-options named maximum-names 1000000 name-controls true"
+        return (
+            "color-by text-attribute \"group\" \\'Any\\' color-options named maximum-names 1000000 name-controls true"
+        )
 
     return ""
 
 
-def _build_view_command(view_settings: Optional[Dict[str, Any]]) -> str:
+def _build_view_command(view_settings: dict[str, Any] | None) -> str:
     if not view_settings:
         return ""
 
-    parts: List[str] = [f"projection {view_settings.get('projection', 'perspective')}"]
+    parts: list[str] = [f"projection {view_settings.get('projection', 'perspective')}"]
 
     center = view_settings.get("center")
     if center:
@@ -251,27 +254,27 @@ def _build_view_command(view_settings: Optional[Dict[str, Any]]) -> str:
 def generate_plot_capture_script(
     output_path: str,
     plot_name: str,
-    size: Tuple[int, int],
-    view_settings: Optional[Dict[str, Any]],
+    size: tuple[int, int],
+    view_settings: dict[str, Any] | None,
     include_ball: bool,
     include_wall: bool,
     include_contact: bool,
     include_axes: bool,
     wall_transparency: int,
     ball_shape: str,
-    ball_color_by: Optional[str],
+    ball_color_by: str | None,
     ball_color_by_quantity: str,
-    wall_color_by: Optional[str],
+    wall_color_by: str | None,
     wall_color_by_quantity: str,
-    contact_color_by: Optional[str],
+    contact_color_by: str | None,
     contact_color_by_quantity: str,
     contact_scale_by_force: bool,
-    ball_cut: Optional[CutPlane],
-    wall_cut: Optional[CutPlane],
-    contact_cut: Optional[CutPlane],
+    ball_cut: CutPlane | None,
+    wall_cut: CutPlane | None,
+    contact_cut: CutPlane | None,
 ) -> str:
     """Generate a Python script for diagnostic plot capture in PFC."""
-    lines: List[str] = [
+    lines: list[str] = [
         "import os",
         "import subprocess",
         "import itasca",
@@ -358,7 +361,7 @@ def generate_plot_capture_script(
     lines.extend(
         [
             "",
-            f"itasca.command(f'plot \"{{plot_name}}\" export bitmap filename \"{{output_path}}\" size {size[0]} {size[1]}')",
+            f'itasca.command(f\'plot "{{plot_name}}" export bitmap filename "{{output_path}}" size {size[0]} {size[1]}\')',
             "result = {'output_path': output_path}",
             "print(f'Plot export initiated: {output_path}')",
         ]

@@ -6,7 +6,8 @@ explainability.
 """
 
 from dataclasses import dataclass
-from typing import Dict, Any, Optional
+from typing import Any
+
 from pfc_mcp.docs.models.document import SearchDocument
 
 
@@ -52,16 +53,16 @@ class SearchResult:
 
     document: SearchDocument
     score: float
-    match_info: Dict[str, Any]
+    match_info: dict[str, Any]
     rank: int
-    score_breakdown: Optional[Dict[str, float]] = None
+    score_breakdown: dict[str, float] | None = None
 
     def __post_init__(self):
         """Validate and normalize fields after initialization."""
         if self.score_breakdown is None:
             self.score_breakdown = {}
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert search result to dictionary representation.
 
         Useful for API responses, logging, and serialization.
@@ -74,7 +75,7 @@ class SearchResult:
             "score": self.score,
             "match_info": self.match_info,
             "rank": self.rank,
-            "score_breakdown": self.score_breakdown
+            "score_breakdown": self.score_breakdown,
         }
 
     def get_highlighted_title(self, highlight_tag: str = "**") -> str:
@@ -98,6 +99,7 @@ class SearchResult:
         for word in matching_words:
             # Case-insensitive replacement while preserving original case
             import re
+
             pattern = re.compile(re.escape(word), re.IGNORECASE)
             title = pattern.sub(f"{highlight_tag}\\g<0>{highlight_tag}", title)
 

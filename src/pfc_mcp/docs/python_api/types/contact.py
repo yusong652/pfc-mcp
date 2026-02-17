@@ -11,9 +11,7 @@ Architecture:
     ContactTypeResolver handles the mapping transparently.
 """
 
-from typing import Optional, Dict, List
 from dataclasses import dataclass
-
 
 # All contact types sharing the same interface
 # These are the official PFC contact type names
@@ -22,7 +20,7 @@ CONTACT_TYPES = [
     "BallFacetContact",
     "BallPebbleContact",
     "PebblePebbleContact",
-    "PebbleFacetContact"
+    "PebbleFacetContact",
 ]
 
 
@@ -44,10 +42,11 @@ class ContactQueryResult:
         ...     all_types=CONTACT_TYPES
         ... )
     """
+
     internal_path: str
     contact_type: str
     original_query: str
-    all_types: List[str]
+    all_types: list[str]
 
 
 class ContactTypeResolver:
@@ -73,11 +72,11 @@ class ContactTypeResolver:
             >>> ContactTypeResolver.is_contact_query("itasca.ball.create")
             False
         """
-        parts_lower = [p.lower() for p in api_path.split('.')]
+        parts_lower = [p.lower() for p in api_path.split(".")]
         return any(ct.lower() in parts_lower for ct in CONTACT_TYPES)
 
     @staticmethod
-    def resolve(api_path: str, quick_ref: Dict[str, str]) -> Optional[ContactQueryResult]:
+    def resolve(api_path: str, quick_ref: dict[str, str]) -> ContactQueryResult | None:
         """Resolve Contact type query to internal path.
 
         Supports multiple query formats:
@@ -103,7 +102,7 @@ class ContactTypeResolver:
             >>> resolve("itasca.ball.create", {...})
             None
         """
-        parts = api_path.split('.')
+        parts = api_path.split(".")
         parts_lower = [p.lower() for p in parts]
 
         for contact_type in CONTACT_TYPES:
@@ -124,13 +123,13 @@ class ContactTypeResolver:
                             internal_path=internal_path,
                             contact_type=contact_type,
                             original_query=api_path.strip(),
-                            all_types=CONTACT_TYPES
+                            all_types=CONTACT_TYPES,
                         )
 
         return None
 
     @staticmethod
-    def _verify_method(internal_path: str, quick_ref: Dict[str, str]) -> bool:
+    def _verify_method(internal_path: str, quick_ref: dict[str, str]) -> bool:
         """Verify that the method exists in Contact interface.
 
         Args:
@@ -146,7 +145,7 @@ class ContactTypeResolver:
 
         # Try case-insensitive match
         internal_path_lower = internal_path.lower()
-        return any(api.lower() == internal_path_lower for api in quick_ref.keys())
+        return any(api.lower() == internal_path_lower for api in quick_ref)
 
     @staticmethod
     def format_official_path(contact_type: str, method_name: str) -> str:

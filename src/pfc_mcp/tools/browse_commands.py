@@ -1,6 +1,6 @@
 """PFC Command Browse Tool - Navigate and retrieve command documentation."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from fastmcp import FastMCP
 from pydantic import Field
@@ -15,7 +15,7 @@ def register(mcp: FastMCP):
 
     @mcp.tool()
     def pfc_browse_commands(
-        command: Optional[str] = Field(
+        command: str | None = Field(
             None,
             description=(
                 "PFC command to browse (space-separated, matching PFC syntax). Examples:\n"
@@ -24,9 +24,9 @@ def register(mcp: FastMCP):
                 "- 'ball create': Get ball create documentation\n"
                 "- 'contact': List all contact commands\n"
                 "- 'contact property': Get contact property command documentation"
-            )
-        )
-    ) -> Dict[str, Any]:
+            ),
+        ),
+    ) -> dict[str, Any]:
         """Browse PFC command documentation by path (like glob + cat).
 
         Navigation levels:
@@ -58,11 +58,11 @@ def register(mcp: FastMCP):
         return _wrap_payload(payload)
 
 
-def _browse_root() -> Dict[str, Any]:
+def _browse_root() -> dict[str, Any]:
     """Level 0: Return overview of all command categories."""
     index = CommandLoader.load_index()
     categories = index.get("categories", {})
-    category_items: List[Dict[str, Any]] = []
+    category_items: list[dict[str, Any]] = []
     total_commands = 0
 
     for category_name, category_data in categories.items():
@@ -88,7 +88,7 @@ def _browse_root() -> Dict[str, Any]:
     )
 
 
-def _browse_category(category: str) -> Dict[str, Any]:
+def _browse_category(category: str) -> dict[str, Any]:
     """Level 1: Return list of commands in a category."""
     index = CommandLoader.load_index()
     categories = index.get("categories", {})
@@ -107,7 +107,7 @@ def _browse_category(category: str) -> Dict[str, Any]:
 
     cat_data = categories[category]
     commands = cat_data.get("commands", [])
-    command_items: List[Dict[str, Any]] = []
+    command_items: list[dict[str, Any]] = []
     for cmd in commands:
         command_items.append(
             {
@@ -130,7 +130,7 @@ def _browse_category(category: str) -> Dict[str, Any]:
     )
 
 
-def _browse_command(category: str, command_name: str) -> Dict[str, Any]:
+def _browse_command(category: str, command_name: str) -> dict[str, Any]:
     """Level 2: Return full documentation for a specific command."""
     cmd_doc = CommandLoader.load_command_doc(category, command_name)
 
@@ -178,7 +178,7 @@ def _browse_command(category: str, command_name: str) -> Dict[str, Any]:
     )
 
 
-def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _wrap_payload(payload: dict[str, Any]) -> dict[str, Any]:
     """Wrap tool payload into unified envelope."""
     if "error" in payload:
         err = payload.get("error") or {}

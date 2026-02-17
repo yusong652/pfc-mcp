@@ -13,11 +13,10 @@ The script will overwrite index.json with the generated content.
 
 import json
 from pathlib import Path
-from typing import Dict, Any, List
-
+from typing import Any
 
 # Category-level metadata (cannot be extracted from command files)
-CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
+CATEGORY_METADATA: dict[str, dict[str, Any]] = {
     "ball": {
         "full_name": "Ball Commands",
         "description": "Commands for creating, modifying, and managing ball objects in PFC discrete element simulations",
@@ -30,8 +29,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Ball commands typically operate on ranges (groups, spatial regions, or all balls)",
             "Use Python SDK for fine-grained control and complex logic",
             "Use commands for batch operations and initial model setup",
-            "Ball generation with packing patterns requires commands (not available in Python SDK)"
-        ]
+            "Ball generation with packing patterns requires commands (not available in Python SDK)",
+        ],
     },
     "wall": {
         "full_name": "Wall Commands",
@@ -45,8 +44,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Walls are composed of triangular facets (Facet objects)",
             "Wall generation commands (box, cylinder) are not available in Python SDK",
             "Use Python SDK for programmatic wall manipulation",
-            "Walls can be moved via velocity or displacement attributes"
-        ]
+            "Walls can be moved via velocity or displacement attributes",
+        ],
     },
     "clump": {
         "full_name": "Clump Commands",
@@ -60,8 +59,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Clumps are rigid bodies composed of pebbles (component balls)",
             "Clump templates enable efficient replication of complex shapes",
             "clump generate creates non-overlapping clumps; clump distribute allows overlaps for target porosity",
-            "Most clump operations (template, generate, distribute) not available in Python SDK"
-        ]
+            "Most clump operations (template, generate, distribute) not available in Python SDK",
+        ],
     },
     "contact": {
         "full_name": "Contact Commands",
@@ -75,8 +74,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Contact models define mechanical behavior at contact points",
             "Common contact models: linear, linearpbond, linearcbond, hertz",
             "Contact properties are model-specific (e.g., 'kn' for normal stiffness)",
-            "Use 'contact model' commands to assign and configure models"
-        ]
+            "Use 'contact model' commands to assign and configure models",
+        ],
     },
     "model": {
         "full_name": "Model Commands",
@@ -89,7 +88,7 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "solve": ["ratio", "ratio-average", "force-max", "moment-max", "cycles"],
             "cycle": ["number of cycles"],
             "domain": ["extent", "condition", "periodic", "destroy"],
-            "configure": ["threads", "dynamic"]
+            "configure": ["threads", "dynamic"],
         },
         "related_categories": ["ball", "wall", "contact", "set"],
         "notes": [
@@ -97,8 +96,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "'model cycle' is equivalent to itasca.cycle() in Python",
             "Model state can be saved/restored for checkpointing",
             "Domain settings must be configured before generating objects",
-            "Use 'model solve' with ratio criteria for automatic convergence"
-        ]
+            "Use 'model solve' with ratio criteria for automatic convergence",
+        ],
     },
     "fragment": {
         "full_name": "Fragment Commands",
@@ -111,7 +110,7 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "1. Register fragments: fragment register",
             "2. Compute or activate: fragment compute OR fragment activate cycles 100",
             "3. Query fragment IDs: ball.fragment() or clump.fragment() in Python",
-            "4. Clear when done: fragment clear"
+            "4. Clear when done: fragment clear",
         ],
         "related_categories": ["ball", "clump", "contact", "model"],
         "notes": [
@@ -119,8 +118,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "By default, only bonded contacts contribute to fragment connectivity (use ignorebond for all contacts)",
             "Fragment ID 0 indicates isolated body (no contacts)",
             "fragment activate enables automatic periodic computation; fragment compute is one-time",
-            "After computation, query fragment IDs via ball.fragment() or clump.fragment() in Python"
-        ]
+            "After computation, query fragment IDs via ball.fragment() or clump.fragment() in Python",
+        ],
     },
     "measure": {
         "full_name": "Measurement Commands",
@@ -129,18 +128,12 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
         "python_module": "itasca.measure",
         "python_object_class": "Measurement",
         "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/measure/measure.html",
-        "measured_quantities": [
-            "porosity",
-            "coordination_number",
-            "stress",
-            "strain",
-            "particle_size_distribution"
-        ],
+        "measured_quantities": ["porosity", "coordination_number", "stress", "strain", "particle_size_distribution"],
         "typical_workflow": [
             "1. Create measurement region: measure create radius 5.0",
             "2. Trigger calculation: model clean",
             "3. View results: measure list",
-            "4. Export if needed: measure dump"
+            "4. Export if needed: measure dump",
         ],
         "related_categories": ["ball", "clump", "model"],
         "notes": [
@@ -148,8 +141,8 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Measurements calculated when 'model clean' is called or when FISH intrinsic queries measurement",
             "Can measure: porosity, coordination number, stress, strain, size distribution",
             "Use 'bins' keyword in create to enable particle size distribution calculation",
-            "Tolerance parameter controls accuracy vs. speed trade-off for porosity calculation"
-        ]
+            "Tolerance parameter controls accuracy vs. speed trade-off for porosity calculation",
+        ],
     },
     "plot": {
         "full_name": "Plot Commands",
@@ -162,82 +155,79 @@ CATEGORY_METADATA: Dict[str, Dict[str, Any]] = {
             "Plot commands control visualization, not simulation",
             "Use 'plot export bitmap' to save plot images",
             "Plot item keywords are extensive; use 'plot export datafile' to inspect syntax",
-            "Camera view controlled via center, eye, magnification, projection keywords"
-        ]
-    }
+            "Camera view controlled via center, eye, magnification, projection keywords",
+        ],
+    },
 }
 
 # Python SDK alternatives (command-level, kept in index for quick reference)
-PYTHON_SDK_ALTERNATIVES: Dict[str, Dict[str, Any]] = {
+PYTHON_SDK_ALTERNATIVES: dict[str, dict[str, Any]] = {
     "ball generate": {
         "command": "ball generate",
         "reason": "Python SDK doesn't support packing patterns for batch ball creation",
         "python_alternative": "itasca.ball.create() - can create individual balls only",
         "python_workaround": "Use itasca.ball.create() in a loop with manual positioning logic",
-        "recommendation": "use_command"
+        "recommendation": "use_command",
     },
     "wall generate": {
         "command": "wall generate",
         "reason": "Python SDK doesn't support geometric wall generation (box, cylinder, etc.)",
         "python_alternative": "Manual wall creation using Python SDK requires vertex-by-vertex construction",
         "python_workaround": "Calculate vertices manually and use itasca.wall module",
-        "recommendation": "use_command"
+        "recommendation": "use_command",
     },
     "clump template": {
         "command": "clump template",
         "reason": "Python SDK does not provide clump template management",
         "python_alternative": "itasca.command('clump template ...') - must use command interface",
         "python_workaround": "Use command interface via itasca.command()",
-        "recommendation": "use_command"
+        "recommendation": "use_command",
     },
     "clump generate": {
         "command": "clump generate",
         "reason": "Python SDK cannot generate clumps with templates and packing patterns",
         "python_alternative": "itasca.command('clump generate ...') - must use command interface",
         "python_workaround": "Use command interface via itasca.command()",
-        "recommendation": "use_command"
+        "recommendation": "use_command",
     },
     "model solve": {
         "command": "model solve",
         "reason": "Python SDK doesn't have automatic equilibrium detection",
         "python_alternative": "itasca.cycle() - requires manual termination logic",
         "python_workaround": "Use itasca.cycle() with manual ratio checking in a loop",
-        "recommendation": "use_command"
+        "recommendation": "use_command",
     },
     "fragment register": {
         "command": "fragment register",
         "reason": "Fragment registration is a global initialization operation",
         "python_alternative": "itasca.command('fragment register ...') - no direct SDK method",
         "python_workaround": "Use command interface via itasca.command()",
-        "recommendation": "use_command"
-    }
+        "recommendation": "use_command",
+    },
 }
 
 # Command patterns metadata
-COMMAND_PATTERNS: Dict[str, List[str]] = {
+COMMAND_PATTERNS: dict[str, list[str]] = {
     "object_commands": ["ball", "wall", "clump", "measure"],
     "system_commands": ["model", "contact"],
     "analysis_commands": ["fragment", "measure"],
     "visualization_commands": ["plot"],
-    "common_subcommands": [
-        "generate", "create", "delete", "attribute", "property",
-        "group", "result", "history"
-    ]
+    "common_subcommands": ["generate", "create", "delete", "attribute", "property", "group", "result", "history"],
 }
 
 # Global notes
-GLOBAL_NOTES: List[str] = [
+GLOBAL_NOTES: list[str] = [
     "Commands are preferred over Python SDK for batch operations and specialized geometries",
     "Python SDK is preferred for fine-grained control and programmatic logic",
     "Use 'itasca.command()' to execute any PFC command from Python",
     "Commands return no value; use 'result' subcommands to query results",
-    "Most commands operate on ranges (groups, spatial regions, all objects)"
+    "Most commands operate on ranges (groups, spatial regions, all objects)",
 ]
 
 
-def extract_command_metadata(cmd_path: Path, category: str, category_dir: Path) -> Dict[str, Any]:
+def extract_command_metadata(cmd_path: Path, category: str, category_dir: Path) -> dict[str, Any]:
     """Extract metadata from a command JSON file."""
-    with open(cmd_path, 'r', encoding='utf-8') as f:
+    with open(cmd_path, encoding="utf-8") as f:
         cmd_data = json.load(f)
 
     # Extract command name from filename (without .json)
@@ -270,11 +260,11 @@ def extract_command_metadata(cmd_path: Path, category: str, category_dir: Path) 
         "short_description": short_desc,
         "syntax": cmd_data.get("syntax", ""),
         "python_available": python_available,
-        "python_alternative": python_alternative
+        "python_alternative": python_alternative,
     }
 
 
-def scan_category_commands(category_dir: Path, category: str) -> List[Dict[str, Any]]:
+def scan_category_commands(category_dir: Path, category: str) -> list[dict[str, Any]]:
     """Scan a category directory and extract all command metadata."""
     commands = []
 
@@ -293,7 +283,7 @@ def scan_category_commands(category_dir: Path, category: str) -> List[Dict[str, 
     return commands
 
 
-def generate_index(commands_dir: Path) -> Dict[str, Any]:
+def generate_index(commands_dir: Path) -> dict[str, Any]:
     """Generate the complete index structure."""
     categories = {}
 
@@ -309,7 +299,7 @@ def generate_index(commands_dir: Path) -> Dict[str, Any]:
             category_meta = {
                 "full_name": f"{category_name.title()} Commands",
                 "description": f"Commands for {category_name}",
-                "command_prefix": category_name
+                "command_prefix": category_name,
             }
         else:
             category_meta = CATEGORY_METADATA[category_name].copy()
@@ -327,7 +317,7 @@ def generate_index(commands_dir: Path) -> Dict[str, Any]:
         "categories": categories,
         "python_sdk_alternatives": PYTHON_SDK_ALTERNATIVES,
         "command_patterns": COMMAND_PATTERNS,
-        "notes": GLOBAL_NOTES
+        "notes": GLOBAL_NOTES,
     }
 
     return index
@@ -347,15 +337,12 @@ def main():
     index = generate_index(commands_dir)
 
     # Count commands
-    total_commands = sum(
-        len(cat.get("commands", []))
-        for cat in index["categories"].values()
-    )
+    total_commands = sum(len(cat.get("commands", [])) for cat in index["categories"].values())
 
     print(f"Found {len(index['categories'])} categories, {total_commands} commands")
 
     # Write index
-    with open(index_path, 'w', encoding='utf-8') as f:
+    with open(index_path, "w", encoding="utf-8") as f:
         json.dump(index, f, indent=2, ensure_ascii=False)
 
     print(f"Generated: {index_path}")

@@ -5,15 +5,8 @@ New code should use pfc_mcp.docs.search.legacy_models instead.
 """
 
 # Import from unified models for backward compatibility
-from pfc_mcp.docs.search.legacy_models import (
-    SearchResult as CommandSearchResult,
-    DocumentType,
-    SearchStrategy
-)
+from pfc_mcp.docs.search.legacy_models import DocumentType, SearchStrategy
+from pfc_mcp.docs.search.legacy_models import SearchResult as CommandSearchResult
 
 # Re-export for backward compatibility
-__all__ = [
-    "CommandSearchResult",
-    "DocumentType",
-    "SearchStrategy"
-]
+__all__ = ["CommandSearchResult", "DocumentType", "SearchStrategy"]

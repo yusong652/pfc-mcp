@@ -6,7 +6,7 @@ and technical abbreviations.
 """
 
 import re
-from typing import List, Set
+
 from pfc_mcp.docs.search.preprocessing.stopwords import is_stopword
 
 
@@ -54,20 +54,20 @@ class TextTokenizer:
 
     # Regex pattern for word extraction
     # Matches: alphanumeric + hyphens + underscores + dots (for numbers)
-    WORD_PATTERN = re.compile(r'\b[\w.-]+\b')
+    WORD_PATTERN = re.compile(r"\b[\w.-]+\b")
 
     # Pattern for numeric values (decimals, scientific notation)
     # Examples: 1.5, 0.001, .5, 1e-5, 2.5e10, -1.5e+20
     NUMERIC_PATTERN = re.compile(
-        r'^'
-        r'[+-]?'  # Optional sign
-        r'(?:'
-            r'\d+\.?\d*'  # Integer or decimal (1, 1., 1.5)
-            r'|'
-            r'\.\d+'      # Decimal starting with dot (.5)
-        r')'
-        r'(?:[eE][+-]?\d+)?'  # Optional scientific notation
-        r'$'
+        r"^"
+        r"[+-]?"  # Optional sign
+        r"(?:"
+        r"\d+\.?\d*"  # Integer or decimal (1, 1., 1.5)
+        r"|"
+        r"\.\d+"  # Decimal starting with dot (.5)
+        r")"
+        r"(?:[eE][+-]?\d+)?"  # Optional scientific notation
+        r"$"
     )
 
     # Minimum word length (avoid single-char noise)
@@ -75,7 +75,7 @@ class TextTokenizer:
 
     # Technical single-character tokens that should be preserved
     # These are common in scientific/engineering contexts
-    TECHNICAL_SINGLE_CHARS = {'x', 'y', 'z', 'r', 'n', 't'}  # Coordinates, radius, normal, tangent
+    TECHNICAL_SINGLE_CHARS = {"x", "y", "z", "r", "n", "t"}  # Coordinates, radius, normal, tangent
 
     def __init__(self, remove_stopwords: bool = True, min_length: int = 2):
         """Initialize tokenizer.
@@ -87,7 +87,7 @@ class TextTokenizer:
         self.remove_stopwords = remove_stopwords
         self.min_length = min_length
 
-    def tokenize(self, text: str) -> List[str]:
+    def tokenize(self, text: str) -> list[str]:
         """Tokenize text into words.
 
         Args:
@@ -122,7 +122,7 @@ class TextTokenizer:
         for original_word, word in zip(original_words, lowercase_words):
             # Handle dotted terms (smart split: API paths vs. decimals)
             # Context: API paths like "itasca.ball.Ball.vel" vs. decimals like "1.5"
-            if '.' in word:
+            if "." in word:
                 # Check if it's a numeric value (decimal or scientific notation)
                 if self.NUMERIC_PATTERN.match(word):
                     # Numeric value - keep intact
@@ -132,21 +132,21 @@ class TextTokenizer:
                     # API path - split on dots
                     # "itasca.ball.Ball.vel" → ["itasca", "ball", "ball", "vel"]
                     # Split both original and lowercase to preserve CamelCase info
-                    original_parts = original_word.split('.')
-                    lowercase_parts = word.split('.')
+                    original_parts = original_word.split(".")
+                    lowercase_parts = word.split(".")
                     for original_part, part in zip(original_parts, lowercase_parts):
                         # Process each path component (may contain underscores)
-                        if '_' in part:
+                        if "_" in part:
                             # Handle underscores within path components
                             # "force_global" → ["force", "global"]
-                            subparts = part.split('_')
+                            subparts = part.split("_")
                             for subpart in subparts:
                                 if self._is_valid_token(subpart, from_technical_context=True):
                                     tokens.append(subpart)
-                        elif '-' in part:
+                        elif "-" in part:
                             # Handle hyphens within path components
                             # "ball-ball" → ["ball", "ball"]
-                            subparts = part.split('-')
+                            subparts = part.split("-")
                             for subpart in subparts:
                                 if self._is_valid_token(subpart, from_technical_context=True):
                                     tokens.append(subpart)
@@ -159,8 +159,8 @@ class TextTokenizer:
                                     tokens.append(camel_part)
             # Handle hyphenated terms (split and keep parts)
             # Context: technical compound terms like "ball-ball"
-            elif '-' in word:
-                parts = word.split('-')
+            elif "-" in word:
+                parts = word.split("-")
                 for part in parts:
                     # In hyphenated context, preserve technical single chars
                     if self._is_valid_token(part, from_technical_context=True):
@@ -168,8 +168,8 @@ class TextTokenizer:
             # Handle underscored terms (e.g., "vel_x", "set_pos", "end_1")
             # Split to improve matching: "vel_x" → ["vel", "x"]
             # Context: API naming conventions with direction/index suffixes
-            elif '_' in word:
-                parts = word.split('_')
+            elif "_" in word:
+                parts = word.split("_")
                 for part in parts:
                     # In underscore context, preserve technical single chars
                     if self._is_valid_token(part, from_technical_context=True):
@@ -186,7 +186,7 @@ class TextTokenizer:
 
         return tokens
 
-    def tokenize_to_set(self, text: str) -> Set[str]:
+    def tokenize_to_set(self, text: str) -> set[str]:
         """Tokenize text into a set of unique words.
 
         Useful for matching operations where duplicates don't matter.
@@ -204,7 +204,7 @@ class TextTokenizer:
         """
         return set(self.tokenize(text))
 
-    def _split_camel_case(self, word: str) -> List[str]:
+    def _split_camel_case(self, word: str) -> list[str]:
         """Split CamelCase word into components.
 
         Args:
@@ -223,7 +223,7 @@ class TextTokenizer:
         """
         # Pattern: insert space before uppercase letters (except at start)
         # BallBallContact → Ball Ball Contact
-        spaced = re.sub(r'(?<!^)(?=[A-Z])', ' ', word)
+        spaced = re.sub(r"(?<!^)(?=[A-Z])", " ", word)
 
         # Split on spaces and lowercase
         parts = spaced.split()
@@ -294,5 +294,5 @@ class TextTokenizer:
             'create ball'
         """
         # Remove extra whitespace and lowercase
-        query = ' '.join(query.split())
+        query = " ".join(query.split())
         return query.lower()

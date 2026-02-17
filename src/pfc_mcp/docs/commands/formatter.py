@@ -10,7 +10,8 @@ Formatting Goals:
 - Include Python SDK alternatives when available
 """
 
-from typing import Dict, Any, List
+from typing import Any
+
 from pfc_mcp.docs.commands.models import CommandSearchResult, DocumentType
 
 
@@ -38,7 +39,7 @@ class CommandFormatter:
         return f"Error: {error_msg}\n\n{fallback_content}"
 
     @staticmethod
-    def format_root(categories: Dict[str, Any]) -> str:
+    def format_root(categories: dict[str, Any]) -> str:
         """Format command categories overview as markdown.
 
         Args:
@@ -49,10 +50,7 @@ class CommandFormatter:
         """
         parts = []
 
-        total_commands = sum(
-            len(cat_data.get("commands", []))
-            for cat_data in categories.values()
-        )
+        total_commands = sum(len(cat_data.get("commands", [])) for cat_data in categories.values())
 
         parts.append("## PFC Command Documentation")
         parts.append("")
@@ -69,7 +67,7 @@ class CommandFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_category(category: str, cat_data: Dict[str, Any]) -> str:
+    def format_category(category: str, cat_data: dict[str, Any]) -> str:
         """Format command list in a category as markdown.
 
         Args:
@@ -119,7 +117,7 @@ class CommandFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_command(doc: Dict[str, Any], category: str) -> str:
+    def format_command(doc: dict[str, Any], category: str) -> str:
         """Format a full command documentation as markdown.
 
         Args:
@@ -231,7 +229,7 @@ class CommandFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def format_search_results(results: List[CommandSearchResult]) -> str:
+    def format_search_results(results: list[CommandSearchResult]) -> str:
         """Format search results as a summary list.
 
         Args:
@@ -266,9 +264,11 @@ class CommandFormatter:
 
             if result.metadata:
                 # For commands, show short_description; for models, show description or common_use
-                desc = (result.metadata.get("short_description") or
-                       result.metadata.get("description") or
-                       result.metadata.get("common_use"))
+                desc = (
+                    result.metadata.get("short_description")
+                    or result.metadata.get("description")
+                    or result.metadata.get("common_use")
+                )
                 if desc:
                     # Truncate long descriptions
                     desc = desc[:100] + "..." if len(desc) > 100 else desc

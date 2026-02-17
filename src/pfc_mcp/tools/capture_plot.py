@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import base64
-from pathlib import Path
 import time
-from typing import Annotated, Any, Literal, Optional
+from pathlib import Path
+from typing import Annotated, Any, Literal
 
 from fastmcp import FastMCP
 from fastmcp.tools.tool import ToolResult
@@ -53,17 +53,18 @@ def _cleanup_script(script_path: Path) -> None:
         pass
 
 
-
 def register(mcp: FastMCP) -> None:
     """Register pfc_capture_plot tool."""
 
     @mcp.tool()
     async def pfc_capture_plot(
         output_path: PlotOutputPath,
-        size: Annotated[list[int], Field(min_length=2, max_length=2, description="Image size in pixels [width, height]")] = Field(default_factory=lambda: list(DEFAULT_IMAGE_SIZE)),
+        size: Annotated[
+            list[int], Field(min_length=2, max_length=2, description="Image size in pixels [width, height]")
+        ] = Field(default_factory=lambda: list(DEFAULT_IMAGE_SIZE)),
         include_ball: bool = True,
         ball_shape: BallShapeType = "sphere",
-        ball_color_by: Optional[str] = Field(
+        ball_color_by: str | None = Field(
             default=None,
             description=(
                 "Ball coloring key (string). Examples: velocity, displacement, force-contact, "
@@ -72,32 +73,36 @@ def register(mcp: FastMCP) -> None:
         ),
         ball_color_by_quantity: VectorQuantityType = "mag",
         include_wall: bool = True,
-        wall_color_by: Optional[str] = Field(
+        wall_color_by: str | None = Field(
             default=None,
-            description=(
-                "Wall coloring key (string). Examples: velocity, force-contact, name, group, extra-1."
-            ),
+            description=("Wall coloring key (string). Examples: velocity, force-contact, name, group, extra-1."),
         ),
         wall_color_by_quantity: VectorQuantityType = "mag",
         wall_transparency: Annotated[int, Field(ge=0, le=100)] = DEFAULT_WALL_TRANSPARENCY,
         include_contact: bool = False,
-        contact_color_by: Optional[str] = Field(
+        contact_color_by: str | None = Field(
             default="force",
             description=(
-                "Contact coloring key (string). Examples: force, contact-type, model-name, "
-                "fric, kn, ks, extra-1."
+                "Contact coloring key (string). Examples: force, contact-type, model-name, fric, kn, ks, extra-1."
             ),
         ),
         contact_color_by_quantity: VectorQuantityType = "mag",
         contact_scale_by_force: bool = True,
-        center: Optional[Annotated[list[float], Field(min_length=3, max_length=3, description="Camera look-at point in model coordinates [x, y, z]")]] = None,
-        eye: Optional[Annotated[list[float], Field(min_length=3, max_length=3, description="Camera position in model coordinates [x, y, z]")]] = None,
+        center: Annotated[
+            list[float],
+            Field(min_length=3, max_length=3, description="Camera look-at point in model coordinates [x, y, z]"),
+        ]
+        | None = None,
+        eye: Annotated[
+            list[float], Field(min_length=3, max_length=3, description="Camera position in model coordinates [x, y, z]")
+        ]
+        | None = None,
         roll: Annotated[float, Field(description="Camera roll angle in degrees")] = 0.0,
         magnification: Annotated[float, Field(description="Zoom factor (1.0 = fit model, >1 = zoom in)")] = 1.0,
         projection: Literal["perspective", "parallel"] = "perspective",
-        ball_cut: Optional[CutPlane] = None,
-        wall_cut: Optional[CutPlane] = None,
-        contact_cut: Optional[CutPlane] = None,
+        ball_cut: CutPlane | None = None,
+        wall_cut: CutPlane | None = None,
+        contact_cut: CutPlane | None = None,
         timeout: Annotated[int, Field(ge=1, le=120, description="Capture timeout in seconds")] = 30,
     ) -> ToolResult | dict[str, Any]:
         """Capture a PFC plot image. The image is saved to output_path and returned for visual inspection.
@@ -185,7 +190,9 @@ def register(mcp: FastMCP) -> None:
                     error_code,
                     error_message,
                     reason=reason,
-                    action="Run bridge in GUI mode for plot capture" if error_code == "unsupported_in_console" else "Check bridge diagnostic logs and retry",
+                    action="Run bridge in GUI mode for plot capture"
+                    if error_code == "unsupported_in_console"
+                    else "Check bridge diagnostic logs and retry",
                 )
 
             data = response.get("data") or {}

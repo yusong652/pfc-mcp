@@ -1,10 +1,9 @@
 """Lightweight task tracking for MCP-side submitted jobs."""
 
+import uuid
 from dataclasses import dataclass
 from datetime import datetime
 from threading import Lock
-from typing import Dict, Optional
-import uuid
 
 
 @dataclass
@@ -20,7 +19,7 @@ class BridgeTaskManager:
     """Minimal in-memory task registry for generated task IDs."""
 
     def __init__(self) -> None:
-        self._tasks: Dict[str, TaskRecord] = {}
+        self._tasks: dict[str, TaskRecord] = {}
         self._lock = Lock()
 
     def create_task(self, entry_script: str, description: str) -> str:
@@ -42,12 +41,12 @@ class BridgeTaskManager:
             if task is not None:
                 task.status = status
 
-    def get_task(self, task_id: str) -> Optional[TaskRecord]:
+    def get_task(self, task_id: str) -> TaskRecord | None:
         with self._lock:
             return self._tasks.get(task_id)
 
 
-_task_manager: Optional[BridgeTaskManager] = None
+_task_manager: BridgeTaskManager | None = None
 
 
 def get_task_manager() -> BridgeTaskManager:

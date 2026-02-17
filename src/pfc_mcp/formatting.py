@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any
 
 from pfc_mcp.config import get_bridge_config
 from pfc_mcp.contracts import build_error
-
 
 # =============================================================================
 # Task status / output formatting
@@ -44,7 +43,7 @@ def paginate_output(
     output: str,
     skip_newest: int,
     limit: int,
-    filter_text: Optional[str],
+    filter_text: str | None,
 ) -> tuple[str, dict[str, Any]]:
     lines = output.splitlines() if output else []
     if filter_text:
@@ -69,6 +68,7 @@ def paginate_output(
 # Bridge error formatting
 # =============================================================================
 
+
 def is_bridge_connectivity_error(exc: Exception) -> bool:
     """Best-effort detection for bridge connectivity failures."""
     if isinstance(exc, (ConnectionError, TimeoutError, OSError)):
@@ -80,7 +80,8 @@ def is_bridge_connectivity_error(exc: Exception) -> bool:
         or "connection refused" in lowered
         or "connection lost" in lowered
         or "connection closed" in lowered
-        or "bridge" in lowered and "unavailable" in lowered
+        or "bridge" in lowered
+        and "unavailable" in lowered
         or "[errno 61]" in lowered
     )
 

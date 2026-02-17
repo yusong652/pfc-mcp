@@ -1,11 +1,11 @@
 """PFC Python API Query Tool - Keyword search for SDK documentation."""
 
-from typing import Any, Dict, List
+from typing import Any
 
 from fastmcp import FastMCP
 
 from pfc_mcp.contracts import build_docs_data, build_ok
-from pfc_mcp.docs.python_api import DocumentationLoader, APIDocFormatter
+from pfc_mcp.docs.python_api import APIDocFormatter, DocumentationLoader
 from pfc_mcp.docs.query import APISearch
 from pfc_mcp.utils import PythonAPISearchQuery, SearchLimit
 
@@ -17,7 +17,7 @@ def register(mcp: FastMCP):
     def pfc_query_python_api(
         query: PythonAPISearchQuery,
         limit: SearchLimit = 10,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Search PFC Python SDK documentation by keywords (like grep).
 
         Returns matching API paths with signatures. Use pfc_browse_python_api for full documentation.
@@ -31,7 +31,7 @@ def register(mcp: FastMCP):
         - pfc_query_command: Search PFC commands by keywords
         """
         matches = APISearch.search(query, top_k=limit)
-        results_payload: List[Dict[str, Any]] = []
+        results_payload: list[dict[str, Any]] = []
         for result in matches:
             api_path = result.document.name
             sig = APIDocFormatter.format_signature(api_path, result.document.metadata)
@@ -47,7 +47,7 @@ def register(mcp: FastMCP):
                 }
             )
 
-        payload: Dict[str, Any] = build_docs_data(
+        payload: dict[str, Any] = build_docs_data(
             source="python_api",
             action="query",
             entries=results_payload,

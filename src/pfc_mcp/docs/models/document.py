@@ -6,8 +6,8 @@ across the entire PFC documentation system.
 """
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Any, Optional
 from enum import Enum
+from typing import Any
 
 
 class DocumentType(Enum):
@@ -22,6 +22,7 @@ class DocumentType(Enum):
     - COMMAND + MODEL_PROPERTY: Unified search via CommandSearch
     - PYTHON_API: Independent search via APISearch
     """
+
     COMMAND = "command"
     MODEL_PROPERTY = "model_property"
     PYTHON_API = "python_api"
@@ -89,13 +90,13 @@ class SearchDocument:
     doc_type: DocumentType
     title: str
     description: str
-    keywords: List[str]
+    keywords: list[str]
 
     # Optional fields (with defaults)
-    category: Optional[str] = None
-    syntax: Optional[str] = None
-    examples: Optional[List[Dict[str, str]]] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    category: str | None = None
+    syntax: str | None = None
+    examples: list[dict[str, str]] | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self):
         """Validate and normalize fields after initialization."""
@@ -110,7 +111,7 @@ class SearchDocument:
         # Normalize keywords (lowercase for consistent matching)
         self.keywords = [k.lower() for k in self.keywords]
 
-    def matches_filters(self, filters: Dict[str, Any]) -> bool:
+    def matches_filters(self, filters: dict[str, Any]) -> bool:
         """Check if document matches filter criteria.
 
         Args:
@@ -146,7 +147,7 @@ class SearchDocument:
                 return False
         return True
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert document to dictionary representation.
 
         Useful for serialization, logging, and API responses.
@@ -163,5 +164,5 @@ class SearchDocument:
             "category": self.category,
             "syntax": self.syntax,
             "examples": self.examples,
-            "metadata": self.metadata
+            "metadata": self.metadata,
         }

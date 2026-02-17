@@ -9,9 +9,9 @@ Responsibilities:
 - Cache loaded data to avoid repeated I/O
 """
 
-from typing import Dict, Any, Optional, List
-from functools import lru_cache
 import json
+from functools import lru_cache
+from typing import Any
 
 from pfc_mcp.docs.config import PFC_REFERENCES_ROOT
 
@@ -26,7 +26,7 @@ class ReferenceLoader:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def load_index() -> Dict[str, Any]:
+    def load_index() -> dict[str, Any]:
         """Load the main references index file.
 
         Returns:
@@ -45,11 +45,11 @@ class ReferenceLoader:
         if not index_path.exists():
             return {}
 
-        with open(index_path, 'r', encoding='utf-8') as f:
+        with open(index_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def load_category_index(category: str) -> Optional[Dict[str, Any]]:
+    def load_category_index(category: str) -> dict[str, Any] | None:
         """Load index for a specific reference category.
 
         Args:
@@ -81,11 +81,11 @@ class ReferenceLoader:
         if not index_path.exists():
             return None
 
-        with open(index_path, 'r', encoding='utf-8') as f:
+        with open(index_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def load_item_doc(category: str, item_name: str) -> Optional[Dict[str, Any]]:
+    def load_item_doc(category: str, item_name: str) -> dict[str, Any] | None:
         """Load documentation for a specific reference item.
 
         Args:
@@ -117,11 +117,11 @@ class ReferenceLoader:
         if not doc_path.exists():
             return None
 
-        with open(doc_path, 'r', encoding='utf-8') as f:
+        with open(doc_path, encoding="utf-8") as f:
             return json.load(f)
 
     @staticmethod
-    def get_item_list(category: str) -> List[Dict[str, Any]]:
+    def get_item_list(category: str) -> list[dict[str, Any]]:
         """Get list of items in a reference category.
 
         Args:

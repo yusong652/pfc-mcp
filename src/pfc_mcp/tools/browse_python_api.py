@@ -1,6 +1,6 @@
 """PFC Python API Browse Tool - Navigate and retrieve Python SDK documentation."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from fastmcp import FastMCP
 from pydantic import Field
@@ -14,7 +14,7 @@ def register(mcp: FastMCP):
 
     @mcp.tool()
     def pfc_browse_python_api(
-        api: Optional[str] = Field(
+        api: str | None = Field(
             None,
             description=(
                 "PFC Python API path to browse (dot-separated, starting from itasca). Examples:\n"
@@ -26,9 +26,9 @@ def register(mcp: FastMCP):
                 "- 'itasca.ball.Ball.pos': Specific method documentation\n"
                 "- 'itasca.wall.facet': Nested submodule\n"
                 "- 'itasca.wall.facet.Facet': Facet object in wall.facet module"
-            )
-        )
-    ) -> Dict[str, Any]:
+            ),
+        ),
+    ) -> dict[str, Any]:
         """Browse PFC Python SDK documentation by path (like glob + cat)."""
         normalized = _normalize_api_path(api)
 
@@ -72,13 +72,13 @@ def register(mcp: FastMCP):
         )
 
 
-def _normalize_api_path(api: Optional[str]) -> str:
+def _normalize_api_path(api: str | None) -> str:
     if api is None:
         return ""
     return api.strip()
 
 
-def _parse_api_path(api: str) -> Dict[str, Any]:
+def _parse_api_path(api: str) -> dict[str, Any]:
     if not api.startswith("itasca"):
         return {
             "type": "error",
@@ -171,8 +171,8 @@ def _format_module_path(index_key: str) -> str:
     return f"itasca.{index_key}"
 
 
-def _extract_function_names(functions: List[Any]) -> List[str]:
-    names: List[str] = []
+def _extract_function_names(functions: list[Any]) -> list[str]:
+    names: list[str] = []
     for func in functions:
         if isinstance(func, dict):
             name = func.get("name")
@@ -183,12 +183,12 @@ def _extract_function_names(functions: List[Any]) -> List[str]:
     return names
 
 
-def _browse_root() -> Dict[str, Any]:
+def _browse_root() -> dict[str, Any]:
     index = APILoader.load_index()
     modules = index.get("modules", {})
     objects = index.get("objects", {})
 
-    module_items: List[Dict[str, Any]] = []
+    module_items: list[dict[str, Any]] = []
     for module_key, module_info in modules.items():
         module_items.append(
             {
@@ -199,7 +199,7 @@ def _browse_root() -> Dict[str, Any]:
             }
         )
 
-    object_items: List[Dict[str, Any]] = []
+    object_items: list[dict[str, Any]] = []
     for object_name, object_info in objects.items():
         object_items.append(
             {
@@ -224,7 +224,7 @@ def _browse_root() -> Dict[str, Any]:
     )
 
 
-def _browse_module(module_path: str) -> Dict[str, Any]:
+def _browse_module(module_path: str) -> dict[str, Any]:
     index_key = _path_to_index_key(module_path)
     module_data = APILoader.load_module(index_key)
 
@@ -263,7 +263,7 @@ def _browse_module(module_path: str) -> Dict[str, Any]:
     )
 
 
-def _browse_function(module_path: str, func_name: str) -> Dict[str, Any]:
+def _browse_function(module_path: str, func_name: str) -> dict[str, Any]:
     index_key = _path_to_index_key(module_path)
     func_doc = APILoader.load_function(index_key, func_name)
 
@@ -295,7 +295,7 @@ def _browse_function(module_path: str, func_name: str) -> Dict[str, Any]:
     )
 
 
-def _browse_object(module_path: str, object_name: str, display_name: Optional[str] = None) -> Dict[str, Any]:
+def _browse_object(module_path: str, object_name: str, display_name: str | None = None) -> dict[str, Any]:
     object_doc = APILoader.load_object(object_name)
     shown_name = display_name or object_name
 
@@ -332,8 +332,8 @@ def _browse_method(
     module_path: str,
     object_name: str,
     method_name: str,
-    display_name: Optional[str] = None,
-) -> Dict[str, Any]:
+    display_name: str | None = None,
+) -> dict[str, Any]:
     method_doc = APILoader.load_method(object_name, method_name)
     shown_name = display_name or object_name
 
@@ -372,13 +372,13 @@ def _browse_method(
     )
 
 
-def _browse_with_fallback(parsed: Dict[str, Any], requested_api: str) -> Dict[str, Any]:
+def _browse_with_fallback(parsed: dict[str, Any], requested_api: str) -> dict[str, Any]:
     error_msg = parsed.get("error", "Unknown error")
     fallback_path = parsed.get("fallback_path", "")
 
     index = APILoader.load_index()
     modules = index.get("modules", {})
-    available_modules = sorted(_format_module_path(module_key) for module_key in modules.keys())
+    available_modules = sorted(_format_module_path(module_key) for module_key in modules)
 
     return {
         "source": "python_api",
@@ -393,7 +393,7 @@ def _browse_with_fallback(parsed: Dict[str, Any], requested_api: str) -> Dict[st
     }
 
 
-def _wrap_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
+def _wrap_payload(payload: dict[str, Any]) -> dict[str, Any]:
     if "error" in payload:
         err = payload.get("error") or {}
         details = {k: v for k, v in payload.items() if k != "error"}

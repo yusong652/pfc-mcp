@@ -3,7 +3,7 @@
 import asyncio
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any
 from uuid import uuid4
 
 import websockets
@@ -32,7 +32,7 @@ class PFCBridgeClient:
 
         self._websocket: Any | None = None
         self._receiver_task: asyncio.Task[Any] | None = None
-        self._pending_requests: Dict[str, asyncio.Future[Dict[str, Any]]] = {}
+        self._pending_requests: dict[str, asyncio.Future[dict[str, Any]]] = {}
         self._lock = asyncio.Lock()
 
     @property
@@ -105,7 +105,7 @@ class PFCBridgeClient:
                 self._receiver_task = None
             self._fail_pending(ConnectionError("Bridge connection lost"))
 
-    async def _send_request(self, message: Dict[str, Any], timeout_s: float) -> Dict[str, Any]:
+    async def _send_request(self, message: dict[str, Any], timeout_s: float) -> dict[str, Any]:
         await self._ensure_connected()
         assert self._websocket is not None
 
@@ -113,7 +113,7 @@ class PFCBridgeClient:
         message["request_id"] = request_id
 
         loop = asyncio.get_event_loop()
-        future: asyncio.Future[Dict[str, Any]] = loop.create_future()
+        future: asyncio.Future[dict[str, Any]] = loop.create_future()
         self._pending_requests[request_id] = future
 
         try:
@@ -125,10 +125,10 @@ class PFCBridgeClient:
 
     async def _request_with_retry(
         self,
-        message: Dict[str, Any],
+        message: dict[str, Any],
         operation_name: str,
-        timeout_s: Optional[float] = None,
-    ) -> Dict[str, Any]:
+        timeout_s: float | None = None,
+    ) -> dict[str, Any]:
         timeout = timeout_s if timeout_s is not None else self.request_timeout_s
         attempts = self.max_retries + 1
         last_error: Exception | None = None
@@ -153,7 +153,7 @@ class PFCBridgeClient:
         task_id: str,
         session_id: str,
         source: str = "agent",
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         return await self._request_with_retry(
             {
                 "type": "pfc_task",
@@ -167,13 +167,13 @@ class PFCBridgeClient:
             timeout_s=10.0,
         )
 
-    async def check_task_status(self, task_id: str) -> Dict[str, Any]:
+    async def check_task_status(self, task_id: str) -> dict[str, Any]:
         return await self._request_with_retry(
             {"type": "check_task_status", "task_id": task_id},
             operation_name="check_task_status",
         )
 
-    async def execute_diagnostic(self, script_path: str, timeout_ms: int = 30000) -> Dict[str, Any]:
+    async def execute_diagnostic(self, script_path: str, timeout_ms: int = 30000) -> dict[str, Any]:
         timeout_s = max(self.request_timeout_s, timeout_ms / 1000.0 + 5.0)
         return await self._request_with_retry(
             {
@@ -185,7 +185,7 @@ class PFCBridgeClient:
             timeout_s=timeout_s,
         )
 
-    async def list_tasks(self, session_id: Optional[str], offset: int, limit: Optional[int]) -> Dict[str, Any]:
+    async def list_tasks(self, session_id: str | None, offset: int, limit: int | None) -> dict[str, Any]:
         return await self._request_with_retry(
             {
                 "type": "list_tasks",
@@ -196,14 +196,14 @@ class PFCBridgeClient:
             operation_name="list_tasks",
         )
 
-    async def interrupt_task(self, task_id: str) -> Dict[str, Any]:
+    async def interrupt_task(self, task_id: str) -> dict[str, Any]:
         return await self._request_with_retry(
             {"type": "interrupt_task", "task_id": task_id},
             operation_name="interrupt_task",
             timeout_s=5.0,
         )
 
-    async def get_working_directory(self) -> Optional[str]:
+    async def get_working_directory(self) -> str | None:
         response = await self._request_with_retry(
             {"type": "get_working_directory"},
             operation_name="get_working_directory",

@@ -4,11 +4,10 @@ This module handles deduplication of Contact type APIs (BallBallContact, BallFac
 that share the same interface, reducing redundancy while preserving type information.
 """
 
-from typing import List
 from pfc_mcp.docs.models.search_result import SearchResult
 
 
-def consolidate_contact_apis(results: List[SearchResult]) -> List[SearchResult]:
+def consolidate_contact_apis(results: list[SearchResult]) -> list[SearchResult]:
     """Consolidate duplicate Contact type APIs.
 
     When multiple Contact types (BallBallContact, BallFacetContact, etc.) share

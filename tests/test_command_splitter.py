@@ -1,16 +1,13 @@
 """Tests for command_splitter: multi-line itasca.command() splitting."""
 
-import sys
 import os
+import sys
 import textwrap
-
-import pytest
 
 # Add bridge source to path for direct import
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pfc-bridge", "src"))
 
-from pfc_mcp_bridge.utils.command_splitter import split_pfc_commands, preprocess_script
-
+from pfc_mcp_bridge.utils.command_splitter import preprocess_script, split_pfc_commands
 
 # ── split_pfc_commands tests ────────────────────────────────────────
 
@@ -107,10 +104,10 @@ class TestPreprocessScript:
         assert preprocess_script(script) == script
 
     def test_variable_arg_unchanged(self):
-        script = textwrap.dedent('''\
+        script = textwrap.dedent("""\
             cmd = "model new"
             itasca.command(cmd)
-        ''')
+        """)
         assert preprocess_script(script) == script
 
     def test_preserves_indentation(self):

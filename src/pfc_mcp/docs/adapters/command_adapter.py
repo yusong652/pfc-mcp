@@ -6,9 +6,8 @@ into unified SearchDocument models for search.
 Note: Model properties are handled separately via pfc_browse_reference tool.
 """
 
-from typing import List, Optional
 from pfc_mcp.docs.commands.loader import CommandLoader
-from pfc_mcp.docs.models import SearchDocument, DocumentType
+from pfc_mcp.docs.models import DocumentType, SearchDocument
 
 
 class CommandDocumentAdapter:
@@ -28,7 +27,7 @@ class CommandDocumentAdapter:
     """
 
     @staticmethod
-    def load_commands() -> List[SearchDocument]:
+    def load_commands() -> list[SearchDocument]:
         """Load all PFC command documents.
 
         Returns:
@@ -67,8 +66,8 @@ class CommandDocumentAdapter:
                 metadata={
                     "python_available": cmd_doc.get("python_sdk_alternative", {}).get("available", False),
                     "file": cmd_meta.get("file"),
-                    "short_description": cmd_meta.get("short_description", "")
-                }
+                    "short_description": cmd_meta.get("short_description", ""),
+                },
             )
             documents.append(doc)
 
@@ -78,7 +77,7 @@ class CommandDocumentAdapter:
     load_all = load_commands
 
     @staticmethod
-    def load_by_id(doc_id: str) -> Optional[SearchDocument]:
+    def load_by_id(doc_id: str) -> SearchDocument | None:
         """Load a specific command document by ID.
 
         Args:
@@ -110,7 +109,5 @@ class CommandDocumentAdapter:
             category=category,
             syntax=cmd_doc.get("syntax"),
             examples=cmd_doc.get("examples", []),
-            metadata={
-                "python_available": cmd_doc.get("python_sdk_alternative", {}).get("available", False)
-            }
+            metadata={"python_available": cmd_doc.get("python_sdk_alternative", {}).get("available", False)},
         )

@@ -4,11 +4,12 @@ This module implements BM25 ranking with multi-field scoring and weighted combin
 using only Python standard library (no NumPy dependency).
 """
 
-from typing import List, Dict, Any, Tuple
+from typing import Any
+
 from pfc_mcp.docs.models.document import SearchDocument
 from pfc_mcp.docs.search.indexing.bm25_indexer import BM25Indexer
-from pfc_mcp.docs.search.preprocessing.tokenizer import TextTokenizer
 from pfc_mcp.docs.search.keyword_matcher import find_partial_matches
+from pfc_mcp.docs.search.preprocessing.tokenizer import TextTokenizer
 
 
 class BM25Scorer:
@@ -56,9 +57,9 @@ class BM25Scorer:
 
     # Field weights (tunable) - must sum to 1.0
     # These define relative importance of each field in final score
-    WEIGHT_NAME = 0.5        # 50% - API paths have highest importance
-    WEIGHT_KEYWORDS = 0.3    # 30% - Curated terms are highly relevant
-    WEIGHT_DESCRIPTION = 0.2 # 20% - Descriptions provide context
+    WEIGHT_NAME = 0.5  # 50% - API paths have highest importance
+    WEIGHT_KEYWORDS = 0.3  # 30% - Curated terms are highly relevant
+    WEIGHT_DESCRIPTION = 0.2  # 20% - Descriptions provide context
 
     def __init__(self, indexer: BM25Indexer):
         """Initialize BM25 scorer with multi-field indexer.
@@ -69,7 +70,7 @@ class BM25Scorer:
         self.indexer = indexer
         self.tokenizer = TextTokenizer()
 
-    def score(self, query: str, document: SearchDocument) -> Tuple[float, Dict[str, Any]]:
+    def score(self, query: str, document: SearchDocument) -> tuple[float, dict[str, Any]]:
         """Calculate multi-field BM25 score for a query-document pair.
 
         Process:
@@ -109,46 +110,35 @@ class BM25Scorer:
 
         # 3. Combine scores using field weights
         total_score = (
-            self.WEIGHT_NAME * name_score +
-            self.WEIGHT_DESCRIPTION * desc_score +
-            self.WEIGHT_KEYWORDS * kw_score
+            self.WEIGHT_NAME * name_score + self.WEIGHT_DESCRIPTION * desc_score + self.WEIGHT_KEYWORDS * kw_score
         )
 
         # 4. Collect all matched terms (union across fields)
         all_matched_terms = set()
-        all_matched_terms.update(name_info['exact_matches'])
-        all_matched_terms.update(desc_info['exact_matches'])
-        all_matched_terms.update(kw_info['exact_matches'])
+        all_matched_terms.update(name_info["exact_matches"])
+        all_matched_terms.update(desc_info["exact_matches"])
+        all_matched_terms.update(kw_info["exact_matches"])
 
         # 5. Build comprehensive match info
         match_info = {
-            'total_score': round(total_score, 3),
-            'field_scores': {
-                'name': round(name_score, 3),
-                'description': round(desc_score, 3),
-                'keywords': round(kw_score, 3)
+            "total_score": round(total_score, 3),
+            "field_scores": {
+                "name": round(name_score, 3),
+                "description": round(desc_score, 3),
+                "keywords": round(kw_score, 3),
             },
-            'field_weights': {
-                'name': self.WEIGHT_NAME,
-                'description': self.WEIGHT_DESCRIPTION,
-                'keywords': self.WEIGHT_KEYWORDS
+            "field_weights": {
+                "name": self.WEIGHT_NAME,
+                "description": self.WEIGHT_DESCRIPTION,
+                "keywords": self.WEIGHT_KEYWORDS,
             },
-            'matched_terms': list(all_matched_terms),
-            'field_details': {
-                'name': name_info,
-                'description': desc_info,
-                'keywords': kw_info
-            }
+            "matched_terms": list(all_matched_terms),
+            "field_details": {"name": name_info, "description": desc_info, "keywords": kw_info},
         }
 
         return total_score, match_info
 
-    def _score_field(
-        self,
-        query_tokens: set,
-        doc_id: str,
-        field: str
-    ) -> Tuple[float, Dict[str, Any]]:
+    def _score_field(self, query_tokens: set, doc_id: str, field: str) -> tuple[float, dict[str, Any]]:
         """Score query against a specific document field.
 
         Args:
@@ -170,7 +160,7 @@ class BM25Scorer:
         doc_tokens = set(self.indexer.get_field_tokens(doc_id, field=field))
 
         if not doc_tokens:
-            return 0.0, {'exact_matches': [], 'partial_matches': [], 'term_scores': {}}
+            return 0.0, {"exact_matches": [], "partial_matches": [], "term_scores": {}}
 
         # 2. Find exact matches
         exact_matches = query_tokens & doc_tokens
@@ -203,12 +193,9 @@ class BM25Scorer:
 
         # 7. Build field match info
         field_info = {
-            'exact_matches': list(exact_matches),
-            'partial_matches': [
-                {'query': q, 'doc': d, 'quality': quality}
-                for q, d in partial_matches
-            ],
-            'term_scores': term_scores
+            "exact_matches": list(exact_matches),
+            "partial_matches": [{"query": q, "doc": d, "quality": quality} for q, d in partial_matches],
+            "term_scores": term_scores,
         }
 
         return field_score, field_info
@@ -267,10 +254,8 @@ class BM25Scorer:
         return score
 
     def batch_score(
-        self,
-        query: str,
-        documents: List[SearchDocument]
-    ) -> List[Tuple[SearchDocument, float, Dict[str, Any]]]:
+        self, query: str, documents: list[SearchDocument]
+    ) -> list[tuple[SearchDocument, float, dict[str, Any]]]:
         """Score multiple documents for a query using multi-field BM25.
 
         Args:
@@ -303,7 +288,7 @@ class BM25Scorer:
         b: float | None = None,
         weight_name: float | None = None,
         weight_desc: float | None = None,
-        weight_kw: float | None = None
+        weight_kw: float | None = None,
     ):
         """Set BM25 hyperparameters and field weights.
 

@@ -5,9 +5,9 @@ import asyncio
 import logging
 
 from fastmcp import FastMCP
+
 from pfc_mcp import __version__
 from pfc_mcp.bridge import close_bridge_client
-
 from pfc_mcp.tools import (
     browse_commands,
     browse_python_api,
@@ -54,9 +54,7 @@ def main():
         prog="pfc-mcp",
         description="PFC MCP Server - ITASCA PFC tools exposed over MCP",
     )
-    parser.add_argument(
-        "--version", "-v", action="version", version=f"pfc-mcp {__version__}"
-    )
+    parser.add_argument("--version", "-v", action="version", version=f"pfc-mcp {__version__}")
     parser.add_argument(
         "--transport",
         choices=["stdio", "http", "sse"],

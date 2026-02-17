@@ -9,81 +9,160 @@ English words.
 # Carefully curated to avoid removing technical terms
 STOPWORDS = {
     # Articles
-    'a', 'an', 'the',
-
+    "a",
+    "an",
+    "the",
     # Pronouns
-    'this', 'that', 'these', 'those',
-    'it', 'its', 'itself',
-    'they', 'them', 'their', 'theirs', 'themselves',
-    'what', 'which', 'who', 'whom', 'whose',
-
+    "this",
+    "that",
+    "these",
+    "those",
+    "it",
+    "its",
+    "itself",
+    "they",
+    "them",
+    "their",
+    "theirs",
+    "themselves",
+    "what",
+    "which",
+    "who",
+    "whom",
+    "whose",
     # Prepositions
-    'with', 'from', 'to', 'for', 'of', 'in', 'on', 'at', 'by', 'as',
-    'into', 'through', 'during', 'before', 'after', 'above', 'below',
-    'between', 'under', 'again', 'further', 'then', 'once',
-
+    "with",
+    "from",
+    "to",
+    "for",
+    "of",
+    "in",
+    "on",
+    "at",
+    "by",
+    "as",
+    "into",
+    "through",
+    "during",
+    "before",
+    "after",
+    "above",
+    "below",
+    "between",
+    "under",
+    "again",
+    "further",
+    "then",
+    "once",
     # Conjunctions
-    'and', 'or', 'but', 'nor', 'so', 'yet',
-
+    "and",
+    "or",
+    "but",
+    "nor",
+    "so",
+    "yet",
     # Common verbs (be/have forms)
-    'is', 'are', 'was', 'were', 'be', 'been', 'being',
-    'have', 'has', 'had', 'having',
-    'do', 'does', 'did', 'doing',
-
+    "is",
+    "are",
+    "was",
+    "were",
+    "be",
+    "been",
+    "being",
+    "have",
+    "has",
+    "had",
+    "having",
+    "do",
+    "does",
+    "did",
+    "doing",
     # Modal verbs
-    'will', 'would', 'can', 'could', 'may', 'might',
-    'shall', 'should', 'must',
-
+    "will",
+    "would",
+    "can",
+    "could",
+    "may",
+    "might",
+    "shall",
+    "should",
+    "must",
     # Other common words
-    'if', 'than', 'because', 'while', 'where', 'when',
-    'why', 'how', 'all', 'both', 'each', 'few', 'more',
-    'most', 'other', 'some', 'such', 'no', 'not', 'only',
-    'own', 'same', 'than', 'too', 'very',
-
+    "if",
+    "than",
+    "because",
+    "while",
+    "where",
+    "when",
+    "why",
+    "how",
+    "all",
+    "both",
+    "each",
+    "few",
+    "more",
+    "most",
+    "other",
+    "some",
+    "such",
+    "no",
+    "not",
+    "only",
+    "own",
+    "same",
+    "too",
+    "very",
     # Common adverbs
-    'here', 'there', 'now', 'then', 'just', 'also',
-    'always', 'never', 'often', 'sometimes',
+    "here",
+    "there",
+    "now",
+    "just",
+    "also",
+    "always",
+    "never",
+    "often",
+    "sometimes",
 }
 
 # Technical terms to PRESERVE (not stopwords)
 # These are often confused with stopwords but are meaningful in PFC context
 TECHNICAL_PRESERVE = {
-    'set',        # set property, set value
-    'get',        # get value, get property
-    'command',    # PFC command
-    'generate',   # generate balls
-    'create',     # create objects
-    'delete',     # delete objects
-    'property',   # model property
-    'model',      # contact model
-    'contact',    # contact mechanics
-    'ball',       # ball object
-    'wall',       # wall object
-    'cycle',      # simulation cycle
-    'range',      # range specification
-    'group',      # object group
-    'id',         # object ID
-    'list',       # list objects
-    'find',       # find objects
-    'near',       # near neighbors
-    'zone',       # zone element
-    'node',       # node element
-    'face',       # facet face
-    'edge',       # edge element
-    'measure',    # measure command
-    'calculate',  # calculate value
-    'update',     # update state
-    'reset',      # reset state
-    'initialize', # initialize simulation
-    'solve',      # solve equations
-    'apply',      # apply force
-    'assign',     # assign value
-    'remove',     # remove object
-    'clear',      # clear data
-    'save',       # save state
-    'restore',    # restore state
-    'export',     # export data
-    'import',     # import data
+    "set",  # set property, set value
+    "get",  # get value, get property
+    "command",  # PFC command
+    "generate",  # generate balls
+    "create",  # create objects
+    "delete",  # delete objects
+    "property",  # model property
+    "model",  # contact model
+    "contact",  # contact mechanics
+    "ball",  # ball object
+    "wall",  # wall object
+    "cycle",  # simulation cycle
+    "range",  # range specification
+    "group",  # object group
+    "id",  # object ID
+    "list",  # list objects
+    "find",  # find objects
+    "near",  # near neighbors
+    "zone",  # zone element
+    "node",  # node element
+    "face",  # facet face
+    "edge",  # edge element
+    "measure",  # measure command
+    "calculate",  # calculate value
+    "update",  # update state
+    "reset",  # reset state
+    "initialize",  # initialize simulation
+    "solve",  # solve equations
+    "apply",  # apply force
+    "assign",  # assign value
+    "remove",  # remove object
+    "clear",  # clear data
+    "save",  # save state
+    "restore",  # restore state
+    "export",  # export data
+    "import",  # import data
 }
 
 

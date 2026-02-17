@@ -12,15 +12,12 @@ Features:
 - Component API consolidation (x/y/z variants → base method with metadata)
 """
 
-from typing import List, Optional, Dict, Any
-from pfc_mcp.docs.models.document import DocumentType
-from pfc_mcp.docs.models.search_result import SearchResult
+from typing import Any
+
 from pfc_mcp.docs.adapters.api_adapter import APIDocumentAdapter
+from pfc_mcp.docs.models.search_result import SearchResult
 from pfc_mcp.docs.search.engines.bm25_engine import BM25SearchEngine
-from pfc_mcp.docs.search.postprocessing import (
-    consolidate_contact_apis,
-    consolidate_component_apis
-)
+from pfc_mcp.docs.search.postprocessing import consolidate_component_apis, consolidate_contact_apis
 
 
 class APISearch:
@@ -79,12 +76,8 @@ class APISearch:
 
     @classmethod
     def search(
-        cls,
-        query: str,
-        top_k: int = 10,
-        category: Optional[str] = None,
-        min_score: Optional[float] = None
-    ) -> List[SearchResult]:
+        cls, query: str, top_k: int = 10, category: str | None = None, min_score: float | None = None
+    ) -> list[SearchResult]:
         """Search for Python SDK APIs using BM25 algorithm.
 
         This method uses BM25 with smart tokenization to handle both
@@ -134,7 +127,7 @@ class APISearch:
         engine.build()
 
         # Build filter dictionary
-        filters: Dict[str, Any] = {}
+        filters: dict[str, Any] = {}
 
         if category is not None:
             filters["category"] = category
@@ -156,11 +149,7 @@ class APISearch:
         # Calculate search limit: 10x for two-stage consolidation, capped at 100
         search_limit = min(top_k * 10, 100)
 
-        results = engine.search(
-            query=query,
-            top_k=search_limit,
-            filters=filters if filters else None
-        )
+        results = engine.search(query=query, top_k=search_limit, filters=filters if filters else None)
 
         # Consolidate Contact API duplicates
         # This reduces redundancy (e.g., BallBallContact.gap, BallFacetContact.gap → single result)

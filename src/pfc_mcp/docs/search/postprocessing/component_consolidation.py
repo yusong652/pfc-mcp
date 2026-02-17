@@ -5,12 +5,12 @@ them into their base vector method, reducing redundancy while preserving compone
 information in metadata.
 """
 
-from typing import List, Dict, Optional
 import re
+
 from pfc_mcp.docs.models.search_result import SearchResult
 
 
-def consolidate_component_apis(results: List[SearchResult]) -> List[SearchResult]:
+def consolidate_component_apis(results: list[SearchResult]) -> list[SearchResult]:
     """Consolidate component APIs (_x, _y, _z) into base vector methods.
 
     When a base method and its components (method_x, method_y, method_z) appear
@@ -72,15 +72,15 @@ def consolidate_component_apis(results: List[SearchResult]) -> List[SearchResult
         ['x', 'y', 'z']
     """
     # Component pattern: matches method names ending with _x, _y, or _z
-    COMPONENT_PATTERN = re.compile(r'^(.+)_(x|y|z)$')
+    COMPONENT_PATTERN = re.compile(r"^(.+)_(x|y|z)$")
 
     # Pass 1: Identify all base methods and their components
-    base_methods: Dict[str, set] = {}
+    base_methods: dict[str, set] = {}
     # {base_api_name: set of components ('x', 'y', 'z')}
 
     for result in results:
         doc_name = result.document.name
-        method_name = doc_name.split('.')[-1]
+        method_name = doc_name.split(".")[-1]
 
         # Check if this is a component method
         match = COMPONENT_PATTERN.match(method_name)
@@ -91,7 +91,7 @@ def consolidate_component_apis(results: List[SearchResult]) -> List[SearchResult
             component = match.group(2)
 
             # Reconstruct base API name
-            prefix = '.'.join(doc_name.split('.')[:-1])
+            prefix = ".".join(doc_name.split(".")[:-1])
             base_api_name = f"{prefix}.{base_method}"
 
             # Track this component
@@ -104,7 +104,7 @@ def consolidate_component_apis(results: List[SearchResult]) -> List[SearchResult
 
     for result in results:
         doc_name = result.document.name
-        method_name = doc_name.split('.')[-1]
+        method_name = doc_name.split(".")[-1]
 
         # Skip component methods
         if COMPONENT_PATTERN.match(method_name):
@@ -114,7 +114,7 @@ def consolidate_component_apis(results: List[SearchResult]) -> List[SearchResult
         if doc_name in base_methods:
             components = base_methods[doc_name]
             # Add metadata to result
-            result.document.metadata['has_components'] = sorted(components)
+            result.document.metadata["has_components"] = sorted(components)
 
         # Add to consolidated list
         consolidated.append(result)

@@ -5,7 +5,9 @@ ensuring consistent behavior across different search algorithms.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Optional, Callable
+from collections.abc import Callable
+from typing import Any
+
 from pfc_mcp.docs.models.document import SearchDocument
 from pfc_mcp.docs.models.search_result import SearchResult
 
@@ -34,7 +36,7 @@ class BaseSearchEngine(ABC):
         ...     print(f"{result.document.title}: {result.score}")
     """
 
-    def __init__(self, document_loader: Callable[[], List[SearchDocument]]):
+    def __init__(self, document_loader: Callable[[], list[SearchDocument]]):
         """Initialize search engine with document loader.
 
         Args:
@@ -46,7 +48,7 @@ class BaseSearchEngine(ABC):
             >>> engine = BM25SearchEngine(document_loader=CommandDocumentAdapter.load_all)
         """
         self.document_loader = document_loader
-        self.documents: List[SearchDocument] = []
+        self.documents: list[SearchDocument] = []
         self._is_built = False
 
     @abstractmethod
@@ -70,12 +72,7 @@ class BaseSearchEngine(ABC):
         pass
 
     @abstractmethod
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-        filters: Optional[Dict[str, Any]] = None
-    ) -> List[SearchResult]:
+    def search(self, query: str, top_k: int = 10, filters: dict[str, Any] | None = None) -> list[SearchResult]:
         """Execute search query with optional filtering.
 
         Args:
@@ -148,11 +145,7 @@ class BaseSearchEngine(ABC):
         """
         return len(self.documents)
 
-    def _apply_filters(
-        self,
-        results: List[SearchResult],
-        filters: Optional[Dict[str, Any]]
-    ) -> List[SearchResult]:
+    def _apply_filters(self, results: list[SearchResult], filters: dict[str, Any] | None) -> list[SearchResult]:
         """Apply filters to search results.
 
         This is a helper method that can be used by concrete implementations.
@@ -178,10 +171,7 @@ class BaseSearchEngine(ABC):
         # Filter by document type
         if "doc_type" in filters:
             doc_type_filter = filters["doc_type"]
-            filtered = [
-                r for r in filtered
-                if r.document.doc_type.value == doc_type_filter
-            ]
+            filtered = [r for r in filtered if r.document.doc_type.value == doc_type_filter]
 
         # Filter by category
         # Supports both exact match and partial match
@@ -189,19 +179,18 @@ class BaseSearchEngine(ABC):
         if "category" in filters:
             category_filter = filters["category"].lower()
             filtered = [
-                r for r in filtered
-                if r.document.category and (
-                    r.document.category.lower() == category_filter or
-                    r.document.category.lower().endswith(f".{category_filter}")
+                r
+                for r in filtered
+                if r.document.category
+                and (
+                    r.document.category.lower() == category_filter
+                    or r.document.category.lower().endswith(f".{category_filter}")
                 )
             ]
 
         # Filter by minimum score
         if "min_score" in filters:
             min_score = filters["min_score"]
-            filtered = [
-                r for r in filtered
-                if r.score >= min_score
-            ]
+            filtered = [r for r in filtered if r.score >= min_score]
 
         return filtered

@@ -38,7 +38,7 @@ Note:
 
 from pfc_mcp.docs.python_api.formatter import APIDocFormatter
 from pfc_mcp.docs.python_api.loader import DocumentationLoader
-from pfc_mcp.docs.python_api.models import SearchResult, APIDocumentation, SearchStrategy
+from pfc_mcp.docs.python_api.models import APIDocumentation, SearchResult, SearchStrategy
 
 # Aliases for browse tool (more intuitive names)
 APILoader = DocumentationLoader
@@ -56,5 +56,5 @@ __all__ = [
     # Data models
     "SearchResult",
     "APIDocumentation",
-    "SearchStrategy"
+    "SearchStrategy",
 ]

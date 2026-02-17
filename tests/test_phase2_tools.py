@@ -1,7 +1,7 @@
 import asyncio
 
-from pfc_mcp.server import mcp
 from pfc_mcp.formatting import build_bridge_error
+from pfc_mcp.server import mcp
 from pfc_mcp.tools.task_formatting import normalize_status, paginate_output
 from pfc_mcp.utils import validate_script_path
 

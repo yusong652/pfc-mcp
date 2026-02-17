@@ -11,7 +11,7 @@ Multi-Field Design:
 
 import math
 from collections import Counter
-from typing import List, Dict, Set, Tuple
+
 from pfc_mcp.docs.models.document import SearchDocument
 from pfc_mcp.docs.search.preprocessing.tokenizer import TextTokenizer
 
@@ -55,28 +55,28 @@ class BM25Indexer:
     def __init__(self):
         """Initialize empty multi-field BM25 index."""
         # Name field index
-        self.name_documents: Dict[str, List[str]] = {}  # doc_id → tokens
-        self.name_term_freq: Dict[str, Dict[str, int]] = {}  # doc_id → {term → count}
-        self.name_term_doc_freq: Dict[str, int] = {}  # term → document frequency
+        self.name_documents: dict[str, list[str]] = {}  # doc_id → tokens
+        self.name_term_freq: dict[str, dict[str, int]] = {}  # doc_id → {term → count}
+        self.name_term_doc_freq: dict[str, int] = {}  # term → document frequency
         self.name_avg_doc_len: float = 0.0
 
         # Description field index
-        self.desc_documents: Dict[str, List[str]] = {}
-        self.desc_term_freq: Dict[str, Dict[str, int]] = {}
-        self.desc_term_doc_freq: Dict[str, int] = {}
+        self.desc_documents: dict[str, list[str]] = {}
+        self.desc_term_freq: dict[str, dict[str, int]] = {}
+        self.desc_term_doc_freq: dict[str, int] = {}
         self.desc_avg_doc_len: float = 0.0
 
         # Keywords field index
-        self.kw_documents: Dict[str, List[str]] = {}
-        self.kw_term_freq: Dict[str, Dict[str, int]] = {}
-        self.kw_term_doc_freq: Dict[str, int] = {}
+        self.kw_documents: dict[str, list[str]] = {}
+        self.kw_term_freq: dict[str, dict[str, int]] = {}
+        self.kw_term_doc_freq: dict[str, int] = {}
         self.kw_avg_doc_len: float = 0.0
 
         # Common
         self.doc_count: int = 0
         self.tokenizer = TextTokenizer()
 
-    def build(self, documents: List[SearchDocument]) -> None:
+    def build(self, documents: list[SearchDocument]) -> None:
         """Build multi-field BM25 index from documents.
 
         Each field is indexed independently with its real token counts:
@@ -265,7 +265,7 @@ class BM25Indexer:
         else:
             raise ValueError(f"Unknown field: {field}")
 
-    def get_field_tokens(self, doc_id: str, field: str = "name") -> List[str]:
+    def get_field_tokens(self, doc_id: str, field: str = "name") -> list[str]:
         """Get tokenized content for a specific field.
 
         Args:
@@ -288,7 +288,7 @@ class BM25Indexer:
         else:
             raise ValueError(f"Unknown field: {field}")
 
-    def get_all_doc_ids(self) -> Set[str]:
+    def get_all_doc_ids(self) -> set[str]:
         """Get all document IDs in the index.
 
         Returns:
@@ -329,7 +329,7 @@ class BM25Indexer:
         # Clear common
         self.doc_count = 0
 
-    def get_stats(self) -> Dict:
+    def get_stats(self) -> dict:
         """Get index statistics for debugging.
 
         Returns:
@@ -358,20 +358,20 @@ class BM25Indexer:
             }
         """
         return {
-            'doc_count': self.doc_count,
-            'name_field': {
-                'avg_doc_len': round(self.name_avg_doc_len, 2),
-                'vocab_size': len(self.name_term_doc_freq),
-                'total_terms': sum(len(tokens) for tokens in self.name_documents.values())
+            "doc_count": self.doc_count,
+            "name_field": {
+                "avg_doc_len": round(self.name_avg_doc_len, 2),
+                "vocab_size": len(self.name_term_doc_freq),
+                "total_terms": sum(len(tokens) for tokens in self.name_documents.values()),
             },
-            'description_field': {
-                'avg_doc_len': round(self.desc_avg_doc_len, 2),
-                'vocab_size': len(self.desc_term_doc_freq),
-                'total_terms': sum(len(tokens) for tokens in self.desc_documents.values())
+            "description_field": {
+                "avg_doc_len": round(self.desc_avg_doc_len, 2),
+                "vocab_size": len(self.desc_term_doc_freq),
+                "total_terms": sum(len(tokens) for tokens in self.desc_documents.values()),
             },
-            'keywords_field': {
-                'avg_doc_len': round(self.kw_avg_doc_len, 2),
-                'vocab_size': len(self.kw_term_doc_freq),
-                'total_terms': sum(len(tokens) for tokens in self.kw_documents.values())
-            }
+            "keywords_field": {
+                "avg_doc_len": round(self.kw_avg_doc_len, 2),
+                "vocab_size": len(self.kw_term_doc_freq),
+                "total_terms": sum(len(tokens) for tokens in self.kw_documents.values()),
+            },
         }

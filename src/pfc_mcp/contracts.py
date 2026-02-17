@@ -16,9 +16,7 @@ class ToolError(BaseModel):
 
     code: str = Field(description="Stable machine-readable error code")
     message: str = Field(description="Human-readable error summary")
-    details: dict[str, Any] | None = Field(
-        default=None, description="Optional structured error details"
-    )
+    details: dict[str, Any] | None = Field(default=None, description="Optional structured error details")
 
 
 class ToolEnvelope(BaseModel):
@@ -29,7 +27,7 @@ class ToolEnvelope(BaseModel):
     error: ToolError | None = Field(default=None, description="Structured error payload")
 
     @model_validator(mode="after")
-    def _validate_coherence(self) -> "ToolEnvelope":
+    def _validate_coherence(self) -> ToolEnvelope:
         if self.ok and self.error is not None:
             raise ValueError("ok=true responses must not include error")
         if not self.ok and self.error is None:
@@ -80,5 +78,3 @@ def build_docs_data(
         entries=entries,
         summary=summary or {},
     ).model_dump(exclude_none=True)
-
-

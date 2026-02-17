@@ -4,9 +4,8 @@ This module converts Python SDK API documentation from the DocumentationLoader
 format into unified SearchDocument models for search.
 """
 
-from typing import List
+from pfc_mcp.docs.models.document import DocumentType, SearchDocument
 from pfc_mcp.docs.python_api.loader import DocumentationLoader
-from pfc_mcp.docs.models.document import SearchDocument, DocumentType
 
 
 class APIDocumentAdapter:
@@ -38,7 +37,7 @@ class APIDocumentAdapter:
     """
 
     @staticmethod
-    def load_all() -> List[SearchDocument]:
+    def load_all() -> list[SearchDocument]:
         """Load all Python API documents.
 
         Returns:
@@ -104,17 +103,14 @@ class APIDocumentAdapter:
                 keywords=keywords,
                 category=category,
                 syntax=api_doc.get("signature", api_name),
-                examples=[
-                    {"code": ex} if isinstance(ex, str) else ex
-                    for ex in api_doc.get("examples", [])
-                ],
+                examples=[{"code": ex} if isinstance(ex, str) else ex for ex in api_doc.get("examples", [])],
                 metadata={
                     "file_ref": file_ref,
                     "returns": api_doc.get("returns", ""),
                     "limitations": api_doc.get("limitations", []),
                     "fallback_commands": api_doc.get("fallback_commands", []),
-                    "see_also": api_doc.get("see_also", [])
-                }
+                    "see_also": api_doc.get("see_also", []),
+                },
             )
             documents.append(doc)
 
@@ -161,6 +157,7 @@ class APIDocumentAdapter:
             # Try to map class name to module
             try:
                 from pfc_mcp.docs.python_api.types.mappings import CLASS_TO_MODULE
+
                 class_name = parts[0]
                 if class_name in CLASS_TO_MODULE:
                     return f"itasca.{CLASS_TO_MODULE[class_name]}"
@@ -219,13 +216,10 @@ class APIDocumentAdapter:
             keywords=keywords,
             category=category,
             syntax=api_doc.get("signature", doc_id),
-            examples=[
-                {"code": ex} if isinstance(ex, str) else ex
-                for ex in api_doc.get("examples", [])
-            ],
+            examples=[{"code": ex} if isinstance(ex, str) else ex for ex in api_doc.get("examples", [])],
             metadata={
                 "returns": api_doc.get("returns", ""),
                 "limitations": api_doc.get("limitations", []),
-                "see_also": api_doc.get("see_also", [])
-            }
+                "see_also": api_doc.get("see_also", []),
+            },
         )

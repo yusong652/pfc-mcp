@@ -16,4 +16,4 @@ jobs:
       - run: uv run ruff check src/ tests/
       - run: uv run ruff format --check src/ tests/
       - run: uv run mypy src/pfc_mcp/
-      - run: uv run pytest
+      - run: uv run pytest --cov=pfc_mcp --cov-report=term-missing

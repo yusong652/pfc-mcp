@@ -24,8 +24,9 @@ from pfc_mcp.tools import (
 mcp = FastMCP(
     "PFC MCP Server",
     instructions=(
-        "PFC (Particle Flow Code) documentation server. "
-        "Provides tools for browsing/searching documentation and for executing tasks "
+        "PFC (Particle Flow Code) MCP server. "
+        "Provides tools for browsing/searching PFC documentation "
+        "and for executing simulation tasks, capturing plots, and managing runs "
         "through a pfc-bridge WebSocket service running inside PFC GUI."
     ),
 )
@@ -80,8 +81,13 @@ def main():
         run_kwargs["host"] = args.host
         run_kwargs["port"] = args.port
 
+    # Suppress noisy uvicorn shutdown messages (e.g. "Cancel N running task(s)")
+    logging.getLogger("uvicorn.error").setLevel(logging.CRITICAL)
+
     try:
         mcp.run(**run_kwargs)
+    except KeyboardInterrupt:
+        pass
     finally:
         try:
             asyncio.run(close_bridge_client())

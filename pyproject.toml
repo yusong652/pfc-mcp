@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pfc-mcp"
-version = "0.2.2"
+dynamic = ["version"]
 description = "MCP server for ITASCA PFC discrete element simulation control and documentation"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -55,6 +55,9 @@ ignore = [
     "B008",    # function call in defaults — needed for FastMCP tool signatures
     "B905",    # zip strict — internal code with guaranteed equal lengths
 ]
+
+[tool.hatch.version]
+path = "src/pfc_mcp/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pfc_mcp"]

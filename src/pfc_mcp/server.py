@@ -72,15 +72,30 @@ def main():
         default=8000,
         help="Port to bind when using http/sse transport (default: 8000)",
     )
+    parser.add_argument(
+        "--log-level",
+        choices=["debug", "info", "warning", "error"],
+        default="warning",
+        help="Log level for pfc-mcp (default: warning)",
+    )
     args = parser.parse_args()
+
+    # Configure logging
+    level = getattr(logging, args.log_level.upper())
+    logging.basicConfig(
+        level=level,
+        format="%(levelname)s %(name)s: %(message)s",
+    )
+    logging.getLogger("pfc-mcp").setLevel(level)
+    # Keep uvicorn quiet unless user asks for debug/info
+    uvicorn_level = level if level <= logging.INFO else logging.CRITICAL
+    logging.getLogger("uvicorn").setLevel(uvicorn_level)
+    logging.getLogger("uvicorn.error").setLevel(uvicorn_level)
 
     run_kwargs: dict = {"transport": args.transport, "show_banner": False}
     if args.transport in ("http", "sse"):
         run_kwargs["host"] = args.host
         run_kwargs["port"] = args.port
-
-    # Suppress noisy uvicorn shutdown messages (e.g. "Cancel N running task(s)")
-    logging.getLogger("uvicorn.error").setLevel(logging.CRITICAL)
 
     try:
         mcp.run(**run_kwargs)

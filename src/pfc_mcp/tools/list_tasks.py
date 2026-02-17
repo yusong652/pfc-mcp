@@ -3,7 +3,6 @@
 from typing import Any
 
 from fastmcp import FastMCP
-from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client
 from pfc_mcp.contracts import build_ok
@@ -16,10 +15,6 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     async def pfc_list_tasks(
-        session_id: str | None = Field(
-            default=None,
-            description="Optional session filter. Omit to list all sessions.",
-        ),
         skip_newest: SkipNewestTasks = 0,
         limit: TaskListLimit = 32,
     ) -> dict[str, Any]:
@@ -27,7 +22,6 @@ def register(mcp: FastMCP) -> None:
         try:
             client = await get_bridge_client()
             response = await client.list_tasks(
-                session_id=session_id,
                 offset=skip_newest,
                 limit=limit,
             )

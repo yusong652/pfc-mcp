@@ -124,33 +124,23 @@ async def _mock_bridge_handler(websocket):
 @pytest.fixture()
 async def mock_bridge(tmp_path):
     """Start mock bridge and configure environment."""
-    import pfc_mcp.bridge.task_manager as tm_mod
-
     TASK_STORE.clear()
 
     server = await websockets.serve(_mock_bridge_handler, "127.0.0.1", 0)
     port = server.sockets[0].getsockname()[1]
 
-    env_keys = ["PFC_MCP_BRIDGE_URL", "PFC_MCP_WORKSPACE_PATH"]
-    prev = {k: os.environ.get(k) for k in env_keys}
-
+    prev = os.environ.get("PFC_MCP_BRIDGE_URL")
     os.environ["PFC_MCP_BRIDGE_URL"] = f"ws://127.0.0.1:{port}"
-    os.environ["PFC_MCP_WORKSPACE_PATH"] = str(tmp_path)
 
-    # Reset singleton so tests get fresh state
-    old_tm = tm_mod._task_manager
-    tm_mod._task_manager = None
     await close_bridge_client()
 
     yield tmp_path
 
     await close_bridge_client()
-    tm_mod._task_manager = old_tm
-    for key, value in prev.items():
-        if value is None:
-            os.environ.pop(key, None)
-        else:
-            os.environ[key] = value
+    if prev is None:
+        os.environ.pop("PFC_MCP_BRIDGE_URL", None)
+    else:
+        os.environ["PFC_MCP_BRIDGE_URL"] = prev
     server.close()
     await server.wait_closed()
 

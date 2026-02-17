@@ -2,10 +2,11 @@
 Task Manager - Registry, lifecycle, and persistence for long-running tasks.
 
 Provides the TaskManager class that acts as a registry for all tracked tasks,
-with disk persistence organized by session.
+with disk persistence in a flat layout.
 
 Persistence layout:
-    .nagisa/sessions/{session_id}/tasks.json
+    .pfc-mcp/tasks.json
+    .pfc-mcp/logs/task_{id}.log
 
 Python 3.6 compatible implementation.
 """
@@ -13,7 +14,6 @@ Python 3.6 compatible implementation.
 import json
 import os
 import uuid
-import shutil
 import logging
 from typing import Any, Dict, List, Optional
 
@@ -23,9 +23,9 @@ from .task import ScriptTask
 logger = logging.getLogger("PFC-Server")
 
 # Persistence constants
-DATA_DIR = ".nagisa"
-SESSIONS_DIR = os.path.join(DATA_DIR, "sessions")
-TASKS_FILENAME = "tasks.json"
+DATA_DIR = ".pfc-mcp"
+LOGS_DIR = os.path.join(DATA_DIR, "logs")
+TASKS_FILENAME = os.path.join(DATA_DIR, "tasks.json")
 
 
 class TaskManager:
@@ -33,7 +33,7 @@ class TaskManager:
     Manage long-running task tracking, status queries, and disk persistence.
 
     Tasks are represented as ScriptTask objects for Python script execution.
-    Task history is persisted to disk organized by session for crash recovery.
+    Task history is persisted to disk for crash recovery.
     """
 
     def __init__(self):
@@ -41,17 +41,18 @@ class TaskManager:
         """Initialize task manager, load historical tasks from disk."""
         self.tasks = {}  # type: Dict[str, ScriptTask]
 
-        # Ensure persistence directory exists
-        if not os.path.exists(SESSIONS_DIR):
-            os.makedirs(SESSIONS_DIR)
+        # Ensure persistence directories exist
+        for d in (DATA_DIR, LOGS_DIR):
+            if not os.path.exists(d):
+                os.makedirs(d)
 
         self._load_historical_tasks()
         logger.info("TaskManager initialized")
 
     # ── Task lifecycle ──────────────────────────────────────────
 
-    def create_script_task(self, session_id, future, script_name, entry_script, output_buffer=None, description=None, task_id=None):
-        # type: (str, Any, str, str, Any, Optional[str], Optional[str]) -> str
+    def create_script_task(self, future, script_name, entry_script, output_buffer=None, description=None, task_id=None):
+        # type: (Any, str, str, Any, Optional[str], Optional[str]) -> str
         """Register a new long-running Python script task.
 
         Returns:
@@ -60,7 +61,7 @@ class TaskManager:
         if task_id is None:
             task_id = uuid.uuid4().hex[:8]
         task = ScriptTask(
-            task_id, session_id, future, script_name, entry_script,
+            task_id, future, script_name, entry_script,
             output_buffer, description, on_status_change=self._on_task_status_change,
         )
         self.tasks[task_id] = task
@@ -89,35 +90,22 @@ class TaskManager:
         self._refresh_runtime_status(task)
         return task.get_status_response()
 
-    def list_all_tasks(self, session_id=None, offset=0, limit=None):
-        # type: (Optional[str], int, Optional[int]) -> Dict[str, Any]
-        """List tracked tasks, optionally filtered by session with pagination."""
+    def list_all_tasks(self, offset=0, limit=None):
+        # type: (int, Optional[int]) -> Dict[str, Any]
+        """List tracked tasks with pagination."""
         for task in self.tasks.values():
             self._refresh_runtime_status(task)
 
-        filtered_tasks = list(self.tasks.values())
-
-        if session_id:
-            filtered_tasks = [
-                task for task in filtered_tasks
-                if task.session_id == session_id or task.session_id.startswith(session_id)
-            ]
-
-        sorted_tasks = sorted(filtered_tasks, key=lambda t: t.start_time, reverse=True)
+        sorted_tasks = sorted(self.tasks.values(), key=lambda t: t.start_time, reverse=True)
 
         total_count = len(sorted_tasks)
         end_idx = offset + limit if limit else total_count
         paginated_tasks = sorted_tasks[offset:end_idx]
         tasks_info = [task.get_task_info() for task in paginated_tasks]
 
-        if session_id:
-            message = "Found {} tracked task(s) for session {} (showing {} of {})".format(
-                len(tasks_info), session_id, len(tasks_info), total_count
-            )
-        else:
-            message = "Found {} tracked task(s) across all sessions (showing {} of {})".format(
-                total_count, len(tasks_info), total_count
-            )
+        message = "Found {} tracked task(s) (showing {} of {})".format(
+            total_count, len(tasks_info), total_count
+        )
 
         return {
             "status": "success",
@@ -161,11 +149,21 @@ class TaskManager:
         cleared_count = len(self.tasks)
         self.tasks.clear()
 
-        if os.path.exists(SESSIONS_DIR):
-            for name in os.listdir(SESSIONS_DIR):
-                path = os.path.join(SESSIONS_DIR, name)
-                if os.path.isdir(path):
-                    shutil.rmtree(path)
+        # Remove tasks.json
+        if os.path.exists(TASKS_FILENAME):
+            try:
+                os.remove(TASKS_FILENAME)
+            except Exception as e:
+                logger.error("Failed to remove tasks file: {}".format(e))
+
+        # Remove all log files
+        if os.path.exists(LOGS_DIR):
+            for name in os.listdir(LOGS_DIR):
+                path = os.path.join(LOGS_DIR, name)
+                try:
+                    os.remove(path)
+                except Exception:
+                    pass
 
         logger.info("Cleared all %d task(s)", cleared_count)
         return cleared_count
@@ -180,18 +178,10 @@ class TaskManager:
 
     def _save_tasks(self):
         # type: () -> None
-        """Save all tasks to disk, grouped by session."""
+        """Save all tasks to disk."""
         try:
-            tasks_by_session = {}  # type: Dict[str, List[Dict[str, Any]]]
-            for task in self.tasks.values():
-                sid = task.session_id
-                if sid not in tasks_by_session:
-                    tasks_by_session[sid] = []
-                tasks_by_session[sid].append(self._serialize_task(task))
-
-            for sid, session_tasks in tasks_by_session.items():
-                self._save_session(sid, session_tasks)
-
+            tasks_data = [self._serialize_task(task) for task in self.tasks.values()]
+            self._save_file(tasks_data)
         except Exception as e:
             logger.error("Failed to save tasks: {}".format(e))
 
@@ -199,7 +189,7 @@ class TaskManager:
         # type: () -> None
         """Load historical tasks from disk on startup."""
         try:
-            all_data = self._load_all_sessions()
+            all_data = self._load_file()
             for task_data in all_data:
                 task = self._restore_task(task_data)
                 if task:
@@ -214,7 +204,6 @@ class TaskManager:
         """Serialize a ScriptTask to JSON-compatible dict."""
         return {
             "task_id": task.task_id,
-            "session_id": task.session_id,
             "task_type": "script",
             "description": task.description,
             "status": task.status,
@@ -251,55 +240,27 @@ class TaskManager:
     # ── Disk I/O helpers ────────────────────────────────────────
 
     @staticmethod
-    def _session_filepath(session_id):
-        # type: (str) -> str
-        """Get filepath for a session's tasks.json, creating dir if needed."""
-        session_dir = os.path.join(SESSIONS_DIR, session_id)
-        if not os.path.exists(session_dir):
-            os.makedirs(session_dir)
-        return os.path.join(session_dir, TASKS_FILENAME)
-
-    @staticmethod
-    def _save_session(session_id, tasks_data):
-        # type: (str, List[Dict[str, Any]]) -> None
-        """Atomically save tasks for a session."""
-        filepath = TaskManager._session_filepath(session_id)
-        temp = filepath + ".tmp"
+    def _save_file(tasks_data):
+        # type: (List[Dict[str, Any]]) -> None
+        """Atomically save tasks to .pfc-mcp/tasks.json."""
+        temp = TASKS_FILENAME + ".tmp"
         try:
             with open(temp, 'w') as f:
                 json.dump(tasks_data, f, indent=2)
-            os.replace(temp, filepath)
+            os.replace(temp, TASKS_FILENAME)
         except Exception as e:
-            logger.error("Failed to save session {} tasks: {}".format(session_id, e))
+            logger.error("Failed to save tasks file: {}".format(e))
 
     @staticmethod
-    def _load_session(session_id):
-        # type: (str) -> List[Dict[str, Any]]
-        """Load tasks for a single session."""
-        filepath = TaskManager._session_filepath(session_id)
-        if not os.path.exists(filepath):
+    def _load_file():
+        # type: () -> List[Dict[str, Any]]
+        """Load tasks from .pfc-mcp/tasks.json."""
+        if not os.path.exists(TASKS_FILENAME):
             return []
         try:
-            with open(filepath, 'r') as f:
+            with open(TASKS_FILENAME, 'r') as f:
                 return json.load(f)
         except Exception as e:
-            logger.error("Failed to load session {} tasks: {}".format(session_id, e))
+            logger.error("Failed to load tasks file: {}".format(e))
             return []
 
-    @staticmethod
-    def _load_all_sessions():
-        # type: () -> List[Dict[str, Any]]
-        """Load tasks from all sessions."""
-        if not os.path.exists(SESSIONS_DIR):
-            return []
-
-        all_tasks = []  # type: List[Dict[str, Any]]
-        try:
-            for name in os.listdir(SESSIONS_DIR):
-                session_dir = os.path.join(SESSIONS_DIR, name)
-                if os.path.isdir(session_dir):
-                    all_tasks.extend(TaskManager._load_session(name))
-            logger.info("Loaded %d task(s) from disk", len(all_tasks))
-        except Exception as e:
-            logger.error("Failed to load tasks: {}".format(e))
-        return all_tasks

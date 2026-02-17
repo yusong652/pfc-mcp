@@ -19,7 +19,6 @@ async def handle_pfc_task(ctx, data):
         ctx: Server context with dependencies
         data: Message data containing:
             - request_id: Request identifier
-            - session_id: Session identifier (default: "default")
             - script_path: Path to Python script
             - description: Task description
             - task_id: Required backend-generated task ID (6-char hex)
@@ -38,11 +37,10 @@ async def handle_pfc_task(ctx, data):
     if err:
         return err
 
-    session_id = data.get("session_id", "default")
     description = data.get("description", "")
 
     result = await ctx.script_runner.run(
-        session_id, script_path, description, task_id=task_id
+        script_path, description, task_id=task_id
     )
 
     # Truncate message before sending
@@ -98,7 +96,6 @@ async def handle_list_tasks(ctx, data):
         ctx: Server context with dependencies
         data: Message data containing:
             - request_id: Request identifier
-            - session_id: Optional session filter
             - offset: Pagination offset (default: 0)
             - limit: Optional pagination limit
 
@@ -106,12 +103,10 @@ async def handle_list_tasks(ctx, data):
         Response dict with task list
     """
     request_id = data.get("request_id", "unknown")
-    session_id = data.get("session_id")  # Optional session filter
     offset = data.get("offset", 0)
     limit = data.get("limit")
 
     result = ctx.task_manager.list_all_tasks(
-        session_id=session_id,
         offset=offset,
         limit=limit
     )

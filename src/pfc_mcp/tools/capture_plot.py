@@ -13,7 +13,6 @@ from mcp.types import ImageContent, TextContent
 from pydantic import Field
 
 from pfc_mcp.bridge import get_bridge_client
-from pfc_mcp.config import get_bridge_config
 from pfc_mcp.contracts import build_ok
 from pfc_mcp.formatting import (
     build_bridge_error,
@@ -39,7 +38,7 @@ def _to_pfc_path(path: str) -> str:
 
 
 def _create_temp_script(working_dir: str, content: str) -> Path:
-    script_dir = Path(working_dir) / ".nagisa" / "plot_scripts"
+    script_dir = Path(working_dir) / ".pfc-mcp" / "plot_scripts"
     script_dir.mkdir(parents=True, exist_ok=True)
     script_path = script_dir / f"capture_plot_{int(time.time() * 1000)}.py"
     script_path.write_text(content, encoding="utf-8")
@@ -108,8 +107,6 @@ def register(mcp: FastMCP) -> None:
         """Capture a PFC plot image. The image is saved to output_path and returned for visual inspection.
 
         ALWAYS use this tool for plot visualization. Do NOT write PFC plot commands manually via pfc_execute_task — the PFC plot command syntax is complex and error-prone. This tool handles all plot setup, camera, coloring, and export internally."""
-        config = get_bridge_config()
-
         try:
             ball_color = normalize_ball_color_by(ball_color_by)
             wall_color = normalize_wall_color_by(wall_color_by)
@@ -152,19 +149,19 @@ def register(mcp: FastMCP) -> None:
             )
 
             client = await get_bridge_client()
-            working_dir = config.workspace_path or await client.get_working_directory()
+            working_dir = await client.get_working_directory()
             if not working_dir:
                 return build_operation_error(
                     "workspace_unavailable",
                     "Cannot resolve pfc-bridge working directory",
-                    action="Set PFC_MCP_WORKSPACE_PATH or ensure bridge has an active workspace",
+                    action="Ensure bridge has an active workspace",
                 )
 
             script_path = _create_temp_script(working_dir, script_content)
             try:
                 response = await client.execute_diagnostic(
                     script_path=_to_pfc_path(str(script_path)),
-                    timeout_ms=timeout * 1000 if timeout else config.diagnostic_timeout_ms,
+                    timeout_ms=timeout * 1000,
                 )
             finally:
                 _cleanup_script(script_path)

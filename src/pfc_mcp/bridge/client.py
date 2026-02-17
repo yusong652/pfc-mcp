@@ -151,14 +151,12 @@ class PFCBridgeClient:
         script_path: str,
         description: str,
         task_id: str,
-        session_id: str,
         source: str = "agent",
     ) -> dict[str, Any]:
         return await self._request_with_retry(
             {
                 "type": "pfc_task",
                 "task_id": task_id,
-                "session_id": session_id,
                 "script_path": script_path,
                 "description": description,
                 "source": source,
@@ -185,11 +183,10 @@ class PFCBridgeClient:
             timeout_s=timeout_s,
         )
 
-    async def list_tasks(self, session_id: str | None, offset: int, limit: int | None) -> dict[str, Any]:
+    async def list_tasks(self, offset: int, limit: int | None) -> dict[str, Any]:
         return await self._request_with_retry(
             {
                 "type": "list_tasks",
-                "session_id": session_id,
                 "offset": offset,
                 "limit": limit,
             },

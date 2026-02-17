@@ -5,7 +5,7 @@ from typing import Any
 
 from fastmcp import FastMCP
 
-from pfc_mcp.bridge import get_bridge_client, get_task_manager
+from pfc_mcp.bridge import get_bridge_client
 from pfc_mcp.contracts import build_ok
 from pfc_mcp.formatting import (
     build_bridge_error,
@@ -55,8 +55,6 @@ def register(mcp: FastMCP) -> None:
             limit=limit,
             filter_text=filter,
         )
-
-        get_task_manager().update_status(task_id, normalized_status)
 
         result: dict[str, Any] = {
             "task_id": task_id,

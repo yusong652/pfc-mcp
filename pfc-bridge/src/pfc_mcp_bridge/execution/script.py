@@ -216,13 +216,12 @@ class ScriptRunner:
             clear_current_task()
             clear_interrupt(task_id)
 
-    async def run(self, session_id, script_path, description, task_id=None):
-        # type: (str, str, str, Optional[str]) -> Dict[str, Any]
+    async def run(self, script_path, description, task_id=None):
+        # type: (str, str, Optional[str]) -> Dict[str, Any]
         """
         Submit script to main thread queue and return immediately.
 
         Args:
-            session_id: Session identifier for task isolation and persistence
             script_path: Absolute path to Python script file
             description: Task description from PFC agent (LLM-provided)
             task_id: Required client-generated task ID (6-char hex)
@@ -256,8 +255,8 @@ class ScriptRunner:
 
         try:
             # Create output log file for complete output preservation
-            # Path: .nagisa/sessions/{session_id}/logs/task_{task_id}.log
-            log_dir = os.path.join(".nagisa", "sessions", session_id, "logs")
+            # Path: .pfc-mcp/logs/task_{task_id}.log
+            log_dir = os.path.join(".pfc-mcp", "logs")
             log_path = os.path.join(log_dir, "task_{}.log".format(task_id))
             output_buffer = FileBuffer(log_path)
 
@@ -267,7 +266,7 @@ class ScriptRunner:
             # Register task with manager
             submit_time = time.time()
             self.task_manager.create_script_task(
-                session_id, future, script_name, script_path, output_buffer, description, task_id
+                future, script_name, script_path, output_buffer, description, task_id
             )
 
             # If execution already started before task registration, sync status.

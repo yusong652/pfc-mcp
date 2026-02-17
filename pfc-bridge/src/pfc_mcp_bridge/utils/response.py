@@ -52,12 +52,6 @@ class TaskDataBuilder:
             "description": description,
         }  # type: Dict[str, Any]
 
-    def with_session(self, session_id):
-        # type: (str) -> TaskDataBuilder
-        """Add session_id field."""
-        self._data["session_id"] = session_id
-        return self
-
     def with_timing(
         self,
         start_time,  # type: Optional[float]

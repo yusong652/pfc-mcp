@@ -36,11 +36,10 @@ class ScriptTask:
     - "interrupted": Task was interrupted by user
     """
 
-    def __init__(self, task_id, session_id, future, script_name, entry_script,
+    def __init__(self, task_id, future, script_name, entry_script,
                  output_buffer=None, description=None, on_status_change=None):
-        # type: (str, str, Any, str, str, Any, Optional[str], Any) -> None
+        # type: (str, Any, str, str, Any, Optional[str], Any) -> None
         self.task_id = task_id
-        self.session_id = session_id
         self.future = future
         self.description = description or ""
         self.script_name = script_name
@@ -61,8 +60,8 @@ class ScriptTask:
         future.add_done_callback(self._on_complete)
 
         logger.info(
-            "Script task registered: %s (id=%s, session=%s)",
-            script_name, task_id, session_id
+            "Script task registered: %s (id=%s)",
+            script_name, task_id
         )
 
     @classmethod
@@ -71,7 +70,6 @@ class ScriptTask:
         """Create a task from persisted data (no Future or buffer)."""
         task = cls.__new__(cls)
         task.task_id = task_data["task_id"]
-        task.session_id = task_data.get("session_id", "default")
         task.description = task_data["description"]
         task.script_name = task_data.get("script_name", "")
         task.entry_script = task_data.get("entry_script") or task_data.get("script_path") or ""
@@ -164,11 +162,10 @@ class ScriptTask:
     def _create_data_builder(self):
         # type: () -> TaskDataBuilder
         """Create pre-configured TaskDataBuilder with common fields."""
-        return (TaskDataBuilder(
-                self.task_id, "script",
-                self.script_name, self.entry_script, self.description
-            )
-            .with_session(self.session_id))
+        return TaskDataBuilder(
+            self.task_id, "script",
+            self.script_name, self.entry_script, self.description
+        )
 
     def get_status_response(self):
         # type: () -> Dict[str, Any]
@@ -305,7 +302,6 @@ class ScriptTask:
         """Get task summary for listing."""
         info = {
             "task_id": self.task_id,
-            "session_id": self.session_id,
             "task_type": "script",
             "description": self.description,
             "status": self.status,

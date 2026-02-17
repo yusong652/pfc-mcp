@@ -56,10 +56,32 @@ def main():
     parser.add_argument(
         "--version", "-v", action="version", version=f"pfc-mcp {__version__}"
     )
-    parser.parse_args()
+    parser.add_argument(
+        "--transport",
+        choices=["stdio", "http", "sse"],
+        default="stdio",
+        help="Transport protocol (default: stdio)",
+    )
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host to bind when using http/sse transport (default: 127.0.0.1)",
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        help="Port to bind when using http/sse transport (default: 8000)",
+    )
+    args = parser.parse_args()
+
+    run_kwargs: dict = {"transport": args.transport, "show_banner": False}
+    if args.transport in ("http", "sse"):
+        run_kwargs["host"] = args.host
+        run_kwargs["port"] = args.port
 
     try:
-        mcp.run(transport="stdio", show_banner=False)
+        mcp.run(**run_kwargs)
     finally:
         try:
             asyncio.run(close_bridge_client())

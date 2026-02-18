@@ -1,5 +1,7 @@
 # pfc-mcp
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 [![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
@@ -92,11 +94,12 @@ Documentation tools work standalone. Execution tools require a running bridge.
 
 | Symptom | Fix |
 |---------|-----|
-| `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or use `uv tool run pfc-mcp` |
-| Bridge won't start | Install dependency in PFC Python: `pip install websockets==9.1` |
-| Tasks not processing | Ensure `pfc_mcp_bridge.start()` is running in PFC |
+| `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or switch client MCP config to `command: "uv"` with `args: ["tool", "run", "pfc-mcp"]` |
+| Bridge won't start | In PFC Python, install/upgrade `pfc-mcp-bridge` (`pip install -U pfc-mcp-bridge`) |
+| Tasks not processing / cannot connect | If execution tools return `ok=false`, `error.code=bridge_unavailable`, and `error.details.reason=cannot connect to bridge service`, start bridge in PFC (`pfc_mcp_bridge.start()`) and ensure `PFC_MCP_BRIDGE_URL` matches the active bridge URL |
 | `pfc_capture_plot` unsupported | Plot capture requires PFC GUI; console mode does not support it |
-| Connection failed | Check bridge is running, port 9001 is free, see `.pfc-bridge/bridge.log` |
+| Bridge on custom port | Set MCP server env `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>` (for example `ws://localhost:9002`) |
+| Connection failed | Check bridge is running, target port is available, see `.pfc-bridge/bridge.log` |
 
 ## Development
 

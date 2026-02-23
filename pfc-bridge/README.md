@@ -1,6 +1,6 @@
 # pfc-mcp-bridge
 
-[English](README.md) | [简体中文](README.zh-CN.md)
+[English](https://github.com/yusong652/pfc-mcp/blob/main/pfc-bridge/README.md) | [简体中文](https://github.com/yusong652/pfc-mcp/blob/main/pfc-bridge/README.zh-CN.md)
 
 [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/)
 

@@ -11,8 +11,8 @@
 在 PFC Python 控制台中安装并启动：
 
 ```python
-import subprocess
-subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+import pip
+pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
 
 import pfc_mcp_bridge
 pfc_mcp_bridge.start()
@@ -42,7 +42,7 @@ PFC Bridge Server
 
 | 现象 | 处理方式 |
 |---------|-----|
-| 服务无法启动 | 在 PFC Python 中安装/升级 `pfc-mcp-bridge`（`pip install -U pfc-mcp-bridge`） |
+| 服务无法启动 | 在 PFC Python/IPython 控制台中使用 `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` 安装/升级 |
 | 端口被占用 | 在 PFC Python 中使用 `pfc_mcp_bridge.start(port=9002)`，并将 MCP 服务端环境变量设为 `PFC_MCP_BRIDGE_URL=ws://localhost:9002` |
 | 连接失败 | 确认 bridge 正在运行且端口可用，查看 `.pfc-bridge/bridge.log` |
 | 无法执行任务 / MCP 无法连接 | 若执行工具返回 `ok=false`、`error.code=bridge_unavailable`、`error.details.reason=cannot connect to bridge service`，请确认已在 PFC 中运行 `pfc_mcp_bridge.start()`，并检查 `PFC_MCP_BRIDGE_URL` 是否与 bridge 地址一致 |

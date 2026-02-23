@@ -11,8 +11,8 @@ Runtime bridge that runs inside a PFC process and enables execution tools for [p
 Install and run in PFC Python console:
 
 ```python
-import subprocess
-subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+import pip
+pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
 
 import pfc_mcp_bridge
 pfc_mcp_bridge.start()
@@ -42,7 +42,7 @@ PFC Bridge Server
 
 | Symptom | Fix |
 |---------|-----|
-| Server won't start | In PFC Python, install/upgrade `pfc-mcp-bridge` (`pip install -U pfc-mcp-bridge`) |
+| Server won't start | In PFC Python/IPython console, install/upgrade `pfc-mcp-bridge` with `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` |
 | Port in use | Use `pfc_mcp_bridge.start(port=9002)` in PFC Python, then set MCP server env `PFC_MCP_BRIDGE_URL=ws://localhost:9002` |
 | Connection failed | Check bridge is running, port is available, see `.pfc-bridge/bridge.log` |
 | No task execution / cannot connect from MCP | If execution tools return `ok=false`, `error.code=bridge_unavailable`, and `error.details.reason=cannot connect to bridge service`, ensure bridge is running in PFC (`pfc_mcp_bridge.start()`) and `PFC_MCP_BRIDGE_URL` matches bridge URL |

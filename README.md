@@ -60,8 +60,8 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 **2. Install dependency:**
 
 ```python
-import subprocess
-subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+import pip
+pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
 ```
 
 ### Start Bridge & Verify
@@ -95,7 +95,7 @@ Documentation tools work standalone. Execution tools require a running bridge.
 | Symptom | Fix |
 |---------|-----|
 | `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or switch client MCP config to `command: "uv"` with `args: ["tool", "run", "pfc-mcp"]` |
-| Bridge won't start | In PFC Python, install/upgrade `pfc-mcp-bridge` (`pip install -U pfc-mcp-bridge`) |
+| Bridge won't start | In PFC Python/IPython console, install/upgrade `pfc-mcp-bridge` with `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` |
 | Tasks not processing / cannot connect | If execution tools return `ok=false`, `error.code=bridge_unavailable`, and `error.details.reason=cannot connect to bridge service`, start bridge in PFC (`pfc_mcp_bridge.start()`) and ensure `PFC_MCP_BRIDGE_URL` matches the active bridge URL |
 | `pfc_capture_plot` unsupported | Plot capture requires PFC GUI; console mode does not support it |
 | Bridge on custom port | Set MCP server env `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>` (for example `ws://localhost:9002`) |

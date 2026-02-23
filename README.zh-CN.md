@@ -60,8 +60,8 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 **2. 安装依赖：**
 
 ```python
-import subprocess
-subprocess.run(["pip", "install", "pfc-mcp-bridge"])
+import pip
+pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
 ```
 
 ### 启动 Bridge 并验证
@@ -95,7 +95,7 @@ pfc_mcp_bridge.start()
 | 现象 | 处理方式 |
 |---------|-----|
 | 找不到 `uvx` | [安装 uv](https://docs.astral.sh/uv/getting-started/installation/)，或将客户端 MCP 配置改为 `command: "uv"`、`args: ["tool", "run", "pfc-mcp"]` |
-| Bridge 启动失败 | 在 PFC Python 中安装/升级 `pfc-mcp-bridge`（`pip install -U pfc-mcp-bridge`） |
+| Bridge 启动失败 | 在 PFC Python/IPython 控制台中使用 `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` 安装/升级 |
 | 任务不执行 / 无法连接 | 若执行工具返回 `ok=false`、`error.code=bridge_unavailable`、`error.details.reason=cannot connect to bridge service`，请在 PFC 中启动 bridge（`pfc_mcp_bridge.start()`），并确认 `PFC_MCP_BRIDGE_URL` 与 bridge 实际地址一致 |
 | `pfc_capture_plot` 不可用 | 图像抓取仅支持 PFC GUI，控制台模式不支持 |
 | Bridge 使用自定义端口 | 将 MCP 服务端环境变量设为 `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>`（例如 `ws://localhost:9002`） |

@@ -71,7 +71,7 @@ import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/init.png)
+![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/install.png)
 
 **Verify** - reconnect your MCP client and ask the agent to call `pfc_list_tasks` to verify the full MCP + bridge connection.
 

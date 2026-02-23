@@ -71,7 +71,7 @@ import pfc_mcp_bridge
 pfc_mcp_bridge.start()
 ```
 
-![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/init.png)
+![PFC GUI Python console](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/install.png)
 
 **验证方法**：重连 MCP 客户端后，让智能体调用 `pfc_list_tasks`，确认 MCP 与 bridge 连接均正常。
 

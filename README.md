@@ -112,3 +112,5 @@ uv run pfc-mcp         # Run server locally
 ## License
 
 MIT - see [LICENSE](LICENSE).
+
+<!-- mcp-name: io.github.yusong652/pfc -->

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.yusong652/pfc",
+  "title": "PFC - ITASCA Discrete Element Simulation",
+  "description": "MCP server that gives AI agents full access to ITASCA PFC - browse documentation, run simulations, capture plots, all through natural conversation.",
+  "repository": {
+    "url": "https://github.com/yusong652/pfc-mcp",
+    "source": "github"
+  },
+  "version": "0.2.5",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "pfc-mcp",
+      "version": "0.2.5",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

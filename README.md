@@ -12,6 +12,10 @@ Built on the [Model Context Protocol](https://modelcontextprotocol.io/), pfc-mcp
 
 ![pfc-mcp demo](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/pfc-mcp.gif)
 
+<a href="https://glama.ai/mcp/servers/yusong652/pfc-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/yusong652/pfc-mcp/badge" alt="pfc-mcp MCP server" />
+</a>
+
 ## Tools (10)
 
 ### Documentation (5) - no bridge required

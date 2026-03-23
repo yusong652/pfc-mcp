@@ -1,4 +1,4 @@
-"""Task status query tool backed by pfc-bridge."""
+"""Task status query tool backed by pfc-mcp-bridge."""
 
 import asyncio
 from typing import Any

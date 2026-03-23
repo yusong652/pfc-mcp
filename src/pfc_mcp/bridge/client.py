@@ -14,7 +14,7 @@ logger = logging.getLogger("pfc-mcp.bridge")
 
 
 class PFCBridgeClient:
-    """Async request/response client for pfc-bridge WebSocket protocol."""
+    """Async request/response client for pfc-mcp-bridge WebSocket protocol."""
 
     def __init__(
         self,
@@ -45,7 +45,7 @@ class PFCBridgeClient:
                 return
             self._websocket = await websockets.connect(self.url, compression=None)
             self._receiver_task = asyncio.create_task(self._receive_loop())
-            logger.info("Connected to pfc-bridge at %s", self.url)
+            logger.info("Connected to pfc-mcp-bridge at %s", self.url)
 
     async def disconnect(self) -> None:
         async with self._lock:

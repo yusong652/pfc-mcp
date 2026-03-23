@@ -7,7 +7,7 @@ Prefer:
     pfc_mcp_bridge.start()
 
 This script is kept for backward compatibility with:
-    %run /path/to/pfc-mcp/pfc-bridge/start_bridge.py
+    %run /path/to/pfc-mcp/pfc-mcp-bridge/start_bridge.py
 """
 
 import os

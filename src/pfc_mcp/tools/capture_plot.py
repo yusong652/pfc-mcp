@@ -153,7 +153,7 @@ def register(mcp: FastMCP) -> None:
             if not working_dir:
                 return build_operation_error(
                     "workspace_unavailable",
-                    "Cannot resolve pfc-bridge working directory",
+                    "Cannot resolve pfc-mcp-bridge working directory",
                     action="Ensure bridge has an active workspace",
                 )
 

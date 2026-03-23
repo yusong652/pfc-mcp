@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v4
-      - run: cd pfc-bridge && uv build
+      - run: cd pfc-mcp-bridge && uv build
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: pfc-bridge/dist/
+          packages-dir: pfc-mcp-bridge/dist/

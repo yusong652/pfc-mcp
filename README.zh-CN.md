@@ -99,7 +99,7 @@ pfc_mcp_bridge.start()
 | 任务不执行 / 无法连接 | 若执行工具返回 `ok=false`、`error.code=bridge_unavailable`、`error.details.reason=cannot connect to bridge service`，请在 PFC 中启动 bridge（`pfc_mcp_bridge.start()`），并确认 `PFC_MCP_BRIDGE_URL` 与 bridge 实际地址一致 |
 | `pfc_capture_plot` 不可用 | 图像抓取仅支持 PFC GUI，控制台模式不支持 |
 | Bridge 使用自定义端口 | 将 MCP 服务端环境变量设为 `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>`（例如 `ws://localhost:9002`） |
-| 连接失败 | 检查 bridge 是否运行、目标端口是否可用，查看 `.pfc-bridge/bridge.log` |
+| 连接失败 | 检查 bridge 是否运行、目标端口是否可用，查看 `.pfc-mcp-bridge/bridge.log` |
 
 ## 开发
 

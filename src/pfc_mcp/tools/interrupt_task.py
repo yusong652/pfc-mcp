@@ -1,4 +1,4 @@
-"""Task interruption tool backed by pfc-bridge."""
+"""Task interruption tool backed by pfc-mcp-bridge."""
 
 from typing import Any
 

@@ -1,4 +1,4 @@
-"""PFC task execution tool backed by pfc-bridge."""
+"""PFC task execution tool backed by pfc-mcp-bridge."""
 
 import uuid
 from typing import Any

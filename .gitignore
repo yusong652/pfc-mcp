@@ -19,6 +19,6 @@ build/
 .codex/
 
 # Local runtime/temp artifacts
-.pfc-bridge/
+.pfc-mcp-bridge/
 .tmp/
 .pytest_tmp/

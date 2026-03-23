@@ -5,7 +5,7 @@ import sys
 import textwrap
 
 # Add bridge source to path for direct import
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pfc-bridge", "src"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "pfc-mcp-bridge", "src"))
 
 from pfc_mcp_bridge.utils.command_splitter import preprocess_script, split_pfc_commands
 

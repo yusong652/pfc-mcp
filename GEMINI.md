@@ -9,7 +9,7 @@ Guidance for coding agents working in the `pfc-mcp` repository.
 This repository intentionally has two runtime contexts:
 
 - `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
-- `pfc-bridge/` (PFC embedded Python, often 3.6): WebSocket bridge running inside PFC GUI
+- `pfc-mcp-bridge/` (PFC embedded Python, often 3.6): WebSocket bridge running inside PFC GUI
 
 Treat these as separate deployment targets even though they live in one repository.
 
@@ -22,12 +22,12 @@ Treat these as separate deployment targets even though they live in one reposito
 - Returns a unified tool envelope: `ok`, `data`, `error`
 - Uses script-first execution model (`pfc_execute_task` + `pfc_check_task_status`)
 
-### Bridge side (`pfc-bridge`)
+### Bridge side (`pfc-mcp-bridge`)
 
 - Runs in PFC GUI process
 - Owns thread-safe interaction with ITASCA SDK
 - Handles long-running tasks and diagnostics
-- Must be started from PFC GUI (for example with `%run .../pfc-bridge/start_bridge.py`)
+- Must be started from PFC GUI (for example with `%run .../pfc-mcp-bridge/start_bridge.py`)
 
 ## Repository Layout
 
@@ -40,7 +40,7 @@ pfc-mcp/
 │   ├── scripts/         # generated script helpers (plot capture, etc.)
 │   ├── formatting.py    # shared response formatting
 │   └── server.py        # MCP server entrypoint
-├── pfc-bridge/          # runtime executed inside PFC GUI
+├── pfc-mcp-bridge/      # runtime executed inside PFC GUI
 └── tests/               # MCP/tool contract tests
 ```
 

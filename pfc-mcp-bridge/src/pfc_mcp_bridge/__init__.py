@@ -139,7 +139,7 @@ def start(
     interval_ms = _to_positive_int(timer_interval_ms, DEFAULT_TIMER_INTERVAL_MS)
 
     # ── Logging ───────────────────────────────────────────────
-    bridge_dir = os.path.join(os.getcwd(), ".pfc-bridge")
+    bridge_dir = os.path.join(os.getcwd(), ".pfc-mcp-bridge")
     if not os.path.exists(bridge_dir):
         os.makedirs(bridge_dir)
     log_file = os.path.join(bridge_dir, "bridge.log")

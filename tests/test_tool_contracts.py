@@ -22,7 +22,7 @@ TASK_STORE = {}
 
 
 async def _mock_bridge_handler(websocket):
-    """Mock pfc-bridge that handles all task-related message types."""
+    """Mock pfc-mcp-bridge that handles all task-related message types."""
     async for raw in websocket:
         req = json.loads(raw)
         req_id = req.get("request_id", "unknown")

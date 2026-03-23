@@ -1,4 +1,4 @@
-"""Task listing tool backed by pfc-bridge."""
+"""Task listing tool backed by pfc-mcp-bridge."""
 
 from typing import Any
 

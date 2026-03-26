@@ -101,7 +101,6 @@ Documentation tools work standalone. Execution tools require a running bridge.
 | `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or switch client MCP config to `command: "uv"` with `args: ["tool", "run", "pfc-mcp"]` |
 | Bridge won't start | In PFC Python/IPython console, install/upgrade `pfc-mcp-bridge` with `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` |
 | Tasks not processing / cannot connect | If execution tools return `ok=false`, `error.code=bridge_unavailable`, and `error.details.reason=cannot connect to bridge service`, start bridge in PFC (`pfc_mcp_bridge.start()`) and ensure `PFC_MCP_BRIDGE_URL` matches the active bridge URL |
-| `pfc_capture_plot` unsupported | Plot capture requires PFC GUI; console mode does not support it |
 | Bridge on custom port | Set MCP server env `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>` (for example `ws://localhost:9002`) |
 | Connection failed | Check bridge is running, target port is available, see `.pfc-mcp-bridge/bridge.log` |
 

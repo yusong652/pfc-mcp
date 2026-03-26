@@ -15,7 +15,7 @@ def test_phase2_tools_registered() -> None:
         "pfc_interrupt_task",
     }
     assert expected.issubset(set(tools.keys()))
-    assert "pfc_execute_code" not in tools
+    assert "pfc_execute_code" in tools
 
 
 def test_status_mapping_and_pagination() -> None:

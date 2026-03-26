@@ -171,18 +171,18 @@ def start(
 
     from .signals import (
         register_interrupt_callback,
-        register_diagnostic_callback,
-        is_diagnostic_callback_registered,
+        register_executor_callback,
+        is_executor_callback_registered,
     )
 
     interrupt_ok = register_interrupt_callback(it, position=50.0)
-    diagnostic_ok = register_diagnostic_callback(it, position=51.0)
-    diagnostic_registered = bool(diagnostic_ok or is_diagnostic_callback_registered())
+    executor_ok = register_executor_callback(it, position=51.0)
+    executor_registered = bool(executor_ok or is_executor_callback_registered())
 
     if not interrupt_ok:
         raise RuntimeError("Failed to register interrupt callback")
-    if not diagnostic_registered:
-        raise RuntimeError("Failed to register diagnostic callback")
+    if not executor_registered:
+        raise RuntimeError("Failed to register executor callback")
 
     # ── Port availability check ──────────────────────────────
     import socket
@@ -231,7 +231,7 @@ def start(
     print("=" * 60)
     print("  URL:         ws://{}:{}".format(host, port))
     print("  Log:         {}".format(log_file))
-    print("  Callbacks:   Interrupt, Diagnostic (registered)")
+    print("  Callbacks:   Interrupt, Executor (registered)")
     print("=" * 60 + "\n")
 
     # ── Main-thread task pump ─────────────────────────────────

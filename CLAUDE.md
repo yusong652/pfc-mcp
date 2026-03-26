@@ -37,7 +37,6 @@ pfc-mcp/
 │   ├── bridge/          # MCP-side bridge client/task manager
 │   ├── knowledge/       # command/API/reference search system
 │   ├── tools/           # MCP tool implementations
-│   ├── scripts/         # generated script helpers (plot capture, etc.)
 │   ├── formatting.py    # shared response formatting
 │   └── server.py        # MCP server entrypoint
 ├── pfc-mcp-bridge/      # runtime executed inside PFC GUI
@@ -53,7 +52,6 @@ uv sync
 uv sync --group dev
 uv run pfc-mcp
 uv run pytest tests/test_phase2_tools.py
-uv run pytest tests/test_phase3_capture_plot.py
 uv run pytest tests/test_tool_contracts.py
 ```
 
@@ -94,9 +92,6 @@ uv run pytest tests/test_tool_contracts.py
 - For tool/contract changes, run:
   - `tests/test_phase2_tools.py`
   - `tests/test_tool_contracts.py`
-- For plot/diagnostic changes, also run:
-  - `tests/test_phase3_capture_plot.py`
-
 Mock bridge based tests are preferred for deterministic CI.
 
 ## Documentation Sources

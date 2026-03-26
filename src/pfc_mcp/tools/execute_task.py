@@ -19,10 +19,17 @@ def register(mcp: FastMCP) -> None:
         entry_script: ScriptPath,
         description: TaskDescription,
     ) -> dict[str, Any]:
-        """Submit a PFC script task for asynchronous execution.
+        """Submit a Python script file for asynchronous execution in PFC.
 
-        This MCP tool is stateless and optimized for background execution.
-        Use pfc_check_task_status to monitor progress.
+        Returns a task_id immediately; the script runs in the background.
+        Use the companion tools to manage the task lifecycle:
+        - pfc_check_task_status: poll output, progress, and final status
+        - pfc_interrupt_task: cancel a running task
+        - pfc_list_tasks: browse task history
+
+        Use this for production simulation runs, long model.solve()
+        cycles, and any operation that may take minutes or longer.
+        For quick queries and REPL-style testing, use pfc_execute_code.
         """
         task_id = uuid.uuid4().hex[:6]
 

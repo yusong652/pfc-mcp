@@ -1,4 +1,4 @@
-"""PFC inspect tool — synchronous REPL for querying model state."""
+"""PFC execute_code tool — synchronous code execution in PFC process."""
 
 from typing import Any
 
@@ -11,26 +11,36 @@ from pfc_mcp.utils import ConsoleCode, ConsoleTimeoutSeconds
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_inspect tool."""
+    """Register pfc_execute_code tool."""
 
     @mcp.tool()
-    async def pfc_inspect(
+    async def pfc_execute_code(
         code: ConsoleCode,
         timeout: ConsoleTimeoutSeconds = 10,
     ) -> dict[str, Any]:
-        """Execute a Python snippet directly in the running PFC process.
+        """Execute Python code synchronously in the running PFC process.
 
-        Code executes synchronously in the PFC main thread during the
-        cycle. Consider side effects carefully — any state changes
-        (variable assignments, model modifications) persist in the
-        process. For long-running or simulation-advancing operations,
-        prefer pfc_execute_task.
+        Returns stdout and an optional result variable immediately.
+        Code runs in the PFC main thread; side effects persist.
 
-        Keep snippets short and focused; a strict timeout applies.
+        Typical uses:
+        - Query model state: ball/wall/contact counts, current cycle
+        - Create and export plots: itasca.command('plot ...')
+        - Read or set properties, inspect variables
+        - Development and REPL-style testing
+
+        Unlike pfc_execute_task, this tool is fire-and-return: the
+        response contains the full output. It is NOT tracked by
+        pfc_list_tasks and cannot be interrupted or polled.
+
+        WARNING: Avoid blocking calls (model.solve with many cycles,
+        long loops). They block the PFC main thread until completion
+        or timeout, and cannot be cancelled. Use pfc_execute_task for
+        anything that may run longer than a few seconds.
         """
         try:
             client = await get_bridge_client()
-            response = await client.inspect_execute(
+            response = await client.execute_code(
                 code=code,
                 timeout_ms=timeout * 1000,
             )
@@ -38,8 +48,8 @@ def register(mcp: FastMCP) -> None:
             if is_bridge_connectivity_error(exc):
                 return build_bridge_error(exc)
             return build_operation_error(
-                "inspect_failed",
-                "Inspect execution failed",
+                "execute_code_failed",
+                "Code execution failed",
                 reason=str(exc),
             )
 
@@ -49,7 +59,7 @@ def register(mcp: FastMCP) -> None:
         if status == "timeout":
             return build_operation_error(
                 "timeout",
-                "Inspect timed out",
+                "Execution timed out",
                 reason=message,
                 action="Reduce code complexity or increase timeout",
             )
@@ -57,7 +67,7 @@ def register(mcp: FastMCP) -> None:
         if status == "error":
             error = response.get("error") or {}
             return build_operation_error(
-                error.get("code", "inspect_error"),
+                error.get("code", "execute_code_error"),
                 error.get("message", message),
                 reason=message,
             )

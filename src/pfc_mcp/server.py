@@ -13,10 +13,9 @@ from pfc_mcp.tools import (
     browse_commands,
     browse_python_api,
     browse_reference,
-    capture_plot,
     check_task_status,
+    execute_code,
     execute_task,
-    inspect,
     interrupt_task,
     list_tasks,
     query_command,
@@ -28,7 +27,7 @@ mcp = FastMCP(
     instructions=(
         "PFC (Particle Flow Code) MCP server. "
         "Provides tools for browsing/searching PFC documentation "
-        "and for executing simulation tasks, capturing plots, and managing runs "
+        "and for executing simulation tasks and managing runs "
         "through a pfc-mcp-bridge WebSocket service running inside PFC GUI."
     ),
 )
@@ -47,8 +46,7 @@ execute_task.register(mcp)
 check_task_status.register(mcp)
 list_tasks.register(mcp)
 interrupt_task.register(mcp)
-capture_plot.register(mcp)
-inspect.register(mcp)
+execute_code.register(mcp)
 
 
 def main() -> None:

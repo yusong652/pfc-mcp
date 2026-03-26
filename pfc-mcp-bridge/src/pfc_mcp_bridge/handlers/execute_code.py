@@ -1,8 +1,8 @@
 """
-Inspect message handler.
+Execute code message handler.
 
-Handles synchronous code snippet execution for pfc_inspect tool.
-Reuses the diagnostic execution strategy (queue/callback switching).
+Handles synchronous code snippet execution for pfc_execute_code tool.
+Uses the script executor strategy (queue/callback switching).
 """
 
 import asyncio
@@ -14,7 +14,7 @@ from io import StringIO
 from typing import Any, Dict, Tuple
 
 from .context import ServerContext
-from .diagnostics import _execute_diagnostic
+from .script_executor import execute_script
 from .helpers import require_field
 
 logger = logging.getLogger("PFC-Server")
@@ -23,11 +23,11 @@ logger = logging.getLogger("PFC-Server")
 def _write_temp_script(working_dir, code):
     # type: (str, str) -> str
     """Write code snippet to a temp file and return the path."""
-    inspect_dir = os.path.join(working_dir, ".pfc-mcp-bridge", "inspect")
-    if not os.path.exists(inspect_dir):
-        os.makedirs(inspect_dir)
-    filename = "inspect_{}.py".format(uuid.uuid4().hex[:8])
-    path = os.path.join(inspect_dir, filename)
+    exec_dir = os.path.join(working_dir, ".pfc-mcp-bridge", "execute_code")
+    if not os.path.exists(exec_dir):
+        os.makedirs(exec_dir)
+    filename = "exec_{}.py".format(uuid.uuid4().hex[:8])
+    path = os.path.join(exec_dir, filename)
     with open(path, "w", encoding="utf-8") as f:
         f.write(code)
     return path
@@ -42,19 +42,19 @@ def _cleanup_temp_script(path):
         pass
 
 
-async def handle_inspect_execute(ctx, data):
+async def handle_execute_code(ctx, data):
     # type: (ServerContext, Dict[str, Any]) -> Dict[str, Any]
     """
-    Handle inspect_execute message.
+    Handle execute_code message.
 
     Executes a code snippet synchronously and returns stdout.
-    Uses the same queue/callback strategy as diagnostic execution.
+    Uses the queue/callback script executor strategy.
     """
     import time as time_module
 
     request_id = data.get("request_id", "unknown")
 
-    code, err = require_field(data, "code", request_id, "inspect_result")
+    code, err = require_field(data, "code", request_id, "execute_code_result")
     if err:
         return err
 
@@ -74,8 +74,8 @@ async def handle_inspect_execute(ctx, data):
         task_id = uuid.uuid4().hex[:8]
         output_buffer = StringIO()
 
-        # Execute with same strategy as diagnostics (queue/callback switching)
-        result, path = await _execute_diagnostic(
+        # Execute with queue/callback strategy switching
+        result, path = await execute_script(
             ctx=ctx,
             script_path=script_path,
             script_content=code,
@@ -88,7 +88,7 @@ async def handle_inspect_execute(ctx, data):
 
         if result is not None:
             return {
-                "type": "inspect_result",
+                "type": "execute_code_result",
                 "request_id": request_id,
                 "execution_path": path,
                 "status": result.get("status", "unknown"),
@@ -100,26 +100,26 @@ async def handle_inspect_execute(ctx, data):
             }
 
         return {
-            "type": "inspect_result",
+            "type": "execute_code_result",
             "request_id": request_id,
             "status": "timeout",
-            "message": "Inspect timed out after {}ms".format(timeout_ms),
+            "message": "Execution timed out after {}ms".format(timeout_ms),
             "error": {
                 "code": "timeout",
-                "message": "Inspect timed out after {}ms".format(timeout_ms),
+                "message": "Execution timed out after {}ms".format(timeout_ms),
             },
             "data": None,
         }
 
     except Exception as e:
-        logger.error("Inspect execution failed: {}".format(e))
+        logger.error("Code execution failed: {}".format(e))
         return {
-            "type": "inspect_result",
+            "type": "execute_code_result",
             "request_id": request_id,
             "status": "error",
             "message": str(e),
             "error": {
-                "code": "inspect_execute_failed",
+                "code": "execute_code_failed",
                 "message": str(e),
             },
             "data": None,

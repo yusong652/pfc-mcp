@@ -60,16 +60,6 @@ def validate_task_description(value: str) -> str:
     return stripped
 
 
-def validate_output_path(value: str) -> str:
-    """Validate screenshot output path."""
-    stripped = validate_non_empty_string(value)
-    if not (PurePosixPath(stripped).is_absolute() or PureWindowsPath(stripped).is_absolute()):
-        raise ValueError("output_path must be an absolute path")
-    if not stripped.lower().endswith(".png"):
-        raise ValueError("output_path must end with .png")
-    return stripped
-
-
 # Search query for commands
 SearchQuery = Annotated[
     str,
@@ -170,11 +160,6 @@ ConsoleCode = Annotated[
 
 ConsoleTimeoutSeconds = Annotated[
     int,
-    Field(default=30, ge=MIN_TIMEOUT_S, le=MAX_TIMEOUT_S, description="Console execution timeout in seconds"),
+    Field(default=120, ge=MIN_TIMEOUT_S, le=MAX_TIMEOUT_S, description="Console execution timeout in seconds"),
 ]
 
-PlotOutputPath = Annotated[
-    str,
-    AfterValidator(validate_output_path),
-    Field(..., description="Absolute output path for plot screenshot PNG"),
-]

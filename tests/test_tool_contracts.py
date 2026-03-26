@@ -110,13 +110,13 @@ async def _mock_bridge_handler(websocket):
                 "data": {"task_id": req.get("task_id"), "interrupt_requested": True},
             }
 
-        elif msg_type == "inspect_execute":
+        elif msg_type == "execute_code":
             code = req.get("code", "")
             resp = {
-                "type": "inspect_result",
+                "type": "execute_code_result",
                 "request_id": req_id,
                 "status": "success",
-                "message": "Inspect completed",
+                "message": "Code executed",
                 "data": {
                     "output": "42\n",
                     "result": 42,
@@ -281,13 +281,13 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
         assert "has_more" in data
 
 
-# ── pfc_inspect ──────────────────────────────────────────
+# ── pfc_execute_code ──────────────────────────────────────
 
 
 @pytest.mark.asyncio
-async def test_inspect_success_fields(mock_bridge):
+async def test_execute_code_success_fields(mock_bridge):
     result = await mcp._tool_manager.call_tool(
-        "pfc_inspect",
+        "pfc_execute_code",
         {"code": "print(42)"},
     )
 

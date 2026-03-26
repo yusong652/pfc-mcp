@@ -12,8 +12,7 @@ from .tasks import (
     handle_list_tasks,
     handle_interrupt_task,
 )
-from .diagnostics import handle_diagnostic_execute
-from .inspect import handle_inspect_execute
+from .execute_code import handle_execute_code
 from .workspace import handle_get_working_directory
 from .utilities import handle_ping
 
@@ -25,10 +24,8 @@ __all__ = [
     "handle_check_task_status",
     "handle_list_tasks",
     "handle_interrupt_task",
-    # Diagnostics
-    "handle_diagnostic_execute",
-    # Inspect
-    "handle_inspect_execute",
+    # Execute code
+    "handle_execute_code",
     # Workspace
     "handle_get_working_directory",
     # Utilities

@@ -87,7 +87,7 @@ class PFCBridgeClient:
             async for raw_message in self._websocket:
                 payload = json.loads(raw_message)
                 msg_type = payload.get("type")
-                if msg_type not in {"result", "diagnostic_result", "inspect_result"}:
+                if msg_type not in {"result", "execute_code_result"}:
                     continue
                 request_id = payload.get("request_id")
                 if not request_id:
@@ -171,18 +171,6 @@ class PFCBridgeClient:
             operation_name="check_task_status",
         )
 
-    async def execute_diagnostic(self, script_path: str, timeout_ms: int = 30000) -> dict[str, Any]:
-        timeout_s = max(self.request_timeout_s, timeout_ms / 1000.0 + 5.0)
-        return await self._request_with_retry(
-            {
-                "type": "diagnostic_execute",
-                "script_path": script_path,
-                "timeout_ms": timeout_ms,
-            },
-            operation_name="diagnostic_execute",
-            timeout_s=timeout_s,
-        )
-
     async def list_tasks(self, offset: int, limit: int | None) -> dict[str, Any]:
         return await self._request_with_retry(
             {
@@ -200,15 +188,15 @@ class PFCBridgeClient:
             timeout_s=5.0,
         )
 
-    async def inspect_execute(self, code: str, timeout_ms: int = 10000) -> dict[str, Any]:
+    async def execute_code(self, code: str, timeout_ms: int = 10000) -> dict[str, Any]:
         timeout_s = max(self.request_timeout_s, timeout_ms / 1000.0 + 5.0)
         return await self._request_with_retry(
             {
-                "type": "inspect_execute",
+                "type": "execute_code",
                 "code": code,
                 "timeout_ms": timeout_ms,
             },
-            operation_name="inspect_execute",
+            operation_name="execute_code",
             timeout_s=timeout_s,
         )
 

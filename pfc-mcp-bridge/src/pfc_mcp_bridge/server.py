@@ -20,8 +20,7 @@ from .handlers import (
     handle_pfc_task,
     handle_check_task_status,
     handle_list_tasks,
-    handle_diagnostic_execute,
-    handle_inspect_execute,
+    handle_execute_code,
     handle_get_working_directory,
     handle_ping,
     handle_interrupt_task,
@@ -85,8 +84,7 @@ class PFCWebSocketServer:
             "list_tasks": handle_list_tasks,
             "get_working_directory": handle_get_working_directory,
             "interrupt_task": handle_interrupt_task,
-            "diagnostic_execute": handle_diagnostic_execute,
-            "inspect_execute": handle_inspect_execute,
+            "execute_code": handle_execute_code,
             "ping": handle_ping,
         }
 

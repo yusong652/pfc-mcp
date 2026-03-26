@@ -198,7 +198,7 @@ class ReferenceLoader:
             return []
 
         # Each category uses its own list key: "models", "elements", "items", etc.
-        for key, value in index.items():
+        for _key, value in index.items():
             if isinstance(value, list) and value and isinstance(value[0], dict):
                 return cast(list[dict[str, Any]], value)
         return []

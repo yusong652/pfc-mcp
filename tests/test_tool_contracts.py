@@ -111,7 +111,6 @@ async def _mock_bridge_handler(websocket):
             }
 
         elif msg_type == "execute_code":
-            code = req.get("code", "")
             resp = {
                 "type": "execute_code_result",
                 "request_id": req_id,

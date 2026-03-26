@@ -1,0 +1,84 @@
+{
+  "name": "clump",
+  "item_type": "clump",
+  "search_keywords": ["clump", "cluster", "pebble", "rigid", "arrow", "color", "velocity", "displacement", "force", "volume"],
+  "description": "Configuration keywords for 'plot item create clump'. Controls clump rendering, coloring by attributes, arrow shape for vector fields, transparency, cut planes, and legend display.",
+  "base_syntax": "plot item create clump <keywords...>",
+
+  "basic_keywords": [
+    {
+      "keyword": "active on",
+      "description": "Show item in plot (default when created)",
+      "syntax": "active on"
+    },
+    {
+      "keyword": "active off",
+      "description": "Hide item without removing it",
+      "syntax": "active off"
+    },
+    {
+      "keyword": "transparency",
+      "description": "Set clump transparency level (0 = opaque, 100 = fully transparent)",
+      "syntax": "transparency <0-100>",
+      "notes": "Useful for seeing internal structure or overlapping clumps"
+    },
+    {
+      "keyword": "legend active on",
+      "description": "Show color legend for this item",
+      "syntax": "legend active on",
+      "notes": "Recommended when using color-by or cut"
+    },
+    {
+      "keyword": "color-options",
+      "description": "Configure color scale for numeric/vector attributes",
+      "syntax": "color-options scaled ramp rainbow minimum automatic maximum automatic",
+      "notes": "Appended after color-by for continuous color mapping"
+    }
+  ],
+
+  "sub_items": [
+    {
+      "name": "color-by",
+      "file": "color-by.json",
+      "description": "Color clumps by vector, numeric, or text attributes (velocity, displacement, volume, group, etc.)"
+    },
+    {
+      "name": "cut",
+      "file": "cut.json",
+      "description": "Clip visualization with a cutting plane"
+    },
+    {
+      "name": "shape",
+      "file": "shape.json",
+      "description": "Arrow shape for vector field visualization"
+    }
+  ],
+
+  "common_usage_patterns": [
+    {
+      "use_case": "Default clump visualization",
+      "command": "plot item create clump active on",
+      "description": "Show all clumps with default coloring"
+    },
+    {
+      "use_case": "Semi-transparent clumps",
+      "command": "plot item create clump active on transparency 50",
+      "description": "Show clumps with 50% transparency"
+    },
+    {
+      "use_case": "Clumps colored by velocity magnitude",
+      "command": "plot item create clump active on color-by vector-attribute \"velocity\" color-options scaled ramp rainbow minimum automatic maximum automatic legend active on",
+      "description": "Rainbow color scale from min to max velocity"
+    },
+    {
+      "use_case": "Clumps colored by group",
+      "command": "plot item create clump active on color-by text-attribute \"group\" 'Any' color-options named maximum-names 1000000 name-controls true legend active on",
+      "description": "Different color per group name"
+    },
+    {
+      "use_case": "Clumps colored by volume",
+      "command": "plot item create clump active on color-by numeric-attribute \"volume\" color-options scaled ramp rainbow minimum automatic maximum automatic legend active on",
+      "description": "Rainbow color scale by clump volume"
+    }
+  ]
+}

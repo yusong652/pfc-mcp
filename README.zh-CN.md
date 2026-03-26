@@ -12,14 +12,14 @@
 
 ![pfc-mcp demo](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/pfc-mcp.gif)
 
-## 工具（9）
+## 工具（10）
 
 ### 文档类（5）- 无需 bridge
 
 - 浏览 PFC 命令树、Python SDK 参考、参考文档（接触模型、range 元素、plot 项目）
 - 基于关键词搜索命令和 Python API（BM25 排序）
 
-### 执行类（4）- 需要在运行中的 PFC 进程中启动 bridge
+### 执行类（5）- 需要在运行中的 PFC 进程中启动 bridge
 
 - **pfc_execute_code** - 同步 REPL：运行 Python 代码片段、查询模型状态、创建图表、导出数据
 - **pfc_execute_task** - 提交长时脚本进行异步执行，支持完整生命周期管理

@@ -1,0 +1,56 @@
+{
+  "name": "color-by",
+  "parent": "clump",
+  "description": "Color-by modes for clump plot items. Three modes depending on attribute type: vector, numeric, and text.",
+
+  "modes": [
+    {
+      "keyword": "color-by vector-attribute",
+      "description": "Color by a vector attribute (velocity, displacement, force, etc.)",
+      "syntax": "color-by vector-attribute \"<name>\"",
+      "examples": [
+        "color-by vector-attribute \"velocity\"",
+        "color-by vector-attribute \"displacement\"",
+        "color-by vector-attribute \"force-contact\""
+      ],
+      "available_attributes": [
+        "position", "velocity", "displacement", "spin",
+        "force-contact", "force-applied", "force-unbalanced",
+        "moment-contact", "moment-applied", "moment-unbalanced"
+      ],
+      "notes": "Defaults to magnitude. Append 'color-options scaled ramp rainbow minimum automatic maximum automatic' for rainbow scale."
+    },
+    {
+      "keyword": "color-by numeric-attribute",
+      "description": "Color by a scalar numeric attribute",
+      "syntax": "color-by numeric-attribute \"<name>\"",
+      "examples": [
+        "color-by numeric-attribute \"volume\"",
+        "color-by numeric-attribute \"mass\"",
+        "color-by numeric-attribute \"density\""
+      ],
+      "available_attributes": ["volume", "mass", "density", "damp", "moi-principal-real", "moi-real"],
+      "notes": "Append 'color-options scaled ramp rainbow minimum automatic maximum automatic' for rainbow scale"
+    },
+    {
+      "keyword": "color-by text-attribute",
+      "description": "Color by a text/categorical attribute",
+      "syntax": "color-by text-attribute \"<name>\"",
+      "examples": [
+        "color-by text-attribute \"id\" color-options named maximum-names 1000000 name-controls true",
+        "color-by text-attribute \"group\" 'Any' color-options named maximum-names 1000000 name-controls true"
+      ],
+      "available_attributes": ["id", "group"],
+      "notes": "group attribute requires slot name ('Any' for default slot). Use 'color-options named' instead of 'scaled ramp'."
+    },
+    {
+      "keyword": "color-by numeric-attribute (extra)",
+      "description": "Color by extra variable index",
+      "syntax": "color-by numeric-attribute \"extra\" <index>",
+      "examples": [
+        "color-by numeric-attribute \"extra\" 1",
+        "color-by numeric-attribute \"extra\" 3"
+      ]
+    }
+  ]
+}

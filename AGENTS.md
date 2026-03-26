@@ -20,7 +20,7 @@ Treat these as separate deployment targets even though they live in one reposito
 - Exposes documentation tools and execution tools through FastMCP
 - Communicates with bridge via WebSocket client (`pfc_mcp.bridge.client`)
 - Returns a unified tool envelope: `ok`, `data`, `error`
-- Uses script-first execution model (`pfc_execute_task` + `pfc_check_task_status`)
+- Dual execution model: synchronous REPL (`pfc_execute_code`) for quick queries, script-first async (`pfc_execute_task` + `pfc_check_task_status`) for long-running simulations
 
 ### Bridge side (`pfc-mcp-bridge`)
 
@@ -61,7 +61,8 @@ uv run pytest tests/test_tool_contracts.py
    - Do not couple MCP logic to PFC GUI internals.
    - Do not introduce application/session policy into bridge runtime.
 
-2. Preserve script-only execution semantics.
+2. Preserve execution semantics for each model.
+   - `pfc_execute_code` runs synchronous snippets and returns stdout/result immediately.
    - `pfc_execute_task` submits scripts and returns quickly.
    - Progress/result retrieval goes through `pfc_check_task_status`.
 

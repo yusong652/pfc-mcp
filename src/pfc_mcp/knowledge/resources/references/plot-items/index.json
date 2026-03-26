@@ -18,6 +18,12 @@
       "common_use": "Visualize boundaries with adjustable transparency and coloring"
     },
     {
+      "name": "clump",
+      "file": "clump.json",
+      "description": "Clump (rigid cluster) visualization with coloring by attribute, arrow shape, transparency, and cut planes",
+      "common_use": "Visualize clumps colored by velocity, displacement, volume, group, etc."
+    },
+    {
       "name": "contact",
       "file": "contact.json",
       "description": "Contact visualization with force scaling, property coloring, and cut planes",

@@ -16,14 +16,14 @@ Built on the [Model Context Protocol](https://modelcontextprotocol.io/), pfc-mcp
   <img width="380" height="200" src="https://glama.ai/mcp/servers/yusong652/pfc-mcp/badge" alt="pfc-mcp MCP server" />
 </a>
 
-## Tools (9)
+## Tools (10)
 
 ### Documentation (5) - no bridge required
 
 - Browse PFC command tree, Python SDK reference, and reference docs (contact models, range elements, plot items)
 - Search commands and Python APIs by keyword (BM25 ranked)
 
-### Execution (4) - requires bridge in a running PFC process
+### Execution (5) - requires bridge in a running PFC process
 
 - **pfc_execute_code** - synchronous REPL: run Python snippets, query model state, create plots, export data
 - **pfc_execute_task** - submit long-running scripts for async execution with full lifecycle management

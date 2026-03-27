@@ -23,6 +23,9 @@ def register(mcp: FastMCP) -> None:
         Returns stdout and an optional result variable immediately.
         Code runs in the PFC main thread; side effects persist.
 
+        Scheduling: This tool remains available whether PFC is cycling
+        or idle — you can query model state while a task is running.
+
         Environment: PFC embedded Python 3.6.
 
         Typical uses:

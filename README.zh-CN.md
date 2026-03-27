@@ -17,6 +17,7 @@
 ### 文档类（5）- 无需 bridge
 
 - 浏览 PFC 命令树、Python SDK 参考、参考文档（接触模型、range 元素、plot 项目）
+- 命令文档支持通过 `version` 参数选择 PFC `6.0`、`7.0` 和 `9.0`
 - 基于关键词搜索命令和 Python API（BM25 排序）
 
 ### 执行类（5）- 需要在运行中的 PFC 进程中启动 bridge
@@ -29,7 +30,7 @@
 
 ### 前置条件
 
-- 已安装 **ITASCA PFC 7.0**（`pfc2d700_gui.exe` 或 `pfc3d700_gui.exe`）
+- 已安装 **ITASCA PFC 6.0、7.0 或 9.0**
 - 已安装 **[uv](https://docs.astral.sh/uv/getting-started/installation/)**（用于 `uvx`）
 
 ### 智能体自动配置（推荐）
@@ -59,9 +60,19 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 **2. 安装依赖：**
 
 ```python
-import pip
-pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
+import sys
+
+if sys.version_info < (3, 10):
+    import pip
+
+    pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
+else:
+    from pip._internal.cli.main import main as pip_main
+
+    pip_main(["install", "--user", "-U", "pfc-mcp-bridge"])
 ```
+
+在 PFC 6/7 中，这会走 `pip.main(...)`；在 PFC 9 中，则会走 `pip._internal.cli.main.main(...)`，适配内嵌的 Python 3.10 环境，并自动安装 `websockets==16.0`。
 
 ### 启动 Bridge 并验证
 
@@ -85,16 +96,16 @@ pfc_mcp_bridge.start()
 | 组件 | PyPI | Python | 角色 |
 |------|------|--------|------|
 | **pfc-mcp** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/) | >= 3.10 | MCP 服务器（文档工具 + 执行客户端） |
-| **pfc-mcp-bridge** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/) | >= 3.6 | PFC 进程内 WebSocket bridge（GUI 或控制台） |
+| **pfc-mcp-bridge** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/) | >= 3.6 | PFC 进程内 WebSocket bridge（GUI 或控制台）；PFC 6/7 使用 Python 3.6，PFC 9 使用 Python 3.10 |
 
-文档工具可独立使用；执行工具依赖已运行的 bridge。
+文档工具可独立使用；执行工具依赖已运行的 bridge。命令浏览与搜索支持 `version=6.0|7.0|9.0`。
 
 ## 故障排查
 
 | 现象 | 处理方式 |
 |---------|-----|
 | 找不到 `uvx` | [安装 uv](https://docs.astral.sh/uv/getting-started/installation/)，或将客户端 MCP 配置改为 `command: "uv"`、`args: ["tool", "run", "pfc-mcp"]` |
-| Bridge 启动失败 | 在 PFC Python/IPython 控制台中使用 `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` 安装/升级 |
+| Bridge 启动失败 | 在 PFC Python/IPython 控制台中重新执行上面的“按版本分支”的安装片段（PFC 6/7 用 `pip.main(...)`，PFC 9 用 `pip._internal.cli.main.main(...)`） |
 | 任务不执行 / 无法连接 | 若执行工具返回 `ok=false`、`error.code=bridge_unavailable`、`error.details.reason=cannot connect to bridge service`，请在 PFC 中启动 bridge（`pfc_mcp_bridge.start()`），并确认 `PFC_MCP_BRIDGE_URL` 与 bridge 实际地址一致 |
 | Bridge 使用自定义端口 | 将 MCP 服务端环境变量设为 `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>`（例如 `ws://localhost:9002`） |
 | 连接失败 | 检查 bridge 是否运行、目标端口是否可用，查看 `.pfc-mcp-bridge/bridge.log` |
@@ -109,7 +120,15 @@ uv run pfc-mcp         # 本地启动服务
 
 ### 从源码启动
 
-如需让 MCP 客户端指向本地源码而非 PyPI 发布版，使用 `uv run --directory`：
+完整开发流程请参考 [开发者指南：从源码安装与运行](docs/development/source-install.zh-CN.md)。
+
+简版说明：
+
+- 用 `uv run --directory` 让 MCP 客户端指向本地 checkout
+- 用 `%run .../pfc-mcp-bridge/start_bridge.py` 从本地源码启动 bridge
+- 如果要把 `pfc-mcp-bridge` 从本地源码安装到 PFC 环境里，优先在终端中调用内嵌解释器
+
+MCP 配置示例：
 
 ```json
 {
@@ -120,12 +139,6 @@ uv run pfc-mcp         # 本地启动服务
     }
   }
 }
-```
-
-Bridge 从源码启动，在 PFC IPython 控制台中使用 `%run`：
-
-```python
-%run C:/path/to/pfc-mcp/pfc-mcp-bridge/start_bridge.py
 ```
 
 ## 许可证

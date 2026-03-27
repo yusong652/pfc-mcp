@@ -5,7 +5,7 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 ## Target Outcome
 
 1. MCP client is configured to run `pfc-mcp`.
-2. `pfc-mcp-bridge` is installed in PFC embedded Python (`>=0.1.2`).
+2. `pfc-mcp-bridge` is installed in the correct PFC embedded Python environment.
 3. Bridge is started in PFC GUI (`pfc_mcp_bridge.start()`).
 4. MCP execution tools are verified with `pfc_list_tasks`.
 
@@ -13,7 +13,8 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 
 - Use bounded, fast path detection for `pfc_path`; avoid full-drive recursive scans by default.
 - Prefer PFC embedded interpreter for package install:
-  - `"{pfc_path}/exe64/python36/python.exe" -m pip ...`
+  - PFC 6.0/7.0: `"{pfc_path}/exe64/python36/python.exe" -m pip ...`
+  - PFC 9.0: `"{pfc_path}/exe64/python310/python.exe" -m pip ...`
 - If a step fails, report the exact command and output, then apply the next fallback.
 - Respect step ownership labels:
   - `[AGENT]` means the agent should execute the action.
@@ -128,54 +129,71 @@ If still unresolved, ask user to provide exact `pfc_path`.
 
 [AGENT]
 
+First resolve `pfc_python` from the installed PFC version:
+
+- PFC 6.0/7.0: `{pfc_path}/exe64/python36/python.exe`
+- PFC 9.0: `{pfc_path}/exe64/python310/python.exe`
+
 Check current package:
 
 ```bash
-"{pfc_path}/exe64/python36/python.exe" -m pip show pfc-mcp-bridge
+"{pfc_python}" -m pip show pfc-mcp-bridge
 ```
 
 PowerShell form (recommended on Windows shells):
 
 ```powershell
-& "{pfc_path}/exe64/python36/python.exe" -m pip show pfc-mcp-bridge
+& "{pfc_python}" -m pip show pfc-mcp-bridge
 ```
 
 Install/upgrade to required version:
 
 ```bash
-"{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+"{pfc_python}" -m pip install --user --upgrade pfc-mcp-bridge
 ```
 
 PowerShell form (recommended on Windows shells):
 
 ```powershell
-& "{pfc_path}/exe64/python36/python.exe" -m pip install --user --upgrade pfc-mcp-bridge
+& "{pfc_python}" -m pip install --user --upgrade pfc-mcp-bridge
 ```
 
 Verify import and version:
 
 ```bash
-"{pfc_path}/exe64/python36/python.exe" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
+"{pfc_python}" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
 ```
 
 PowerShell form (recommended on Windows shells):
 
 ```powershell
-& "{pfc_path}/exe64/python36/python.exe" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
+& "{pfc_python}" -c "import pfc_mcp_bridge; print(pfc_mcp_bridge.__version__)"
 ```
 
-Ignore pip upgrade warnings in this environment. PFC embedded Python 3.6 commonly uses older pip.
+Ignore pip upgrade warnings in this environment. Older embedded interpreters commonly use older pip builds.
 
-If websocket dependency errors appear, install:
+If websocket dependency errors appear, install the version that matches the embedded Python:
 
 ```bash
-"{pfc_path}/exe64/python36/python.exe" -m pip install --user websockets==9.1
+"{pfc_python}" -m pip install --user websockets==9.1
+```
+
+Use the command above for PFC 6.0/7.0. For PFC 9.0, use:
+
+```bash
+"{pfc_python}" -m pip install --user websockets==16.0
 ```
 
 PowerShell form (recommended on Windows shells):
 
 ```powershell
-& "{pfc_path}/exe64/python36/python.exe" -m pip install --user websockets==9.1
+& "{pfc_python}" -m pip install --user websockets==9.1
+```
+
+PowerShell form for PFC 9.0:
+
+```powershell
+& "{pfc_python}" -m pip install --user websockets==16.0
 ```
 
 ## Step 4 - Start Bridge in PFC GUI
@@ -243,9 +261,9 @@ Success example (shape may vary by client):
 - `No module named pfc_mcp_bridge`:
   - Bridge package not installed in PFC embedded Python.
 - `No module named websockets`:
-  - Install `websockets==9.1` in PFC embedded Python.
+  - Install `websockets==9.1` for PFC 6/7 or `websockets==16.0` for PFC 9 in the embedded Python environment.
 - `status remains pending / plot diagnostic timeout during solve`:
-  - Upgrade to `pfc-mcp-bridge >= 0.1.2`.
+  - Upgrade to the latest `pfc-mcp-bridge` release.
 - `pip` upgrade warning after install:
   - Usually safe to ignore if package install completed successfully.
 - Need to confirm GUI process from terminal:
@@ -253,4 +271,4 @@ Success example (shape may vary by client):
 - `pfc_*` tools missing in client after setup:
   - Client session was not fully restarted after Step 1. Close/reopen client session and retry Step 5.
 - PowerShell error `Unexpected token '-m'`:
-  - Quoted executable path was not invoked with `&`. Use `& "{pfc_path}/exe64/python36/python.exe" -m ...`.
+  - Quoted executable path was not invoked with `&`. Use `& "{pfc_python}" -m ...`.

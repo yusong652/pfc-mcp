@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pfc-mcp-bridge"
-version = "0.2.0"
+version = "0.2.1"
 description = "WebSocket bridge for ITASCA PFC - runs inside PFC GUI to enable remote simulation control"
 requires-python = ">=3.6"
 license = { text = "MIT" }
@@ -18,8 +18,12 @@ classifiers = [
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.10",
 ]
-dependencies = ["websockets==9.1"]
+dependencies = [
+    "websockets==9.1; python_version < '3.10'",
+    "websockets==16.0; python_version >= '3.10'",
+]
 readme = "README.md"
 
 [project.scripts]

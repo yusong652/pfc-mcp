@@ -21,6 +21,7 @@ Built on the [Model Context Protocol](https://modelcontextprotocol.io/), pfc-mcp
 ### Documentation (5) - no bridge required
 
 - Browse PFC command tree, Python SDK reference, and reference docs (contact models, range elements, plot items)
+- Command docs support PFC `6.0`, `7.0`, and `9.0` via the `version` parameter on command tools
 - Search commands and Python APIs by keyword (BM25 ranked)
 
 ### Execution (5) - requires bridge in a running PFC process
@@ -33,7 +34,7 @@ Built on the [Model Context Protocol](https://modelcontextprotocol.io/), pfc-mcp
 
 ### Prerequisites
 
-- **ITASCA PFC 7.0** installed (`pfc2d700_gui.exe` or `pfc3d700_gui.exe`)
+- **ITASCA PFC 6.0, 7.0, or 9.0** installed
 - **[uv](https://docs.astral.sh/uv/getting-started/installation/)** installed (for `uvx`)
 
 ### Agentic Setup (Recommended)
@@ -63,9 +64,19 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 **2. Install dependency:**
 
 ```python
-import pip
-pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
+import sys
+
+if sys.version_info < (3, 10):
+    import pip
+
+    pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])
+else:
+    from pip._internal.cli.main import main as pip_main
+
+    pip_main(["install", "--user", "-U", "pfc-mcp-bridge"])
 ```
+
+In PFC 6/7 this uses `pip.main(...)`. In PFC 9 it uses `pip._internal.cli.main.main(...)`, which works with the embedded Python 3.10 environment and installs `websockets==16.0` automatically.
 
 ### Start Bridge & Verify
 
@@ -89,16 +100,16 @@ pfc_mcp_bridge.start()
 | Component | PyPI | Python | Role |
 |-----------|------|--------|------|
 | **pfc-mcp** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/) | >= 3.10 | MCP server (documentation + execution client) |
-| **pfc-mcp-bridge** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/) | >= 3.6 | WebSocket bridge inside PFC process (GUI or console) |
+| **pfc-mcp-bridge** | [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/) | >= 3.6 | WebSocket bridge inside PFC process (GUI or console); uses Python 3.6 on PFC 6/7 and Python 3.10 on PFC 9 |
 
-Documentation tools work standalone. Execution tools require a running bridge.
+Documentation tools work standalone. Execution tools require a running bridge. Command browsing and search support `version=6.0|7.0|9.0`.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
 | `uvx` not found | [Install uv](https://docs.astral.sh/uv/getting-started/installation/) or switch client MCP config to `command: "uv"` with `args: ["tool", "run", "pfc-mcp"]` |
-| Bridge won't start | In PFC Python/IPython console, install/upgrade `pfc-mcp-bridge` with `import pip; pip.main(["install", "--user", "-U", "pfc-mcp-bridge"])` |
+| Bridge won't start | In PFC Python/IPython console, rerun the version-aware install snippet above (`pip.main(...)` on PFC 6/7, `pip._internal.cli.main.main(...)` on PFC 9) |
 | Tasks not processing / cannot connect | If execution tools return `ok=false`, `error.code=bridge_unavailable`, and `error.details.reason=cannot connect to bridge service`, start bridge in PFC (`pfc_mcp_bridge.start()`) and ensure `PFC_MCP_BRIDGE_URL` matches the active bridge URL |
 | Bridge on custom port | Set MCP server env `PFC_MCP_BRIDGE_URL=ws://localhost:<bridge-port>` (for example `ws://localhost:9002`) |
 | Connection failed | Check bridge is running, target port is available, see `.pfc-mcp-bridge/bridge.log` |
@@ -113,7 +124,15 @@ uv run pfc-mcp         # Run server locally
 
 ### Running from Source
 
-To point your MCP client at a local checkout instead of the PyPI release, use `uv run --directory`:
+For a complete developer workflow, see [Developer Guide: Install and Run from Source](docs/development/source-install.md).
+
+Quick version:
+
+- Point your MCP client at a local checkout with `uv run --directory`
+- Start the bridge from local source with `%run .../pfc-mcp-bridge/start_bridge.py`
+- Use the embedded PFC interpreter from a terminal if you need to install `pfc-mcp-bridge` from local source
+
+Example MCP config:
 
 ```json
 {
@@ -124,12 +143,6 @@ To point your MCP client at a local checkout instead of the PyPI release, use `u
     }
   }
 }
-```
-
-To run the bridge from source, use `%run` in the PFC IPython console:
-
-```python
-%run C:/path/to/pfc-mcp/pfc-mcp-bridge/start_bridge.py
 ```
 
 ## License

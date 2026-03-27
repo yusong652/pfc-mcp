@@ -171,7 +171,7 @@ class PFCWebSocketServer:
 
         Args:
             websocket: WebSocket connection instance
-            path: Request path (for websockets 9.x compatibility)
+            path: Optional request path for legacy websockets handler compatibility
         """
         self.active_connections.add(websocket)
         pending_tasks = set()  # type: set
@@ -201,7 +201,7 @@ class PFCWebSocketServer:
         """Start the WebSocket server (non-blocking)."""
 
         try:
-            # Use websockets 9.1 compatible syntax (Python 3.6)
+            # This call shape works with both legacy websockets 9.1 and modern 16.x.
             self.server = await websockets.serve(
                 self.handle_client,
                 self.host,

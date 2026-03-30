@@ -31,16 +31,22 @@ def register(mcp: FastMCP) -> None:
         cycles, and any operation that may take minutes or longer.
         For quick queries and REPL-style testing, use pfc_execute_code.
         """
+        try:
+            client = await get_bridge_client()
+        except Exception as exc:
+            # Connection failed — no task_id generated, nothing to track
+            return build_bridge_error(exc)
+
         task_id = uuid.uuid4().hex[:6]
 
         try:
-            client = await get_bridge_client()
             response = await client.execute_task(
                 script_path=entry_script,
                 description=description,
                 task_id=task_id,
             )
         except Exception as exc:
+            # Connected but request failed — task may or may not exist on bridge
             return build_bridge_error(exc, task_id=task_id)
 
         status = response.get("status", "unknown")

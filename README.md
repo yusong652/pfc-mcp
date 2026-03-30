@@ -25,6 +25,10 @@
 
 **5 execution tools** — interactive REPL, task submission, progress monitoring, interruption, and history. Requires bridge.
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/yusong652-pfc-mcp).
+
 ## Quick Start
 
 ### Prerequisites

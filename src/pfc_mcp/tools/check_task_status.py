@@ -37,12 +37,22 @@ def register(mcp: FastMCP) -> None:
             if wait_seconds > 0:
                 client.listen_for_task(task_id)
 
-            response = await client.check_task_status(task_id)
+            response = await client.check_task_status(
+                task_id,
+                skip_newest=skip_newest,
+                limit=limit,
+                filter_text=filter,
+            )
             status = normalize_status(response.get("status", "unknown"))
 
             if status not in terminal_states and wait_seconds > 0:
                 await client.wait_for_task(task_id, timeout=wait_seconds)
-                response = await client.check_task_status(task_id)
+                response = await client.check_task_status(
+                    task_id,
+                    skip_newest=skip_newest,
+                    limit=limit,
+                    filter_text=filter,
+                )
             else:
                 client.unlisten_task(task_id)
         except Exception as exc:
@@ -60,12 +70,22 @@ def register(mcp: FastMCP) -> None:
         data = response.get("data") or {}
         normalized_status = normalize_status(status)
 
-        output_text, pagination = paginate_output(
-            output=data.get("output") or "",
-            skip_newest=skip_newest,
-            limit=limit,
-            filter_text=filter,
-        )
+        # Prefer bridge-side pagination when available: the bridge sees
+        # the full log and reports accurate total_lines / has_older /
+        # filter matches. Fall back to MCP-side paginate_output only for
+        # legacy bridges that still send unpaginated output.
+        bridge_output = data.get("output") or ""
+        bridge_pagination = data.get("pagination")
+        if isinstance(bridge_pagination, dict):
+            output_text = bridge_output if bridge_output else "(no output)"
+            pagination = bridge_pagination
+        else:
+            output_text, pagination = paginate_output(
+                output=bridge_output,
+                skip_newest=skip_newest,
+                limit=limit,
+                filter_text=filter,
+            )
 
         result: dict[str, Any] = {
             "task_id": task_id,

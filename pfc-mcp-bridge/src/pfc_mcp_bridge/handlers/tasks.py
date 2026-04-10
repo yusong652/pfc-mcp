@@ -64,9 +64,12 @@ async def handle_check_task_status(ctx, data):
         data: Message data containing:
             - request_id: Request identifier
             - task_id: Task ID to check
+            - skip_newest: Optional int, skip N most recent lines (default 0)
+            - limit: Optional int, max lines to return (default 64)
+            - filter_text: Optional str, keep only lines containing this text
 
     Returns:
-        Response dict with task status
+        Response dict with task status and paginated output
     """
     request_id = data.get("request_id", "unknown")
 
@@ -74,7 +77,16 @@ async def handle_check_task_status(ctx, data):
     if err:
         return err
 
-    result = ctx.task_manager.get_task_status(task_id)
+    skip_newest = data.get("skip_newest", 0)
+    limit = data.get("limit", 64)
+    filter_text = data.get("filter_text")
+
+    result = ctx.task_manager.get_task_status(
+        task_id,
+        skip_newest=skip_newest,
+        limit=limit,
+        filter_text=filter_text,
+    )
 
     # Truncate message before sending
     if "message" in result:

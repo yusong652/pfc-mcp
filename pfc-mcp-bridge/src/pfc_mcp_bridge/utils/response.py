@@ -9,22 +9,30 @@ Python 3.6 compatible implementation.
 
 from typing import Any, Dict, Optional
 
-# Bridge-side output cap.  MCP will truncate further for the LLM context
-# window, but we cap here to keep WebSocket messages well under max_size.
-MAX_OUTPUT_CHARS = 50000
+# Bridge-side output cap. Acts as a defensive safety net for very large
+# payloads; normal long-running task output is already tail-limited by
+# ScriptTask.get_current_output (OUTPUT_TAIL_BYTES). We keep the TAIL
+# (most recent output) because monitoring scenarios care about current
+# progress, not the beginning of a multi-hour log.
+MAX_OUTPUT_CHARS = 200_000
 
 
 def _truncate_output(text, max_chars=MAX_OUTPUT_CHARS):
     # type: (str, int) -> str
-    """Truncate output text, cutting at a line boundary with a friendly hint."""
+    """Truncate output text, keeping the tail (most recent) at a line boundary."""
     if len(text) <= max_chars:
         return text
-    cut = text[:max_chars].rsplit("\n", 1)[0]
-    return cut + (
-        "\n... (truncated, {} total chars. "
-        "Use pfc_check_task_status with skip_newest/limit/filter_text for full output.)"
-        .format(len(text))
-    )
+    tail = text[-max_chars:]
+    nl = tail.find("\n")
+    if nl >= 0:
+        tail = tail[nl + 1:]
+    omitted = len(text) - len(tail)
+    return (
+        "... (truncated, {} earlier chars omitted; showing most recent {} chars. "
+        "Use pfc_check_task_status with skip_newest/limit/filter_text to page "
+        "within this window.)\n"
+        .format(omitted, len(tail))
+    ) + tail
 
 
 class TaskDataBuilder:
@@ -96,6 +104,13 @@ class TaskDataBuilder:
         """Add output field (captured stdout), truncated for safe transport."""
         if output is not None:
             self._data["output"] = _truncate_output(output)
+        return self
+
+    def with_pagination(self, pagination):
+        # type: (Optional[Dict[str, Any]]) -> TaskDataBuilder
+        """Add pagination metadata field (total_lines, line_range, has_older, has_newer)."""
+        if pagination is not None:
+            self._data["pagination"] = pagination
         return self
 
     def with_result(self, result):

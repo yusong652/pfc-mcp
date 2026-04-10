@@ -231,6 +231,54 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
 
 
 @pytest.mark.asyncio
+async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, tmp_path, monkeypatch):
+    """When bridge returns data.pagination, tool should use it directly
+    (not re-paginate the output string locally)."""
+    from pfc_mcp.bridge import get_bridge_client
+
+    client = await get_bridge_client()
+
+    async def fake_check(task_id, skip_newest=0, limit=64, filter_text=None):
+        return {
+            "type": "result",
+            "status": "completed",  # terminal → skips wait_for_task
+            "message": "ok",
+            "data": {
+                "task_id": task_id,
+                "status": "completed",
+                "start_time": time.time(),
+                "end_time": time.time(),
+                "elapsed_time": "1.0s",
+                "script_path": "/tmp/fake.py",
+                "description": "fake",
+                "output": "paginated-window-line",
+                "pagination": {
+                    "total_lines": 12345,
+                    "line_range": "12281-12345",
+                    "has_older": True,
+                    "has_newer": False,
+                },
+            },
+        }
+
+    monkeypatch.setattr(client, "check_task_status", fake_check)
+
+    result = await mcp._tool_manager.call_tool(
+        "pfc_check_task_status",
+        {"task_id": "abc123", "wait_seconds": 1},
+    )
+    parsed = json.loads(result.content[0].text)
+    assert parsed["ok"] is True
+    data = parsed["data"]
+    # Bridge pagination should pass through unchanged
+    assert data["pagination"]["total_lines"] == 12345
+    assert data["pagination"]["line_range"] == "12281-12345"
+    assert data["pagination"]["has_older"] is True
+    # Output should come from bridge verbatim (not re-split/joined)
+    assert data["output"] == "paginated-window-line"
+
+
+@pytest.mark.asyncio
 async def test_check_task_status_not_found(mock_bridge):
     result = await mcp._tool_manager.call_tool(
         "pfc_check_task_status",

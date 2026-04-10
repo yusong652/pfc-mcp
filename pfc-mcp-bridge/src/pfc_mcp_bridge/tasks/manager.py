@@ -83,9 +83,9 @@ class TaskManager:
                 return True
         return False
 
-    def get_task_status(self, task_id):
-        # type: (str) -> Dict[str, Any]
-        """Query task status (non-blocking)."""
+    def get_task_status(self, task_id, skip_newest=0, limit=64, filter_text=None):
+        # type: (str, int, int, Optional[str]) -> Dict[str, Any]
+        """Query task status (non-blocking) with paginated output."""
         task = self.tasks.get(task_id)
         if not task:
             return {
@@ -94,7 +94,9 @@ class TaskManager:
                 "data": None
             }
         self._refresh_runtime_status(task)
-        return task.get_status_response()
+        return task.get_status_response(
+            skip_newest=skip_newest, limit=limit, filter_text=filter_text
+        )
 
     def list_all_tasks(self, offset=0, limit=None):
         # type: (int, Optional[int]) -> Dict[str, Any]

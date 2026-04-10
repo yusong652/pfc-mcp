@@ -205,9 +205,23 @@ class PFCBridgeClient:
             timeout_s=10.0,
         )
 
-    async def check_task_status(self, task_id: str) -> dict[str, Any]:
+    async def check_task_status(
+        self,
+        task_id: str,
+        skip_newest: int = 0,
+        limit: int = 64,
+        filter_text: str | None = None,
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "type": "check_task_status",
+            "task_id": task_id,
+            "skip_newest": skip_newest,
+            "limit": limit,
+        }
+        if filter_text is not None:
+            payload["filter_text"] = filter_text
         return await self._request_with_retry(
-            {"type": "check_task_status", "task_id": task_id},
+            payload,
             operation_name="check_task_status",
         )
 

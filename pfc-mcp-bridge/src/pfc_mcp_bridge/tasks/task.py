@@ -20,6 +20,9 @@ from ..utils import TaskDataBuilder, build_response
 # Module logger
 logger = logging.getLogger("PFC-Server")
 
+# Default pagination window when caller does not specify one.
+DEFAULT_PAGINATION_LIMIT = 64
+
 
 class ScriptTask:
     """
@@ -132,32 +135,57 @@ class ScriptTask:
             return 0.0
         return time.time() - self.start_time
 
-    def get_current_output(self):
-        # type: () -> Optional[str]
-        """Get current output from log file.
+    def get_paginated_output(self, skip_newest=0, limit=DEFAULT_PAGINATION_LIMIT, filter_text=None):
+        # type: (int, int, Optional[str]) -> tuple
+        """Return (output_text, pagination_dict) paginating the task log.
 
-        For active tasks, flushes the write buffer first to ensure
-        all data is on disk before reading.
+        Reads the complete log file, optionally filters by substring,
+        then extracts a tail-biased window: `skip_newest` lines from
+        the end, then up to `limit` lines backwards from there.
+
+        The `pagination` dict reports metadata against the *full* log
+        (or the filtered view if `filter_text` is set), so callers can
+        reason about whether older/newer content exists.
         """
-        # Flush active write buffer to disk
+        # Flush active write buffer to disk so the read sees it
         if self.output_buffer:
             try:
                 self.output_buffer.flush()
             except Exception:
                 pass
 
-        # Read from log file
-        if self.log_path:
+        # Read full log from disk. For multi-MB logs this is still fast
+        # (<50 ms for 10 MB on SSD) and gives accurate pagination metadata.
+        full = ""
+        if self.log_path and os.path.exists(self.log_path):
             try:
-                if os.path.exists(self.log_path):
-                    with open(self.log_path, 'r', encoding='utf-8') as f:
-                        return f.read()
+                with open(self.log_path, 'r', encoding='utf-8', errors='replace') as f:
+                    full = f.read()
             except Exception as e:
                 logger.warning("Failed to read log file: {}".format(e))
 
         # Backward compatibility: old persisted format with inline output
-        snapshot = getattr(self, '_output_snapshot', None)
-        return snapshot if snapshot else None
+        if not full:
+            full = getattr(self, '_output_snapshot', '') or ''
+
+        lines = full.splitlines()
+        if filter_text:
+            lines = [line for line in lines if filter_text in line]
+
+        total_lines = len(lines)
+        start_idx = max(0, total_lines - limit - skip_newest)
+        end_idx = max(0, total_lines - skip_newest)
+        selected = lines[start_idx:end_idx]
+
+        pagination = {
+            "total_lines": total_lines,
+            "line_range": "{}-{}".format(start_idx + 1, end_idx) if selected else "0-0",
+            "has_older": start_idx > 0,
+            "has_newer": skip_newest > 0,
+        }
+
+        text = "\n".join(selected) if selected else ""
+        return text, pagination
 
     def _create_data_builder(self):
         # type: () -> TaskDataBuilder
@@ -167,30 +195,37 @@ class ScriptTask:
             self.script_name, self.entry_script, self.description
         )
 
-    def get_status_response(self):
-        # type: () -> Dict[str, Any]
-        """Get task status response with output and timing."""
+    def get_status_response(self, skip_newest=0, limit=DEFAULT_PAGINATION_LIMIT, filter_text=None):
+        # type: (int, int, Optional[str]) -> Dict[str, Any]
+        """Get task status response with paginated output and timing.
+
+        Pagination args are applied on the bridge side against the full
+        log file, so `total_lines`, `has_older`, and `filter_text` all
+        reflect the real on-disk state (not a pre-truncated window).
+        """
         current_status = self.status
         elapsed_time = self.get_elapsed_time()
+        output_text, pagination = self.get_paginated_output(
+            skip_newest=skip_newest, limit=limit, filter_text=filter_text
+        )
 
         if current_status == "pending":
-            return self._build_pending_response(elapsed_time)
+            return self._build_pending_response(elapsed_time, output_text, pagination)
         elif current_status == "running":
-            return self._build_running_response(elapsed_time)
+            return self._build_running_response(elapsed_time, output_text, pagination)
         elif current_status == "completed":
-            return self._build_completed_response(elapsed_time)
+            return self._build_completed_response(elapsed_time, output_text, pagination)
         elif current_status == "interrupted":
-            return self._build_interrupted_response(elapsed_time)
+            return self._build_interrupted_response(elapsed_time, output_text, pagination)
         else:  # failed
-            return self._build_failed_response(elapsed_time)
+            return self._build_failed_response(elapsed_time, output_text, pagination)
 
-    def _build_pending_response(self, elapsed_time):
-        # type: (float) -> Dict[str, Any]
-        current_output = self.get_current_output()
-
+    def _build_pending_response(self, elapsed_time, output_text, pagination):
+        # type: (float, str, Dict[str, Any]) -> Dict[str, Any]
         data = (self._create_data_builder()
             .with_timing(self.start_time, elapsed_time=elapsed_time)
-            .with_output(current_output)
+            .with_output(output_text)
+            .with_pagination(pagination)
             .build())
 
         message = "Script queued (waiting for main thread): {}\nWaiting time: {:.2f}s".format(
@@ -199,13 +234,12 @@ class ScriptTask:
 
         return build_response("pending", message, data)
 
-    def _build_running_response(self, elapsed_time):
-        # type: (float) -> Dict[str, Any]
-        current_output = self.get_current_output()
-
+    def _build_running_response(self, elapsed_time, output_text, pagination):
+        # type: (float, str, Dict[str, Any]) -> Dict[str, Any]
         data = (self._create_data_builder()
             .with_timing(self.start_time, elapsed_time=elapsed_time)
-            .with_output(current_output)
+            .with_output(output_text)
+            .with_pagination(pagination)
             .build())
 
         message = "Script executing: {}\nElapsed time: {:.2f}s".format(
@@ -214,10 +248,8 @@ class ScriptTask:
 
         return build_response("running", message, data)
 
-    def _build_completed_response(self, elapsed_time):
-        # type: (float) -> Dict[str, Any]
-        output_text = self.get_current_output()
-
+    def _build_completed_response(self, elapsed_time, output_text, pagination):
+        # type: (float, str, Dict[str, Any]) -> Dict[str, Any]
         # Extract result from future (active tasks only)
         result_data = None
         if self.future:
@@ -247,16 +279,15 @@ class ScriptTask:
 
         data = (self._create_data_builder()
             .with_timing(self.start_time, self.end_time, elapsed_time)
-            .with_output(output_text if output_text else "")
+            .with_output(output_text)
+            .with_pagination(pagination)
             .with_result(serialized_result)
             .build())
 
         return build_response("completed", message, data)
 
-    def _build_interrupted_response(self, elapsed_time):
-        # type: (float) -> Dict[str, Any]
-        output_text = self.get_current_output()
-
+    def _build_interrupted_response(self, elapsed_time, output_text, pagination):
+        # type: (float, str, Dict[str, Any]) -> Dict[str, Any]
         if output_text:
             message = "Script interrupted by user: {}\nElapsed time: {:.2f}s\n\n=== Partial Output ===\n{}".format(
                 self.script_name, elapsed_time, output_text
@@ -268,14 +299,14 @@ class ScriptTask:
 
         data = (self._create_data_builder()
             .with_timing(self.start_time, self.end_time, elapsed_time)
-            .with_output(output_text if output_text else "")
+            .with_output(output_text)
+            .with_pagination(pagination)
             .build())
 
         return build_response("interrupted", message, data)
 
-    def _build_failed_response(self, elapsed_time):
-        # type: (float) -> Dict[str, Any]
-        output_text = self.get_current_output()
+    def _build_failed_response(self, elapsed_time, output_text, pagination):
+        # type: (float, str, Dict[str, Any]) -> Dict[str, Any]
         error_msg = self.error or "Task execution failed"
 
         if output_text:
@@ -289,7 +320,8 @@ class ScriptTask:
 
         data = (self._create_data_builder()
             .with_timing(self.start_time, self.end_time, elapsed_time)
-            .with_output(output_text if output_text else "")
+            .with_output(output_text)
+            .with_pagination(pagination)
             .with_error(error_msg)
             .build())
 

@@ -216,11 +216,31 @@ def register_interrupt_callback(itasca_module, position=50.0):
         # Register with PFC
         itasca_module.set_callback("_pfc_interrupt_check", position)
 
-        # Wrap itasca.command to auto-re-register callback after model new/restore
-        # These commands clear PFC's internal callback registry
+        # Wrap itasca.command to:
+        #   1. Keep _pfc_interrupt_check visible in the current __main__ (some
+        #      contexts like IPython %run temporarily replace sys.modules['__main__'],
+        #      which hides the attribute injected at startup and makes PFC's
+        #      callback lookup fail with "function is not defined").
+        #   2. Auto-re-register callback after model new/restore (those commands
+        #      clear PFC's internal callback registry).
         _original_command = itasca_module.command
+        import sys as _sys
 
         def _wrapped_command(cmd):
+            # Ensure callbacks are available in whichever module is currently __main__.
+            # Idempotent; costs two attr ops per callback when already injected.
+            main_mod = _sys.modules.get('__main__')
+            if main_mod is not None:
+                if getattr(main_mod, '_pfc_interrupt_check', None) is not _pfc_interrupt_check:
+                    main_mod._pfc_interrupt_check = _pfc_interrupt_check  # type: ignore[attr-defined]
+                # Also keep executor callback visible if it's been registered
+                try:
+                    from .script_executor import _pfc_executor_callback, is_executor_callback_registered
+                    if is_executor_callback_registered() and getattr(main_mod, '_pfc_executor_callback', None) is not _pfc_executor_callback:
+                        main_mod._pfc_executor_callback = _pfc_executor_callback  # type: ignore[attr-defined]
+                except ImportError:
+                    pass
+
             result = _original_command(cmd)
             # Check if command resets model (clears callback registry)
             cmd_lower = cmd.strip().lower()

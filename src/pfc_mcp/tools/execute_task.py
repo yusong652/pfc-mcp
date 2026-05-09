@@ -34,9 +34,12 @@ def register(mcp: FastMCP) -> None:
         termination via a sentinel variable. Both tools share the same
         __main__ namespace in PFC's main thread.
 
-        Use this for production simulation runs, long model.solve()
-        cycles, or any work you want to be cancellable and pollable.
-        For quick queries and REPL-style testing, use pfc_execute_code.
+        This is the async / background execution path: pollable via
+        pfc_check_task_status, cancellable via pfc_interrupt_task.
+        Submission does not lock parameters — start with reasonable
+        values and refine live via pfc_execute_code as the task
+        cycles. For synchronous, inline execution, use
+        pfc_execute_code directly.
         """
         try:
             client = await get_bridge_client()

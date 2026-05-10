@@ -5,17 +5,6 @@ Mac users can develop and test pfc-mcp without a Windows + USB-key setup.
 Demo mode (no license required) caps models at 1000 balls/clumps + 1000
 rigid blocks + 10 DFNs — enough for bridge integration testing.
 
-## Status
-
-**Experimental, MVP.** First goal is just to confirm:
-
-1. The Itasca `.deb` installs cleanly inside Ubuntu 22.04
-2. We can locate the PFC console binary and the `itasca` Python module
-3. `pfc_mcp_bridge.start(mode="console")` actually starts the bridge
-
-Once those land, the `CMD` will be replaced with a one-shot invocation that
-boots PFC console + bridge in one go.
-
 ## Build
 
 The Itasca `.deb` (~2.5 GB) is downloaded once on the host so we get curl's
@@ -43,6 +32,11 @@ If your `.deb` is somewhere other than `~/Downloads`, set
 
 After the first successful build, subsequent rebuilds that only touch bridge
 source files reuse the cached engine layer.
+
+`run.sh` does **not** auto-rebuild. If you change `Dockerfile`, run
+`./docker/build.sh` first; if you only edit `entrypoint.sh` or files under
+`pfc-mcp-bridge/src/`, those are bind-mounted and pick up changes on the
+next `run.sh`.
 
 ## Run
 

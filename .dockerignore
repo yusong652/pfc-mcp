@@ -12,6 +12,10 @@ build/
 .ruff_cache/
 .mypy_cache/
 
+# Bridge probe scripts and their captured outputs -- dev artifacts that
+# don't belong in the runtime image.
+pfc-mcp-bridge/scratch/
+
 # MCP-side package and tests don't need to be inside the container yet -- the
 # container only runs the bridge. Comment out if you later want them available.
 src/

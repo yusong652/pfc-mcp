@@ -1,0 +1,60 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "automatic-model-save"
+  ],
+  "description": "Sets value controlling automatic safe file creating during cycling. This is intended as a safety feature to prevent having to start a lengthy run over in the event of a power failure or program crash.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "available": false
+    },
+    "7.0": {
+      "command": "program automatic-model-save",
+      "syntax": "program automatic-model-save keyword ...",
+      "keywords": [
+        {
+          "name": "active",
+          "syntax": "active <b>",
+          "description": "Turns automatic model saves during cycling on and off."
+        },
+        {
+          "name": "interval",
+          "syntax": "interval <fi>",
+          "description": "Sets the time interval (in hours) for automatic model save creation during cycling. The time value must be between 0 and 24 . If the value is set to 0 , this will also automatically set active off . If the value is set to non-zero, this will also automatically set active on ."
+        },
+        {
+          "name": "directory",
+          "syntax": "directory <s>",
+          "description": "Set the directory the automatically saved file will be placed in. If this is a relative path, this will be relative to the current directory. By default this string is empty, indicating the file will be saved in the current directory."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "program automatic-model-save",
+      "syntax": "program automatic-model-save keyword ...",
+      "keywords": [
+        {
+          "name": "active",
+          "syntax": "active <b>",
+          "description": "Turns automatic model saves during cycling on and off."
+        },
+        {
+          "name": "interval",
+          "syntax": "interval <fi>",
+          "description": "Sets the time interval (in hours) for automatic model save creation during cycling. The time value must be between 0 and 24 . If the value is set to 0 , this will also automatically set active off . If the value is set to non-zero, this will also automatically set active on ."
+        },
+        {
+          "name": "directory",
+          "syntax": "directory <s>",
+          "description": "Set the directory the automatically saved file will be placed in. If this is a relative path, this will be relative to the current directory. By default this string is empty, indicating the file will be saved in the current directory."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

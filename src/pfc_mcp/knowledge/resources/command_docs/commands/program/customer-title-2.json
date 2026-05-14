@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "customer-title-2"
+  ],
+  "description": "Set the second line of customer information. This line is displayed in the lower-left corner of the legend of all plot views by default.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program customer-title-2",
+      "syntax": "program customer-title-2 <s>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program customer-title-2",
+      "syntax": "program customer-title-2 <s>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program customer-title-2",
+      "syntax": "program customer-title-2 <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

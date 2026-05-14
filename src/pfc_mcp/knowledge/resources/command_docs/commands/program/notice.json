@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "notice"
+  ],
+  "description": "Set the notice state.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program notice",
+      "syntax": "program notice <b>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program notice",
+      "syntax": "program notice <b>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program notice",
+      "syntax": "program notice <b>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

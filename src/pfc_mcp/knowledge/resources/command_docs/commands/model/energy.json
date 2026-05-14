@@ -1,0 +1,74 @@
+{
+  "category": "model",
+  "search_keywords": [
+    "energy"
+  ],
+  "description": "Specify the energy tracking state. Currently only mechanical energies can be tracked.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "model energy",
+      "syntax": "model energy keyword ...",
+      "keywords": [
+        {
+          "name": "all",
+          "syntax": "all <b>",
+          "description": "Set the energy tracking state of all processes to b ."
+        },
+        {
+          "name": "cfd",
+          "syntax": "cfd <b>",
+          "description": "Set the energy tracking state of the cfd process to b ."
+        },
+        {
+          "name": "creep",
+          "syntax": "creep <b>",
+          "description": "Set the energy tracking state of the creep process to b ."
+        },
+        {
+          "name": "dynamic",
+          "syntax": "dynamic <b>",
+          "description": "Set the energy tracking state of the dynamic process to b ."
+        },
+        {
+          "name": "mechanical",
+          "syntax": "mechanical <b>",
+          "description": "Set the energy tracking state of the mechanical process to b ."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal <b>",
+          "description": "Set the energy tracking state of the thermal process to b ."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "model energy",
+      "syntax": "model energy keyword ...",
+      "keywords": [
+        {
+          "name": "mechanical",
+          "syntax": "mechanical <b>",
+          "description": "Specify the energy tracking state for the mechanical process."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "model energy",
+      "syntax": "model energy keyword ...",
+      "keywords": [
+        {
+          "name": "mechanical",
+          "syntax": "mechanical <b>",
+          "description": "Specify the energy tracking state for the mechanical process."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

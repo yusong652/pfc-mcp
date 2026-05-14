@@ -1,0 +1,109 @@
+{
+  "category": "model",
+  "search_keywords": [
+    "list"
+  ],
+  "description": "List a model related quantity. The following keywords apply:",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "model list",
+      "syntax": "model list keyword",
+      "keywords": [
+        {
+          "name": "domain",
+          "syntax": "domain",
+          "description": "List the domain extent and the conditions."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List general information about the current model state."
+        },
+        {
+          "name": "range",
+          "syntax": "range [s]",
+          "description": "above needs fixing; looks like use of RAnge as a keyword here prevents proper use of :str:s as needed List all named ranges created as a part of this model. If s is provided, the contents of the matching named range are listed."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List information about the current model record. This is a record of all commands and input to the model. See The State Record Pane for further information. List all commands given interactively, including commands emitted by interactive tools. Note that commands input as part of a data file are not recorded, instead the data file is tracked in the Files section. This list can be sent to the program playback command. When a project bundle is created (See the Tools/Bundle/Pack menu entry in the user interface) the a .record file is created to represent each model save state in the project. This can theoretically be used to recreate that model state. A list of all input files that can affect the model state, including data files. The name, size, and last modified time and date of the file is recorded. A single line displaying the number of lines of commands and number of file entries stored in the record. This is the default option if no keyword is specified."
+        },
+        {
+          "name": "requirements",
+          "syntax": "requirements",
+          "description": "A complete list of the security requirements for the current model state. Note that if no model exists or the model that does exist is smaller than the demo limits, need a this to be a link to a section *somewhere* that describes demo version nothing may be listed."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "model list",
+      "syntax": "model list keyword",
+      "keywords": [
+        {
+          "name": "domain",
+          "syntax": "domain",
+          "description": "List the domain extent and the conditions."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List general information about the current model state."
+        },
+        {
+          "name": "range",
+          "syntax": "range [s]",
+          "description": "above needs fixing; looks like use of RAnge as a keyword here prevents proper use of :str:s as needed List all named ranges created as a part of this model. If s is provided, the contents of the matching named range are listed."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List information about the current model record. This is a record of all commands and input to the model. See the i State Record pane description. List all commands given interactively, including commands emitted by interactive tools. Note that commands input as part of a data file are not recorded, instead the data file is tracked in the Files section. This list can be sent to the program playback command. When a project bundle is created (See the Tools Bundle Pack… menu entry in the user interface) a .record file is created to represent each model save state in the project. This can theoretically be used to recreate that model state. A list of all input files that can affect the model state, including data files. The name, size, and last modified time and date of the file is recorded. A single line displaying the number of lines of commands and number of file entries stored in the record. This is the default option if no keyword is specified."
+        },
+        {
+          "name": "requirements",
+          "syntax": "requirements",
+          "description": "A complete list of the security requirements for the current model state. Note that if no model exists or the model that does exist is smaller than the demo limits, need a this to be a link to a section *somewhere* that describes demo version nothing may be listed."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "model list",
+      "syntax": "model list keyword",
+      "keywords": [
+        {
+          "name": "domain",
+          "syntax": "domain",
+          "description": "List the domain extent and the conditions."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List general information about the current model state."
+        },
+        {
+          "name": "range",
+          "syntax": "range [s]",
+          "description": "above needs fixing; looks like use of RAnge as a keyword here prevents proper use of :str:s as needed List all named ranges created as a part of this model. If s is provided, the contents of the matching named range are listed."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List information about the current model record. This is a record of all commands and input to the model. See the i State Record pane description. List all commands given interactively, including commands emitted by interactive tools. Note that commands input as part of a data file are not recorded, instead the data file is tracked in the Files section. This list can be sent to the program playback command. When a project bundle is created (See the Tools Bundle Pack… menu entry in the user interface) a .record file is created to represent each model save state in the project. This can theoretically be used to recreate that model state. A list of all input files that can affect the model state, including data files. The name, size, and last modified time and date of the file is recorded. A single line displaying the number of lines of commands and number of file entries stored in the record. This is the default option if no keyword is specified."
+        },
+        {
+          "name": "requirements",
+          "syntax": "requirements",
+          "description": "A complete list of the security requirements for the current model state. Note that if no model exists or the model that does exist is smaller than the demo limits, need a this to be a link to a section *somewhere* that describes demo version nothing may be listed."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

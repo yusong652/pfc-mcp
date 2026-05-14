@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "undo"
+  ],
+  "description": "Undo commands.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program undo",
+      "syntax": "program undo [<i>]",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program undo",
+      "syntax": "program undo [<i>]",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program undo",
+      "syntax": "program undo [<i>]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

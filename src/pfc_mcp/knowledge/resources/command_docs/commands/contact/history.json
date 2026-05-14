@@ -1,0 +1,340 @@
+{
+  "category": "contact",
+  "search_keywords": [
+    "history"
+  ],
+  "description": "Add a contact history. A history is a floating point variable that can be sampled and stored during a model run. The optional id directly following history creates a history with the specified ID. If not specified, then the next available history ID is used. The s value identifies the contact type (i.e., ball-ball , ball-pebble , ball-facet , or pebble-facet ). Following one of the keywords given below, either 1) a position vector or 2) an additional id keyword must be given to define the specific contact. See the contact history command for details regarding the manipulation of histories.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "available": false
+    },
+    "7.0": {
+      "command": "contact history",
+      "syntax": "contact history [id <id>] <s>keyword ...",
+      "keywords": [
+        {
+          "name": "force",
+          "syntax": "force",
+          "description": "Magnitude of the contact force."
+        },
+        {
+          "name": "force-x",
+          "syntax": "force-x",
+          "description": "The \\(x\\) -component of the contact force."
+        },
+        {
+          "name": "force-y",
+          "syntax": "force-y",
+          "description": "The \\(y\\) -component of the contact force."
+        },
+        {
+          "name": "force-z",
+          "syntax": "force-z",
+          "description": "The \\(z\\) -component of the contact force."
+        },
+        {
+          "name": "localforce-x",
+          "syntax": "localforce-x",
+          "description": "The \\(x\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localforce-y",
+          "syntax": "localforce-y",
+          "description": "The \\(y\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localforce-z",
+          "syntax": "localforce-z",
+          "description": "The \\(z\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-x",
+          "syntax": "localmomenton1-x",
+          "description": "The \\(x\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-y",
+          "syntax": "localmomenton1-y",
+          "description": "The \\(y\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-z",
+          "syntax": "localmomenton1-z",
+          "description": "The \\(z\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-x",
+          "syntax": "localmomenton2-x",
+          "description": "The \\(x\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-y",
+          "syntax": "localmomenton2-y",
+          "description": "The \\(y\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-z",
+          "syntax": "localmomenton2-z",
+          "description": "The \\(z\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "mechanical",
+          "syntax": "mechanical",
+          "description": "Apply to mechanical contacts."
+        },
+        {
+          "name": "momenton1",
+          "syntax": "momenton1",
+          "description": "The {contact moment on end 1 in 2D; magnitude of the contact moment on end 1 in 3D}."
+        },
+        {
+          "name": "momenton1-x",
+          "syntax": "momenton1-x",
+          "description": "The \\(x\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton1-y",
+          "syntax": "momenton1-y",
+          "description": "The \\(y\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton1-z",
+          "syntax": "momenton1-z",
+          "description": "The \\(z\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton2",
+          "syntax": "momenton2",
+          "description": "The {contact moment on end 2 in 2D; magnitude of the contact moment on end 2 in 3D}."
+        },
+        {
+          "name": "momenton2-x",
+          "syntax": "momenton2-x",
+          "description": "The \\(x\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "momenton2-y",
+          "syntax": "momenton2-y",
+          "description": "The \\(y\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "momenton2-z",
+          "syntax": "momenton2-z",
+          "description": "The \\(z\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "normalforce",
+          "syntax": "normalforce",
+          "description": "Contact force in the normal direction."
+        },
+        {
+          "name": "position-x",
+          "syntax": "position-x",
+          "description": "The \\(x\\) -component of the contact position."
+        },
+        {
+          "name": "position-y",
+          "syntax": "position-y",
+          "description": "The \\(y\\) -component of the contact position."
+        },
+        {
+          "name": "position-z",
+          "syntax": "position-z",
+          "description": "The \\(z\\) -component of the contact position."
+        },
+        {
+          "name": "shearforce",
+          "syntax": "shearforce",
+          "description": "Magnitude of the shear contact force."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Apply to thermal contacts."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "contact history",
+      "syntax": "contact history [name <sname>] <stype>keyword",
+      "keywords": [
+        {
+          "name": "force",
+          "syntax": "force [contacthistoryblock]",
+          "description": "Magnitude of the contact force."
+        },
+        {
+          "name": "force-x",
+          "syntax": "force-x [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact force."
+        },
+        {
+          "name": "force-y",
+          "syntax": "force-y [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact force."
+        },
+        {
+          "name": "force-z",
+          "syntax": "force-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact force."
+        },
+        {
+          "name": "localforce-x",
+          "syntax": "localforce-x [contacthistoryblock]",
+          "description": "Contact gap. The \\(x\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localforce-y",
+          "syntax": "localforce-y [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localforce-z",
+          "syntax": "localforce-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact force in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-x",
+          "syntax": "localmomenton1-x 3D ONLY [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-y",
+          "syntax": "localmomenton1-y 3D ONLY [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton1-z",
+          "syntax": "localmomenton1-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact moment on end 1 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-x",
+          "syntax": "localmomenton2-x 3D ONLY [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-y",
+          "syntax": "localmomenton2-y 3D ONLY [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "localmomenton2-z",
+          "syntax": "localmomenton2-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact moment on end 2 in the contact coordinate system."
+        },
+        {
+          "name": "mechanical",
+          "syntax": "mechanical [contacthistoryblock]",
+          "description": "Apply to mechanical contacts."
+        },
+        {
+          "name": "momenton1",
+          "syntax": "momenton1 [contacthistoryblock]",
+          "description": "The {contact moment on end 1 in 2D; magnitude of the contact moment on end 1 in 3D}."
+        },
+        {
+          "name": "momenton1-x",
+          "syntax": "momenton1-x 3D ONLY [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton1-y",
+          "syntax": "momenton1-y 3D ONLY [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton1-z",
+          "syntax": "momenton1-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact moment on end 1."
+        },
+        {
+          "name": "momenton2",
+          "syntax": "momenton2 [contacthistoryblock]",
+          "description": "The {contact moment on end 2 in 2D; magnitude of the contact moment on end 2 in 3D}."
+        },
+        {
+          "name": "momenton2-x",
+          "syntax": "momenton2-x 3D ONLY [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "momenton2-y",
+          "syntax": "momenton2-y 3D ONLY [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "momenton2-z",
+          "syntax": "momenton2-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact moment on end 2."
+        },
+        {
+          "name": "normalforce",
+          "syntax": "normalforce [contacthistoryblock]",
+          "description": "Contact force in the normal direction."
+        },
+        {
+          "name": "position-x",
+          "syntax": "position-x [contacthistoryblock]",
+          "description": "The \\(x\\) -component of the contact position."
+        },
+        {
+          "name": "position-y",
+          "syntax": "position-y [contacthistoryblock]",
+          "description": "The \\(y\\) -component of the contact position."
+        },
+        {
+          "name": "position-z",
+          "syntax": "position-z 3D ONLY [contacthistoryblock]",
+          "description": "The \\(z\\) -component of the contact position."
+        },
+        {
+          "name": "shearforce",
+          "syntax": "shearforce [contacthistoryblock]",
+          "description": "Magnitude of the shear contact force."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal [contacthistoryblock]",
+          "description": "Apply to thermal contacts."
+        },
+        {
+          "name": "magnitude",
+          "syntax": "magnitude",
+          "description": "This keyword selects which scalar to retrieve from a vector type value, such as velocity or displacement. If the value type is not a vector, this setting is ignored. The available options are: Record the \\(x\\) -component of the vector. Record the \\(y\\) -component of the vector. Record the \\(z\\) -component of the vector. Record the vector magnitude."
+        },
+        {
+          "name": "kwd:id",
+          "syntax": "id <i>",
+          "description": "Record the history of the stype contact with ID i ."
+        },
+        {
+          "name": "kwd:index",
+          "syntax": "index <i>",
+          "description": "For keywords that require it (most notably extra ), this specifies the index that should be used."
+        },
+        {
+          "name": "kwd:log",
+          "syntax": "log <b>",
+          "description": "If on , the returned number is the base 10 log of the absolute value of the original value. The default is off ."
+        },
+        {
+          "name": "kwd:position",
+          "syntax": "position <v>",
+          "description": "Record the history of the stype contact that is nearest to position v ."
+        },
+        {
+          "name": "vector",
+          "syntax": "vector",
+          "description": "In certain cases the type (scalar, vector, or tensor) of the value cannot necessarily be determined ahead of time. Extra variables, for example, can hold values of all three types. This keyword allows one to specify which type it is assumed to be. If the original value type does not match, 0.0 is returned. Specify a scalar float type. Specify a tensor type. Specify a vector type."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

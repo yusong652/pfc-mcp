@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "floating-point-check"
+  ],
+  "description": "Enable/disable the floating point check. By default this check is turned off. Enabling this check may increase computational time substantially.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program floating-point-check",
+      "syntax": "program floating-point-check <b>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program floating-point-check",
+      "syntax": "program floating-point-check <b>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program floating-point-check",
+      "syntax": "program floating-point-check <b>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

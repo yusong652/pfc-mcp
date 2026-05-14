@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "warning"
+  ],
+  "description": "Set the warning state.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program warning",
+      "syntax": "program warning <b>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program warning",
+      "syntax": "program warning <b>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program warning",
+      "syntax": "program warning <b>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "category": "history",
+  "search_keywords": [
+    "results"
+  ],
+  "description": "Specify whether history information is stored in subsequent results files. By default this value is off .",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "history results",
+      "syntax": "history results active <b>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "history results",
+      "syntax": "history results active <b>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "history results",
+      "syntax": "history results active <b>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

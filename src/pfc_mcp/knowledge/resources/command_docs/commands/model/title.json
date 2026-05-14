@@ -1,0 +1,31 @@
+{
+  "category": "model",
+  "search_keywords": [
+    "title"
+  ],
+  "description": "Set the model title. The title may be displayed in plots and is stored in save files. The command model list information lists the current title.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "model title",
+      "syntax": "model title [<s>]",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "model title",
+      "syntax": "model title [<s>]",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "model title",
+      "syntax": "model title [<s>]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "category": "history",
+  "search_keywords": [
+    "list"
+  ],
+  "description": "List history information.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "history list",
+      "syntax": "history list keyword",
+      "keywords": [
+        {
+          "name": "all",
+          "syntax": "all",
+          "description": "All histories are listed including their IDs, names and positions."
+        },
+        {
+          "name": "labels",
+          "syntax": "labels",
+          "description": "The labels associated with all histories are listed."
+        },
+        {
+          "name": "limit",
+          "syntax": "limit",
+          "description": "The limits (i.e., minimum interval, maximum interval, minimum value and maximum values) are listed for all histories."
+        },
+        {
+          "name": "step",
+          "syntax": "step",
+          "description": "Lists the contents of selected histories to the console Adds a history by name s to the list of those being output. If the reversed keyword is given, the negative of that history value is output. Values with a step number greater than or equal to i will be output. Values with a step number less than or equal to i will be output. Only one set of values for every i sampled intervals will be output. For example, skip 10 means that every 10th recorded set of values (starting with the first) will be output. Specifies the values to use for the x -axis of the history output. By default this value is the step number. The values of history s at the same step may be used instead. If the reverse keyword is given, then the negative values of history s at the same step are used."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "history list",
+      "syntax": "history list keyword",
+      "keywords": [
+        {
+          "name": "all",
+          "syntax": "all",
+          "description": "All histories are listed including their IDs, names and positions."
+        },
+        {
+          "name": "labels",
+          "syntax": "labels",
+          "description": "The labels associated with all histories are listed."
+        },
+        {
+          "name": "limits",
+          "syntax": "limits",
+          "description": "The limits (i.e., minimum interval, maximum interval, minimum value and maximum values) are listed for all histories."
+        },
+        {
+          "name": "step",
+          "syntax": "step",
+          "description": "Lists the contents of selected histories to the console Adds a history by name s to the list of those being output. If the reversed keyword is given, the negative of that history value is output. Values with a step number greater than or equal to i will be output. Values with a step number less than or equal to i will be output. Only one set of values for every i sampled intervals will be output. For example, skip 10 means that every 10th recorded set of values (starting with the first) will be output. Specifies the values to use for the \\(x\\) -axis of the history output. By default this value is the step number. The values of history s at the same step may be used instead. If the reverse keyword is given, then the negative values of history s at the same step are used."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "history list",
+      "syntax": "history list keyword",
+      "keywords": [
+        {
+          "name": "all",
+          "syntax": "all",
+          "description": "All histories are listed including their IDs, names and positions."
+        },
+        {
+          "name": "labels",
+          "syntax": "labels",
+          "description": "The labels associated with all histories are listed."
+        },
+        {
+          "name": "limits",
+          "syntax": "limits",
+          "description": "The limits (i.e., minimum interval, maximum interval, minimum value and maximum values) are listed for all histories."
+        },
+        {
+          "name": "step",
+          "syntax": "step",
+          "description": "Lists the contents of selected histories to the console Adds a history by name s to the list of those being output. If the reversed keyword is given, the negative of that history value is output. Values with a step number greater than or equal to i will be output. Values with a step number less than or equal to i will be output. Only one set of values for every i sampled intervals will be output. For example, skip 10 means that every 10th recorded set of values (starting with the first) will be output. Specifies the values to use for the \\(x\\) -axis of the history output. By default this value is the step number. The values of history s at the same step may be used instead. If the reverse keyword is given, then the negative values of history s at the same step are used."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

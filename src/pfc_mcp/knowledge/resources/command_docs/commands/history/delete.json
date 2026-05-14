@@ -1,0 +1,31 @@
+{
+  "category": "history",
+  "search_keywords": [
+    "delete"
+  ],
+  "description": "All history traces are deleted.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "history delete",
+      "syntax": "history delete",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "history delete",
+      "syntax": "history delete",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "history delete",
+      "syntax": "history delete",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "exit"
+  ],
+  "description": "Close the program.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program exit",
+      "syntax": "program exit",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program exit",
+      "syntax": "program exit",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program exit",
+      "syntax": "program exit",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

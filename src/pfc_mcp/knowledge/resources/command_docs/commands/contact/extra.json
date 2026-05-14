@@ -1,0 +1,64 @@
+{
+  "category": "contact",
+  "search_keywords": [
+    "extra"
+  ],
+  "description": "Set contact extra variables. The extra variable a can be of any type and is associated with the index i as if stored in an array.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "contact extra",
+      "syntax": "contact [<sprocess>] extra <i>a[range]",
+      "keywords": [
+        {
+          "name": "mechanical",
+          "syntax": "mechanical",
+          "description": "Apply to mechanical contacts."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Apply to thermal contacts."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "contact extra",
+      "syntax": "contact extra <i><a>[keyword] [range]",
+      "keywords": [
+        {
+          "name": "mechanical",
+          "syntax": "mechanical",
+          "description": "Apply to mechanical contacts."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Apply to thermal contacts."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "contact extra",
+      "syntax": "contact extra <i><a>[keyword] [range]",
+      "keywords": [
+        {
+          "name": "mechanical",
+          "syntax": "mechanical",
+          "description": "Apply to mechanical contacts."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Apply to thermal contacts."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

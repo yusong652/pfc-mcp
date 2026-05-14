@@ -1,0 +1,28 @@
+{
+  "category": "fragment",
+  "search_keywords": [
+    "groupisolated"
+  ],
+  "description": "Assign groups to isolated fragments. All bodies currently associated with an isolated fragment have their group name set to s in slot slot . The range logic can subsequently be used to filter bodies by the assigned groups.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "available": false
+    },
+    "7.0": {
+      "command": "fragment group-isolated",
+      "syntax": "fragment group-isolated <s>[slot <slot>]",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "fragment group-isolated",
+      "syntax": "fragment group-isolated <s>[slot <slot>]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

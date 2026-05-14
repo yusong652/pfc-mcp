@@ -67,6 +67,21 @@ CATEGORY_CONFIG = {
             "large-strain": "largestrain",
         },
     },
+    "program": {
+        "html_dir": PFC700_DOC / "common/kernel/doc/manual/program/commands",
+        "file_prefix": "cmd_program.",
+        "dt_id_prefix": "kwd:",
+    },
+    "history": {
+        "html_dir": PFC700_DOC / "common/kernel/doc/manual/history_manual/history_commands",
+        "file_prefix": "cmd_history.",
+        "dt_id_prefix": "kwd:",
+    },
+    "fish": {
+        "html_dir": PFC700_DOC / "common/kernel/doc/manual/fish/commands",
+        "file_prefix": "cmd_fish.",
+        "dt_id_prefix": "kwd:",
+    },
     "plot": {
         "html_dir": PFC700_DOC / "common/guimodule/doc/manual/plot",
         "file_prefix": "cmd_plot.",

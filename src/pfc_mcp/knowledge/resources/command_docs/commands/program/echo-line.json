@@ -1,0 +1,31 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "echo-line"
+  ],
+  "description": "Specify output to echo to the console.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program echo-line",
+      "syntax": "program echo-line <s>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program echo-line",
+      "syntax": "program echo-line <s>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "program echo-line",
+      "syntax": "program echo-line <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

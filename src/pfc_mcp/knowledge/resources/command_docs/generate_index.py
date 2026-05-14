@@ -187,6 +187,50 @@ CATEGORY_METADATA: dict[str, dict[str, Any]] = {
             "Python SDK supports querying and manipulating existing rblocks, while many creation workflows still require commands",
         ],
     },
+    "program": {
+        "full_name": "Program Commands",
+        "description": "Program-level commands controlling the PFC executable: license, threads, working directory, logging, encryption, undo, system shell, and lifecycle (quit/exit/stop/return/continue).",
+        "command_prefix": "program",
+        "python_module": None,
+        "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/program/program.html",
+        "related_categories": ["model", "history", "fish"],
+        "notes": [
+            "These commands manage the executable itself, not the model state",
+            "program list and program license print to stdout - useful for environment diagnostics under itasca.command()",
+            "program log redirects subsequent command output to a file",
+            "program quit / exit / stop terminate execution; rarely used from MCP workflows",
+            "program threads controls multi-threaded solve parallelism",
+        ],
+    },
+    "history": {
+        "full_name": "History Commands",
+        "description": "Commands for managing model histories: time-series recordings of scalar quantities sampled during cycling. Used for monitoring convergence, plotting trends, and exporting tabular data.",
+        "command_prefix": "history",
+        "python_module": None,
+        "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/history/history.html",
+        "related_categories": ["model", "ball", "wall", "clump"],
+        "notes": [
+            "Histories are created by domain-specific commands (e.g., 'ball history', 'model history'), then managed here",
+            "history list and history results print samples to stdout - capturable via log",
+            "history export writes tabular data to a file; history interval controls sampling cadence",
+            "history label / rename adjust display metadata; history delete / purge remove entries",
+        ],
+    },
+    "fish": {
+        "full_name": "FISH Commands",
+        "description": "Commands controlling the FISH embedded scripting language: function definition, callbacks, debugging, tracing, and runtime configuration.",
+        "command_prefix": "fish",
+        "python_module": None,
+        "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/fish/fish.html",
+        "related_categories": ["model", "program", "history"],
+        "notes": [
+            "FISH is PFC's in-process scripting language; these commands manage its runtime",
+            "fish define introduces a function; fish list prints all symbols (loggable)",
+            "fish callback registers per-cycle FISH execution; fish-halt in 'model solve' is a stop-condition callback",
+            "fish trace / debug emit diagnostic output capturable via log",
+            "Prefer Python SDK for new scripting; FISH remains required for callbacks and in-cycle hooks",
+        ],
+    },
 }
 
 # Python SDK alternatives (command-level, kept in index for quick reference)
@@ -238,9 +282,10 @@ PYTHON_SDK_ALTERNATIVES: dict[str, dict[str, Any]] = {
 # Command patterns metadata
 COMMAND_PATTERNS: dict[str, list[str]] = {
     "object_commands": ["ball", "wall", "clump", "measure", "brick", "rblock"],
-    "system_commands": ["model", "contact"],
-    "analysis_commands": ["fragment", "measure"],
+    "system_commands": ["model", "contact", "program"],
+    "analysis_commands": ["fragment", "measure", "history"],
     "visualization_commands": ["plot"],
+    "scripting_commands": ["fish"],
     "common_subcommands": ["generate", "create", "delete", "attribute", "property", "group", "result", "history"],
 }
 

@@ -1,0 +1,31 @@
+{
+  "category": "fish",
+  "search_keywords": [
+    "boolean-convert"
+  ],
+  "description": "Convert other types to Boolean values. If true , integer, float, pointer and index values can be automatically converted to Boolean values in FISH statements. The default setting is true .",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "fish boolean-convert",
+      "syntax": "fish boolean-convert <b>",
+      "keywords": [],
+      "examples": []
+    },
+    "7.0": {
+      "command": "fish boolean-convert",
+      "syntax": "fish boolean-convert <b>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "fish boolean-convert",
+      "syntax": "fish boolean-convert <b>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,669 @@
+{
+  "category": "fish",
+  "search_keywords": [
+    "callback"
+  ],
+  "description": "Add/remove functions to be executed in response to callback events.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "fish callback",
+      "syntax": "fish callback keyword",
+      "keywords": [
+        {
+          "name": "event",
+          "syntax": "event <s>",
+          "description": "Adds a FISH function to be called. When the function is called depends on the following keywords: The FISH function will be called every step at the location in the cycle sequence given by f . The following keywords are available to reduce the frequency of the callback. If specified, then the function will only be called every i steps. If specified, then the function will only be called if the process indicated is active during that particular cycle. The callback will only execute if the creep and mechanical process is active. The callback will only execute if the dynamic and mechanical process is active. The callback will only execute if the fluid process is active. The callback will only execute if the mechanical process is active. The callback will only execute if the thermal process is active. The FISH function will be called in response to the event named s ."
+        },
+        {
+          "name": "event",
+          "syntax": "event <s>",
+          "description": "Removes a FISH function callback. If no further keywords are specified, the function will be removed wherever it is found. The first callback found at location f in the cycle is removed. If the function has been entered multiple times only one entry will be removed. The first callback found associated with the event s is removed. If the function has been entered multiple times only one entry will be removed."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "fish callback",
+      "syntax": "fish callback keyword",
+      "keywords": [
+        {
+          "name": "event",
+          "syntax": "event",
+          "description": "Adds the FISH symbol sym to be called back by the system. The location of the callback is determined by the following keyword. Note that any parameters required by sym must be given at this time enclosed in paranthesis. A FISH function sym will be called every step at the location in the cycle sequence given by f . The following keywords are available to reduce the frequency of the callback. If specified, then the function will only be called every i steps. If specified, then the function will only be called if the process indicated is active during that particular cycle. The callback will only execute if the creep and mechanical process is active. The callback will only execute if the dynamic and mechanical process is active. The callback will only execute if the fluid process is active. The callback will only execute if the mechanical process is active. The callback will only execute if the thermal process is active. The FISH function sym will be called in response to the specified event."
+        },
+        {
+          "name": "event",
+          "syntax": "event",
+          "description": "Removes sym from the list of callbacks in the system. If no event name or location is specified then the symbol will be removed wherever it is found. The following keywords and options are available: The first instance of a callback to symbol sym found at location f in the cycle is removed. If the function has been entered multiple times only one entry will be removed. The first callback to symbol sym found associated with the event is removed. If the function has been entered multiple times only one entry will be removed."
+        },
+        {
+          "name": "kwd:ball_create",
+          "syntax": "ball_create",
+          "description": "Ball creation event."
+        },
+        {
+          "name": "kwd:ball_delete",
+          "syntax": "ball_delete",
+          "description": "Ball deletion event."
+        },
+        {
+          "name": "kwd:ballcfd_create",
+          "syntax": "ballcfd_create",
+          "description": "Ball CFD creation event."
+        },
+        {
+          "name": "kwd:ballcfd_delete",
+          "syntax": "ballcfd_delete",
+          "description": "Ball CFD deletion event."
+        },
+        {
+          "name": "kwd:ballthermal_create",
+          "syntax": "ballthermal_create",
+          "description": "Ball thermal creation event."
+        },
+        {
+          "name": "kwd:ballthermal_delete",
+          "syntax": "ballthermal_delete",
+          "description": "Ball thermal deletion event."
+        },
+        {
+          "name": "kwd:block_create",
+          "syntax": "block_create",
+          "description": "Block creation event. Argument to called fish function will be the pointer to the new block."
+        },
+        {
+          "name": "kwd:block_delete",
+          "syntax": "block_delete",
+          "description": "Block deletion event. Argument to called fish function will be the pointer to the deleted block."
+        },
+        {
+          "name": "kwd:bond_break",
+          "syntax": "bond_break",
+          "description": "Contact bond break event."
+        },
+        {
+          "name": "kwd:cfd_after_update",
+          "syntax": "cfd_after_update",
+          "description": "After CFD porosities have been updated."
+        },
+        {
+          "name": "kwd:cfd_after_receive",
+          "syntax": "cfd_after_receive",
+          "description": "After CFD velocities have been received."
+        },
+        {
+          "name": "kwd:cfd_before_send",
+          "syntax": "cfd_before_send",
+          "description": "Before CFD information has been sent."
+        },
+        {
+          "name": "kwd:cfd_before_update",
+          "syntax": "cfd_before_update",
+          "description": "Before CFD porosities have been updated."
+        },
+        {
+          "name": "kwd:clump_create",
+          "syntax": "clump_create",
+          "description": "Clump creation event."
+        },
+        {
+          "name": "kwd:clump_delete",
+          "syntax": "clump_delete",
+          "description": "Clump deletion event."
+        },
+        {
+          "name": "kwd:clumpcfd_create",
+          "syntax": "clumpcfd_create",
+          "description": "Clump CFD creation event."
+        },
+        {
+          "name": "kwd:clumpcfd_delete",
+          "syntax": "clumpcfd_delete",
+          "description": "Clump CFD deletion event."
+        },
+        {
+          "name": "kwd:clumpthermal_create",
+          "syntax": "clumpthermal_create",
+          "description": "Clump thermal creation event."
+        },
+        {
+          "name": "kwd:clumpthermal_delete",
+          "syntax": "clumpthermal_delete",
+          "description": "Clump thermal deletion event."
+        },
+        {
+          "name": "kwd:contact_activated",
+          "syntax": "contact_activated",
+          "description": "Contact activation event."
+        },
+        {
+          "name": "kwd:contact_create",
+          "syntax": "contact_create",
+          "description": "Contact creation event."
+        },
+        {
+          "name": "kwd:contact_delete",
+          "syntax": "contact_delete",
+          "description": "Contact deletion event."
+        },
+        {
+          "name": "kwd:faceblock_create",
+          "syntax": "faceblock_create",
+          "description": "Face block creation event."
+        },
+        {
+          "name": "kwd:faceblock_delete",
+          "syntax": "faceblock_delete",
+          "description": "Face block deletion event."
+        },
+        {
+          "name": "kwd:facet_create",
+          "syntax": "facet_create",
+          "description": "Wall facet creation event."
+        },
+        {
+          "name": "kwd:facet_delete",
+          "syntax": "facet_delete",
+          "description": "Wall facet deletion event."
+        },
+        {
+          "name": "kwd:fos_complete",
+          "syntax": "fos_complete",
+          "description": "A factor of safety solution has completed. Check the current solve criteria to see if the model has converged. The global.fos intrinsic will return the current factor of safety."
+        },
+        {
+          "name": "kwd:fos_start",
+          "syntax": "fos_start",
+          "description": "A factor of safety solution has started. The global.fos intrinsic will return the current factor of safety. The model will have been restored from the initial state and automatic strength reduction applied. This can be used to customized strength reduction at a given factor of safety."
+        },
+        {
+          "name": "kwd:rblock_create",
+          "syntax": "rblock_create",
+          "description": "RBlock creation event."
+        },
+        {
+          "name": "kwd:rblock_delete",
+          "syntax": "rblock_delete",
+          "description": "RBlock deletion event."
+        },
+        {
+          "name": "kwd:rblockthermal_create",
+          "syntax": "rblockthermal_create",
+          "description": "RBlock thermal creation event."
+        },
+        {
+          "name": "kwd:rblockthermal_delete",
+          "syntax": "rblockthermal_delete",
+          "description": "RBlock thermal deletion event."
+        },
+        {
+          "name": "kwd:slip_change",
+          "syntax": "slip_change",
+          "description": "Contact slip change event."
+        },
+        {
+          "name": "kwd:solve_complete",
+          "syntax": "solve_complete",
+          "description": "The solve of cycle command has terminiated. One argument available of type string. If the string is not empty this indicates the error message that halted cycling."
+        },
+        {
+          "name": "kwd:solve_ending",
+          "syntax": "solve_ending",
+          "description": "The solve of cycle command is about to terminate. Cycling has stopped and cleanup operations begun."
+        },
+        {
+          "name": "kwd:solve_master",
+          "syntax": "solve_master",
+          "description": "The code has entered the Master section of a coupled solution."
+        },
+        {
+          "name": "kwd:solve_slave",
+          "syntax": "solve_slave",
+          "description": "The code has entered a slave section of teh copuled solution. One argument is provided indicating the name of the slave process."
+        },
+        {
+          "name": "kwd:solve_start",
+          "syntax": "solve_start",
+          "description": "The solve or cycle command is just about to start."
+        },
+        {
+          "name": "kwd:struct_eom",
+          "syntax": "struct_eom",
+          "description": "Just before structural element node equations of motion."
+        },
+        {
+          "name": "kwd:struct_eom_complete",
+          "syntax": "struct_eom_complete",
+          "description": "Just after structural element node equations of motion."
+        },
+        {
+          "name": "kwd:struct_internal",
+          "syntax": "struct_internal",
+          "description": "Just before structural element internal forces are calculated."
+        },
+        {
+          "name": "kwd:struct_internal_complete",
+          "syntax": "struct_internal_complete",
+          "description": "Just after structural element internal forces are calculated"
+        },
+        {
+          "name": "kwd:struct_link_force",
+          "syntax": "struct_link_force",
+          "description": "Just before structural link forces are calculated."
+        },
+        {
+          "name": "kwd:struct_link_force_complete",
+          "syntax": "struct_link_force_complete",
+          "description": "Just after structural link forces are calculated."
+        },
+        {
+          "name": "kwd:struct_link_update_complete",
+          "syntax": "struct_link_update_complete",
+          "description": "Just after structural link properties are assigned from element properties as part of an update."
+        },
+        {
+          "name": "kwd:struct_update",
+          "syntax": "struct_update",
+          "description": "Just before structural geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:struct_update_complete",
+          "syntax": "struct_update_complete",
+          "description": "Just after structural geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:subcontact_create",
+          "syntax": "subcontact_create",
+          "description": "Subcontact creation event. Argument to called fish function will be the pointer to the new subcontact."
+        },
+        {
+          "name": "kwd:subcontact_delete",
+          "syntax": "subcontact_delete",
+          "description": "Subcontact deletion event. Argument to called fish function will be the pointer to the deleted subcontact."
+        },
+        {
+          "name": "kwd:subcontact_state_change",
+          "syntax": "subcontact_state_change",
+          "description": "Subcontact change of failure state. Arguments to called fish function will be the subcontact pointer and the old state (integer)."
+        },
+        {
+          "name": "kwd:wall_create",
+          "syntax": "wall_create",
+          "description": "Wall creation event."
+        },
+        {
+          "name": "kwd:wall_delete",
+          "syntax": "wall_delete",
+          "description": "Wall deletion event."
+        },
+        {
+          "name": "kwd:wallthermal_create",
+          "syntax": "wallthermal_create",
+          "description": "Wall thermal creation event."
+        },
+        {
+          "name": "kwd:wallthermal_delete",
+          "syntax": "wallthermal_delete",
+          "description": "Wall thermal deletion event."
+        },
+        {
+          "name": "kwd:zone_eom",
+          "syntax": "zone_eom",
+          "description": "Just before zone grid point equations of motion are performed."
+        },
+        {
+          "name": "kwd:zone_eom_complete",
+          "syntax": "zone_eom_complete",
+          "description": "Just after zone grid point equations of motion are performed."
+        },
+        {
+          "name": "kwd:zone_stress",
+          "syntax": "zone_stress",
+          "description": "Just before zone stress updates."
+        },
+        {
+          "name": "kwd:zone_stress_complete",
+          "syntax": "zone_stress_complete",
+          "description": "Just after zone stress updates and other forces applied."
+        },
+        {
+          "name": "kwd:zone_update",
+          "syntax": "zone_update",
+          "description": "Just before zone geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:zone_update_complete",
+          "syntax": "zone_update_complete",
+          "description": "Just after zone geometry update. Done at the start of cycling and in large strain mode every update interval."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "fish callback",
+      "syntax": "fish callback keyword",
+      "keywords": [
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Adds the FISH symbol sym to be called back by the system. The location of the callback is determined by the following keyword. See the section FISH Callback Events for a discussion of FISH callbacks. A FISH function sym will be called every step at the location in the cycle sequence given by f . The following keywords are available to reduce the frequency of the callback. The FISH function sym will be called in response to the specified event. If specified, then the function will only be called every i steps. Cannot be used with the interval-time keyword. If specified, then the function will only be called every f time units of the process specified with the process keyword. If no process is specified then the mechanical process is used. Cannot be used with the interval keyword. If specified, then the function will only be called if the process indicated is active during that particular cycle. The callback will only execute if the creep and mechanical process is active. The callback will only execute if the dynamic and mechanical process is active. The callback will only execute if the fluid process is active. The callback will only execute if the mechanical process is active. The callback will only execute if the thermal process is active."
+        },
+        {
+          "name": "event",
+          "syntax": "event [evblock]",
+          "description": "Removes sym from the list of callbacks in the system. If no event name or location is specified then the symbol will be removed wherever it is found. The following keywords and options are available: The first instance of a callback to symbol sym found at location f in the cycle is removed. If the function has been entered multiple times only one entry will be removed. The first callback to symbol sym found associated with the event is removed. If the function has been entered multiple times only one entry will be removed."
+        },
+        {
+          "name": "kwd:ball_create",
+          "syntax": "ball_create",
+          "description": "Ball creation event."
+        },
+        {
+          "name": "kwd:ball_delete",
+          "syntax": "ball_delete",
+          "description": "Ball deletion event."
+        },
+        {
+          "name": "kwd:ballcfd_create",
+          "syntax": "ballcfd_create",
+          "description": "Ball CFD creation event."
+        },
+        {
+          "name": "kwd:ballcfd_delete",
+          "syntax": "ballcfd_delete",
+          "description": "Ball CFD deletion event."
+        },
+        {
+          "name": "kwd:ballthermal_create",
+          "syntax": "ballthermal_create",
+          "description": "Ball thermal creation event."
+        },
+        {
+          "name": "kwd:ballthermal_delete",
+          "syntax": "ballthermal_delete",
+          "description": "Ball thermal deletion event."
+        },
+        {
+          "name": "kwd:block_create",
+          "syntax": "block_create",
+          "description": "Block creation event. Argument to called fish function will be the pointer to the new block."
+        },
+        {
+          "name": "kwd:block_delete",
+          "syntax": "block_delete",
+          "description": "Block deletion event. Argument to called fish function will be the pointer to the deleted block."
+        },
+        {
+          "name": "kwd:bond_break",
+          "syntax": "bond_break",
+          "description": "Contact bond break event."
+        },
+        {
+          "name": "kwd:bond_broken",
+          "syntax": "bond_broken",
+          "description": "Contact bond broken event."
+        },
+        {
+          "name": "kwd:cfd_after_update",
+          "syntax": "cfd_after_update",
+          "description": "After CFD porosities have been updated."
+        },
+        {
+          "name": "kwd:cfd_after_receive",
+          "syntax": "cfd_after_receive",
+          "description": "After CFD velocities have been received."
+        },
+        {
+          "name": "kwd:cfd_before_send",
+          "syntax": "cfd_before_send",
+          "description": "Before CFD information has been sent."
+        },
+        {
+          "name": "kwd:cfd_before_update",
+          "syntax": "cfd_before_update",
+          "description": "Before CFD porosities have been updated."
+        },
+        {
+          "name": "kwd:clump_create",
+          "syntax": "clump_create",
+          "description": "Clump creation event."
+        },
+        {
+          "name": "kwd:clump_delete",
+          "syntax": "clump_delete",
+          "description": "Clump deletion event."
+        },
+        {
+          "name": "kwd:clumpcfd_create",
+          "syntax": "clumpcfd_create",
+          "description": "Clump CFD creation event."
+        },
+        {
+          "name": "kwd:clumpcfd_delete",
+          "syntax": "clumpcfd_delete",
+          "description": "Clump CFD deletion event."
+        },
+        {
+          "name": "kwd:clumpthermal_create",
+          "syntax": "clumpthermal_create",
+          "description": "Clump thermal creation event."
+        },
+        {
+          "name": "kwd:clumpthermal_delete",
+          "syntax": "clumpthermal_delete",
+          "description": "Clump thermal deletion event."
+        },
+        {
+          "name": "kwd:contact_activated",
+          "syntax": "contact_activated",
+          "description": "Contact activation event."
+        },
+        {
+          "name": "kwd:contact_create",
+          "syntax": "contact_create",
+          "description": "Contact creation event."
+        },
+        {
+          "name": "kwd:contact_delete",
+          "syntax": "contact_delete",
+          "description": "Contact deletion event."
+        },
+        {
+          "name": "kwd:faceblock_create",
+          "syntax": "faceblock_create",
+          "description": "Face block creation event."
+        },
+        {
+          "name": "kwd:faceblock_delete",
+          "syntax": "faceblock_delete",
+          "description": "Face block deletion event."
+        },
+        {
+          "name": "kwd:facet_create",
+          "syntax": "facet_create",
+          "description": "Wall facet creation event."
+        },
+        {
+          "name": "kwd:facet_delete",
+          "syntax": "facet_delete",
+          "description": "Wall facet deletion event."
+        },
+        {
+          "name": "kwd:fos_complete",
+          "syntax": "fos_complete",
+          "description": "A factor of safety solution has completed. Check the current solve criteria to see if the model has converged. The global.fos intrinsic will return the current factor of safety."
+        },
+        {
+          "name": "kwd:fos_start",
+          "syntax": "fos_start",
+          "description": "A factor of safety solution has started. The global.fos intrinsic will return the current factor of safety. The model will have been restored from the initial state and automatic strength reduction applied. This can be used to customized strength reduction at a given factor of safety."
+        },
+        {
+          "name": "kwd:rblock_create",
+          "syntax": "rblock_create",
+          "description": "RBlock creation event."
+        },
+        {
+          "name": "kwd:rblock_delete",
+          "syntax": "rblock_delete",
+          "description": "RBlock deletion event."
+        },
+        {
+          "name": "kwd:rblockthermal_create",
+          "syntax": "rblockthermal_create",
+          "description": "RBlock thermal creation event."
+        },
+        {
+          "name": "kwd:rblockthermal_delete",
+          "syntax": "rblockthermal_delete",
+          "description": "RBlock thermal deletion event."
+        },
+        {
+          "name": "kwd:slip_change",
+          "syntax": "slip_change",
+          "description": "Contact slip change event."
+        },
+        {
+          "name": "kwd:solve_complete",
+          "syntax": "solve_complete",
+          "description": "The solve of cycle command has terminiated. One argument available of type string. If the string is not empty this indicates the error message that halted cycling."
+        },
+        {
+          "name": "kwd:solve_ending",
+          "syntax": "solve_ending",
+          "description": "The solve of cycle command is about to terminate. Cycling has stopped and cleanup operations begun."
+        },
+        {
+          "name": "kwd:solve_master",
+          "syntax": "solve_master",
+          "description": "The code has entered the Master section of a coupled solution."
+        },
+        {
+          "name": "kwd:solve_slave",
+          "syntax": "solve_slave",
+          "description": "The code has entered a slave section of teh copuled solution. One argument is provided indicating the name of the slave process."
+        },
+        {
+          "name": "kwd:solve_start",
+          "syntax": "solve_start",
+          "description": "The solve or cycle command is just about to start."
+        },
+        {
+          "name": "kwd:struct_eom",
+          "syntax": "struct_eom",
+          "description": "Just before structural element node equations of motion."
+        },
+        {
+          "name": "kwd:struct_eom_complete",
+          "syntax": "struct_eom_complete",
+          "description": "Just after structural element node equations of motion."
+        },
+        {
+          "name": "kwd:struct_internal",
+          "syntax": "struct_internal",
+          "description": "Just before structural element internal forces are calculated."
+        },
+        {
+          "name": "kwd:struct_internal_complete",
+          "syntax": "struct_internal_complete",
+          "description": "Just after structural element internal forces are calculated"
+        },
+        {
+          "name": "kwd:struct_link_force",
+          "syntax": "struct_link_force",
+          "description": "Just before structural link forces are calculated."
+        },
+        {
+          "name": "kwd:struct_link_force_complete",
+          "syntax": "struct_link_force_complete",
+          "description": "Just after structural link forces are calculated."
+        },
+        {
+          "name": "kwd:struct_link_update_complete",
+          "syntax": "struct_link_update_complete",
+          "description": "Just after structural link properties are assigned from element properties as part of an update."
+        },
+        {
+          "name": "kwd:struct_update",
+          "syntax": "struct_update",
+          "description": "Just before structural geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:struct_update_complete",
+          "syntax": "struct_update_complete",
+          "description": "Just after structural geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:subcontact_create",
+          "syntax": "subcontact_create",
+          "description": "Subcontact creation event. Argument to called fish function will be the pointer to the new subcontact."
+        },
+        {
+          "name": "kwd:subcontact_delete",
+          "syntax": "subcontact_delete",
+          "description": "Subcontact deletion event. Argument to called fish function will be the pointer to the deleted subcontact."
+        },
+        {
+          "name": "kwd:subcontact_state_change",
+          "syntax": "subcontact_state_change",
+          "description": "Subcontact change of failure state. Arguments to called fish function will be the subcontact pointer and the old state (integer)."
+        },
+        {
+          "name": "kwd:wall_create",
+          "syntax": "wall_create",
+          "description": "Wall creation event."
+        },
+        {
+          "name": "kwd:wall_delete",
+          "syntax": "wall_delete",
+          "description": "Wall deletion event."
+        },
+        {
+          "name": "kwd:wallthermal_create",
+          "syntax": "wallthermal_create",
+          "description": "Wall thermal creation event."
+        },
+        {
+          "name": "kwd:wallthermal_delete",
+          "syntax": "wallthermal_delete",
+          "description": "Wall thermal deletion event."
+        },
+        {
+          "name": "kwd:zone_eom",
+          "syntax": "zone_eom",
+          "description": "Just before zone grid point equations of motion are performed."
+        },
+        {
+          "name": "kwd:zone_eom_complete",
+          "syntax": "zone_eom_complete",
+          "description": "Just after zone grid point equations of motion are performed."
+        },
+        {
+          "name": "kwd:zone_stress",
+          "syntax": "zone_stress",
+          "description": "Just before zone stress updates."
+        },
+        {
+          "name": "kwd:zone_stress_complete",
+          "syntax": "zone_stress_complete",
+          "description": "Just after zone stress updates and other forces applied."
+        },
+        {
+          "name": "kwd:zone_update",
+          "syntax": "zone_update",
+          "description": "Just before zone geometry update. Done at the start of cycling and in large strain mode every update interval."
+        },
+        {
+          "name": "kwd:zone_update_complete",
+          "syntax": "zone_update_complete",
+          "description": "Just after zone geometry update. Done at the start of cycling and in large strain mode every update interval."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

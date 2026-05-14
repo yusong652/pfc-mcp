@@ -1,0 +1,109 @@
+{
+  "category": "program",
+  "search_keywords": [
+    "directory"
+  ],
+  "description": "Set the working directory. This setting defaults to the location of the current project file.",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "command": "program directory",
+      "syntax": "program directory keyword",
+      "keywords": [
+        {
+          "name": "custom",
+          "syntax": "custom <s>",
+          "description": "The working directory is set to s ."
+        },
+        {
+          "name": "engine",
+          "syntax": "engine",
+          "description": "Set the working directory to the location of the main engine module (dll)."
+        },
+        {
+          "name": "executable",
+          "syntax": "executable",
+          "description": "Set the working directory to the executable directory, or the directory where the application is stored."
+        },
+        {
+          "name": "input",
+          "syntax": "input",
+          "description": "Set the working directory to the location of the current input data file."
+        },
+        {
+          "name": "project",
+          "syntax": "project",
+          "description": "The working directory is set to the location of the current project directory. This is the default."
+        }
+      ],
+      "examples": []
+    },
+    "7.0": {
+      "command": "program directory",
+      "syntax": "program directory keyword",
+      "keywords": [
+        {
+          "name": "custom",
+          "syntax": "custom <s>",
+          "description": "The working directory is set to s ."
+        },
+        {
+          "name": "engine",
+          "syntax": "engine",
+          "description": "Set the working directory to the location of the main engine module (dll)."
+        },
+        {
+          "name": "executable",
+          "syntax": "executable",
+          "description": "Set the working directory to the executable directory, or the directory where the application is stored."
+        },
+        {
+          "name": "input",
+          "syntax": "input",
+          "description": "Set the working directory to the location of the current input data file."
+        },
+        {
+          "name": "project",
+          "syntax": "project",
+          "description": "The working directory is set to the location of the current project directory. This is the default."
+        }
+      ]
+    },
+    "9.0": {
+      "command": "program directory",
+      "syntax": "program directory keyword",
+      "keywords": [
+        {
+          "name": "custom",
+          "syntax": "custom <s>",
+          "description": "The working directory is set to s ."
+        },
+        {
+          "name": "engine",
+          "syntax": "engine",
+          "description": "Set the working directory to the location of the main engine module (dll)."
+        },
+        {
+          "name": "executable",
+          "syntax": "executable",
+          "description": "Set the working directory to the executable directory, or the directory where the application is stored."
+        },
+        {
+          "name": "input",
+          "syntax": "input",
+          "description": "Set the working directory to the location of the current input data file."
+        },
+        {
+          "name": "project",
+          "syntax": "project",
+          "description": "The working directory is set to the location of the current project directory. This is the default."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

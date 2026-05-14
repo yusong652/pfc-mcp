@@ -1,0 +1,28 @@
+{
+  "category": "history",
+  "search_keywords": [
+    "rename"
+  ],
+  "description": "Rename the history with name sn to sr .",
+  "notes": [],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": ""
+  },
+  "versions": {
+    "6.0": {
+      "available": false
+    },
+    "7.0": {
+      "command": "history REName",
+      "syntax": "history rename <sr>name <sn>",
+      "keywords": []
+    },
+    "9.0": {
+      "command": "history REName",
+      "syntax": "history rename <sr>name <sn>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

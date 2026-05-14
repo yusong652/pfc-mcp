@@ -24,6 +24,13 @@ import sys
 PACKAGE_NAME = "pfc-mcp-bridge"
 PORT = 9001  # Change this to run multiple bridges on different ports
 
+# Index URLs tried in order. Mirrors act as a fallback when the primary
+# is unreachable (corporate proxies, slow international routes).
+DEFAULT_INDEXES = [
+    ("https://pypi.org/simple/", ("pypi.org", "files.pythonhosted.org")),
+    ("https://pypi.tuna.tsinghua.edu.cn/simple/", ("pypi.tuna.tsinghua.edu.cn",)),
+]
+
 
 def _ensure_user_site_on_path():
     try:
@@ -37,23 +44,29 @@ def _ensure_user_site_on_path():
         sys.path.append(user_site)
 
 
-def _install_bridge():
-    os.environ["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
-
-    install_args = [
+def _build_install_args(index_url, trusted_hosts):
+    args = [
         "install",
         "--user",
         "-U",
         "--disable-pip-version-check",
-        PACKAGE_NAME,
+        "--default-timeout", "120",
+        "--retries", "5",
+        "--index-url", index_url,
     ]
+    for host in trusted_hosts:
+        args += ["--trusted-host", host]
+    if sys.version_info >= (3, 10):
+        args += ["--no-warn-script-location", "--progress-bar", "off"]
+    args.append(PACKAGE_NAME)
+    return args
 
+
+def _run_pip(args):
     if sys.version_info < (3, 10):
         import pip
 
-        return pip.main(install_args)
-
-    install_args[4:4] = ["--no-warn-script-location", "--progress-bar", "off"]
+        return pip.main(args)
 
     from pip._internal.cli.main import main as pip_main
 
@@ -62,9 +75,28 @@ def _install_bridge():
     previous_raise_exceptions = logging.raiseExceptions
     logging.raiseExceptions = False
     try:
-        return pip_main(install_args)
+        return pip_main(args)
     finally:
         logging.raiseExceptions = previous_raise_exceptions
+
+
+def _install_bridge():
+    os.environ["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
+
+    override = os.environ.get("PFC_MCP_PIP_INDEX_URL")
+    if override:
+        indexes = [(override, ())]
+    else:
+        indexes = DEFAULT_INDEXES
+
+    last_code = 1
+    for attempt, (index_url, trusted_hosts) in enumerate(indexes, start=1):
+        if attempt > 1:
+            print("Primary index failed, retrying with mirror: {}".format(index_url))
+        last_code = _run_pip(_build_install_args(index_url, trusted_hosts))
+        if last_code == 0:
+            return 0
+    return last_code
 
 
 def _load_installed_bridge():

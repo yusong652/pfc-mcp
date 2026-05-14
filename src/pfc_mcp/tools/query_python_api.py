@@ -41,7 +41,7 @@ def register(mcp: FastMCP) -> None:
                     "signature": sig,
                     "category": result.document.category,
                     "description": result.document.description,
-                    "score": result.score,
+                    "score": round(result.score, 2),
                     "rank": result.rank,
                     "metadata": result.document.metadata,
                 }

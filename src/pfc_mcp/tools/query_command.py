@@ -48,7 +48,7 @@ def register(mcp: FastMCP) -> None:
                     "category": result.document.category,
                     "syntax": result.document.syntax,
                     "short_description": metadata.get("short_description"),
-                    "score": result.score,
+                    "score": round(result.score, 2),
                     "rank": result.rank,
                     "version": metadata.get("version", version_value),
                 }

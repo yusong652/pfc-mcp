@@ -3,7 +3,7 @@ PFC Server Signals and Callbacks.
 
 Inter-process communication mechanisms:
 - Interrupt signals for task cancellation
-- Script executor callback scheduling for cycle-gap execution
+- Cycle-gap snippet executor scheduling
 """
 
 from .interrupt import (
@@ -14,8 +14,8 @@ from .interrupt import (
     clear_current_task,
     register_interrupt_callback,
 )
-from .script_executor import (
-    submit_script,
+from .cycle_executor import (
+    submit_snippet,
     is_executor_callback_registered,
     register_executor_callback,
 )
@@ -28,8 +28,8 @@ __all__ = [
     "set_current_task",
     "clear_current_task",
     "register_interrupt_callback",
-    # Script executor callback
-    "submit_script",
+    # Cycle-gap executor
+    "submit_snippet",
     "is_executor_callback_registered",
     "register_executor_callback",
 ]

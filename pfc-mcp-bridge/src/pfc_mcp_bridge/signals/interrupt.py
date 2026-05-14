@@ -173,13 +173,13 @@ def _re_register_callback(itasca_module, position=50.0):
 
     # Also re-register executor callback if it was registered
     try:
-        from .script_executor import _pfc_executor_callback, is_executor_callback_registered
+        from .cycle_executor import _pfc_executor_callback, is_executor_callback_registered
         if is_executor_callback_registered():
             __main__._pfc_executor_callback = _pfc_executor_callback  # type: ignore[attr-defined]
             itasca_module.set_callback("_pfc_executor_callback", 51.0)
             logger.debug("Executor callback re-registered after model reset")
     except ImportError:
-        pass  # script_executor not available
+        pass  # cycle_executor not available
 
 
 # Commands that clear PFC's callback registry
@@ -235,7 +235,7 @@ def register_interrupt_callback(itasca_module, position=50.0):
                     main_mod._pfc_interrupt_check = _pfc_interrupt_check  # type: ignore[attr-defined]
                 # Also keep executor callback visible if it's been registered
                 try:
-                    from .script_executor import _pfc_executor_callback, is_executor_callback_registered
+                    from .cycle_executor import _pfc_executor_callback, is_executor_callback_registered
                     if is_executor_callback_registered() and getattr(main_mod, '_pfc_executor_callback', None) is not _pfc_executor_callback:
                         main_mod._pfc_executor_callback = _pfc_executor_callback  # type: ignore[attr-defined]
                 except ImportError:

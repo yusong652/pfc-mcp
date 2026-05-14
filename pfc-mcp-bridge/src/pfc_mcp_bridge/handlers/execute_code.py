@@ -1,58 +1,33 @@
 """
 Execute code message handler.
 
-Handles synchronous code snippet execution for pfc_execute_code tool.
-Uses the script executor strategy (queue/callback switching).
+Handles synchronous code snippet execution for ``pfc_execute_code``.
+Routes through the queue/callback strategy in
+``handlers.exec_strategy.execute_snippet``.
 """
 
-import asyncio
 import logging
-import os
-import time
-import uuid
+import time as time_module
 from io import StringIO
-from typing import Any, Dict, Tuple
+from typing import Any, Dict
 
 from .context import ServerContext
-from .script_executor import execute_script
+from .exec_strategy import execute_snippet
 from .helpers import require_field
 from ..utils.response import _truncate_output
 
 logger = logging.getLogger("PFC-Server")
 
 
-def _write_temp_script(working_dir, code):
-    # type: (str, str) -> str
-    """Write code snippet to a temp file and return the path."""
-    exec_dir = os.path.join(working_dir, ".pfc-mcp-bridge", "execute_code")
-    if not os.path.exists(exec_dir):
-        os.makedirs(exec_dir)
-    filename = "exec_{}.py".format(uuid.uuid4().hex[:8])
-    path = os.path.join(exec_dir, filename)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(code)
-    return path
-
-
-def _cleanup_temp_script(path):
-    # type: (str) -> None
-    """Remove temp script file."""
-    try:
-        os.remove(path)
-    except Exception:
-        pass
-
-
 async def handle_execute_code(ctx, data):
     # type: (ServerContext, Dict[str, Any]) -> Dict[str, Any]
     """
-    Handle execute_code message.
+    Handle ``execute_code`` message.
 
-    Executes a code snippet synchronously and returns stdout.
-    Uses the queue/callback script executor strategy.
+    Runs a code snippet synchronously in the PFC main thread and returns
+    captured stdout plus any ``result`` value. Path selection (queue vs
+    callback) is handled by ``execute_snippet``.
     """
-    import time as time_module
-
     request_id = data.get("request_id", "unknown")
 
     code, err = require_field(data, "code", request_id, "execute_code_result")
@@ -66,22 +41,14 @@ async def handle_execute_code(ctx, data):
     def remaining():
         return total_timeout - (time_module.time() - start_time)
 
-    script_path = None
     try:
-        # Write code to temp file
-        working_dir = os.getcwd()
-        script_path = _write_temp_script(working_dir, code)
-
-        task_id = uuid.uuid4().hex[:8]
         output_buffer = StringIO()
 
-        # Execute with queue/callback strategy switching
-        result, path = await execute_script(
+        result, path = await execute_snippet(
             ctx=ctx,
-            script_path=script_path,
-            script_content=code,
+            code=code,
+            request_id=request_id,
             output_buffer=output_buffer,
-            task_id=task_id,
             remaining_time_func=remaining,
             attempt=0,
             max_attempts=2,
@@ -125,7 +92,3 @@ async def handle_execute_code(ctx, data):
             },
             "data": None,
         }
-
-    finally:
-        if script_path:
-            _cleanup_temp_script(script_path)

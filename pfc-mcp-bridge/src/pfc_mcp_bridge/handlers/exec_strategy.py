@@ -1,8 +1,15 @@
 """
-Script execution strategies.
+Execution-strategy router for execute_code snippets.
 
-Provides queue-based and callback-based execution strategies for running
-scripts in the PFC main thread. Used by the execute_code handler.
+Decides between two paths based on bridge state:
+
+* ``"queue"``    — main thread is idle; submit straight to
+                   ``MainThreadExecutor``
+* ``"callback"`` — main thread is busy with a tracked task; queue the
+                   snippet for the PFC cycle-gap callback to drain
+
+Both paths are MainThread-bound; this module only routes. Actual
+snippet execution lives in ``execution.snippet.run_snippet``.
 """
 
 import asyncio
@@ -18,28 +25,23 @@ logger = logging.getLogger("PFC-Server")
 
 async def _execute_via_queue(
     ctx: ServerContext,
-    script_path: str,
-    script_content: str,
+    code: str,
+    request_id: str,
     output_buffer: StringIO,
-    task_id: str,
     timeout: float,
     remaining_time_func,
 ) -> Tuple[Optional[Dict[str, Any]], bool]:
     """
-    Execute script via main thread queue.
+    Submit snippet to ``MainThreadExecutor`` for direct execution.
 
     Returns:
-        (result, success): result dict if success, None otherwise
+        (result, success): result dict if completed, None otherwise.
     """
+    from ..execution.snippet import run_snippet
+
     loop = asyncio.get_event_loop()
 
-    future = ctx.main_executor.submit(
-        ctx.script_runner._execute,
-        script_path,
-        script_content,
-        output_buffer,
-        task_id
-    )
+    future = ctx.main_executor.submit(run_snippet, code, output_buffer)
 
     try:
         result = await asyncio.wait_for(
@@ -64,17 +66,19 @@ async def _execute_via_queue(
         return None, False
 
 
-async def _execute_via_callback(script_path: str, timeout: float) -> Tuple[Optional[Dict[str, Any]], bool]:
+async def _execute_via_callback(
+    code: str, request_id: str, timeout: float
+) -> Tuple[Optional[Dict[str, Any]], bool]:
     """
-    Execute script via cycle callback.
+    Queue snippet for PFC cycle-gap callback.
 
     Returns:
-        (result, success): result dict if success, None otherwise
+        (result, success): result dict if completed, None otherwise.
     """
-    from ..signals import submit_script
+    from ..signals import submit_snippet
 
     loop = asyncio.get_event_loop()
-    future = submit_script(script_path)
+    future = submit_snippet(code, request_id)
 
     try:
         result = await asyncio.wait_for(
@@ -86,31 +90,31 @@ async def _execute_via_callback(script_path: str, timeout: float) -> Tuple[Optio
         return None, False
 
 
-async def execute_script(
+async def execute_snippet(
     ctx: ServerContext,
-    script_path: str,
-    script_content: str,
+    code: str,
+    request_id: str,
     output_buffer: StringIO,
-    task_id: str,
     remaining_time_func,
     attempt: int = 0,
     max_attempts: int = 2,
 ) -> Tuple[Optional[Dict[str, Any]], str]:
     """
-    Execute script with recursive strategy switching.
+    Execute snippet, choosing path by bridge state.
 
     Each attempt:
-    1. Check current state (has_running_tasks)
+    1. Check current state (``has_running_tasks``)
     2. Choose strategy based on state
-    3. If timeout, recurse with attempt + 1 (re-evaluates state)
+    3. If timeout, recurse with ``attempt + 1`` (re-evaluates state)
 
     Args:
-        remaining_time_func: Function returning remaining time budget
-        attempt: Current attempt number (0-indexed)
-        max_attempts: Maximum attempts before giving up
+        remaining_time_func: Callable returning remaining time budget (s).
+        attempt: Current attempt number (0-indexed).
+        max_attempts: Maximum attempts before giving up.
 
     Returns:
-        (result, execution_path) or (None, "timeout" / "max_attempts")
+        ``(result, execution_path)`` where ``execution_path`` is
+        ``"queue"``, ``"callback"``, ``"timeout"``, or ``"max_attempts"``.
     """
     if attempt >= max_attempts:
         return None, "max_attempts"
@@ -129,25 +133,23 @@ async def execute_script(
 
     if has_running:
         # Tasks running → try callback (queue is blocked)
-        result, success = await _execute_via_callback(script_path, timeout)
+        result, success = await _execute_via_callback(code, request_id, timeout)
         if success:
             return result, "callback"
     else:
         # No tasks → try queue (faster path)
         result, success = await _execute_via_queue(
-            ctx, script_path, script_content, output_buffer, task_id, timeout,
-            remaining_time_func,
+            ctx, code, request_id, output_buffer, timeout, remaining_time_func,
         )
         if success:
             return result, "queue"
 
     # Strategy failed → recurse (state may have changed)
-    return await execute_script(
+    return await execute_snippet(
         ctx=ctx,
-        script_path=script_path,
-        script_content=script_content,
+        code=code,
+        request_id=request_id,
         output_buffer=output_buffer,
-        task_id=task_id,
         remaining_time_func=remaining_time_func,
         attempt=attempt + 1,
         max_attempts=max_attempts,

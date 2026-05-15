@@ -26,12 +26,12 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 
 Use the client-specific Step 1 profile:
 
-- OpenCode: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md
-- Claude Code: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude.md
-- Codex: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-codex.md
-- Gemini CLI: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-gemini.md
-- GitHub Copilot CLI: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-copilot.md
-- toyoura-nagisa: https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md
+- OpenCode: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md>
+- Claude Code: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude.md>
+- Codex: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-codex.md>
+- Gemini CLI: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-gemini.md>
+- GitHub Copilot CLI: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-copilot.md>
+- toyoura-nagisa: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md>
 
 If raw URL fetch is unavailable, use repository-relative paths:
 

@@ -5,14 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 <!--
-Add a new section per release before tagging. The publish workflow extracts
-the section matching the tag version and uses it as the GitHub release body.
-The release will fail to publish if no matching entry is found.
+Convention (mirrors the yade-dev/trunk ChangeLog discipline):
+
+- Keep a `## [Unreleased]` section at the top. Add an entry there as soon as
+  a notable change lands -- do not wait until release.
+- Documentation is first-class here: agents read the docs and the agentic
+  install guides to understand and operate pfc-mcp, so notable documentation
+  / install-flow changes are logged like behaviour changes.
+- "Notable" = anything that changes how a user or agent understands or uses
+  pfc-mcp: behaviour changes, added/removed tools, bug fixes, and notable
+  documentation / install-flow changes. Pure internal refactors, tests, CI,
+  and trivial doc fixes (typos, formatting) may be omitted.
+- Group entries under these categories (Keep a Changelog + Documentation):
+  Added / Changed / Deprecated / Removed / Fixed / Security / Documentation.
+- Referencing a commit/PR is optional; the entry must stand on its own.
+
+At release: rename `## [Unreleased]` to `## [x.y.z] - YYYY-MM-DD`, then start
+a fresh empty `## [Unreleased]`. The publish workflow extracts the section
+whose header matches the tag version exactly (`## [x.y.z]`); `## [Unreleased]`
+is never published until promoted, and a release fails if no matching version
+section exists.
 
 ## [x.y.z] - YYYY-MM-DD
 
-Description of the release.
+### Changed
+- ...
 -->
+
+## [Unreleased]
+
+### Changed
+- Agentic install now defaults the MCP client config to user/global scope
+  instead of workspace, with workspace as an explicit last-resort fallback.
+  Per-client profiles are CLI-first where a verified user-scope command
+  exists (Claude/Codex/Gemini/Copilot) and file-edit for OpenCode. Affects
+  nearly all users of the agentic install flow.
 
 ## [0.3.15] - 2026-05-16
 

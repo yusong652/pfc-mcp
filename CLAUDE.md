@@ -117,9 +117,10 @@ Both packages are published to PyPI via GitHub Actions, triggered by pushing Git
 Steps to release:
 
 1. Bump `__version__` in the corresponding `__init__.py` (both packages use hatch dynamic versioning, so `__init__.py` is the single source of truth).
-2. Commit and push to `main`.
-3. Tag the commit: `git tag v0.x.x` or `git tag bridge-v0.x.x`.
-4. Push the tag: `git push origin <tag>`.
+2. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [x.y.z] - YYYY-MM-DD` and start a fresh empty `## [Unreleased]`. The `pfc-mcp` publish workflow extracts the section whose header matches the tag version exactly and fails if it is missing.
+3. Commit and push to `main`.
+4. Tag the commit: `git tag v0.x.x` or `git tag bridge-v0.x.x`.
+5. Push the tag: `git push origin <tag>`.
 
 The `pfc-mcp` publish workflow runs tests before publishing; the bridge workflow publishes directly.
 
@@ -138,3 +139,10 @@ Use conventional prefixes seen in repository history, for example:
 - `docs: ...`
 
 Keep commit messages focused on why the change was needed.
+
+Documentation is first-class for this project -- agents rely on the docs and
+the agentic install guides to understand and operate pfc-mcp. Any notable
+change to behaviour, tools, or user/agent-facing documentation or install
+flow must add a `## [Unreleased]` entry in `CHANGELOG.md` in the same commit
+(see the convention comment at the top of that file). Trivial doc fixes
+(typos, formatting) and internal-only refactors/tests/CI are exempt.

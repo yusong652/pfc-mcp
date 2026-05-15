@@ -1,14 +1,13 @@
 {
   "type": "pfc_references",
   "description": "Reference documentation for PFC syntax elements and model properties. These are not standalone commands but language elements used within commands.",
-
   "categories": {
     "contact-models": {
       "name": "Contact Models",
-      "description": "Contact model properties (kn, ks, fric, pb_*, etc.)",
+      "description": "Contact model properties (mechanical & thermal) — kn, ks, fric, bond/joint params, etc.",
       "directory": "contact-models",
       "index_file": "contact-models/index.json",
-      "summary": "5 built-in models: linear, linearcbond, linearpbond, hertz, rrlinear",
+      "summary": "22 contact models across PFC 6.0/7.0/9.0 (version-filtered): linear, flatjoint, smoothjoint, softbond, hertz, mohr, springnetwork, and more",
       "usage": "contact cmat add model <name> property <prop> <value>"
     },
     "range-elements": {
@@ -28,13 +27,11 @@
       "usage": "plot item create <type> <keyword> <keyword> ..."
     }
   },
-
   "navigation": {
     "root": "List all reference categories",
     "category": "List items in category (e.g., 'contact-models')",
     "item": "Full documentation (e.g., 'contact-models linear')"
   },
-
   "notes": [
     "References are syntax elements used within commands, not standalone commands",
     "Use pfc_browse_commands for command syntax",

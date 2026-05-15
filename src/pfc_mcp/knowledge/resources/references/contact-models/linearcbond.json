@@ -1,9 +1,13 @@
 {
   "model": "linearcbond",
   "full_name": "Linear Contact Bond Model",
-  "search_keywords": ["linearcbond", "bond", "contact", "model"],
+  "search_keywords": [
+    "linearcbond",
+    "bond",
+    "contact",
+    "model"
+  ],
   "description": "Linear contact bond model simulates a pair of elastic springs with constant normal and shear stiffnesses acting at the contact point. This model permits tensile forces while limiting shear forces through strength parameters rather than friction coefficients. When bonded, contacts can resist tension and prevent slip. When unbonded, behavior is equivalent to the linear model with Coulomb friction.",
-
   "typical_applications": [
     "Point-based bonds between particles",
     "Adhesion simulation",
@@ -11,7 +15,6 @@
     "Contact-specific bonding (not parallel bonds)",
     "Materials where bonds form at contact points"
   ],
-
   "key_characteristics": [
     "Bonded behavior: prevents slip and allows tensile forces up to tensile strength limit",
     "Unbonded behavior: equivalent to linear model with Coulomb friction and no tension",
@@ -19,7 +22,6 @@
     "Upon shear failure, shear forces are set to zero",
     "Normal force becomes zero only if positive (tension) after bond breaks"
   ],
-
   "property_groups": [
     {
       "name": "Linear Group",
@@ -313,7 +315,6 @@
       ]
     }
   ],
-
   "energy_partitions": [
     {
       "name": "energy-strain",
@@ -337,7 +338,6 @@
       "accumulated": true
     }
   ],
-
   "common_usage_patterns": [
     {
       "use_case": "Create bonded contacts with force-based strength",
@@ -363,7 +363,6 @@
       "description": "Use stress-based strengths (requires user_area to be set)"
     }
   ],
-
   "typical_parameter_values": {
     "weak_adhesion": {
       "kn": "1e7 - 1e8 [N/m]",
@@ -378,7 +377,6 @@
       "cb_shearf": "0.5 × cb_tenf to 1.0 × cb_tenf"
     }
   },
-
   "notes": [
     "Bonds must be activated using 'contact method bond' command",
     "Use force-based (cb_tenf, cb_shearf) OR stress-based (cb_tens, cb_shears) strength, not both",
@@ -389,7 +387,6 @@
     "Friction coefficient only applies in unbonded state",
     "cb_state can be queried to track bond breakage patterns"
   ],
-
   "workflow": [
     "1. Set contact model to linearcbond via CMAT or contact model assign",
     "2. Set stiffnesses (kn, ks) directly or via deformability method",
@@ -398,7 +395,6 @@
     "5. Bonds break automatically when forces exceed strength limits",
     "6. After breaking, contact behaves like linear model with friction"
   ],
-
   "related_models": [
     {
       "model": "linear",
@@ -408,5 +404,10 @@
       "model": "linearpbond",
       "description": "Parallel bond model - bonds act in parallel with base behavior, not at a point"
     }
-  ]
+  ],
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
 }

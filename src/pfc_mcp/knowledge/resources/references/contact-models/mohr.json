@@ -1,0 +1,379 @@
+{
+  "model": "mohr",
+  "full_name": "Mohr Model",
+  "search_keywords": [
+    "contact",
+    "model",
+    "mohr"
+  ],
+  "description": "The mohr model with inactive dashpots provides Mohr-Coulomb style slip with optional slip weakening, including dilation and pore pressure effects with healing. It is referred to in commands and FISH by the name mohr .",
+  "typical_applications": [
+    "Mohr-Coulomb shear strength at contacts",
+    "Frictional/cohesive interfaces",
+    "Rock joint and soil shear behavior"
+  ],
+  "property_groups": [
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap in units length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Mohr Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "area",
+          "symbol": "A",
+          "description": "Area of the contact",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "Cohesive strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "cohesion-residual",
+          "symbol": "c^*",
+          "description": "Residual cohesive strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dashpot-force",
+          "symbol": "F^d",
+          "description": "Dashpot force in units force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dashpot-mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dashpot-ratio-normal",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dashpot-ratio-shear",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "Dilation angle in degrees",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dilation-residual",
+          "symbol": "ψ*",
+          "description": "Residual dilation angle in degrees",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dilation-zero",
+          "symbol": "u_cs",
+          "description": "Shear displacement where dilation stops in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "infinity",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "disp-normal",
+          "symbol": "-",
+          "description": "Normal displacement",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "disp-shear",
+          "symbol": "-",
+          "description": "Shear displacement in the global coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "force-normal",
+          "symbol": "F_n",
+          "description": "Normal force",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "force-shear",
+          "symbol": "F_s",
+          "description": "Shear force in the global coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "friction",
+          "symbol": "φ",
+          "description": "Friction angle (in degrees)",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "friction-residual",
+          "symbol": "φ*",
+          "description": "Residual friction angle (in degrees)",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "healing",
+          "symbol": "-",
+          "description": "Healing",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "pore-pressure",
+          "symbol": "P_p",
+          "description": "Pore pressure in units stress. Positive pore pressure reduces the effective normal stress for failure computations",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "slip",
+          "symbol": "s",
+          "description": "Slip magnitude in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        },
+        {
+          "keyword": "slip-dc",
+          "symbol": "d_c",
+          "description": "Critical slip distance (i.e., for degradation of shear stress as a function of slip) in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "slip-table",
+          "symbol": "x",
+          "description": "Slip weakening multiplier ( x -component) as a function of slip ( y -component). Use table-pos to retrieving a specific value",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "state",
+          "symbol": "B",
+          "description": "Contact state",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "state-string",
+          "symbol": "-",
+          "description": "State string",
+          "type": "STR",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        },
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "Normal stiffness in units stress/length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "Shear stiffness in units stress/length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "stress-effective",
+          "symbol": "σ_e",
+          "description": "Effective normal stress in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        },
+        {
+          "keyword": "table-pos",
+          "symbol": "-",
+          "description": "Position in either the slip weakening table",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "tension",
+          "symbol": "σ_c",
+          "description": "Tensile strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "tension-residual",
+          "symbol": "σ_c^*",
+          "description": "Residual tensile strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "user-area",
+          "symbol": "A",
+          "description": "Set contact area to the constant value f . &#8644; &#9776; &#8657; -->",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Mohr-Coulomb contact model (PFC 9.0+)."
+  ],
+  "source": "Itasca Software 9.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": false,
+    "9.0": true
+  }
+}

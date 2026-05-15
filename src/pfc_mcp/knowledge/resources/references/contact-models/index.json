@@ -1,14 +1,12 @@
 {
   "type": "contact_model_properties",
-  "description": "Reference documentation for contact model properties. Each contact model has specific properties that control its mechanical behavior. Use this reference when setting properties via 'contact cmat', 'contact property', or Python SDK.",
-
+  "description": "Reference documentation for PFC contact model properties. Each contact model has specific properties that control its mechanical (or thermal) behavior. Use this reference when setting properties via 'contact cmat', 'contact property', or the Python SDK.",
   "usage_contexts": [
     "contact cmat add model <name> property <prop> <value>",
     "contact cmat default model <name> property <prop> <value>",
     "contact property <prop> <value> range ...",
     "Python: contact.set_prop('<prop>', value)"
   ],
-
   "property_metadata_fields": {
     "keyword": "Property name used in commands",
     "symbol": "Mathematical symbol used in documentation",
@@ -19,60 +17,410 @@
     "modifiable": "Can be changed after contact creation",
     "inheritable": "Can inherit from contacting pieces (balls/walls)"
   },
-
   "models": [
     {
       "name": "linear",
       "file": "linear.json",
       "full_name": "Linear Model",
       "description": "Linear elastic-frictional contact model with optional damping",
-      "property_groups": ["Linear Group", "Dashpot Group"],
+      "property_groups": [
+        "Linear Group",
+        "Dashpot Group"
+      ],
       "common_use": "Default general-purpose contact model",
       "priority": "high",
-      "status": "documented"
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
     },
     {
       "name": "linearcbond",
       "file": "linearcbond.json",
       "full_name": "Linear Contact Bond Model",
       "description": "Linear model with contact-based bonds for point adhesion",
-      "property_groups": ["Linear Group", "Dashpot Group", "Contact Bond Group"],
+      "property_groups": [
+        "Linear Group",
+        "Dashpot Group",
+        "Contact-Bond Group"
+      ],
       "common_use": "Point-based bonds, adhesion, weak cementation",
       "priority": "high",
-      "status": "documented"
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
     },
     {
       "name": "linearpbond",
       "file": "linearpbond.json",
       "full_name": "Linear Parallel Bond Model",
       "description": "Linear model with parallel bonds for cemented materials - transmits force AND moment",
-      "property_groups": ["Linear Group", "Dashpot Group", "Parallel Bond Group"],
+      "property_groups": [
+        "Linear Group",
+        "Dashpot Group",
+        "Parallel-Bond Group"
+      ],
       "common_use": "Cemented particulate materials, intact rock, bonded assemblies",
       "priority": "high",
-      "status": "documented"
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
     },
     {
       "name": "hertz",
       "file": "hertz.json",
       "full_name": "Hertz Model",
       "description": "Nonlinear elastic contact model based on Hertz-Mindlin theory - F_n ~ δ^1.5",
-      "property_groups": ["Hertz Group", "Dashpot Group"],
+      "property_groups": [
+        "Hertz Group",
+        "Dashpot Group"
+      ],
       "common_use": "Impact simulations, nonlinear elasticity, realistic contact mechanics",
       "priority": "medium",
-      "status": "documented"
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
     },
     {
       "name": "rrlinear",
       "file": "rrlinear.json",
       "full_name": "Rolling Resistance Linear Model",
       "description": "Linear model with torque mechanism opposing rolling motion - simulates surface roughness effects",
-      "property_groups": ["Linear Group", "Dashpot Group", "Rolling Resistance Group"],
+      "property_groups": [
+        "Linear Group",
+        "Dashpot Group",
+        "Rolling-Resistance Group"
+      ],
       "common_use": "Granular materials with rolling resistance, heap repose angle analysis",
       "priority": "medium",
-      "status": "documented"
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "arrlinear",
+      "file": "arrlinear.json",
+      "full_name": "Adhesive Rolling Resistance Linear Model",
+      "description": "The adhesive rolling resistance linear model is based on the rolling resistance linear model, to which an adhesive component is added. It is a linear-based mode",
+      "property_groups": [
+        "Dashpot Group",
+        "Rolling Resistance Group",
+        "User-Defined Group",
+        "Linear / Elastic Group",
+        "Adhesive Rolling Resistance Linear Group"
+      ],
+      "common_use": "Cohesive granular materials with rolling resistance",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "bilinear",
+      "file": "bilinear.json",
+      "full_name": "Bilinear Contact Model",
+      "description": "Built-in PFC contact model with a bilinear (two-branch) normal force-displacement response. Refer to the PFC 7.0 manual for the full property set and behavior.",
+      "property_groups": [],
+      "common_use": "Bilinear (two-stage) normal force-displacement response",
+      "priority": "medium",
+      "status": "summary",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "burger",
+      "file": "burger.json",
+      "full_name": "Burger’s Model",
+      "description": "Burger’s model simulates creep mechanisms by using a Kelvin model and a Maxwell model connected in series in both the normal and shear directions.",
+      "property_groups": [
+        "Linear / Elastic Group",
+        "Burger’s Group"
+      ],
+      "common_use": "Viscoelastic creep behavior",
+      "priority": "high",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "eepa",
+      "file": "eepa.json",
+      "full_name": "Edinburgh-Elasto-Plastic-Adhesive (EEPA) Contact Model",
+      "description": "Cohesion or adhesion can be modeled by introducing an attractive force component to the contact model. The terms cohesion and adhesion are usually defined for a",
+      "property_groups": [
+        "Dashpot Group",
+        "Rolling Resistance Group",
+        "Linear / Elastic Group",
+        "EEPA Group"
+      ],
+      "common_use": "Cohesive powders and fine particles",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "fish",
+      "file": "fish.json",
+      "full_name": "FISH Model",
+      "description": "The FISH contact model can facilitate contact model development. This model can be installed for any contact types, and is referred to in commands and FISH by t",
+      "property_groups": [
+        "Linear / Elastic Group",
+        "FISH Group"
+      ],
+      "common_use": "User-defined / custom contact constitutive behavior",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "flatjoint",
+      "file": "flatjoint.json",
+      "full_name": "Flat-Joint Model",
+      "description": "The flat-joint model can be installed at both ball-ball and ball-facet contacts, and is referred to in commands and FISH by the name flatjoint .",
+      "property_groups": [
+        "User-Defined Group",
+        "Flat-Joint Group"
+      ],
+      "common_use": "Bonded-particle rock models with realistic strength envelope",
+      "priority": "high",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "hysteretic",
+      "file": "hysteretic.json",
+      "full_name": "Hysteretic Model",
+      "description": "The hysteretic contact model in PFC consists of a combination of the elastic portion of the Hertz model as described in the “ Hertz Model ” section, combined wi",
+      "property_groups": [
+        "Dashpot Group",
+        "Linear / Elastic Group",
+        "Hysteretic Group"
+      ],
+      "common_use": "Impact and collision with energy loss",
+      "priority": "high",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "jkr",
+      "file": "jkr.json",
+      "full_name": "Johnson-Kendall-Roberts (JKR) Contact Model",
+      "description": "Cohesion or adhesion can be modeled by introducing an attractive force component to the contact model. The terms cohesion and adhesion are usually defined for a",
+      "property_groups": [
+        "Dashpot Group",
+        "Rolling Resistance Group",
+        "Linear / Elastic Group",
+        "JKR Group"
+      ],
+      "common_use": "Fine, dry adhesive micro-particles",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "lineardipole",
+      "file": "lineardipole.json",
+      "full_name": "Linear Dipole Model",
+      "description": "The linear dipole model is mechanically the same as the Linear Model , comprised of both linear and dashpot components. In addition to unbonded mechanical inter",
+      "property_groups": [
+        "Dashpot Group",
+        "User-Defined Group",
+        "Linear / Elastic Group",
+        "Linear Dipole Group"
+      ],
+      "common_use": "Magnetic / dipole-interacting particles",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "mohr",
+      "file": "mohr.json",
+      "full_name": "Mohr Model",
+      "description": "The mohr model with inactive dashpots provides Mohr-Coulomb style slip with optional slip weakening, including dilation and pore pressure effects with healing. ",
+      "property_groups": [
+        "Linear / Elastic Group",
+        "Mohr Group"
+      ],
+      "common_use": "Mohr-Coulomb shear strength at contacts",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": false,
+        "9.0": true
+      }
+    },
+    {
+      "name": "null",
+      "file": "null.json",
+      "full_name": "Null Model",
+      "description": "The null model maintains a generalized internal force of zero ( F_c M_c 0 ). Newly created contacts are assigned this contact model unless an alternative contac",
+      "property_groups": [],
+      "common_use": "Disabling mechanical interaction at selected contacts",
+      "priority": "medium",
+      "status": "summary",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "smoothjoint",
+      "file": "smoothjoint.json",
+      "full_name": "Smooth-Joint Model",
+      "description": "The smooth-joint model can be installed at ball-ball contacts and is referred to in commands and FISH by the name smoothjoint .",
+      "property_groups": [
+        "Smooth-Joint Group"
+      ],
+      "common_use": "Joints, faults and bedding planes",
+      "priority": "high",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "softbond",
+      "file": "softbond.json",
+      "full_name": "Soft-Bond Model",
+      "description": "The soft-bond model can be used to simulate both unbonded and bonded systems.",
+      "property_groups": [
+        "Dashpot Group",
+        "User-Defined Group",
+        "Linear / Elastic Group",
+        "Soft-Bond Group"
+      ],
+      "common_use": "Bonded granular materials with post-peak softening",
+      "priority": "high",
+      "status": "documented",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "springnetwork",
+      "file": "springnetwork.json",
+      "full_name": "Spring Network Model",
+      "description": "The spring network model can be used to simulate unbonded and bonded systems. The bonded formulation is based on the Rigid Body Spring Network (RBSN) lattice mo",
+      "property_groups": [
+        "Dashpot Group",
+        "User-Defined Group",
+        "Linear / Elastic Group",
+        "Spring Network Group"
+      ],
+      "common_use": "Rigid-body-spring-network rock fracture",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "subspringnetwork",
+      "file": "subspringnetwork.json",
+      "full_name": "Subspring Network Model",
+      "description": "The subspring network model can be used to simulate unbonded and bonded systems. Like the Spring Network Model, the bonded formulation is based on the Rigid Bod",
+      "property_groups": [
+        "Dashpot Group",
+        "User-Defined Group",
+        "Linear / Elastic Group",
+        "Subspring Network Group"
+      ],
+      "common_use": "Sub-spring network fracture (refined RBSN)",
+      "priority": "medium",
+      "status": "documented",
+      "availability": {
+        "6.0": false,
+        "7.0": false,
+        "9.0": true
+      }
+    },
+    {
+      "name": "thermalnull",
+      "file": "thermalnull.json",
+      "full_name": "Null Thermal Contact Model",
+      "description": "The null thermal contact model is the default thermal contact model. No power is generated.",
+      "property_groups": [],
+      "common_use": "Disabling thermal conduction at selected contacts",
+      "priority": "low",
+      "status": "summary",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
+    },
+    {
+      "name": "thermalpipe",
+      "file": "thermalpipe.json",
+      "full_name": "Thermal Pipe Contact Model",
+      "description": "The thermal pipe contact model models a one-dimensional pipe with a thermal resistance per unit length of η .",
+      "property_groups": [],
+      "common_use": "Heat conduction between pieces (thermal option)",
+      "priority": "low",
+      "status": "summary",
+      "availability": {
+        "6.0": true,
+        "7.0": true,
+        "9.0": true
+      }
     }
   ],
-
   "related_documentation": {
     "command_docs": [
       "../cmat/add.json",
@@ -81,12 +429,13 @@
     ],
     "pfc_manual": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/contact_models/index.html"
   },
-
   "notes": [
     "Property availability depends on the contact model",
     "Inheritable properties can receive values from contacting pieces",
     "Non-modifiable properties are read-only or calculated automatically",
     "Use 'emod' and 'kratio' with deformability method for automatic stiffness calculation",
-    "Vector properties use contact plane coordinate system"
+    "Vector properties use contact plane coordinate system",
+    "Model availability is version-specific (see each model's 'availability'); browse with the 'version' parameter (6.0/7.0/9.0). Property content is shared across versions; properties added in a later version carry a 'since' marker.",
+    "Thermal contact models (thermalnull, thermalpipe) require the thermal option to be configured."
   ]
 }

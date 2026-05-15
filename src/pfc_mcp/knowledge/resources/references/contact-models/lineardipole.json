@@ -1,0 +1,281 @@
+{
+  "model": "lineardipole",
+  "full_name": "Linear Dipole Model",
+  "search_keywords": [
+    "contact",
+    "dipole",
+    "linear",
+    "lineardipole",
+    "model"
+  ],
+  "description": "The linear dipole model is mechanically the same as the Linear Model , comprised of both linear and dashpot components. In addition to unbonded mechanical interactions, forces and moments based on discrete magnetic dipoles may be included to explicitly model permanent and induced magnetization.",
+  "typical_applications": [
+    "Magnetic / dipole-interacting particles",
+    "Electrostatically interacting grains",
+    "Orientation-dependent attractive interactions"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force in units force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "User-Defined Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Set contact area to the constant value f . &#8644; &#9776; &#8657; -->",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "emod",
+          "symbol": "E^*",
+          "description": "Effective modulus in units force/area",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": true,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness in units force/length",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ^*",
+          "description": "Normal-to-shear stiffness ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": true,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness in units force/length",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_force",
+          "symbol": "F^l",
+          "description": "Linear force in units force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_slip",
+          "symbol": "s",
+          "description": "Slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap in units length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear Dipole Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dipole_cap",
+          "symbol": "d_cap",
+          "description": "Distance to cap the dipole force/moment contribution",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dipole_d",
+          "symbol": "d_d",
+          "description": "Dipole distance used for contact activity",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dipole_f",
+          "symbol": "F^di",
+          "description": "Dipole force",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dipole_m1",
+          "symbol": "M_1",
+          "description": "Moment applied to piece 1 due to the dipole",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dipole_m2",
+          "symbol": "M_2",
+          "description": "Moment applied to piece 2 due to the dipole",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dipole_mo1",
+          "symbol": "m_1",
+          "description": "Original dipole moment of piece 1",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dipole_mo2",
+          "symbol": "m_2",
+          "description": "Original dipole moment on piece 2",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": true,
+    "9.0": true
+  }
+}

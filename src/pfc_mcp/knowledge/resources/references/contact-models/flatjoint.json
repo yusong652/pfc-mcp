@@ -1,0 +1,385 @@
+{
+  "model": "flatjoint",
+  "full_name": "Flat-Joint Model",
+  "search_keywords": [
+    "contact",
+    "flat",
+    "flatjoint",
+    "joint",
+    "model"
+  ],
+  "description": "The flat-joint model can be installed at both ball-ball and ball-facet contacts, and is referred to in commands and FISH by the name flatjoint .",
+  "typical_applications": [
+    "Bonded-particle rock models with realistic strength envelope",
+    "Intact rock and rock-like materials",
+    "Materials with high UCS-to-tensile-strength ratio",
+    "Grain-scale cracking studies"
+  ],
+  "property_groups": [
+    {
+      "name": "User-Defined Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Set contact area to the constant value f . &#8644; &#9776; &#8657; -->",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Flat-Joint Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "fj_area",
+          "symbol": "A^(e)",
+          "description": "Area of element (e)",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_cen",
+          "symbol": "x^(e)",
+          "description": "Centroid location of element (e)",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_coh",
+          "symbol": "c",
+          "description": "Cohesion in units stress",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_cohres",
+          "symbol": "c_r",
+          "description": "Residual cohesion in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "",
+          "since": "7.0"
+        },
+        {
+          "keyword": "fj_egap",
+          "symbol": "g^(e)",
+          "description": "Gap at centroid of element (e)",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_elem",
+          "symbol": "e",
+          "description": "Set element ( e ) to i",
+          "type": "INT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_emod",
+          "symbol": "E^*",
+          "description": "Effective modulus",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_fa",
+          "symbol": "φ",
+          "description": "Friction angle in units degrees",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_force",
+          "symbol": "F",
+          "description": "Interface force",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_fric",
+          "symbol": "μ",
+          "description": "Friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_gap",
+          "symbol": "g_s",
+          "description": "Surface gap",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_gap0",
+          "symbol": "g_0",
+          "description": "Initial surface gap",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness in units stress/disp",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_kratio",
+          "symbol": "κ^*",
+          "description": "Normal-to-shear stiffness ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness in units stress/disp",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_moment",
+          "symbol": "M",
+          "description": "Interface moment",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_mtype",
+          "symbol": "-",
+          "description": "Initial microstructural type",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_nal",
+          "symbol": "N_α",
+          "description": "Number of elements in circumferential direction",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_nr",
+          "symbol": "N_r",
+          "description": "Number of elements in radial direction (total number of elements in 2D)",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_radius",
+          "symbol": "R",
+          "description": "Flat-joint radius",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_relbr",
+          "symbol": "θ_ b",
+          "description": "Relative bend-rotation as a 2D vector",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_resmode",
+          "symbol": "M_r",
+          "description": "Residual cohesion mode. If M_r = 0 , the shear stress drops to zero. If M_r = 1 , the shear stress drops to the residual value",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": "",
+          "since": "7.0"
+        },
+        {
+          "keyword": "fj_rmul",
+          "symbol": "λ",
+          "description": "Radius multiplier",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_shear",
+          "symbol": "τ_c^(e)",
+          "description": "Shear strength in units stress at centroid of element (e)",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_sigma",
+          "symbol": "σ^(e)",
+          "description": "Normal stress at centroid of element (e)",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_slip",
+          "symbol": "s^(e)",
+          "description": "Slip state of element (e)",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_state",
+          "symbol": "B^(e)",
+          "description": "Bond state of element (e)",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_tau",
+          "symbol": "τ^(e)",
+          "description": "Shear stress at centroid of element (e)",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_ten",
+          "symbol": "σ_c",
+          "description": "Tensile strength in units stress",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "fj_track",
+          "symbol": "-",
+          "description": "Tracking state for use when plotting contacts with the specific numeric value",
+          "type": "BOOL",
+          "range": "",
+          "default": "false",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Flat-joint interface is discretized into elements.",
+    "Bonded and unbonded elements give a moment-resisting contact."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

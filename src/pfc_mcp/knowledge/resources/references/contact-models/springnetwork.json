@@ -1,0 +1,559 @@
+{
+  "model": "springnetwork",
+  "full_name": "Spring Network Model",
+  "search_keywords": [
+    "contact",
+    "model",
+    "network",
+    "spring",
+    "springnetwork"
+  ],
+  "description": "The spring network model can be used to simulate unbonded and bonded systems. The bonded formulation is based on the Rigid Body Spring Network (RBSN) lattice model introduced by [Bolander1998a] based on the work of [Kawai1978] , and the subsequent work of [Asahina2015] .",
+  "typical_applications": [
+    "Rigid-body-spring-network rock fracture",
+    "Quasi-brittle failure with tensile/cohesion tables",
+    "Lattice-type fracture modeling",
+    "Heterogeneous strength via property tables"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force in units force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "User-Defined Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Set contact area to the constant value f . &#8644; &#9776; &#8657; -->",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "emod",
+          "symbol": "E^*",
+          "description": "Effective modulus in units force/area",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness in units stress/disp/area",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ^*",
+          "description": "Normal-to-shear stiffness ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness in units stress/disp/area",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap in units length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Spring Network Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "krot",
+          "symbol": "k_r",
+          "description": "Rotational stiffness in units stress/disp/area",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_area",
+          "symbol": "A",
+          "description": "Area of the contact",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_bmul",
+          "symbol": "λ_b",
+          "description": "Bending friction multiplier",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_coh",
+          "symbol": "σ_c",
+          "description": "Bond cohesive strength in units stress",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_cohdc",
+          "symbol": "-",
+          "description": "Critical slip distance (i.e., for degradation of shear strength as a function of slip) in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_cohtab",
+          "symbol": "x",
+          "description": "Cohesive strength multiplier ( x -component) as a function of slip ( y -component). Use sn_tabpos to set the table position when retrieving a value",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_cohres",
+          "symbol": "-",
+          "description": "Residual cohesive strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_dil",
+          "symbol": "-",
+          "description": "Dilation angle in degrees",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_dilzero",
+          "symbol": "-",
+          "description": "Shear displacement where dilation stops in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "infinity",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_fa",
+          "symbol": "φ",
+          "description": "Bond friction angle in units degrees",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_force",
+          "symbol": "F",
+          "description": "Linear force in units force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_heal",
+          "symbol": "-",
+          "description": "Healing mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_mcf",
+          "symbol": "β",
+          "description": "Moment-contribution factor",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_moment",
+          "symbol": "M",
+          "description": "Moment. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_ndisp",
+          "symbol": "-",
+          "description": "Normal displacement in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_non_diag",
+          "symbol": "-",
+          "description": "Off-diagonal computation mode with default 0 (no off-diagonal Poisson correction). Off-diagonal terms are utilized when set to 1",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_pois",
+          "symbol": "-",
+          "description": "Poisson ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_pois_force",
+          "symbol": "-",
+          "description": "Poisson force correction in units force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_porp",
+          "symbol": "P_p",
+          "description": "Pore pressure in units stress. Positive pore pressure reduces the effective normal stress for failure computations",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_radius",
+          "symbol": "R",
+          "description": "Effective contact radius",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_rmul",
+          "symbol": "λ",
+          "description": "Radius multiplier",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_sdisp",
+          "symbol": "0",
+          "description": "Accumulated shear displacement magnitude in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_slip",
+          "symbol": "s",
+          "description": "Slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_slipb",
+          "symbol": "sn",
+          "description": "Bending slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_slipt",
+          "symbol": "sn",
+          "description": "Twisting slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_shear",
+          "symbol": "τ_c",
+          "description": "Bond shear strength in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_sigma",
+          "symbol": "σ",
+          "description": "Bond normal stress at bond periphery in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_state",
+          "symbol": "B",
+          "description": "Bond state",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_tabpos",
+          "symbol": "-",
+          "description": "Position in either the cohesion or tension table",
+          "type": "INT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_tau",
+          "symbol": "τ",
+          "description": "Bond shear stress at bond periphery in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_ten",
+          "symbol": "σ_c",
+          "description": "Bond tensile strength in units stress",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_tendc",
+          "symbol": "-",
+          "description": "Critical tension distance (i.e., for degradation of tensile strength as a function of elongation) in units distance",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_tentab",
+          "symbol": "x",
+          "description": "Tensile strength multiplier ( x -component) as a function of elongation ( y -component). Use sn_tabpos to set the table position when retrieving a value",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "sn_tmul",
+          "symbol": "λ_t",
+          "description": "Twisting friction multiplier",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Model command name is 'springnetwork' (a.k.a. RBSN)."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": true,
+    "9.0": true
+  }
+}

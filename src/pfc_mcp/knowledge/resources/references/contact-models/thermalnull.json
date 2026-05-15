@@ -1,0 +1,26 @@
+{
+  "model": "thermalnull",
+  "full_name": "Null Thermal Contact Model",
+  "search_keywords": [
+    "contact",
+    "model",
+    "null",
+    "thermal",
+    "thermalnull"
+  ],
+  "description": "The null thermal contact model is the default thermal contact model. No power is generated.",
+  "typical_applications": [
+    "Disabling thermal conduction at selected contacts",
+    "Excluding a contact type from heat transfer"
+  ],
+  "property_groups": [],
+  "notes": [
+    "Thermal option model; carries no heat, no user-settable properties."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

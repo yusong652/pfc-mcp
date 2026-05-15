@@ -1,9 +1,14 @@
 {
   "model": "linearpbond",
   "full_name": "Linear Parallel Bond Model",
-  "search_keywords": ["linearpbond", "parallel", "bond", "contact", "model"],
+  "search_keywords": [
+    "linearpbond",
+    "parallel",
+    "bond",
+    "contact",
+    "model"
+  ],
   "description": "Linear parallel bond model simulates a finite-sized piece of cement-like material deposited between two contacting pieces. It combines a linear elastic interface with a parallel bond that transmits both force and moment, allowing the bonded interface to resist relative rotation. This is the most commonly used model for simulating cemented particulate materials.",
-
   "typical_applications": [
     "Cemented particulate materials",
     "Rock mechanics (intact rock, synthetic rock mass)",
@@ -12,7 +17,6 @@
     "Concrete and cement composites",
     "Fault slip modeling with inserted interfaces"
   ],
-
   "key_characteristics": [
     "Parallel bond transmits BOTH force and moment (unlike linearcbond which only transmits force)",
     "Bond can resist relative rotation via moment transmission",
@@ -22,7 +26,6 @@
     "Bond breakage based on stress at bond periphery, not total force",
     "After bond breaks, contact behavior reverts to linear model"
   ],
-
   "property_groups": [
     {
       "name": "Linear Group",
@@ -445,7 +448,6 @@
       ]
     }
   ],
-
   "energy_partitions": [
     {
       "name": "energy-strain",
@@ -476,7 +478,6 @@
       "accumulated": false
     }
   ],
-
   "available_methods": [
     {
       "group": "Linear Group",
@@ -488,7 +489,10 @@
         {
           "name": "deformability",
           "description": "Calculate kn and ks from emod and kratio",
-          "typical_args": ["emod", "kratio"]
+          "typical_args": [
+            "emod",
+            "kratio"
+          ]
         }
       ]
     },
@@ -498,12 +502,17 @@
         {
           "name": "pb_deformability",
           "description": "Calculate pb_kn and pb_ks from pb_emod and pb_kratio",
-          "typical_args": ["emod", "kratio"]
+          "typical_args": [
+            "emod",
+            "kratio"
+          ]
         },
         {
           "name": "bond",
           "description": "Activate parallel bond at contact",
-          "typical_args": ["gap (optional)"]
+          "typical_args": [
+            "gap (optional)"
+          ]
         },
         {
           "name": "unbond",
@@ -512,7 +521,6 @@
       ]
     }
   ],
-
   "common_usage_patterns": [
     {
       "use_case": "Basic parallel bond with direct stiffness specification",
@@ -545,7 +553,6 @@
       "description": "Set pb_fa = 0.0 for pure cohesive behavior"
     }
   ],
-
   "typical_parameter_values": {
     "rock_like_materials": {
       "kn": "1e8 - 1e10 [N/m]",
@@ -565,7 +572,6 @@
       "pb_fa": "20 - 40 [degrees]"
     }
   },
-
   "notes": [
     "Parallel bond acts IN PARALLEL with linear component - both contribute to total force",
     "Bond transmits BOTH force and moment (unlike linearcbond)",
@@ -579,7 +585,6 @@
     "After bond breaks, behavior reverts to linear model with friction",
     "Bond area and moment of inertia calculated automatically from pb_radius"
   ],
-
   "workflow": [
     "1. Set contact model to linearpbond via CMAT or contact model assign",
     "2. Set linear stiffnesses (kn, ks) - preferably via deformability method",
@@ -590,7 +595,6 @@
     "7. Bonds break automatically when stresses exceed strength limits",
     "8. After breaking, contact behaves like linear model with friction"
   ],
-
   "key_differences_from_linearcbond": {
     "linearpbond": [
       "Transmits force AND moment",
@@ -609,7 +613,6 @@
       "Simpler strength: tensile force + shear force"
     ]
   },
-
   "related_models": [
     {
       "model": "linear",
@@ -619,5 +622,10 @@
       "model": "linearcbond",
       "description": "Simpler bond model without moment transmission"
     }
-  ]
+  ],
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
 }

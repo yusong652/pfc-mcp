@@ -1,0 +1,292 @@
+{
+  "model": "arrlinear",
+  "full_name": "Adhesive Rolling Resistance Linear Model",
+  "search_keywords": [
+    "adhesive",
+    "arrlinear",
+    "contact",
+    "linear",
+    "model",
+    "resistance",
+    "rolling"
+  ],
+  "description": "The adhesive rolling resistance linear model is based on the rolling resistance linear model, to which an adhesive component is added. It is a linear-based model that can be installed at both ball-ball and ball-facet contacts, and is referred to in commands and FISH by the name arrlinear .",
+  "typical_applications": [
+    "Cohesive granular materials with rolling resistance",
+    "Wet / sticky soils and powders",
+    "Repose-angle studies with adhesion",
+    "Fine-particle agglomeration"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force in units force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Rolling Resistance Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "rr_fric",
+          "symbol": "μ_r",
+          "description": "Rolling friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_kr",
+          "symbol": "k_r",
+          "description": "Rolling resistance stiffness",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "rr_moment",
+          "symbol": "M^r",
+          "description": "Rolling resistance moment. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_slip",
+          "symbol": "s_r",
+          "description": "Rolling slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        }
+      ]
+    },
+    {
+      "name": "User-Defined Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "user_area",
+          "symbol": "A",
+          "description": "Set contact area to the constant value f . &#8644; &#9776; &#8657; -->",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "emod",
+          "symbol": "E^*",
+          "description": "Effective modulus in units force/area",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": true,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kn",
+          "symbol": "k_n",
+          "description": "Normal stiffness in units force/length",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "kratio",
+          "symbol": "κ^*",
+          "description": "Normal-to-shear stiffness ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": true,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "ks",
+          "symbol": "k_s",
+          "description": "Shear stiffness in units force/length",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_force",
+          "symbol": "F^l",
+          "description": "Linear force in units force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_mode",
+          "symbol": "M_l",
+          "description": "Normal-force update mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "lin_slip",
+          "symbol": "s",
+          "description": "Slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap in units length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Adhesive Rolling Resistance Linear Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "adh_d0",
+          "symbol": "D_0",
+          "description": "Attraction range",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "adh_f0",
+          "symbol": "F_0",
+          "description": "Maximum attractive force",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "adh_force",
+          "symbol": "F^a",
+          "description": "Attractive force",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Adhesive rolling-resistance linear model."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

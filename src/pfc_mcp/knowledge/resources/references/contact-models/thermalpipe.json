@@ -1,0 +1,27 @@
+{
+  "model": "thermalpipe",
+  "full_name": "Thermal Pipe Contact Model",
+  "search_keywords": [
+    "contact",
+    "model",
+    "pipe",
+    "thermal",
+    "thermalpipe"
+  ],
+  "description": "The thermal pipe contact model models a one-dimensional pipe with a thermal resistance per unit length of η .",
+  "typical_applications": [
+    "Heat conduction between pieces (thermal option)",
+    "Coupled thermo-mechanical simulations",
+    "Thermal diffusion through granular assemblies"
+  ],
+  "property_groups": [],
+  "notes": [
+    "Thermal option model. Properties documented under the PFC thermal option manual."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

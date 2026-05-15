@@ -1,0 +1,165 @@
+{
+  "model": "hysteretic",
+  "full_name": "Hysteretic Model",
+  "search_keywords": [
+    "contact",
+    "hysteretic",
+    "model"
+  ],
+  "description": "The hysteretic contact model in PFC consists of a combination of the elastic portion of the Hertz model as described in the “ Hertz Model ” section, combined with an alternate dashpot group consisting of a nonlinear visco-elastic element in the normal direction. This model is referred to in commands and FISH as hysteretic .",
+  "typical_applications": [
+    "Impact and collision with energy loss",
+    "Restitution-controlled dynamic simulations",
+    "Drop tests and dynamic compaction"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_en",
+          "symbol": "e_n",
+          "description": "Target restitution coefficient",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_enmin",
+          "symbol": "e^*_n",
+          "description": "Minimal restitution coefficient",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Hysteretic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "hz_alpha",
+          "symbol": "α",
+          "description": "Exponent",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "hz_force",
+          "symbol": "F^h",
+          "description": "Hertz force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "hz_mode",
+          "symbol": "M_s",
+          "description": "Shear-force scaling mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "hz_poiss",
+          "symbol": "ν",
+          "description": "Poisson’s ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "hz_shear",
+          "symbol": "G",
+          "description": "Shear modulus in units stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "hz_slip",
+          "symbol": "s",
+          "description": "Slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Energy dissipation via the coefficient of restitution."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "model": "jkr",
+  "full_name": "Johnson-Kendall-Roberts (JKR) Contact Model",
+  "search_keywords": [
+    "contact",
+    "jkr",
+    "johnson",
+    "kendall",
+    "model",
+    "roberts"
+  ],
+  "description": "Cohesion or adhesion can be modeled by introducing an attractive force component to the contact model. The terms cohesion and adhesion are usually defined for attracting forces between similar and dissimilar materials respectively.",
+  "typical_applications": [
+    "Fine, dry adhesive micro-particles",
+    "Van der Waals dominated contact",
+    "Powder cohesion and agglomeration",
+    "Surface-energy controlled adhesion"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Rolling Resistance Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "rr_fric",
+          "symbol": "μ_r",
+          "description": "Rolling friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_moment",
+          "symbol": "M^r",
+          "description": "Rolling resistance moment",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_slip",
+          "symbol": "s_r",
+          "description": "Rolling slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Sliding friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "JKR Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "a0",
+          "symbol": "a_0",
+          "description": "Equilibrium contact patch radius",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "adh_exp",
+          "symbol": "M_a",
+          "description": "Active mode",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "jkr_force",
+          "symbol": "F^JKR",
+          "description": "JKR force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "jkr_poiss",
+          "symbol": "ν",
+          "description": "Poisson’s ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "jkr_shear",
+          "symbol": "G",
+          "description": "Shear modulus in units of stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "jkr_slip",
+          "symbol": "s",
+          "description": "Sliding slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "pull_off_f",
+          "symbol": "F_po",
+          "description": "Pull-off force",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "ks_fac",
+          "symbol": "k_sf",
+          "description": "Shear stiffness scaling factor",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "tear_off_d",
+          "symbol": "δ_po",
+          "description": "Tear-off distance",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "surf_adh",
+          "symbol": "γ",
+          "description": "Surface adhesion energy",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Johnson-Kendall-Roberts adhesive contact based on surface energy."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": true,
+    "9.0": true
+  }
+}

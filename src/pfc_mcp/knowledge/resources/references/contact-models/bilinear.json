@@ -1,0 +1,25 @@
+{
+  "model": "bilinear",
+  "full_name": "Bilinear Contact Model",
+  "search_keywords": [
+    "bilinear",
+    "contact",
+    "model"
+  ],
+  "description": "Built-in PFC contact model with a bilinear (two-branch) normal force-displacement response. Refer to the PFC 7.0 manual for the full property set and behavior.",
+  "typical_applications": [
+    "Bilinear (two-stage) normal force-displacement response",
+    "Compaction with stiffness change",
+    "Specialized loading/unloading paths"
+  ],
+  "property_groups": [],
+  "notes": [
+    "Refer to the PFC 7.0 manual for the bilinear property set."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": true,
+    "9.0": true
+  }
+}

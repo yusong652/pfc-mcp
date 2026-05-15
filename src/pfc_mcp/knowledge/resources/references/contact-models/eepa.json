@@ -1,0 +1,286 @@
+{
+  "model": "eepa",
+  "full_name": "Edinburgh-Elasto-Plastic-Adhesive (EEPA) Contact Model",
+  "search_keywords": [
+    "adhesive",
+    "contact",
+    "edinburgh",
+    "eepa",
+    "elasto",
+    "model",
+    "plastic"
+  ],
+  "description": "Cohesion or adhesion can be modeled by introducing an attractive force component to the contact model. The terms cohesion and adhesion are usually defined for attracting forces between similar and dissimilar materials, respectively.",
+  "typical_applications": [
+    "Cohesive powders and fine particles",
+    "Adhesive / sticky bulk solids handling",
+    "Compressible plastic contact (caking, storage)",
+    "Pharmaceutical and food powders"
+  ],
+  "property_groups": [
+    {
+      "name": "Dashpot Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "dp_force",
+          "symbol": "F^d",
+          "description": "Dashpot force. Expressed in the contact plane coordinate system",
+          "type": "VEC",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_mode",
+          "symbol": "M_d",
+          "description": "Dashpot mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_nratio",
+          "symbol": "β_n",
+          "description": "Normal critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "dp_sratio",
+          "symbol": "β_s",
+          "description": "Shear critical damping ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Rolling Resistance Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "rr_fric",
+          "symbol": "μ_r",
+          "description": "Rolling friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_moment",
+          "symbol": "M^r",
+          "description": "Rolling resistance moment",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "rr_slip",
+          "symbol": "s_r",
+          "description": "Rolling slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "fric",
+          "symbol": "μ",
+          "description": "Sliding friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        },
+        {
+          "keyword": "rgap",
+          "symbol": "g_r",
+          "description": "Reference gap in units length",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "EEPA Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "adh_exp",
+          "symbol": "-",
+          "description": "Adhesive branch exponent",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "eepa_force",
+          "symbol": "F^EEPA",
+          "description": "EEPA force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "eepa_poiss",
+          "symbol": "ν",
+          "description": "Poisson’s ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "eepa_shear",
+          "symbol": "G",
+          "description": "Shear modulus in units of stress",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "eepa_slip",
+          "symbol": "s",
+          "description": "Sliding slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "force_min",
+          "symbol": "f_min",
+          "description": "Minimum force",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "ks_fac",
+          "symbol": "k_sf",
+          "description": "Shear stiffness scaling factor",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "lu_exp",
+          "symbol": "m",
+          "description": "Loading-unloading branch exponent",
+          "type": "FLT",
+          "range": "",
+          "default": "1",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "overlap_max",
+          "symbol": "δ_max",
+          "description": "Maximum overlap",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "plas_ratio",
+          "symbol": "λ_p",
+          "description": "Plasticity ratio",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "pull_off",
+          "symbol": "F^0",
+          "description": "Pull-off force",
+          "type": "FLT",
+          "range": "",
+          "default": "",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "surf_adh",
+          "symbol": "γ^*",
+          "description": "Effective surface adhesion energy",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Edinburgh Elasto-Plastic Adhesive: hysteretic loading/unloading with adhesion."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": false,
+    "7.0": true,
+    "9.0": true
+  }
+}

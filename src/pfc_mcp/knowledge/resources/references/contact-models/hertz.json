@@ -1,9 +1,12 @@
 {
   "model": "hertz",
   "full_name": "Hertz Model",
-  "search_keywords": ["hertz", "contact", "model"],
+  "search_keywords": [
+    "hertz",
+    "contact",
+    "model"
+  ],
   "description": "Hertz contact model implements a nonlinear formulation based on an approximation of the theory of Mindlin and Deresiewicz. Unlike linear models with constant stiffnesses, the Hertz model produces nonlinear force-displacement relationships through elastic sphere deformation analysis. Normal force follows F_n^h = -h_n|g_c|^(α_h) where α_h defaults to 1.5, and shear stiffness depends on current normal force, making the contact response highly nonlinear and velocity-dependent.",
-
   "typical_applications": [
     "Impact simulations",
     "Energy dissipation analysis",
@@ -12,7 +15,6 @@
     "Material systems where Hertzian contact theory applies",
     "Coaxial cylinder contact problems"
   ],
-
   "key_characteristics": [
     "Nonlinear force-displacement relationships (unlike linear model)",
     "Normal force: F_n^h = -h_n|g_c|^(α_h), default α_h = 1.5",
@@ -23,7 +25,6 @@
     "Complex property inheritance through effective elastic properties",
     "Suitable for impact and energy dissipation scenarios"
   ],
-
   "property_groups": [
     {
       "name": "Hertz Group",
@@ -227,7 +228,6 @@
       ]
     }
   ],
-
   "energy_partitions": [
     {
       "name": "energy-strain",
@@ -254,7 +254,6 @@
       "group": "Dashpot Group"
     }
   ],
-
   "callback_events": [
     {
       "name": "contact_activated",
@@ -277,7 +276,6 @@
       "use": "Track sliding events and transitions"
     }
   ],
-
   "common_usage_patterns": [
     {
       "use_case": "Basic Hertz contact with material properties",
@@ -308,7 +306,6 @@
       "description": "Use dp_alpha > 0 for nonlinear velocity-dependent damping behavior."
     }
   ],
-
   "typical_parameter_values": {
     "rock_materials": {
       "hz_shear": "1e10 - 1e11 [Pa] (typical rock shear modulus)",
@@ -330,7 +327,6 @@
       "other_geometries": "Adjust hz_alpha based on contact theory"
     }
   },
-
   "notes": [
     "Hertz model is NONLINEAR - forces depend on overlap raised to power hz_alpha (default 1.5)",
     "Normal force: F_n^h = -h_n|g_c|^(α_h) where g_c is surface gap",
@@ -345,7 +341,6 @@
     "Contact response is inherently velocity-dependent",
     "More computationally expensive than linear model due to nonlinearity"
   ],
-
   "hertzian_contact_theory": {
     "concept": "Hertz contact theory describes the elastic deformation when two curved surfaces come into contact. The contact area and pressure distribution are nonlinear functions of the applied force and material properties.",
     "force_displacement": "Normal force varies as F_n ~ δ^(3/2) for sphere-sphere contact, where δ is overlap. This is why default hz_alpha = 1.5.",
@@ -363,7 +358,6 @@
       "Cannot transmit tension (purely repulsive)"
     ]
   },
-
   "workflow": [
     "1. Set contact model to hertz via CMAT or contact model assign",
     "2. Set material properties: hz_shear (shear modulus) and hz_poiss (Poisson's ratio)",
@@ -374,7 +368,6 @@
     "7. Monitor energy-dashpot to verify energy dissipation",
     "8. Use callback events (contact_activated, slip_change) for tracking"
   ],
-
   "comparison_to_linear_model": {
     "linear_model": {
       "force_displacement": "Linear: F = k × δ (constant stiffness)",
@@ -404,11 +397,15 @@
       "Large-scale simulations with many contacts"
     ]
   },
-
   "related_models": [
     {
       "model": "linear",
       "description": "Simpler alternative with constant stiffnesses - computationally cheaper"
     }
-  ]
+  ],
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
 }

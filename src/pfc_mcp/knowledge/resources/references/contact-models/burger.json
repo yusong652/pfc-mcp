@@ -1,0 +1,172 @@
+{
+  "model": "burger",
+  "full_name": "Burger’s Model",
+  "search_keywords": [
+    "burger",
+    "contact",
+    "model",
+    "s"
+  ],
+  "description": "Burger’s model simulates creep mechanisms by using a Kelvin model and a Maxwell model connected in series in both the normal and shear directions.",
+  "typical_applications": [
+    "Viscoelastic creep behavior",
+    "Time-dependent deformation (asphalt, ice, salt rock)",
+    "Stress-relaxation studies",
+    "Long-term settlement"
+  ],
+  "property_groups": [
+    {
+      "name": "Linear / Elastic Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "fric",
+          "symbol": "f_s",
+          "description": "Sliding friction coefficient",
+          "type": "FLT",
+          "range": "[0.0, +∞)",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": true,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "name": "Burger’s Group",
+      "description": "",
+      "properties": [
+        {
+          "keyword": "bur_cnk",
+          "symbol": "C_k_n",
+          "description": "Normal viscosity Kelvin section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_cnm",
+          "symbol": "C_m_n",
+          "description": "Normal viscosity Maxwell section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_csk",
+          "symbol": "C_k_s",
+          "description": "Shear viscosity Kelvin section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_csm",
+          "symbol": "C_m_s",
+          "description": "Shear viscosity Maxwell section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_knk",
+          "symbol": "K_k_n",
+          "description": "Normal stiffness Kelvin section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_knm",
+          "symbol": "K_m_n",
+          "description": "Normal stiffness Maxwell section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_ksk",
+          "symbol": "K_k_s",
+          "description": "Shear stiffness Kelvin section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_ksm",
+          "symbol": "K_m_s",
+          "description": "Shear stiffness Maxwell section",
+          "type": "FLT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_mode",
+          "symbol": "M_t",
+          "description": "Normal force tensile mode",
+          "type": "INT",
+          "range": "",
+          "default": "0",
+          "modifiable": true,
+          "inheritable": false,
+          "notes": ""
+        },
+        {
+          "keyword": "bur_force",
+          "symbol": "F",
+          "description": "Total force in units force",
+          "type": "VEC",
+          "range": "",
+          "default": "0",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read-only property."
+        },
+        {
+          "keyword": "bur_slip",
+          "symbol": "s",
+          "description": "Slip state",
+          "type": "BOOL",
+          "range": "",
+          "default": "",
+          "modifiable": false,
+          "inheritable": false,
+          "notes": "This is a read only property."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Burger's model: Kelvin + Maxwell elements in normal and shear."
+  ],
+  "source": "PFC 7.0 documentation",
+  "availability": {
+    "6.0": true,
+    "7.0": true,
+    "9.0": true
+  }
+}

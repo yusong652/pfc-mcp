@@ -13,7 +13,7 @@ jobs:
       id-token: write
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Extract release notes from CHANGELOG
         run: |
@@ -31,12 +31,12 @@ jobs:
           echo "--- release notes ---"
           cat release-notes.md
 
-      - uses: astral-sh/setup-uv@v4
+      - uses: astral-sh/setup-uv@v8
       - run: cd pfc-mcp-bridge && uv build
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: pfc-mcp-bridge/dist/
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           body_path: release-notes.md
           files: pfc-mcp-bridge/dist/*

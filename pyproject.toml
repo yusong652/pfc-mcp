@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pfc-mcp"
 dynamic = ["version"]
-description = "MCP server for ITASCA PFC discrete element simulation control and documentation"
+description = "MCP server for ITASCA PFC discrete element method simulation"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name= "Yusong Han", email = "yusong.han.652@gmail.com" }, { name = "Nagisa Toyoura", email = "nagisa.toyoura@gmail.com" }]

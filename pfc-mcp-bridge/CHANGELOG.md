@@ -4,6 +4,26 @@ All notable changes to `pfc-mcp-bridge` are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.3] - 2026-05-22
+
+### Deprecated
+
+**Final release.** `pfc-mcp-bridge` has been superseded by
+[`itasca-mcp-bridge`](https://pypi.org/project/itasca-mcp-bridge/), a
+product-neutral bridge that supports PFC and FLAC3D from one codebase.
+
+This release exists solely to deliver a migration signal:
+
+- Emits `DeprecationWarning` at import time so programmatic users
+  (pytest, lint, CI) catch the move automatically.
+- Prints a banner inside `start()` directing addon.py users to install
+  `itasca-mcp-bridge` and download the new `addon.py` from the
+  [`pfc-mcp`](https://github.com/yusong652/pfc-mcp) repo.
+
+The multi-line `it.command()` deadlock fix (recognized aliases like
+`import itasca as it`) ships only in `itasca-mcp-bridge 0.1.1+`, NOT
+in this package.
+
 ## [0.3.2] - 2026-05-14
 
 Adds two-layer cancellation for `execute_code` so runaway snippets

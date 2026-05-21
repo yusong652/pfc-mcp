@@ -4,6 +4,8 @@
 
 [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/)
 
+> **⚠️ 已弃用。** 本包已被 [`itasca-mcp-bridge`](https://pypi.org/project/itasca-mcp-bridge/) 取代——后者是 PFC 与 FLAC3D 共用的产品中立 bridge。新修复（包括 multi-line `it.command()` 死锁修复）只在新包发布，老包不再维护。请改装 `itasca-mcp-bridge` 并下载新的 [`addon.py`](https://github.com/yusong652/pfc-mcp/blob/main/addon.py)。
+
 运行在 PFC 进程内的 bridge，为 [pfc-mcp](https://pypi.org/project/pfc-mcp/) 提供执行类工具能力。
 
 ## 快速开始

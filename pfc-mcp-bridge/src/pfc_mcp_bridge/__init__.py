@@ -1,7 +1,11 @@
 """PFC MCP Bridge - WebSocket bridge for ITASCA PFC.
 
-Runs inside PFC GUI's Python environment and exposes the PFC SDK
-as a remote WebSocket API for MCP clients and other tools.
+DEPRECATED: this package has been superseded by `itasca-mcp-bridge`, a
+product-neutral bridge that supports PFC and FLAC3D from one codebase.
+Install `itasca-mcp-bridge` instead and use the new `addon.py` from
+https://github.com/yusong652/pfc-mcp. This package will receive no
+further fixes; the alias-detection deadlock fix shipped in
+`itasca-mcp-bridge` is NOT backported here.
 
 Usage (in PFC GUI Python console):
     import pfc_mcp_bridge
@@ -12,7 +16,18 @@ Usage (in PFC console CLI):
     pfc_mcp_bridge.start(mode="console")
 """
 
-__version__ = "0.3.2"
+import warnings
+
+__version__ = "0.3.3"
+
+_DEPRECATION_MESSAGE = (
+    "pfc-mcp-bridge is deprecated and will no longer receive fixes. "
+    "Install `itasca-mcp-bridge` instead and download the new addon.py "
+    "from https://github.com/yusong652/pfc-mcp."
+)
+
+# Fire once on import so programmatic users (and pytest, lint, CI) see it.
+warnings.warn(_DEPRECATION_MESSAGE, DeprecationWarning, stacklevel=2)
 
 
 # Keep global references to avoid Qt timer/callback garbage collection.
@@ -224,6 +239,15 @@ def start(
 
     if not server_thread.is_alive():
         raise RuntimeError("Bridge server thread failed to start")
+
+    # ── Deprecation banner ─────────────────────────────────────
+    print("\n" + "!" * 60)
+    print("DEPRECATED: pfc-mcp-bridge is no longer maintained.")
+    print("Recent fixes (incl. multi-line it.command() deadlock) ship in:")
+    print("    itasca-mcp-bridge   (https://pypi.org/project/itasca-mcp-bridge/)")
+    print("Download the new addon.py from:")
+    print("    https://github.com/yusong652/pfc-mcp")
+    print("!" * 60)
 
     # ── Status display ────────────────────────────────────────
     print("\n" + "=" * 60)

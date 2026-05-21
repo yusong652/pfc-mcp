@@ -4,6 +4,8 @@
 
 [![PyPI](https://img.shields.io/pypi/v/pfc-mcp-bridge)](https://pypi.org/project/pfc-mcp-bridge/)
 
+> **⚠️ DEPRECATED.** This package has been superseded by [`itasca-mcp-bridge`](https://pypi.org/project/itasca-mcp-bridge/), a product-neutral bridge that supports PFC and FLAC3D from one codebase. New fixes — including the multi-line `it.command()` deadlock fix — ship there, not here. Install `itasca-mcp-bridge` and download the new [`addon.py`](https://github.com/yusong652/pfc-mcp/blob/main/addon.py).
+
 Runtime bridge that runs inside a PFC process and enables execution tools for [pfc-mcp](https://pypi.org/project/pfc-mcp/).
 
 ## Quick Start

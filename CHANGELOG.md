@@ -37,12 +37,54 @@ section exists.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-05-22
+
+Bridge installation path migrates from `pfc-mcp-bridge` to `itasca-mcp-bridge`.
+Tool surface (MCP tools and their wire contracts) is unchanged; the minor bump
+reflects the user-visible install/dependency move, not a tool API change.
+
 ### Changed
+- `addon.py` now installs `itasca-mcp-bridge` (PyPI) instead of
+  `pfc-mcp-bridge`. End users get the multi-line `it.command()` deadlock fix
+  (recognized aliases like `import itasca as it`) automatically — the
+  splitter in `pfc-mcp-bridge` only matched the literal `itasca.command(...)`
+  form and silently skipped any aliased call, letting one C batch hold the
+  GIL while IPython's ZMQIOStream backed up. Re-download `addon.py` from the
+  pfc-mcp repo to pick up the new install path.
 - Agentic install now defaults the MCP client config to user/global scope
   instead of workspace, with workspace as an explicit last-resort fallback.
   Per-client profiles are CLI-first where a verified user-scope command
   exists (Claude/Codex/Gemini/Copilot) and file-edit for OpenCode. Affects
   nearly all users of the agentic install flow.
+
+### Deprecated
+- `pfc-mcp-bridge` PyPI package is frozen at `0.3.3` (final release). It
+  emits a `DeprecationWarning` at import and prints a migration banner from
+  `start()`. Users still on the old `addon.py` that upgrade will see the
+  signal; those who decline the upgrade prompt stay on the affected version
+  until they upgrade once. No further fixes ship to this package.
+
+### Removed
+- Embedded `pfc-mcp-bridge/` directory. Bridge sources now live in the
+  separate [`itasca-mcp-bridge`](https://github.com/yusong652/itasca-mcp-bridge)
+  repo and are referenced from this repo as a git submodule
+  (`itasca-mcp-bridge/`). Fresh clones intended for bridge development need
+  `git clone --recurse-submodules` (or `git submodule update --init
+  --recursive`); end users running `addon.py` do not need the submodule.
+- `.github/workflows/publish-bridge.yml` — bridge releases now happen from
+  the bridge's own repo.
+- `tests/test_command_splitter.py` and `tests/test_command_log.py` — they
+  reached into the embedded bridge source via `sys.path` and now live with
+  the bridge in its repo.
+
+### Documentation
+- `docs/development/source-install.{md,zh-CN.md}` document the submodule
+  workflow: clone with `--recurse-submodules`, re-sync after pull, pin
+  bump recipe, push order (bridge first), and how to read submodule
+  status noise.
+- Per-AI bootstrap files (CLAUDE/AGENTS/GEMINI/WARP.md) and the agentic
+  install guide describe the new layout: `src/pfc_mcp/` for the MCP server,
+  `itasca-mcp-bridge/` (submodule) for the bridge runtime.
 
 ## [0.3.15] - 2026-05-16
 

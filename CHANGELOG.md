@@ -18,6 +18,14 @@ Convention (mirrors the yade-dev/trunk ChangeLog discipline):
   pfc-mcp: behaviour changes, added/removed tools, bug fixes, and notable
   documentation / install-flow changes. Pure internal refactors, tests, CI,
   and trivial doc fixes (typos, formatting) are omitted.
+- Bridge changes that users perceive (deadlock fixes, new tool surfaces,
+  protocol shifts requiring a minimum `itasca-mcp-bridge` version) are
+  re-stated here even though they ship from a separate repo — readers of
+  pfc-mcp's release notes shouldn't have to follow a second changelog to
+  understand what changed for them. The notability test is the same: ask
+  "if a user upgrades pfc-mcp without thinking about bridge versions, do
+  they perceive this change?" Bridge-internal refactors and silent
+  improvements stay only in `itasca-mcp-bridge`'s own changelog.
 - Group entries under these categories (Keep a Changelog + Documentation):
   Added / Changed / Deprecated / Removed / Fixed / Security / Documentation.
 - Referencing a commit/PR is optional; the entry must stand on its own.

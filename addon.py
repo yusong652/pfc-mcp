@@ -62,20 +62,52 @@ def _build_install_args(index_url, trusted_hosts):
     return args
 
 
+def _resolve_pip_main():
+    """Locate pip's callable entry point.
+
+    There is no single stable location. `pip.main` exists in pip <= 9
+    (what PFC 6.0 ships), was removed in pip 10.0, and was later restored
+    as an internal-only shim; `pip._internal.main` covers pip 10 .. 19.2;
+    `pip._internal.cli.main.main` covers pip >= 19.3. The embedded PFC
+    Python may carry any pip version, so probe each location in turn
+    rather than guessing from the pip or Python version.
+    """
+    try:
+        from pip._internal.cli.main import main as pip_main  # pip >= 19.3
+
+        return pip_main
+    except Exception:
+        pass
+    try:
+        from pip._internal import main as pip_main  # pip 10 .. 19.2
+
+        return pip_main
+    except Exception:
+        pass
+    try:
+        from pip import main as pip_main  # pip <= 9 (PFC 6.0)
+
+        return pip_main
+    except Exception:
+        pass
+    return None
+
+
 def _run_pip(args):
-    if sys.version_info < (3, 10):
-        import pip
+    pip_main = _resolve_pip_main()
+    if pip_main is None:
+        raise RuntimeError(
+            "Could not locate pip's Python entry point in this PFC interpreter. "
+            "Install the bridge manually, then re-run this script:\n"
+            "    python -m pip install --user itasca-mcp-bridge"
+        )
 
-        return pip.main(args)
-
-    from pip._internal.cli.main import main as pip_main
-
-    # PFC 9 runs pip inside an IPython host; temporarily suppress logging
+    # PFC runs pip inside an IPython host; temporarily suppress logging
     # handler tracebacks that don't reflect actual installation failures.
     previous_raise_exceptions = logging.raiseExceptions
     logging.raiseExceptions = False
     try:
-        return pip_main(args)
+        return pip_main(list(args))
     finally:
         logging.raiseExceptions = previous_raise_exceptions
 
@@ -158,7 +190,14 @@ def main():
     if _prompt_for_upgrade(installed_version):
         code = _install_bridge()
         if code != 0:
-            raise RuntimeError("Bridge installation failed with exit code {}".format(code))
+            raise RuntimeError(
+                "Bridge installation failed (pip exit code {}). The real pip "
+                "error is in the output above this message -- read that, not "
+                "this line. Common causes: no network route to PyPI, or a "
+                "corporate proxy/firewall blocking the index. You can also "
+                "install manually and re-run this script:\n"
+                "    python -m pip install --user itasca-mcp-bridge".format(code)
+            )
     else:
         print("Skipping package upgrade.")
 

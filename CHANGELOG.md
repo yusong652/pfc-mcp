@@ -51,6 +51,18 @@ section exists.
   PFC IPython console. The status banner shows URL + log path and stops.
   Ships when pfc-mcp's pin moves past `itasca-mcp-bridge` `bc68380`.
 
+### Fixed
+- `addon.py` no longer hard-codes pip's entry point to `pip.main`. That
+  symbol exists in pip <= 9 (what PFC 6.0 ships) and was later restored
+  as an internal shim, but it was absent in pip 10.0 through ~19.x -- a
+  PFC interpreter carrying a pip from that range crashed with
+  `AttributeError` instead of installing the bridge. The bootstrap now
+  probes `pip._internal.cli.main`, `pip._internal`, and `pip.main` in
+  turn, so it works regardless of which pip the embedded Python carries.
+- A failed bridge install now points at pip's real error output and
+  offers a manual `pip install` fallback, instead of surfacing only a
+  bare `exit code 2` that hid the underlying cause.
+
 ## [0.4.0] - 2026-05-22
 
 Bridge installation path migrates from `pfc-mcp-bridge` to `itasca-mcp-bridge`.

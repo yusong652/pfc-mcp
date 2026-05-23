@@ -39,6 +39,15 @@ def register(mcp: FastMCP) -> None:
         and interleaved with Python prints in the task log, visible
         through pfc_check_task_status.
 
+        Do NOT have the script invoke `program call '<file>.p3dat'`
+        (or .p2dat / .dat). PFC's command-script interpreter blocks
+        the bridge for the script's entire duration with no cycle-gap
+        interleaving, leaving the bridge unreachable until PFC is
+        stopped manually. If the user asks to run a .dat / .p3dat /
+        .p2dat file, read the file and translate its commands into a
+        sequence of `itasca.command(...)` calls in the Python script
+        instead.
+
         This is the async / background execution path: pollable via
         pfc_check_task_status, cancellable via pfc_interrupt_task.
         Submission does not lock parameters — start with reasonable

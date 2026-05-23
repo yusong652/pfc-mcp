@@ -3,7 +3,7 @@
 ``addon.py`` runs inside PFC's embedded Python (3.6 on PFC 6/7), while this
 suite runs on the MCP package's interpreter (3.10+). These tests therefore
 guard the *control flow* of the bootstrap -- argument construction, the
-index-fallback loop, pip entry-point resolution, and the upgrade prompt --
+index-fallback loop, pip entry-point resolution, and the install gate --
 and deliberately do NOT exercise real pip behaviour or the in-PFC ``start()``
 path. Confirming the bootstrap against an actual PFC interpreter stays a
 manual step.
@@ -194,35 +194,27 @@ def test_install_bridge_honors_index_override(monkeypatch, clean_pip_env):
     assert "https://override.test/simple/" in calls[0]
 
 
-# --- _prompt_for_upgrade -------------------------------------------------
+# --- _should_install -----------------------------------------------------
 
 
-def test_prompt_for_upgrade_true_when_not_installed():
-    # No installed version -> fresh install, no prompt shown.
-    assert addon._prompt_for_upgrade(None) is True
+def test_should_install_true_when_not_installed(monkeypatch):
+    # Missing install -> always install, regardless of the AUTO_UPGRADE switch.
+    monkeypatch.setattr(addon, "AUTO_UPGRADE", False)
+
+    assert addon._should_install(None) is True
 
 
-@pytest.mark.parametrize("answer", ["y", "Y", "yes", "YES", "  yes  "])
-def test_prompt_for_upgrade_accepts_affirmative(monkeypatch, answer):
-    monkeypatch.setattr("builtins.input", lambda _prompt="": answer)
+def test_should_install_true_when_auto_upgrade_on(monkeypatch):
+    monkeypatch.setattr(addon, "AUTO_UPGRADE", True)
 
-    assert addon._prompt_for_upgrade("0.1.0") is True
-
-
-@pytest.mark.parametrize("answer", ["n", "no", "", "  ", "maybe"])
-def test_prompt_for_upgrade_rejects_non_affirmative(monkeypatch, answer):
-    monkeypatch.setattr("builtins.input", lambda _prompt="": answer)
-
-    assert addon._prompt_for_upgrade("0.1.0") is False
+    assert addon._should_install("0.1.0") is True
 
 
-def test_prompt_for_upgrade_false_when_input_unavailable(monkeypatch):
-    def no_input(_prompt=""):
-        raise EOFError("no stdin in this host")
+def test_should_install_false_when_auto_upgrade_off(monkeypatch):
+    # Pinning behaviour: an existing install with AUTO_UPGRADE off stays put.
+    monkeypatch.setattr(addon, "AUTO_UPGRADE", False)
 
-    monkeypatch.setattr("builtins.input", no_input)
-
-    assert addon._prompt_for_upgrade("0.1.0") is False
+    assert addon._should_install("0.1.0") is False
 
 
 # --- DEFAULT_INDEXES config ----------------------------------------------

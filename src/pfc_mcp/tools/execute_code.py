@@ -55,6 +55,15 @@ def register(mcp: FastMCP) -> None:
         - Create and export plots: itasca.command('plot ...')
         - Development and REPL-style testing
 
+        Do NOT invoke `program call '<file>.p3dat'` (or .p2dat / .dat)
+        through this tool. PFC's command-script interpreter blocks the
+        bridge for the script's entire duration with no cycle-gap
+        interleaving, so any long `model cycle` inside the file leaves
+        the bridge unreachable until PFC is stopped manually. If the
+        user asks to run a .dat / .p3dat / .p2dat file, read the file
+        and translate its commands into a sequence of
+        `itasca.command(...)` calls in Python instead.
+
         This is a synchronous tool: the request blocks until the code
         finishes or hits the timeout (default 10s, max 600s). Output
         is returned in full; the call is NOT tracked by pfc_list_tasks

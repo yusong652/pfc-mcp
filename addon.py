@@ -8,11 +8,13 @@ Use it inside PFC in either of these ways:
 
 What it does:
 1. Detects the currently installed `itasca-mcp-bridge`, if any
-2. Lets the user decide whether to upgrade to the latest published version
-3. Installs `itasca-mcp-bridge` automatically when it is not installed yet
-4. Ensures the user site-packages directory is importable
-5. Imports `itasca_mcp_bridge` and `websockets`
-6. Starts the bridge
+2. Installs or upgrades `itasca-mcp-bridge` according to `AUTO_UPGRADE`
+3. Ensures the user site-packages directory is importable
+4. Imports `itasca_mcp_bridge` and `websockets`
+5. Starts the bridge
+
+Set `AUTO_UPGRADE = False` near the top if you want to pin the locally
+installed version and skip the network call on every start.
 """
 
 import importlib
@@ -23,6 +25,7 @@ import sys
 
 PACKAGE_NAME = "itasca-mcp-bridge"
 PORT = 9001  # Change this to run multiple bridges on different ports
+AUTO_UPGRADE = True  # Set False to keep the locally installed version
 
 # Index URLs tried in order. Mirrors act as a fallback when the primary
 # is unreachable (corporate proxies, slow international routes).
@@ -160,20 +163,17 @@ def _import_bridge():
     return itasca_mcp_bridge, websockets
 
 
-def _prompt_for_upgrade(current_version):
+def _should_install(current_version):
     if current_version is None:
         print("{} is not installed. Installing the latest version ...".format(PACKAGE_NAME))
         return True
 
     print("Installed itasca-mcp-bridge:", current_version)
-
-    try:
-        answer = input("Update to the latest version before start? [y/N]: ")
-    except Exception:
-        print("Input unavailable. Keeping the current installation.")
-        return False
-
-    return answer.strip().lower() in ("y", "yes")
+    if AUTO_UPGRADE:
+        print("AUTO_UPGRADE is on. Checking for a newer version ...")
+        return True
+    print("AUTO_UPGRADE is off. Keeping the current installation.")
+    return False
 
 
 def main():
@@ -187,7 +187,7 @@ def main():
     if installed_bridge is not None:
         installed_version = getattr(installed_bridge, "__version__", "unknown")
 
-    if _prompt_for_upgrade(installed_version):
+    if _should_install(installed_version):
         code = _install_bridge()
         if code != 0:
             raise RuntimeError(
@@ -198,8 +198,6 @@ def main():
                 "install manually and re-run this script:\n"
                 "    python -m pip install --user itasca-mcp-bridge".format(code)
             )
-    else:
-        print("Skipping package upgrade.")
 
     itasca_mcp_bridge, websockets = _import_bridge()
 

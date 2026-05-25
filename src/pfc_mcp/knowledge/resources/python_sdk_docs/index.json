@@ -730,7 +730,11 @@
         "BallFacetContact",
         "BallPebbleContact",
         "PebblePebbleContact",
-        "PebbleFacetContact"
+        "PebbleFacetContact",
+        "BallRBlockContact",
+        "PebbleRBlockContact",
+        "RBlockFacetContact",
+        "RBlockRBlockContact"
       ],
       "methods": [
         "activate",

@@ -257,11 +257,7 @@ def _browse_module(module_path: str) -> dict[str, Any]:
         summary={
             "count": len(function_names),
             "module_path": module_path,
-            "module": {
-                key: value
-                for key, value in module_data.items()
-                if key != "functions"
-            },
+            "module": {key: value for key, value in module_data.items() if key != "functions"},
             "related_objects": sorted(related_objects),
         },
     )

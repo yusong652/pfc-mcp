@@ -175,7 +175,9 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
                 "available_categories": sorted(categories.keys()),
             }
 
-        available_cmds = [cmd_meta.get("name") for cmd_meta, _cmd_doc in _iter_available_category_commands(category, version)]
+        available_cmds = [
+            cmd_meta.get("name") for cmd_meta, _cmd_doc in _iter_available_category_commands(category, version)
+        ]
         return {
             "source": "commands",
             "action": "browse",

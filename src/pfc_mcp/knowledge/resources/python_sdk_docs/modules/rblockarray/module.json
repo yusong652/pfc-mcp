@@ -1,0 +1,1732 @@
+{
+  "module": "itasca.rblockarray",
+  "description": "Vectorized NumPy array access for rigid block attributes.",
+  "import_statement": "import itasca as it",
+  "versions": [
+    "6.0",
+    "7.0",
+    "9.0"
+  ],
+  "functions": [
+    {
+      "name": "damp",
+      "signature": "itasca.rblockarray.damp () -> array float{rblock}.",
+      "description": "Get a numpy array of the rblock local damping.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock}",
+        "description": "array float{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.damp()",
+          "description": "Call rblockarray.damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "density",
+      "signature": "itasca.rblockarray.density () -> array float{rblock}.",
+      "description": "Get a numpy array of the rblock density.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock}",
+        "description": "array float{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.density()",
+          "description": "Call rblockarray.density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.rblockarray.disp () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock displacement.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.disp()",
+          "description": "Call rblockarray.disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "euler",
+      "signature": "itasca.rblockarray.euler () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock orientation.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.euler()",
+          "description": "Call rblockarray.euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.rblockarray.extra (slot : int) -> array float{rblock} or float{rblock,3}.",
+      "description": "Get the rblock extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array float{rblock} or float{rblock,3}",
+        "description": "array float{rblock} or float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.extra()",
+          "description": "Call rblockarray.extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "fill_damp",
+      "signature": "itasca.rblockarray.fill_damp (data: array float{rblock}) -> None.",
+      "description": "Fill an existing array with the rblock local damping. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.damp())\nit.rblockarray.fill_damp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_density",
+      "signature": "itasca.rblockarray.fill_density (data: array float{rblock}) -> None.",
+      "description": "Fill an existing array with the rblock density. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.density())\nit.rblockarray.fill_density(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.rblockarray.fill_disp (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.disp())\nit.rblockarray.fill_disp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_euler",
+      "signature": "itasca.rblockarray.fill_euler (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock orientation. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.euler())\nit.rblockarray.fill_euler(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_app",
+      "signature": "itasca.rblockarray.fill_force_app (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock applied force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.force_app())\nit.rblockarray.fill_force_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_contact",
+      "signature": "itasca.rblockarray.fill_force_contact (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock contact force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.force_contact())\nit.rblockarray.fill_force_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_unbal",
+      "signature": "itasca.rblockarray.fill_force_unbal (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock unbalanced force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.force_unbal())\nit.rblockarray.fill_force_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass",
+      "signature": "itasca.rblockarray.fill_mass (data: array float{rblock}) -> None.",
+      "description": "Fill an existing array with the inertial rblock mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.mass())\nit.rblockarray.fill_mass(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass_real",
+      "signature": "itasca.rblockarray.fill_mass_real (data: array float{rblock}) -> None.",
+      "description": "Fill an existing array with the real (gravitational) rblock mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.mass_real())\nit.rblockarray.fill_mass_real(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moi_prin",
+      "signature": "itasca.rblockarray.fill_moi_prin (value : float) -> None.",
+      "description": "Get the x-component of the rblock principal moment of inertia.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "value argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.moi_prin())\nit.rblockarray.fill_moi_prin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moi_prin_real",
+      "signature": "itasca.rblockarray.fill_moi_prin_real (data: array float{rblock,dim}) -> None.",
+      "description": "Fill an existing array with the rblock principal moments of inertia. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.moi_prin_real())\nit.rblockarray.fill_moi_prin_real(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_app",
+      "signature": "itasca.rblockarray.fill_moment_app (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock applied moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.moment_app())\nit.rblockarray.fill_moment_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_contact",
+      "signature": "itasca.rblockarray.fill_moment_contact (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock contact moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.moment_contact())\nit.rblockarray.fill_moment_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_unbal",
+      "signature": "itasca.rblockarray.fill_moment_unbal (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock unbalanced moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.moment_unbal())\nit.rblockarray.fill_moment_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.rblockarray.fill_pos (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.pos())\nit.rblockarray.fill_pos(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_spin",
+      "signature": "itasca.rblockarray.fill_spin (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock angular velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.spin())\nit.rblockarray.fill_spin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.rblockarray.fill_vel (data: array float{rblock, 3}) -> None.",
+      "description": "Fill an existing array with the rblock velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.vel())\nit.rblockarray.fill_vel(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vol",
+      "signature": "itasca.rblockarray.fill_vol (data: array float{rblock}) -> None.",
+      "description": "Fill an existing array with the rblock volume. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.vol())\nit.rblockarray.fill_vol(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "force_app",
+      "signature": "itasca.rblockarray.force_app () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock applied force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.force_app()",
+          "description": "Call rblockarray.force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_contact",
+      "signature": "itasca.rblockarray.force_contact () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock contact force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.force_contact()",
+          "description": "Call rblockarray.force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_unbal",
+      "signature": "itasca.rblockarray.force_unbal () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock unbalanced force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.force_unbal()",
+          "description": "Call rblockarray.force_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.rblockarray.ids () -> array int{rblock}.",
+      "description": "Get the rblock ids as an array.",
+      "parameters": [],
+      "returns": {
+        "type": "array int{rblock}",
+        "description": "array int{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.ids()",
+          "description": "Call rblockarray.ids."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.rblockarray.in_group (group_name : str, slot = 1) -> array bool{rblock}.",
+      "description": "Return rblock group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array bool{rblock}",
+        "description": "array bool{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.in_group()",
+          "description": "Call rblockarray.in_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass",
+      "signature": "itasca.rblockarray.mass () -> array float{rblock}.",
+      "description": "Get a numpy array of the inertial rblock mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock}",
+        "description": "array float{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.mass()",
+          "description": "Call rblockarray.mass."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass_real",
+      "signature": "itasca.rblockarray.mass_real () -> array float{rblock}.",
+      "description": "Get a numpy array of the real (gravitational) rblock mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock}",
+        "description": "array float{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.mass_real()",
+          "description": "Call rblockarray.mass_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moi_prin",
+      "signature": "itasca.rblockarray.moi_prin (value : vec) -> None.",
+      "description": "Get the rblock principal moment of inertia. (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "value argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.moi_prin()",
+          "description": "Call rblockarray.moi_prin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "moi_prin_real",
+      "signature": "itasca.rblockarray.moi_prin_real () -> array float{rblock,dim}.",
+      "description": "Get a numpy array of the rblock principal moments of inertia.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,dim}",
+        "description": "array float{rblock,dim}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.moi_prin_real()",
+          "description": "Call rblockarray.moi_prin_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_app",
+      "signature": "itasca.rblockarray.moment_app () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock applied moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.moment_app()",
+          "description": "Call rblockarray.moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_contact",
+      "signature": "itasca.rblockarray.moment_contact () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock contact moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.moment_contact()",
+          "description": "Call rblockarray.moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_unbal",
+      "signature": "itasca.rblockarray.moment_unbal () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock unbalanced moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.moment_unbal()",
+          "description": "Call rblockarray.moment_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.rblockarray.pos () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock centroid location.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.rblockarray.pos()",
+          "description": "Read positions for all current items as a NumPy array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "set_damp",
+      "signature": "itasca.rblockarray.set_damp (data: array float{rblock}) -> None.",
+      "description": "Set the rblock local damping from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_damp()",
+          "description": "Call rblockarray.set_damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_density",
+      "signature": "itasca.rblockarray.set_density (data: array float{rblock}) -> None.",
+      "description": "Set the rblock density from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_density()",
+          "description": "Call rblockarray.set_density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.rblockarray.set_disp (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_disp()",
+          "description": "Call rblockarray.set_disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_euler",
+      "signature": "itasca.rblockarray.set_euler (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock orientation from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_euler()",
+          "description": "Call rblockarray.set_euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.rblockarray.set_extra (slot: int, data: array float{rblock} or float{rblock, 3}) -> None.",
+      "description": "Set the rblock extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        },
+        {
+          "name": "data",
+          "type": "array float{rblock} or float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_extra()",
+          "description": "Call rblockarray.set_extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "set_force_app",
+      "signature": "itasca.rblockarray.set_force_app (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock applied force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_force_app()",
+          "description": "Call rblockarray.set_force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "itasca.rblockarray.set_force_contact (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock contact force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_force_contact()",
+          "description": "Call rblockarray.set_force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.rblockarray.set_group (membership: array bool{rblock}, group_name: str, slot=1) -> None.",
+      "description": "Set rblock group from an array. Where membership True set the corresponding rblock to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{rblock}",
+          "required": true,
+          "description": "membership argument."
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_group()",
+          "description": "Call rblockarray.set_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moi_prin_real",
+      "signature": "itasca.rblockarray.set_moi_prin_real (data: array float{rblock,dim}) -> None.",
+      "description": "Set the rblock principal moments of inertia from an array. When modified no other rblock attributes are changed (e.g., pebble sizes, rblock volume, etc.). The specification of the moment of inertia in this way results in the principal moments of inertia being in a fixed state so that they will not be automatically updated when scaling a rblock unless the user changes the fix state.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_moi_prin_real()",
+          "description": "Call rblockarray.set_moi_prin_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_app",
+      "signature": "itasca.rblockarray.set_moment_app (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock applied moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_moment_app()",
+          "description": "Call rblockarray.set_moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "itasca.rblockarray.set_moment_contact (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock contact moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_moment_contact()",
+          "description": "Call rblockarray.set_moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.rblockarray.set_pos (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock centroid location from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.rblockarray.pos()\npositions[:, 2] += 0.1\nit.rblockarray.set_pos(positions)",
+          "description": "Modify positions in bulk and write them back."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_spin",
+      "signature": "itasca.rblockarray.set_spin (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock angular velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_spin()",
+          "description": "Call rblockarray.set_spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.rblockarray.set_vel (data: array float{rblock, 3}) -> None.",
+      "description": "Set the rblock velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_vel()",
+          "description": "Call rblockarray.set_vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vol",
+      "signature": "itasca.rblockarray.set_vol (data: array float{rblock}) -> None.",
+      "description": "Set the rblock volume from an array. In 2D this is the volume per unit thickness. When modified no other rblock attributes are changed (e.g., moment of inertia, pebble sizes, etc.). The specification of the volume in this way results in the principal moments of inertia being in a fixed state so that they will not be automatically updated when scaling a rblock unless the user changes the fix state.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{rblock}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.set_vol()",
+          "description": "Call rblockarray.set_vol."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "spin",
+      "signature": "itasca.rblockarray.spin () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock angular velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.spin()",
+          "description": "Call rblockarray.spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.rblockarray.vel () -> array float{rblock,3}.",
+      "description": "Get a numpy array of the rblock velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock,3}",
+        "description": "array float{rblock,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.vel()",
+          "description": "Call rblockarray.vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vol",
+      "signature": "itasca.rblockarray.vol () -> array float{rblock}.",
+      "description": "Get a numpy array of the rblock volume.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{rblock}",
+        "description": "array float{rblock}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.rblockarray.vol()",
+          "description": "Call rblockarray.vol."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    }
+  ]
+}

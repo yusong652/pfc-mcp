@@ -1,0 +1,1732 @@
+{
+  "module": "itasca.clumparray",
+  "description": "Vectorized NumPy array access for clump attributes.",
+  "import_statement": "import itasca as it",
+  "versions": [
+    "6.0",
+    "7.0",
+    "9.0"
+  ],
+  "functions": [
+    {
+      "name": "damp",
+      "signature": "itasca.clumparray.damp () -> array float{clump}.",
+      "description": "Get a numpy array of the clump local damping.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump}",
+        "description": "array float{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.damp()",
+          "description": "Call clumparray.damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "density",
+      "signature": "itasca.clumparray.density () -> array float{clump}.",
+      "description": "Get a numpy array of the clump density.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump}",
+        "description": "array float{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.density()",
+          "description": "Call clumparray.density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.clumparray.disp () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump displacement.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.disp()",
+          "description": "Call clumparray.disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "euler",
+      "signature": "itasca.clumparray.euler () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump orientation.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.euler()",
+          "description": "Call clumparray.euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.clumparray.extra (slot : int) -> array float{clump} or float{clump,3}.",
+      "description": "Get the clump extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array float{clump} or float{clump,3}",
+        "description": "array float{clump} or float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.extra()",
+          "description": "Call clumparray.extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "fill_damp",
+      "signature": "itasca.clumparray.fill_damp (data: array float{clump}) -> None.",
+      "description": "Fill an existing array with the clump local damping. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.damp())\nit.clumparray.fill_damp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_density",
+      "signature": "itasca.clumparray.fill_density (data: array float{clump}) -> None.",
+      "description": "Fill an existing array with the clump density. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.density())\nit.clumparray.fill_density(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.clumparray.fill_disp (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.disp())\nit.clumparray.fill_disp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_euler",
+      "signature": "itasca.clumparray.fill_euler (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump orientation. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.euler())\nit.clumparray.fill_euler(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_app",
+      "signature": "itasca.clumparray.fill_force_app (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump applied force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.force_app())\nit.clumparray.fill_force_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_contact",
+      "signature": "itasca.clumparray.fill_force_contact (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump contact force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.force_contact())\nit.clumparray.fill_force_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_unbal",
+      "signature": "itasca.clumparray.fill_force_unbal (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump unbalanced force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.force_unbal())\nit.clumparray.fill_force_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass",
+      "signature": "itasca.clumparray.fill_mass (data: array float{clump}) -> None.",
+      "description": "Fill an existing array with the inertial clump mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.mass())\nit.clumparray.fill_mass(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass_real",
+      "signature": "itasca.clumparray.fill_mass_real (data: array float{clump}) -> None.",
+      "description": "Fill an existing array with the real (gravitational) clump mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.mass_real())\nit.clumparray.fill_mass_real(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moi_prin",
+      "signature": "itasca.clumparray.fill_moi_prin (value : float) -> None.",
+      "description": "Get the x-component of the clump principal moment of inertia.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "value argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.moi_prin())\nit.clumparray.fill_moi_prin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moi_prin_real",
+      "signature": "itasca.clumparray.fill_moi_prin_real (data: array float{clump,dim}) -> None.",
+      "description": "Fill an existing array with the clump principal moments of inertia. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.moi_prin_real())\nit.clumparray.fill_moi_prin_real(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_app",
+      "signature": "itasca.clumparray.fill_moment_app (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump applied moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.moment_app())\nit.clumparray.fill_moment_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_contact",
+      "signature": "itasca.clumparray.fill_moment_contact (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump contact moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.moment_contact())\nit.clumparray.fill_moment_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_unbal",
+      "signature": "itasca.clumparray.fill_moment_unbal (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump unbalanced moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.moment_unbal())\nit.clumparray.fill_moment_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.clumparray.fill_pos (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.pos())\nit.clumparray.fill_pos(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_spin",
+      "signature": "itasca.clumparray.fill_spin (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump angular velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.spin())\nit.clumparray.fill_spin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.clumparray.fill_vel (data: array float{clump, 3}) -> None.",
+      "description": "Fill an existing array with the clump velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.vel())\nit.clumparray.fill_vel(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vol",
+      "signature": "itasca.clumparray.fill_vol (data: array float{clump}) -> None.",
+      "description": "Fill an existing array with the clump volume. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.vol())\nit.clumparray.fill_vol(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "force_app",
+      "signature": "itasca.clumparray.force_app () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump applied force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.force_app()",
+          "description": "Call clumparray.force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_contact",
+      "signature": "itasca.clumparray.force_contact () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump contact force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.force_contact()",
+          "description": "Call clumparray.force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_unbal",
+      "signature": "itasca.clumparray.force_unbal () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump unbalanced force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.force_unbal()",
+          "description": "Call clumparray.force_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.clumparray.ids () -> array int{clump}.",
+      "description": "Get the clump ids as an array.",
+      "parameters": [],
+      "returns": {
+        "type": "array int{clump}",
+        "description": "array int{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.ids()",
+          "description": "Call clumparray.ids."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.clumparray.in_group (group_name : str, slot = 1) -> array bool{clump}.",
+      "description": "Return clump group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array bool{clump}",
+        "description": "array bool{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.in_group()",
+          "description": "Call clumparray.in_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass",
+      "signature": "itasca.clumparray.mass () -> array float{clump}.",
+      "description": "Get a numpy array of the inertial clump mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump}",
+        "description": "array float{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.mass()",
+          "description": "Call clumparray.mass."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass_real",
+      "signature": "itasca.clumparray.mass_real () -> array float{clump}.",
+      "description": "Get a numpy array of the real (gravitational) clump mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump}",
+        "description": "array float{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.mass_real()",
+          "description": "Call clumparray.mass_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moi_prin",
+      "signature": "itasca.clumparray.moi_prin (value : vec) -> None.",
+      "description": "Get the clump principal moment of inertia. (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true,
+          "description": "value argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.moi_prin()",
+          "description": "Call clumparray.moi_prin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "moi_prin_real",
+      "signature": "itasca.clumparray.moi_prin_real () -> array float{clump,dim}.",
+      "description": "Get a numpy array of the clump principal moments of inertia.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,dim}",
+        "description": "array float{clump,dim}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.moi_prin_real()",
+          "description": "Call clumparray.moi_prin_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_app",
+      "signature": "itasca.clumparray.moment_app () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump applied moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.moment_app()",
+          "description": "Call clumparray.moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_contact",
+      "signature": "itasca.clumparray.moment_contact () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump contact moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.moment_contact()",
+          "description": "Call clumparray.moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_unbal",
+      "signature": "itasca.clumparray.moment_unbal () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump unbalanced moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.moment_unbal()",
+          "description": "Call clumparray.moment_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.clumparray.pos () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump centroid location.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.clumparray.pos()",
+          "description": "Read positions for all current items as a NumPy array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "set_damp",
+      "signature": "itasca.clumparray.set_damp (data: array float{clump}) -> None.",
+      "description": "Set the clump local damping from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_damp()",
+          "description": "Call clumparray.set_damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_density",
+      "signature": "itasca.clumparray.set_density (data: array float{clump}) -> None.",
+      "description": "Set the clump density from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_density()",
+          "description": "Call clumparray.set_density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.clumparray.set_disp (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_disp()",
+          "description": "Call clumparray.set_disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_euler",
+      "signature": "itasca.clumparray.set_euler (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump orientation from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_euler()",
+          "description": "Call clumparray.set_euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.clumparray.set_extra (slot: int, data: array float{clump} or float{clump, 3}) -> None.",
+      "description": "Set the clump extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        },
+        {
+          "name": "data",
+          "type": "array float{clump} or float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_extra()",
+          "description": "Call clumparray.set_extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "set_force_app",
+      "signature": "itasca.clumparray.set_force_app (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump applied force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_force_app()",
+          "description": "Call clumparray.set_force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "itasca.clumparray.set_force_contact (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump contact force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_force_contact()",
+          "description": "Call clumparray.set_force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.clumparray.set_group (membership: array bool{clump}, group_name: str, slot=1) -> None.",
+      "description": "Set clump group from an array. Where membership True set the corresponding clump to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{clump}",
+          "required": true,
+          "description": "membership argument."
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_group()",
+          "description": "Call clumparray.set_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moi_prin_real",
+      "signature": "itasca.clumparray.set_moi_prin_real (data: array float{clump,dim}) -> None.",
+      "description": "Set the clump principal moments of inertia from an array. When modified no other clump attributes are changed (e.g., pebble sizes, clump volume, etc.). The specification of the moment of inertia in this way results in the principal moments of inertia being in a fixed state so that they will not be automatically updated when scaling a clump unless the user changes the fix state.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_moi_prin_real()",
+          "description": "Call clumparray.set_moi_prin_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_app",
+      "signature": "itasca.clumparray.set_moment_app (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump applied moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_moment_app()",
+          "description": "Call clumparray.set_moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "itasca.clumparray.set_moment_contact (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump contact moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_moment_contact()",
+          "description": "Call clumparray.set_moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.clumparray.set_pos (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump centroid location from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.clumparray.pos()\npositions[:, 2] += 0.1\nit.clumparray.set_pos(positions)",
+          "description": "Modify positions in bulk and write them back."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_spin",
+      "signature": "itasca.clumparray.set_spin (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump angular velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_spin()",
+          "description": "Call clumparray.set_spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.clumparray.set_vel (data: array float{clump, 3}) -> None.",
+      "description": "Set the clump velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_vel()",
+          "description": "Call clumparray.set_vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vol",
+      "signature": "itasca.clumparray.set_vol (data: array float{clump}) -> None.",
+      "description": "Set the clump volume from an array. In 2D this is the volume per unit thickness. When modified no other clump attributes are changed (e.g., moment of inertia, pebble sizes, etc.). The specification of the volume in this way results in the principal moments of inertia being in a fixed state so that they will not be automatically updated when scaling a clump unless the user changes the fix state.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{clump}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.set_vol()",
+          "description": "Call clumparray.set_vol."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "spin",
+      "signature": "itasca.clumparray.spin () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump angular velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.spin()",
+          "description": "Call clumparray.spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.clumparray.vel () -> array float{clump,3}.",
+      "description": "Get a numpy array of the clump velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump,3}",
+        "description": "array float{clump,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.vel()",
+          "description": "Call clumparray.vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vol",
+      "signature": "itasca.clumparray.vol () -> array float{clump}.",
+      "description": "Get a numpy array of the clump volume.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{clump}",
+        "description": "array float{clump}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.clumparray.vol()",
+          "description": "Call clumparray.vol."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    }
+  ]
+}

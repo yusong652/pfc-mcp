@@ -46,7 +46,7 @@ def register(mcp: FastMCP) -> None:
         - pfc_query_command: Search commands by keywords (when path unknown)
         - pfc_browse_reference: Browse reference docs (e.g., "contact-models linear")
         """
-        cmd = normalize_input(command)
+        cmd = normalize_input(command, lowercase=True)
         version_value = normalize_command_doc_version(version)
 
         if not cmd:
@@ -175,9 +175,9 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
                 "available_categories": sorted(categories.keys()),
             }
 
-        cat_data = categories[category]
-        commands = cat_data.get("commands", [])
-        available_cmds = [cmd.get("name") for cmd in commands]
+        available_cmds = [
+            cmd_meta.get("name") for cmd_meta, _cmd_doc in _iter_available_category_commands(category, version)
+        ]
         return {
             "source": "commands",
             "action": "browse",

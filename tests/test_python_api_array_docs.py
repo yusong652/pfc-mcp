@@ -1,0 +1,87 @@
+"""Integrity tests for vectorized Python array API documentation."""
+
+import json
+from pathlib import Path
+from typing import Any
+
+from pfc_mcp.knowledge.config import PFC_DOCS_SOURCE
+from pfc_mcp.knowledge.python_api.loader import DocumentationLoader
+
+ARRAY_MODULES = {
+    "ballarray",
+    "clumparray",
+    "wallarray",
+    "rblockarray",
+    "ballballarray",
+    "ballfacetarray",
+    "ballpebblearray",
+    "pebblepebblearray",
+    "pebblefacetarray",
+}
+
+
+def _load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def setup_function() -> None:
+    DocumentationLoader.clear_cache()
+
+
+def test_array_modules_load_from_index() -> None:
+    index = DocumentationLoader.load_index()
+
+    for module in ARRAY_MODULES:
+        assert module in index["modules"]
+        doc = DocumentationLoader.load_module(module)
+        assert doc is not None
+        assert doc["module"] == f"itasca.{module}"
+        assert any(func["name"] == "pos" for func in doc["functions"])
+
+
+def test_ballarray_full_module_doc_loads_without_truncation_at_loader_layer() -> None:
+    doc = DocumentationLoader.load_module("ballarray")
+
+    assert doc is not None
+    function_names = {func["name"] for func in doc["functions"]}
+    assert "pos" in function_names
+    assert "set_pos" in function_names
+
+
+def test_array_quick_refs_resolve_to_existing_functions() -> None:
+    index = DocumentationLoader.load_index()
+
+    for api_path, ref in index["quick_ref"].items():
+        if not any(api_path.startswith(f"itasca.{module}.") for module in ARRAY_MODULES):
+            continue
+
+        file_name, anchor = ref.split("#", 1)
+        doc_path = PFC_DOCS_SOURCE / file_name
+        assert doc_path.exists(), api_path
+
+        doc = _load_json(doc_path)
+        function_names = {func["name"] for func in doc.get("functions", [])}
+        assert anchor in function_names, api_path
+
+
+def test_array_keywords_point_to_quick_ref_entries() -> None:
+    index = DocumentationLoader.load_index()
+    quick_ref = index["quick_ref"]
+
+    for module in ARRAY_MODULES:
+        keywords_path = PFC_DOCS_SOURCE / "modules" / module / "keywords.json"
+        keywords = _load_json(keywords_path)["keywords"]
+        for api_list in keywords.values():
+            assert isinstance(api_list, list)
+            for api_path in api_list:
+                assert api_path in quick_ref, api_path
+
+
+def test_array_modules_advertise_all_three_versions() -> None:
+    for module in ARRAY_MODULES:
+        doc = DocumentationLoader.load_module(module)
+        assert doc is not None
+        for func in doc["functions"]:
+            assert func["availability"]["versions"] == ["6.0", "7.0", "9.0"], (
+                f"{module}.{func['name']} unexpectedly version-gated"
+            )

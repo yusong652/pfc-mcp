@@ -1,0 +1,348 @@
+{
+  "module": "clumparray",
+  "description": "Natural language keywords for clumparray vectorized array API search",
+  "keywords": {
+    "clumparray array": [
+      "itasca.clumparray.damp",
+      "itasca.clumparray.density",
+      "itasca.clumparray.disp",
+      "itasca.clumparray.euler",
+      "itasca.clumparray.extra",
+      "itasca.clumparray.fill_damp",
+      "itasca.clumparray.fill_density",
+      "itasca.clumparray.fill_disp",
+      "itasca.clumparray.fill_euler",
+      "itasca.clumparray.fill_force_app",
+      "itasca.clumparray.fill_force_contact",
+      "itasca.clumparray.fill_force_unbal",
+      "itasca.clumparray.fill_mass",
+      "itasca.clumparray.fill_mass_real",
+      "itasca.clumparray.fill_moi_prin",
+      "itasca.clumparray.fill_moi_prin_real",
+      "itasca.clumparray.fill_moment_app",
+      "itasca.clumparray.fill_moment_contact",
+      "itasca.clumparray.fill_moment_unbal",
+      "itasca.clumparray.fill_pos",
+      "itasca.clumparray.fill_spin",
+      "itasca.clumparray.fill_vel",
+      "itasca.clumparray.fill_vol",
+      "itasca.clumparray.force_app",
+      "itasca.clumparray.force_contact",
+      "itasca.clumparray.force_unbal",
+      "itasca.clumparray.ids",
+      "itasca.clumparray.in_group",
+      "itasca.clumparray.mass",
+      "itasca.clumparray.mass_real",
+      "itasca.clumparray.moi_prin",
+      "itasca.clumparray.moi_prin_real",
+      "itasca.clumparray.moment_app",
+      "itasca.clumparray.moment_contact",
+      "itasca.clumparray.moment_unbal",
+      "itasca.clumparray.pos",
+      "itasca.clumparray.set_damp",
+      "itasca.clumparray.set_density",
+      "itasca.clumparray.set_disp",
+      "itasca.clumparray.set_euler",
+      "itasca.clumparray.set_extra",
+      "itasca.clumparray.set_force_app",
+      "itasca.clumparray.set_force_contact",
+      "itasca.clumparray.set_group",
+      "itasca.clumparray.set_moi_prin_real",
+      "itasca.clumparray.set_moment_app",
+      "itasca.clumparray.set_moment_contact",
+      "itasca.clumparray.set_pos",
+      "itasca.clumparray.set_spin",
+      "itasca.clumparray.set_vel",
+      "itasca.clumparray.set_vol",
+      "itasca.clumparray.spin",
+      "itasca.clumparray.vel",
+      "itasca.clumparray.vol"
+    ],
+    "array api": [
+      "itasca.clumparray.damp",
+      "itasca.clumparray.density",
+      "itasca.clumparray.disp",
+      "itasca.clumparray.euler",
+      "itasca.clumparray.extra",
+      "itasca.clumparray.fill_damp",
+      "itasca.clumparray.fill_density",
+      "itasca.clumparray.fill_disp",
+      "itasca.clumparray.fill_euler",
+      "itasca.clumparray.fill_force_app",
+      "itasca.clumparray.fill_force_contact",
+      "itasca.clumparray.fill_force_unbal",
+      "itasca.clumparray.fill_mass",
+      "itasca.clumparray.fill_mass_real",
+      "itasca.clumparray.fill_moi_prin",
+      "itasca.clumparray.fill_moi_prin_real",
+      "itasca.clumparray.fill_moment_app",
+      "itasca.clumparray.fill_moment_contact",
+      "itasca.clumparray.fill_moment_unbal",
+      "itasca.clumparray.fill_pos",
+      "itasca.clumparray.fill_spin",
+      "itasca.clumparray.fill_vel",
+      "itasca.clumparray.fill_vol",
+      "itasca.clumparray.force_app",
+      "itasca.clumparray.force_contact",
+      "itasca.clumparray.force_unbal",
+      "itasca.clumparray.ids",
+      "itasca.clumparray.in_group",
+      "itasca.clumparray.mass",
+      "itasca.clumparray.mass_real",
+      "itasca.clumparray.moi_prin",
+      "itasca.clumparray.moi_prin_real",
+      "itasca.clumparray.moment_app",
+      "itasca.clumparray.moment_contact",
+      "itasca.clumparray.moment_unbal",
+      "itasca.clumparray.pos",
+      "itasca.clumparray.set_damp",
+      "itasca.clumparray.set_density",
+      "itasca.clumparray.set_disp",
+      "itasca.clumparray.set_euler",
+      "itasca.clumparray.set_extra",
+      "itasca.clumparray.set_force_app",
+      "itasca.clumparray.set_force_contact",
+      "itasca.clumparray.set_group",
+      "itasca.clumparray.set_moi_prin_real",
+      "itasca.clumparray.set_moment_app",
+      "itasca.clumparray.set_moment_contact",
+      "itasca.clumparray.set_pos",
+      "itasca.clumparray.set_spin",
+      "itasca.clumparray.set_vel",
+      "itasca.clumparray.set_vol",
+      "itasca.clumparray.spin",
+      "itasca.clumparray.vel",
+      "itasca.clumparray.vol"
+    ],
+    "array position": [
+      "itasca.clumparray.fill_pos",
+      "itasca.clumparray.pos",
+      "itasca.clumparray.set_pos"
+    ],
+    "clumparray position": [
+      "itasca.clumparray.fill_pos",
+      "itasca.clumparray.pos",
+      "itasca.clumparray.set_pos"
+    ],
+    "array force": [
+      "itasca.clumparray.fill_force_app",
+      "itasca.clumparray.fill_force_contact",
+      "itasca.clumparray.fill_force_unbal",
+      "itasca.clumparray.force_app",
+      "itasca.clumparray.force_contact",
+      "itasca.clumparray.force_unbal",
+      "itasca.clumparray.set_force_app",
+      "itasca.clumparray.set_force_contact"
+    ],
+    "clumparray force": [
+      "itasca.clumparray.fill_force_app",
+      "itasca.clumparray.fill_force_contact",
+      "itasca.clumparray.fill_force_unbal",
+      "itasca.clumparray.force_app",
+      "itasca.clumparray.force_contact",
+      "itasca.clumparray.force_unbal",
+      "itasca.clumparray.set_force_app",
+      "itasca.clumparray.set_force_contact"
+    ],
+    "array moment": [
+      "itasca.clumparray.fill_moment_app",
+      "itasca.clumparray.fill_moment_contact",
+      "itasca.clumparray.fill_moment_unbal",
+      "itasca.clumparray.moment_app",
+      "itasca.clumparray.moment_contact",
+      "itasca.clumparray.moment_unbal",
+      "itasca.clumparray.set_moment_app",
+      "itasca.clumparray.set_moment_contact"
+    ],
+    "clumparray moment": [
+      "itasca.clumparray.fill_moment_app",
+      "itasca.clumparray.fill_moment_contact",
+      "itasca.clumparray.fill_moment_unbal",
+      "itasca.clumparray.moment_app",
+      "itasca.clumparray.moment_contact",
+      "itasca.clumparray.moment_unbal",
+      "itasca.clumparray.set_moment_app",
+      "itasca.clumparray.set_moment_contact"
+    ],
+    "array group": [
+      "itasca.clumparray.in_group",
+      "itasca.clumparray.set_group"
+    ],
+    "clumparray group": [
+      "itasca.clumparray.in_group",
+      "itasca.clumparray.set_group"
+    ],
+    "array extra": [
+      "itasca.clumparray.extra",
+      "itasca.clumparray.set_extra"
+    ],
+    "clumparray extra": [
+      "itasca.clumparray.extra"
+    ],
+    "array id": [
+      "itasca.clumparray.ids"
+    ],
+    "clumparray id": [
+      "itasca.clumparray.ids"
+    ],
+    "clumparray damp": [
+      "itasca.clumparray.damp"
+    ],
+    "clumparray density": [
+      "itasca.clumparray.density"
+    ],
+    "clumparray disp": [
+      "itasca.clumparray.disp"
+    ],
+    "clumparray euler": [
+      "itasca.clumparray.euler"
+    ],
+    "clumparray fill damp": [
+      "itasca.clumparray.fill_damp"
+    ],
+    "clumparray fill density": [
+      "itasca.clumparray.fill_density"
+    ],
+    "clumparray fill disp": [
+      "itasca.clumparray.fill_disp"
+    ],
+    "clumparray fill euler": [
+      "itasca.clumparray.fill_euler"
+    ],
+    "clumparray fill force app": [
+      "itasca.clumparray.fill_force_app"
+    ],
+    "clumparray fill force contact": [
+      "itasca.clumparray.fill_force_contact"
+    ],
+    "clumparray fill force unbal": [
+      "itasca.clumparray.fill_force_unbal"
+    ],
+    "clumparray fill mass": [
+      "itasca.clumparray.fill_mass"
+    ],
+    "clumparray fill mass real": [
+      "itasca.clumparray.fill_mass_real"
+    ],
+    "clumparray fill moi prin": [
+      "itasca.clumparray.fill_moi_prin"
+    ],
+    "clumparray fill moi prin real": [
+      "itasca.clumparray.fill_moi_prin_real"
+    ],
+    "clumparray fill moment app": [
+      "itasca.clumparray.fill_moment_app"
+    ],
+    "clumparray fill moment contact": [
+      "itasca.clumparray.fill_moment_contact"
+    ],
+    "clumparray fill moment unbal": [
+      "itasca.clumparray.fill_moment_unbal"
+    ],
+    "clumparray fill pos": [
+      "itasca.clumparray.fill_pos"
+    ],
+    "clumparray fill spin": [
+      "itasca.clumparray.fill_spin"
+    ],
+    "clumparray fill vel": [
+      "itasca.clumparray.fill_vel"
+    ],
+    "clumparray fill vol": [
+      "itasca.clumparray.fill_vol"
+    ],
+    "clumparray force app": [
+      "itasca.clumparray.force_app"
+    ],
+    "clumparray force contact": [
+      "itasca.clumparray.force_contact"
+    ],
+    "clumparray force unbal": [
+      "itasca.clumparray.force_unbal"
+    ],
+    "clumparray ids": [
+      "itasca.clumparray.ids"
+    ],
+    "clumparray in group": [
+      "itasca.clumparray.in_group"
+    ],
+    "clumparray mass": [
+      "itasca.clumparray.mass"
+    ],
+    "clumparray mass real": [
+      "itasca.clumparray.mass_real"
+    ],
+    "clumparray moi prin": [
+      "itasca.clumparray.moi_prin"
+    ],
+    "clumparray moi prin real": [
+      "itasca.clumparray.moi_prin_real"
+    ],
+    "clumparray moment app": [
+      "itasca.clumparray.moment_app"
+    ],
+    "clumparray moment contact": [
+      "itasca.clumparray.moment_contact"
+    ],
+    "clumparray moment unbal": [
+      "itasca.clumparray.moment_unbal"
+    ],
+    "clumparray pos": [
+      "itasca.clumparray.pos"
+    ],
+    "clumparray set damp": [
+      "itasca.clumparray.set_damp"
+    ],
+    "clumparray set density": [
+      "itasca.clumparray.set_density"
+    ],
+    "clumparray set disp": [
+      "itasca.clumparray.set_disp"
+    ],
+    "clumparray set euler": [
+      "itasca.clumparray.set_euler"
+    ],
+    "clumparray set extra": [
+      "itasca.clumparray.set_extra"
+    ],
+    "clumparray set force app": [
+      "itasca.clumparray.set_force_app"
+    ],
+    "clumparray set force contact": [
+      "itasca.clumparray.set_force_contact"
+    ],
+    "clumparray set group": [
+      "itasca.clumparray.set_group"
+    ],
+    "clumparray set moi prin real": [
+      "itasca.clumparray.set_moi_prin_real"
+    ],
+    "clumparray set moment app": [
+      "itasca.clumparray.set_moment_app"
+    ],
+    "clumparray set moment contact": [
+      "itasca.clumparray.set_moment_contact"
+    ],
+    "clumparray set pos": [
+      "itasca.clumparray.set_pos"
+    ],
+    "clumparray set spin": [
+      "itasca.clumparray.set_spin"
+    ],
+    "clumparray set vel": [
+      "itasca.clumparray.set_vel"
+    ],
+    "clumparray set vol": [
+      "itasca.clumparray.set_vol"
+    ],
+    "clumparray spin": [
+      "itasca.clumparray.spin"
+    ],
+    "clumparray vel": [
+      "itasca.clumparray.vel"
+    ],
+    "clumparray vol": [
+      "itasca.clumparray.vol"
+    ]
+  }
+}

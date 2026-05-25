@@ -1,0 +1,218 @@
+{
+  "module": "wallarray",
+  "description": "Natural language keywords for wallarray vectorized array API search",
+  "keywords": {
+    "wallarray array": [
+      "itasca.wallarray.cutoff",
+      "itasca.wallarray.disp",
+      "itasca.wallarray.euler",
+      "itasca.wallarray.extra",
+      "itasca.wallarray.fill_cutoff",
+      "itasca.wallarray.fill_disp",
+      "itasca.wallarray.fill_euler",
+      "itasca.wallarray.fill_force_contact",
+      "itasca.wallarray.fill_moment_contact",
+      "itasca.wallarray.fill_pos",
+      "itasca.wallarray.fill_rotation_center",
+      "itasca.wallarray.fill_spin",
+      "itasca.wallarray.fill_vel",
+      "itasca.wallarray.force_contact",
+      "itasca.wallarray.ids",
+      "itasca.wallarray.in_group",
+      "itasca.wallarray.moment_contact",
+      "itasca.wallarray.pos",
+      "itasca.wallarray.rotation_center",
+      "itasca.wallarray.set_cutoff",
+      "itasca.wallarray.set_disp",
+      "itasca.wallarray.set_euler",
+      "itasca.wallarray.set_extra",
+      "itasca.wallarray.set_force_contact",
+      "itasca.wallarray.set_group",
+      "itasca.wallarray.set_moment_contact",
+      "itasca.wallarray.set_pos",
+      "itasca.wallarray.set_rotation_center",
+      "itasca.wallarray.set_spin",
+      "itasca.wallarray.set_vel",
+      "itasca.wallarray.spin",
+      "itasca.wallarray.vel"
+    ],
+    "array api": [
+      "itasca.wallarray.cutoff",
+      "itasca.wallarray.disp",
+      "itasca.wallarray.euler",
+      "itasca.wallarray.extra",
+      "itasca.wallarray.fill_cutoff",
+      "itasca.wallarray.fill_disp",
+      "itasca.wallarray.fill_euler",
+      "itasca.wallarray.fill_force_contact",
+      "itasca.wallarray.fill_moment_contact",
+      "itasca.wallarray.fill_pos",
+      "itasca.wallarray.fill_rotation_center",
+      "itasca.wallarray.fill_spin",
+      "itasca.wallarray.fill_vel",
+      "itasca.wallarray.force_contact",
+      "itasca.wallarray.ids",
+      "itasca.wallarray.in_group",
+      "itasca.wallarray.moment_contact",
+      "itasca.wallarray.pos",
+      "itasca.wallarray.rotation_center",
+      "itasca.wallarray.set_cutoff",
+      "itasca.wallarray.set_disp",
+      "itasca.wallarray.set_euler",
+      "itasca.wallarray.set_extra",
+      "itasca.wallarray.set_force_contact",
+      "itasca.wallarray.set_group",
+      "itasca.wallarray.set_moment_contact",
+      "itasca.wallarray.set_pos",
+      "itasca.wallarray.set_rotation_center",
+      "itasca.wallarray.set_spin",
+      "itasca.wallarray.set_vel",
+      "itasca.wallarray.spin",
+      "itasca.wallarray.vel"
+    ],
+    "array position": [
+      "itasca.wallarray.fill_pos",
+      "itasca.wallarray.pos",
+      "itasca.wallarray.set_pos"
+    ],
+    "wallarray position": [
+      "itasca.wallarray.fill_pos",
+      "itasca.wallarray.pos",
+      "itasca.wallarray.set_pos"
+    ],
+    "array force": [
+      "itasca.wallarray.fill_force_contact",
+      "itasca.wallarray.force_contact",
+      "itasca.wallarray.set_force_contact"
+    ],
+    "wallarray force": [
+      "itasca.wallarray.fill_force_contact",
+      "itasca.wallarray.force_contact",
+      "itasca.wallarray.set_force_contact"
+    ],
+    "array moment": [
+      "itasca.wallarray.fill_moment_contact",
+      "itasca.wallarray.moment_contact",
+      "itasca.wallarray.set_moment_contact"
+    ],
+    "wallarray moment": [
+      "itasca.wallarray.fill_moment_contact",
+      "itasca.wallarray.moment_contact",
+      "itasca.wallarray.set_moment_contact"
+    ],
+    "array group": [
+      "itasca.wallarray.in_group",
+      "itasca.wallarray.set_group"
+    ],
+    "wallarray group": [
+      "itasca.wallarray.in_group",
+      "itasca.wallarray.set_group"
+    ],
+    "array extra": [
+      "itasca.wallarray.extra",
+      "itasca.wallarray.set_extra"
+    ],
+    "wallarray extra": [
+      "itasca.wallarray.extra"
+    ],
+    "array id": [
+      "itasca.wallarray.ids"
+    ],
+    "wallarray id": [
+      "itasca.wallarray.ids"
+    ],
+    "wallarray cutoff": [
+      "itasca.wallarray.cutoff"
+    ],
+    "wallarray disp": [
+      "itasca.wallarray.disp"
+    ],
+    "wallarray euler": [
+      "itasca.wallarray.euler"
+    ],
+    "wallarray fill cutoff": [
+      "itasca.wallarray.fill_cutoff"
+    ],
+    "wallarray fill disp": [
+      "itasca.wallarray.fill_disp"
+    ],
+    "wallarray fill euler": [
+      "itasca.wallarray.fill_euler"
+    ],
+    "wallarray fill force contact": [
+      "itasca.wallarray.fill_force_contact"
+    ],
+    "wallarray fill moment contact": [
+      "itasca.wallarray.fill_moment_contact"
+    ],
+    "wallarray fill pos": [
+      "itasca.wallarray.fill_pos"
+    ],
+    "wallarray fill rotation center": [
+      "itasca.wallarray.fill_rotation_center"
+    ],
+    "wallarray fill spin": [
+      "itasca.wallarray.fill_spin"
+    ],
+    "wallarray fill vel": [
+      "itasca.wallarray.fill_vel"
+    ],
+    "wallarray force contact": [
+      "itasca.wallarray.force_contact"
+    ],
+    "wallarray ids": [
+      "itasca.wallarray.ids"
+    ],
+    "wallarray in group": [
+      "itasca.wallarray.in_group"
+    ],
+    "wallarray moment contact": [
+      "itasca.wallarray.moment_contact"
+    ],
+    "wallarray pos": [
+      "itasca.wallarray.pos"
+    ],
+    "wallarray rotation center": [
+      "itasca.wallarray.rotation_center"
+    ],
+    "wallarray set cutoff": [
+      "itasca.wallarray.set_cutoff"
+    ],
+    "wallarray set disp": [
+      "itasca.wallarray.set_disp"
+    ],
+    "wallarray set euler": [
+      "itasca.wallarray.set_euler"
+    ],
+    "wallarray set extra": [
+      "itasca.wallarray.set_extra"
+    ],
+    "wallarray set force contact": [
+      "itasca.wallarray.set_force_contact"
+    ],
+    "wallarray set group": [
+      "itasca.wallarray.set_group"
+    ],
+    "wallarray set moment contact": [
+      "itasca.wallarray.set_moment_contact"
+    ],
+    "wallarray set pos": [
+      "itasca.wallarray.set_pos"
+    ],
+    "wallarray set rotation center": [
+      "itasca.wallarray.set_rotation_center"
+    ],
+    "wallarray set spin": [
+      "itasca.wallarray.set_spin"
+    ],
+    "wallarray set vel": [
+      "itasca.wallarray.set_vel"
+    ],
+    "wallarray spin": [
+      "itasca.wallarray.spin"
+    ],
+    "wallarray vel": [
+      "itasca.wallarray.vel"
+    ]
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "module": "ballfacetarray",
+  "description": "Natural language keywords for ballfacetarray vectorized array API search",
+  "keywords": {
+    "ballfacetarray array": [
+      "itasca.ballfacetarray.branch",
+      "itasca.ballfacetarray.extra",
+      "itasca.ballfacetarray.fill_branch",
+      "itasca.ballfacetarray.fill_force_global",
+      "itasca.ballfacetarray.fill_force_local",
+      "itasca.ballfacetarray.fill_force_normal",
+      "itasca.ballfacetarray.fill_force_shear",
+      "itasca.ballfacetarray.fill_gap",
+      "itasca.ballfacetarray.fill_moment1_global",
+      "itasca.ballfacetarray.fill_moment1_local",
+      "itasca.ballfacetarray.fill_moment2_global",
+      "itasca.ballfacetarray.fill_moment2_local",
+      "itasca.ballfacetarray.fill_normal",
+      "itasca.ballfacetarray.fill_offset",
+      "itasca.ballfacetarray.fill_pos",
+      "itasca.ballfacetarray.force_global",
+      "itasca.ballfacetarray.force_local",
+      "itasca.ballfacetarray.force_normal",
+      "itasca.ballfacetarray.force_shear",
+      "itasca.ballfacetarray.gap",
+      "itasca.ballfacetarray.ids",
+      "itasca.ballfacetarray.in_group",
+      "itasca.ballfacetarray.moment1_global",
+      "itasca.ballfacetarray.moment1_local",
+      "itasca.ballfacetarray.moment2_global",
+      "itasca.ballfacetarray.moment2_local",
+      "itasca.ballfacetarray.normal",
+      "itasca.ballfacetarray.offset",
+      "itasca.ballfacetarray.pos",
+      "itasca.ballfacetarray.set_extra",
+      "itasca.ballfacetarray.set_group"
+    ],
+    "array api": [
+      "itasca.ballfacetarray.branch",
+      "itasca.ballfacetarray.extra",
+      "itasca.ballfacetarray.fill_branch",
+      "itasca.ballfacetarray.fill_force_global",
+      "itasca.ballfacetarray.fill_force_local",
+      "itasca.ballfacetarray.fill_force_normal",
+      "itasca.ballfacetarray.fill_force_shear",
+      "itasca.ballfacetarray.fill_gap",
+      "itasca.ballfacetarray.fill_moment1_global",
+      "itasca.ballfacetarray.fill_moment1_local",
+      "itasca.ballfacetarray.fill_moment2_global",
+      "itasca.ballfacetarray.fill_moment2_local",
+      "itasca.ballfacetarray.fill_normal",
+      "itasca.ballfacetarray.fill_offset",
+      "itasca.ballfacetarray.fill_pos",
+      "itasca.ballfacetarray.force_global",
+      "itasca.ballfacetarray.force_local",
+      "itasca.ballfacetarray.force_normal",
+      "itasca.ballfacetarray.force_shear",
+      "itasca.ballfacetarray.gap",
+      "itasca.ballfacetarray.ids",
+      "itasca.ballfacetarray.in_group",
+      "itasca.ballfacetarray.moment1_global",
+      "itasca.ballfacetarray.moment1_local",
+      "itasca.ballfacetarray.moment2_global",
+      "itasca.ballfacetarray.moment2_local",
+      "itasca.ballfacetarray.normal",
+      "itasca.ballfacetarray.offset",
+      "itasca.ballfacetarray.pos",
+      "itasca.ballfacetarray.set_extra",
+      "itasca.ballfacetarray.set_group"
+    ],
+    "array position": [
+      "itasca.ballfacetarray.fill_pos",
+      "itasca.ballfacetarray.pos"
+    ],
+    "ballfacetarray position": [
+      "itasca.ballfacetarray.fill_pos",
+      "itasca.ballfacetarray.pos"
+    ],
+    "array force": [
+      "itasca.ballfacetarray.fill_force_global",
+      "itasca.ballfacetarray.fill_force_local",
+      "itasca.ballfacetarray.fill_force_normal",
+      "itasca.ballfacetarray.fill_force_shear",
+      "itasca.ballfacetarray.force_global",
+      "itasca.ballfacetarray.force_local",
+      "itasca.ballfacetarray.force_normal",
+      "itasca.ballfacetarray.force_shear"
+    ],
+    "ballfacetarray force": [
+      "itasca.ballfacetarray.fill_force_global",
+      "itasca.ballfacetarray.fill_force_local",
+      "itasca.ballfacetarray.fill_force_normal",
+      "itasca.ballfacetarray.fill_force_shear",
+      "itasca.ballfacetarray.force_global",
+      "itasca.ballfacetarray.force_local",
+      "itasca.ballfacetarray.force_normal",
+      "itasca.ballfacetarray.force_shear"
+    ],
+    "array moment": [
+      "itasca.ballfacetarray.fill_moment1_global",
+      "itasca.ballfacetarray.fill_moment1_local",
+      "itasca.ballfacetarray.fill_moment2_global",
+      "itasca.ballfacetarray.fill_moment2_local",
+      "itasca.ballfacetarray.moment1_global",
+      "itasca.ballfacetarray.moment1_local",
+      "itasca.ballfacetarray.moment2_global",
+      "itasca.ballfacetarray.moment2_local"
+    ],
+    "ballfacetarray moment": [
+      "itasca.ballfacetarray.fill_moment1_global",
+      "itasca.ballfacetarray.fill_moment1_local",
+      "itasca.ballfacetarray.fill_moment2_global",
+      "itasca.ballfacetarray.fill_moment2_local",
+      "itasca.ballfacetarray.moment1_global",
+      "itasca.ballfacetarray.moment1_local",
+      "itasca.ballfacetarray.moment2_global",
+      "itasca.ballfacetarray.moment2_local"
+    ],
+    "array group": [
+      "itasca.ballfacetarray.in_group",
+      "itasca.ballfacetarray.set_group"
+    ],
+    "ballfacetarray group": [
+      "itasca.ballfacetarray.in_group",
+      "itasca.ballfacetarray.set_group"
+    ],
+    "array extra": [
+      "itasca.ballfacetarray.extra",
+      "itasca.ballfacetarray.set_extra"
+    ],
+    "ballfacetarray extra": [
+      "itasca.ballfacetarray.extra"
+    ],
+    "array id": [
+      "itasca.ballfacetarray.ids"
+    ],
+    "ballfacetarray id": [
+      "itasca.ballfacetarray.ids"
+    ],
+    "ballfacetarray branch": [
+      "itasca.ballfacetarray.branch"
+    ],
+    "ballfacetarray fill branch": [
+      "itasca.ballfacetarray.fill_branch"
+    ],
+    "ballfacetarray fill force global": [
+      "itasca.ballfacetarray.fill_force_global"
+    ],
+    "ballfacetarray fill force local": [
+      "itasca.ballfacetarray.fill_force_local"
+    ],
+    "ballfacetarray fill force normal": [
+      "itasca.ballfacetarray.fill_force_normal"
+    ],
+    "ballfacetarray fill force shear": [
+      "itasca.ballfacetarray.fill_force_shear"
+    ],
+    "ballfacetarray fill gap": [
+      "itasca.ballfacetarray.fill_gap"
+    ],
+    "ballfacetarray fill moment1 global": [
+      "itasca.ballfacetarray.fill_moment1_global"
+    ],
+    "ballfacetarray fill moment1 local": [
+      "itasca.ballfacetarray.fill_moment1_local"
+    ],
+    "ballfacetarray fill moment2 global": [
+      "itasca.ballfacetarray.fill_moment2_global"
+    ],
+    "ballfacetarray fill moment2 local": [
+      "itasca.ballfacetarray.fill_moment2_local"
+    ],
+    "ballfacetarray fill normal": [
+      "itasca.ballfacetarray.fill_normal"
+    ],
+    "ballfacetarray fill offset": [
+      "itasca.ballfacetarray.fill_offset"
+    ],
+    "ballfacetarray fill pos": [
+      "itasca.ballfacetarray.fill_pos"
+    ],
+    "ballfacetarray force global": [
+      "itasca.ballfacetarray.force_global"
+    ],
+    "ballfacetarray force local": [
+      "itasca.ballfacetarray.force_local"
+    ],
+    "ballfacetarray force normal": [
+      "itasca.ballfacetarray.force_normal"
+    ],
+    "ballfacetarray force shear": [
+      "itasca.ballfacetarray.force_shear"
+    ],
+    "ballfacetarray gap": [
+      "itasca.ballfacetarray.gap"
+    ],
+    "ballfacetarray ids": [
+      "itasca.ballfacetarray.ids"
+    ],
+    "ballfacetarray in group": [
+      "itasca.ballfacetarray.in_group"
+    ],
+    "ballfacetarray moment1 global": [
+      "itasca.ballfacetarray.moment1_global"
+    ],
+    "ballfacetarray moment1 local": [
+      "itasca.ballfacetarray.moment1_local"
+    ],
+    "ballfacetarray moment2 global": [
+      "itasca.ballfacetarray.moment2_global"
+    ],
+    "ballfacetarray moment2 local": [
+      "itasca.ballfacetarray.moment2_local"
+    ],
+    "ballfacetarray normal": [
+      "itasca.ballfacetarray.normal"
+    ],
+    "ballfacetarray offset": [
+      "itasca.ballfacetarray.offset"
+    ],
+    "ballfacetarray pos": [
+      "itasca.ballfacetarray.pos"
+    ],
+    "ballfacetarray set extra": [
+      "itasca.ballfacetarray.set_extra"
+    ],
+    "ballfacetarray set group": [
+      "itasca.ballfacetarray.set_group"
+    ]
+  }
+}

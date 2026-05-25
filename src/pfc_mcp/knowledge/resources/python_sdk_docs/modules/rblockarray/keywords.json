@@ -1,0 +1,348 @@
+{
+  "module": "rblockarray",
+  "description": "Natural language keywords for rblockarray vectorized array API search",
+  "keywords": {
+    "rblockarray array": [
+      "itasca.rblockarray.damp",
+      "itasca.rblockarray.density",
+      "itasca.rblockarray.disp",
+      "itasca.rblockarray.euler",
+      "itasca.rblockarray.extra",
+      "itasca.rblockarray.fill_damp",
+      "itasca.rblockarray.fill_density",
+      "itasca.rblockarray.fill_disp",
+      "itasca.rblockarray.fill_euler",
+      "itasca.rblockarray.fill_force_app",
+      "itasca.rblockarray.fill_force_contact",
+      "itasca.rblockarray.fill_force_unbal",
+      "itasca.rblockarray.fill_mass",
+      "itasca.rblockarray.fill_mass_real",
+      "itasca.rblockarray.fill_moi_prin",
+      "itasca.rblockarray.fill_moi_prin_real",
+      "itasca.rblockarray.fill_moment_app",
+      "itasca.rblockarray.fill_moment_contact",
+      "itasca.rblockarray.fill_moment_unbal",
+      "itasca.rblockarray.fill_pos",
+      "itasca.rblockarray.fill_spin",
+      "itasca.rblockarray.fill_vel",
+      "itasca.rblockarray.fill_vol",
+      "itasca.rblockarray.force_app",
+      "itasca.rblockarray.force_contact",
+      "itasca.rblockarray.force_unbal",
+      "itasca.rblockarray.ids",
+      "itasca.rblockarray.in_group",
+      "itasca.rblockarray.mass",
+      "itasca.rblockarray.mass_real",
+      "itasca.rblockarray.moi_prin",
+      "itasca.rblockarray.moi_prin_real",
+      "itasca.rblockarray.moment_app",
+      "itasca.rblockarray.moment_contact",
+      "itasca.rblockarray.moment_unbal",
+      "itasca.rblockarray.pos",
+      "itasca.rblockarray.set_damp",
+      "itasca.rblockarray.set_density",
+      "itasca.rblockarray.set_disp",
+      "itasca.rblockarray.set_euler",
+      "itasca.rblockarray.set_extra",
+      "itasca.rblockarray.set_force_app",
+      "itasca.rblockarray.set_force_contact",
+      "itasca.rblockarray.set_group",
+      "itasca.rblockarray.set_moi_prin_real",
+      "itasca.rblockarray.set_moment_app",
+      "itasca.rblockarray.set_moment_contact",
+      "itasca.rblockarray.set_pos",
+      "itasca.rblockarray.set_spin",
+      "itasca.rblockarray.set_vel",
+      "itasca.rblockarray.set_vol",
+      "itasca.rblockarray.spin",
+      "itasca.rblockarray.vel",
+      "itasca.rblockarray.vol"
+    ],
+    "array api": [
+      "itasca.rblockarray.damp",
+      "itasca.rblockarray.density",
+      "itasca.rblockarray.disp",
+      "itasca.rblockarray.euler",
+      "itasca.rblockarray.extra",
+      "itasca.rblockarray.fill_damp",
+      "itasca.rblockarray.fill_density",
+      "itasca.rblockarray.fill_disp",
+      "itasca.rblockarray.fill_euler",
+      "itasca.rblockarray.fill_force_app",
+      "itasca.rblockarray.fill_force_contact",
+      "itasca.rblockarray.fill_force_unbal",
+      "itasca.rblockarray.fill_mass",
+      "itasca.rblockarray.fill_mass_real",
+      "itasca.rblockarray.fill_moi_prin",
+      "itasca.rblockarray.fill_moi_prin_real",
+      "itasca.rblockarray.fill_moment_app",
+      "itasca.rblockarray.fill_moment_contact",
+      "itasca.rblockarray.fill_moment_unbal",
+      "itasca.rblockarray.fill_pos",
+      "itasca.rblockarray.fill_spin",
+      "itasca.rblockarray.fill_vel",
+      "itasca.rblockarray.fill_vol",
+      "itasca.rblockarray.force_app",
+      "itasca.rblockarray.force_contact",
+      "itasca.rblockarray.force_unbal",
+      "itasca.rblockarray.ids",
+      "itasca.rblockarray.in_group",
+      "itasca.rblockarray.mass",
+      "itasca.rblockarray.mass_real",
+      "itasca.rblockarray.moi_prin",
+      "itasca.rblockarray.moi_prin_real",
+      "itasca.rblockarray.moment_app",
+      "itasca.rblockarray.moment_contact",
+      "itasca.rblockarray.moment_unbal",
+      "itasca.rblockarray.pos",
+      "itasca.rblockarray.set_damp",
+      "itasca.rblockarray.set_density",
+      "itasca.rblockarray.set_disp",
+      "itasca.rblockarray.set_euler",
+      "itasca.rblockarray.set_extra",
+      "itasca.rblockarray.set_force_app",
+      "itasca.rblockarray.set_force_contact",
+      "itasca.rblockarray.set_group",
+      "itasca.rblockarray.set_moi_prin_real",
+      "itasca.rblockarray.set_moment_app",
+      "itasca.rblockarray.set_moment_contact",
+      "itasca.rblockarray.set_pos",
+      "itasca.rblockarray.set_spin",
+      "itasca.rblockarray.set_vel",
+      "itasca.rblockarray.set_vol",
+      "itasca.rblockarray.spin",
+      "itasca.rblockarray.vel",
+      "itasca.rblockarray.vol"
+    ],
+    "array position": [
+      "itasca.rblockarray.fill_pos",
+      "itasca.rblockarray.pos",
+      "itasca.rblockarray.set_pos"
+    ],
+    "rblockarray position": [
+      "itasca.rblockarray.fill_pos",
+      "itasca.rblockarray.pos",
+      "itasca.rblockarray.set_pos"
+    ],
+    "array force": [
+      "itasca.rblockarray.fill_force_app",
+      "itasca.rblockarray.fill_force_contact",
+      "itasca.rblockarray.fill_force_unbal",
+      "itasca.rblockarray.force_app",
+      "itasca.rblockarray.force_contact",
+      "itasca.rblockarray.force_unbal",
+      "itasca.rblockarray.set_force_app",
+      "itasca.rblockarray.set_force_contact"
+    ],
+    "rblockarray force": [
+      "itasca.rblockarray.fill_force_app",
+      "itasca.rblockarray.fill_force_contact",
+      "itasca.rblockarray.fill_force_unbal",
+      "itasca.rblockarray.force_app",
+      "itasca.rblockarray.force_contact",
+      "itasca.rblockarray.force_unbal",
+      "itasca.rblockarray.set_force_app",
+      "itasca.rblockarray.set_force_contact"
+    ],
+    "array moment": [
+      "itasca.rblockarray.fill_moment_app",
+      "itasca.rblockarray.fill_moment_contact",
+      "itasca.rblockarray.fill_moment_unbal",
+      "itasca.rblockarray.moment_app",
+      "itasca.rblockarray.moment_contact",
+      "itasca.rblockarray.moment_unbal",
+      "itasca.rblockarray.set_moment_app",
+      "itasca.rblockarray.set_moment_contact"
+    ],
+    "rblockarray moment": [
+      "itasca.rblockarray.fill_moment_app",
+      "itasca.rblockarray.fill_moment_contact",
+      "itasca.rblockarray.fill_moment_unbal",
+      "itasca.rblockarray.moment_app",
+      "itasca.rblockarray.moment_contact",
+      "itasca.rblockarray.moment_unbal",
+      "itasca.rblockarray.set_moment_app",
+      "itasca.rblockarray.set_moment_contact"
+    ],
+    "array group": [
+      "itasca.rblockarray.in_group",
+      "itasca.rblockarray.set_group"
+    ],
+    "rblockarray group": [
+      "itasca.rblockarray.in_group",
+      "itasca.rblockarray.set_group"
+    ],
+    "array extra": [
+      "itasca.rblockarray.extra",
+      "itasca.rblockarray.set_extra"
+    ],
+    "rblockarray extra": [
+      "itasca.rblockarray.extra"
+    ],
+    "array id": [
+      "itasca.rblockarray.ids"
+    ],
+    "rblockarray id": [
+      "itasca.rblockarray.ids"
+    ],
+    "rblockarray damp": [
+      "itasca.rblockarray.damp"
+    ],
+    "rblockarray density": [
+      "itasca.rblockarray.density"
+    ],
+    "rblockarray disp": [
+      "itasca.rblockarray.disp"
+    ],
+    "rblockarray euler": [
+      "itasca.rblockarray.euler"
+    ],
+    "rblockarray fill damp": [
+      "itasca.rblockarray.fill_damp"
+    ],
+    "rblockarray fill density": [
+      "itasca.rblockarray.fill_density"
+    ],
+    "rblockarray fill disp": [
+      "itasca.rblockarray.fill_disp"
+    ],
+    "rblockarray fill euler": [
+      "itasca.rblockarray.fill_euler"
+    ],
+    "rblockarray fill force app": [
+      "itasca.rblockarray.fill_force_app"
+    ],
+    "rblockarray fill force contact": [
+      "itasca.rblockarray.fill_force_contact"
+    ],
+    "rblockarray fill force unbal": [
+      "itasca.rblockarray.fill_force_unbal"
+    ],
+    "rblockarray fill mass": [
+      "itasca.rblockarray.fill_mass"
+    ],
+    "rblockarray fill mass real": [
+      "itasca.rblockarray.fill_mass_real"
+    ],
+    "rblockarray fill moi prin": [
+      "itasca.rblockarray.fill_moi_prin"
+    ],
+    "rblockarray fill moi prin real": [
+      "itasca.rblockarray.fill_moi_prin_real"
+    ],
+    "rblockarray fill moment app": [
+      "itasca.rblockarray.fill_moment_app"
+    ],
+    "rblockarray fill moment contact": [
+      "itasca.rblockarray.fill_moment_contact"
+    ],
+    "rblockarray fill moment unbal": [
+      "itasca.rblockarray.fill_moment_unbal"
+    ],
+    "rblockarray fill pos": [
+      "itasca.rblockarray.fill_pos"
+    ],
+    "rblockarray fill spin": [
+      "itasca.rblockarray.fill_spin"
+    ],
+    "rblockarray fill vel": [
+      "itasca.rblockarray.fill_vel"
+    ],
+    "rblockarray fill vol": [
+      "itasca.rblockarray.fill_vol"
+    ],
+    "rblockarray force app": [
+      "itasca.rblockarray.force_app"
+    ],
+    "rblockarray force contact": [
+      "itasca.rblockarray.force_contact"
+    ],
+    "rblockarray force unbal": [
+      "itasca.rblockarray.force_unbal"
+    ],
+    "rblockarray ids": [
+      "itasca.rblockarray.ids"
+    ],
+    "rblockarray in group": [
+      "itasca.rblockarray.in_group"
+    ],
+    "rblockarray mass": [
+      "itasca.rblockarray.mass"
+    ],
+    "rblockarray mass real": [
+      "itasca.rblockarray.mass_real"
+    ],
+    "rblockarray moi prin": [
+      "itasca.rblockarray.moi_prin"
+    ],
+    "rblockarray moi prin real": [
+      "itasca.rblockarray.moi_prin_real"
+    ],
+    "rblockarray moment app": [
+      "itasca.rblockarray.moment_app"
+    ],
+    "rblockarray moment contact": [
+      "itasca.rblockarray.moment_contact"
+    ],
+    "rblockarray moment unbal": [
+      "itasca.rblockarray.moment_unbal"
+    ],
+    "rblockarray pos": [
+      "itasca.rblockarray.pos"
+    ],
+    "rblockarray set damp": [
+      "itasca.rblockarray.set_damp"
+    ],
+    "rblockarray set density": [
+      "itasca.rblockarray.set_density"
+    ],
+    "rblockarray set disp": [
+      "itasca.rblockarray.set_disp"
+    ],
+    "rblockarray set euler": [
+      "itasca.rblockarray.set_euler"
+    ],
+    "rblockarray set extra": [
+      "itasca.rblockarray.set_extra"
+    ],
+    "rblockarray set force app": [
+      "itasca.rblockarray.set_force_app"
+    ],
+    "rblockarray set force contact": [
+      "itasca.rblockarray.set_force_contact"
+    ],
+    "rblockarray set group": [
+      "itasca.rblockarray.set_group"
+    ],
+    "rblockarray set moi prin real": [
+      "itasca.rblockarray.set_moi_prin_real"
+    ],
+    "rblockarray set moment app": [
+      "itasca.rblockarray.set_moment_app"
+    ],
+    "rblockarray set moment contact": [
+      "itasca.rblockarray.set_moment_contact"
+    ],
+    "rblockarray set pos": [
+      "itasca.rblockarray.set_pos"
+    ],
+    "rblockarray set spin": [
+      "itasca.rblockarray.set_spin"
+    ],
+    "rblockarray set vel": [
+      "itasca.rblockarray.set_vel"
+    ],
+    "rblockarray set vol": [
+      "itasca.rblockarray.set_vol"
+    ],
+    "rblockarray spin": [
+      "itasca.rblockarray.spin"
+    ],
+    "rblockarray vel": [
+      "itasca.rblockarray.vel"
+    ],
+    "rblockarray vol": [
+      "itasca.rblockarray.vol"
+    ]
+  }
+}

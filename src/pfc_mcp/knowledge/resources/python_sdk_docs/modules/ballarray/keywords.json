@@ -1,0 +1,328 @@
+{
+  "module": "ballarray",
+  "description": "Natural language keywords for ballarray vectorized array API search",
+  "keywords": {
+    "ballarray array": [
+      "itasca.ballarray.create",
+      "itasca.ballarray.damp",
+      "itasca.ballarray.density",
+      "itasca.ballarray.disp",
+      "itasca.ballarray.euler",
+      "itasca.ballarray.extra",
+      "itasca.ballarray.fill_damp",
+      "itasca.ballarray.fill_density",
+      "itasca.ballarray.fill_disp",
+      "itasca.ballarray.fill_euler",
+      "itasca.ballarray.fill_force_app",
+      "itasca.ballarray.fill_force_contact",
+      "itasca.ballarray.fill_force_unbal",
+      "itasca.ballarray.fill_mass",
+      "itasca.ballarray.fill_mass_real",
+      "itasca.ballarray.fill_moment_app",
+      "itasca.ballarray.fill_moment_contact",
+      "itasca.ballarray.fill_moment_unbal",
+      "itasca.ballarray.fill_pos",
+      "itasca.ballarray.fill_radius",
+      "itasca.ballarray.fill_spin",
+      "itasca.ballarray.fill_vel",
+      "itasca.ballarray.force_app",
+      "itasca.ballarray.force_contact",
+      "itasca.ballarray.force_unbal",
+      "itasca.ballarray.ids",
+      "itasca.ballarray.in_group",
+      "itasca.ballarray.mass",
+      "itasca.ballarray.mass_real",
+      "itasca.ballarray.moment_app",
+      "itasca.ballarray.moment_contact",
+      "itasca.ballarray.moment_unbal",
+      "itasca.ballarray.pos",
+      "itasca.ballarray.radius",
+      "itasca.ballarray.set_damp",
+      "itasca.ballarray.set_density",
+      "itasca.ballarray.set_disp",
+      "itasca.ballarray.set_euler",
+      "itasca.ballarray.set_extra",
+      "itasca.ballarray.set_force_app",
+      "itasca.ballarray.set_force_contact",
+      "itasca.ballarray.set_group",
+      "itasca.ballarray.set_moment_app",
+      "itasca.ballarray.set_moment_contact",
+      "itasca.ballarray.set_pos",
+      "itasca.ballarray.set_radius",
+      "itasca.ballarray.set_spin",
+      "itasca.ballarray.set_vel",
+      "itasca.ballarray.spin",
+      "itasca.ballarray.vel"
+    ],
+    "array api": [
+      "itasca.ballarray.create",
+      "itasca.ballarray.damp",
+      "itasca.ballarray.density",
+      "itasca.ballarray.disp",
+      "itasca.ballarray.euler",
+      "itasca.ballarray.extra",
+      "itasca.ballarray.fill_damp",
+      "itasca.ballarray.fill_density",
+      "itasca.ballarray.fill_disp",
+      "itasca.ballarray.fill_euler",
+      "itasca.ballarray.fill_force_app",
+      "itasca.ballarray.fill_force_contact",
+      "itasca.ballarray.fill_force_unbal",
+      "itasca.ballarray.fill_mass",
+      "itasca.ballarray.fill_mass_real",
+      "itasca.ballarray.fill_moment_app",
+      "itasca.ballarray.fill_moment_contact",
+      "itasca.ballarray.fill_moment_unbal",
+      "itasca.ballarray.fill_pos",
+      "itasca.ballarray.fill_radius",
+      "itasca.ballarray.fill_spin",
+      "itasca.ballarray.fill_vel",
+      "itasca.ballarray.force_app",
+      "itasca.ballarray.force_contact",
+      "itasca.ballarray.force_unbal",
+      "itasca.ballarray.ids",
+      "itasca.ballarray.in_group",
+      "itasca.ballarray.mass",
+      "itasca.ballarray.mass_real",
+      "itasca.ballarray.moment_app",
+      "itasca.ballarray.moment_contact",
+      "itasca.ballarray.moment_unbal",
+      "itasca.ballarray.pos",
+      "itasca.ballarray.radius",
+      "itasca.ballarray.set_damp",
+      "itasca.ballarray.set_density",
+      "itasca.ballarray.set_disp",
+      "itasca.ballarray.set_euler",
+      "itasca.ballarray.set_extra",
+      "itasca.ballarray.set_force_app",
+      "itasca.ballarray.set_force_contact",
+      "itasca.ballarray.set_group",
+      "itasca.ballarray.set_moment_app",
+      "itasca.ballarray.set_moment_contact",
+      "itasca.ballarray.set_pos",
+      "itasca.ballarray.set_radius",
+      "itasca.ballarray.set_spin",
+      "itasca.ballarray.set_vel",
+      "itasca.ballarray.spin",
+      "itasca.ballarray.vel"
+    ],
+    "array position": [
+      "itasca.ballarray.fill_pos",
+      "itasca.ballarray.pos",
+      "itasca.ballarray.set_pos"
+    ],
+    "ballarray position": [
+      "itasca.ballarray.fill_pos",
+      "itasca.ballarray.pos",
+      "itasca.ballarray.set_pos"
+    ],
+    "array force": [
+      "itasca.ballarray.fill_force_app",
+      "itasca.ballarray.fill_force_contact",
+      "itasca.ballarray.fill_force_unbal",
+      "itasca.ballarray.force_app",
+      "itasca.ballarray.force_contact",
+      "itasca.ballarray.force_unbal",
+      "itasca.ballarray.set_force_app",
+      "itasca.ballarray.set_force_contact"
+    ],
+    "ballarray force": [
+      "itasca.ballarray.fill_force_app",
+      "itasca.ballarray.fill_force_contact",
+      "itasca.ballarray.fill_force_unbal",
+      "itasca.ballarray.force_app",
+      "itasca.ballarray.force_contact",
+      "itasca.ballarray.force_unbal",
+      "itasca.ballarray.set_force_app",
+      "itasca.ballarray.set_force_contact"
+    ],
+    "array moment": [
+      "itasca.ballarray.fill_moment_app",
+      "itasca.ballarray.fill_moment_contact",
+      "itasca.ballarray.fill_moment_unbal",
+      "itasca.ballarray.moment_app",
+      "itasca.ballarray.moment_contact",
+      "itasca.ballarray.moment_unbal",
+      "itasca.ballarray.set_moment_app",
+      "itasca.ballarray.set_moment_contact"
+    ],
+    "ballarray moment": [
+      "itasca.ballarray.fill_moment_app",
+      "itasca.ballarray.fill_moment_contact",
+      "itasca.ballarray.fill_moment_unbal",
+      "itasca.ballarray.moment_app",
+      "itasca.ballarray.moment_contact",
+      "itasca.ballarray.moment_unbal",
+      "itasca.ballarray.set_moment_app",
+      "itasca.ballarray.set_moment_contact"
+    ],
+    "array group": [
+      "itasca.ballarray.in_group",
+      "itasca.ballarray.set_group"
+    ],
+    "ballarray group": [
+      "itasca.ballarray.in_group",
+      "itasca.ballarray.set_group"
+    ],
+    "array extra": [
+      "itasca.ballarray.extra",
+      "itasca.ballarray.set_extra"
+    ],
+    "ballarray extra": [
+      "itasca.ballarray.extra"
+    ],
+    "array id": [
+      "itasca.ballarray.ids"
+    ],
+    "ballarray id": [
+      "itasca.ballarray.ids"
+    ],
+    "ballarray create": [
+      "itasca.ballarray.create"
+    ],
+    "ballarray damp": [
+      "itasca.ballarray.damp"
+    ],
+    "ballarray density": [
+      "itasca.ballarray.density"
+    ],
+    "ballarray disp": [
+      "itasca.ballarray.disp"
+    ],
+    "ballarray euler": [
+      "itasca.ballarray.euler"
+    ],
+    "ballarray fill damp": [
+      "itasca.ballarray.fill_damp"
+    ],
+    "ballarray fill density": [
+      "itasca.ballarray.fill_density"
+    ],
+    "ballarray fill disp": [
+      "itasca.ballarray.fill_disp"
+    ],
+    "ballarray fill euler": [
+      "itasca.ballarray.fill_euler"
+    ],
+    "ballarray fill force app": [
+      "itasca.ballarray.fill_force_app"
+    ],
+    "ballarray fill force contact": [
+      "itasca.ballarray.fill_force_contact"
+    ],
+    "ballarray fill force unbal": [
+      "itasca.ballarray.fill_force_unbal"
+    ],
+    "ballarray fill mass": [
+      "itasca.ballarray.fill_mass"
+    ],
+    "ballarray fill mass real": [
+      "itasca.ballarray.fill_mass_real"
+    ],
+    "ballarray fill moment app": [
+      "itasca.ballarray.fill_moment_app"
+    ],
+    "ballarray fill moment contact": [
+      "itasca.ballarray.fill_moment_contact"
+    ],
+    "ballarray fill moment unbal": [
+      "itasca.ballarray.fill_moment_unbal"
+    ],
+    "ballarray fill pos": [
+      "itasca.ballarray.fill_pos"
+    ],
+    "ballarray fill radius": [
+      "itasca.ballarray.fill_radius"
+    ],
+    "ballarray fill spin": [
+      "itasca.ballarray.fill_spin"
+    ],
+    "ballarray fill vel": [
+      "itasca.ballarray.fill_vel"
+    ],
+    "ballarray force app": [
+      "itasca.ballarray.force_app"
+    ],
+    "ballarray force contact": [
+      "itasca.ballarray.force_contact"
+    ],
+    "ballarray force unbal": [
+      "itasca.ballarray.force_unbal"
+    ],
+    "ballarray ids": [
+      "itasca.ballarray.ids"
+    ],
+    "ballarray in group": [
+      "itasca.ballarray.in_group"
+    ],
+    "ballarray mass": [
+      "itasca.ballarray.mass"
+    ],
+    "ballarray mass real": [
+      "itasca.ballarray.mass_real"
+    ],
+    "ballarray moment app": [
+      "itasca.ballarray.moment_app"
+    ],
+    "ballarray moment contact": [
+      "itasca.ballarray.moment_contact"
+    ],
+    "ballarray moment unbal": [
+      "itasca.ballarray.moment_unbal"
+    ],
+    "ballarray pos": [
+      "itasca.ballarray.pos"
+    ],
+    "ballarray radius": [
+      "itasca.ballarray.radius"
+    ],
+    "ballarray set damp": [
+      "itasca.ballarray.set_damp"
+    ],
+    "ballarray set density": [
+      "itasca.ballarray.set_density"
+    ],
+    "ballarray set disp": [
+      "itasca.ballarray.set_disp"
+    ],
+    "ballarray set euler": [
+      "itasca.ballarray.set_euler"
+    ],
+    "ballarray set extra": [
+      "itasca.ballarray.set_extra"
+    ],
+    "ballarray set force app": [
+      "itasca.ballarray.set_force_app"
+    ],
+    "ballarray set force contact": [
+      "itasca.ballarray.set_force_contact"
+    ],
+    "ballarray set group": [
+      "itasca.ballarray.set_group"
+    ],
+    "ballarray set moment app": [
+      "itasca.ballarray.set_moment_app"
+    ],
+    "ballarray set moment contact": [
+      "itasca.ballarray.set_moment_contact"
+    ],
+    "ballarray set pos": [
+      "itasca.ballarray.set_pos"
+    ],
+    "ballarray set radius": [
+      "itasca.ballarray.set_radius"
+    ],
+    "ballarray set spin": [
+      "itasca.ballarray.set_spin"
+    ],
+    "ballarray set vel": [
+      "itasca.ballarray.set_vel"
+    ],
+    "ballarray spin": [
+      "itasca.ballarray.spin"
+    ],
+    "ballarray vel": [
+      "itasca.ballarray.vel"
+    ]
+  }
+}

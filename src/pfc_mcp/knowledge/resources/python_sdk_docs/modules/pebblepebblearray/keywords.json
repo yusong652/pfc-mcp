@@ -1,0 +1,231 @@
+{
+  "module": "pebblepebblearray",
+  "description": "Natural language keywords for pebblepebblearray vectorized array API search",
+  "keywords": {
+    "pebblepebblearray array": [
+      "itasca.pebblepebblearray.branch",
+      "itasca.pebblepebblearray.extra",
+      "itasca.pebblepebblearray.fill_branch",
+      "itasca.pebblepebblearray.fill_force_global",
+      "itasca.pebblepebblearray.fill_force_local",
+      "itasca.pebblepebblearray.fill_force_normal",
+      "itasca.pebblepebblearray.fill_force_shear",
+      "itasca.pebblepebblearray.fill_gap",
+      "itasca.pebblepebblearray.fill_moment1_global",
+      "itasca.pebblepebblearray.fill_moment1_local",
+      "itasca.pebblepebblearray.fill_moment2_global",
+      "itasca.pebblepebblearray.fill_moment2_local",
+      "itasca.pebblepebblearray.fill_normal",
+      "itasca.pebblepebblearray.fill_offset",
+      "itasca.pebblepebblearray.fill_pos",
+      "itasca.pebblepebblearray.force_global",
+      "itasca.pebblepebblearray.force_local",
+      "itasca.pebblepebblearray.force_normal",
+      "itasca.pebblepebblearray.force_shear",
+      "itasca.pebblepebblearray.gap",
+      "itasca.pebblepebblearray.ids",
+      "itasca.pebblepebblearray.in_group",
+      "itasca.pebblepebblearray.moment1_global",
+      "itasca.pebblepebblearray.moment1_local",
+      "itasca.pebblepebblearray.moment2_global",
+      "itasca.pebblepebblearray.moment2_local",
+      "itasca.pebblepebblearray.normal",
+      "itasca.pebblepebblearray.offset",
+      "itasca.pebblepebblearray.pos",
+      "itasca.pebblepebblearray.set_extra",
+      "itasca.pebblepebblearray.set_group"
+    ],
+    "array api": [
+      "itasca.pebblepebblearray.branch",
+      "itasca.pebblepebblearray.extra",
+      "itasca.pebblepebblearray.fill_branch",
+      "itasca.pebblepebblearray.fill_force_global",
+      "itasca.pebblepebblearray.fill_force_local",
+      "itasca.pebblepebblearray.fill_force_normal",
+      "itasca.pebblepebblearray.fill_force_shear",
+      "itasca.pebblepebblearray.fill_gap",
+      "itasca.pebblepebblearray.fill_moment1_global",
+      "itasca.pebblepebblearray.fill_moment1_local",
+      "itasca.pebblepebblearray.fill_moment2_global",
+      "itasca.pebblepebblearray.fill_moment2_local",
+      "itasca.pebblepebblearray.fill_normal",
+      "itasca.pebblepebblearray.fill_offset",
+      "itasca.pebblepebblearray.fill_pos",
+      "itasca.pebblepebblearray.force_global",
+      "itasca.pebblepebblearray.force_local",
+      "itasca.pebblepebblearray.force_normal",
+      "itasca.pebblepebblearray.force_shear",
+      "itasca.pebblepebblearray.gap",
+      "itasca.pebblepebblearray.ids",
+      "itasca.pebblepebblearray.in_group",
+      "itasca.pebblepebblearray.moment1_global",
+      "itasca.pebblepebblearray.moment1_local",
+      "itasca.pebblepebblearray.moment2_global",
+      "itasca.pebblepebblearray.moment2_local",
+      "itasca.pebblepebblearray.normal",
+      "itasca.pebblepebblearray.offset",
+      "itasca.pebblepebblearray.pos",
+      "itasca.pebblepebblearray.set_extra",
+      "itasca.pebblepebblearray.set_group"
+    ],
+    "array position": [
+      "itasca.pebblepebblearray.fill_pos",
+      "itasca.pebblepebblearray.pos"
+    ],
+    "pebblepebblearray position": [
+      "itasca.pebblepebblearray.fill_pos",
+      "itasca.pebblepebblearray.pos"
+    ],
+    "array force": [
+      "itasca.pebblepebblearray.fill_force_global",
+      "itasca.pebblepebblearray.fill_force_local",
+      "itasca.pebblepebblearray.fill_force_normal",
+      "itasca.pebblepebblearray.fill_force_shear",
+      "itasca.pebblepebblearray.force_global",
+      "itasca.pebblepebblearray.force_local",
+      "itasca.pebblepebblearray.force_normal",
+      "itasca.pebblepebblearray.force_shear"
+    ],
+    "pebblepebblearray force": [
+      "itasca.pebblepebblearray.fill_force_global",
+      "itasca.pebblepebblearray.fill_force_local",
+      "itasca.pebblepebblearray.fill_force_normal",
+      "itasca.pebblepebblearray.fill_force_shear",
+      "itasca.pebblepebblearray.force_global",
+      "itasca.pebblepebblearray.force_local",
+      "itasca.pebblepebblearray.force_normal",
+      "itasca.pebblepebblearray.force_shear"
+    ],
+    "array moment": [
+      "itasca.pebblepebblearray.fill_moment1_global",
+      "itasca.pebblepebblearray.fill_moment1_local",
+      "itasca.pebblepebblearray.fill_moment2_global",
+      "itasca.pebblepebblearray.fill_moment2_local",
+      "itasca.pebblepebblearray.moment1_global",
+      "itasca.pebblepebblearray.moment1_local",
+      "itasca.pebblepebblearray.moment2_global",
+      "itasca.pebblepebblearray.moment2_local"
+    ],
+    "pebblepebblearray moment": [
+      "itasca.pebblepebblearray.fill_moment1_global",
+      "itasca.pebblepebblearray.fill_moment1_local",
+      "itasca.pebblepebblearray.fill_moment2_global",
+      "itasca.pebblepebblearray.fill_moment2_local",
+      "itasca.pebblepebblearray.moment1_global",
+      "itasca.pebblepebblearray.moment1_local",
+      "itasca.pebblepebblearray.moment2_global",
+      "itasca.pebblepebblearray.moment2_local"
+    ],
+    "array group": [
+      "itasca.pebblepebblearray.in_group",
+      "itasca.pebblepebblearray.set_group"
+    ],
+    "pebblepebblearray group": [
+      "itasca.pebblepebblearray.in_group",
+      "itasca.pebblepebblearray.set_group"
+    ],
+    "array extra": [
+      "itasca.pebblepebblearray.extra",
+      "itasca.pebblepebblearray.set_extra"
+    ],
+    "pebblepebblearray extra": [
+      "itasca.pebblepebblearray.extra"
+    ],
+    "array id": [
+      "itasca.pebblepebblearray.ids"
+    ],
+    "pebblepebblearray id": [
+      "itasca.pebblepebblearray.ids"
+    ],
+    "pebblepebblearray branch": [
+      "itasca.pebblepebblearray.branch"
+    ],
+    "pebblepebblearray fill branch": [
+      "itasca.pebblepebblearray.fill_branch"
+    ],
+    "pebblepebblearray fill force global": [
+      "itasca.pebblepebblearray.fill_force_global"
+    ],
+    "pebblepebblearray fill force local": [
+      "itasca.pebblepebblearray.fill_force_local"
+    ],
+    "pebblepebblearray fill force normal": [
+      "itasca.pebblepebblearray.fill_force_normal"
+    ],
+    "pebblepebblearray fill force shear": [
+      "itasca.pebblepebblearray.fill_force_shear"
+    ],
+    "pebblepebblearray fill gap": [
+      "itasca.pebblepebblearray.fill_gap"
+    ],
+    "pebblepebblearray fill moment1 global": [
+      "itasca.pebblepebblearray.fill_moment1_global"
+    ],
+    "pebblepebblearray fill moment1 local": [
+      "itasca.pebblepebblearray.fill_moment1_local"
+    ],
+    "pebblepebblearray fill moment2 global": [
+      "itasca.pebblepebblearray.fill_moment2_global"
+    ],
+    "pebblepebblearray fill moment2 local": [
+      "itasca.pebblepebblearray.fill_moment2_local"
+    ],
+    "pebblepebblearray fill normal": [
+      "itasca.pebblepebblearray.fill_normal"
+    ],
+    "pebblepebblearray fill offset": [
+      "itasca.pebblepebblearray.fill_offset"
+    ],
+    "pebblepebblearray fill pos": [
+      "itasca.pebblepebblearray.fill_pos"
+    ],
+    "pebblepebblearray force global": [
+      "itasca.pebblepebblearray.force_global"
+    ],
+    "pebblepebblearray force local": [
+      "itasca.pebblepebblearray.force_local"
+    ],
+    "pebblepebblearray force normal": [
+      "itasca.pebblepebblearray.force_normal"
+    ],
+    "pebblepebblearray force shear": [
+      "itasca.pebblepebblearray.force_shear"
+    ],
+    "pebblepebblearray gap": [
+      "itasca.pebblepebblearray.gap"
+    ],
+    "pebblepebblearray ids": [
+      "itasca.pebblepebblearray.ids"
+    ],
+    "pebblepebblearray in group": [
+      "itasca.pebblepebblearray.in_group"
+    ],
+    "pebblepebblearray moment1 global": [
+      "itasca.pebblepebblearray.moment1_global"
+    ],
+    "pebblepebblearray moment1 local": [
+      "itasca.pebblepebblearray.moment1_local"
+    ],
+    "pebblepebblearray moment2 global": [
+      "itasca.pebblepebblearray.moment2_global"
+    ],
+    "pebblepebblearray moment2 local": [
+      "itasca.pebblepebblearray.moment2_local"
+    ],
+    "pebblepebblearray normal": [
+      "itasca.pebblepebblearray.normal"
+    ],
+    "pebblepebblearray offset": [
+      "itasca.pebblepebblearray.offset"
+    ],
+    "pebblepebblearray pos": [
+      "itasca.pebblepebblearray.pos"
+    ],
+    "pebblepebblearray set extra": [
+      "itasca.pebblepebblearray.set_extra"
+    ],
+    "pebblepebblearray set group": [
+      "itasca.pebblepebblearray.set_group"
+    ]
+  }
+}

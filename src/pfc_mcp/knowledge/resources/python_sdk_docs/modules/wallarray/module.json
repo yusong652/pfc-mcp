@@ -1,0 +1,1040 @@
+{
+  "module": "itasca.wallarray",
+  "description": "Vectorized NumPy array access for wall attributes.",
+  "import_statement": "import itasca as it",
+  "versions": [
+    "6.0",
+    "7.0",
+    "9.0"
+  ],
+  "functions": [
+    {
+      "name": "cutoff",
+      "signature": "itasca.wallarray.cutoff () -> array float{wall}.",
+      "description": "Get a numpy array of the wall cutoff angle.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall}",
+        "description": "array float{wall}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.cutoff()",
+          "description": "Call wallarray.cutoff."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.wallarray.disp () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall displacement.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.disp()",
+          "description": "Call wallarray.disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "euler",
+      "signature": "itasca.wallarray.euler () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall orientation.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.euler()",
+          "description": "Call wallarray.euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.wallarray.extra (slot : int) -> array float{wall} or float{wall,3}.",
+      "description": "Get the wall extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array float{wall} or float{wall,3}",
+        "description": "array float{wall} or float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.extra()",
+          "description": "Call wallarray.extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "fill_cutoff",
+      "signature": "itasca.wallarray.fill_cutoff (data: array float{wall}) -> None.",
+      "description": "Fill an existing array with the wall cutoff angle. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.cutoff())\nit.wallarray.fill_cutoff(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.wallarray.fill_disp (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.disp())\nit.wallarray.fill_disp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_euler",
+      "signature": "itasca.wallarray.fill_euler (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall orientation. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.euler())\nit.wallarray.fill_euler(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_contact",
+      "signature": "itasca.wallarray.fill_force_contact (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall contact force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.force_contact())\nit.wallarray.fill_force_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_contact",
+      "signature": "itasca.wallarray.fill_moment_contact (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall contact moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.moment_contact())\nit.wallarray.fill_moment_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.wallarray.fill_pos (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.pos())\nit.wallarray.fill_pos(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_rotation_center",
+      "signature": "itasca.wallarray.fill_rotation_center (data: array float{wall,dim}) -> None.",
+      "description": "Fill an existing array with the wall center of rotation. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.rotation_center())\nit.wallarray.fill_rotation_center(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_spin",
+      "signature": "itasca.wallarray.fill_spin (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall angular velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.spin())\nit.wallarray.fill_spin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.wallarray.fill_vel (data: array float{wall, 3}) -> None.",
+      "description": "Fill an existing array with the wall velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.wallarray.vel())\nit.wallarray.fill_vel(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "force_contact",
+      "signature": "itasca.wallarray.force_contact () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall contact force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.force_contact()",
+          "description": "Call wallarray.force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.wallarray.ids () -> array int{wall}.",
+      "description": "Get the wall ids as an array.",
+      "parameters": [],
+      "returns": {
+        "type": "array int{wall}",
+        "description": "array int{wall}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.ids()",
+          "description": "Call wallarray.ids."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.wallarray.in_group (group_name : str, slot = 1) -> array bool{wall}.",
+      "description": "Return wall group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array bool{wall}",
+        "description": "array bool{wall}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.in_group()",
+          "description": "Call wallarray.in_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_contact",
+      "signature": "itasca.wallarray.moment_contact () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall contact moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.moment_contact()",
+          "description": "Call wallarray.moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.wallarray.pos () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall location.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.wallarray.pos()",
+          "description": "Read positions for all current items as a NumPy array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "rotation_center",
+      "signature": "itasca.wallarray.rotation_center () -> array float{wall,dim}.",
+      "description": "Get a numpy array of the wall center of rotation.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,dim}",
+        "description": "array float{wall,dim}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.rotation_center()",
+          "description": "Call wallarray.rotation_center."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "set_cutoff",
+      "signature": "itasca.wallarray.set_cutoff (data: array float{wall}) -> None.",
+      "description": "Set the wall cutoff angle from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_cutoff()",
+          "description": "Call wallarray.set_cutoff."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.wallarray.set_disp (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_disp()",
+          "description": "Call wallarray.set_disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_euler",
+      "signature": "itasca.wallarray.set_euler (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall orientation from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_euler()",
+          "description": "Call wallarray.set_euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.wallarray.set_extra (slot: int, data: array float{wall} or float{wall, 3}) -> None.",
+      "description": "Set the wall extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        },
+        {
+          "name": "data",
+          "type": "array float{wall} or float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_extra()",
+          "description": "Call wallarray.set_extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "itasca.wallarray.set_force_contact (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall contact force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_force_contact()",
+          "description": "Call wallarray.set_force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.wallarray.set_group (membership: array bool{wall}, group_name: str, slot=1) -> None.",
+      "description": "Set wall group from an array. Where membership True set the corresponding wall to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{wall}",
+          "required": true,
+          "description": "membership argument."
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_group()",
+          "description": "Call wallarray.set_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "itasca.wallarray.set_moment_contact (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall contact moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_moment_contact()",
+          "description": "Call wallarray.set_moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.wallarray.set_pos (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall location from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.wallarray.pos()\npositions[:, 2] += 0.1\nit.wallarray.set_pos(positions)",
+          "description": "Modify positions in bulk and write them back."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_rotation_center",
+      "signature": "itasca.wallarray.set_rotation_center ((data: array float{wall,dim}) -> None.",
+      "description": "Set the wall center of rotation from an array.",
+      "parameters": [],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_rotation_center()",
+          "description": "Call wallarray.set_rotation_center."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_spin",
+      "signature": "itasca.wallarray.set_spin (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall angular velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_spin()",
+          "description": "Call wallarray.set_spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.wallarray.set_vel (data: array float{wall, 3}) -> None.",
+      "description": "Set the wall velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{wall",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.set_vel()",
+          "description": "Call wallarray.set_vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "spin",
+      "signature": "itasca.wallarray.spin () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall angular velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.spin()",
+          "description": "Call wallarray.spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.wallarray.vel () -> array float{wall,3}.",
+      "description": "Get a numpy array of the wall velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{wall,3}",
+        "description": "array float{wall,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.wallarray.vel()",
+          "description": "Call wallarray.vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    }
+  ]
+}

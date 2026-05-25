@@ -81,7 +81,7 @@ async def _mock_bridge_handler(websocket):
                     "status": t["status"],
                     "source": "agent",
                     "elapsed_time": "5.0s",
-                    "entry_script": t["script_path"],
+                    "script_path": t["script_path"],
                     "description": t["description"],
                 }
                 for tid, t in TASK_STORE.items()
@@ -165,7 +165,7 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
     script = tmp_path / "run.py"
     script.write_text("print('hello')")
 
-    result = await mcp._tool_manager.call_tool(
+    result = await mcp.call_tool(
         "pfc_execute_task",
         {"entry_script": str(script), "description": "test task"},
     )
@@ -199,7 +199,7 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     script = tmp_path / "sim.py"
     script.write_text("print('running')")
 
-    exec_result = await mcp._tool_manager.call_tool(
+    exec_result = await mcp.call_tool(
         "pfc_execute_task",
         {"entry_script": str(script), "description": "simulation"},
     )
@@ -207,7 +207,7 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     exec_data = json.loads(exec_text) if exec_text.startswith("{") else {}
     task_id = exec_data.get("data", {}).get("task_id", list(TASK_STORE.keys())[0])
 
-    result = await mcp._tool_manager.call_tool(
+    result = await mcp.call_tool(
         "pfc_check_task_status",
         {"task_id": task_id, "wait_seconds": 1},
     )
@@ -263,7 +263,7 @@ async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, t
 
     monkeypatch.setattr(client, "check_task_status", fake_check)
 
-    result = await mcp._tool_manager.call_tool(
+    result = await mcp.call_tool(
         "pfc_check_task_status",
         {"task_id": "abc123", "wait_seconds": 1},
     )
@@ -280,7 +280,7 @@ async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, t
 
 @pytest.mark.asyncio
 async def test_check_task_status_not_found(mock_bridge):
-    result = await mcp._tool_manager.call_tool(
+    result = await mcp.call_tool(
         "pfc_check_task_status",
         {"task_id": "nonexistent", "wait_seconds": 1},
     )
@@ -301,12 +301,12 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
     # Submit a task first
     script = tmp_path / "job.py"
     script.write_text("print('done')")
-    await mcp._tool_manager.call_tool(
+    await mcp.call_tool(
         "pfc_execute_task",
         {"entry_script": str(script), "description": "list test"},
     )
 
-    result = await mcp._tool_manager.call_tool("pfc_list_tasks", {})
+    result = await mcp.call_tool("pfc_list_tasks", {})
 
     text = result.content[0].text
     parsed = json.loads(text) if text.startswith("{") else None
@@ -333,7 +333,7 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
 
 @pytest.mark.asyncio
 async def test_execute_code_success_fields(mock_bridge):
-    result = await mcp._tool_manager.call_tool(
+    result = await mcp.call_tool(
         "pfc_execute_code",
         {"code": "print(42)"},
     )
@@ -355,7 +355,7 @@ async def test_execute_code_success_fields(mock_bridge):
 @pytest.mark.asyncio
 async def test_list_tasks_empty(mock_bridge):
     # No tasks submitted — TASK_STORE is cleared by fixture
-    result = await mcp._tool_manager.call_tool("pfc_list_tasks", {})
+    result = await mcp.call_tool("pfc_list_tasks", {})
 
     text = result.content[0].text
     parsed = json.loads(text) if text.startswith("{") else None

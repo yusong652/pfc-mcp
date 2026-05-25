@@ -1,0 +1,1614 @@
+{
+  "module": "itasca.ballarray",
+  "description": "Vectorized NumPy array access for ball attributes and bulk ball creation.",
+  "import_statement": "import itasca as it",
+  "versions": [
+    "6.0",
+    "7.0",
+    "9.0"
+  ],
+  "functions": [
+    {
+      "name": "create",
+      "signature": "itasca.ballarray.create (radii: array float{ball}, centroids: array float{ball,dim}, **kwds) -> array int{ball} IDs of the newly created balls.",
+      "description": "Create balls from two arrays. The first array must contain the radii, and the second array the positions. The arrays must be the correct shape. Additional keyword arguments can be specified which will set the newly created ball attributes. The keyword arguments values can be scalars, vecs or arrays of 1 or two dimensions. The keyword argument props can be used to set ball properties, the value should be a dict of type {str: value}. The keyword argument extra can be used to set extra variables, the value should be a dict of type {int: value}. The props or extra dictionary values can be a 1 or 2 dimensional array of doubles, a number, a vec or a string.",
+      "parameters": [
+        {
+          "name": "radii",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "radii argument."
+        },
+        {
+          "name": "centroids",
+          "type": "array float{ball",
+          "required": true,
+          "description": "centroids argument."
+        },
+        {
+          "name": "**kwds",
+          "type": "keyword arguments",
+          "required": false,
+          "description": "Optional keyword arguments accepted by the official API."
+        }
+      ],
+      "returns": {
+        "type": "array int{ball} IDs of the newly created balls",
+        "description": "array int{ball} IDs of the newly created balls"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\nradii = np.full(10, 0.05)\ncentroids = np.zeros((10, it.dim()))\nids = it.ballarray.create(radii, centroids)",
+          "description": "Create balls in bulk from radius and centroid arrays."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "damp",
+      "signature": "itasca.ballarray.damp () -> array float{ball}.",
+      "description": "Get a numpy array of the ball local damping.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball}",
+        "description": "array float{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.damp()",
+          "description": "Call ballarray.damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "density",
+      "signature": "itasca.ballarray.density () -> array float{ball}.",
+      "description": "Get a numpy array of the ball density.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball}",
+        "description": "array float{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.density()",
+          "description": "Call ballarray.density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.ballarray.disp () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball displacement.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.disp()",
+          "description": "Call ballarray.disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "euler",
+      "signature": "itasca.ballarray.euler () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball orientation.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.euler()",
+          "description": "Call ballarray.euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
+      ]
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.ballarray.extra (slot : int) -> array float{ball} or float{ball,3}.",
+      "description": "Get the ball extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array float{ball} or float{ball,3}",
+        "description": "array float{ball} or float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.extra()",
+          "description": "Call ballarray.extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "fill_damp",
+      "signature": "itasca.ballarray.fill_damp (data: array float{ball}) -> None.",
+      "description": "Fill an existing array with the ball local damping. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.damp())\nit.ballarray.fill_damp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_density",
+      "signature": "itasca.ballarray.fill_density (data: array float{ball}) -> None.",
+      "description": "Fill an existing array with the ball density. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.density())\nit.ballarray.fill_density(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.ballarray.fill_disp (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.disp())\nit.ballarray.fill_disp(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_euler",
+      "signature": "itasca.ballarray.fill_euler (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball orientation. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.euler())\nit.ballarray.fill_euler(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_app",
+      "signature": "itasca.ballarray.fill_force_app (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball applied force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.force_app())\nit.ballarray.fill_force_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_contact",
+      "signature": "itasca.ballarray.fill_force_contact (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball contact force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.force_contact())\nit.ballarray.fill_force_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_force_unbal",
+      "signature": "itasca.ballarray.fill_force_unbal (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball unbalanced force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.force_unbal())\nit.ballarray.fill_force_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass",
+      "signature": "itasca.ballarray.fill_mass (data: array float{ball}) -> None.",
+      "description": "Fill an existing array with the inertial ball mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.mass())\nit.ballarray.fill_mass(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_mass_real",
+      "signature": "itasca.ballarray.fill_mass_real (data: array float{ball}) -> None.",
+      "description": "Fill an existing array with the real (gravitational) ball mass. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.mass_real())\nit.ballarray.fill_mass_real(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_app",
+      "signature": "itasca.ballarray.fill_moment_app (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball applied moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.moment_app())\nit.ballarray.fill_moment_app(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_contact",
+      "signature": "itasca.ballarray.fill_moment_contact (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball contact moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.moment_contact())\nit.ballarray.fill_moment_contact(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_moment_unbal",
+      "signature": "itasca.ballarray.fill_moment_unbal (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball unbalanced moment. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.moment_unbal())\nit.ballarray.fill_moment_unbal(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.ballarray.fill_pos (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.pos())\nit.ballarray.fill_pos(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_radius",
+      "signature": "itasca.ballarray.fill_radius (data: array float{ball}) -> None.",
+      "description": "Fill an existing array with the ball radii. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.radius())\nit.ballarray.fill_radius(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_spin",
+      "signature": "itasca.ballarray.fill_spin (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball angular velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.spin())\nit.ballarray.fill_spin(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.ballarray.fill_vel (data: array float{ball, 3}) -> None.",
+      "description": "Fill an existing array with the ball velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.ballarray.vel())\nit.ballarray.fill_vel(data)",
+          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "The destination array must already have the correct shape and dtype."
+      ]
+    },
+    {
+      "name": "force_app",
+      "signature": "itasca.ballarray.force_app () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball applied force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.force_app()",
+          "description": "Call ballarray.force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_contact",
+      "signature": "itasca.ballarray.force_contact () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball contact force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.force_contact()",
+          "description": "Call ballarray.force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "force_unbal",
+      "signature": "itasca.ballarray.force_unbal () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball unbalanced force.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.force_unbal()",
+          "description": "Call ballarray.force_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.ballarray.ids () -> array int{ball}.",
+      "description": "Get the ball ids as an array.",
+      "parameters": [],
+      "returns": {
+        "type": "array int{ball}",
+        "description": "array int{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.ids()",
+          "description": "Call ballarray.ids."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.ballarray.in_group (group_name : str, slot = 1) -> array bool{ball}.",
+      "description": "Return ball group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "array bool{ball}",
+        "description": "array bool{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.in_group()",
+          "description": "Call ballarray.in_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass",
+      "signature": "itasca.ballarray.mass () -> array float{ball}.",
+      "description": "Get a numpy array of the inertial ball mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball}",
+        "description": "array float{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.mass()",
+          "description": "Call ballarray.mass."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "mass_real",
+      "signature": "itasca.ballarray.mass_real () -> array float{ball}.",
+      "description": "Get a numpy array of the real (gravitational) ball mass.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball}",
+        "description": "array float{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.mass_real()",
+          "description": "Call ballarray.mass_real."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_app",
+      "signature": "itasca.ballarray.moment_app () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball applied moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.moment_app()",
+          "description": "Call ballarray.moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_contact",
+      "signature": "itasca.ballarray.moment_contact () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball contact moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.moment_contact()",
+          "description": "Call ballarray.moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "moment_unbal",
+      "signature": "itasca.ballarray.moment_unbal () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball unbalanced moment.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.moment_unbal()",
+          "description": "Call ballarray.moment_unbal."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.ballarray.pos () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball centroid location.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.ballarray.pos()",
+          "description": "Read positions for all current items as a NumPy array."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "radius",
+      "signature": "itasca.ballarray.radius () -> array float{ball}.",
+      "description": "Get a numpy array of the ball radii.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball}",
+        "description": "array float{ball}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.radius()",
+          "description": "Call ballarray.radius."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "set_damp",
+      "signature": "itasca.ballarray.set_damp (data: array float{ball}) -> None.",
+      "description": "Set the ball local damping from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_damp()",
+          "description": "Call ballarray.set_damp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_density",
+      "signature": "itasca.ballarray.set_density (data: array float{ball}) -> None.",
+      "description": "Set the ball density from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_density()",
+          "description": "Call ballarray.set_density."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.ballarray.set_disp (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_disp()",
+          "description": "Call ballarray.set_disp."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_euler",
+      "signature": "itasca.ballarray.set_euler (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball orientation from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_euler()",
+          "description": "Call ballarray.set_euler."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.ballarray.set_extra (slot: int, data: array float{ball} or float{ball, 3}) -> None.",
+      "description": "Set the ball extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true,
+          "description": "slot argument."
+        },
+        {
+          "name": "data",
+          "type": "array float{ball} or float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_extra()",
+          "description": "Call ballarray.set_extra."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately.",
+        "Array extra variables must be float or vector values in the selected slot."
+      ]
+    },
+    {
+      "name": "set_force_app",
+      "signature": "itasca.ballarray.set_force_app (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball applied force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_force_app()",
+          "description": "Call ballarray.set_force_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_force_contact",
+      "signature": "itasca.ballarray.set_force_contact (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball contact force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_force_contact()",
+          "description": "Call ballarray.set_force_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.ballarray.set_group (membership: array bool{ball}, group_name: str, slot=1) -> None.",
+      "description": "Set ball group from an array. Where membership True set the corresponding ball to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{ball}",
+          "required": true,
+          "description": "membership argument."
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true,
+          "description": "group_name argument."
+        },
+        {
+          "name": "slot",
+          "type": "Any",
+          "required": false,
+          "description": "slot argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_group()",
+          "description": "Call ballarray.set_group."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_app",
+      "signature": "itasca.ballarray.set_moment_app (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball applied moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_moment_app()",
+          "description": "Call ballarray.set_moment_app."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_moment_contact",
+      "signature": "itasca.ballarray.set_moment_contact (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball contact moment from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_moment_contact()",
+          "description": "Call ballarray.set_moment_contact."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.ballarray.set_pos (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball centroid location from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\npositions = it.ballarray.pos()\npositions[:, 2] += 0.1\nit.ballarray.set_pos(positions)",
+          "description": "Modify positions in bulk and write them back."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_radius",
+      "signature": "itasca.ballarray.set_radius (data: array float{ball}) -> None.",
+      "description": "Set the ball radii from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball}",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_radius()",
+          "description": "Call ballarray.set_radius."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_spin",
+      "signature": "itasca.ballarray.set_spin (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball angular velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_spin()",
+          "description": "Call ballarray.set_spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.ballarray.set_vel (data: array float{ball, 3}) -> None.",
+      "description": "Set the ball velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{ball",
+          "required": true,
+          "description": "data argument."
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "None"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.set_vel()",
+          "description": "Call ballarray.set_vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
+        "Setter functions modify model state immediately."
+      ]
+    },
+    {
+      "name": "spin",
+      "signature": "itasca.ballarray.spin () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball angular velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.spin()",
+          "description": "Call ballarray.spin."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.ballarray.vel () -> array float{ball,3}.",
+      "description": "Get a numpy array of the ball velocity.",
+      "parameters": [],
+      "returns": {
+        "type": "array float{ball,3}",
+        "description": "array float{ball,3}"
+      },
+      "examples": [
+        {
+          "code": "import itasca as it\nvalues = it.ballarray.vel()",
+          "description": "Call ballarray.vel."
+        }
+      ],
+      "availability": {
+        "versions": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "notes": [
+        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature."
+      ]
+    }
+  ]
+}

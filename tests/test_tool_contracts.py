@@ -81,7 +81,7 @@ async def _mock_bridge_handler(websocket):
                     "status": t["status"],
                     "source": "agent",
                     "elapsed_time": "5.0s",
-                    "script_path": t["script_path"],
+                    "entry_script": t["script_path"],
                     "description": t["description"],
                 }
                 for tid, t in TASK_STORE.items()

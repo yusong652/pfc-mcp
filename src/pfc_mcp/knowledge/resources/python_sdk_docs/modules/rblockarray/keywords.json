@@ -23,7 +23,6 @@
       "itasca.rblockarray.fill_moment_contact",
       "itasca.rblockarray.fill_moment_unbal",
       "itasca.rblockarray.fill_pos",
-      "itasca.rblockarray.fill_rotation",
       "itasca.rblockarray.fill_spin",
       "itasca.rblockarray.fill_vel",
       "itasca.rblockarray.fill_vol",
@@ -40,7 +39,6 @@
       "itasca.rblockarray.moment_contact",
       "itasca.rblockarray.moment_unbal",
       "itasca.rblockarray.pos",
-      "itasca.rblockarray.rotation",
       "itasca.rblockarray.set_damp",
       "itasca.rblockarray.set_density",
       "itasca.rblockarray.set_disp",
@@ -53,7 +51,6 @@
       "itasca.rblockarray.set_moment_app",
       "itasca.rblockarray.set_moment_contact",
       "itasca.rblockarray.set_pos",
-      "itasca.rblockarray.set_rotation",
       "itasca.rblockarray.set_spin",
       "itasca.rblockarray.set_vel",
       "itasca.rblockarray.set_vol",
@@ -82,7 +79,6 @@
       "itasca.rblockarray.fill_moment_contact",
       "itasca.rblockarray.fill_moment_unbal",
       "itasca.rblockarray.fill_pos",
-      "itasca.rblockarray.fill_rotation",
       "itasca.rblockarray.fill_spin",
       "itasca.rblockarray.fill_vel",
       "itasca.rblockarray.fill_vol",
@@ -99,7 +95,6 @@
       "itasca.rblockarray.moment_contact",
       "itasca.rblockarray.moment_unbal",
       "itasca.rblockarray.pos",
-      "itasca.rblockarray.rotation",
       "itasca.rblockarray.set_damp",
       "itasca.rblockarray.set_density",
       "itasca.rblockarray.set_disp",
@@ -112,7 +107,6 @@
       "itasca.rblockarray.set_moment_app",
       "itasca.rblockarray.set_moment_contact",
       "itasca.rblockarray.set_pos",
-      "itasca.rblockarray.set_rotation",
       "itasca.rblockarray.set_spin",
       "itasca.rblockarray.set_vel",
       "itasca.rblockarray.set_vol",
@@ -248,9 +242,6 @@
     "rblockarray fill pos": [
       "itasca.rblockarray.fill_pos"
     ],
-    "rblockarray fill rotation": [
-      "itasca.rblockarray.fill_rotation"
-    ],
     "rblockarray fill spin": [
       "itasca.rblockarray.fill_spin"
     ],
@@ -299,9 +290,6 @@
     "rblockarray pos": [
       "itasca.rblockarray.pos"
     ],
-    "rblockarray rotation": [
-      "itasca.rblockarray.rotation"
-    ],
     "rblockarray set damp": [
       "itasca.rblockarray.set_damp"
     ],
@@ -337,9 +325,6 @@
     ],
     "rblockarray set pos": [
       "itasca.rblockarray.set_pos"
-    ],
-    "rblockarray set rotation": [
-      "itasca.rblockarray.set_rotation"
     ],
     "rblockarray set spin": [
       "itasca.rblockarray.set_spin"

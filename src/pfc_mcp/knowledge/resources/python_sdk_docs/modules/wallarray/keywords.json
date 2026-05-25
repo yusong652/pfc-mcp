@@ -13,7 +13,6 @@
       "itasca.wallarray.fill_force_contact",
       "itasca.wallarray.fill_moment_contact",
       "itasca.wallarray.fill_pos",
-      "itasca.wallarray.fill_rotation",
       "itasca.wallarray.fill_rotation_center",
       "itasca.wallarray.fill_spin",
       "itasca.wallarray.fill_vel",
@@ -22,7 +21,6 @@
       "itasca.wallarray.in_group",
       "itasca.wallarray.moment_contact",
       "itasca.wallarray.pos",
-      "itasca.wallarray.rotation",
       "itasca.wallarray.rotation_center",
       "itasca.wallarray.set_cutoff",
       "itasca.wallarray.set_disp",
@@ -32,7 +30,6 @@
       "itasca.wallarray.set_group",
       "itasca.wallarray.set_moment_contact",
       "itasca.wallarray.set_pos",
-      "itasca.wallarray.set_rotation",
       "itasca.wallarray.set_rotation_center",
       "itasca.wallarray.set_spin",
       "itasca.wallarray.set_vel",
@@ -50,7 +47,6 @@
       "itasca.wallarray.fill_force_contact",
       "itasca.wallarray.fill_moment_contact",
       "itasca.wallarray.fill_pos",
-      "itasca.wallarray.fill_rotation",
       "itasca.wallarray.fill_rotation_center",
       "itasca.wallarray.fill_spin",
       "itasca.wallarray.fill_vel",
@@ -59,7 +55,6 @@
       "itasca.wallarray.in_group",
       "itasca.wallarray.moment_contact",
       "itasca.wallarray.pos",
-      "itasca.wallarray.rotation",
       "itasca.wallarray.rotation_center",
       "itasca.wallarray.set_cutoff",
       "itasca.wallarray.set_disp",
@@ -69,7 +64,6 @@
       "itasca.wallarray.set_group",
       "itasca.wallarray.set_moment_contact",
       "itasca.wallarray.set_pos",
-      "itasca.wallarray.set_rotation",
       "itasca.wallarray.set_rotation_center",
       "itasca.wallarray.set_spin",
       "itasca.wallarray.set_vel",
@@ -154,9 +148,6 @@
     "wallarray fill pos": [
       "itasca.wallarray.fill_pos"
     ],
-    "wallarray fill rotation": [
-      "itasca.wallarray.fill_rotation"
-    ],
     "wallarray fill rotation center": [
       "itasca.wallarray.fill_rotation_center"
     ],
@@ -180,9 +171,6 @@
     ],
     "wallarray pos": [
       "itasca.wallarray.pos"
-    ],
-    "wallarray rotation": [
-      "itasca.wallarray.rotation"
     ],
     "wallarray rotation center": [
       "itasca.wallarray.rotation_center"
@@ -210,9 +198,6 @@
     ],
     "wallarray set pos": [
       "itasca.wallarray.set_pos"
-    ],
-    "wallarray set rotation": [
-      "itasca.wallarray.set_rotation"
     ],
     "wallarray set rotation center": [
       "itasca.wallarray.set_rotation_center"

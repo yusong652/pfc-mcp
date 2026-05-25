@@ -103,6 +103,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -272,6 +273,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -476,6 +478,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -653,39 +656,6 @@
       },
       "notes": [
         "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "The destination array must already have the correct shape and dtype."
-      ]
-    },
-    {
-      "name": "fill_rotation",
-      "signature": "itasca.rblockarray.fill_rotation (data: array float{rblock}) -> None.",
-      "description": "Fill an existing array with the rblock orientation. The array must be the correct shape.",
-      "parameters": [
-        {
-          "name": "data",
-          "type": "array float{rblock}",
-          "required": true,
-          "description": "data argument."
-        }
-      ],
-      "returns": {
-        "type": "None",
-        "description": "None"
-      },
-      "examples": [
-        {
-          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.rblockarray.rotation())\nit.rblockarray.fill_rotation(data)",
-          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
         "The destination array must already have the correct shape and dtype."
       ]
     },
@@ -1010,6 +980,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -1150,31 +1121,6 @@
       ]
     },
     {
-      "name": "rotation",
-      "signature": "itasca.rblockarray.rotation () -> array float{rblock}.",
-      "description": "Get a numpy array of the rblock orientation.",
-      "parameters": [],
-      "returns": {
-        "type": "array float{rblock}",
-        "description": "array float{rblock}"
-      },
-      "examples": [
-        {
-          "code": "import itasca as it\nvalues = it.rblockarray.rotation()",
-          "description": "Call rblockarray.rotation."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
-      ]
-    },
-    {
       "name": "set_damp",
       "signature": "itasca.rblockarray.set_damp (data: array float{rblock}) -> None.",
       "description": "Set the rblock local damping from an array.",
@@ -1300,6 +1246,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -1598,39 +1545,6 @@
       },
       "notes": [
         "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "Setter functions modify model state immediately."
-      ]
-    },
-    {
-      "name": "set_rotation",
-      "signature": "itasca.rblockarray.set_rotation (data: array float{rblock}) -> None.",
-      "description": "Set the rblock orientation from an array.",
-      "parameters": [
-        {
-          "name": "data",
-          "type": "array float{rblock}",
-          "required": true,
-          "description": "data argument."
-        }
-      ],
-      "returns": {
-        "type": "None",
-        "description": "None"
-      },
-      "examples": [
-        {
-          "code": "import itasca as it\nvalues = it.rblockarray.set_rotation()",
-          "description": "Call rblockarray.set_rotation."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
         "Setter functions modify model state immediately."
       ]
     },

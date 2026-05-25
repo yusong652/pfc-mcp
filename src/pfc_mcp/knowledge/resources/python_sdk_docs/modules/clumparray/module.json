@@ -103,6 +103,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -272,6 +273,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -476,6 +478,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -653,39 +656,6 @@
       },
       "notes": [
         "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "The destination array must already have the correct shape and dtype."
-      ]
-    },
-    {
-      "name": "fill_rotation",
-      "signature": "itasca.clumparray.fill_rotation (data: array float{clump}) -> None.",
-      "description": "Fill an existing array with the clump orientation. The array must be the correct shape.",
-      "parameters": [
-        {
-          "name": "data",
-          "type": "array float{clump}",
-          "required": true,
-          "description": "data argument."
-        }
-      ],
-      "returns": {
-        "type": "None",
-        "description": "None"
-      },
-      "examples": [
-        {
-          "code": "import numpy as np\nimport itasca as it\ndata = np.empty_like(it.clumparray.rotation())\nit.clumparray.fill_rotation(data)",
-          "description": "Fill a preallocated NumPy array to avoid allocating a new result array."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
         "The destination array must already have the correct shape and dtype."
       ]
     },
@@ -1010,6 +980,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -1150,31 +1121,6 @@
       ]
     },
     {
-      "name": "rotation",
-      "signature": "itasca.clumparray.rotation () -> array float{clump}.",
-      "description": "Get a numpy array of the clump orientation.",
-      "parameters": [],
-      "returns": {
-        "type": "array float{clump}",
-        "description": "array float{clump}"
-      },
-      "examples": [
-        {
-          "code": "import itasca as it\nvalues = it.clumparray.rotation()",
-          "description": "Call clumparray.rotation."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set."
-      ]
-    },
-    {
       "name": "set_damp",
       "signature": "itasca.clumparray.set_damp (data: array float{clump}) -> None.",
       "description": "Set the clump local damping from an array.",
@@ -1300,6 +1246,7 @@
       ],
       "availability": {
         "versions": [
+          "6.0",
           "7.0",
           "9.0"
         ]
@@ -1598,39 +1545,6 @@
       },
       "notes": [
         "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "Setter functions modify model state immediately."
-      ]
-    },
-    {
-      "name": "set_rotation",
-      "signature": "itasca.clumparray.set_rotation (data: array float{clump}) -> None.",
-      "description": "Set the clump orientation from an array.",
-      "parameters": [
-        {
-          "name": "data",
-          "type": "array float{clump}",
-          "required": true,
-          "description": "data argument."
-        }
-      ],
-      "returns": {
-        "type": "None",
-        "description": "None"
-      },
-      "examples": [
-        {
-          "code": "import itasca as it\nvalues = it.clumparray.set_rotation()",
-          "description": "Call clumparray.set_rotation."
-        }
-      ],
-      "availability": {
-        "versions": [
-          "6.0"
-        ]
-      },
-      "notes": [
-        "Array APIs operate on all current objects of this type and return or accept NumPy arrays with the shape shown in the signature.",
-        "This function is version-specific within the supported PFC 6.0/7.0/9.0 documentation set.",
         "Setter functions modify model state immediately."
       ]
     },

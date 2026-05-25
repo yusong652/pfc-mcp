@@ -77,12 +77,11 @@ def test_array_keywords_point_to_quick_ref_entries() -> None:
                 assert api_path in quick_ref, api_path
 
 
-def test_array_version_specific_api_availability_is_data_only() -> None:
-    clumparray = DocumentationLoader.load_module("clumparray")
-    assert clumparray is not None
-
-    rotation = next(func for func in clumparray["functions"] if func["name"] == "rotation")
-    euler = next(func for func in clumparray["functions"] if func["name"] == "euler")
-
-    assert rotation["availability"]["versions"] == ["6.0"]
-    assert euler["availability"]["versions"] == ["7.0", "9.0"]
+def test_array_modules_advertise_all_three_versions() -> None:
+    for module in ARRAY_MODULES:
+        doc = DocumentationLoader.load_module(module)
+        assert doc is not None
+        for func in doc["functions"]:
+            assert func["availability"]["versions"] == ["6.0", "7.0", "9.0"], (
+                f"{module}.{func['name']} unexpectedly version-gated"
+            )

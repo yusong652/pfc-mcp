@@ -23,7 +23,6 @@
       "itasca.clumparray.fill_moment_contact",
       "itasca.clumparray.fill_moment_unbal",
       "itasca.clumparray.fill_pos",
-      "itasca.clumparray.fill_rotation",
       "itasca.clumparray.fill_spin",
       "itasca.clumparray.fill_vel",
       "itasca.clumparray.fill_vol",
@@ -40,7 +39,6 @@
       "itasca.clumparray.moment_contact",
       "itasca.clumparray.moment_unbal",
       "itasca.clumparray.pos",
-      "itasca.clumparray.rotation",
       "itasca.clumparray.set_damp",
       "itasca.clumparray.set_density",
       "itasca.clumparray.set_disp",
@@ -53,7 +51,6 @@
       "itasca.clumparray.set_moment_app",
       "itasca.clumparray.set_moment_contact",
       "itasca.clumparray.set_pos",
-      "itasca.clumparray.set_rotation",
       "itasca.clumparray.set_spin",
       "itasca.clumparray.set_vel",
       "itasca.clumparray.set_vol",
@@ -82,7 +79,6 @@
       "itasca.clumparray.fill_moment_contact",
       "itasca.clumparray.fill_moment_unbal",
       "itasca.clumparray.fill_pos",
-      "itasca.clumparray.fill_rotation",
       "itasca.clumparray.fill_spin",
       "itasca.clumparray.fill_vel",
       "itasca.clumparray.fill_vol",
@@ -99,7 +95,6 @@
       "itasca.clumparray.moment_contact",
       "itasca.clumparray.moment_unbal",
       "itasca.clumparray.pos",
-      "itasca.clumparray.rotation",
       "itasca.clumparray.set_damp",
       "itasca.clumparray.set_density",
       "itasca.clumparray.set_disp",
@@ -112,7 +107,6 @@
       "itasca.clumparray.set_moment_app",
       "itasca.clumparray.set_moment_contact",
       "itasca.clumparray.set_pos",
-      "itasca.clumparray.set_rotation",
       "itasca.clumparray.set_spin",
       "itasca.clumparray.set_vel",
       "itasca.clumparray.set_vol",
@@ -248,9 +242,6 @@
     "clumparray fill pos": [
       "itasca.clumparray.fill_pos"
     ],
-    "clumparray fill rotation": [
-      "itasca.clumparray.fill_rotation"
-    ],
     "clumparray fill spin": [
       "itasca.clumparray.fill_spin"
     ],
@@ -299,9 +290,6 @@
     "clumparray pos": [
       "itasca.clumparray.pos"
     ],
-    "clumparray rotation": [
-      "itasca.clumparray.rotation"
-    ],
     "clumparray set damp": [
       "itasca.clumparray.set_damp"
     ],
@@ -337,9 +325,6 @@
     ],
     "clumparray set pos": [
       "itasca.clumparray.set_pos"
-    ],
-    "clumparray set rotation": [
-      "itasca.clumparray.set_rotation"
     ],
     "clumparray set spin": [
       "itasca.clumparray.set_spin"

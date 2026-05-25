@@ -23,7 +23,6 @@
       "itasca.ballarray.fill_moment_unbal",
       "itasca.ballarray.fill_pos",
       "itasca.ballarray.fill_radius",
-      "itasca.ballarray.fill_rotation",
       "itasca.ballarray.fill_spin",
       "itasca.ballarray.fill_vel",
       "itasca.ballarray.force_app",
@@ -38,7 +37,6 @@
       "itasca.ballarray.moment_unbal",
       "itasca.ballarray.pos",
       "itasca.ballarray.radius",
-      "itasca.ballarray.rotation",
       "itasca.ballarray.set_damp",
       "itasca.ballarray.set_density",
       "itasca.ballarray.set_disp",
@@ -51,7 +49,6 @@
       "itasca.ballarray.set_moment_contact",
       "itasca.ballarray.set_pos",
       "itasca.ballarray.set_radius",
-      "itasca.ballarray.set_rotation",
       "itasca.ballarray.set_spin",
       "itasca.ballarray.set_vel",
       "itasca.ballarray.spin",
@@ -78,7 +75,6 @@
       "itasca.ballarray.fill_moment_unbal",
       "itasca.ballarray.fill_pos",
       "itasca.ballarray.fill_radius",
-      "itasca.ballarray.fill_rotation",
       "itasca.ballarray.fill_spin",
       "itasca.ballarray.fill_vel",
       "itasca.ballarray.force_app",
@@ -93,7 +89,6 @@
       "itasca.ballarray.moment_unbal",
       "itasca.ballarray.pos",
       "itasca.ballarray.radius",
-      "itasca.ballarray.rotation",
       "itasca.ballarray.set_damp",
       "itasca.ballarray.set_density",
       "itasca.ballarray.set_disp",
@@ -106,7 +101,6 @@
       "itasca.ballarray.set_moment_contact",
       "itasca.ballarray.set_pos",
       "itasca.ballarray.set_radius",
-      "itasca.ballarray.set_rotation",
       "itasca.ballarray.set_spin",
       "itasca.ballarray.set_vel",
       "itasca.ballarray.spin",
@@ -240,9 +234,6 @@
     "ballarray fill radius": [
       "itasca.ballarray.fill_radius"
     ],
-    "ballarray fill rotation": [
-      "itasca.ballarray.fill_rotation"
-    ],
     "ballarray fill spin": [
       "itasca.ballarray.fill_spin"
     ],
@@ -285,9 +276,6 @@
     "ballarray radius": [
       "itasca.ballarray.radius"
     ],
-    "ballarray rotation": [
-      "itasca.ballarray.rotation"
-    ],
     "ballarray set damp": [
       "itasca.ballarray.set_damp"
     ],
@@ -323,9 +311,6 @@
     ],
     "ballarray set radius": [
       "itasca.ballarray.set_radius"
-    ],
-    "ballarray set rotation": [
-      "itasca.ballarray.set_rotation"
     ],
     "ballarray set spin": [
       "itasca.ballarray.set_spin"

@@ -55,8 +55,8 @@ CONTACT_TYPE_VERSIONS = {contact_type: ALL_VERSIONS for contact_type in ALL_CONT
 CONTACT_TYPE_VERSIONS["VertexFacetContact"] = ["9.0"]
 
 # PFC 9 runtime reflection shows thermal contacts share these non-force
-# Contact methods. Thermal-specific power/set_power are real but do not have
-# source docs in this tree yet, so they are intentionally not expanded here.
+# Contact methods. Thermal-specific power/set_power are sourced from PFC 9
+# Python HTML docs (no force_normal / force_shear on thermal contacts).
 THERMAL_CONTACT_METHODS = {
     "activate",
     "activated",
@@ -87,6 +87,7 @@ THERMAL_CONTACT_METHODS = {
     "pos_x",
     "pos_y",
     "pos_z",
+    "power",
     "prop",
     "props",
     "set_extra",
@@ -94,6 +95,7 @@ THERMAL_CONTACT_METHODS = {
     "set_inhibit",
     "set_model",
     "set_persist",
+    "set_power",
     "set_prop",
     "shear",
     "shear_x",

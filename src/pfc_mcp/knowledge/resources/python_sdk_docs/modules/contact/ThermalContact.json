@@ -362,6 +362,16 @@
       }
     },
     {
+      "name": "power",
+      "signature": "contact.power() -> float",
+      "description": "Get the contact power.",
+      "parameters": [],
+      "returns": {
+        "type": "float",
+        "description": "Contact power"
+      }
+    },
+    {
       "name": "prop",
       "signature": "contact.prop(property_name or index: str or int) -> any",
       "description": "Get a contact model property.",
@@ -478,6 +488,23 @@
           "type": "bool",
           "required": true,
           "description": "Persistence flag to set"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "No return value"
+      }
+    },
+    {
+      "name": "set_power",
+      "signature": "contact.set_power(value: float) -> None",
+      "description": "Set the contact power.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true,
+          "description": "Power value to set"
         }
       ],
       "returns": {

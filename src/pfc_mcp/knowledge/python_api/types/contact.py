@@ -13,15 +13,10 @@ Architecture:
 
 from dataclasses import dataclass
 
-# Contact types sharing the same mechanical interface.
-# Thermal contact types (e.g. BallBallThermalContact) are intentionally
-# excluded: they lack force_normal / force_shear and need a separate
-# expansion strategy (see issue #10).
-#
-# Keep in sync with `objects.Contact.types` in
-# `src/pfc_mcp/knowledge/resources/python_sdk_docs/index.json` —
-# browse path resolution uses that list instead of this one.
-CONTACT_TYPES = [
+ALL_VERSIONS = ["6.0", "7.0", "9.0"]
+
+# Contact types sharing the full mechanical interface.
+MECHANICAL_CONTACT_TYPES = [
     "BallBallContact",
     "BallFacetContact",
     "BallPebbleContact",
@@ -31,7 +26,81 @@ CONTACT_TYPES = [
     "PebbleRBlockContact",
     "RBlockFacetContact",
     "RBlockRBlockContact",
+    "VertexFacetContact",
 ]
+
+THERMAL_CONTACT_TYPES = [
+    "BallBallThermalContact",
+    "BallFacetThermalContact",
+    "BallPebbleThermalContact",
+    "PebblePebbleThermalContact",
+    "PebbleFacetThermalContact",
+]
+
+CONTACT_TYPES = MECHANICAL_CONTACT_TYPES
+ALL_CONTACT_TYPES = MECHANICAL_CONTACT_TYPES + THERMAL_CONTACT_TYPES
+
+CONTACT_INTERFACE_TYPES = {
+    "Contact": MECHANICAL_CONTACT_TYPES,
+    "ThermalContact": THERMAL_CONTACT_TYPES,
+}
+
+CONTACT_TYPE_TO_INTERFACE = {
+    contact_type: interface
+    for interface, contact_types in CONTACT_INTERFACE_TYPES.items()
+    for contact_type in contact_types
+}
+
+CONTACT_TYPE_VERSIONS = {contact_type: ALL_VERSIONS for contact_type in ALL_CONTACT_TYPES}
+CONTACT_TYPE_VERSIONS["VertexFacetContact"] = ["9.0"]
+
+# PFC 9 runtime reflection shows thermal contacts share these non-force
+# Contact methods. Thermal-specific power/set_power are real but do not have
+# source docs in this tree yet, so they are intentionally not expanded here.
+THERMAL_CONTACT_METHODS = {
+    "activate",
+    "activated",
+    "active",
+    "end1",
+    "end2",
+    "extra",
+    "gap",
+    "group",
+    "group_remove",
+    "groups",
+    "has_prop",
+    "id",
+    "in_group",
+    "inhibit",
+    "method",
+    "model",
+    "normal",
+    "normal_x",
+    "normal_y",
+    "normal_z",
+    "offset",
+    "offset_x",
+    "offset_y",
+    "offset_z",
+    "persist",
+    "pos",
+    "pos_x",
+    "pos_y",
+    "pos_z",
+    "prop",
+    "props",
+    "set_extra",
+    "set_group",
+    "set_inhibit",
+    "set_model",
+    "set_persist",
+    "set_prop",
+    "shear",
+    "shear_x",
+    "shear_y",
+    "shear_z",
+    "valid",
+}
 
 
 @dataclass
@@ -59,6 +128,44 @@ class ContactQueryResult:
     all_types: list[str]
 
 
+def is_contact_type(contact_type: str) -> bool:
+    return contact_type in CONTACT_TYPE_TO_INTERFACE
+
+
+def get_contact_interface(contact_type: str) -> str | None:
+    return CONTACT_TYPE_TO_INTERFACE.get(contact_type)
+
+
+def get_contact_type_versions(contact_type: str) -> list[str]:
+    return CONTACT_TYPE_VERSIONS.get(contact_type, ALL_VERSIONS)
+
+
+def get_contact_types_for_interface(interface: str) -> list[str]:
+    return CONTACT_INTERFACE_TYPES.get(interface, [])
+
+
+def get_contact_types_for_method(method_name: str) -> list[str]:
+    contact_types = list(MECHANICAL_CONTACT_TYPES)
+    if method_name in THERMAL_CONTACT_METHODS:
+        contact_types.extend(THERMAL_CONTACT_TYPES)
+    return contact_types
+
+
+def get_contact_type_from_api_path(api_path: str) -> str | None:
+    parts = api_path.split(".")
+    for part in parts:
+        if is_contact_type(part):
+            return part
+    return None
+
+
+def contact_type_supports_method(contact_type: str, method_name: str) -> bool:
+    interface = get_contact_interface(contact_type)
+    if interface == "ThermalContact":
+        return method_name in THERMAL_CONTACT_METHODS
+    return interface == "Contact"
+
+
 class ContactTypeResolver:
     """Resolves Contact type queries to internal documentation paths.
 
@@ -83,7 +190,7 @@ class ContactTypeResolver:
             False
         """
         parts_lower = [p.lower() for p in api_path.split(".")]
-        return any(ct.lower() in parts_lower for ct in CONTACT_TYPES)
+        return any(ct.lower() in parts_lower for ct in ALL_CONTACT_TYPES)
 
     @staticmethod
     def resolve(api_path: str, quick_ref: dict[str, str]) -> ContactQueryResult | None:
@@ -115,7 +222,7 @@ class ContactTypeResolver:
         parts = api_path.split(".")
         parts_lower = [p.lower() for p in parts]
 
-        for contact_type in CONTACT_TYPES:
+        for contact_type in ALL_CONTACT_TYPES:
             contact_type_lower = contact_type.lower()
 
             if contact_type_lower in parts_lower:
@@ -124,16 +231,21 @@ class ContactTypeResolver:
                 # Extract method name after contact type
                 if contact_idx + 1 < len(parts):
                     method_name = parts[contact_idx + 1]
-                    internal_path = f"Contact.{method_name}"
+                    interface = get_contact_interface(contact_type)
+                    if not interface:
+                        continue
+                    internal_path = f"{interface}.{method_name}"
 
                     # Only return exact matches
                     # Partial matching is handled by BM25 search
-                    if ContactTypeResolver._verify_method(internal_path, quick_ref):
+                    if contact_type_supports_method(contact_type, method_name) and ContactTypeResolver._verify_method(
+                        internal_path, quick_ref
+                    ):
                         return ContactQueryResult(
                             internal_path=internal_path,
                             contact_type=contact_type,
                             original_query=api_path.strip(),
-                            all_types=CONTACT_TYPES,
+                            all_types=get_contact_types_for_method(method_name),
                         )
 
         return None
@@ -152,6 +264,13 @@ class ContactTypeResolver:
         # Try exact match
         if internal_path in quick_ref:
             return True
+
+        if internal_path.startswith(("Contact.", "ThermalContact.")):
+            interface, method_name = internal_path.split(".", 1)
+            return any(
+                f"itasca.{contact_type}.{method_name}" in quick_ref
+                for contact_type in get_contact_types_for_interface(interface)
+            )
 
         # Try case-insensitive match
         internal_path_lower = internal_path.lower()

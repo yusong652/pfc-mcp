@@ -1,7 +1,7 @@
 {
   "class": "Contact",
-  "namespace": "itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact, itasca.PebbleFacetContact",
-  "description": "Contact object representing interaction between objects in PFC. This interface is shared by all contact types: BallBallContact (ball-ball), BallFacetContact (ball-facet), BallPebbleContact (ball-pebble), PebblePebbleContact (pebble-pebble), and PebbleFacetContact (pebble-facet). Cannot be instantiated directly - obtain instances via itasca.contact.list() or itasca.contact.find().",
+  "namespace": "itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact, itasca.PebbleFacetContact, itasca.BallRBlockContact, itasca.PebbleRBlockContact, itasca.RBlockFacetContact, itasca.RBlockRBlockContact, itasca.VertexFacetContact",
+  "description": "Mechanical contact object representing interaction between objects in PFC. This interface is shared by mechanical ball, pebble, facet, rblock, and vertex-facet contact types. Thermal contacts use the separate ThermalContact interface because they do not expose mechanical force methods. Cannot be instantiated directly - obtain instances via itasca.contact.list() or itasca.contact.find().",
   "instantiation": "Cannot be instantiated. Obtained via itasca.contact.list() or itasca.contact.find()",
   "methods": [
     {

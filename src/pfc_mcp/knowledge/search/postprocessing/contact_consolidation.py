@@ -72,7 +72,7 @@ def consolidate_contact_apis(results: list[SearchResult]) -> list[SearchResult]:
     """
     # Import Contact types
     try:
-        from pfc_mcp.knowledge.python_api.types.contact import CONTACT_TYPES
+        from pfc_mcp.knowledge.python_api.types.contact import ALL_CONTACT_TYPES, get_contact_types_for_method
     except ImportError:
         # If Contact types not available, return unchanged
         return results
@@ -87,7 +87,7 @@ def consolidate_contact_apis(results: list[SearchResult]) -> list[SearchResult]:
         contact_type = None
         method_name = None
 
-        for ct in CONTACT_TYPES:
+        for ct in ALL_CONTACT_TYPES:
             # Check if doc_name contains this Contact type
             # Examples: "itasca.BallBallContact.gap", "BallBallContact.gap"
             if f".{ct}." in doc_name or doc_name.startswith(f"{ct}."):
@@ -108,25 +108,13 @@ def consolidate_contact_apis(results: list[SearchResult]) -> list[SearchResult]:
             first_idx = seen_methods[method_name]
             first_result = consolidated[first_idx]
 
-            # Update metadata to include this Contact type
-            if "all_contact_types" not in first_result.document.metadata:
-                # Initialize with the first Contact type we saw
-                first_contact_type = None
-                for ct in CONTACT_TYPES:
-                    if f".{ct}." in first_result.document.name or first_result.document.name.startswith(f"{ct}."):
-                        first_contact_type = ct
-                        break
-
-                first_result.document.metadata["all_contact_types"] = [first_contact_type] if first_contact_type else []
-
-            # Add current Contact type if not already in the list
-            if contact_type not in first_result.document.metadata["all_contact_types"]:
-                first_result.document.metadata["all_contact_types"].append(contact_type)
+            first_result.document.metadata["all_contact_types"] = get_contact_types_for_method(method_name)
 
             # Skip adding this duplicate result
             continue
 
         # First time seeing this Contact method - add it and track it
+        result.document.metadata["all_contact_types"] = get_contact_types_for_method(method_name)
         seen_methods[method_name] = len(consolidated)
         consolidated.append(result)
 

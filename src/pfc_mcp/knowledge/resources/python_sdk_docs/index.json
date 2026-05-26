@@ -723,7 +723,7 @@
       "file": "modules/rblock/template/Template.json"
     },
     "Contact": {
-      "description": "Contact object instance (all contact types share this interface)",
+      "description": "Mechanical contact object instance (ball, pebble, facet, rblock, and vertex-facet contacts share this interface)",
       "file": "modules/contact/Contact.json",
       "types": [
         "BallBallContact",
@@ -734,8 +734,59 @@
         "BallRBlockContact",
         "PebbleRBlockContact",
         "RBlockFacetContact",
-        "RBlockRBlockContact"
+        "RBlockRBlockContact",
+        "VertexFacetContact"
       ],
+      "type_versions": {
+        "BallBallContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "BallFacetContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "BallPebbleContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "PebblePebbleContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "PebbleFacetContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "BallRBlockContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "PebbleRBlockContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "RBlockFacetContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "RBlockRBlockContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "VertexFacetContact": [
+          "9.0"
+        ]
+      },
       "methods": [
         "activate",
         "activated",
@@ -819,6 +870,88 @@
         "shear_z",
         "to_global",
         "to_local",
+        "valid"
+      ]
+    },
+    "ThermalContact": {
+      "description": "Thermal contact object instance (heat-transfer contacts expose geometry/orientation methods, not mechanical force methods)",
+      "file": "modules/contact/ThermalContact.json",
+      "types": [
+        "BallBallThermalContact",
+        "BallFacetThermalContact",
+        "BallPebbleThermalContact",
+        "PebblePebbleThermalContact",
+        "PebbleFacetThermalContact"
+      ],
+      "type_versions": {
+        "BallBallThermalContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "BallFacetThermalContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "BallPebbleThermalContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "PebblePebbleThermalContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ],
+        "PebbleFacetThermalContact": [
+          "6.0",
+          "7.0",
+          "9.0"
+        ]
+      },
+      "methods": [
+        "activate",
+        "activated",
+        "active",
+        "end1",
+        "end2",
+        "extra",
+        "gap",
+        "group",
+        "group_remove",
+        "groups",
+        "has_prop",
+        "id",
+        "in_group",
+        "inhibit",
+        "method",
+        "model",
+        "normal",
+        "normal_x",
+        "normal_y",
+        "normal_z",
+        "offset",
+        "offset_x",
+        "offset_y",
+        "offset_z",
+        "persist",
+        "pos",
+        "pos_x",
+        "pos_y",
+        "pos_z",
+        "prop",
+        "props",
+        "set_extra",
+        "set_group",
+        "set_inhibit",
+        "set_model",
+        "set_persist",
+        "set_prop",
+        "shear",
+        "shear_x",
+        "shear_y",
+        "shear_z",
         "valid"
       ]
     },
@@ -2029,7 +2162,49 @@
     "itasca.pebblefacetarray.offset": "modules/pebblefacetarray/module.json#offset",
     "itasca.pebblefacetarray.pos": "modules/pebblefacetarray/module.json#pos",
     "itasca.pebblefacetarray.set_extra": "modules/pebblefacetarray/module.json#set_extra",
-    "itasca.pebblefacetarray.set_group": "modules/pebblefacetarray/module.json#set_group"
+    "itasca.pebblefacetarray.set_group": "modules/pebblefacetarray/module.json#set_group",
+    "ThermalContact.activate": "modules/contact/ThermalContact.json#activate",
+    "ThermalContact.activated": "modules/contact/ThermalContact.json#activated",
+    "ThermalContact.active": "modules/contact/ThermalContact.json#active",
+    "ThermalContact.end1": "modules/contact/ThermalContact.json#end1",
+    "ThermalContact.end2": "modules/contact/ThermalContact.json#end2",
+    "ThermalContact.extra": "modules/contact/ThermalContact.json#extra",
+    "ThermalContact.gap": "modules/contact/ThermalContact.json#gap",
+    "ThermalContact.group": "modules/contact/ThermalContact.json#group",
+    "ThermalContact.group_remove": "modules/contact/ThermalContact.json#group_remove",
+    "ThermalContact.groups": "modules/contact/ThermalContact.json#groups",
+    "ThermalContact.has_prop": "modules/contact/ThermalContact.json#has_prop",
+    "ThermalContact.id": "modules/contact/ThermalContact.json#id",
+    "ThermalContact.in_group": "modules/contact/ThermalContact.json#in_group",
+    "ThermalContact.inhibit": "modules/contact/ThermalContact.json#inhibit",
+    "ThermalContact.method": "modules/contact/ThermalContact.json#method",
+    "ThermalContact.model": "modules/contact/ThermalContact.json#model",
+    "ThermalContact.normal": "modules/contact/ThermalContact.json#normal",
+    "ThermalContact.normal_x": "modules/contact/ThermalContact.json#normal_x",
+    "ThermalContact.normal_y": "modules/contact/ThermalContact.json#normal_y",
+    "ThermalContact.normal_z": "modules/contact/ThermalContact.json#normal_z",
+    "ThermalContact.offset": "modules/contact/ThermalContact.json#offset",
+    "ThermalContact.offset_x": "modules/contact/ThermalContact.json#offset_x",
+    "ThermalContact.offset_y": "modules/contact/ThermalContact.json#offset_y",
+    "ThermalContact.offset_z": "modules/contact/ThermalContact.json#offset_z",
+    "ThermalContact.persist": "modules/contact/ThermalContact.json#persist",
+    "ThermalContact.pos": "modules/contact/ThermalContact.json#pos",
+    "ThermalContact.pos_x": "modules/contact/ThermalContact.json#pos_x",
+    "ThermalContact.pos_y": "modules/contact/ThermalContact.json#pos_y",
+    "ThermalContact.pos_z": "modules/contact/ThermalContact.json#pos_z",
+    "ThermalContact.prop": "modules/contact/ThermalContact.json#prop",
+    "ThermalContact.props": "modules/contact/ThermalContact.json#props",
+    "ThermalContact.set_extra": "modules/contact/ThermalContact.json#set_extra",
+    "ThermalContact.set_group": "modules/contact/ThermalContact.json#set_group",
+    "ThermalContact.set_inhibit": "modules/contact/ThermalContact.json#set_inhibit",
+    "ThermalContact.set_model": "modules/contact/ThermalContact.json#set_model",
+    "ThermalContact.set_persist": "modules/contact/ThermalContact.json#set_persist",
+    "ThermalContact.set_prop": "modules/contact/ThermalContact.json#set_prop",
+    "ThermalContact.shear": "modules/contact/ThermalContact.json#shear",
+    "ThermalContact.shear_x": "modules/contact/ThermalContact.json#shear_x",
+    "ThermalContact.shear_y": "modules/contact/ThermalContact.json#shear_y",
+    "ThermalContact.shear_z": "modules/contact/ThermalContact.json#shear_z",
+    "ThermalContact.valid": "modules/contact/ThermalContact.json#valid"
   },
   "fallback_hints": {
     "batch creation": "For creating many balls with packing patterns, use itasca.command('ball generate ...')",

@@ -104,11 +104,7 @@ def _parse_api_path(api: str) -> dict[str, Any]:
 
         actual_object_name = object_name
         if object_name not in objects:
-            contact_data = objects.get("Contact", {})
-            contact_types = contact_data.get("types", [])
-            if object_name in contact_types:
-                actual_object_name = "Contact"
-            else:
+            if not _is_documented_object_type(object_name, objects):
                 return {
                     "type": "error",
                     "error": f"Object '{object_name}' not found",
@@ -169,6 +165,10 @@ def _format_module_path(index_key: str) -> str:
     if index_key == "itasca":
         return "itasca"
     return f"itasca.{index_key}"
+
+
+def _is_documented_object_type(object_name: str, objects: dict[str, Any]) -> bool:
+    return any(object_name in object_info.get("types", []) for object_info in objects.values())
 
 
 def _extract_function_names(functions: list[Any]) -> list[str]:

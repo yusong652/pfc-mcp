@@ -136,15 +136,15 @@ class APIDocumentAdapter:
         """
         # Import contact types for mapping
         try:
-            from pfc_mcp.knowledge.python_api.types.contact import CONTACT_TYPES
+            from pfc_mcp.knowledge.python_api.types.contact import ALL_CONTACT_TYPES
         except ImportError:
-            CONTACT_TYPES = []
+            ALL_CONTACT_TYPES = []
 
         # Check if it's a Contact type (e.g., BallBallContact, BallFacetContact)
         parts = api_name.split(".")
         if len(parts) >= 2:
             # Check if second part is a Contact type
-            if parts[1] in CONTACT_TYPES:
+            if parts[1] in ALL_CONTACT_TYPES:
                 return "itasca.contact"
 
         # Standard module function: itasca.ball.create → itasca.ball

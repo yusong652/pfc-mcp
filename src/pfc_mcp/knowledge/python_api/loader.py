@@ -12,6 +12,7 @@ Responsibilities:
 
 import json
 from collections import defaultdict
+from copy import deepcopy
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, cast
@@ -190,7 +191,7 @@ class DocumentationLoader:
         if "methods" in doc:
             for method in doc["methods"]:
                 if method["name"] == anchor:
-                    return cast(dict[str, Any], method)
+                    return DocumentationLoader._decorate_contact_method(api_name, cast(dict[str, Any], method))
         elif "functions" in doc:
             for func in doc["functions"]:
                 if func["name"] == anchor:
@@ -224,31 +225,32 @@ class DocumentationLoader:
                 "PebblePebbleContact.gap": "modules/contact/Contact.json#gap"
                 "PebbleFacetContact.gap": "modules/contact/Contact.json#gap"
         """
-        from pfc_mcp.knowledge.python_api.types.contact import CONTACT_TYPES
+        from pfc_mcp.knowledge.python_api.types.contact import get_contact_types_for_interface
 
         quick_ref = index.get("quick_ref", {})
 
-        # Find all Contact.* entries
+        # Find abstract Contact.* / ThermalContact.* entries.
         contact_entries = {}
         entries_to_remove = []
 
         for api_name, file_ref in quick_ref.items():
-            # Format 1: Short format "Contact.gap" (legacy)
-            if api_name.startswith("Contact."):
-                # Extract method name
-                method_name = api_name.split(".", 1)[1]
-                contact_entries[method_name] = file_ref
-                entries_to_remove.append(api_name)
-            # Format 2: Unified format "itasca.contact.Contact.gap" (preferred)
-            elif api_name.startswith("itasca.contact.Contact."):
-                # Extract method name after "itasca.contact.Contact."
-                method_name = api_name.split(".", 3)[3]
-                contact_entries[method_name] = file_ref
-                entries_to_remove.append(api_name)
+            for interface in ("Contact", "ThermalContact"):
+                short_prefix = f"{interface}."
+                full_prefix = f"itasca.contact.{interface}."
+                if api_name.startswith(short_prefix):
+                    method_name = api_name.split(".", 1)[1]
+                    contact_entries[(interface, method_name)] = file_ref
+                    entries_to_remove.append(api_name)
+                    break
+                if api_name.startswith(full_prefix):
+                    method_name = api_name.split(".", 3)[3]
+                    contact_entries[(interface, method_name)] = file_ref
+                    entries_to_remove.append(api_name)
+                    break
 
-        # Expand each Contact.* entry to all Contact types
-        for method_name, file_ref in contact_entries.items():
-            for contact_type in CONTACT_TYPES:
+        # Expand each abstract interface entry to its concrete Contact types.
+        for (interface, method_name), file_ref in contact_entries.items():
+            for contact_type in get_contact_types_for_interface(interface):
                 # Create only full official paths: itasca.BallBallContact.gap
                 # This eliminates the need for PathResolver to add "itasca." prefix
                 full_path = f"itasca.{contact_type}.{method_name}"
@@ -397,7 +399,10 @@ class DocumentationLoader:
                     "itasca.PebbleFacetContact.gap"
                 ]}
         """
-        from pfc_mcp.knowledge.python_api.types.contact import CONTACT_TYPES
+        from pfc_mcp.knowledge.python_api.types.contact import (
+            get_contact_types_for_interface,
+            get_contact_types_for_method,
+        )
 
         # Create a new dict to store expanded results
         expanded_keywords = defaultdict(list)
@@ -408,11 +413,14 @@ class DocumentationLoader:
             for api_name in api_list:
                 # Check if this is a Contact abstract path
                 if api_name.startswith("itasca.contact.Contact."):
-                    # Extract method name after "itasca.contact.Contact."
                     method_name = api_name.split(".", 3)[3]
 
-                    # Expand to all Contact types
-                    for contact_type in CONTACT_TYPES:
+                    for contact_type in get_contact_types_for_method(method_name):
+                        expanded_apis.append(f"itasca.{contact_type}.{method_name}")
+                elif api_name.startswith("itasca.contact.ThermalContact."):
+                    method_name = api_name.split(".", 3)[3]
+
+                    for contact_type in get_contact_types_for_interface("ThermalContact"):
                         expanded_apis.append(f"itasca.{contact_type}.{method_name}")
                 else:
                     # Keep non-Contact APIs as-is
@@ -581,23 +589,40 @@ class DocumentationLoader:
         index = DocumentationLoader.load_index()
         objects = index.get("objects", {})
 
-        if object_name not in objects:
-            return None
+        concrete_contact_type = None
+        if object_name in objects:
+            object_info = objects[object_name]
+        else:
+            from pfc_mcp.knowledge.python_api.types.contact import get_contact_interface
 
-        object_info = objects[object_name]
+            interface = get_contact_interface(object_name)
+            if not interface or interface not in objects:
+                return None
+            concrete_contact_type = object_name
+            object_info = objects[interface]
+
         file_path = object_info.get("file")
 
         if not file_path:
             # Return basic info from index
-            return cast(dict[str, Any], object_info)
+            object_doc = cast(dict[str, Any], deepcopy(object_info))
+            if concrete_contact_type:
+                object_doc = DocumentationLoader._filter_contact_object_doc(object_doc, concrete_contact_type)
+            return object_doc
 
         # Load full object documentation
         doc_path = PFC_DOCS_SOURCE / file_path
         if not doc_path.exists():
-            return cast(dict[str, Any], object_info)
+            object_doc = cast(dict[str, Any], deepcopy(object_info))
+            if concrete_contact_type:
+                object_doc = DocumentationLoader._filter_contact_object_doc(object_doc, concrete_contact_type)
+            return object_doc
 
         with open(doc_path, encoding="utf-8") as f:
-            return cast(dict[str, Any], json.load(f))
+            object_doc = cast(dict[str, Any], json.load(f))
+            if concrete_contact_type:
+                object_doc = DocumentationLoader._filter_contact_object_doc(object_doc, concrete_contact_type)
+            return object_doc
 
     @staticmethod
     def load_method(object_name: str, method_name: str) -> dict[str, Any] | None:
@@ -629,9 +654,64 @@ class DocumentationLoader:
         methods = object_doc.get("methods", [])
         for method in methods:
             if isinstance(method, dict) and method.get("name") == method_name:
-                return method
+                return DocumentationLoader._decorate_contact_method(object_name, method)
 
         return None
+
+    @staticmethod
+    def _decorate_contact_method(api_name: str, method: dict[str, Any]) -> dict[str, Any]:
+        """Attach concrete Contact type availability to aliased methods."""
+        from pfc_mcp.knowledge.python_api.types.contact import (
+            get_contact_interface,
+            get_contact_type_from_api_path,
+            get_contact_type_versions,
+            get_contact_types_for_interface,
+        )
+
+        contact_type = get_contact_type_from_api_path(api_name)
+        if not contact_type:
+            return method
+
+        interface = get_contact_interface(contact_type)
+        decorated = deepcopy(method)
+        decorated["availability"] = {"versions": get_contact_type_versions(contact_type)}
+        if interface:
+            decorated["applicable_contact_types"] = get_contact_types_for_interface(interface)
+        return decorated
+
+    @staticmethod
+    def _filter_contact_object_doc(object_doc: dict[str, Any], contact_type: str) -> dict[str, Any]:
+        """Filter an abstract Contact document to one concrete Contact type."""
+        from pfc_mcp.knowledge.python_api.types.contact import contact_type_supports_method, get_contact_type_versions
+
+        filtered = deepcopy(object_doc)
+        filtered["class"] = contact_type
+        filtered["namespace"] = f"itasca.{contact_type}"
+        filtered["description"] = object_doc.get("description", "")
+        filtered["availability"] = {"versions": get_contact_type_versions(contact_type)}
+
+        if "methods" in filtered:
+            methods = []
+            for method in filtered["methods"]:
+                if not isinstance(method, dict):
+                    continue
+                method_name = method.get("name", "")
+                if contact_type_supports_method(contact_type, method_name):
+                    methods.append(DocumentationLoader._decorate_contact_method(contact_type, method))
+            filtered["methods"] = methods
+
+        if "method_groups" in filtered:
+            groups = {}
+            for group_name, group_methods in filtered["method_groups"].items():
+                if isinstance(group_methods, list):
+                    kept = [m for m in group_methods if contact_type_supports_method(contact_type, str(m))]
+                    if kept:
+                        groups[group_name] = kept
+                else:
+                    groups[group_name] = group_methods
+            filtered["method_groups"] = groups
+
+        return filtered
 
     @staticmethod
     def clear_cache() -> None:

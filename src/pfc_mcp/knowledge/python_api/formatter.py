@@ -105,15 +105,12 @@ class APIDocFormatter:
             else:
                 obj_path = name
 
-            # Handle Contact types - they are in itasca root namespace
-            if name == "Contact":
-                contact_types = data.get("types", [])
-                if contact_types:
-                    for ct in contact_types:
-                        object_lines.append(f"- itasca.{ct}: {desc}")
-                    continue
-                else:
-                    obj_path = f"itasca.{name}"
+            # Handle Contact interface aliases - concrete contact types are in the itasca root namespace.
+            contact_types = data.get("types", [])
+            if contact_types:
+                for ct in contact_types:
+                    object_lines.append(f"- itasca.{ct}: {desc}")
+                continue
 
             object_lines.append(f"- {obj_path}: {desc}")
 

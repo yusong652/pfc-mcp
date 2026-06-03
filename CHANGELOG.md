@@ -45,6 +45,25 @@ section exists.
 
 ## [Unreleased]
 
+## [0.4.4] - 2026-06-03
+
+### Fixed
+- Bumped `itasca-mcp-bridge` to `0.1.3` (submodule pin `25668d7`), picking up
+  two abspath-vs-CWD fixes since 0.4.3. Command-log capture: `itasca.command()`
+  output no longer comes back empty when the engine's working directory
+  diverges from Python's (headless consoles, or after a task `os.chdir()`).
+  Task-log resolution: `pfc_check_task_status` no longer returns `(no output)`
+  for a task that called `os.chdir()` — the task log and `tasks.json` are now
+  read from a bridge root frozen at startup rather than the live working
+  directory.
+
+### Changed
+- Task `elapsed_time` is now rounded to 2 decimals in `pfc_check_task_status`
+  and `pfc_list_tasks` (e.g. `0.01` instead of `0.010000944137573242`). The
+  field stays numeric; the bridge still reports full precision, with rounding
+  applied at the MCP presentation layer alongside the existing
+  `start_time` / `end_time` formatting.
+
 ## [0.4.3] - 2026-05-26
 
 Contact API documentation now distinguishes mechanical and thermal

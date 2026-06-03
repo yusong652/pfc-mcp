@@ -6,7 +6,12 @@ from fastmcp import FastMCP
 
 from pfc_mcp.bridge import get_bridge_client
 from pfc_mcp.contracts import build_ok
-from pfc_mcp.formatting import build_bridge_error, build_operation_error, format_unix_timestamp
+from pfc_mcp.formatting import (
+    build_bridge_error,
+    build_operation_error,
+    format_elapsed_seconds,
+    format_unix_timestamp,
+)
 from pfc_mcp.utils import SkipNewestTasks, TaskListLimit
 
 
@@ -51,7 +56,7 @@ def register(mcp: FastMCP) -> None:
                 "source": task.get("source", "agent"),
                 "start_time": format_unix_timestamp(task.get("start_time")),
                 "end_time": format_unix_timestamp(task.get("end_time")),
-                "elapsed_time": task.get("elapsed_time"),
+                "elapsed_time": format_elapsed_seconds(task.get("elapsed_time")),
                 "entry_script": task.get("entry_script") or task.get("name"),
                 "description": task.get("description"),
             }

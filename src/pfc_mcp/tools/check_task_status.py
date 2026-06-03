@@ -9,6 +9,7 @@ from pfc_mcp.contracts import build_ok
 from pfc_mcp.formatting import (
     build_bridge_error,
     build_operation_error,
+    format_elapsed_seconds,
     format_unix_timestamp,
     paginate_output,
 )
@@ -96,7 +97,7 @@ def register(mcp: FastMCP) -> None:
             "task_status": status,
             "start_time": format_unix_timestamp(data.get("start_time")),
             "end_time": format_unix_timestamp(data.get("end_time")),
-            "elapsed_time": data.get("elapsed_time"),
+            "elapsed_time": format_elapsed_seconds(data.get("elapsed_time")),
             "entry_script": data.get("entry_script") or data.get("script_path"),
             "description": data.get("description"),
             "output": output_text,

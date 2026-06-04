@@ -29,8 +29,7 @@ def test_pagination() -> None:
 
     assert text == "c\nd"
     assert page["line_range"] == "3-4"
-    assert page["has_older"] is True
-    assert page["has_newer"] is False
+    assert page["total_lines"] == 4
 
 
 def test_validate_script_path_requires_absolute() -> None:

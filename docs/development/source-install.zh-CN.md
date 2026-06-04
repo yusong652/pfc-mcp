@@ -73,7 +73,10 @@ uv run pytest tests
 }
 ```
 
-`--bridge-url` 参数是可选的（默认 `ws://localhost:9001`），用于连接不同端口上的 bridge。
+`--bridge-url` 参数是可选的（默认 `ws://localhost:9001`）。若 bridge 跑在非默认端口上，
+直接用 `--bridge-port` 即可，无需写出整条 URL——例如 bridge 以
+`itasca_mcp_bridge.start(port=9002)` 启动时，配置写
+`"args": [..., "pfc-mcp", "--bridge-port", "9002"]`。
 
 这是验证 MCP 侧改动最简单的方式，不需要先构建或发布包。
 

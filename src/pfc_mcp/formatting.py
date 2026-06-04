@@ -60,8 +60,6 @@ def paginate_output(
     pagination = {
         "total_lines": total_lines,
         "line_range": f"{start_idx + 1}-{end_idx}" if selected else "0-0",
-        "has_older": start_idx > 0,
-        "has_newer": skip_newest > 0,
     }
 
     return "\n".join(selected) if selected else "(no output)", pagination

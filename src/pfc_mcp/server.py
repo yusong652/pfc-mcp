@@ -5,6 +5,7 @@ import asyncio
 import logging
 import os
 from typing import Any
+from urllib.parse import urlsplit, urlunsplit
 
 from fastmcp import FastMCP
 
@@ -50,6 +51,16 @@ interrupt_task.register(mcp)
 execute_code.register(mcp)
 
 
+DEFAULT_BRIDGE_URL = "ws://localhost:9001"
+
+
+def _override_bridge_port(url: str, port: int) -> str:
+    """Return ``url`` with its port replaced, preserving scheme/host/path."""
+    parts = urlsplit(url)
+    host = parts.hostname or "localhost"
+    return urlunsplit((parts.scheme or "ws", f"{host}:{port}", parts.path, parts.query, parts.fragment))
+
+
 def main() -> None:
     """Entry point for the PFC MCP server."""
     parser = argparse.ArgumentParser(
@@ -80,6 +91,16 @@ def main() -> None:
         help="Bridge WebSocket URL (default: ws://localhost:9001, or PFC_MCP_BRIDGE_URL env)",
     )
     parser.add_argument(
+        "--bridge-port",
+        type=int,
+        default=None,
+        help=(
+            "Bridge WebSocket port; shorthand for --bridge-url ws://localhost:PORT. "
+            "Overrides only the port of --bridge-url / PFC_MCP_BRIDGE_URL when both "
+            "are given (default: 9001)"
+        ),
+    )
+    parser.add_argument(
         "--log-level",
         choices=["debug", "info", "warning", "error"],
         default="warning",
@@ -87,8 +108,17 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    if args.bridge_url:
-        os.environ["PFC_MCP_BRIDGE_URL"] = args.bridge_url
+    # Resolve the bridge URL from (in order of precedence) --bridge-url,
+    # the PFC_MCP_BRIDGE_URL env, then the default. --bridge-port then
+    # overrides just the port, so users can point at a non-default bridge
+    # port without spelling out the whole ws:// URL.
+    bridge_url = args.bridge_url or os.environ.get("PFC_MCP_BRIDGE_URL")
+    if args.bridge_port is not None:
+        if not 1 <= args.bridge_port <= 65535:
+            parser.error("--bridge-port must be between 1 and 65535")
+        bridge_url = _override_bridge_port(bridge_url or DEFAULT_BRIDGE_URL, args.bridge_port)
+    if bridge_url:
+        os.environ["PFC_MCP_BRIDGE_URL"] = bridge_url
 
     # Configure logging
     level = getattr(logging, args.log_level.upper())

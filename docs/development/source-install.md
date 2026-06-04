@@ -73,7 +73,10 @@ If you want your MCP client to use local source instead of the published PyPI pa
 }
 ```
 
-The `--bridge-url` argument is optional (defaults to `ws://localhost:9001`). Use it to connect to a bridge on a different port.
+The `--bridge-url` argument is optional (defaults to `ws://localhost:9001`). To
+connect to a bridge on a non-default port, pass `--bridge-port` instead of
+spelling out the whole URL — e.g. `"args": [..., "pfc-mcp", "--bridge-port", "9002"]`
+when the bridge was started with `itasca_mcp_bridge.start(port=9002)`.
 
 This is the simplest way to test MCP-side changes without building or publishing packages.
 

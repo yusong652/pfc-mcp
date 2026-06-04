@@ -226,8 +226,6 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
         pag = data["pagination"]
         assert "total_lines" in pag
         assert "line_range" in pag
-        assert "has_older" in pag
-        assert "has_newer" in pag
 
 
 @pytest.mark.asyncio
@@ -270,10 +268,9 @@ async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, t
     parsed = json.loads(result.content[0].text)
     assert parsed["ok"] is True
     data = parsed["data"]
-    # Bridge pagination should pass through unchanged
+    # Bridge pagination values are used (total_lines + line_range)
     assert data["pagination"]["total_lines"] == 12345
     assert data["pagination"]["line_range"] == "12281-12345"
-    assert data["pagination"]["has_older"] is True
     # Output should come from bridge verbatim (not re-split/joined)
     assert data["output"] == "paginated-window-line"
 

@@ -76,14 +76,21 @@ def register(mcp: FastMCP) -> None:
         data = response.get("data") or {}
 
         # Prefer bridge-side pagination when available: the bridge sees
-        # the full log and reports accurate total_lines / has_older /
+        # the full log and reports accurate total_lines / line_range /
         # filter matches. Fall back to MCP-side paginate_output only for
         # legacy bridges that still send unpaginated output.
         bridge_output = data.get("output") or ""
         bridge_pagination = data.get("pagination")
         if isinstance(bridge_pagination, dict):
             output_text = bridge_output if bridge_output else "(no output)"
-            pagination = bridge_pagination
+            # Normalize to the slim shape regardless of bridge version:
+            # total_lines + line_range are self-describing, so the old
+            # has_older / has_newer booleans (still emitted by pre-slim
+            # bridges on PyPI) are dropped here for a consistent contract.
+            pagination = {
+                "total_lines": bridge_pagination.get("total_lines"),
+                "line_range": bridge_pagination.get("line_range"),
+            }
         else:
             output_text, pagination = paginate_output(
                 output=bridge_output,

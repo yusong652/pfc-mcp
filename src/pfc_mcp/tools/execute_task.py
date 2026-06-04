@@ -54,6 +54,13 @@ def register(mcp: FastMCP) -> None:
         values and refine live via pfc_execute_code as the task
         cycles. For synchronous, inline execution, use
         pfc_execute_code directly.
+
+        Submission uses the bridge's `execute_task` protocol message. If
+        a submission times out, the connected bridge may predate it —
+        confirm its version with pfc_execute_code (`import
+        itasca_mcp_bridge; print(itasca_mcp_bridge.__version__)`). To
+        upgrade, fetch and follow the bootstrap guide, then resubmit:
+        https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
         """
         try:
             client = await get_bridge_client()

@@ -195,13 +195,13 @@ class PFCBridgeClient:
     ) -> dict[str, Any]:
         return await self._request_with_retry(
             {
-                "type": "pfc_task",
+                "type": "execute_task",
                 "task_id": task_id,
                 "script_path": script_path,
                 "description": description,
                 "source": source,
             },
-            operation_name="pfc_task",
+            operation_name="execute_task",
             timeout_s=10.0,
         )
 

@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/yusong652-pfc-mcp-badge.png)](https://mseep.ai/app/yusong652-pfc-mcp)
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/header.gif" alt="pfc-mcp" width="70%">
 </p>

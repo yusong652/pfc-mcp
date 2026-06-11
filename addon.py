@@ -205,6 +205,11 @@ def main():
     print("Installed websockets:", getattr(websockets, "__version__", "unknown"))
     print("Starting bridge on port {} ...".format(PORT))
 
+    # This script already handled install/upgrade above; tell start() to skip
+    # its own update check. The env var works across bridge versions, unlike
+    # the start(auto_upgrade=...) kwarg which older bridges don't accept.
+    os.environ["ITASCA_MCP_BRIDGE_AUTO_UPGRADE"] = "0"
+
     itasca_mcp_bridge.start(port=PORT)
 
 

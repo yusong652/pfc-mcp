@@ -72,7 +72,14 @@ Restart your AI agent (Claude Code, Codex CLI, Gemini CLI, etc.) and ask it to c
 
 ## Daily Startup
 
-Once first-time setup is done, each new PFC session only needs the bridge re-started — paste [`addon.py`](addon.py) into PFC's IPython console and you're back online. The MCP client config persists.
+Once first-time setup is done, each new PFC session only needs the bridge re-started — run this in PFC's IPython console and you're back online:
+
+```python
+import itasca_mcp_bridge
+itasca_mcp_bridge.start()
+```
+
+`start()` checks PyPI for a newer bridge release and self-upgrades before starting (best-effort: offline machines just start the installed version; pass `auto_upgrade=False` to pin). The MCP client config persists.
 
 ## Features
 

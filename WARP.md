@@ -11,7 +11,7 @@ This repository has two runtime contexts:
 - `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
 - `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): WebSocket bridge running inside PFC GUI
 
-End users install the bridge from PyPI (`pip install itasca-mcp-bridge`) via `addon.py`; the submodule exists only so contributors can edit bridge code alongside MCP code without two clones. The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is deprecated.
+End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first install happens via the agentic bootstrap's terminal pip step or `addon.py`, and from then on `itasca_mcp_bridge.start()` self-upgrades on every start. The submodule exists only so contributors can edit bridge code alongside MCP code without two clones. The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is deprecated.
 
 ## Core Architecture
 
@@ -27,7 +27,7 @@ End users install the bridge from PyPI (`pip install itasca-mcp-bridge`) via `ad
 - Runs in PFC GUI process
 - Owns thread-safe interaction with ITASCA SDK
 - Handles long-running tasks and diagnostics
-- Started inside PFC GUI via `addon.py` (which pip-installs `itasca-mcp-bridge` and calls `itasca_mcp_bridge.start()`)
+- Started inside PFC GUI via `itasca_mcp_bridge.start()`, which self-upgrades from PyPI first (best-effort); `addon.py` remains the manual first-install bootstrap
 
 ## Repository Layout
 
@@ -40,7 +40,7 @@ pfc-mcp/
 │   ├── formatting.py    # shared response formatting
 │   └── server.py        # MCP server entrypoint
 ├── itasca-mcp-bridge/   # submodule → github.com/yusong652/itasca-mcp-bridge
-├── addon.py             # PFC-side bootstrap (pip-installs the bridge)
+├── addon.py             # PFC-side first-install bootstrap (pip-installs the bridge)
 └── tests/               # MCP/tool contract tests
 ```
 

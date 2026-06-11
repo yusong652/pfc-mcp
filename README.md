@@ -79,7 +79,7 @@ import itasca_mcp_bridge
 itasca_mcp_bridge.start()
 ```
 
-`start()` checks PyPI for a newer bridge release and self-upgrades before starting (best-effort: offline machines just start the installed version; pass `auto_upgrade=False` to pin). The MCP client config persists.
+`start()` checks PyPI for a newer bridge release and self-upgrades before starting. The MCP client config persists.
 
 ## Features
 

@@ -79,7 +79,7 @@ import itasca_mcp_bridge
 itasca_mcp_bridge.start()
 ```
 
-`start()` 会先检查 PyPI 上是否有新版 bridge，有则自动升级再启动（尽力而为：离线时直接启动已安装版本；传 `auto_upgrade=False` 可锁定版本）。MCP 客户端配置会一直保留。
+`start()` 会先检查 PyPI 上是否有新版 bridge，有则自动升级再启动。MCP 客户端配置会一直保留。
 
 ## 功能亮点
 

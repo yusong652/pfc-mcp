@@ -18,13 +18,20 @@ set -e
 # not in the bridge install dir.
 cd /workspace 2>/dev/null || true
 
-# Bootstrap that starts the bridge inside PFC's embedded Python. mode=auto
-# attaches a QTimer pump if a Qt app is running (GUI mode), otherwise falls
-# back to a blocking poll (console mode).
+# Bootstrap that starts the bridge inside PFC's embedded Python. The pump
+# mode must be explicit: pfc3d9_console has a live QCoreApplication but
+# never runs its event loop, so mode=auto (bridge >= 0.1.4, PySide6 probe)
+# would attach a QTimer that never fires and return from start(), parking
+# the main thread at the console prompt -- which starves every bridge
+# thread and leaves ws://:9001 accepting TCP but never answering.
+BRIDGE_MODE=console
+if [ "${PFC_GUI:-}" = "1" ]; then
+    BRIDGE_MODE=gui
+fi
 BOOTSTRAP=/tmp/itasca_mcp_bridge_start.py
-cat > "$BOOTSTRAP" << 'PYEOF'
+cat > "$BOOTSTRAP" << PYEOF
 import itasca_mcp_bridge
-itasca_mcp_bridge.start(host="0.0.0.0", port=9001, mode="auto")
+itasca_mcp_bridge.start(host="0.0.0.0", port=9001, mode="${BRIDGE_MODE}")
 PYEOF
 
 # ── GUI mode ──────────────────────────────────────────────────

@@ -39,14 +39,21 @@ def register(mcp: FastMCP) -> None:
         and interleaved with Python prints in the task log, visible
         through pfc_check_task_status.
 
-        Do NOT have the script invoke `program call '<file>.p3dat'`
-        (or .p2dat / .dat). PFC's command-script interpreter blocks
-        the bridge for the script's entire duration with no cycle-gap
-        interleaving, leaving the bridge unreachable until PFC is
-        stopped manually. If the user asks to run a .dat / .p3dat /
-        .p2dat file, read the file and translate its commands into a
-        sequence of `itasca.command(...)` calls in the Python script
-        instead.
+        Having the script invoke `program call '<file>.p3dat'` (or
+        .p2dat / .dat) is PFC-version-gated. On PFC 6/7 the
+        command-script interpreter blocks the bridge for the
+        script's entire duration with no cycle-gap interleaving,
+        leaving the bridge unreachable until PFC is stopped
+        manually. Never emit it there, and treat unknown or
+        unverified versions (including PFC 9.0-9.6) the same way.
+        On PFC 9.7+ the bridge stays fully responsive during a
+        `program call` (verified on 9.7: status polling, cycle-gap
+        interleaving, and interrupt all work mid-call). Even where
+        it is safe, prefer reading the file and translating its
+        commands into a sequence of `itasca.command(...)` calls in
+        the Python script — that keeps per-command output, error
+        locality, and mid-script control that a single opaque
+        `program call` cannot give.
 
         This is the async / background execution path: pollable via
         pfc_check_task_status, cancellable via pfc_interrupt_task.

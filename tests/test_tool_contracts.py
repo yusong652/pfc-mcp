@@ -28,7 +28,7 @@ async def _mock_bridge_handler(websocket):
         req_id = req.get("request_id", "unknown")
         msg_type = req.get("type", "execute_task")
 
-        if msg_type in ("execute_task", "pfc_task"):
+        if msg_type == "execute_task":
             task_id = req.get("task_id", "000000")
             TASK_STORE[task_id] = {
                 "status": "running",

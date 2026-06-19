@@ -1,0 +1,16 @@
+{
+  "type": "boundary_conditions",
+  "description": "Boundary-condition reference topics for MPoint — material-point fixity ('mpoint fix'/'free') and background-grid node fixity ('mpoint node fix'/'free'). Grid-node velocity fixity is the primary mechanical BC in MPM.",
+  "items": [
+    {
+      "name": "material-point-fixity",
+      "file": "material-point-fixity.json",
+      "full_name": "Material-Point Fixity / Prescribed Motion"
+    },
+    {
+      "name": "grid-node-fixity",
+      "file": "grid-node-fixity.json",
+      "full_name": "Background-Grid Node Fixity"
+    }
+  ]
+}

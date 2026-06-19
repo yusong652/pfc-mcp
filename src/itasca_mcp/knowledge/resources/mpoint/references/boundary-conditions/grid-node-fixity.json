@@ -1,0 +1,45 @@
+{
+  "name": "grid-node-fixity",
+  "dimension": "3D",
+  "full_name": "Background-Grid Node Fixity",
+  "description": "Fix or release the background-grid nodes with 'mpoint node fix' / 'mpoint node free'. Grid-node fixity is the workhorse mechanical BC in MPM — material points exchange momentum with the grid, so pinning grid-node velocity sets the domain boundary. Fluid velocity has its own components.",
+  "primary_commands": [
+    "mpoint node fix",
+    "mpoint node free"
+  ],
+  "condition_families": [
+    {
+      "family": "prescribed velocity",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z"
+      ],
+      "notes": [
+        "Pin a wall/floor by fixing the relevant grid-node velocity component to 0 over a range."
+      ]
+    },
+    {
+      "family": "prescribed fluid velocity",
+      "keywords": [
+        "fluid-velocity",
+        "fluid-velocity-x",
+        "fluid-velocity-y",
+        "fluid-velocity-z"
+      ],
+      "notes": [
+        "Fluid-phase grid-node velocity for coupled fluid-flow analyses."
+      ]
+    },
+    {
+      "family": "modifiers",
+      "keywords": [
+        "range"
+      ],
+      "notes": [
+        "'range' scopes which grid nodes are affected (e.g. a boundary plane)."
+      ]
+    }
+  ]
+}

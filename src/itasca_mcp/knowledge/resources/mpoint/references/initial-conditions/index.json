@@ -1,0 +1,16 @@
+{
+  "type": "initial_conditions",
+  "description": "Initial-condition reference topics for MPoint — direct material-point field initialization ('mpoint initialize') and gravitational in-situ stress ('mpoint initialize-stresses').",
+  "items": [
+    {
+      "name": "field-initialization",
+      "file": "field-initialization.json",
+      "full_name": "Material-Point Field Initialization"
+    },
+    {
+      "name": "gravitational-stress",
+      "file": "gravitational-stress.json",
+      "full_name": "Gravitational (In-Situ) Stress Initialization"
+    }
+  ]
+}

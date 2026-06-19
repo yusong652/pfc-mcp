@@ -1,0 +1,67 @@
+{
+  "name": "field-initialization",
+  "dimension": "3D",
+  "full_name": "Material-Point Field Initialization",
+  "description": "Seed material-point state directly with 'mpoint initialize <field> <value> [range ...]' before solving. Covers stress/strain, velocity/displacement, pore pressure and the fluid/biot poromechanical properties, plus density/porosity/volume. Compression is negative.",
+  "primary_commands": [
+    "mpoint initialize"
+  ],
+  "field_groups": [
+    {
+      "group": "stress & strain",
+      "fields": [
+        "stress",
+        "stress-effective",
+        "strain",
+        "deformation"
+      ],
+      "notes": [
+        "'stress' / 'stress-effective' set the carried tensor; pair with 'mpoint initialize-stresses' for gravitational fields."
+      ]
+    },
+    {
+      "group": "kinematics",
+      "fields": [
+        "velocity",
+        "displacement",
+        "position"
+      ],
+      "notes": [
+        "Reset velocity/displacement between staged-loading phases so reported values measure the current stage."
+      ]
+    },
+    {
+      "group": "fluid / poromechanics",
+      "fields": [
+        "pore-pressure",
+        "porosity",
+        "fluid-density",
+        "fluid-modulus",
+        "fluid-tension",
+        "fluid-flow",
+        "biot-coefficient",
+        "biot-modulus",
+        "mobility-coefficient"
+      ],
+      "notes": [
+        "Initialize the poromechanical field for hydro-mechanical (Biot) coupling."
+      ]
+    },
+    {
+      "group": "mass & identity",
+      "fields": [
+        "density",
+        "volume",
+        "applied-force",
+        "fixity",
+        "state",
+        "model",
+        "id",
+        "index"
+      ],
+      "notes": [
+        "'model' / 'state' seed the constitutive model and its state; see the 'constitutive-models' reference."
+      ]
+    }
+  ]
+}

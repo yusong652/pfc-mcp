@@ -1,0 +1,43 @@
+{
+  "name": "material-point-fixity",
+  "dimension": "3D",
+  "full_name": "Material-Point Fixity / Prescribed Motion",
+  "description": "Fix or release degrees of freedom on material points with 'mpoint fix' / 'mpoint free'. Applying a velocity component fixes it (use 0 to pin a boundary); pore-pressure fixity drives the hydraulic boundary. 'multiplier' scales the fixed value over time.",
+  "primary_commands": [
+    "mpoint fix",
+    "mpoint free"
+  ],
+  "condition_families": [
+    {
+      "family": "prescribed velocity",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z"
+      ],
+      "notes": [
+        "'mpoint fix velocity-x 0 range ...' pins the x-motion of the selected material points."
+      ]
+    },
+    {
+      "family": "pore pressure (fluid)",
+      "keywords": [
+        "pore-pressure"
+      ],
+      "notes": [
+        "Fix pore pressure for the hydro-mechanical / fluid-coupled solution."
+      ]
+    },
+    {
+      "family": "modifiers",
+      "keywords": [
+        "multiplier",
+        "range"
+      ],
+      "notes": [
+        "'multiplier' applies a time-varying factor; 'range' scopes which material points are affected."
+      ]
+    }
+  ]
+}

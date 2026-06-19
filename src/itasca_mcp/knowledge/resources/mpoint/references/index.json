@@ -33,6 +33,22 @@
       "index_file": "fish-intrinsics/index.json",
       "summary": "2 MPoint FISH intrinsic family groups (material-point, background-node)",
       "usage": "Use in FISH: loop foreach over mpoint.list / mpoint.node.list; read with mpoint.<intrinsic>(ptr)"
+    },
+    "boundary-conditions": {
+      "name": "Boundary Conditions",
+      "description": "MPoint boundary conditions — material-point fixity ('mpoint fix'/'free': velocity, pore-pressure) and background-grid node fixity ('mpoint node fix'/'free': velocity, fluid-velocity).",
+      "directory": "boundary-conditions",
+      "index_file": "boundary-conditions/index.json",
+      "summary": "2 MPoint boundary-condition topics (material-point + grid-node fixity)",
+      "usage": "mpoint fix velocity-x 0 range ... ; mpoint node fix velocity 0 range ..."
+    },
+    "initial-conditions": {
+      "name": "Initial Conditions",
+      "description": "MPoint initial conditions — material-point field initialization ('mpoint initialize': stress, velocity, pore-pressure, biot/fluid props) and gravitational in-situ stress ('mpoint initialize-stresses').",
+      "directory": "initial-conditions",
+      "index_file": "initial-conditions/index.json",
+      "summary": "2 MPoint initial-condition topics (field init + gravitational stress)",
+      "usage": "mpoint initialize stress-zz -1e5 range ... ; model gravity 0 0 -9.81 ; mpoint initialize-stresses overburden ... ratio ..."
     }
   },
   "navigation": {

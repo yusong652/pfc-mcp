@@ -1,0 +1,26 @@
+{
+  "name": "gravitational-stress",
+  "dimension": "3D",
+  "full_name": "Gravitational (In-Situ) Stress Initialization",
+  "description": "Establish a gravitational in-situ stress field over the material points with 'mpoint initialize-stresses'. Requires 'model gravity' to be set first. Builds a depth-varying field from the overburden and a lateral stress ratio (k0-style).",
+  "primary_commands": [
+    "model gravity",
+    "mpoint initialize-stresses"
+  ],
+  "field_groups": [
+    {
+      "group": "in-situ stress controls",
+      "fields": [
+        "overburden",
+        "ratio",
+        "direction-x",
+        "total"
+      ],
+      "notes": [
+        "'overburden' sets the surface stress; 'ratio' is the lateral/vertical stress ratio (k0).",
+        "'direction-x' orients the field; 'total' includes pore pressure in the total stress.",
+        "'model gravity 0 0 -9.81' must be defined before 'mpoint initialize-stresses'."
+      ]
+    }
+  ]
+}

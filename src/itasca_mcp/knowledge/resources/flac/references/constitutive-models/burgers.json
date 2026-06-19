@@ -1,0 +1,99 @@
+{
+  "model": "burgers",
+  "full_name": "Burgers Model",
+  "search_keywords": [
+    "burgers",
+    "constitutive",
+    "bulk",
+    "shear-kelvin",
+    "shear-maxwell",
+    "viscosity-kelvin",
+    "viscosity-maxwell",
+    "strain-kelvin-xx",
+    "strain-kelvin-yy",
+    "strain-kelvin-zz",
+    "strain-kelvin-xy",
+    "strain-kelvin-xz",
+    "strain-kelvin-yz"
+  ],
+  "description": "The Burgers model is composed of a Kelvin model and a Maxwell model connected in series (see Figure 1 for symbol definitions). The equations for the Kelvin sub-model are (1) \\[\\dot u_k={F_d\\over\\eta_1}\\] (2) \\[F_d=F-k_1 u_k\\] Combining Equations (1) and (2) in finite-difference form, (3) \\[u'_k=u_k^\\circ+\\bigl(\\bar F-k_1 \\bar u_k\\bigr){\\Delta t\\over\\eta_1}\\] where \\(\\bar F\\) and \\(\\bar u_k\\) correspond to mean values of \\(F\\) and \\(u_k\\) over the timestep, and the superscripts \\({}'\\) and \\({}^\\circ\\) denote new and old values, respectively. Hence, (4) \\[u'_k=u_k^\\circ+\\bigl\\{F'+F^\\circ-k_1(u'",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'burgers' zone constitutive model. Assign the model with 'zone cmodel assign burgers [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name burgers]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-kelvin",
+          "symbol": "G^K",
+          "description": "Kelvin shear modulus, G^K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-maxwell",
+          "symbol": "G^M",
+          "description": "Maxwell shear modulus, G^M",
+          "type": "FLT"
+        },
+        {
+          "keyword": "viscosity-kelvin",
+          "symbol": "n^K",
+          "description": "Kelvin viscosity, n^K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "viscosity-maxwell",
+          "symbol": "n^M",
+          "description": "Maxwell viscosity, n^M",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xx",
+          "symbol": "e^K_{xx}",
+          "description": "Kelvin strain, e^K_{xx}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-yy",
+          "symbol": "e^K_{yy}",
+          "description": "Kelvin strain, e^K_{yy}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-zz",
+          "symbol": "e^K_{zz}",
+          "description": "Kelvin strain, e^K_{zz}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xy",
+          "symbol": "e^K_{xy}",
+          "description": "Kelvin strain, e^K_{xy}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xz",
+          "symbol": "e^K_{xz}",
+          "description": "Kelvin strain, e^K_{xz}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-yz",
+          "symbol": "e^K_{yz}",
+          "description": "Kelvin strain, e^K_{yz}",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/burgers/doc/modelburgers.html",
+  "usage": {
+    "assign": "zone cmodel assign burgers [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name burgers]"
+  }
+}

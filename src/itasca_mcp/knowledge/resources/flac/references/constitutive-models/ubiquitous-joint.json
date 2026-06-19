@@ -1,0 +1,161 @@
+{
+  "model": "ubiquitous-joint",
+  "full_name": "Ubiquitous-Joint Model",
+  "search_keywords": [
+    "ubiquitous",
+    "joint",
+    "ubiquitous-joint",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "dilation",
+    "dip",
+    "dip-direction",
+    "angle",
+    "friction",
+    "poisson",
+    "shear",
+    "tension",
+    "young",
+    "joint-cohesion",
+    "joint-dilation",
+    "joint-friction",
+    "joint-tension",
+    "normal",
+    "normal-x",
+    "normal-y",
+    "normal-z",
+    "flag-brittle"
+  ],
+  "description": "This model accounts for the presence of an orientation of weakness (weak plane) in a Mohr-Coulomb model . The criterion for failure on the plane, whose orientation is given, consists of a composite Mohr-Coulomb envelope with tension cutoff. The position of a stress point on the latter envelope is controlled again by a non-associated flow rule for shear failure and an associated rule for tension failure. In this numerical model, general failure is first detected and relevant plastic corrections are applied, as indicated in the Mohr-Coulomb model description. The new stresses are then analyzed f",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'ubiquitous-joint' zone constitutive model. Assign the model with 'zone cmodel assign ubiquitous-joint [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name ubiquitous-joint]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip",
+          "description": "dip angle [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "dip-direction",
+          "description": "dip direction [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "angle",
+          "description": "angle [degrees] of weakness plane, taken counterclockwise from the x-axis",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "{\\sigma}^t",
+          "description": "tension limit, {\\sigma}^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-cohesion",
+          "symbol": "c_j",
+          "description": "joint cohesion, c_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-dilation",
+          "symbol": "{\\psi}_j",
+          "description": "joint dilation angle, {\\psi}_j. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-friction",
+          "symbol": "{\\phi}_j",
+          "description": "joint friction angle, {\\phi}_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-tension",
+          "symbol": "{\\sigma}^t_j",
+          "description": "joint tension limit, {\\sigma}^t_j. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal",
+          "description": "normal direction of the weakness plane, (2D or 3D vector)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x",
+          "symbol": "x",
+          "description": "x-component of the normal direction to the weakness plane, n_x",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y",
+          "symbol": "y",
+          "description": "y-component of the normal direction to the weakness plane, n_y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z",
+          "symbol": "z",
+          "description": "z-component of the normal direction to the weakness plane, n_z",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/ubiquit/doc/modelubiquit.html",
+  "usage": {
+    "assign": "zone cmodel assign ubiquitous-joint [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name ubiquitous-joint]"
+  }
+}

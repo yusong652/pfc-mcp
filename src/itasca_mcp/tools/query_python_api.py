@@ -7,7 +7,7 @@ from fastmcp import FastMCP
 from itasca_mcp.contracts import build_docs_data, build_ok
 from itasca_mcp.knowledge.python_api import APIDocFormatter, DocumentationLoader
 from itasca_mcp.knowledge.query import APISearch
-from itasca_mcp.utils import PythonAPISearchQuery, SearchLimit
+from itasca_mcp.utils import PythonAPISearchQuery, SearchLimit, SoftwareParam, normalize_software_value
 
 
 def register(mcp: FastMCP) -> None:
@@ -16,6 +16,7 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool()
     def pfc_query_python_api(
         query: PythonAPISearchQuery,
+        software: SoftwareParam,
         limit: SearchLimit = 10,
     ) -> dict[str, Any]:
         """Search PFC Python SDK documentation by keywords (like grep).
@@ -30,11 +31,12 @@ def register(mcp: FastMCP) -> None:
         - pfc_browse_python_api: Get full documentation for a known API path
         - pfc_query_command: Search PFC commands by keywords
         """
-        matches = APISearch.search(query, top_k=limit)
+        sw = normalize_software_value(software)
+        matches = APISearch.search(query, top_k=limit, software=sw)
         results_payload: list[dict[str, Any]] = []
         for result in matches:
             api_path = result.document.name
-            sig = APIDocFormatter.format_signature(api_path, result.document.metadata)
+            sig = APIDocFormatter.format_signature(api_path, result.document.metadata, software=sw)
             results_payload.append(
                 {
                     "api_path": api_path,
@@ -53,11 +55,12 @@ def register(mcp: FastMCP) -> None:
             entries=results_payload,
             summary={
                 "count": len(results_payload),
+                "software": sw,
             },
         )
 
         if not results_payload:
-            index = DocumentationLoader.load_index()
+            index = DocumentationLoader.load_index(software=sw)
             hints = []
             for hint_key, hint_msg in index.get("fallback_hints", {}).items():
                 if hint_key in query.lower():

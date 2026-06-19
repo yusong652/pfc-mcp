@@ -1,0 +1,104 @@
+{
+  "type": "flac_references",
+  "description": "Reference documentation for FLAC syntax elements and model properties. These are not standalone commands but language elements used within commands.",
+  "categories": {
+    "constitutive-models": {
+      "name": "Constitutive Models",
+      "description": "FLAC zone constitutive (material) model properties — mohr-coulomb, drucker-prager, modified-cam-clay, cysoil, plastic-hardening, etc. Property vocabulary for 'zone property'.",
+      "directory": "constitutive-models",
+      "index_file": "constitutive-models/index.json",
+      "summary": "38 FLAC zone material models (version-agnostic): elastic/plastic/cap/creep families — the property keywords for 'zone cmodel assign' + 'zone property'",
+      "usage": "zone cmodel assign <name> ; zone property <prop> <value> [range cmodel-name <name>]"
+    },
+    "range-elements": {
+      "name": "Range Elements",
+      "description": "Range filtering syntax (position, cylinder, group, id, etc.)",
+      "directory": "range-elements",
+      "index_file": "range-elements/index.json",
+      "summary": "Geometric, attribute, and logical range filters",
+      "usage": "<command> ... range <element> [params]"
+    },
+    "plot-items": {
+      "name": "Plot Item Keywords",
+      "description": "Configuration keywords for common FLAC plot item types (zone, gridpoint, and structural elements).",
+      "directory": "plot-items",
+      "index_file": "plot-items/index.json",
+      "summary": "Keywords for 'plot item create <type>' — color-by, cut, transparency, legends, labels, and rendering controls",
+      "usage": "plot item create <type> <keyword> <keyword> ..."
+    },
+    "boundary-conditions": {
+      "name": "Boundary Conditions",
+      "description": "Practical keyword maps for mechanical, fluid, thermal, and dynamic FLAC boundary conditions.",
+      "directory": "boundary-conditions",
+      "index_file": "boundary-conditions/index.json",
+      "summary": "Keyword families for 'zone face apply', 'zone gridpoint fix/free', and boundary-condition modifiers",
+      "usage": "zone face apply <condition> <value> [modifier] [range]; zone gridpoint fix <condition> [range]"
+    },
+    "initial-conditions": {
+      "name": "Initial Conditions",
+      "description": "Reference patterns for stress, pore-pressure, density, temperature, displacement, and staged initial-state setup.",
+      "directory": "initial-conditions",
+      "index_file": "initial-conditions/index.json",
+      "summary": "Common setup recipes using 'zone initialize', 'zone initialize-stresses', 'model gravity', and solve/reset workflows",
+      "usage": "zone initialize <quantity> <value> [gradient ...] [range]; zone initialize-stresses [keyword ...]"
+    },
+    "structural-properties": {
+      "name": "Structural Element Properties",
+      "description": "Property keyword groups for FLAC structural elements such as cable, beam, pile, shell, liner, and geogrid.",
+      "directory": "structural-properties",
+      "index_file": "structural-properties/index.json",
+      "summary": "Property vocabularies for 'structure <type> property' and related structural-element workflows",
+      "usage": "structure <type> property <keyword> <value> [range]"
+    },
+    "histories-and-results": {
+      "name": "Histories and Results",
+      "description": "Monitoring, field-query, and results-export keyword references for FLAC model validation.",
+      "directory": "histories-and-results",
+      "index_file": "histories-and-results/index.json",
+      "summary": "Keyword families for 'history', 'zone history', 'zone.field.*', 'zone results', and 'model results export'",
+      "usage": "history interval <i>; zone history <name> position <v>; zone results <keyword> <bool>; model results export <file>"
+    },
+    "fish-intrinsics": {
+      "name": "FISH Intrinsics",
+      "description": "Common FISH intrinsic families for scripted FLAC model inspection, field queries, and object iteration.",
+      "directory": "fish-intrinsics",
+      "index_file": "fish-intrinsics/index.json",
+      "summary": "Practical maps for zone/gridpoint/structure/field/math FISH intrinsics used in validation scripts",
+      "usage": "fish define <name>; loop foreach local z zone.list; zone.field.name = '<field>'; zone.field.get(<pos>)"
+    },
+    "interface-and-joints": {
+      "name": "Interfaces and Joints",
+      "description": "Reference keyword groups for zone interface and joint workflows.",
+      "directory": "interface-and-joints",
+      "index_file": "interface-and-joints/index.json",
+      "summary": "Creation, property, attach/contact, history, and validation patterns for discontinuities and interface elements",
+      "usage": "zone interface create ...; zone interface node property <keyword> <value>; fracture joint-set ..."
+    },
+    "geometry-data-table": {
+      "name": "Geometry, Data, and Table",
+      "description": "Reference workflows for imported geometry, labeled/scalar/vector/tensor data sets, and table curves.",
+      "directory": "geometry-data-table",
+      "index_file": "geometry-data-table/index.json",
+      "summary": "Geometry import/group/range workflows, data-set storage, and table-driven boundary/property patterns",
+      "usage": "geometry import <file>; data scalar import <file>; table import <file>; range geometry ..."
+    },
+    "sketch-and-building-blocks": {
+      "name": "Sketch and Building Blocks",
+      "description": "Model-generation workflow references for FLAC sketch commands and FLAC3D building-block commands.",
+      "directory": "sketch-and-building-blocks",
+      "index_file": "sketch-and-building-blocks/index.json",
+      "summary": "Sketch object workflow for FLAC2D/FLAC3D and 3D-only building-block mesh workflows",
+      "usage": "sketch point/edge/block/mesh ...; zone generate from-sketch; building-blocks block ..."
+    }
+  },
+  "navigation": {
+    "root": "List all reference categories",
+    "category": "List items in category (e.g., 'constitutive-models')",
+    "item": "Full documentation (e.g., 'constitutive-models mohr-coulomb')"
+  },
+  "notes": [
+    "References are syntax elements used within commands, not standalone commands",
+    "Use flac_browse_commands for command syntax",
+    "Use flac_browse_reference for reference documentation"
+  ]
+}

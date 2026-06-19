@@ -1,0 +1,48 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "nodal",
+    "mixed",
+    "discretization",
+    "zone",
+    "nodal-mixed-discretization"
+  ],
+  "description": "Activate or deactivate the nodal mixed discretization (nmd) feature. When nmd is on , any tetrahedral zones (3D) or triangular zones (2D) will use the nmd algorithm during stress calculations. When nmd is off , the default mixed discretization method will be used. See Grid Discretization in FLAC for further information.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone nodal-mixed-discretization",
+      "syntax": "zone nodal-mixed-discretization b",
+      "description": "Activate or deactivate the nodal mixed discretization (nmd) feature. When nmd is on, any tetrahedral zones will use the nmd algorithm during the stress calculations. When nmd is off, the default mixed discretization method will be used. See Nodal Formulation of the Equations of Motion for further information.",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.nodal-mixed-discretization.html#zone.nodal-mixed-discretization"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone nodal-mixed-discretization",
+      "syntax": "zone nodal-mixed-discretization b",
+      "description": "Activate or deactivate the nodal mixed discretization (nmd) feature. When nmd is on, any tetrahedral zones will use the nmd algorithm during the stress calculations. This provides a more accurate solution for tetrahedral meshes. When nmd is off, the default mixed discretization method will be used. See Grid Discretization for further information.",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.nodal-mixed-discretization.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone nodal-mixed-discretization",
+      "syntax": "zone nodal-mixed-discretization <b>"
+    }
+  }
+}

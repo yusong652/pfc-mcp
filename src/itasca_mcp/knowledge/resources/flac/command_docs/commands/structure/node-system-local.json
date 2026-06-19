@@ -1,0 +1,109 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "node",
+    "system",
+    "local",
+    "structure",
+    "system-local"
+  ],
+  "description": "Set the orientation of the node-local system for all nodes in the range.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "structure node system-local",
+      "syntax": "structure node system-local keyword <range>",
+      "description": "Set the orientation of the node-local system for all nodes in the range.",
+      "keywords": [
+        {
+          "name": "x",
+          "syntax": "x v",
+          "description": "specifies the local x-direction"
+        },
+        {
+          "name": "y",
+          "syntax": "y v",
+          "description": "specifies the local y-direction"
+        },
+        {
+          "name": "z",
+          "syntax": "z v",
+          "description": "specifies the local z-direction"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/nodes/commands/cmd_structure.node.system-local.html#structure.node.system-local"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "structure node system-local",
+      "syntax": "structure node system-local keyword... <range>",
+      "description": "Set the orientation of the node-local system for all nodes in the range.",
+      "keywords": [
+        {
+          "name": "x",
+          "syntax": "x v",
+          "description": "specifies the local \\(x\\)-direction"
+        },
+        {
+          "name": "y",
+          "syntax": "y v",
+          "description": "specifies the local \\(y\\)-direction"
+        },
+        {
+          "name": "z",
+          "syntax": "z v",
+          "description": "specifies the local \\(z\\)-direction"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/nodes/commands/cmd_structure.node.system-local.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure node system-local",
+      "syntax": "structure node system-local keyword ... [range]",
+      "keywords": [
+        {
+          "name": "x",
+          "syntax": "x <v>",
+          "description": "specifies the local \\(x\\) -direction"
+        },
+        {
+          "name": "y",
+          "syntax": "y <v>",
+          "description": "specifies the local \\(y\\) -direction"
+        },
+        {
+          "name": "z",
+          "syntax": "z <v>3D ONLY",
+          "description": "specifies the local \\(z\\) -direction"
+        },
+        {
+          "name": "reverse-x",
+          "syntax": "reverse-x 2D ONLY",
+          "description": "reverses the current \\(x\\) -direction (cannot be used with the \\(x\\) or \\(y\\) keywords)"
+        },
+        {
+          "name": "reverse-y",
+          "syntax": "reverse-y 2D ONLY",
+          "description": "reverses the current \\(y\\) -direction (cannot be used with the \\(x\\) or \\(y\\) keywords)"
+        }
+      ]
+    }
+  }
+}

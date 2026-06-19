@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "mesh",
+    "shape",
+    "quality",
+    "sketch",
+    "shape-quality"
+  ],
+  "description": "Specify a value for the shape-quality 0 ≤ f ≤ 1 for the unstructured mesher. The default value is 0.7.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch mesh shape-quality",
+      "syntax": "sketch mesh shape-quality <f>",
+      "keywords": []
+    }
+  }
+}

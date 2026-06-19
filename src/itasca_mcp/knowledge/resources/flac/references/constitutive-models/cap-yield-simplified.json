@@ -1,0 +1,213 @@
+{
+  "model": "cap-yield-simplified",
+  "full_name": "Simplified Cap-Yield (CHSoil) Model*",
+  "search_keywords": [
+    "cap",
+    "yield",
+    "simplified",
+    "cap-yield",
+    "(chsoil)",
+    "model*",
+    "constitutive",
+    "bulk-reference",
+    "cohesion",
+    "dilation",
+    "friction",
+    "friction-mobilized",
+    "poisson",
+    "pressure-initial",
+    "pressure-reference",
+    "shear-reference",
+    "tension",
+    "young-reference",
+    "dilation-mobilized",
+    "flag-brittle",
+    "flag-dilation",
+    "exponent-bulk",
+    "exponent-shear",
+    "friction-0",
+    "friction-critical",
+    "strain-shear-plastic",
+    "strain-tensile-plastic",
+    "failure-ratio",
+    "table-cohesion",
+    "table-dilation",
+    "table-tension",
+    "bulk",
+    "shear",
+    "young"
+  ],
+  "description": "Note *This model is not available in 3DEC . As discussed previously in the CYSoil model , when soils are subjected to deviatoric loading, they usually exhibit a decrease in stiffness accompanied by irreversible deformation. The well-known Duncan and Chang model (1970) is commonly used to simulate this hyperbolic stress-strain behavior. The Duncan and Chang model is relatively easy to use. However, as noted in in the CYSoil model , this model has several drawbacks. In addition, hyperbolic relations that rely on nonlinear elasticity are known to have significant limitations (Duncan et al. 1980),",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'cap-yield-simplified' zone constitutive model. Assign the model with 'zone cmodel assign cap-yield-simplified [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name cap-yield-simplified]'.",
+      "properties": [
+        {
+          "keyword": "bulk-reference",
+          "symbol": "K_{ref}",
+          "description": "dimensionless bulk modulus reference value, K_{ref}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "ultimate cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi_f",
+          "description": "ultimate dilation angle, \\psi_f",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi_f",
+          "description": "ultimate friction angle, \\phi_f",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-mobilized",
+          "symbol": "\\phi_m",
+          "description": "mobilized friction angle, \\phi_m, which should be initialized no less than the value determined by this equation via a command or FISH function",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "current Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-initial",
+          "symbol": "p_m",
+          "description": "initial mean effective pressure, p_m, which should be initialized via a command or FISH function",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p_{ref}",
+          "description": "reference pressure, p_{ref}. A non-zero value should be specified based on the unit of stress/pressure adopted in the model.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-reference",
+          "symbol": "G_{ref}",
+          "description": "dimensionless shear modulus reference value, G_{ref}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-reference",
+          "symbol": "E_{ref}",
+          "description": "dimensionless Young’s modulus reference value, E_{ref}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-mobilized",
+          "symbol": "\\psi_m",
+          "description": "current mobilized dilation angle, \\psi_m. It is read-only, except for table-dilation ǂ 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-dilation",
+          "symbol": "\\psi_m",
+          "description": "= 0 for mobilized dilation angle, \\psi_m, equal to input value, dilation or a function of plastic shear strain if table is input with table-dilation",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "exponent-bulk",
+          "symbol": "m",
+          "description": "bulk modulus exponent, m. The default is 0.5.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-shear",
+          "symbol": "n",
+          "description": "shear modulus exponent, n. The default is 0.5.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-0",
+          "symbol": "\\phi_0",
+          "description": "initial mobilized fiction angle, \\phi_0 associated with zero plastic shear strain. By default, \\phi_0 = \\phi_m if strain-shear-plastic is initialized to 0; otherwise, \\phi_0 = 0 if not specified.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-critical",
+          "symbol": "\\phi_{cv}",
+          "description": "constant used in dilation law (flag-dilation = 1 or 2), \\phi_{cv}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "symbol": "\\epsilon^{ps}",
+          "description": "accumulated plastic shear strain, \\epsilon^{ps}. By default, it is initialized internally.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic",
+          "symbol": "\\epsilon^{pt}",
+          "description": "accumulated plastic tensile strain, \\epsilon^{pt}. The default initial value is 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "failure-ratio",
+          "symbol": "R_f",
+          "description": "failure ratio, R_f. The default is 0.9.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-cohesion",
+          "symbol": "c",
+          "description": "name of the table relating cohesion, c, to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-dilation",
+          "description": "name of the table relating mobilized dilation angle to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "description": "name of the table relating mobilized tensile strength to plastic tensile strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K^e",
+          "description": "current elastic bulk modulus, K^e",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G^e",
+          "description": "current elastic shear modulus, G^e",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "current elastic Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/chsoil/doc/modelchsoil.html",
+  "usage": {
+    "assign": "zone cmodel assign cap-yield-simplified [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name cap-yield-simplified]"
+  }
+}

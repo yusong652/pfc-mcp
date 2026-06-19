@@ -1,0 +1,246 @@
+{
+  "model": "swell",
+  "full_name": "Swell Model*",
+  "search_keywords": [
+    "swell",
+    "model*",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "constant-a-1",
+    "constant-a-3",
+    "constant-c-1",
+    "constant-c-3",
+    "constant-m-1",
+    "constant-m-3",
+    "dilation",
+    "dip",
+    "dip-direction",
+    "angle",
+    "friction",
+    "normal",
+    "normal-x",
+    "normal-y",
+    "normal-z",
+    "poisson",
+    "pressure-reference",
+    "shear",
+    "tension",
+    "young",
+    "flag-swell",
+    "flag-brittle",
+    "flag-effective",
+    "number-start",
+    "count-swell",
+    "stress-local-vertical",
+    "stress-swell-xx",
+    "stress-swell-yy",
+    "stress-swell-zz",
+    "stress-swell-xy",
+    "stress-swell-xz",
+    "stress-swell-yz"
+  ],
+  "description": "Note *This model is not available in 3DEC . This model is based on the Mohr-Coulomb model with nonassociated shear and associated tension flow rules. The difference is that the wetting-induced deformations are taken into account by means of coupling wetting strains with the model state prior to wetting. For model application and modeling procedures, see Noorany et al. (1999), Pathak et al. (2003), and Pathak et al (2010). The yield and potential functions, plastic flow rules, and stress corrections are identical to those of the Mohr-Coulomb model. Wetting Strain and Stress Corrections The wett",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'swell' zone constitutive model. Assign the model with 'zone cmodel assign swell [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name swell]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a-1",
+          "symbol": "a_1",
+          "description": "swelling property, a_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a-3",
+          "symbol": "a_3",
+          "description": "swelling property, a_3",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-c-1",
+          "symbol": "c_1",
+          "description": "swelling property, c_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-c-3",
+          "symbol": "c_3",
+          "description": "swelling property, c_3",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-m-1",
+          "description": "maximum possible swelling strain in the principal swelling direction defined by (z’)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-m-3",
+          "description": "maximum possible swelling strain perpendicular to the principal swelling direction (x’ and y’)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip",
+          "description": "dip angle [degrees] of the local swelling plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "dip-direction",
+          "description": "dip direction [degrees] of the local swelling plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "angle",
+          "description": "angle [degrees] of the local swelling plane, taken counterclockwise from the x-axis",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal",
+          "description": "normal direction of the local swelling plane, (2D or 3D vector)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x",
+          "symbol": "x",
+          "description": "x-component of the normal direction to the local swelling plane, n_x",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y",
+          "symbol": "y",
+          "description": "y-component of the normal direction to the local swelling plane, n_y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z",
+          "symbol": "z",
+          "description": "z-component of the normal direction to the local swelling plane, n_z (3D ONLY)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p_a",
+          "description": "atmospheric pressure, p_a",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-swell",
+          "description": "flag of swelling function, (1 - logarithmic; 2 - linear). The default is 1.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-effective",
+          "description": "If true, the swelling effect is based on effective compressive stress in the principal swelling direction; otherwise, it is based on the total compressive stress in the principal swelling direction. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "number-start",
+          "symbol": "N_s",
+          "description": "number of steps over which swelling strains are introduced, N_s. The default is 1.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "count-swell",
+          "description": "count of step number after swelling starts, must be reset to zero to start a new swelling episode",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-local-vertical",
+          "description": "local total stress vertical stress when swelling starts; must be reset to zero when soil swelling properties are changed",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-xx",
+          "description": "xx swelling stress component",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-yy",
+          "description": "yy swelling stress component",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-zz",
+          "description": "zz swelling stress component",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-xy",
+          "description": "xy swelling stress component",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-xz",
+          "description": "xz swelling stress component",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-swell-yz",
+          "description": "yz swelling stress component",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/swell/doc/modelswell.html",
+  "usage": {
+    "assign": "zone cmodel assign swell [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name swell]"
+  }
+}

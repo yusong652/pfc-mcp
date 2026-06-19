@@ -14,7 +14,7 @@ import json
 from functools import lru_cache
 from typing import Any, cast
 
-from itasca_mcp.knowledge.config import PFC_COMMAND_DOCS_ROOT
+from itasca_mcp.knowledge.config import command_index_path, resolve
 
 
 class CommandLoader:
@@ -27,8 +27,8 @@ class CommandLoader:
     DEFAULT_VERSION = "7.0"
 
     @staticmethod
-    @lru_cache(maxsize=1)
-    def load_index() -> dict[str, Any]:
+    @lru_cache(maxsize=8)
+    def load_index(*, software: str) -> dict[str, Any]:
         """Load the main command index file with caching.
 
         The index file contains:
@@ -51,7 +51,7 @@ class CommandLoader:
             >>> "ball" in categories
             True
         """
-        index_path = PFC_COMMAND_DOCS_ROOT / "index.json"
+        index_path = command_index_path(software)
         if not index_path.exists():
             raise FileNotFoundError(f"Command index file not found: {index_path}")
 
@@ -61,8 +61,8 @@ class CommandLoader:
     @staticmethod
     @lru_cache(maxsize=256)
     def _load_doc_file(command_file: str) -> dict[str, Any] | None:
-        """Load a raw command documentation file by relative path."""
-        doc_path = PFC_COMMAND_DOCS_ROOT / command_file
+        """Load a raw command documentation file by RESOURCES-root-relative path."""
+        doc_path = resolve(command_file)
         if not doc_path.exists():
             return None
 
@@ -100,6 +100,8 @@ class CommandLoader:
         category: str,
         command_name: str,
         version: str = DEFAULT_VERSION,
+        *,
+        software: str,
     ) -> dict[str, Any] | None:
         """Load documentation for a specific command.
 
@@ -133,7 +135,7 @@ class CommandLoader:
             >>> "description" in doc
             True
         """
-        index = CommandLoader.load_index()
+        index = CommandLoader.load_index(software=software)
 
         # Find command file path from index
         categories = index.get("categories", {})
@@ -161,7 +163,7 @@ class CommandLoader:
         return CommandLoader._resolve_versioned_doc(raw_doc, version)
 
     @staticmethod
-    def get_all_commands() -> list[dict[str, Any]]:
+    def get_all_commands(*, software: str) -> list[dict[str, Any]]:
         """Get all commands from all categories.
 
         Returns:
@@ -180,7 +182,7 @@ class CommandLoader:
             >>> commands[0]["category"] in ["ball", "wall", "clump", ...]
             True
         """
-        index = CommandLoader.load_index()
+        index = CommandLoader.load_index(software=software)
         categories = index.get("categories", {})
 
         all_commands = []

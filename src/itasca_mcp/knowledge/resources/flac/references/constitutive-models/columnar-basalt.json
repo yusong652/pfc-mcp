@@ -1,0 +1,242 @@
+{
+  "model": "columnar-basalt",
+  "full_name": "Columnar-Basalt (COMBA) Model**",
+  "search_keywords": [
+    "columnar",
+    "basalt",
+    "columnar-basalt",
+    "(comba)",
+    "model**",
+    "constitutive",
+    "cohesion",
+    "dilation",
+    "dip-i",
+    "dip-direction-i",
+    "friction",
+    "joint-cohesion-i",
+    "joint-dilation-i",
+    "joint-friction-i",
+    "joint-tension-i",
+    "normal-x-amplification",
+    "normal-y-amplification",
+    "normal-z-amplification",
+    "normal-x-i",
+    "normal-y-i",
+    "normal-z-i",
+    "poisson",
+    "space-i",
+    "stiffness-normal-i",
+    "stiffness-shear-i",
+    "table-amplification",
+    "tension",
+    "young",
+    "flag-matrix-plastic",
+    "creep-coefficient-i",
+    "creep-exponent-i",
+    "creep-limit-ratio-i",
+    "table-joint-cohesion-i",
+    "table-joint-dilation-i",
+    "table-joint-friction-i",
+    "table-joint-tension",
+    "strain-shear-plastic-joint-i",
+    "strain-tensile-plastic-joint-i"
+  ],
+  "description": "Note **Not available in FLAC2D . The Columnar-Basalt (COMBA) model (Detournay et al 2016, Meng et al 2020) accounts for the presence of up to four arbitrary orientations of weakness (ubiquitous joint) in a non-isotropic elastic matrix. The model can be applied to model quadrangular (hexagonal) columnar basalt with cross-joints by specifying that two (three) of the ubiquitous joints are oriented along the column axis, and another along the cross-joints. The model elastic behavior accounts for the compliance of the column matrix and that of the joints. The criterion for failure on the planes con",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'columnar-basalt' zone constitutive model. Assign the model with 'zone cmodel assign columnar-basalt [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name columnar-basalt]'.",
+      "properties": [
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "matrix cohesion, c = c_1.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "matrix dilation angle, \\psi = \\psi_1. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip-i",
+          "description": "dip angle [degrees] of weakness plane of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip-direction-i",
+          "description": "dip direction [degrees] of weakness plane of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "matrix friction angle, \\phi = \\phi_1.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-cohesion-i",
+          "symbol": "c_j",
+          "description": "joint cohesion, c_j of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-dilation-i",
+          "symbol": "\\psi_j",
+          "description": "joint dilation angle, \\psi_j of the i-th (i=1,2,3,or 4) set. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-friction-i",
+          "symbol": "\\phi_j",
+          "description": "joint friction angle of the i-th (i=1,2,3,or 4) set, \\phi_j.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-tension-i",
+          "symbol": "\\sigma^t_j",
+          "description": "joint tension limit, \\sigma^t_j of the i-th (i=1,2,3,or 4) set. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x-amplification",
+          "symbol": "x",
+          "description": "x-component of reference unit vector for amplification.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y-amplification",
+          "symbol": "y",
+          "description": "y-component of reference unit vector for amplification.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z-amplification",
+          "symbol": "z",
+          "description": "z-component of reference unit vector for amplification.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x-i",
+          "symbol": "x",
+          "description": "x-component of the normal direction to the weakness plane, n_x, of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y-i",
+          "symbol": "y",
+          "description": "y-component of the normal direction to the weakness plane, n_y of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z-i",
+          "symbol": "z",
+          "description": "z-component of the normal direction to the weakness plane, n_z of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "description": "Poisson ratio for the column matrix.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "space-i",
+          "symbol": "S_i",
+          "description": "Space for joint of the i-th (i=1,2,3,or 4) set, S_i. S_i = 0 (default value) means joint i (1,2,3, or 4) is inactive. S_i > 0 means the joint is active for detection of shear and tensile yielding. However, it may not contribute to the stiffness matrix, if k_{n,i} = k_{n,i} = 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-normal-i",
+          "symbol": "k_{n,i}",
+          "description": "Normal stiffness of joint of the i-th (i=1,2,3,or 4) set, k_{n,i}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear-i",
+          "symbol": "k_{s,i}",
+          "description": "Shear stiffness of joint of the i-th (i=1,2,3,or 4) set, k_{s,i}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-amplification",
+          "description": "Amplification table for joint dilation 1, 2, 3. It should provide entries between 0 and 90 degree. Dilation amplification factor affects joint 1 to 3. Presumably, the cross joint is not affected by dilation amplification, thus if present, it should be declared as joint 4.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "{\\sigma}^t",
+          "description": "tension limit, {\\sigma}^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "description": "Young’s modulus for the column matrix.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-matrix-plastic",
+          "description": "If true, the matrix plasticity will be considered, otherwise the matrix is elastic. The default is true.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "creep-coefficient-i",
+          "symbol": "A",
+          "description": "Creep parameter A of joint of the i-th (i=1,2,3,or 4) set. Valid only when creep is configured.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-exponent-i",
+          "symbol": "n",
+          "description": "Creep parameter n of joint of the i-th (i=1,2,3,or 4) set. Valid only when creep is configured.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-limit-ratio-i",
+          "symbol": "s_{lim}",
+          "description": "Creep parameter s_{lim} of joint of the i-th (i=1,2,3,or 4) set. Valid only when creep is configured.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-joint-cohesion-i",
+          "symbol": "c_j",
+          "description": "name of the table relating joint cohesion c_j = c_{j1} to joint plastic shear strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-joint-dilation-i",
+          "symbol": "\\psi_j",
+          "description": "name of the table relating joint dilation \\psi_j = \\psi_{j1} to joint plastic shear strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-joint-friction-i",
+          "symbol": "\\phi_j",
+          "description": "name of the table relating joint friction angle \\phi_j = \\phi_{j1} to joint plastic shear strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-joint-tension",
+          "symbol": "\\sigma^t_j",
+          "description": "name of the table relating joint tension limit \\sigma^t_j to joint plastic tensile strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic-joint-i",
+          "description": "accumulated joint plastic shear strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic-joint-i",
+          "description": "accumulated joint plastic tensile strain of the i-th (i=1,2,3,or 4) set.",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/comba/doc/modelcomba.html",
+  "usage": {
+    "assign": "zone cmodel assign columnar-basalt [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name columnar-basalt]"
+  }
+}

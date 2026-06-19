@@ -1,0 +1,117 @@
+{
+  "name": "results-export",
+  "dimension": "mixed",
+  "full_name": "Results Export Selection Keywords",
+  "description": "The 'zone results' command controls which zone-related values are saved to exported results files. It is normally paired with 'model results export'.",
+  "primary_commands": [
+    "zone results",
+    "model results export",
+    "model results import"
+  ],
+  "default_behavior": [
+    "Zone results are active by default.",
+    "Default exported values include stresses, groups, and displacements.",
+    "Use explicit keywords to include or exclude additional data families."
+  ],
+  "keywords": [
+    {
+      "keyword": "accelerations",
+      "description": "Include gridpoint acceleration vectors (dynamic analyses)."
+    },
+    {
+      "keyword": "active",
+      "description": "Control whether zone values are exported."
+    },
+    {
+      "keyword": "apply",
+      "description": "Include applied conditions at zones and zone faces."
+    },
+    {
+      "keyword": "attach",
+      "description": "Include attach-condition information."
+    },
+    {
+      "keyword": "displacements",
+      "description": "Include gridpoint displacement vectors."
+    },
+    {
+      "keyword": "extra",
+      "description": "Include extra variables at zones and gridpoints."
+    },
+    {
+      "keyword": "forces",
+      "description": "Include gridpoint unbalanced force information and local force ratio."
+    },
+    {
+      "keyword": "groups",
+      "description": "Include group assignments to zones, faces, and gridpoints."
+    },
+    {
+      "keyword": "interfaces",
+      "description": "Include interface information."
+    },
+    {
+      "keyword": "model-fluid",
+      "description": "Include fluid constitutive model information."
+    },
+    {
+      "keyword": "model-mechanical",
+      "description": "Include mechanical constitutive model information."
+    },
+    {
+      "keyword": "model-thermal",
+      "description": "Include thermal constitutive model information."
+    },
+    {
+      "keyword": "pore-pressure",
+      "description": "Include gridpoint pore-pressure values."
+    },
+    {
+      "keyword": "range",
+      "description": "Restrict exported zones by a saved range."
+    },
+    {
+      "keyword": "saturation",
+      "description": "Include gridpoint saturation values."
+    },
+    {
+      "keyword": "stresses",
+      "description": "Include average zone stresses."
+    },
+    {
+      "keyword": "temperatures",
+      "description": "Include gridpoint temperatures."
+    },
+    {
+      "keyword": "velocities",
+      "description": "Include gridpoint velocity vectors."
+    },
+    {
+      "keyword": "water",
+      "description": "Include water-table information."
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Full mechanical validation export",
+      "commands": [
+        "zone results active on",
+        "zone results stresses on",
+        "zone results displacements on",
+        "zone results forces on",
+        "zone results groups on",
+        "model results export 'stage1_results'"
+      ]
+    },
+    {
+      "name": "Coupled-flow export",
+      "commands": [
+        "zone results pore-pressure on",
+        "zone results saturation on",
+        "zone results model-fluid on",
+        "model results export 'flow_results'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.results.html"
+}

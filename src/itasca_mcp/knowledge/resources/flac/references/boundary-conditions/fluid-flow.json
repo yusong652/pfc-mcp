@@ -1,0 +1,65 @@
+{
+  "name": "fluid-flow",
+  "dimension": "mixed",
+  "full_name": "Fluid-Flow Boundary Conditions",
+  "description": "Fluid-flow boundary conditions control pore pressure, fluid flux, leakage, head, and well source/sink terms in coupled or flow-only analyses.",
+  "primary_commands": [
+    "model configure fluid",
+    "zone face apply pore-pressure",
+    "zone face apply discharge",
+    "zone face apply leakage",
+    "zone face apply head",
+    "zone apply well",
+    "zone gridpoint fix pore-pressure",
+    "zone gridpoint free pore-pressure",
+    "zone gridpoint fix well"
+  ],
+  "keyword_groups": [
+    {
+      "group": "pressure control",
+      "keywords": [
+        "pore-pressure",
+        "head"
+      ],
+      "notes": [
+        "Fixed pore pressure permits fluid exchange with the exterior.",
+        "Free pore pressure is the default impermeable condition for gridpoints."
+      ]
+    },
+    {
+      "group": "flux and leakage (face apply)",
+      "keywords": [
+        "discharge",
+        "leakage"
+      ],
+      "notes": [
+        "Use face discharge/leakage for boundary fluxes via 'zone face apply'."
+      ]
+    },
+    {
+      "group": "source/sink (gridpoint only)",
+      "keywords": [
+        "well"
+      ],
+      "notes": [
+        "'well' is a gridpoint-fix keyword — NOT a 'zone face apply' keyword. Use 'zone gridpoint fix well ...' for source/sink style flow."
+      ]
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Fixed boundary pore pressure",
+      "commands": [
+        "model configure fluid",
+        "zone face apply pore-pressure 0 range group 'drain'"
+      ]
+    },
+    {
+      "name": "Free pore pressure condition",
+      "commands": [
+        "zone gridpoint free pore-pressure range group 'sealed'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/theory/fluid-mechanical/boundary_conditions/boundary_conditions.html"
+}

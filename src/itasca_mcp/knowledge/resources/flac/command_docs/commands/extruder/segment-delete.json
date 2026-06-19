@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "delete",
+    "sketch"
+  ],
+  "description": "Delete segments. All segments are deleted if < range > is not supplied.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment delete",
+      "syntax": "sketch segment delete [range]",
+      "keywords": []
+    }
+  }
+}

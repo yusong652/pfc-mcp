@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "node",
+    "delete",
+    "sketch",
+    "segment-node"
+  ],
+  "description": "Delete nodes. All nodes are deleted if < range > is not supplied. If invalid is used, only nodes not connected to an edge will be deleted.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment-node delete",
+      "syntax": "sketch segment-node delete [invalid] [range]",
+      "keywords": []
+    }
+  }
+}

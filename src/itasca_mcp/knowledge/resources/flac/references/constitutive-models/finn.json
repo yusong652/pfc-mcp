@@ -1,0 +1,174 @@
+{
+  "model": "finn",
+  "full_name": "Finn Model*",
+  "search_keywords": [
+    "finn",
+    "model*",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "constant-1",
+    "constant-2",
+    "constant-3",
+    "constant-4",
+    "dilation",
+    "flag-switch",
+    "friction",
+    "poisson",
+    "shear",
+    "tension",
+    "young",
+    "number-latency",
+    "flag-brittle",
+    "table-cohesion",
+    "table-dilation",
+    "table-friction",
+    "table-tension",
+    "number-count",
+    "strain-shear-plastic",
+    "strain-tensile-plastic",
+    "strain-volumetric-irrecoverable"
+  ],
+  "description": "Note *Not available in 3DEC . In reality, pore pressure build-up is a secondary effect, although many people seem to think it is the primary response to cyclic loading. The primary effect is the irrecoverable volume contraction of the matrix of grains when a material is taken through a complete strain cycle with the confining stress held constant. Since it is grain rearrangement rather than grain volume change that takes place, the volume of the void space decreases under constant confining stress. If the voids are filled with fluid, then the pressure of the fluid increases and the effective s",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'finn' zone constitutive model. Assign the model with 'zone cmodel assign finn [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name finn]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-1",
+          "symbol": "C_1",
+          "description": "constant, C_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-2",
+          "symbol": "C_2",
+          "description": "constant, C_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-3",
+          "symbol": "C_3",
+          "description": "constant, C_3",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-4",
+          "symbol": "C_4",
+          "description": "constant, C_4",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-switch",
+          "description": "= 0 for Martin et al. formula, and",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "number-latency",
+          "description": "minimum number of timesteps between reversals. The default is 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "if true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "table-cohesion",
+          "description": "name of the table relating cohesion to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-dilation",
+          "description": "name of the table relating dilation angle to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-friction",
+          "description": "name of the table relating friction angle to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "description": "name of the table relating tension limit to plastic tensile strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "number-count",
+          "description": "number of shear strain reversals (half cycles) detected",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "description": "accumulated plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic",
+          "description": "accumulated plastic tensile strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-volumetric-irrecoverable",
+          "symbol": "\\epsilon_{vd}",
+          "description": "accumulated irrecoverable volume strain, \\epsilon_{vd}, which is positive in compression, an interval variable used in Martin et al and Byrne formula",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/finn/doc/modelfinn.html",
+  "usage": {
+    "assign": "zone cmodel assign finn [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name finn]"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "group",
+    "sketch"
+  ],
+  "description": "Assign/remove a group name to segments. Use of the group logic is described in the Groups topic.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment group",
+      "syntax": "sketch segment group <s>[keyword] [range]",
+      "keywords": [
+        {
+          "name": "slot",
+          "syntax": "slot <s2>",
+          "description": "Designate the slot for the group assignment. If omitted, the slot is set the slot named Default ."
+        },
+        {
+          "name": "remove",
+          "syntax": "remove",
+          "description": "Remove the specified group/slot assignment."
+        }
+      ]
+    }
+  }
+}

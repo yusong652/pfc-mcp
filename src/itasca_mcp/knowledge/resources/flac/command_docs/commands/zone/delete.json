@@ -1,0 +1,43 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "delete",
+    "zone"
+  ],
+  "description": "Delete zones.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone delete",
+      "syntax": "zone delete <range>",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.delete.html#zone.delete"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone delete",
+      "syntax": "zone delete <range>",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.delete.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone delete",
+      "syntax": "zone delete [range]"
+    }
+  }
+}

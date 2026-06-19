@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "mesh",
+    "target",
+    "size",
+    "sketch",
+    "target-size"
+  ],
+  "description": "Specify the desired zone size (target size) inside of a block, f ≥ 0. The default value is 0.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch mesh target-size",
+      "syntax": "sketch mesh target-size <f>",
+      "keywords": []
+    }
+  }
+}

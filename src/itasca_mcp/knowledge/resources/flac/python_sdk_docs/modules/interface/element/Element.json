@@ -1,0 +1,248 @@
+{
+  "class": "Element",
+  "description": "Element object instance in itasca.interface.element.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.interface.element.Element.html",
+  "note": "Do not instantiate directly; use itasca.interface.element module functions.",
+  "method_groups": {
+    "area": [
+      "area"
+    ],
+    "extra": [
+      "extra",
+      "set_extra"
+    ],
+    "group": [
+      "group",
+      "group_remove",
+      "set_group"
+    ],
+    "groups": [
+      "groups"
+    ],
+    "id": [
+      "id"
+    ],
+    "in": [
+      "in_group"
+    ],
+    "join": [
+      "join"
+    ],
+    "node": [
+      "node"
+    ],
+    "normal": [
+      "normal"
+    ],
+    "valid": [
+      "valid"
+    ],
+    "vertex": [
+      "vertex"
+    ]
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "interface.element.area() -> float",
+      "description": "(3D only) Get the area of the interface element.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "interface.element.extra(slot: int) -> any",
+      "description": "Get the element extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "interface.element.group([slot: str or int]) -> str",
+      "description": "Get the element group name in a given slot.",
+      "parameters": [
+        {
+          "name": "[slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "interface.element.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the element. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "interface.element.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this element is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "interface.element.id() -> int",
+      "description": "Get the element id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "interface.element.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the element is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "join",
+      "signature": "interface.element.join(i: int) -> Interface pointer",
+      "description": "Get the pointer to the adjacent interface element joined across edge i for 3D (i = 1,2,3) pr node i for 2D (i = 1,2).",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Interface pointer"
+      }
+    },
+    {
+      "name": "node",
+      "signature": "interface.element.node(i: int) -> Node pointer",
+      "description": "Pointer to the node associated with the interface element where i=1,2,3 for 3D and i=1,2 for 2D.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Node pointer"
+      }
+    },
+    {
+      "name": "normal",
+      "signature": "interface.element.normal(i: int) -> normal vector or component",
+      "description": "Get the normal vector for the interface element. Returns a vector, unless an optional component argument i is supplied, in which case it returns the component value.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "normal vector or component"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "interface.element.set_extra(slot: int, value: any) -> None",
+      "description": "Set the element extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "interface.element.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the element group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "interface.element.valid() -> bool",
+      "description": "Returns True if this element is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vertex",
+      "signature": "interface.element.vertex(i: int) -> Vertex pointer",
+      "description": "Pointer to the vertex associated with the interface element where i=1,2,3 for 3D and i=1,2 for 2D.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Vertex pointer"
+      }
+    }
+  ]
+}

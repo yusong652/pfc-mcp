@@ -1,0 +1,19 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "tolerance",
+    "building-blocks"
+  ],
+  "description": "Set the tolerance for geometric manipulations. For instance, if the distance between two points is less than f they will be treated as one point (merged). The tolerance value f must be positive. Invoking the command will set off the auto-tolerance flag (see building-blocks set auto-tolerance ).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set tolerance",
+      "syntax": "building-blocks set tolerance <f>",
+      "keywords": []
+    }
+  }
+}

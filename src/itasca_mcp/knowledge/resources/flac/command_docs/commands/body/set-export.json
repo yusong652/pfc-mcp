@@ -1,0 +1,19 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "export",
+    "building-blocks"
+  ],
+  "description": "Export current building blocks to a file. If a file name s is not supplied, the name of the current set will be used. The extension of the file will be “.f3bset”. The optional switch binary specifies binary output. The default is text format.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set export",
+      "syntax": "building-blocks set export [<s>] [binary]",
+      "keywords": []
+    }
+  }
+}

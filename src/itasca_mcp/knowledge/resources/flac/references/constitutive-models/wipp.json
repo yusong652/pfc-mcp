@@ -1,0 +1,120 @@
+{
+  "model": "wipp",
+  "full_name": "WIPP Model",
+  "search_keywords": [
+    "wipp",
+    "constitutive",
+    "activation-energy",
+    "bulk",
+    "constant-a",
+    "constant-b",
+    "constant-d",
+    "constant-gas",
+    "creep-rate-critical",
+    "exponent",
+    "poisson",
+    "shear",
+    "temperature",
+    "young",
+    "creep-strain-primary",
+    "creep-rate-primary"
+  ],
+  "description": "An empirical creep law, known as the WIPP-reference creep law, has been developed to describe the time- and temperature-dependent creep of natural rock salt, specifically for nuclear waste isolation studies. The model is described by Herrmann et al. (1980a and b); a different expression of the same creep law is also given by Senseny (1985). The WIPP-reference creep law, as implemented in FLAC3D , partitions the deviatoric strain-rate tensor, \\(\\dot\\epsilon_{ij}^d\\) , into elastic and viscous parts ( \\(\\dot\\epsilon_{ij}^{de}\\) and \\(\\dot\\epsilon_{ij}^{dv}\\) , respectively): (1) \\[\\dot\\epsilon_{",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'wipp' zone constitutive model. Assign the model with 'zone cmodel assign wipp [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name wipp]'.",
+      "properties": [
+        {
+          "keyword": "activation-energy",
+          "symbol": "Q",
+          "description": "activation energy, Q",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a",
+          "symbol": "A",
+          "description": "WIPP model constant, A",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-b",
+          "symbol": "B",
+          "description": "WIPP model constant, B",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-d",
+          "symbol": "D",
+          "description": "WIPP model constant, D",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-gas",
+          "symbol": "R",
+          "description": "gas constant, R",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-rate-critical",
+          "symbol": "ε̇ ^*_{ss}",
+          "description": "critical steady-state creep rate, ε̇ ^*_{ss}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent",
+          "symbol": "n",
+          "description": "WIPP model exponent, n",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "temperature",
+          "symbol": "T",
+          "description": "zone temperature, T",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-strain-primary",
+          "symbol": "ε̇_s",
+          "description": "accumulated primary creep strain, ε̇_s",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-rate-primary",
+          "symbol": "ε_s",
+          "description": "accumulated primary creep strain rate, ε_s",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/wipp/doc/modelwipp.html",
+  "usage": {
+    "assign": "zone cmodel assign wipp [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name wipp]"
+  }
+}

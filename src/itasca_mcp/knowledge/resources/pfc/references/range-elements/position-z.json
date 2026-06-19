@@ -1,0 +1,17 @@
+{
+  "name": "position-z",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "position-z <f1> <f2>",
+  "alt_syntax": "position-z <f1> tolerance <f>",
+  "description": "Filter by Z-coordinate range.",
+  "supports_extent": true,
+  "examples": [
+    "range position-z 0 20"
+  ],
+  "search_keywords": [
+    "position-z",
+    "position",
+    "z"
+  ]
+}

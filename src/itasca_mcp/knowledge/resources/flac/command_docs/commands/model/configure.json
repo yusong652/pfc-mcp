@@ -1,0 +1,228 @@
+{
+  "category": "model",
+  "search_keywords": [
+    "configure",
+    "settings"
+  ],
+  "description": "Configure an additional calculation mode. This command allows the user to specify that the model is using calculation modes that either require extra resources or are restricted by the current license. The model configure command can be given at any stage of an analysis, but it must be given before the calculation mode (model solve or model cycle) can be invoked.",
+  "notes": [
+    "Must be given BEFORE model solve or model cycle can be invoked",
+    "Can be given at any stage of an analysis",
+    "Configures calculation modes that require extra resources or license restrictions",
+    "Once configured, the mode remains active for the model",
+    "May affect available memory and computational resources"
+  ],
+  "python_sdk_alternative": {
+    "available": false,
+    "workaround": "itasca.command('model configure fluid') - Python SDK does not provide a direct configure method"
+  },
+  "versions": {
+    "7.0": {
+      "command": "model configure",
+      "syntax": "model configure keyword ...",
+      "keywords": [
+        {
+          "name": "creep",
+          "syntax": "creep",
+          "description": "Creep material analysis*"
+        },
+        {
+          "name": "dynamic",
+          "syntax": "dynamic",
+          "description": "Fully dynamic analysis*"
+        },
+        {
+          "name": "fluid",
+          "syntax": "fluid",
+          "description": "Fluid-flow analysis"
+        },
+        {
+          "name": "imass",
+          "syntax": "imass",
+          "description": "The Itasca Model for Advanced Strain Softening*"
+        },
+        {
+          "name": "plugins",
+          "syntax": "plugins",
+          "description": "C++ user-defined models and/or FISH intrinsic plugins.* FISH plugins can be loaded (but cycling is disabled) without this configuration."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Thermal analysis"
+        }
+      ],
+      "examples": [
+        {
+          "command": "model configure fluid",
+          "description": "Enable fluid-flow analysis mode before solving"
+        },
+        {
+          "command": "model configure dynamic",
+          "description": "Enable dynamic analysis mode before cycling"
+        }
+      ]
+    },
+    "6.0": {
+      "command": "model configure",
+      "syntax": "model configure keyword ...",
+      "keywords": [
+        {
+          "name": "creep",
+          "syntax": "creep",
+          "description": "Creep material analysis*"
+        },
+        {
+          "name": "dynamic",
+          "syntax": "dynamic",
+          "description": "Fully dynamic analysis*"
+        },
+        {
+          "name": "fluid",
+          "syntax": "fluid",
+          "description": "Fluid-flow analysis"
+        },
+        {
+          "name": "imass",
+          "syntax": "imass",
+          "description": "The Itasca Model for Advanced Strain Softening*"
+        },
+        {
+          "name": "plugin",
+          "syntax": "plugin",
+          "description": "C++ user-defined models and/or FISH intrinsic plugins.* FISH plugins can be loaded (but cycling is disabled) without this configuration."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Thermal analysis"
+        }
+      ],
+      "examples": [
+        {
+          "command": "model configure fluid",
+          "description": "Enable fluid-flow analysis mode before solving"
+        },
+        {
+          "command": "model configure dynamic",
+          "description": "Enable dynamic analysis mode before cycling"
+        }
+      ]
+    },
+    "9.0": {
+      "command": "model configure",
+      "syntax": "model configure keyword ...",
+      "keywords": [
+        {
+          "name": "axisymmetry",
+          "syntax": "axisymmetry",
+          "description": "FLAC2D axisymmetric analysis. Currently available for standard mechanical analysis only (no full dynamics)."
+        },
+        {
+          "name": "creep",
+          "syntax": "creep",
+          "description": "Creep material analysis*"
+        },
+        {
+          "name": "dynamic",
+          "syntax": "dynamic",
+          "description": "Fully dynamic analysis*"
+        },
+        {
+          "name": "fluid",
+          "syntax": "fluid",
+          "description": "Fluid-flow analysis"
+        },
+        {
+          "name": "imass",
+          "syntax": "imass",
+          "description": "The Itasca Model for Advanced Strain Softening*"
+        },
+        {
+          "name": "plugins",
+          "syntax": "plugins",
+          "description": "C++ user-defined models and/or FISH intrinsic plugins.* FISH plugins can be loaded (but cycling is disabled) without this configuration."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Thermal analysis"
+        }
+      ],
+      "examples": [
+        {
+          "command": "model configure fluid",
+          "description": "Enable fluid-flow analysis mode before solving"
+        },
+        {
+          "command": "model configure dynamic",
+          "description": "Enable dynamic analysis mode before cycling"
+        }
+      ]
+    },
+    "9.1": {
+      "command": "model configure",
+      "syntax": "model configure keyword ...",
+      "keywords": [
+        {
+          "name": "axisymmetry",
+          "syntax": "axisymmetry",
+          "description": "Enable FLAC2D axisymmetric analysis."
+        },
+        {
+          "name": "creep",
+          "syntax": "creep",
+          "description": "Enable creep material analysis when licensed."
+        },
+        {
+          "name": "dynamic",
+          "syntax": "dynamic",
+          "description": "Enable fully dynamic analysis when licensed."
+        },
+        {
+          "name": "fluid-flow",
+          "syntax": "fluid-flow",
+          "description": "Enable groundwater fluid-flow analysis. This replaces the 9.0 fluid keyword in 9.1 and later."
+        },
+        {
+          "name": "imass",
+          "syntax": "imass",
+          "description": "Enable the Itasca Model for Advanced Strain Softening when licensed."
+        },
+        {
+          "name": "plugins",
+          "syntax": "plugins",
+          "description": "Load C++ user-defined models and FISH intrinsic plugins."
+        },
+        {
+          "name": "thermal",
+          "syntax": "thermal",
+          "description": "Enable thermal analysis."
+        }
+      ],
+      "examples": [
+        {
+          "command": "model configure fluid-flow",
+          "description": "Enable groundwater fluid-flow analysis before solving"
+        },
+        {
+          "command": "model configure dynamic",
+          "description": "Enable dynamic analysis before cycling"
+        }
+      ],
+      "version_notes": [
+        "ITASCA 9.1 and later use model configure fluid-flow for FLAC groundwater flow; 9.0 used model configure fluid.",
+        "The bundled FLAC command block omits common-page keywords for other Itasca products."
+      ],
+      "official_documentation": {
+        "source_urls": [
+          "https://docs.itascacg.com/itasca910/common/kernel/doc/manual/model/commands/cmd_model.configure.html"
+        ]
+      }
+    },
+    "9.3": {
+      "alias_of": "9.1",
+      "reason": "FLAC 9.3+ uses the bundled 9.1 fluid-flow syntax block for this command until an exact 9.3 page is bundled."
+    }
+  }
+}

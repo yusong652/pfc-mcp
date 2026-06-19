@@ -1,0 +1,57 @@
+{
+  "name": "data-sets",
+  "dimension": "mixed",
+  "full_name": "Data Set Workflows",
+  "description": "Data commands manage model-space scalar, vector, tensor, and label data. They are useful for imported measurements, interpreted geology, and overlaying external results with FLAC model plots.",
+  "primary_commands": [
+    "data scalar create",
+    "data scalar import",
+    "data scalar export",
+    "data scalar group",
+    "data vector create",
+    "data vector import",
+    "data tensor create",
+    "data tensor import",
+    "data label create"
+  ],
+  "data_types": [
+    {
+      "type": "scalar",
+      "use": "Point measurements such as pore pressure, elevation, or material index."
+    },
+    {
+      "type": "vector",
+      "use": "Directional measurements such as displacement or velocity vectors."
+    },
+    {
+      "type": "tensor",
+      "use": "Stress/strain tensor measurements or interpreted tensor fields."
+    },
+    {
+      "type": "label",
+      "use": "Text labels for annotations, stations, or named locations."
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Import measured scalar values",
+      "commands": [
+        "data scalar import 'measurements.csv'",
+        "data scalar group 'field-data'"
+      ]
+    },
+    {
+      "name": "Export interpreted data",
+      "commands": [
+        "data vector export 'vectors.csv'",
+        "data tensor export 'stress_tensor.csv'"
+      ]
+    }
+  ],
+  "validation_notes": [
+    "Keep units and coordinate system in the data-set name or metadata.",
+    "Group imported data immediately so later plots and exports remain selectable.",
+    "Use plot data items to confirm imported data align with the model domain."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/flac3dhome.html"
+}

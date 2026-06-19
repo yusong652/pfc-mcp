@@ -1,0 +1,74 @@
+{
+  "name": "apply-modifiers",
+  "dimension": "mixed",
+  "full_name": "Boundary Apply Modifiers",
+  "description": "Modifier keywords that can follow a 'zone face apply' condition value to vary it over space, time, FISH callbacks, or convergence response.",
+  "primary_commands": [
+    "zone face apply"
+  ],
+  "modifiers": [
+    {
+      "keyword": "gradient",
+      "purpose": "Apply a spatial gradient to scalar values.",
+      "notes": [
+        "Always specify an origin when the default origin would make the gradient ambiguous."
+      ]
+    },
+    {
+      "keyword": "fish",
+      "purpose": "Multiply the base value by a FISH function return value each step.",
+      "notes": [
+        "The FISH function should return a scalar or vector compatible with the applied condition."
+      ]
+    },
+    {
+      "keyword": "fish-local",
+      "purpose": "Evaluate a FISH multiplier separately for each face or gridpoint affected by the condition.",
+      "notes": [
+        "For face-based conditions, the function can use the zone pointer and side number."
+      ]
+    },
+    {
+      "keyword": "servo",
+      "purpose": "Control the applied magnitude based on mechanical convergence ratio.",
+      "notes": [
+        "Use ramp to increase load gradually; use reduce to remove a condition gradually."
+      ]
+    },
+    {
+      "keyword": "symmetry",
+      "purpose": "Help local-axis boundary logic respect specified symmetry planes.",
+      "notes": [
+        "Most useful for velocity, acceleration, and reaction conditions based on local axes."
+      ]
+    },
+    {
+      "keyword": "table",
+      "purpose": "Vary a condition through a table-controlled multiplier.",
+      "notes": [
+        "Useful for staged loading, histories, hydrographs, and dynamic input records."
+      ]
+    },
+    {
+      "keyword": "vary",
+      "purpose": "Apply a per-component variation profile to a condition value.",
+      "notes": [
+        "Validated against the FLAC2D 9.0 binary modifier set after 'zone face apply <kw> <value> ?'."
+      ]
+    }
+  ],
+  "binary_validated_modifier_set": [
+    "fish",
+    "fish-local",
+    "gradient",
+    "range",
+    "servo",
+    "table",
+    "vary"
+  ],
+  "notes_general": [
+    "'range' is treated as a modifier-position keyword by the parser (it follows the value, like the other modifiers).",
+    "'symmetry' is accepted only after local-axis conditions (velocity-local / -normal / -tangential, reaction-local / -normal / -tangential, acceleration-local / -normal / -tangential). It is not a universal modifier."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.apply.html"
+}

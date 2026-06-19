@@ -1,0 +1,25 @@
+{
+  "type": "sketch_and_building_blocks_reference",
+  "description": "Sketch and building-block references for FLAC model generation.",
+  "items": [
+    {
+      "name": "sketch-workflow",
+      "dimension": "mixed",
+      "file": "sketch-workflow.json",
+      "description": "Sketch set, point, edge, block, mesh, and zone-generation workflow.",
+      "common_use": "Generate FLAC2D zones directly or prepare FLAC3D extrusion from a 2D sketch."
+    },
+    {
+      "name": "building-blocks",
+      "dimension": "3D",
+      "file": "building-blocks.json",
+      "description": "FLAC3D-only structured building-block workflow.",
+      "common_use": "Build and refine structured 3D meshes before generating zones."
+    }
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/sketch/sketch.html",
+    "https://docs.itascacg.com/itasca900/flac3d/extruder/doc/manual/sketch_manual/sketch_commands.html",
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/buildingblocks/buildingblocks.html"
+  ]
+}

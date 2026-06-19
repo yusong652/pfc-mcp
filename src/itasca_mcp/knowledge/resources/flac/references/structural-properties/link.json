@@ -1,0 +1,49 @@
+{
+  "name": "link",
+  "dimension": "mixed",
+  "full_name": "Structural Element Link Properties",
+  "description": "Structural links define how structural nodes attach to zones or other structural objects. Link properties and attachment modes control normal/shear transfer and sliding behavior.",
+  "primary_commands": [
+    "structure link attach",
+    "structure link create",
+    "structure link delete",
+    "structure link property",
+    "structure link list",
+    "structure link slide"
+  ],
+  "property_groups": [
+    {
+      "group": "per-DOF link property selector",
+      "properties": [
+        "x",
+        "y",
+        "rotation"
+      ],
+      "notes": [
+        "'structure link property' is followed by a DOF selector ('x', 'y', or 'rotation' for FLAC2D), then per-DOF sub-keywords like 'attach', 'model', 'area', 'stiffness', etc.",
+        "FLAC2D nodes have 3 DOFs: x, y, rotation. FLAC3D adds 'z', 'rotation-x', 'rotation-y' / 'rotation-z'.",
+        "Probe live with 'structure link property x ?' to see per-DOF sub-keywords."
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "name": "attachment",
+      "description": "Defines the target object and degree-of-freedom relationship for a structural node."
+    },
+    {
+      "name": "link model",
+      "description": "Defines the mechanical response used by a link in each degree of freedom."
+    },
+    {
+      "name": "sliding",
+      "description": "Controls whether the attachment location can migrate during large-strain motion."
+    }
+  ],
+  "workflow_hints": [
+    "Most structure creation commands create required links automatically.",
+    "Use explicit link commands when you need nondefault attachment behavior.",
+    "List links after structure creation when troubleshooting unexpected support-grid interaction."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/formulation/formulation.html"
+}

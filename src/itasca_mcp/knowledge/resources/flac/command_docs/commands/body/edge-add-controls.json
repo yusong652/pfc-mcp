@@ -1,0 +1,35 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "edge",
+    "add",
+    "controls",
+    "building-blocks",
+    "add-controls"
+  ],
+  "description": "Add control points to edges. Control points are added on all edges in the current building blocks set if < range > is not supplied.",
+  "notes": [
+    "Requires a current building-blocks set: run 'building-blocks set create <name>' then 'building-blocks set select <name>' before any block/edge/face/point operation; otherwise FLAC rejects the command with 'Unused extra parameter'."
+  ],
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks edge add-controls",
+      "syntax": "building-blocks edge add-controls keyword [range]",
+      "keywords": [
+        {
+          "name": "count",
+          "syntax": "<i>",
+          "description": "Bare positional integer. Add exactly i control points per each edge ( i must be a positive integer no greater than 20). Added control points will be evenly spaced."
+        },
+        {
+          "name": "use-size",
+          "syntax": "use-size",
+          "description": "Add a number of control points equal to the number of zones on each edge (see building-blocks edge size )."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "automatic",
+    "zone",
+    "building-blocks",
+    "automatic-zone"
+  ],
+  "description": "Specify a automatic zoning method.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set automatic-zone",
+      "syntax": "building-blocks set automatic-zone keyword",
+      "keywords": [
+        {
+          "name": "extent",
+          "syntax": "extent <i>",
+          "description": "Specify zoning by setting i zones to be created across the largest extent of the set."
+        },
+        {
+          "name": "length",
+          "syntax": "length <f>",
+          "description": "Specify zoning by setting a fixed length of f for all zones generated from the set ( f must be positive)."
+        },
+        {
+          "name": "total",
+          "syntax": "total <i>",
+          "description": "Specify zoning by setting the total number of zones in the set to i ."
+        }
+      ]
+    }
+  }
+}

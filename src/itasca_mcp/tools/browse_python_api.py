@@ -7,6 +7,7 @@ from pydantic import Field
 
 from itasca_mcp.contracts import build_docs_data, build_error, build_ok
 from itasca_mcp.knowledge.python_api import APILoader
+from itasca_mcp.utils import SoftwareParam, normalize_software_value
 
 
 def register(mcp: FastMCP) -> None:
@@ -14,6 +15,7 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     def pfc_browse_python_api(
+        software: SoftwareParam,
         api: str | None = Field(
             None,
             description=(
@@ -31,29 +33,31 @@ def register(mcp: FastMCP) -> None:
     ) -> dict[str, Any]:
         """Browse PFC Python SDK documentation by path (like glob + cat)."""
         normalized = _normalize_api_path(api)
+        sw = normalize_software_value(software)
 
         if not normalized:
-            return build_ok(_browse_root())
+            return build_ok(_browse_root(sw))
 
         if normalized == "itasca":
-            return _wrap_payload(_browse_module("itasca"))
+            return _wrap_payload(_browse_module("itasca", sw))
 
-        parsed = _parse_api_path(normalized)
+        parsed = _parse_api_path(normalized, sw)
 
         if parsed["type"] == "error":
-            return _wrap_payload(_browse_with_fallback(parsed, normalized))
+            return _wrap_payload(_browse_with_fallback(parsed, normalized, sw))
 
         if parsed["type"] == "module":
-            payload = _browse_module(parsed["module_path"])
+            payload = _browse_module(parsed["module_path"], sw)
             return _wrap_payload(payload)
         if parsed["type"] == "function":
-            payload = _browse_function(parsed["module_path"], parsed["name"])
+            payload = _browse_function(parsed["module_path"], parsed["name"], sw)
             return _wrap_payload(payload)
         if parsed["type"] == "object":
             payload = _browse_object(
                 parsed["module_path"],
                 parsed["name"],
                 parsed.get("display_name"),
+                software=sw,
             )
             return _wrap_payload(payload)
         if parsed["type"] == "method":
@@ -62,6 +66,7 @@ def register(mcp: FastMCP) -> None:
                 parsed["object_name"],
                 parsed["name"],
                 parsed.get("display_name"),
+                software=sw,
             )
             return _wrap_payload(payload)
 
@@ -78,7 +83,7 @@ def _normalize_api_path(api: str | None) -> str:
     return api.strip()
 
 
-def _parse_api_path(api: str) -> dict[str, Any]:
+def _parse_api_path(api: str, software: str) -> dict[str, Any]:
     if not api.startswith("itasca"):
         return {
             "type": "error",
@@ -87,7 +92,7 @@ def _parse_api_path(api: str) -> dict[str, Any]:
         }
 
     parts = api.split(".")
-    index = APILoader.load_index()
+    index = APILoader.load_index(software=software)
     modules = index.get("modules", {})
     objects = index.get("objects", {})
 
@@ -183,8 +188,8 @@ def _extract_function_names(functions: list[Any]) -> list[str]:
     return names
 
 
-def _browse_root() -> dict[str, Any]:
-    index = APILoader.load_index()
+def _browse_root(software: str) -> dict[str, Any]:
+    index = APILoader.load_index(software=software)
     modules = index.get("modules", {})
     objects = index.get("objects", {})
 
@@ -220,13 +225,14 @@ def _browse_root() -> dict[str, Any]:
             "count": len(entries),
             "total_modules": len(module_items),
             "total_objects": len(object_items),
+            "software": software,
         },
     )
 
 
-def _browse_module(module_path: str) -> dict[str, Any]:
+def _browse_module(module_path: str, software: str) -> dict[str, Any]:
     index_key = _path_to_index_key(module_path)
-    module_data = APILoader.load_module(index_key)
+    module_data = APILoader.load_module(index_key, software=software)
 
     if not module_data:
         return {
@@ -236,10 +242,10 @@ def _browse_module(module_path: str) -> dict[str, Any]:
                 "code": "module_not_found",
                 "message": f"Module not found: {module_path}",
             },
-            "input": {"module_path": module_path},
+            "input": {"module_path": module_path, "software": software},
         }
 
-    index = APILoader.load_index()
+    index = APILoader.load_index(software=software)
     objects = index.get("objects", {})
     related_objects = []
     for obj_name, obj_data in objects.items():
@@ -263,12 +269,12 @@ def _browse_module(module_path: str) -> dict[str, Any]:
     )
 
 
-def _browse_function(module_path: str, func_name: str) -> dict[str, Any]:
+def _browse_function(module_path: str, func_name: str, software: str) -> dict[str, Any]:
     index_key = _path_to_index_key(module_path)
-    func_doc = APILoader.load_function(index_key, func_name)
+    func_doc = APILoader.load_function(index_key, func_name, software=software)
 
     if not func_doc:
-        module_data = APILoader.load_module(index_key) or {}
+        module_data = APILoader.load_module(index_key, software=software) or {}
         available_functions = _extract_function_names(module_data.get("functions", []))
         return {
             "source": "python_api",
@@ -277,7 +283,7 @@ def _browse_function(module_path: str, func_name: str) -> dict[str, Any]:
                 "code": "function_not_found",
                 "message": f"Function '{func_name}' not found in {module_path}",
             },
-            "input": {"module_path": module_path, "function": func_name},
+            "input": {"module_path": module_path, "function": func_name, "software": software},
             "available_functions": available_functions,
         }
 
@@ -295,12 +301,14 @@ def _browse_function(module_path: str, func_name: str) -> dict[str, Any]:
     )
 
 
-def _browse_object(module_path: str, object_name: str, display_name: str | None = None) -> dict[str, Any]:
-    object_doc = APILoader.load_object(object_name)
+def _browse_object(
+    module_path: str, object_name: str, display_name: str | None = None, *, software: str
+) -> dict[str, Any]:
+    object_doc = APILoader.load_object(object_name, software=software)
     shown_name = display_name or object_name
 
     if not object_doc:
-        index = APILoader.load_index()
+        index = APILoader.load_index(software=software)
         available_objects = sorted(index.get("objects", {}).keys())
         return {
             "source": "python_api",
@@ -309,7 +317,7 @@ def _browse_object(module_path: str, object_name: str, display_name: str | None 
                 "code": "object_not_found",
                 "message": f"Object not found: {shown_name}",
             },
-            "input": {"module_path": module_path, "object": shown_name},
+            "input": {"module_path": module_path, "object": shown_name, "software": software},
             "available_objects": available_objects,
         }
 
@@ -333,12 +341,14 @@ def _browse_method(
     object_name: str,
     method_name: str,
     display_name: str | None = None,
+    *,
+    software: str,
 ) -> dict[str, Any]:
-    method_doc = APILoader.load_method(object_name, method_name)
+    method_doc = APILoader.load_method(object_name, method_name, software=software)
     shown_name = display_name or object_name
 
     if not method_doc:
-        object_doc = APILoader.load_object(object_name) or {}
+        object_doc = APILoader.load_object(object_name, software=software) or {}
         method_names = _extract_function_names(object_doc.get("methods", []))
         return {
             "source": "python_api",
@@ -352,6 +362,7 @@ def _browse_method(
                 "object": shown_name,
                 "actual_object": object_name,
                 "method": method_name,
+                "software": software,
             },
             "available_methods": method_names,
         }
@@ -372,11 +383,11 @@ def _browse_method(
     )
 
 
-def _browse_with_fallback(parsed: dict[str, Any], requested_api: str) -> dict[str, Any]:
+def _browse_with_fallback(parsed: dict[str, Any], requested_api: str, software: str) -> dict[str, Any]:
     error_msg = parsed.get("error", "Unknown error")
     fallback_path = parsed.get("fallback_path", "")
 
-    index = APILoader.load_index()
+    index = APILoader.load_index(software=software)
     modules = index.get("modules", {})
     available_modules = sorted(_format_module_path(module_key) for module_key in modules)
 
@@ -387,7 +398,7 @@ def _browse_with_fallback(parsed: dict[str, Any], requested_api: str) -> dict[st
             "code": "invalid_path",
             "message": error_msg,
         },
-        "input": {"api": requested_api},
+        "input": {"api": requested_api, "software": software},
         "fallback_path": fallback_path or "itasca",
         "available_modules": available_modules,
     }

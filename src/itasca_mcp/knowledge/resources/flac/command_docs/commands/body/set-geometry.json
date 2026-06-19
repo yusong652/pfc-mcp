@@ -1,0 +1,35 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "geometry",
+    "building-blocks"
+  ],
+  "description": "Associate a geometry set with the current set. Geometric sets may be added, removed, or cleared for use with the current building blocks set.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set geometry",
+      "syntax": "building-blocks set geometry keyword",
+      "keywords": [
+        {
+          "name": "add",
+          "syntax": "add <s>",
+          "description": "Add a geometric set with name s to be associated with current building blocks set."
+        },
+        {
+          "name": "clear",
+          "syntax": "clear",
+          "description": "Clear the list of geometric sets associated with the current building blocks set."
+        },
+        {
+          "name": "remove",
+          "syntax": "remove <s>",
+          "description": "Remove the geometric set with name s from the list of geometric sets associated with the current building blocks set."
+        }
+      ]
+    }
+  }
+}

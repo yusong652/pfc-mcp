@@ -1,0 +1,22 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "block",
+    "hide",
+    "building-blocks"
+  ],
+  "description": "Set the blocks to be hide or not.",
+  "notes": [
+    "Requires a current building-blocks set: run 'building-blocks set create <name>' then 'building-blocks set select <name>' before any block/edge/face/point operation; otherwise FLAC rejects the command with 'Unused extra parameter'."
+  ],
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks block hide",
+      "syntax": "building-blocks block hide <b>[range]",
+      "keywords": []
+    }
+  }
+}

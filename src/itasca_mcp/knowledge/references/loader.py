@@ -18,7 +18,7 @@ import json
 from functools import lru_cache
 from typing import Any, cast
 
-from itasca_mcp.knowledge.config import PFC_REFERENCES_ROOT
+from itasca_mcp.knowledge.config import references_root
 
 
 class ReferenceLoader:
@@ -30,8 +30,8 @@ class ReferenceLoader:
     """
 
     @staticmethod
-    @lru_cache(maxsize=1)
-    def load_index() -> dict[str, Any]:
+    @lru_cache(maxsize=8)
+    def load_index(*, software: str) -> dict[str, Any]:
         """Load the main references index file.
 
         Returns:
@@ -46,7 +46,7 @@ class ReferenceLoader:
             >>> "contact-models" in categories
             True
         """
-        index_path = PFC_REFERENCES_ROOT / "index.json"
+        index_path = references_root(software) / "index.json"
         if not index_path.exists():
             return {}
 
@@ -54,7 +54,7 @@ class ReferenceLoader:
             return cast(dict[str, Any], json.load(f))
 
     @staticmethod
-    def load_category_index(category: str) -> dict[str, Any] | None:
+    def load_category_index(category: str, *, software: str) -> dict[str, Any] | None:
         """Load index for a specific reference category.
 
         Args:
@@ -71,7 +71,7 @@ class ReferenceLoader:
             >>> len(index["elements"])
             24
         """
-        refs_index = ReferenceLoader.load_index()
+        refs_index = ReferenceLoader.load_index(software=software)
         categories = refs_index.get("categories", {})
 
         if category not in categories:
@@ -82,7 +82,7 @@ class ReferenceLoader:
         if not index_file:
             return None
 
-        index_path = PFC_REFERENCES_ROOT / index_file
+        index_path = references_root(software) / index_file
         if not index_path.exists():
             return None
 
@@ -90,7 +90,7 @@ class ReferenceLoader:
             return cast(dict[str, Any], json.load(f))
 
     @staticmethod
-    def load_item_doc(category: str, item_name: str) -> dict[str, Any] | None:
+    def load_item_doc(category: str, item_name: str, *, software: str) -> dict[str, Any] | None:
         """Load documentation for a specific reference item.
 
         Args:
@@ -108,7 +108,7 @@ class ReferenceLoader:
             >>> doc["name"]
             "cylinder"
         """
-        refs_index = ReferenceLoader.load_index()
+        refs_index = ReferenceLoader.load_index(software=software)
         categories = refs_index.get("categories", {})
 
         if category not in categories:
@@ -118,13 +118,13 @@ class ReferenceLoader:
         directory = cat_data.get("directory", category)
 
         # Try file-based item first: {category}/{item}.json
-        doc_path = PFC_REFERENCES_ROOT / directory / f"{item_name}.json"
+        doc_path = references_root(software) / directory / f"{item_name}.json"
         if doc_path.exists():
             with open(doc_path, encoding="utf-8") as f:
                 return cast(dict[str, Any], json.load(f))
 
         # Try directory-based item: {category}/{item}/index.json
-        dir_index = PFC_REFERENCES_ROOT / directory / item_name / "index.json"
+        dir_index = references_root(software) / directory / item_name / "index.json"
         if dir_index.exists():
             with open(dir_index, encoding="utf-8") as f:
                 return cast(dict[str, Any], json.load(f))
@@ -132,23 +132,23 @@ class ReferenceLoader:
         return None
 
     @staticmethod
-    def is_directory_item(category: str, item_name: str) -> bool:
+    def is_directory_item(category: str, item_name: str, *, software: str) -> bool:
         """Check if an item uses directory-based layout (supports sub-items).
 
         Returns:
             True if {category}/{item}/index.json exists, False otherwise.
         """
-        refs_index = ReferenceLoader.load_index()
+        refs_index = ReferenceLoader.load_index(software=software)
         categories = refs_index.get("categories", {})
         if category not in categories:
             return False
         category_meta = categories[category]
         raw_directory = category_meta.get("directory") if isinstance(category_meta, dict) else None
         directory = raw_directory if isinstance(raw_directory, str) and raw_directory else category
-        return (PFC_REFERENCES_ROOT / directory / item_name / "index.json").exists()
+        return (references_root(software) / directory / item_name / "index.json").exists()
 
     @staticmethod
-    def load_sub_item_doc(category: str, item_name: str, sub_item: str) -> dict[str, Any] | None:
+    def load_sub_item_doc(category: str, item_name: str, sub_item: str, *, software: str) -> dict[str, Any] | None:
         """Load documentation for a sub-item within a directory-based item.
 
         Args:
@@ -164,13 +164,13 @@ class ReferenceLoader:
             >>> doc["name"]
             "color-by"
         """
-        refs_index = ReferenceLoader.load_index()
+        refs_index = ReferenceLoader.load_index(software=software)
         categories = refs_index.get("categories", {})
         if category not in categories:
             return None
         directory = categories[category].get("directory", category)
 
-        doc_path = PFC_REFERENCES_ROOT / directory / item_name / f"{sub_item}.json"
+        doc_path = references_root(software) / directory / item_name / f"{sub_item}.json"
         if not doc_path.exists():
             return None
 
@@ -192,7 +192,7 @@ class ReferenceLoader:
         return bool(availability.get(version, False))
 
     @staticmethod
-    def get_item_list(category: str, version: str | None = None) -> list[dict[str, Any]]:
+    def get_item_list(category: str, version: str | None = None, *, software: str) -> list[dict[str, Any]]:
         """Get list of items in a reference category.
 
         Args:
@@ -212,7 +212,7 @@ class ReferenceLoader:
             >>> len(items)
             24
         """
-        index = ReferenceLoader.load_category_index(category)
+        index = ReferenceLoader.load_category_index(category, software=software)
         if not index:
             return []
 
@@ -228,12 +228,12 @@ class ReferenceLoader:
         return [i for i in items if ReferenceLoader._entry_available(i, version)]
 
     @staticmethod
-    def item_availability(category: str, item_name: str) -> dict[str, bool] | None:
+    def item_availability(category: str, item_name: str, *, software: str) -> dict[str, bool] | None:
         """Return an item's availability map, or None if version-agnostic.
 
         Used by the browse tool to gate a model behind a requested version.
         """
-        doc = ReferenceLoader.load_item_doc(category, item_name)
+        doc = ReferenceLoader.load_item_doc(category, item_name, software=software)
         if not doc:
             return None
         availability = doc.get("availability")

@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "zone",
+    "length",
+    "sketch",
+    "zone-length"
+  ],
+  "description": "Set the length of zones on the segments. If the specified zone length causes the number of zones on the segment to exceed the limits (1-10000), the limit value is used for the segment.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment zone-length",
+      "syntax": "sketch segment zone-length <f>[range]",
+      "keywords": []
+    }
+  }
+}

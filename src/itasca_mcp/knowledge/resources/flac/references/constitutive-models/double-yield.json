@@ -1,0 +1,162 @@
+{
+  "model": "double-yield",
+  "full_name": "Double-Yield Model",
+  "search_keywords": [
+    "double",
+    "yield",
+    "double-yield",
+    "constitutive",
+    "bulk-maximum",
+    "cohesion",
+    "dilation",
+    "friction",
+    "multiplier",
+    "pressure-cap",
+    "shear-maximum",
+    "tension",
+    "flag-brittle",
+    "table-cohesion",
+    "table-dilation",
+    "table-friction",
+    "table-pressure-cap",
+    "table-tension",
+    "bulk",
+    "poisson",
+    "shear",
+    "strain-shear-plastic",
+    "strain-tensile-plastic",
+    "strain-volumetric-plastic",
+    "young"
+  ],
+  "description": "Permanent volume changes caused by the application of isotropic pressure are taken into account in this model by including, in addition to the shear and tensile failure envelopes in the strain-softening/hardening model, a volumetric yield surface (or “cap”). For simplicity, the cap surface, defined by the “cap pressure” \\(p_c >\\) 0, is independent of shear stress; it consists of a vertical line on a plot of shear stress versus mean stress. The hardening behavior of the cap pressure is activated by volumetric plastic strain, and follows a piecewise-linear law prescribed in a user-supplied table",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'double-yield' zone constitutive model. Assign the model with 'zone cmodel assign double-yield [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name double-yield]'.",
+      "properties": [
+        {
+          "keyword": "bulk-maximum",
+          "symbol": "K_{max}",
+          "description": "maximum elastic bulk modulus, K_{max}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "angle of internal friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "multiplier",
+          "symbol": "R",
+          "description": "multiplier on current plastic cap modulus to give elastic bulk and shear moduli, R. The default is 5.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-cap",
+          "symbol": "p_c",
+          "description": "current intersection of volumetric yield surface with pressure axis, p_c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-maximum",
+          "symbol": "G_{max}",
+          "description": "maximum elastic shear modulus, G_{max}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "table-cohesion",
+          "description": "name of the table relating cohesion to plastic shear strain. The default is a null string.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-dilation",
+          "description": "name of the table relating dilation angle to plastic shear strain. The default is a null string.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-friction",
+          "description": "name of the table relating friction angle to plastic shear strain. The default is a null string.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-pressure-cap",
+          "description": "name of the table relating cap pressure to plastic volume strain. The default is a null string.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "description": "name of the table relating tensile limit to plastic tensile strain. The default is a null string.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "current elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "current Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "current elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "description": "accumulated plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic",
+          "description": "accumulated plastic tensile strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-volumetric-plastic",
+          "description": "accumulated plastic volumetric strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "current elastic Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/doubley/doc/modeldoubley.html",
+  "usage": {
+    "assign": "zone cmodel assign double-yield [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name double-yield]"
+  }
+}

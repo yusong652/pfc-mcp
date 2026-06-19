@@ -1,0 +1,25 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "mesh",
+    "list",
+    "sketch"
+  ],
+  "description": "Display information about meshing settings.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch mesh list",
+      "syntax": "sketch mesh list keyword",
+      "keywords": [
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "Print detailed information about all current meshing parameters."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "interface",
+    "permeability",
+    "zone"
+  ],
+  "description": "Interfaces are permeable by default. An interface can be made impermeable by setting permeability off .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone interface permeability",
+      "syntax": "zone interface <s > permeability b <range>",
+      "description": "Interfaces are permeable by default. An interface can be made impermeable by setting permeability off.",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneinterface/cmd_zone.interface.permeability.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone interface permeability",
+      "syntax": "zone interface [<s>] permeability <b>[range]"
+    }
+  }
+}

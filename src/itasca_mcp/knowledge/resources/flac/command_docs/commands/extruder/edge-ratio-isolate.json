@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "ratio",
+    "isolate",
+    "sketch",
+    "ratio-isolate"
+  ],
+  "description": "This keyword only applies to edges that form regular (3- or 4-sided) blocks.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge ratio-isolate",
+      "syntax": "sketch edge ratio-isolate <b>[range]",
+      "keywords": []
+    }
+  }
+}

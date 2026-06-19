@@ -8,7 +8,14 @@ from pydantic import Field
 from itasca_mcp.contracts import build_docs_data, build_ok
 from itasca_mcp.knowledge.commands import CommandLoader
 from itasca_mcp.knowledge.query import CommandSearch
-from itasca_mcp.utils import CommandDocVersion, SearchLimit, SearchQuery, normalize_command_doc_version
+from itasca_mcp.utils import (
+    CommandDocVersion,
+    SearchLimit,
+    SearchQuery,
+    SoftwareParam,
+    normalize_command_doc_version,
+    normalize_software_value,
+)
 
 
 def register(mcp: FastMCP) -> None:
@@ -17,6 +24,7 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool()
     def pfc_query_command(
         query: SearchQuery,
+        software: SoftwareParam,
         limit: SearchLimit = 10,
         version: CommandDocVersion = Field(
             CommandDocVersion.V7_0,
@@ -37,7 +45,8 @@ def register(mcp: FastMCP) -> None:
         - pfc_query_python_api: Search Python SDK by keywords
         """
         version_value = normalize_command_doc_version(version)
-        results = CommandSearch.search_commands_only(query, top_k=limit, version=version_value)
+        sw = normalize_software_value(software)
+        results = CommandSearch.search_commands_only(query, top_k=limit, version=version_value, software=sw)
         matches: list[dict[str, Any]] = []
         for result in results:
             metadata = result.document.metadata or {}
@@ -61,11 +70,12 @@ def register(mcp: FastMCP) -> None:
             summary={
                 "count": len(matches),
                 "version": version_value,
+                "software": sw,
             },
         )
 
         if not matches:
-            categories = sorted(CommandLoader.load_index().get("categories", {}).keys())
+            categories = sorted(CommandLoader.load_index(software=sw).get("categories", {}).keys())
             payload["summary"]["hints"] = [
                 "Try broader keywords (for example: create, property, solve).",
                 "Try category + action (for example: ball create, contact property).",

@@ -1,0 +1,585 @@
+{
+  "module": "itasca.zonearray",
+  "description": "Array interface for FLAC3D zones.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.zonearray.html",
+  "functions": [
+    {
+      "name": "aspect",
+      "signature": "itasca.zonearray.aspect() -> array double{nzone}",
+      "description": "Return an array of the zone aspect ratio.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "condition",
+      "signature": "itasca.zonearray.condition() -> array double{nzone}",
+      "description": "Return an array of the zone condition number. This is a general value indication how geometrically well formed the zone is. A value of 1.0 indicates a perfect zone. A value of 0.0 indicates an unusable zone.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "density",
+      "signature": "itasca.zonearray.density() -> array float{zone}",
+      "description": "Get a numpy array of the zone density.",
+      "returns": {
+        "type": "array float{zone}"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.zonearray.extra(slot: int) -> array float{zone} or float{zone,3}",
+      "description": "Get the zone extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{zone} or float{zone,3}"
+      }
+    },
+    {
+      "name": "face_areas",
+      "signature": "itasca.zonearray.face_areas() -> array double{nzone,6} (3D ONLY)",
+      "description": "Return an array of face area.",
+      "returns": {
+        "type": "array double{nzone,6} (3D ONLY)"
+      }
+    },
+    {
+      "name": "faces",
+      "signature": "itasca.zonearray.faces() -> array int{nzone,6,4} in 3D and array int{nzone,4,2} in 2D",
+      "description": "Return an array containing the gridpoint indices of each face of each zone. Indices of -1 indicate a nonexistent face. The indicies are relative to the ordering of the itasca.gridpointarray return values.",
+      "returns": {
+        "type": "array int{nzone,6,4} in 3D and array int{nzone,4,2} in 2D"
+      }
+    },
+    {
+      "name": "fill_density",
+      "signature": "itasca.zonearray.fill_density(data: array float{zone}) -> None",
+      "description": "Fill an existing array with the zone density. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{zone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.zonearray.fill_pos(data: array float{zone,3}) -> None",
+      "description": "Fill an existing array with the zone centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{zone",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "flow",
+      "signature": "itasca.zonearray.flow() -> array double{nzone,3} in 3D and array double{nzone,2} in 2D",
+      "description": "Return an array of the zone specific discharge vectors.",
+      "returns": {
+        "type": "array double{nzone,3} in 3D and array double{nzone,2} in 2D"
+      }
+    },
+    {
+      "name": "fluid_prop",
+      "signature": "itasca.zonearray.fluid_prop(prop_name: str) -> array double{nzone}",
+      "description": "Return an array of the fluid property `prop_name`.",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "gridpoints",
+      "signature": "itasca.zonearray.gridpoints() -> array int{nzone,8} in 3D and array int{nzone,4} in 2D",
+      "description": "Return an array containing the gridpoint indices of each zone. Indices of -1 indicate a nonexistent gridpoint. The indices are relative to the ordering of the itasca.gridpointarray return values.",
+      "returns": {
+        "type": "array int{nzone,8} in 3D and array int{nzone,4} in 2D"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.zonearray.ids() -> array int{zone}",
+      "description": "Get the zone ids as an array.",
+      "returns": {
+        "type": "array int{zone}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.zonearray.in_group(group_name: str, slot=\"default\") -> array bool{nzone}",
+      "description": "Return zone group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "array bool{nzone}"
+      }
+    },
+    {
+      "name": "live_mechanical",
+      "signature": "itasca.zonearray.live_mechanical() -> array bool{nzone}",
+      "description": "Return an array of True/False values, True values correspond to zones which have an active mechanical model.",
+      "returns": {
+        "type": "array bool{nzone}"
+      }
+    },
+    {
+      "name": "neighbors",
+      "signature": "itasca.zonearray.neighbors() -> array int{nzone,6} in 3D and array int{nzone,4} in 2D",
+      "description": "Return an array containing the indices of the zone adjacent to each zone. Indices of -1 indicate nonexistent neighbor zone. The indicies are relative to the ordering of the itasca.zonearray return values.",
+      "returns": {
+        "type": "array int{nzone,6} in 3D and array int{nzone,4} in 2D"
+      }
+    },
+    {
+      "name": "ortho",
+      "signature": "itasca.zonearray.ortho() -> array double{nzone}",
+      "description": "Return an array of the zone orthogonality.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "overlay_stresses",
+      "signature": "itasca.zonearray.overlay_stresses() -> array double{nzone,2,5,6} and array double{nzone,2,2,6} in 2D",
+      "description": "Get a multidimensional numpy array of the zone overlay stresses. Nonexistent tets have a stress of zero. The return value is a 4 dimentional array with sub-arrays: zone, overlay, tet (3D) or triangle (2D), stress tensor components. The tensor component ordering is xx,yy,zz,xy,yz,xz.",
+      "returns": {
+        "type": "array double{nzone,2,5,6} and array double{nzone,2,2,6} in 2D"
+      }
+    },
+    {
+      "name": "planarity",
+      "signature": "itasca.zonearray.planarity() -> array double{nzone} (3D ONLY)",
+      "description": "Return an array of a measure of how planar the quadrilateral faces of a zone are. A value of 0 means that all faces are perfectly planar. The greater this number, the more nonplanar the faces are.",
+      "returns": {
+        "type": "array double{nzone} (3D ONLY)"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.zonearray.pos() -> array float{zone,3}",
+      "description": "Get a numpy array of the zone centroid location.",
+      "returns": {
+        "type": "array float{zone,3}"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "itasca.zonearray.pp() -> array double{nzone}",
+      "description": "Return an array of the average pore pressure.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "prop_scalar",
+      "signature": "itasca.zonearray.prop_scalar(prop_name: str, fill_value=0.0) -> array double{nzone}",
+      "description": "Return an array of the property `prop_name` for each zone. Only properties of type double are supported by this function. If a property is not specified in a zone, `fill_value` is given for that zone. `fill_value` is an optional argument and defaults to zero.",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "fill_value",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "set_density",
+      "signature": "itasca.zonearray.set_density(data: array float{zone}) -> None",
+      "description": "Set the zone density from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{zone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.zonearray.set_extra(slot: int, data: array float{zone} or float{zone,3}) -> None",
+      "description": "Set the zone extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{zone} or float{zone",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_prop",
+      "signature": "itasca.zonearray.set_fluid_prop(prop_name: str, data: array double{nzone}) -> None",
+      "description": "Set the fluid property `prop_name` with values from an array.",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.zonearray.set_group(membership: array bool{nzone}, group_name: str, slot=\"default\") -> None",
+      "description": "Set zone group from an array. Where membership True set the corresponding zone to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{nzone}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp",
+      "signature": "itasca.zonearray.set_pp(array double{nzone}) -> None",
+      "description": "Set the average pore pressure.",
+      "parameters": [
+        {
+          "name": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop_scalar",
+      "signature": "itasca.zonearray.set_prop_scalar(prop_name: str, array) -> None",
+      "description": "Set the property `prop_name` of each zone. Only properties of type double or vec3 are supported. The input array should be shape (nzone,).",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "array",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_stress",
+      "signature": "itasca.zonearray.set_stress(array double{nzone,3,3}) -> None",
+      "description": "Set the zone stresses.",
+      "parameters": [
+        {
+          "name": "array double{nzone",
+          "required": true
+        },
+        {
+          "name": "3",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_stress_flat",
+      "signature": "itasca.zonearray.set_stress_flat(array double{nzone,6}) -> None",
+      "description": "Set the zone stresses. Component ordering in the array should xx,yy,zz,xy,yz,xz.",
+      "parameters": [
+        {
+          "name": "array double{nzone",
+          "required": true
+        },
+        {
+          "name": "6}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_work_elastic_shear",
+      "signature": "itasca.zonearray.set_work_elastic_shear(array double{nzone}) -> None",
+      "description": "Set the shear elastic work dissipated.",
+      "parameters": [
+        {
+          "name": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_work_elastic_vol",
+      "signature": "itasca.zonearray.set_work_elastic_vol(array double{nzone}) -> None",
+      "description": "Set the volumetric elastic work dissipated.",
+      "parameters": [
+        {
+          "name": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_work_plastic_shear",
+      "signature": "itasca.zonearray.set_work_plastic_shear(array double{nzone}) -> None",
+      "description": "Set the shear plastic work dissipated.",
+      "parameters": [
+        {
+          "name": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_work_plastic_vol",
+      "signature": "itasca.zonearray.set_work_plastic_vol(array double{nzone}) -> None",
+      "description": "Set the volumetric plastic work dissipated.",
+      "parameters": [
+        {
+          "name": "array double{nzone}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "state",
+      "signature": "itasca.zonearray.state(average: bool) -> array int{nzones}",
+      "description": "Get the current plasticity state indicators of all zones. The argument average, if true, indicates that the state indicator will be set if 50% or more of the volume averaged tetra/triangles have that indicator. If false then the state indicator will be set if any tetra/triangles in the zone have that indicator. For more information, see `zone.state` FISH function.",
+      "parameters": [
+        {
+          "name": "average",
+          "type": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array int{nzones}"
+      }
+    },
+    {
+      "name": "strain",
+      "signature": "itasca.zonearray.strain() -> array double{nzone,3,3}",
+      "description": "Get an array containing the zone strain-increment tensor.",
+      "returns": {
+        "type": "array double{nzone,3,3}"
+      }
+    },
+    {
+      "name": "strain_flat",
+      "signature": "itasca.zonearray.strain_flat() -> array double{nzone,6}",
+      "description": "Get an array of the zone strains. The return value is a 2D array where the component ordering is xx,yy,zz,xy,yz,xz.",
+      "returns": {
+        "type": "array double{nzone,6}"
+      }
+    },
+    {
+      "name": "stress",
+      "signature": "itasca.zonearray.stress() -> array double{nzone,3,3}",
+      "description": "Get an array of the zone stresses.",
+      "returns": {
+        "type": "array double{nzone,3,3}"
+      }
+    },
+    {
+      "name": "stress_effective",
+      "signature": "itasca.zonearray.stress_effective() -> array double{nzone,3,3}",
+      "description": "Get an array of the zone effective stresses.",
+      "returns": {
+        "type": "array double{nzone,3,3}"
+      }
+    },
+    {
+      "name": "stress_effective_flat",
+      "signature": "itasca.zonearray.stress_effective_flat() -> array double{nzone,6}",
+      "description": "Get an array of the zone effective stresses. The return value is a 2D array where the component ordering is xx,yy,zz,xy,yz,xz.",
+      "returns": {
+        "type": "array double{nzone,6}"
+      }
+    },
+    {
+      "name": "stress_flat",
+      "signature": "itasca.zonearray.stress_flat() -> array double{nzone,6}",
+      "description": "Get an array of the zone stresses. The return value is a 2D array where the component ordering is xx,yy,zz,xy,yz,xz.",
+      "returns": {
+        "type": "array double{nzone,6}"
+      }
+    },
+    {
+      "name": "stress_max",
+      "signature": "itasca.zonearray.stress_max() -> array double{nzone}",
+      "description": "Return an array of the maximum (most positive) principal value of the volume averaged tetra/triangle stress for each zone. Note that compressive stresses are negative in FLAC3D/FLAC2D.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "stress_min",
+      "signature": "itasca.zonearray.stress_min() -> array double{nzone}",
+      "description": "Return an array of the minimum (most negative) principal value of the volume averaged tetra/triangle stress for each zone. Note that compressive stresses are negative in FLAC3D/FLAC2D.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "temperature",
+      "signature": "itasca.zonearray.temperature() -> array double{nzone}",
+      "description": "Return an array of the zone tempertures.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "test_quality",
+      "signature": "itasca.zonearray.test_quality() -> array double{nzone,2} (3D ONLY)",
+      "description": "Return an array of the measures of the zone quality, or how the zone shape may affect solution accuracy. The first value indicates a test of volume over edge length. The second value indicates a test of skew. Both return the minimum value obtained over all internal tetrahedrons. A return value of 1.0 indicates an equilateral tetra.",
+      "returns": {
+        "type": "array double{nzone,2} (3D ONLY)"
+      }
+    },
+    {
+      "name": "volume",
+      "signature": "itasca.zonearray.volume() -> array double{nzone}",
+      "description": "Return an array of the undeformed zone volumes (in 3D) or areas (in 2D).",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "volume_deformed",
+      "signature": "itasca.zonearray.volume_deformed() -> array double{nzone}",
+      "description": "Return an array of the deformed zone volumes (in 3D) or areas (in 2D).",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "work_elastic_shear",
+      "signature": "itasca.zonearray.work_elastic_shear() -> array double{nzone}",
+      "description": "Set the total elastic work dissipated.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "work_elastic_vol",
+      "signature": "itasca.zonearray.work_elastic_vol() -> array double{nzone}",
+      "description": "Return an array of the volumetric elastic work dissipated.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "work_plastic_shear",
+      "signature": "itasca.zonearray.work_plastic_shear() -> array double{nzone}",
+      "description": "Set the total plastic work dissipated.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    },
+    {
+      "name": "work_plastic_vol",
+      "signature": "itasca.zonearray.work_plastic_vol() -> array double{nzone}",
+      "description": "Return an array of the volumetric plastic work dissipated.",
+      "returns": {
+        "type": "array double{nzone}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "gridpoint",
+    "group",
+    "zone"
+  ],
+  "description": "Assign group name s to zone gridpoints in the range. Use of the group logic is described in Groups .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone gridpoint group",
+      "syntax": "zone gridpoint group s <keyword> <range>",
+      "description": "Assign group name s to zone gridpoints in the range. Use of the group logic is described in Groups.",
+      "keywords": [
+        {
+          "name": "remove",
+          "syntax": "remove",
+          "description": "Remove group s from the gridpoint. If no slot is specified the group assignment is removed from all slots it is found in."
+        },
+        {
+          "name": "slot",
+          "syntax": "slot s",
+          "description": "Assign the group to the slot named s. The default slot is Default."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/zonegridpoint/cmd_zone.gridpoint.group.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone gridpoint group",
+      "syntax": "zone gridpoint group <s>[keyword] [range]",
+      "keywords": [
+        {
+          "name": "remove",
+          "syntax": "remove",
+          "description": "Remove group s from the gridpoint. If no slot is specified the group assignment is removed from all slots it is found in."
+        },
+        {
+          "name": "slot",
+          "syntax": "slot <s>",
+          "description": "Assign the group to the slot named s . The default slot is Default ."
+        }
+      ]
+    }
+  }
+}

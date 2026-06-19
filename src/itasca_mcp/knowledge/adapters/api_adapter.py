@@ -37,7 +37,7 @@ class APIDocumentAdapter:
     """
 
     @staticmethod
-    def load_all() -> list[SearchDocument]:
+    def load_all(*, software: str) -> list[SearchDocument]:
         """Load all Python API documents.
 
         Returns:
@@ -56,13 +56,14 @@ class APIDocumentAdapter:
             'itasca.ball.create(radius, pos=None)'
         """
         documents = []
-        index = DocumentationLoader.load_index()
+        index = DocumentationLoader.load_index(software=software)
         quick_ref = index.get("quick_ref", {})
+        all_keywords = DocumentationLoader.load_all_keywords(software=software)
 
         # Iterate through all API entries in quick_ref
         for api_name, file_ref in quick_ref.items():
             # Load the API documentation
-            api_doc = DocumentationLoader.load_api_doc(api_name)
+            api_doc = DocumentationLoader.load_api_doc(api_name, software=software)
 
             if not api_doc:
                 continue
@@ -87,8 +88,7 @@ class APIDocumentAdapter:
                 param_names = [p.get("name", "") for p in parameters]
                 description += f"\n\nParameters: {', '.join(param_names)}"
 
-            # Get keywords from the keywords index
-            all_keywords = DocumentationLoader.load_all_keywords()
+            # Get keywords from the keywords index (loaded once above)
             keywords = []
             for keyword, api_list in all_keywords.items():
                 if api_name in api_list:
@@ -170,7 +170,7 @@ class APIDocumentAdapter:
         return parts[0] if parts else "unknown"
 
     @staticmethod
-    def load_by_id(doc_id: str) -> SearchDocument | None:
+    def load_by_id(doc_id: str, *, software: str) -> SearchDocument | None:
         """Load a specific API document by ID.
 
         Args:
@@ -186,7 +186,7 @@ class APIDocumentAdapter:
             >>> doc.syntax
             'itasca.ball.create(radius, pos=None)'
         """
-        api_doc = DocumentationLoader.load_api_doc(doc_id)
+        api_doc = DocumentationLoader.load_api_doc(doc_id, software=software)
 
         if not api_doc or api_doc.get("type") == "module":
             return None
@@ -202,7 +202,7 @@ class APIDocumentAdapter:
             description += f"\n\nParameters: {', '.join(param_names)}"
 
         # Get keywords
-        all_keywords = DocumentationLoader.load_all_keywords()
+        all_keywords = DocumentationLoader.load_all_keywords(software=software)
         keywords = []
         for keyword, api_list in all_keywords.items():
             if doc_id in api_list:

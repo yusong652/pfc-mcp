@@ -1,0 +1,1440 @@
+{
+  "class": "Gridpoint",
+  "description": "Gridpoint object instance in itasca.gridpoint.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.gridpoint.Gridpoint.html",
+  "note": "Do not instantiate directly; use itasca.gridpoint module functions.",
+  "method_groups": {
+    "accel": [
+      "accel",
+      "accel_x",
+      "accel_y",
+      "accel_z"
+    ],
+    "biot": [
+      "biot_modulus",
+      "set_biot_modulus"
+    ],
+    "convergence": [
+      "convergence"
+    ],
+    "copy": [
+      "copy_to"
+    ],
+    "disp": [
+      "disp",
+      "disp_small",
+      "disp_small_x",
+      "disp_small_y",
+      "disp_small_z",
+      "disp_x",
+      "disp_y",
+      "disp_z",
+      "set_disp",
+      "set_disp_small",
+      "set_disp_small_x",
+      "set_disp_small_y",
+      "set_disp_small_z",
+      "set_disp_x",
+      "set_disp_y",
+      "set_disp_z"
+    ],
+    "dynamic": [
+      "dynamic_mul"
+    ],
+    "extra": [
+      "extra",
+      "set_extra"
+    ],
+    "fix": [
+      "fix",
+      "set_fix"
+    ],
+    "flow": [
+      "flow",
+      "set_flow"
+    ],
+    "fluid": [
+      "fluid_load",
+      "fluid_modulus",
+      "fluid_modulus_confined",
+      "fluid_tension",
+      "fluid_unbal",
+      "fluid_vol_inv",
+      "set_fluid_load",
+      "set_fluid_modulus",
+      "set_fluid_tension",
+      "set_fluid_unbal"
+    ],
+    "flux": [
+      "flux"
+    ],
+    "force": [
+      "force_app",
+      "force_app_x",
+      "force_app_y",
+      "force_app_z",
+      "force_load",
+      "force_load_x",
+      "force_load_y",
+      "force_load_z",
+      "force_unbal",
+      "force_unbal_x",
+      "force_unbal_y",
+      "force_unbal_z",
+      "set_force_load",
+      "set_force_load_x",
+      "set_force_load_y",
+      "set_force_load_z"
+    ],
+    "group": [
+      "group",
+      "group_remove",
+      "set_group"
+    ],
+    "groups": [
+      "groups"
+    ],
+    "id": [
+      "id"
+    ],
+    "in": [
+      "in_group"
+    ],
+    "local": [
+      "local_small",
+      "set_local_small"
+    ],
+    "mass": [
+      "mass_add",
+      "mass_add_x",
+      "mass_add_y",
+      "mass_add_z",
+      "mass_gravity",
+      "mass_inertial",
+      "set_mass_add",
+      "set_mass_add_x",
+      "set_mass_add_y",
+      "set_mass_add_z"
+    ],
+    "pos": [
+      "pos",
+      "pos_x",
+      "pos_y",
+      "pos_z",
+      "set_pos",
+      "set_pos_x",
+      "set_pos_y",
+      "set_pos_z"
+    ],
+    "pp": [
+      "pp",
+      "pp_fix",
+      "set_pp",
+      "set_pp_fix"
+    ],
+    "ratio": [
+      "ratio",
+      "ratio_target",
+      "set_ratio_target"
+    ],
+    "sat": [
+      "sat",
+      "set_sat"
+    ],
+    "temp": [
+      "set_temp",
+      "set_temp_change",
+      "set_temp_source",
+      "temp",
+      "temp_change",
+      "temp_source"
+    ],
+    "tempfis": [
+      "set_tempfis",
+      "tempfis"
+    ],
+    "vel": [
+      "set_vel",
+      "set_vel_x",
+      "set_vel_y",
+      "set_vel_z",
+      "vel",
+      "vel_x",
+      "vel_y",
+      "vel_z"
+    ],
+    "stiff": [
+      "stiff"
+    ],
+    "valid": [
+      "valid"
+    ],
+    "zones": [
+      "zones"
+    ]
+  },
+  "methods": [
+    {
+      "name": "accel",
+      "signature": "gridpoint.accel() -> vec",
+      "description": "Get the gridpoint acceleration (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "accel_x",
+      "signature": "gridpoint.accel_x() -> float",
+      "description": "Get the x-component of the gridpoint acceleration.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "accel_y",
+      "signature": "gridpoint.accel_y() -> float",
+      "description": "Get the y-component of the gridpoint acceleration.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "accel_z",
+      "signature": "gridpoint.accel_z() -> float",
+      "description": "Get the z-component of the gridpoint acceleration.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "biot_modulus",
+      "signature": "gridpoint.biot_modulus() -> float",
+      "description": "Get the gridpoint fluid Biot modulus.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "convergence",
+      "signature": "gridpoint.convergence() -> float",
+      "description": "Get the gridpoint gridpoint convergence value, defined as the ratio of the currenct local force ratio (gridpoint ratio member) to the target force ratio (gridpoint ratio_target method). A value of 1 or less is therefore considered converged.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "copy_to",
+      "signature": "gridpoint.copy_to(destination: gridpoint) -> None",
+      "description": "Copy the gridpoint state information from this gridpoint to the given gridpoint.",
+      "parameters": [
+        {
+          "name": "destination",
+          "type": "gridpoint",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "gridpoint.disp() -> vec",
+      "description": "Get the gridpoint displacement (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "disp_small",
+      "signature": "gridpoint.disp_small() -> vec",
+      "description": "Get the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps. (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "disp_small_x",
+      "signature": "gridpoint.disp_small_x() -> float",
+      "description": "Get the x-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_small_y",
+      "signature": "gridpoint.disp_small_y() -> float",
+      "description": "Get the y-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_small_z",
+      "signature": "gridpoint.disp_small_z() -> float",
+      "description": "Get the z-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_x",
+      "signature": "gridpoint.disp_x() -> float",
+      "description": "Get the x-component of the gridpoint displacement.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_y",
+      "signature": "gridpoint.disp_y() -> float",
+      "description": "Get the y-component of the gridpoint displacement.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_z",
+      "signature": "gridpoint.disp_z() -> float",
+      "description": "Get the z-component of the gridpoint displacement.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "dynamic_mul",
+      "signature": "gridpoint.dynamic_mul() -> float",
+      "description": "Get the gridpoint dynamic stepping multiplier.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "gridpoint.extra(slot: int) -> any",
+      "description": "Get the gridpoint extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "fix",
+      "signature": "gridpoint.fix(component: int) -> bool",
+      "description": "Get the gridpoint fixity condition. The first argument is the vector component.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "flow",
+      "signature": "gridpoint.flow() -> float",
+      "description": "Get the gridpoint unbalanced flow discharge at a gridpoint.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_load",
+      "signature": "gridpoint.fluid_load() -> float",
+      "description": "Get the gridpoint additional fluid load.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_modulus",
+      "signature": "gridpoint.fluid_modulus() -> float",
+      "description": "Get the gridpoint gridpoint fluid bulk modulus.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_modulus_confined",
+      "signature": "gridpoint.fluid_modulus_confined() -> float",
+      "description": "Get the gridpoint fluid flow confined modulus times nodal volume. This is used in the fastflow solution scheme.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_tension",
+      "signature": "gridpoint.fluid_tension() -> float",
+      "description": "Get the gridpoint gridpoint fluid tension limit.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_unbal",
+      "signature": "gridpoint.fluid_unbal() -> float",
+      "description": "Get the gridpoint fluid out-of-balance flow : used in the fastflow solution scheme.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fluid_vol_inv",
+      "signature": "gridpoint.fluid_vol_inv() -> float",
+      "description": "Get the gridpoint inverse of the fluid nodal volume..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "flux",
+      "signature": "gridpoint.flux() -> float",
+      "description": "Get the gridpoint unbalanced thermal flux at a gridpoint..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_app",
+      "signature": "gridpoint.force_app() -> vec",
+      "description": "Get the gridpoint total applied force at a gridpoint. This includes all sources, including forces due to gravity (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_app_x",
+      "signature": "gridpoint.force_app_x() -> float",
+      "description": "Get the x-component of the gridpoint total applied force at a gridpoint. This includes all sources, including forces due to gravity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_app_y",
+      "signature": "gridpoint.force_app_y() -> float",
+      "description": "Get the y-component of the gridpoint total applied force at a gridpoint. This includes all sources, including forces due to gravity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_app_z",
+      "signature": "gridpoint.force_app_z() -> float",
+      "description": "Get the z-component of the gridpoint total applied force at a gridpoint. This includes all sources, including forces due to gravity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_load",
+      "signature": "gridpoint.force_load() -> vec",
+      "description": "Get the gridpoint user applied load (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_load_x",
+      "signature": "gridpoint.force_load_x() -> float",
+      "description": "Get the x-component of the gridpoint user applied load.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_load_y",
+      "signature": "gridpoint.force_load_y() -> float",
+      "description": "Get the y-component of the gridpoint user applied load.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_load_z",
+      "signature": "gridpoint.force_load_z() -> float",
+      "description": "Get the z-component of the gridpoint user applied load.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal",
+      "signature": "gridpoint.force_unbal() -> vec",
+      "description": "Get the gridpoint unbalanced force (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_unbal_x",
+      "signature": "gridpoint.force_unbal_x() -> float",
+      "description": "Get the x-component of the gridpoint unbalanced force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal_y",
+      "signature": "gridpoint.force_unbal_y() -> float",
+      "description": "Get the y-component of the gridpoint unbalanced force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal_z",
+      "signature": "gridpoint.force_unbal_z() -> float",
+      "description": "Get the z-component of the gridpoint unbalanced force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "gridpoint.group([slot: str or int]) -> str",
+      "description": "Get the gridpoint group name in a given slot.",
+      "parameters": [
+        {
+          "name": "[slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "gridpoint.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the gridpoint. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "gridpoint.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this gridpoint is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "gridpoint.id() -> int",
+      "description": "Get the gridpoint id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "gridpoint.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the gridpoint is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "local_small",
+      "signature": "gridpoint.local_small() -> bool",
+      "description": "Get the gridpoint local small strain setting.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "mass_add",
+      "signature": "gridpoint.mass_add() -> vec",
+      "description": "Get the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion. (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "mass_add_x",
+      "signature": "gridpoint.mass_add_x() -> float",
+      "description": "Get the x-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "mass_add_y",
+      "signature": "gridpoint.mass_add_y() -> float",
+      "description": "Get the y-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "mass_add_z",
+      "signature": "gridpoint.mass_add_z() -> float",
+      "description": "Get the z-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "mass_gravity",
+      "signature": "gridpoint.mass_gravity() -> float",
+      "description": "Get the gridpoint gravitational mass.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "mass_inertial",
+      "signature": "gridpoint.mass_inertial() -> float",
+      "description": "Get the gridpoint gridpoint inertial mass.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "gridpoint.pos() -> vec",
+      "description": "Get the gridpoint centroid location (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "gridpoint.pos_x() -> float",
+      "description": "Get the x-component of the gridpoint centroid location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "gridpoint.pos_y() -> float",
+      "description": "Get the y-component of the gridpoint centroid location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "gridpoint.pos_z() -> float",
+      "description": "Get the z-component of the gridpoint centroid location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "gridpoint.pp() -> float",
+      "description": "Get the gridpoint pore pressure.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pp_fix",
+      "signature": "gridpoint.pp_fix() -> bool",
+      "description": "Get the gridpoint flag indicating that the pore-pressure in the gridpoint is fixed.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "ratio",
+      "signature": "gridpoint.ratio() -> float",
+      "description": "Get the gridpoint local gridpoint mechanical convergence ratio.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "ratio_target",
+      "signature": "gridpoint.ratio_target() -> float",
+      "description": "Get the gridpoint target local gridpoint mechanical convergence ratio. The default value is 1e-4. A local force ratio (gridpoint ratio method) below this value is considered converged. See the convergence Gridpoint method.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "sat",
+      "signature": "gridpoint.sat() -> float",
+      "description": "Get the gridpoint gridpoint fluid saturation.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_biot_modulus",
+      "signature": "gridpoint.set_biot_modulus(value: float) -> None",
+      "description": "Set the gridpoint fluid Biot modulus.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp",
+      "signature": "gridpoint.set_disp(value: vec) -> None",
+      "description": "Set the gridpoint displacement (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_small",
+      "signature": "gridpoint.set_disp_small(value: vec) -> None",
+      "description": "Set the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps. (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_small_x",
+      "signature": "gridpoint.set_disp_small_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_small_y",
+      "signature": "gridpoint.set_disp_small_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_small_z",
+      "signature": "gridpoint.set_disp_small_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint small displacement vector for the gridpoint. Small displacements are incremented from velocity and timestep only in small strain model. See the command model large. The small strain vector field is used in the interface logic to calculate overlaps..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_x",
+      "signature": "gridpoint.set_disp_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_y",
+      "signature": "gridpoint.set_disp_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_disp_z",
+      "signature": "gridpoint.set_disp_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint displacement.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "gridpoint.set_extra(slot: int, value: any) -> None",
+      "description": "Set the gridpoint extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fix",
+      "signature": "gridpoint.set_fix(component: int, fix: bool) -> None",
+      "description": "Set the gridpoint fixity condition. The first argument is the vector component to set and the second components is a the fixity flag. The component starts at 0.",
+      "parameters": [
+        {
+          "name": "component",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "fix",
+          "type": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_flow",
+      "signature": "gridpoint.set_flow(value: float) -> None",
+      "description": "Set the gridpoint unbalanced flow discharge at a gridpoint.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_load",
+      "signature": "gridpoint.set_fluid_load(value: float) -> None",
+      "description": "Set the gridpoint additional fluid load.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_modulus",
+      "signature": "gridpoint.set_fluid_modulus(value: float) -> None",
+      "description": "Set the gridpoint gridpoint fluid bulk modulus.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_tension",
+      "signature": "gridpoint.set_fluid_tension(value: float) -> None",
+      "description": "Set the gridpoint gridpoint fluid tension limit.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_unbal",
+      "signature": "gridpoint.set_fluid_unbal(value: float) -> None",
+      "description": "Set the gridpoint fluid out-of-balance flow : used in the fastflow solution scheme.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_load",
+      "signature": "gridpoint.set_force_load(value: vec) -> None",
+      "description": "Set the gridpoint user applied load (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_load_x",
+      "signature": "gridpoint.set_force_load_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint user applied load.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_load_y",
+      "signature": "gridpoint.set_force_load_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint user applied load.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_load_z",
+      "signature": "gridpoint.set_force_load_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint user applied load.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "gridpoint.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the gridpoint group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_local_small",
+      "signature": "gridpoint.set_local_small(value: bool) -> None",
+      "description": "Set the gridpoint local small strain setting.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_mass_add",
+      "signature": "gridpoint.set_mass_add(value: vec) -> None",
+      "description": "Set the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion. (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_mass_add_x",
+      "signature": "gridpoint.set_mass_add_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_mass_add_y",
+      "signature": "gridpoint.set_mass_add_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_mass_add_z",
+      "signature": "gridpoint.set_mass_add_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint added mass vector for the gridpoint. This mass is added to the inertial mass of the gridpoint during equations of motion..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "gridpoint.set_pos(value: vec) -> None",
+      "description": "Set the gridpoint centroid location (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos_x",
+      "signature": "gridpoint.set_pos_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos_y",
+      "signature": "gridpoint.set_pos_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos_z",
+      "signature": "gridpoint.set_pos_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint centroid location.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp",
+      "signature": "gridpoint.set_pp(pp: float, update: bool=false) -> None",
+      "description": "Set the gridpoint pore pressure. If the optional second argument is true in addition to modifying the gridpoint pore pressure, this method will fix the gridpoint pressure and update the accumulated pore pressure increment since the last mechanical step. The fluid flow calculation must be active for this option to be performed. To achieve the same result as the command zone gridpoint fix pore-pressure f, the methods pp_fix and pp must be used together.",
+      "parameters": [
+        {
+          "name": "pp",
+          "type": "float",
+          "required": true
+        },
+        {
+          "name": "update",
+          "type": "bool",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp_fix",
+      "signature": "gridpoint.set_pp_fix(value: bool) -> None",
+      "description": "Set the gridpoint flag indicating that the pore-pressure in the gridpoint is fixed.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_ratio_target",
+      "signature": "gridpoint.set_ratio_target(value: float) -> None",
+      "description": "Set the gridpoint target local gridpoint mechanical convergence ratio. The default value is 1e-4. A local force ratio (gridpoint ratio method) below this value is considered converged. See the convergence Gridpoint method.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_sat",
+      "signature": "gridpoint.set_sat(value: float) -> None",
+      "description": "Set the gridpoint gridpoint fluid saturation.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temp",
+      "signature": "gridpoint.set_temp(value: float) -> None",
+      "description": "Set the gridpoint current gridpoint temperature.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temp_change",
+      "signature": "gridpoint.set_temp_change(value: float) -> None",
+      "description": "Set the gridpoint amount of temperature change that has accumulated since the last thermal/mechanical coupling..",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temp_source",
+      "signature": "gridpoint.set_temp_source(value: float) -> None",
+      "description": "Set the gridpoint applied FISH temperature source at a gridpoint.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_tempfis",
+      "signature": "gridpoint.set_tempfis(value: bool) -> None",
+      "description": "Set the gridpoint flag indicating that temperature in this gridpoint is fixed.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel",
+      "signature": "gridpoint.set_vel(value: vec) -> None",
+      "description": "Set the gridpoint velocity (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel_x",
+      "signature": "gridpoint.set_vel_x(value: float) -> None",
+      "description": "Set the x-component of the gridpoint velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel_y",
+      "signature": "gridpoint.set_vel_y(value: float) -> None",
+      "description": "Set the y-component of the gridpoint velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel_z",
+      "signature": "gridpoint.set_vel_z(value: float) -> None",
+      "description": "Set the z-component of the gridpoint velocity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stiff",
+      "signature": "gridpoint.stiff() -> float",
+      "description": "Get the gridpoint accumulated gridpoint effective stiffness.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "temp",
+      "signature": "gridpoint.temp() -> float",
+      "description": "Get the gridpoint current gridpoint temperature.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "temp_change",
+      "signature": "gridpoint.temp_change() -> float",
+      "description": "Get the gridpoint amount of temperature change that has accumulated since the last thermal/mechanical coupling..",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "temp_source",
+      "signature": "gridpoint.temp_source() -> float",
+      "description": "Get the gridpoint applied FISH temperature source at a gridpoint.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "tempfis",
+      "signature": "gridpoint.tempfis() -> bool",
+      "description": "Get the gridpoint flag indicating that temperature in this gridpoint is fixed.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "gridpoint.valid() -> bool",
+      "description": "Returns True if this gridpoint is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "gridpoint.vel() -> vec",
+      "description": "Get the gridpoint velocity (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "vel_x",
+      "signature": "gridpoint.vel_x() -> float",
+      "description": "Get the x-component of the gridpoint velocity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_y",
+      "signature": "gridpoint.vel_y() -> float",
+      "description": "Get the y-component of the gridpoint velocity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_z",
+      "signature": "gridpoint.vel_z() -> float",
+      "description": "Get the z-component of the gridpoint velocity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "zones",
+      "signature": "gridpoint.zones() -> tuple of Zone objects",
+      "description": "Get a tuple of the zones attached to this gridpoint.",
+      "returns": {
+        "type": "tuple of Zone objects"
+      }
+    }
+  ]
+}

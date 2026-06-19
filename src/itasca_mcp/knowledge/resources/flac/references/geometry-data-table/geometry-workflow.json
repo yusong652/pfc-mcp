@@ -1,0 +1,50 @@
+{
+  "name": "geometry-workflow",
+  "dimension": "mixed",
+  "full_name": "Geometry Workflow",
+  "description": "Geometry sets are named collections of nodes, edges, and polygons independent of the model domain. They support import/export, plotting, group assignment, and range filtering.",
+  "primary_commands": [
+    "geometry import",
+    "geometry export",
+    "geometry set",
+    "geometry list",
+    "geometry assign-groups",
+    "geometry polygon group",
+    "geometry node group",
+    "geometry edge group",
+    "zone geometry-test"
+  ],
+  "workflow": [
+    {
+      "step": "Import or create geometry",
+      "commands": [
+        "geometry import 'surface.stl'",
+        "geometry set 'excavation'"
+      ]
+    },
+    {
+      "step": "Group and inspect",
+      "commands": [
+        "geometry list",
+        "geometry polygon group 'fault' range ..."
+      ]
+    },
+    {
+      "step": "Use with zones",
+      "commands": [
+        "zone geometry-test range geometry-space 'excavation'",
+        "zone group 'inside_surface' range geometry-space 'excavation'"
+      ],
+      "notes": [
+        "Use geometry ranges to transfer CAD-defined regions to zones.",
+        "Always validate group assignment visually or with counts."
+      ]
+    }
+  ],
+  "formats": [
+    "stl",
+    "dxf",
+    "Itasca geometry format"
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/common/geometry/doc/manual/geometry.html"
+}

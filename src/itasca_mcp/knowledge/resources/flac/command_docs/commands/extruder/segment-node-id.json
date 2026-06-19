@@ -1,0 +1,37 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "node",
+    "id",
+    "sketch",
+    "segment-node"
+  ],
+  "description": "Modify a single node by ID.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment-node id",
+      "syntax": "sketch segment-node id <i> keyword",
+      "keywords": [
+        {
+          "name": "group",
+          "syntax": "group <s1> [slot <s2>] [remove]",
+          "description": "Assign the group name s1 in slot s2 (if supplied) to the node. The node is removed from the group/slot if remove is present. If the slot keyword is omitted, the slot is set to the slot named Default."
+        },
+        {
+          "name": "merge",
+          "syntax": "merge [node] <i2>",
+          "description": "Merge the node with node i2 (node ID positive integer)."
+        },
+        {
+          "name": "move-to",
+          "syntax": "move-to <v3> [merge-tolerance <f>]",
+          "description": "Moves the node to location v3, 3D coordinate vector (u,v,w). If supplied, merge-tolerance f will be used as a tolerance for merging nodes during moving."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "trace",
+    "zone"
+  ],
+  "description": "Trace zone position and velocity. See the c trace commands.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone trace",
+      "syntax": "zone trace keyword",
+      "description": "Trace zone position and velocity. See the Trace section.",
+      "keywords": [
+        {
+          "name": "zoneid",
+          "syntax": "zoneid i",
+          "description": "Add a trace of the centroid of the zone with ID i."
+        },
+        {
+          "name": "gridpointid",
+          "syntax": "gridpointid i",
+          "description": "Add a trace of the location corresponding to the gridpoint ID i."
+        },
+        {
+          "name": "position",
+          "syntax": "position v",
+          "description": "Add a trace at position v, which must fall in or on some zone."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.trace.html#zone.trace"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone trace",
+      "syntax": "zone trace keyword",
+      "description": "Trace zone position and velocity. See the c trace commands.",
+      "keywords": [
+        {
+          "name": "zoneid",
+          "syntax": "zoneid i",
+          "description": "Add a trace of the centroid of the zone with ID i."
+        },
+        {
+          "name": "gridpointid",
+          "syntax": "gridpointid i",
+          "description": "Add a trace of the location corresponding to the gridpoint ID i."
+        },
+        {
+          "name": "position",
+          "syntax": "position v",
+          "description": "Add a trace at position v, which must fall in or on some zone."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.trace.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone trace",
+      "syntax": "zone trace keyword",
+      "keywords": [
+        {
+          "name": "zoneid",
+          "syntax": "zoneid <i>",
+          "description": "Add a trace of the centroid of the zone with ID i ."
+        },
+        {
+          "name": "gridpointid",
+          "syntax": "gridpointid <i>",
+          "description": "Add a trace of the location corresponding to the gridpoint ID i ."
+        },
+        {
+          "name": "position",
+          "syntax": "position <v>",
+          "description": "Add a trace at position v , which must fall in or on some zone."
+        },
+        {
+          "name": "gp",
+          "syntax": "gp <i>",
+          "description": "sample a gridpoint trace by gridpoint number i"
+        },
+        {
+          "name": "name",
+          "syntax": "name <s>",
+          "description": "assign a name s to the trace record. Use together with a location keyword (gp/gridpointid/position/zoneid) that identifies what to trace."
+        }
+      ]
+    }
+  }
+}

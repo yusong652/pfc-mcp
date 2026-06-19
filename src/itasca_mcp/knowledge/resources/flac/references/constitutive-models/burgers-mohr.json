@@ -1,0 +1,141 @@
+{
+  "model": "burgers-mohr",
+  "full_name": "Burgers-Mohr Model",
+  "search_keywords": [
+    "burgers",
+    "mohr",
+    "burgers-mohr",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "dilation",
+    "friction",
+    "shear-kelvin",
+    "shear-maxwell",
+    "strain-kelvin-xx",
+    "strain-kelvin-xy",
+    "strain-kelvin-xz",
+    "strain-kelvin-yy",
+    "strain-kelvin-yz",
+    "strain-kelvin-zz",
+    "tension",
+    "viscosity-kelvin",
+    "viscosity-maxwell",
+    "strain-shear-plastic",
+    "strain-tensile-plastic"
+  ],
+  "description": "A viscoplastic model in FLAC3D or 3DEC is characterized by a visco-elasto-plastic deviatoric behavior and an elasto-plastic volumetric behavior. The viscoelastic and viscoplastic strain-rate components are assumed to act in series. The viscoelastic constitutive law corresponds to a Burgers model (Kelvin cell in series with a Maxwell component), and the plastic constitutive law corresponds to a Mohr-Coulomb model . As a notation convention in this section, we use the symbols \\(S_{ij}\\) and \\(e_{ij}\\) to denote deviatoric stress and strain components: (1) \\[S_{ij}=\\sigma_{ij}-{\\sigma}_{0}\\delta_",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'burgers-mohr' zone constitutive model. Assign the model with 'zone cmodel assign burgers-mohr [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name burgers-mohr]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle in degrees, ψ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "ϕ",
+          "description": "internal friction angle in degrees, ϕ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-kelvin",
+          "symbol": "G^K",
+          "description": "Kelvin shear modulus, G^K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-maxwell",
+          "symbol": "G^M",
+          "description": "shear modulus, G^M",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xx",
+          "symbol": "e^K_{xx}",
+          "description": "Kelvin strain, e^K_{xx}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xy",
+          "symbol": "e^K_{xy}",
+          "description": "Kelvin strain, e^K_{xy}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-xz",
+          "symbol": "e^K_{xz}",
+          "description": "Kelvin strain, e^K_{xz}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-yy",
+          "symbol": "e^K_{yy}",
+          "description": "Kelvin strain, e^K_{yy}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-yz",
+          "symbol": "e^K_{yz}",
+          "description": "Kelvin strain, e^K_{yz}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-kelvin-zz",
+          "symbol": "e^K_{zz}",
+          "description": "Kelvin strain, e^K_{zz}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "σ^t",
+          "description": "tension limit σ^t. The default is zero.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "viscosity-kelvin",
+          "symbol": "η^K",
+          "description": "Kelvin viscosity, η^K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "viscosity-maxwell",
+          "symbol": "η^M",
+          "description": "Maxwell dynamic viscosity, η^M",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "description": "accumulated plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic",
+          "description": "accumulated plastic tensile strain",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/cvisc/doc/modelcvisc.html",
+  "usage": {
+    "assign": "zone cmodel assign burgers-mohr [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name burgers-mohr]"
+  }
+}

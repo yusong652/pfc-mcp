@@ -1,0 +1,15 @@
+{
+  "name": "by",
+  "category": "element_modifiers",
+  "category_name": "Element Modifiers",
+  "syntax": "<element> ... by <object-type>",
+  "description": "Specify object hierarchy level for evaluation.",
+  "examples": [
+    "range position-z 0 10 by zone"
+  ],
+  "search_keywords": [
+    "by",
+    "hierarchy",
+    "sub-object"
+  ]
+}

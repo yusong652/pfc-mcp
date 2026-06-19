@@ -1,0 +1,203 @@
+{
+  "model": "power-ubiquitous",
+  "full_name": "Power-Ubiquitous Model",
+  "search_keywords": [
+    "power",
+    "ubiquitous",
+    "power-ubiquitous",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "constant-1",
+    "constant-2",
+    "dilation",
+    "exponent-1",
+    "exponent-2",
+    "friction",
+    "dip",
+    "dip-direction",
+    "angle",
+    "joint-cohesion",
+    "joint-dilation",
+    "joint-friction",
+    "joint-tension",
+    "normal",
+    "normal-x",
+    "normal-y",
+    "normal-z",
+    "poisson",
+    "shear",
+    "stress-reference-1",
+    "stress-reference-2",
+    "tension",
+    "young",
+    "flag-brittle"
+  ],
+  "description": "This model simulates the visco-elasto-plastic mechanical behavior of ubiquitous joint rock with creep occurring in a rock matrix similar to the viscoplastic two-component power model . This model combines two existing FLAC3D / 3DEC models: the viscoplastic two-component power model and the elasto-plastic ubiquitous-joint model . If compared to the viscoplastic two-component power model , this model accounts for the presence of an orientation of weakness (weak plane), and, therefore, yield may occur in either the solid or along the weak plane, or both, which depends on the stress state, the ori",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'power-ubiquitous' zone constitutive model. Assign the model with 'zone cmodel assign power-ubiquitous [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name power-ubiquitous]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-1",
+          "symbol": "A",
+          "description": "power-law constant, A1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-2",
+          "symbol": "A",
+          "description": "power-law constant, A2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle, ψ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-1",
+          "symbol": "n",
+          "description": "power-law exponent, n1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-2",
+          "symbol": "n",
+          "description": "power-law exponent, n2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "ϕ",
+          "description": "angle of internal friction, ϕ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip",
+          "description": "dip angle [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "dip-direction",
+          "description": "dip direction [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "angle",
+          "description": "angle [degrees] of weakness plane, taken counterclockwise from the x-axis",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-cohesion",
+          "symbol": "c_j",
+          "description": "joint cohesion, c_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-dilation",
+          "symbol": "ψ_j",
+          "description": "joint dilation angle, ψ_j. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-friction",
+          "symbol": "ϕ_j",
+          "description": "joint friction angle, ϕ_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-tension",
+          "symbol": "σ^t_{j}",
+          "description": "joint tension limit, σ^t_{j}. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal",
+          "description": "normal direction of the weakness plane, (2D or 3D vector)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x",
+          "symbol": "x",
+          "description": "x-component of the normal direction to the weakness plane, n_x",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y",
+          "symbol": "y",
+          "description": "y-component of the normal direction to the weakness plane, n_y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z",
+          "symbol": "z",
+          "description": "z-component of the normal direction to the weakness plane, n_z (3D only)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-1",
+          "symbol": "\\sigma^{ref}_1",
+          "description": "reference stress, \\sigma^{ref}_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-2",
+          "symbol": "\\sigma^{ref}_2",
+          "description": "reference stress, \\sigma^{ref}_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "σ^t",
+          "description": "tension limit, σ^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/cupow/doc/modelcupow.html",
+  "usage": {
+    "assign": "zone cmodel assign power-ubiquitous [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name power-ubiquitous]"
+  }
+}

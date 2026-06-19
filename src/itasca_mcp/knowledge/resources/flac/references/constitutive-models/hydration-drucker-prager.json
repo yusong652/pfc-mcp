@@ -1,0 +1,144 @@
+{
+  "model": "hydration-drucker-prager",
+  "full_name": "Hydration-Drucker-Prager Model",
+  "search_keywords": [
+    "hydration",
+    "drucker",
+    "prager",
+    "hydration-drucker-prager",
+    "constitutive",
+    "bulk",
+    "bulk-reference",
+    "cohesion-drucker",
+    "compression",
+    "constant-a",
+    "constant-c",
+    "dilation-drucker",
+    "friction-drucker",
+    "hydration-minimum",
+    "hydration-difference-minimum",
+    "poisson",
+    "shear",
+    "shear-reference",
+    "tension",
+    "tension-reference",
+    "young",
+    "young-reference"
+  ],
+  "description": "The mechanical aspects of hydration in FLAC3D are handled by a modified Drucker-Prager constitutive model where elastic and strength properties depend on the hydration grade, \\(\\alpha\\) (Hinze 1987). [ * ] Due to a dormant phase, the evolution of strength and stiffness starts with some delay. This is taken into account by the minimum degree of hydration, \\(\\alpha_0\\) . This value marks the transition between the suspension and solid-state behavior. Beyond \\(\\alpha_0\\) , strength and stiffness do not always depend linearly on hydration grade. Thus, a relationship is introduced, based on the ide",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'hydration-drucker-prager' zone constitutive model. Assign the model with 'zone cmodel assign hydration-drucker-prager [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name hydration-drucker-prager]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk-reference",
+          "symbol": "α",
+          "description": "reference bulk modulus for α = 1, K_{cte}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-drucker",
+          "symbol": "k_φ",
+          "description": "Drucker-Prager material parameter, k_φ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compression",
+          "symbol": "σ_c",
+          "description": "compressive strength limit, σ_c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a",
+          "symbol": "a",
+          "description": "material parameter, a",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-c",
+          "symbol": "c",
+          "description": "material parameter, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-drucker",
+          "symbol": "q_ψ",
+          "description": "Drucker-Prager material parameter, q_ψ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-drucker",
+          "symbol": "q_φ",
+          "description": "Drucker-Prager material parameter, q_φ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "hydration-minimum",
+          "symbol": "α",
+          "description": "minimum hydration grade, α0",
+          "type": "FLT"
+        },
+        {
+          "keyword": "hydration-difference-minimum",
+          "symbol": "(α - α_0)_{min}",
+          "description": "minimum difference of (α - α_0)_{min}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "ν",
+          "description": "Poisson’s ratio, ν",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-reference",
+          "symbol": "α",
+          "description": "reference shear modulus for α = 1, G_{cte}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "σ^t",
+          "description": "tension cut-off, σ^t",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension-reference",
+          "symbol": "α",
+          "description": "reference tensile strength for α = 1, f_{cte}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-reference",
+          "symbol": "α",
+          "description": "reference Young’s modulus for α = 1, E_{cte}",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/hydrat/doc/modelhydrat.html",
+  "usage": {
+    "assign": "zone cmodel assign hydration-drucker-prager [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name hydration-drucker-prager]"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "model": "power",
+  "full_name": "Power Model",
+  "search_keywords": [
+    "power",
+    "constitutive",
+    "bulk",
+    "constant-1",
+    "constant-2",
+    "exponent-1",
+    "exponent-2",
+    "poisson",
+    "shear",
+    "stress-reference-1",
+    "stress-reference-2",
+    "young"
+  ],
+  "description": "The two-component Norton power law (Norton 1929) is commonly used to model the creep behavior of salt. The standard form of this law is (1) \\[\\dot \\epsilon_{cr} = A\\ \\bar \\sigma^n\\] where \\(\\dot \\epsilon_{cr}\\) is the creep rate, \\(A\\) and \\(n\\) are material properties, and \\(\\bar \\sigma\\) is the von Mises stress. By definition, \\(\\bar \\sigma = \\sqrt{3J_2}\\) , and \\(J_2\\) is the second invariant of the effective deviatoric-stress tensor, \\(\\sigma_{ij}^d\\) (i.e., \\(J_2 = {1 \\over 2} \\sigma_{ij}^d \\sigma_{ij}^d\\) ). The deviatoric stress increments are given by (2) \\[\\Delta \\sigma_{ij}^{d} = 2G",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'power' zone constitutive model. Assign the model with 'zone cmodel assign power [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name power]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-1",
+          "symbol": "A_1",
+          "description": "power-law constant, A_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-2",
+          "symbol": "A_2",
+          "description": "power-law constant, A_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-1",
+          "symbol": "n",
+          "description": "power-law exponent, n1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-2",
+          "symbol": "n",
+          "description": "power-law exponent, n2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-1",
+          "symbol": "\\sigma^{ref}_1",
+          "description": "reference stress, \\sigma^{ref}_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-2",
+          "symbol": "\\sigma^{ref}_2",
+          "description": "reference stress, \\sigma^{ref}_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/power/doc/modelpower.html",
+  "usage": {
+    "assign": "zone cmodel assign power [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name power]"
+  }
+}

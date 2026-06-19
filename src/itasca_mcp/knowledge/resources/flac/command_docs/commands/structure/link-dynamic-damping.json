@@ -1,0 +1,49 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "link",
+    "dynamic",
+    "damping",
+    "structure",
+    "dynamic-damping"
+  ],
+  "description": "Set dynamic damping type to the link.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 7.0 contents command index.",
+      "source_urls": [
+        "https://docs.itascacg.com/flac3d700/contents.html"
+      ],
+      "target_version": "7.0"
+    },
+    "9.0": {
+      "command": "structure link dynamic-damping",
+      "syntax": "structure link dynamic-damping keyword ... [range]",
+      "keywords": [
+        {
+          "name": "none",
+          "syntax": "none",
+          "description": "No Maxwell damping."
+        },
+        {
+          "name": "maxwell",
+          "syntax": "maxwell <fd1><f1><fd2><f2><fd3><f3>[off-when-yield <b>]",
+          "description": "Maxwell damping (see Maxwell Damping ) for all conformable structural links in the range. f1 is the center frequency of the first Maxwell component and fd1 is the maximum damping ratio of the first Maxwell component; f2 is the center frequency of the second Maxwell component and fd2 is the maximum damping ratio of the second Maxwell component; f3 is the center frequency of the third Maxwell component and fd3 is the maximum damping ratio of the third Maxwell component. This command must be issued when the dynamic option is configured and turned on. If off-when-yield = on/yes/true (default), the Maxwell damping will be inactivated when the constitutive model is yielding; If off-when-yield = off/no/false , the Maxwell damping will still be active when the link constitutive model is yielding."
+        }
+      ]
+    }
+  }
+}

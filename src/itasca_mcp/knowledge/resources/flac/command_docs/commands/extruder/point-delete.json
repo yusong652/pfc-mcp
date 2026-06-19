@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "point",
+    "delete",
+    "sketch"
+  ],
+  "description": "Delete points. All points are deleted if < range > is not supplied. If invalid is used, only points not connected to an edge will be deleted.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch point delete",
+      "syntax": "sketch point delete [invalid] [range]",
+      "keywords": []
+    }
+  }
+}

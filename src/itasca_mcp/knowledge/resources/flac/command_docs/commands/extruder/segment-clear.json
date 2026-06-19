@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "clear",
+    "sketch"
+  ],
+  "description": "Clear all zone size and ratio settings on segments.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment clear",
+      "syntax": "sketch segment clear",
+      "keywords": []
+    }
+  }
+}

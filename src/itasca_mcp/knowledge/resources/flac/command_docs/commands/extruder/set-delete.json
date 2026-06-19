@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "delete",
+    "sketch"
+  ],
+  "description": "Delete a sketch set. The set named s is deleted if supplied; the current set is deleted if not.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set delete",
+      "syntax": "sketch set delete [<s>]",
+      "keywords": []
+    }
+  }
+}

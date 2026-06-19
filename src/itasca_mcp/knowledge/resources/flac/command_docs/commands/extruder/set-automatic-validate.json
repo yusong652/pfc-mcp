@@ -1,0 +1,27 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "automatic",
+    "validate",
+    "sketch",
+    "automatic-validate"
+  ],
+  "description": "Set automatic validation off/on . This controls whether or not the program checks for valid geometry during changes. The default is true (on).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set automatic-validate",
+      "syntax": "sketch set automatic-validate <b>[keyword]",
+      "keywords": [
+        {
+          "name": "tolerance",
+          "syntax": "tolerance <f>",
+          "description": "The optional tolerance value f changes the tolerance used in this check. The default value is 1e-6."
+        }
+      ]
+    }
+  }
+}

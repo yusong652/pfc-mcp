@@ -1,0 +1,67 @@
+{
+  "module": "itasca.interfacearray",
+  "description": "Array interface for FLAC interfaces.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.interfacearray.html",
+  "functions": [
+    {
+      "name": "elements",
+      "signature": "itasca.interfacearray.elements() -> array int{ninterface, maxnodes}",
+      "description": "Return an array containing the elements indices of each interface. Indices of -1 indicate a non-existent element.",
+      "returns": {
+        "type": "array int{ninterface, maxnodes}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.interfacearray.in_group(group_name: str, slot=\"default\") -> array bool{ninterface}",
+      "description": "Return interface group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "array bool{ninterface}"
+      }
+    },
+    {
+      "name": "nodes",
+      "signature": "itasca.interfacearray.nodes() -> array int{ninterface,maxnodes}",
+      "description": "Return an array containing the nodes indices of each interface. Indices of -1 indicate a non-existent node.",
+      "returns": {
+        "type": "array int{ninterface,maxnodes}"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.interfacearray.set_group(membership: array bool{interface}, group_name: str, slot=\"default\") -> None",
+      "description": "Set interface group from an array. Where membership True set the corresponding interface to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{interface}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

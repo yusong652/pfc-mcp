@@ -1,0 +1,156 @@
+{
+  "model": "hoek-brown-pac",
+  "full_name": "Hoek-Brown-PAC Model",
+  "search_keywords": [
+    "hoek",
+    "brown",
+    "pac",
+    "hoek-brown-pac",
+    "constitutive",
+    "bulk",
+    "constant-a",
+    "constant-mb",
+    "constant-mi",
+    "constant-s",
+    "constant-sci",
+    "disturbance",
+    "geological-strength-index",
+    "poisson",
+    "shear",
+    "stress-confining-prescribed",
+    "young",
+    "strain-3-plastic",
+    "table-a",
+    "table-mb",
+    "table-multiplier",
+    "table-s",
+    "table-sci",
+    "number-iteration"
+  ],
+  "description": "The Hoek-Brown failure criterion is an empirical relation that characterizes the stress conditions that lead to failure in intact rock and rock masses. It has been used very successfully in design approaches that use limit equilibrium solutions, but there has been little direct use in numerical solution schemes. Alternatively, equivalent friction and cohesion have been used with a Mohr-Coulomb model that is matched to the nonlinear Hoek-Brown strength envelope at particular stress levels Numerical solution methods require full constitutive models, which relate stress to strain in a general way",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'hoek-brown-pac' zone constitutive model. Assign the model with 'zone cmodel assign hoek-brown-pac [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name hoek-brown-pac]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a",
+          "symbol": "a",
+          "description": "Hoek-Brown parameter, a.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-mb",
+          "symbol": "m_b",
+          "description": "Hoek-Brown parameter, m_b",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-mi",
+          "symbol": "m_i",
+          "description": "Hoek-Brown parameter, m_i",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-s",
+          "symbol": "s",
+          "description": "Hoek-Brown parameter, s",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-sci",
+          "symbol": "\\sigma_{ci}",
+          "description": "Hoek-Brown parameter, \\sigma_{ci}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "disturbance",
+          "symbol": "D",
+          "description": "Hoek-Brown parameter, D",
+          "type": "FLT"
+        },
+        {
+          "keyword": "geological-strength-index",
+          "description": "Hoek-Brown parameter, GSI",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-confining-prescribed",
+          "symbol": "\\sigma^{cv}_3",
+          "description": "Hoek-Brown parameter, confining stress at user-prescribed level, \\sigma^{cv}_3",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-3-plastic",
+          "symbol": "e^p_3",
+          "description": "accumulated plastic strain in direction of least compressive principal stress, e^p_3",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-a",
+          "symbol": "a",
+          "description": "name of the table relating a to e^p_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-mb",
+          "symbol": "m_b",
+          "description": "name of the table relating to m_b to e^p_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-multiplier",
+          "symbol": "\\sigma_3",
+          "description": "name of the table relating a multiplier to \\sigma_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-s",
+          "symbol": "s",
+          "description": "name of the table relating s to e^p_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-sci",
+          "symbol": "\\sigma_{ci}",
+          "description": "name of the table relating \\sigma_{ci} to e^p_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "number-iteration",
+          "description": "number of iterations",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/hoekbrownpac/doc/modelhoekbrownpac.html",
+  "usage": {
+    "assign": "zone cmodel assign hoek-brown-pac [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name hoek-brown-pac]"
+  }
+}

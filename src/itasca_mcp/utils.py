@@ -44,6 +44,20 @@ def normalize_command_doc_version(value: CommandDocVersion | str) -> str:
     return str(value)
 
 
+class Software(str, Enum):
+    """Supported ITASCA engines selected by the documentation tools' ``software`` arg."""
+
+    PFC = "pfc"
+    FLAC = "flac"
+
+
+def normalize_software_value(value: "Software | str") -> str:
+    """Return the plain lowercase string value for a software enum/string."""
+    if isinstance(value, Software):
+        return value.value
+    return str(value).strip().lower()
+
+
 def normalize_input(value: str | None, lowercase: bool = False) -> str:
     """Normalize user input: collapse whitespace, optionally lowercase."""
     if value is None:
@@ -101,6 +115,15 @@ PythonAPISearchQuery = Annotated[
             "Search keywords for PFC Python SDK API. Examples: 'ball pos', "
             "'contact force', 'model solve'. Case-insensitive."
         ),
+    ),
+]
+
+# Software / engine selector (required, no default — itasca-mcp must not bias to one engine)
+SoftwareParam = Annotated[
+    Software,
+    Field(
+        ...,
+        description="ITASCA engine to query: 'pfc' or 'flac'. Required — there is no default engine.",
     ),
 ]
 

@@ -1,0 +1,35 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "face",
+    "add",
+    "controls",
+    "building-blocks",
+    "add-controls"
+  ],
+  "description": "Add control points to faces. Control points are added on all faces in the current building blocks set if < range > is not supplied.",
+  "notes": [
+    "Requires a current building-blocks set: run 'building-blocks set create <name>' then 'building-blocks set select <name>' before any block/edge/face/point operation; otherwise FLAC rejects the command with 'Unused extra parameter'."
+  ],
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks face add-controls",
+      "syntax": "building-blocks face add-controls keyword [no-edges-cp] [range]",
+      "keywords": [
+        {
+          "name": "count",
+          "syntax": "<i>",
+          "description": "Bare positional integer. Add exactly i X i control points (grid) per each face ( i must be a positive integer 0,2,3,…,20). Added control points will be evenly spaced. Also will add i CPs per each internal edge from the list of the faces. If i = 0 control points are removed."
+        },
+        {
+          "name": "no-edges-cp",
+          "syntax": "no-edges-cp",
+          "description": "Optional. Skip adding-removing CPs to-from edges."
+        }
+      ]
+    }
+  }
+}

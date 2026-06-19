@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "mesh",
+    "gradation",
+    "sketch"
+  ],
+  "description": "Specify the maximum gradation f > 0 for the unstructured mesher. The default value is 0.5.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch mesh gradation",
+      "syntax": "sketch mesh gradation <f>",
+      "keywords": []
+    }
+  }
+}

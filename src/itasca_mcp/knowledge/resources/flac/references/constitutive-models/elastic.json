@@ -1,0 +1,51 @@
+{
+  "model": "elastic",
+  "full_name": "Isotropic Elastic Model",
+  "search_keywords": [
+    "isotropic",
+    "elastic",
+    "constitutive",
+    "bulk",
+    "poisson",
+    "shear",
+    "young"
+  ],
+  "description": "In this isotropic elastic (or just, elastic, for simplicity) model, strain increments generate stress increments according to the linear and reversible law of Hooke: (1) \\[\\Delta {\\sigma}_{ij} = 2G\\ \\Delta {\\epsilon}_{ij} + {\\alpha}_2\\ \\Delta {\\epsilon}_{kk}\\ {\\delta}_{ij}\\] where the Einstein summation convention applies, \\({\\delta}_{ij}\\) is the Kroenecker delta symbol, and \\({\\alpha}_2\\) is a material constant related to the bulk modulus, \\(K\\) , and shear modulus, \\(G\\) , as (2) \\[{\\alpha}_2 = K - {{2}\\over{3}}\\ G\\] New stress values are then obtained from the relation (3) \\[{\\sigma}_{ij}^",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'elastic' zone constitutive model. Assign the model with 'zone cmodel assign elastic [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name elastic]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/elastic/doc/modelelastic.html",
+  "usage": {
+    "assign": "zone cmodel assign elastic [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name elastic]"
+  }
+}

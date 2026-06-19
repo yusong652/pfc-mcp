@@ -1,0 +1,302 @@
+{
+  "model": "cap-yield",
+  "full_name": "Cap-Yield (CYSoil) Model*",
+  "search_keywords": [
+    "cap",
+    "yield",
+    "cap-yield",
+    "(cysoil)",
+    "model*",
+    "constitutive",
+    "cohesion",
+    "dilation",
+    "friction",
+    "friction-mobilized",
+    "pressure-cap",
+    "pressure-initial",
+    "pressure-reference",
+    "poisson",
+    "shear-reference",
+    "tension",
+    "alpha",
+    "beta",
+    "dilation-mobilized",
+    "exponent",
+    "failure-ratio",
+    "flag-brittle",
+    "flag-cap",
+    "flag-dilation",
+    "flag-shear",
+    "friction-0",
+    "friction-critical",
+    "over-consolidation-ratio",
+    "multiplier",
+    "shear-maximum",
+    "shear-minimum",
+    "strain-shear-plastic",
+    "strain-tensile-plastic",
+    "strain-volumetric-plastic",
+    "table-pressure-cap",
+    "table-cohesion",
+    "table-dilation",
+    "table-friction",
+    "table-tension",
+    "void-initial",
+    "void-maximum",
+    "bulk",
+    "pressure-effective",
+    "shear",
+    "stress-deviatoric",
+    "void",
+    "young"
+  ],
+  "description": "Note *Not available in 3DEC . The CYSoil model is a strain-hardening constitutive model characterized by a frictional and cohesive Mohr-Coulomb shear envelope and an elliptic volumetric cap with ratio of axes, defined by a shape parameter \\(\\alpha\\) . The CYSoil model in FLAC3D 6 is an updated version of the FLAC3D 5 CYSoil model with the following built-in features: a cap hardening law to capture the volumetric power law behavior observed in isotropic compaction tests; a friction-hardening law to reproduce the hyperbolic stress-strain law behavior observed in drained triaxial tests; and a com",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'cap-yield' zone constitutive model. Assign the model with 'zone cmodel assign cap-yield [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name cap-yield]'.",
+      "properties": [
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "ultimate cohesion, c. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi_f",
+          "description": "ultimate dilation angle, \\psi_f. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi_f",
+          "description": "ultimate friction angle, \\phi_f. If the specified value is less than 0.1 degree, it will be limited to 0.1 degree for numerical stability.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-mobilized",
+          "symbol": "\\phi_m",
+          "description": "mobilized friction angle, \\phi_m, which should be initialized no less than the value determined by \\phi^{nc}_m (see this equation) via a command or FISH function.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-cap",
+          "symbol": "p_c",
+          "description": "cap pressure, p_c, which can be initialized via a command or a FISH function.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-initial",
+          "symbol": "p_{ini}",
+          "description": "initial mean effective stress, p_{ini}. Required if pressure-cap is not specified. It can be initialized via a command or a FISH function.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p_{ref}",
+          "description": "reference pressure, p_{ref}. A non-zero value should be specified based on the unit of stress/pressure adopted in the model.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "current Poisson’s ratio, \\nu. The default is 0.2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-reference",
+          "symbol": "G_{ref}",
+          "description": "dimensionless elastic shear modulus reference value, G_{ref}. A non-zero value should be specified.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "alpha",
+          "symbol": "\\alpha",
+          "description": "dimensionless cap yielding surface parameter, \\alpha. The default is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "beta",
+          "symbol": "\\beta",
+          "description": "dimensionless calibration factor, \\beta. The default is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-mobilized",
+          "symbol": "\\psi_m",
+          "description": "current mobilized dilation angle, \\psi_m. It is read-only, except for table-dilation ǂ 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent",
+          "symbol": "m",
+          "description": "exponent for the pressure-dependent elastic moduli, m. The default is 0.5, and the upper limit is 0.99.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "failure-ratio",
+          "symbol": "R_f",
+          "description": "failure ratio, R_f. The default is 0.9.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-cap",
+          "description": "= 0 (default), no cap. The elastic moduli are functions of the mean effective stress, and pressure_initial should be specified.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-dilation",
+          "description": "= 0 (default), the built-in Rowe dilation rule is used.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-shear",
+          "description": "= 0 (default), the built-in shear hardening law is used.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "friction-0",
+          "symbol": "\\phi_0",
+          "description": "initial mobilized friction angle, \\phi_0 associated with zero plastic shear strain. By default, \\phi_0 = \\phi_m if \\epsilon_{ps} is initialized to 0.0; otherwise, \\phi_0 = 0.0 if not specified.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-critical",
+          "symbol": "\\phi_{cv}",
+          "description": "constant \\phi_{cv}. The default value is calculated by this equation. Required for specification only if flag-dilation = 2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "over-consolidation-ratio",
+          "symbol": "OCR",
+          "description": "over-consolidation ratio, OCR. The default is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "multiplier",
+          "symbol": "R",
+          "description": "multiplier on current plastic cap modulus to give elastic bulk and shear moduli, R. The default is 5.0 with cap and 0.0 without cap.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-maximum",
+          "symbol": "G^e_{max}",
+          "description": "maximum (upper-bound limit) of the elastic shear modulus, G^e_{max}. The default internally calculated value is 10 \\times G^e_{ini}, where G^e_{ini} is the initial G^e when the model is first time set up.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-minimum",
+          "symbol": "G^e_{min}",
+          "description": "minimum (lower-bound limit) of the elastic shear modulus, G^e_{min}. The default internally calculated value is 0.1 \\times G^e_{ini}, where G^e_{ini} is the initial G^e when the model is first time set up.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "symbol": "\\gamma^p",
+          "description": "accumulated plastic shear strain, \\gamma^p. By default, it is initialized internally.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tensile-plastic",
+          "symbol": "e^{pt}",
+          "description": "accumulated plastic shear strain, e^{pt}. The default initial value is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-volumetric-plastic",
+          "symbol": "e^p",
+          "description": "accumulated plastic volumetric strain, e^p. By default, it is initialized internally.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-pressure-cap",
+          "description": "name of the table relating cap pressure to plastic volume strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-cohesion",
+          "description": "name of the table relating cohesion to plastic shear strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-dilation",
+          "description": "name of the table relating mobilized dilation angle to plastic shear strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-friction",
+          "description": "name of the table relating mobilized friction angle to plastic shear strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "description": "name of the table relating tensile strength to plastic tensile strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-initial",
+          "symbol": "\\hat{e}_{ini}",
+          "description": "initial void ratio, \\hat{e}_{ini}. The default is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-maximum",
+          "symbol": "\\hat{e}_{max}",
+          "description": "allowable maximum void ratio, \\hat{e}_{max}. The default is 999.0, a virtual value to bypass the dilatancy cut-off.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "description": "current elastic bulk modulus",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-effective",
+          "symbol": "p",
+          "description": "mean effective stress, p",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "description": "current elastic shear modulus",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-deviatoric",
+          "symbol": "q",
+          "description": "deviatoric stress, q",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void",
+          "symbol": "\\hat{e}",
+          "description": "current void ratio, \\hat{e}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "current elastic Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/cysoil/doc/modelcysoil.html",
+  "usage": {
+    "assign": "zone cmodel assign cap-yield [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name cap-yield]"
+  }
+}

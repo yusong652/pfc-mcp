@@ -1,0 +1,86 @@
+{
+  "model": "mohr-coulomb",
+  "full_name": "Mohr-Coulomb Model",
+  "search_keywords": [
+    "mohr",
+    "coulomb",
+    "mohr-coulomb",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "dilation",
+    "friction",
+    "poisson",
+    "shear",
+    "tension",
+    "young",
+    "flag-brittle"
+  ],
+  "description": "The failure envelope for this model corresponds to a Mohr-Coulomb criterion (shear yield function) with tension cutoff (tension yield function). The position of a stress point on this envelope is controlled by a non-associated flow rule for shear failure, and an associated rule for tension failure.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'mohr-coulomb' zone constitutive model. Assign the model with 'zone cmodel assign mohr-coulomb [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name mohr-coulomb]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "{\\sigma}^t",
+          "description": "tension limit, {\\sigma}^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/mohr/doc/modelmohr.html",
+  "usage": {
+    "assign": "zone cmodel assign mohr-coulomb [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name mohr-coulomb]"
+  }
+}

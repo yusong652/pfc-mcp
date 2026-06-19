@@ -76,7 +76,13 @@ class APISearch:
 
     @classmethod
     def search(
-        cls, query: str, top_k: int = 10, category: str | None = None, min_score: float | None = None
+        cls,
+        query: str,
+        top_k: int = 10,
+        category: str | None = None,
+        min_score: float | None = None,
+        *,
+        software: str,
     ) -> list[SearchResult]:
         """Search for Python SDK APIs using BM25 algorithm.
 
@@ -123,7 +129,7 @@ class APISearch:
         # Create and build BM25 search engine (no caching)
         # Each search builds a fresh index (~240ms overhead)
         # This ensures consistency and avoids stale cache issues in development
-        engine = BM25SearchEngine(document_loader=APIDocumentAdapter.load_all)
+        engine = BM25SearchEngine(document_loader=lambda: APIDocumentAdapter.load_all(software=software))
         engine.build()
 
         # Build filter dictionary

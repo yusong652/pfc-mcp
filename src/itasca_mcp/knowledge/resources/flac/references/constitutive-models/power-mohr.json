@@ -1,0 +1,128 @@
+{
+  "model": "power-mohr",
+  "full_name": "Power-Mohr Model",
+  "search_keywords": [
+    "power",
+    "mohr",
+    "power-mohr",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "constant-1",
+    "constant-2",
+    "dilation",
+    "exponent-1",
+    "exponent-2",
+    "friction",
+    "poisson",
+    "shear",
+    "stress-reference-1",
+    "stress-reference-2",
+    "tension",
+    "young",
+    "flag-brittle"
+  ],
+  "description": "This viscoplastic model cpower combines the behavior of the viscoelastic two-component power model and the elasto-plastic Mohr-Coulomb model . In the model formulation, the total strain rate \\(\\dot{\\epsilon_{ij}}\\) is decomposed into elastic ( \\(\\dot{\\epsilon}_{ij}^e\\) ), viscous ( \\(\\dot{\\epsilon}_{ij}^c\\) ), and plastic ( \\(\\dot{\\epsilon}_{ij}^p\\) ) components: (1) \\[\\dot{\\epsilon}_{ij} = \\dot{\\epsilon}_{ij}^e + \\dot{\\epsilon}_{ij}^c + \\dot{\\epsilon}_{ij}^p\\] The elastic strain rate \\(\\dot{\\epsilon}_{ij}^e\\) is the only component contributing to the stress rate; the deviatoric behavior is vi",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'power-mohr' zone constitutive model. Assign the model with 'zone cmodel assign power-mohr [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name power-mohr]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-1",
+          "symbol": "A",
+          "description": "power-law constant, A1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-2",
+          "symbol": "A",
+          "description": "power-law constant, A2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle, ψ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-1",
+          "symbol": "n",
+          "description": "power-law exponent, n1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-2",
+          "symbol": "n",
+          "description": "power-law exponent, n2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "ϕ",
+          "description": "angle of internal friction, ϕ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-1",
+          "symbol": "\\sigma^{ref}_1",
+          "description": "reference stress, \\sigma^{ref}_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-reference-2",
+          "symbol": "\\sigma^{ref}_2",
+          "description": "reference stress, \\sigma^{ref}_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "σ^t",
+          "description": "tension limit, σ^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/cpower/doc/modelcpower.html",
+  "usage": {
+    "assign": "zone cmodel assign power-mohr [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name power-mohr]"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "histories_and_results_reference",
+  "description": "Monitoring, field-query, and results-export reference topics for FLAC validation workflows.",
+  "items": [
+    {
+      "name": "history-workflow",
+      "file": "history-workflow.json",
+      "description": "History sampling, listing, deletion, purge, export, and common monitoring workflow patterns.",
+      "common_use": "Track response quantities during solve cycles and export time/step series for validation."
+    },
+    {
+      "name": "zone-field-data",
+      "file": "zone-field-data.json",
+      "description": "Zone field data names and quantity selectors used by zone history and FISH zone.field queries.",
+      "common_use": "Choose valid field names for histories, probes, post-processing, and scripted data extraction."
+    },
+    {
+      "name": "results-export",
+      "file": "results-export.json",
+      "description": "Zone results inclusion keywords for FLAC results-file export workflows.",
+      "common_use": "Control which zone, gridpoint, model, and interface data are included in exported results files."
+    }
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/common/kernel/doc/manual/history_manual/history.html",
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/zones/zones.html",
+    "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.results.html"
+  ]
+}

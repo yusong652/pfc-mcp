@@ -1,0 +1,184 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "hybrid",
+    "history",
+    "structure"
+  ],
+  "description": "Sample hybrid bolt responses. Quantities for sampling include element force, stress and yield state, and shear coupling spring displacement, stress and slip state. If a bolt is created using the structure hybrid create , then the nodes of each element so created will be ordered such that the overall bolt direction goes from the begin point to the end point (i.e., the nodal connectivity of each element will be ordered such that the direction from end-1 to end-2 corresponds with the direction from the begin point to the end point).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "structure hybrid history",
+      "syntax": "structure hybrid history keyword",
+      "description": "Sample hybrid bolt responses. Quantities for sampling include element force, stress and yield state, and shear coupling spring displacement, stress and slip state. If a bolt is created using the structure hybrid create, then the nodes of each element so created will be ordered such that the overall bolt direction goes from the begin point to the end point (i.e., the nodal connectivity of each element will be ordered such that the direction from end-1 to end-2 corresponds with the direction from the begin point to the end point).",
+      "keywords": [
+        {
+          "name": "force",
+          "syntax": "force [hybridhistoryblock]",
+          "description": "average axial force in the element (positive: tension; negative: compression)"
+        },
+        {
+          "name": "stress",
+          "syntax": "stress [hybridhistoryblock]",
+          "description": "average axial stress in the element (positive: tension; negative: compression)"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension [hybridhistoryblock]",
+          "description": "tensile yield state of the element. Value {0, 1, 2} denotes never yielded, now yielding, or yielded in the past, respectively."
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression [hybridhistoryblock]",
+          "description": "compressive yield state of the element. Value {0, 1, 2} denotes never yielded, now yielding, or yielded in the past, respectively."
+        },
+        {
+          "name": "grout-displacement",
+          "syntax": "grout-displacement [hybridhistoryblock]",
+          "description": "displacement in grout (shear coupling spring) at end of the element. Sign convention is +/- with respect to the average axial direction of cable."
+        },
+        {
+          "name": "grout-slip",
+          "syntax": "grout-slip [hybridhistoryblock]",
+          "description": "slip state in grout (shear coupling spring) at end of the element. Value {0, 1, 2} denotes never slipped, now slipping, or slipped in the past, respectively."
+        },
+        {
+          "name": "grout-stress",
+          "syntax": "grout-stress [hybridhistoryblock]",
+          "description": "stress in grout (shear coupling spring) at end of the element. Sign convention is +/- with respect to the average axial direction of cable."
+        },
+        {
+          "name": "dowel-force",
+          "syntax": "dowel-force [hybridhistoryblock]",
+          "description": "Shear force in the dowel (always positive)."
+        },
+        {
+          "name": "dowel-rupture",
+          "syntax": "dowel-rupture [hybridhistoryblock]",
+          "description": "Shear rupture state of the dowel. Value is 0 for not ruptured and 1 for ruptured."
+        },
+        {
+          "name": "dowel-strain",
+          "syntax": "dowel-strain [hybridhistoryblock]",
+          "description": "Shear strain in the dowel (always positive)."
+        },
+        {
+          "name": "dowel-yield",
+          "syntax": "dowel-yield [hybridhistoryblock]",
+          "description": "Shear yield state of the dowel. Value {0, 1, 2} denotes never yielded, now yielding, or yielded in the past, respectively."
+        },
+        {
+          "name": "component-id",
+          "syntax": "component-id i",
+          "description": "the particular element is identified by the component ID number. This could refer to a “cable” element or a dowel. If this keyword is used, position should not be used."
+        },
+        {
+          "name": "end",
+          "syntax": "end i"
+        },
+        {
+          "name": "position",
+          "syntax": "position v",
+          "description": "the particular element is identified by (v) coordinates (the nearest element is taken). This could apply to a “cable” element or dowel, depending on what history quantitiy is being queried. If this keyword is used, component-id should not be used."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/hybrid/commands/cmd_structure.hybrid.history.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure hybrid history",
+      "syntax": "structure hybrid history keyword",
+      "keywords": [
+        {
+          "name": "force",
+          "syntax": "force [hybridhistoryblock]",
+          "description": "average axial force in the element (positive: tension; negative: compression)"
+        },
+        {
+          "name": "stress",
+          "syntax": "stress [hybridhistoryblock]",
+          "description": "average axial stress in the element (positive: tension; negative: compression)"
+        },
+        {
+          "name": "yield",
+          "syntax": "yield [hybridhistoryblock]",
+          "description": "tensile yield state of the element. Value {0, 1, 2} denotes never yielded, now yielding, or yielded in the past, respectively."
+        },
+        {
+          "name": "grout-displacement",
+          "syntax": "grout-displacement [hybridhistoryblock]",
+          "description": "displacement in grout (shear coupling spring) at end of the element. Sign convention is +/- with respect to the average axial direction of cable."
+        },
+        {
+          "name": "grout-slip",
+          "syntax": "grout-slip [hybridhistoryblock]",
+          "description": "slip state in grout (shear coupling spring) at end of the element. Value {0, 1, 2} denotes never slipped, now slipping, or slipped in the past, respectively."
+        },
+        {
+          "name": "grout-stress",
+          "syntax": "grout-stress [hybridhistoryblock]",
+          "description": "stress in grout (shear coupling spring) at end of the element. Sign convention is +/- with respect to the average axial direction of cable."
+        },
+        {
+          "name": "dowel-force",
+          "syntax": "dowel-force [hybridhistoryblock]",
+          "description": "Shear force in the dowel (always positive)."
+        },
+        {
+          "name": "dowel-rupture",
+          "syntax": "dowel-rupture [hybridhistoryblock]",
+          "description": "Shear rupture state of the dowel. Value is 0 for not ruptured and 1 for ruptured."
+        },
+        {
+          "name": "dowel-strain",
+          "syntax": "dowel-strain [hybridhistoryblock]",
+          "description": "Shear strain in the dowel (always positive)."
+        },
+        {
+          "name": "dowel-yield",
+          "syntax": "dowel-yield [hybridhistoryblock]",
+          "description": "Shear yield state of the dowel. Value {0, 1, 2} denotes never yielded, now yielding, or yielded in the past, respectively."
+        },
+        {
+          "name": "name",
+          "syntax": "name <s>",
+          "description": "assign a name s to the history record (used to reference the history elsewhere)"
+        },
+        {
+          "name": "component-id",
+          "syntax": "component-id <i>",
+          "description": "the particular element is identified by the component ID number. This could refer to a “cable” element or a dowel. If this keyword is used, position should not be used."
+        },
+        {
+          "name": "end",
+          "syntax": "end <i>",
+          "description": "Not used for dowels."
+        },
+        {
+          "name": "position",
+          "syntax": "position <v>",
+          "description": "the particular element is identified by ( v ) coordinates (the nearest element is taken). This could apply to a “cable” element or dowel, depending on what history quantitiy is being queried. If this keyword is used, component-id should not be used."
+        }
+      ]
+    }
+  }
+}

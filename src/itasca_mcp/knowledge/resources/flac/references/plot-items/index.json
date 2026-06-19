@@ -1,0 +1,45 @@
+{
+  "type": "plot_item_keywords",
+  "description": "Configuration keywords for FLAC plot item types created via 'plot item create <type>'. Item types and their keyword sets are binary-validated against FLAC2D 9.0.",
+  "usage_context": "plot item create <type> <keyword> <keyword> ...",
+  "items": [
+    {
+      "name": "zone",
+      "file": "zone/index.json",
+      "description": "Continuum zone visualization. Use 'contour <attribute>' for scalar/vector field maps, 'label <type>' for categorical labeling (group/state/model/property), and 'color <Color>' for flat coloring.",
+      "common_use": "Visualize continuum grid results: stress, displacement, pore pressure, temperature, model state, groups."
+    },
+    {
+      "name": "gridpoint-fix",
+      "file": "gridpoint-fix/index.json",
+      "description": "Gridpoint fix-condition markers (velocity, pore-pressure, temperature fixity).",
+      "common_use": "Show where boundary fixities are applied. For gridpoint field values (displacement, velocity, pp, temperature) use 'plot item create zone contour <attribute>' instead — zone contour interpolates from gridpoint data."
+    },
+    {
+      "name": "structure",
+      "file": "structure/index.json",
+      "description": "Structural-element visualization. Types: structure-beam, structure-cable, structure-liner, structure-pile (beam-family — share keyword set), structure-vector (vector field at nodes).",
+      "common_use": "Visualize structural-element groups, forces/moments/axial via 'contour <attribute>', categorical via 'label <type>'."
+    }
+  ],
+  "shared_keywords": {
+    "description": "Top-level keywords accepted by most FLAC plot item types (validated against FLAC2D 9.0).",
+    "list": [
+      "active",
+      "color-list",
+      "contour",
+      "deformation-factor",
+      "hide-null",
+      "label",
+      "legend",
+      "map",
+      "range"
+    ]
+  },
+  "notes": [
+    "Plot-item keywords are appended after the item type.",
+    "Some compound settings are easier to apply with 'plot item modify <id> ...' after creating the item.",
+    "Probe the binary live with 'plot item create <type> ?' to see the full keyword set for any type, and 'plot item create <type> <kw> ?' to drill into a keyword.",
+    "Other plot item types (zone-vector, zone-tensor, zone-face, pp-fix, struct-node-fix, etc.) are accepted by FLAC2D 9.0 but not yet documented here."
+  ]
+}

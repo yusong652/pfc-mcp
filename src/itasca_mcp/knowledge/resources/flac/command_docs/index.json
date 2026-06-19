@@ -1,0 +1,4120 @@
+{
+  "version": "1.0",
+  "description": "FLAC command documentation index for quick lookup and LLM-assisted command discovery",
+  "categories": {
+    "body": {
+      "full_name": "Building-Blocks Commands",
+      "description": "Commands for the building-blocks geometry builder — interactively defining blocks, faces, edges, and points that are meshed into the FLAC zone grid via 'zone generate from-build-blocks'.",
+      "command_prefix": "building-blocks",
+      "doc_url": "https://docs.itascacg.com/flac3d900/flac3d/body/doc/manual/buildingblocks_manual/building-blocks.html",
+      "related_categories": [
+        "zone",
+        "geometry"
+      ],
+      "notes": [
+        "Building blocks are a topology-first meshing workflow: define blocks, then generate zones from them",
+        "Command verb is 'building-blocks' even though the docs/UI call it the Building Blocks pane",
+        "Primarily a model-setup tool; most workflows drive it via the GUI or 'itasca.command()'",
+        "Use 'zone generate from-build-blocks' to turn the block topology into a zone grid"
+      ],
+      "commands": [
+        {
+          "name": "block-create",
+          "file": "flac/command_docs/commands/body/block-create.json",
+          "short_description": "Create a block or blocks",
+          "syntax": "building-blocks block create keyword",
+          "python_available": false
+        },
+        {
+          "name": "block-delete",
+          "file": "flac/command_docs/commands/body/block-delete.json",
+          "short_description": "Delete blocks",
+          "syntax": "building-blocks block delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-export",
+          "file": "flac/command_docs/commands/body/block-export.json",
+          "short_description": "Export blocks",
+          "syntax": "building-blocks block export keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-group",
+          "file": "flac/command_docs/commands/body/block-group.json",
+          "short_description": "Assign or remove a group name to blocks",
+          "syntax": "building-blocks block group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-hide",
+          "file": "flac/command_docs/commands/body/block-hide.json",
+          "short_description": "Set the blocks to be hide or not",
+          "syntax": "building-blocks block hide <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "block-id",
+          "file": "flac/command_docs/commands/body/block-id.json",
+          "short_description": "Perform an operation on a block (by ID)",
+          "syntax": "building-blocks block id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "block-import",
+          "file": "flac/command_docs/commands/body/block-import.json",
+          "short_description": "Import blocks from a file",
+          "syntax": "building-blocks block import keyword",
+          "python_available": false
+        },
+        {
+          "name": "block-list",
+          "file": "flac/command_docs/commands/body/block-list.json",
+          "short_description": "Print information about blocks",
+          "syntax": "building-blocks block list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-make-hex-only",
+          "file": "flac/command_docs/commands/body/block-make-hex-only.json",
+          "short_description": "Split all triangular faces of wedge and tetrahedral blocks",
+          "syntax": "building-blocks block make-hex-only",
+          "python_available": false
+        },
+        {
+          "name": "block-multiplier",
+          "file": "flac/command_docs/commands/body/block-multiplier.json",
+          "short_description": "Set the zone multiplier coefficient for final zone generation",
+          "syntax": "building-blocks block multiplier <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "block-snapon",
+          "file": "flac/command_docs/commands/body/block-snapon.json",
+          "short_description": "Snap a block to a geometric set",
+          "syntax": "building-blocks block snapon id <i>set <s>keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-transform",
+          "file": "flac/command_docs/commands/body/block-transform.json",
+          "short_description": "Perform a general geometric transformation on points of blocks",
+          "syntax": "building-blocks block transform [origin <v>] keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-add-controls",
+          "file": "flac/command_docs/commands/body/edge-add-controls.json",
+          "short_description": "Add control points to edges",
+          "syntax": "building-blocks edge add-controls keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-delete",
+          "file": "flac/command_docs/commands/body/edge-delete.json",
+          "short_description": "Delete edges",
+          "syntax": "building-blocks edge delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-drape",
+          "file": "flac/command_docs/commands/body/edge-drape.json",
+          "short_description": "Move the points of edges onto an external geometric set",
+          "syntax": "building-blocks edge drape keyword [novalidate] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-factor",
+          "file": "flac/command_docs/commands/body/edge-factor.json",
+          "short_description": "Apply a sizing factor to zones on edges",
+          "syntax": "building-blocks edge factor <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-group",
+          "file": "flac/command_docs/commands/body/edge-group.json",
+          "short_description": "Assign or remove a group name to edges",
+          "syntax": "building-blocks edge group <s>[slot <s>] [remove] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-id",
+          "file": "flac/command_docs/commands/body/edge-id.json",
+          "short_description": "Modify the properties of an edge",
+          "syntax": "building-blocks edge id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "edge-list",
+          "file": "flac/command_docs/commands/body/edge-list.json",
+          "short_description": "Print information about edges",
+          "syntax": "building-blocks edge list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-ratio",
+          "file": "flac/command_docs/commands/body/edge-ratio.json",
+          "short_description": "Apply a sizing ratio to zones on edges",
+          "syntax": "building-blocks edge ratio <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-ratio-isolate",
+          "file": "flac/command_docs/commands/body/edge-ratio-isolate.json",
+          "short_description": "Determine whether zone ratios or factors propagate",
+          "syntax": "building-blocks edge ratio-isolate <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-size",
+          "file": "flac/command_docs/commands/body/edge-size.json",
+          "short_description": "Specify the number of zones on an edge",
+          "syntax": "building-blocks edge size <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-snapon",
+          "file": "flac/command_docs/commands/body/edge-snapon.json",
+          "short_description": "Snap an edge to a geometric set",
+          "syntax": "building-blocks edge snapon id <i>set <s>keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-transform",
+          "file": "flac/command_docs/commands/body/edge-transform.json",
+          "short_description": "Transform and edge (via its points)",
+          "syntax": "building-blocks edge transform [origin <v_o>] keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-type",
+          "file": "flac/command_docs/commands/body/edge-type.json",
+          "short_description": "Specify edge curve-type",
+          "syntax": "building-blocks edge type keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-add-controls",
+          "file": "flac/command_docs/commands/body/face-add-controls.json",
+          "short_description": "Add control points to faces",
+          "syntax": "building-blocks face add-controls keyword [no-edges-cp] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-cycle",
+          "file": "flac/command_docs/commands/body/face-cycle.json",
+          "short_description": "Rotate (cycle) the topology of triangular faces",
+          "syntax": "building-blocks face cycle [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-delete",
+          "file": "flac/command_docs/commands/body/face-delete.json",
+          "short_description": "Delete faces",
+          "syntax": "building-blocks face delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-drape",
+          "file": "flac/command_docs/commands/body/face-drape.json",
+          "short_description": "Move the points of faces onto an external geometric set",
+          "syntax": "building-blocks face drape keyword [novalidate] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-group",
+          "file": "flac/command_docs/commands/body/face-group.json",
+          "short_description": "Assign a group name to faces",
+          "syntax": "building-blocks face group <s>[slot <s>] [remove] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-id",
+          "file": "flac/command_docs/commands/body/face-id.json",
+          "short_description": "Modify the properties of a face",
+          "syntax": "building-blocks face id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "face-list",
+          "file": "flac/command_docs/commands/body/face-list.json",
+          "short_description": "Print information about faces",
+          "syntax": "building-blocks face list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-snapon",
+          "file": "flac/command_docs/commands/body/face-snapon.json",
+          "short_description": "Snap a face to a geometric set",
+          "syntax": "building-blocks face snapon id <i>set <s>keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-transform",
+          "file": "flac/command_docs/commands/body/face-transform.json",
+          "short_description": "Transform a face (via its points)",
+          "syntax": "building-blocks face transform [origin <v_o>] [control-point <b>] keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-delete",
+          "file": "flac/command_docs/commands/body/point-delete.json",
+          "short_description": "Delete points",
+          "syntax": "building-blocks point delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-drape",
+          "file": "flac/command_docs/commands/body/point-drape.json",
+          "short_description": "Move points onto an external geometric set",
+          "syntax": "building-blocks point drape keyword [novalidate] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-group",
+          "file": "flac/command_docs/commands/body/point-group.json",
+          "short_description": "Assign a group name to points",
+          "syntax": "building-blocks point group <s>[slot <s>] [remove] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-list",
+          "file": "flac/command_docs/commands/body/point-list.json",
+          "short_description": "Print information about points",
+          "syntax": "building-blocks point list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-merge",
+          "file": "flac/command_docs/commands/body/point-merge.json",
+          "short_description": "Merge two points",
+          "syntax": "building-blocks point merge <i1><i2>",
+          "python_available": false
+        },
+        {
+          "name": "point-move-to",
+          "file": "flac/command_docs/commands/body/point-move-to.json",
+          "short_description": "Move points",
+          "syntax": "building-blocks point move-to keyword <f>[control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-snapon",
+          "file": "flac/command_docs/commands/body/point-snapon.json",
+          "short_description": "Snap points to a geometric set",
+          "syntax": "building-blocks point snapon id <i>set <s>keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-transform",
+          "file": "flac/command_docs/commands/body/point-transform.json",
+          "short_description": "Transform points",
+          "syntax": "building-blocks point transform [origin <v_o>] keyword [control-point <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "set-arrest-triangle",
+          "file": "flac/command_docs/commands/body/set-arrest-triangle.json",
+          "short_description": "Specify how to split a wedge block",
+          "syntax": "building-blocks set arrest-triangle <b>",
+          "python_available": false
+        },
+        {
+          "name": "set-auto-tolerance",
+          "file": "flac/command_docs/commands/body/set-auto-tolerance.json",
+          "short_description": "Set the auto-tolerance flag for geometric manipulations",
+          "syntax": "building-blocks set auto-tolerance <b>",
+          "python_available": false
+        },
+        {
+          "name": "set-automatic-zone",
+          "file": "flac/command_docs/commands/body/set-automatic-zone.json",
+          "short_description": "Specify a automatic zoning method",
+          "syntax": "building-blocks set automatic-zone keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-break-angle",
+          "file": "flac/command_docs/commands/body/set-break-angle.json",
+          "short_description": "Set the break angle",
+          "syntax": "building-blocks set break-angle [<f>]",
+          "python_available": false
+        },
+        {
+          "name": "set-create",
+          "file": "flac/command_docs/commands/body/set-create.json",
+          "short_description": "Create a building block set",
+          "syntax": "building-blocks set create <s>",
+          "python_available": false
+        },
+        {
+          "name": "set-delete",
+          "file": "flac/command_docs/commands/body/set-delete.json",
+          "short_description": "Delete a building block set",
+          "syntax": "building-blocks set delete [<s>]",
+          "python_available": false
+        },
+        {
+          "name": "set-export",
+          "file": "flac/command_docs/commands/body/set-export.json",
+          "short_description": "Export current building blocks to a file",
+          "syntax": "building-blocks set export [<s>] [binary]",
+          "python_available": false
+        },
+        {
+          "name": "set-geometry",
+          "file": "flac/command_docs/commands/body/set-geometry.json",
+          "short_description": "Associate a geometry set with the current set",
+          "syntax": "building-blocks set geometry keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-import",
+          "file": "flac/command_docs/commands/body/set-import.json",
+          "short_description": "Import a building blocks set",
+          "syntax": "building-blocks set import keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-list",
+          "file": "flac/command_docs/commands/body/set-list.json",
+          "short_description": "Print information about a building blocks set",
+          "syntax": "building-blocks set list [<s>]",
+          "python_available": false
+        },
+        {
+          "name": "set-select",
+          "file": "flac/command_docs/commands/body/set-select.json",
+          "short_description": "Specify the current building blocks set",
+          "syntax": "building-blocks set select <s>",
+          "python_available": false
+        },
+        {
+          "name": "set-tolerance",
+          "file": "flac/command_docs/commands/body/set-tolerance.json",
+          "short_description": "Set the tolerance for geometric manipulations",
+          "syntax": "building-blocks set tolerance <f>",
+          "python_available": false
+        },
+        {
+          "name": "set-validate-all",
+          "file": "flac/command_docs/commands/body/set-validate-all.json",
+          "short_description": "Check the validity of blocks",
+          "syntax": "building-blocks set validate-all",
+          "python_available": false
+        }
+      ]
+    },
+    "data": {
+      "full_name": "Data Commands",
+      "description": "Commands for creating user-defined data containers — labels, scalars, vectors, and tensors — attached to model objects. Used for visualizing imported field data or computed quantities.",
+      "command_prefix": "data",
+      "related_categories": [
+        "geometry",
+        "plot"
+      ],
+      "notes": [
+        "Four sub-namespaces: data label / scalar / vector / tensor — each with create/delete/list/import/export/group/results",
+        "Useful for piping external CSV / field data into the model for visualization or sampling",
+        "Sub-namespace is part of the JSON key: 'data scalar create' → commands/data/scalar-create.json",
+        "Plot items can color/size objects by data values stored in these containers"
+      ],
+      "commands": [
+        {
+          "name": "label-create",
+          "file": "_common/command_docs/commands/data/label-create.json",
+          "short_description": "Create a user-defined label at a point in space",
+          "syntax": "data label create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "label-delete",
+          "file": "_common/command_docs/commands/data/label-delete.json",
+          "short_description": "Delete all labels within the specified range ",
+          "syntax": "data label delete [name <s>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "label-list",
+          "file": "_common/command_docs/commands/data/label-list.json",
+          "short_description": "List label information",
+          "syntax": "data label list [name <s>]",
+          "python_available": false
+        },
+        {
+          "name": "label-modify",
+          "file": "_common/command_docs/commands/data/label-modify.json",
+          "short_description": "Modify an existing label",
+          "syntax": "data label modify keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "label-results",
+          "file": "_common/command_docs/commands/data/label-results.json",
+          "short_description": "Include label data in results files",
+          "syntax": "data label results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "scalar-create",
+          "file": "_common/command_docs/commands/data/scalar-create.json",
+          "short_description": "Create a scalar data entry",
+          "syntax": "data scalar create <v>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-delete",
+          "file": "_common/command_docs/commands/data/scalar-delete.json",
+          "short_description": "Delete scalars in the range",
+          "syntax": "data scalar delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-export",
+          "file": "_common/command_docs/commands/data/scalar-export.json",
+          "short_description": "Export scalars to the file with name s ",
+          "syntax": "data scalar export <s>[binary] [range]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-group",
+          "file": "_common/command_docs/commands/data/scalar-group.json",
+          "short_description": "Specify scalar group names",
+          "syntax": "data scalar group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-import",
+          "file": "_common/command_docs/commands/data/scalar-import.json",
+          "short_description": "Import scalars from file s ",
+          "syntax": "data scalar import <s>[keyword]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-list",
+          "file": "_common/command_docs/commands/data/scalar-list.json",
+          "short_description": "List scalar information on data in the range specified",
+          "syntax": "data scalar list [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "scalar-results",
+          "file": "_common/command_docs/commands/data/scalar-results.json",
+          "short_description": "Include scalar data in results files",
+          "syntax": "data scalar results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "tensor-create",
+          "file": "_common/command_docs/commands/data/tensor-create.json",
+          "short_description": "Create a tensor data entry",
+          "syntax": "data tensor create <v>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-delete",
+          "file": "_common/command_docs/commands/data/tensor-delete.json",
+          "short_description": "Delete tensors in the range",
+          "syntax": "data tensor delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-export",
+          "file": "_common/command_docs/commands/data/tensor-export.json",
+          "short_description": "Export tensors to the file with name s ",
+          "syntax": "data tensor export <s>[binary] [range]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-group",
+          "file": "_common/command_docs/commands/data/tensor-group.json",
+          "short_description": "Specify tensor group names",
+          "syntax": "data tensor group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-import",
+          "file": "_common/command_docs/commands/data/tensor-import.json",
+          "short_description": "Import tensors from file s ",
+          "syntax": "data tensor import <s>[group <s>[slot <s>]]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-list",
+          "file": "_common/command_docs/commands/data/tensor-list.json",
+          "short_description": "List tensor information on data in the range specified",
+          "syntax": "data tensor list [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "tensor-results",
+          "file": "_common/command_docs/commands/data/tensor-results.json",
+          "short_description": "Include tensor data in results files",
+          "syntax": "data tensor results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "vector-create",
+          "file": "_common/command_docs/commands/data/vector-create.json",
+          "short_description": "Create a vector",
+          "syntax": "data vector create <v>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "vector-delete",
+          "file": "_common/command_docs/commands/data/vector-delete.json",
+          "short_description": "Delete vector data objets in the range",
+          "syntax": "data vector delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "vector-export",
+          "file": "_common/command_docs/commands/data/vector-export.json",
+          "short_description": "Export vectors to the file with name s ",
+          "syntax": "data vector export <s>[binary] [range]",
+          "python_available": false
+        },
+        {
+          "name": "vector-group",
+          "file": "_common/command_docs/commands/data/vector-group.json",
+          "short_description": "Specify vector group names",
+          "syntax": "data vector group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "vector-import",
+          "file": "_common/command_docs/commands/data/vector-import.json",
+          "short_description": "Import vectors from file s ",
+          "syntax": "data vector import <s>[group <s>[slot <s>]]",
+          "python_available": false
+        },
+        {
+          "name": "vector-list",
+          "file": "_common/command_docs/commands/data/vector-list.json",
+          "short_description": "List vector information",
+          "syntax": "data vector list [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "vector-results",
+          "file": "_common/command_docs/commands/data/vector-results.json",
+          "short_description": "Include vector data in results files",
+          "syntax": "data vector results active <b>",
+          "python_available": false
+        }
+      ]
+    },
+    "domain": {
+      "full_name": "Domain Commands",
+      "description": "Commands for configuring the model domain: the bounding box, boundary conditions, and strain-rate for periodic-cell simulations.",
+      "command_prefix": "domain",
+      "related_categories": [
+        "model"
+      ],
+      "notes": [
+        "Configure the domain extent before domain-dependent workflows ('model domain extent ...')",
+        "'domain condition' sets per-face boundary behavior (rigid, destroy, periodic, reflect)",
+        "'domain strain-rate' drives periodic-cell deformation for representative-volume-element (REV) studies",
+        "Most domain configuration is done via 'model domain' shortcuts; standalone 'domain' commands are lower-level overrides"
+      ],
+      "commands": [
+        {
+          "name": "condition",
+          "file": "flac/command_docs/commands/domain/condition.json",
+          "short_description": "Set the domain boundary conditions",
+          "syntax": "domain condition <sx>[<sy><sz>] <sz>",
+          "python_available": false
+        },
+        {
+          "name": "extent",
+          "file": "flac/command_docs/commands/domain/extent.json",
+          "short_description": "Specify the locations of the sides of the domain",
+          "syntax": "domain extent <fxl><fxu>[<fyl><fyu><fzl><fzu>]",
+          "python_available": false
+        },
+        {
+          "name": "strain-rate",
+          "file": "flac/command_docs/commands/domain/strain-rate.json",
+          "short_description": "Specify the domain strain rate",
+          "syntax": "domain strain-rate <v>",
+          "python_available": false
+        }
+      ]
+    },
+    "extruder": {
+      "full_name": "Extruder (Sketch) Commands",
+      "description": "Commands for the extruder/sketch tool — defining 2D cross-sections (points, edges, segments, blocks) and extruding them into a 3D FLAC zone grid.",
+      "command_prefix": "sketch",
+      "doc_url": "https://docs.itascacg.com/flac3d900/flac3d/extruder/doc/manual/sketch_manual/sketch.html",
+      "related_categories": [
+        "zone",
+        "body",
+        "geometry"
+      ],
+      "notes": [
+        "Command verb is 'sketch' even though the tool/UI is called the Extruder",
+        "Workflow: sketch a 2D section (sketch point/edge/segment), then extrude it into zones",
+        "Sub-namespace is part of the JSON key: 'sketch block create' -> commands/extruder/block-create.json",
+        "Primarily a GUI-driven model-setup tool; scriptable via 'itasca.command()'",
+        "Nested keyword options (e.g. <kwd>-group) are captured; some parent keywords may be partial pending nested-dl parsing"
+      ],
+      "commands": [
+        {
+          "name": "block-create",
+          "file": "flac/command_docs/commands/extruder/block-create.json",
+          "short_description": "Create block(s)",
+          "syntax": "sketch block create keyword",
+          "python_available": false
+        },
+        {
+          "name": "block-delete",
+          "file": "flac/command_docs/commands/extruder/block-delete.json",
+          "short_description": "Delete block(s)",
+          "syntax": "sketch block delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-group",
+          "file": "flac/command_docs/commands/extruder/block-group.json",
+          "short_description": "Assign/remove a group name to blocks",
+          "syntax": "sketch block group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-id",
+          "file": "flac/command_docs/commands/extruder/block-id.json",
+          "short_description": "Modify a single block by ID",
+          "syntax": "sketch block id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "block-list",
+          "file": "flac/command_docs/commands/extruder/block-list.json",
+          "short_description": "Print information about blocks",
+          "syntax": "sketch block list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "block-multiplier",
+          "file": "flac/command_docs/commands/extruder/block-multiplier.json",
+          "short_description": "The command only applies to regular (3- or 4-sided) blocks with structured mesh",
+          "syntax": "sketch block multiplier <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "block-position",
+          "file": "flac/command_docs/commands/extruder/block-position.json",
+          "short_description": "Modify a block by position",
+          "syntax": "sketch block position <v2>keyword",
+          "python_available": false
+        },
+        {
+          "name": "edge-clear",
+          "file": "flac/command_docs/commands/extruder/edge-clear.json",
+          "short_description": "Clear all zone size and ratio settings on edges",
+          "syntax": "sketch edge clear",
+          "python_available": false
+        },
+        {
+          "name": "edge-combine",
+          "file": "flac/command_docs/commands/extruder/edge-combine.json",
+          "short_description": "Combine edges into a single edge",
+          "syntax": "sketch edge combine keyword",
+          "python_available": false
+        },
+        {
+          "name": "edge-create",
+          "file": "flac/command_docs/commands/extruder/edge-create.json",
+          "short_description": "Create an edge or a set of edges",
+          "syntax": "sketch edge create keyword",
+          "python_available": false
+        },
+        {
+          "name": "edge-delete",
+          "file": "flac/command_docs/commands/extruder/edge-delete.json",
+          "short_description": "Delete edges",
+          "syntax": "sketch edge delete [invalid] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-group",
+          "file": "flac/command_docs/commands/extruder/edge-group.json",
+          "short_description": "Assign/remove a group name to edges",
+          "syntax": "sketch edge group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-id",
+          "file": "flac/command_docs/commands/extruder/edge-id.json",
+          "short_description": "Modify a single edge by ID",
+          "syntax": "sketch edge id <i>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "edge-list",
+          "file": "flac/command_docs/commands/extruder/edge-list.json",
+          "short_description": "Print information about edges",
+          "syntax": "sketch edge list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-ratio",
+          "file": "flac/command_docs/commands/extruder/edge-ratio.json",
+          "short_description": "Set the ratio",
+          "syntax": "sketch edge ratio <f>keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-ratio-isolate",
+          "file": "flac/command_docs/commands/extruder/edge-ratio-isolate.json",
+          "short_description": "This keyword only applies to edges that form regular (3- or 4-sided) blocks",
+          "syntax": "sketch edge ratio-isolate <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-ratio-reverse",
+          "file": "flac/command_docs/commands/extruder/edge-ratio-reverse.json",
+          "short_description": "This keyword reverses the ratio for edges in the range",
+          "syntax": "sketch edge ratio-reverse [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-size",
+          "file": "flac/command_docs/commands/extruder/edge-size.json",
+          "short_description": "Set the number of zones on the edge",
+          "syntax": "sketch edge size <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-size-default",
+          "file": "flac/command_docs/commands/extruder/edge-size-default.json",
+          "short_description": "Set the default number of zones on the edge",
+          "syntax": "sketch edge size-default <i>",
+          "python_available": false
+        },
+        {
+          "name": "edge-zone-length",
+          "file": "flac/command_docs/commands/extruder/edge-zone-length.json",
+          "short_description": "Set the length of zones on the edge",
+          "syntax": "sketch edge zone-length <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-zone-length-default",
+          "file": "flac/command_docs/commands/extruder/edge-zone-length-default.json",
+          "short_description": "Set the default length of zones on the edge",
+          "syntax": "sketch edge zone-length-default <f>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-gradation",
+          "file": "flac/command_docs/commands/extruder/mesh-gradation.json",
+          "short_description": "Specify the maximum gradation f > 0 for the unstructured mesher",
+          "syntax": "sketch mesh gradation <f>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-list",
+          "file": "flac/command_docs/commands/extruder/mesh-list.json",
+          "short_description": "Display information about meshing settings",
+          "syntax": "sketch mesh list keyword",
+          "python_available": false
+        },
+        {
+          "name": "mesh-mode",
+          "file": "flac/command_docs/commands/extruder/mesh-mode.json",
+          "short_description": "Specify the operating mode for the unstructured mesher",
+          "syntax": "sketch mesh mode keyword",
+          "python_available": false
+        },
+        {
+          "name": "mesh-optimization",
+          "file": "flac/command_docs/commands/extruder/mesh-optimization.json",
+          "short_description": "Specify optimization level 0 ≤ i ≤ 10 for the unstructured mesher",
+          "syntax": "sketch mesh optimization <i>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-quad-weight",
+          "file": "flac/command_docs/commands/extruder/mesh-quad-weight.json",
+          "short_description": "Specify a weight on quadrilaterals 0 ≤ f ≤ 1 for the unstructured mesher",
+          "syntax": "sketch mesh quad-weight <f>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-reset",
+          "file": "flac/command_docs/commands/extruder/mesh-reset.json",
+          "short_description": "Reset all meshing parameters to defaults",
+          "syntax": "sketch mesh reset",
+          "python_available": false
+        },
+        {
+          "name": "mesh-shape-quality",
+          "file": "flac/command_docs/commands/extruder/mesh-shape-quality.json",
+          "short_description": "Specify a value for the shape-quality 0 ≤ f ≤ 1 for the unstructured mesher",
+          "syntax": "sketch mesh shape-quality <f>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-target-size",
+          "file": "flac/command_docs/commands/extruder/mesh-target-size.json",
+          "short_description": "Specify the desired zone size (target size) inside of a block, f ≥ 0",
+          "syntax": "sketch mesh target-size <f>",
+          "python_available": false
+        },
+        {
+          "name": "mesh-type",
+          "file": "flac/command_docs/commands/extruder/mesh-type.json",
+          "short_description": "Specify the type of mesh",
+          "syntax": "sketch mesh type keyword",
+          "python_available": false
+        },
+        {
+          "name": "path-clear",
+          "file": "flac/command_docs/commands/extruder/path-clear.json",
+          "short_description": "Clear all path data (segments, nodes)",
+          "syntax": "sketch path clear keyword",
+          "python_available": false
+        },
+        {
+          "name": "path-continuous",
+          "file": "flac/command_docs/commands/extruder/path-continuous.json",
+          "short_description": "Keep the path continous when deleing a segment or a node",
+          "syntax": "sketch path continuous <b>",
+          "python_available": false
+        },
+        {
+          "name": "path-ends-parallel",
+          "file": "flac/command_docs/commands/extruder/path-ends-parallel.json",
+          "short_description": "Keep the cross-sections at the ends of the path parallel to the construction plane",
+          "syntax": "sketch path ends-parallel <b>",
+          "python_available": false
+        },
+        {
+          "name": "path-extrude-mode",
+          "file": "flac/command_docs/commands/extruder/path-extrude-mode.json",
+          "short_description": "Set the extrude-mode",
+          "syntax": "sketch path extrude-mode keyword",
+          "python_available": false
+        },
+        {
+          "name": "path-translate",
+          "file": "flac/command_docs/commands/extruder/path-translate.json",
+          "short_description": "Translate the whole path based on the extent of the blocks in the construction scene",
+          "syntax": "sketch path translate keyword",
+          "python_available": false
+        },
+        {
+          "name": "point-create",
+          "file": "flac/command_docs/commands/extruder/point-create.json",
+          "short_description": "Create a point",
+          "syntax": "sketch point create <v2>keyword",
+          "python_available": false
+        },
+        {
+          "name": "point-delete",
+          "file": "flac/command_docs/commands/extruder/point-delete.json",
+          "short_description": "Delete points",
+          "syntax": "sketch point delete [invalid] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-group",
+          "file": "flac/command_docs/commands/extruder/point-group.json",
+          "short_description": "Assign/remove a group name to points",
+          "syntax": "sketch point group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "point-id",
+          "file": "flac/command_docs/commands/extruder/point-id.json",
+          "short_description": "Modify a single point by ID",
+          "syntax": "sketch point id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "point-list",
+          "file": "flac/command_docs/commands/extruder/point-list.json",
+          "short_description": "Print information about points",
+          "syntax": "sketch point list keyword",
+          "python_available": false
+        },
+        {
+          "name": "point-transform",
+          "file": "flac/command_docs/commands/extruder/point-transform.json",
+          "short_description": "Transform points",
+          "syntax": "sketch point transform keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "section-circle",
+          "file": "flac/command_docs/commands/extruder/section-circle.json",
+          "short_description": "Adds circular section(s)",
+          "syntax": "sketch section circle keyword",
+          "python_available": false
+        },
+        {
+          "name": "section-polygon",
+          "file": "flac/command_docs/commands/extruder/section-polygon.json",
+          "short_description": "Adds polygon section(s)",
+          "syntax": "sketch section polygon keyword",
+          "python_available": false
+        },
+        {
+          "name": "section-rectangle",
+          "file": "flac/command_docs/commands/extruder/section-rectangle.json",
+          "short_description": "Adds rectangular section(s)",
+          "syntax": "sketch section rectangle keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-clear",
+          "file": "flac/command_docs/commands/extruder/segment-clear.json",
+          "short_description": "Clear all zone size and ratio settings on segments",
+          "syntax": "sketch segment clear",
+          "python_available": false
+        },
+        {
+          "name": "segment-create",
+          "file": "flac/command_docs/commands/extruder/segment-create.json",
+          "short_description": "Create a segment or a set of segments",
+          "syntax": "sketch segment create keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-delete",
+          "file": "flac/command_docs/commands/extruder/segment-delete.json",
+          "short_description": "Delete segments",
+          "syntax": "sketch segment delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-group",
+          "file": "flac/command_docs/commands/extruder/segment-group.json",
+          "short_description": "Assign/remove a group name to segments",
+          "syntax": "sketch segment group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-id",
+          "file": "flac/command_docs/commands/extruder/segment-id.json",
+          "short_description": "Modify a single segment by ID",
+          "syntax": "sketch segment id <i> keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-list",
+          "file": "flac/command_docs/commands/extruder/segment-list.json",
+          "short_description": "Print information about segments",
+          "syntax": "sketch segment list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-create",
+          "file": "flac/command_docs/commands/extruder/segment-node-create.json",
+          "short_description": "Create a node",
+          "syntax": "sketch segment-node create <v3>keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-delete",
+          "file": "flac/command_docs/commands/extruder/segment-node-delete.json",
+          "short_description": "Delete nodes",
+          "syntax": "sketch segment-node delete [invalid] [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-group",
+          "file": "flac/command_docs/commands/extruder/segment-node-group.json",
+          "short_description": "Assign/remove a group name to nodes",
+          "syntax": "sketch segment-node group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-id",
+          "file": "flac/command_docs/commands/extruder/segment-node-id.json",
+          "short_description": "Modify a single node by ID",
+          "syntax": "sketch segment-node id <i>keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-list",
+          "file": "flac/command_docs/commands/extruder/segment-node-list.json",
+          "short_description": "Print information about nodes",
+          "syntax": "sketch segment-node list keyword",
+          "python_available": false
+        },
+        {
+          "name": "segment-node-transform",
+          "file": "flac/command_docs/commands/extruder/segment-node-transform.json",
+          "short_description": "Transform segment-nodes",
+          "syntax": "sketch segment-node transform keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-ratio",
+          "file": "flac/command_docs/commands/extruder/segment-ratio.json",
+          "short_description": "Set the ratio",
+          "syntax": "sketch segment ratio <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-ratio-reverse",
+          "file": "flac/command_docs/commands/extruder/segment-ratio-reverse.json",
+          "short_description": "The ratio direction is reversed on the segments",
+          "syntax": "sketch segment ratio-reverse [range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-size",
+          "file": "flac/command_docs/commands/extruder/segment-size.json",
+          "short_description": "Set the number of zones on the segment",
+          "syntax": "sketch segment size <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "segment-zone-length",
+          "file": "flac/command_docs/commands/extruder/segment-zone-length.json",
+          "short_description": "Set the length of zones on the segments",
+          "syntax": "sketch segment zone-length <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "set-automatic-validate",
+          "file": "flac/command_docs/commands/extruder/set-automatic-validate.json",
+          "short_description": "Set automatic validation off/on ",
+          "syntax": "sketch set automatic-validate <b>[keyword]",
+          "python_available": false
+        },
+        {
+          "name": "set-automatic-zone",
+          "file": "flac/command_docs/commands/extruder/set-automatic-zone.json",
+          "short_description": "Set automatic zoning of the sketch set",
+          "syntax": "sketch set automatic-zone keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-clear",
+          "file": "flac/command_docs/commands/extruder/set-clear.json",
+          "short_description": "Clear all set data (points, edges, blocks in the 2D construction data, and segments in the 1D ext...",
+          "syntax": "sketch set clear",
+          "python_available": false
+        },
+        {
+          "name": "set-create",
+          "file": "flac/command_docs/commands/extruder/set-create.json",
+          "short_description": "Create a new sketch set with name s ",
+          "syntax": "sketch set create <s>",
+          "python_available": false
+        },
+        {
+          "name": "set-delete",
+          "file": "flac/command_docs/commands/extruder/set-delete.json",
+          "short_description": "Delete a sketch set",
+          "syntax": "sketch set delete [<s>]",
+          "python_available": false
+        },
+        {
+          "name": "set-list",
+          "file": "flac/command_docs/commands/extruder/set-list.json",
+          "short_description": "List sketch set information",
+          "syntax": "sketch set list keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-metadata",
+          "file": "flac/command_docs/commands/extruder/set-metadata.json",
+          "short_description": "Manipulate sketch set metadata",
+          "syntax": "sketch set metadata keyword",
+          "python_available": false
+        },
+        {
+          "name": "set-rename",
+          "file": "flac/command_docs/commands/extruder/set-rename.json",
+          "short_description": "Rename sketch set from name s1 to s2 ",
+          "syntax": "sketch set <s1>rename <s2>",
+          "python_available": false
+        },
+        {
+          "name": "set-select",
+          "file": "flac/command_docs/commands/extruder/set-select.json",
+          "short_description": "Set the current sketch set",
+          "syntax": "sketch set select <s>",
+          "python_available": false
+        },
+        {
+          "name": "set-system",
+          "file": "flac/command_docs/commands/extruder/set-system.json",
+          "short_description": "Set the coordinate system",
+          "syntax": "sketch set system keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "set-update-polygons",
+          "file": "flac/command_docs/commands/extruder/set-update-polygons.json",
+          "short_description": "Update the internal list of closed polygons to assure that it reflects current geometry",
+          "syntax": "sketch set update-polygons <b>[keyword]",
+          "python_available": false
+        }
+      ]
+    },
+    "fish": {
+      "full_name": "FISH Commands",
+      "description": "Commands controlling the FISH embedded scripting language: function definition, callbacks, debugging, tracing, and runtime configuration.",
+      "command_prefix": "fish",
+      "related_categories": [
+        "model",
+        "program",
+        "history"
+      ],
+      "notes": [
+        "fish define introduces a function; fish list prints all symbols (loggable)",
+        "fish callback registers per-cycle FISH execution; fish-halt in 'model solve' is a stop-condition callback",
+        "fish trace / debug emit diagnostic output capturable via log",
+        "Prefer Python SDK for new scripting; FISH remains required for callbacks and in-cycle hooks"
+      ],
+      "commands": [
+        {
+          "name": "automatic-create",
+          "file": "_common/command_docs/commands/fish/automatic-create.json",
+          "short_description": "Set the FISH symbol automatic creation status",
+          "syntax": "fish automatic-create <b>",
+          "python_available": false
+        },
+        {
+          "name": "boolean-convert",
+          "file": "_common/command_docs/commands/fish/boolean-convert.json",
+          "short_description": "Convert other types to Boolean values",
+          "syntax": "fish boolean-convert <b>",
+          "python_available": false
+        },
+        {
+          "name": "callback",
+          "file": "_common/command_docs/commands/fish/callback.json",
+          "short_description": "Add/remove functions to be executed in response to callback events",
+          "syntax": "fish callback keyword",
+          "python_available": false
+        },
+        {
+          "name": "debug",
+          "file": "_common/command_docs/commands/fish/debug.json",
+          "short_description": "Launch the FISH function s in debug mode",
+          "syntax": "fish debug <s>keyword",
+          "python_available": false
+        },
+        {
+          "name": "define",
+          "file": "_common/command_docs/commands/fish/define.json",
+          "short_description": "Define a new FISH function",
+          "syntax": "fish define <s>...",
+          "python_available": false
+        },
+        {
+          "name": "history",
+          "file": "_common/command_docs/commands/fish/history.json",
+          "short_description": "Create a history of the FISH variable sym ",
+          "syntax": "fish history [name <s>] <sym>",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/fish/list.json",
+          "short_description": "List FISH -related quantities",
+          "syntax": "fish list [keyword] | <s>...",
+          "python_available": false
+        },
+        {
+          "name": "operator",
+          "file": "_common/command_docs/commands/fish/operator.json",
+          "short_description": "Define a new FISH operator",
+          "syntax": "fish operator <s>...",
+          "python_available": false
+        },
+        {
+          "name": "result",
+          "file": "_common/command_docs/commands/fish/result.json",
+          "short_description": "Set storage of FISH information in results files",
+          "syntax": "fish results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "structure",
+          "file": "_common/command_docs/commands/fish/structure.json",
+          "short_description": "Define a new FISH structure",
+          "syntax": "fish structure <s>...",
+          "python_available": false
+        },
+        {
+          "name": "trace",
+          "file": "_common/command_docs/commands/fish/trace.json",
+          "short_description": "Create a particle trace of the FISH variable sym ",
+          "syntax": "fish trace [name <s>] <sym>",
+          "python_available": false
+        }
+      ]
+    },
+    "fracture": {
+      "full_name": "Fracture (DFN) Commands",
+      "description": "Discrete Fracture Network commands for creating, importing, and analyzing planar discontinuities (fractures) and their intersections. Drives Smooth-Joint and similar contact models.",
+      "command_prefix": "fracture",
+      "related_categories": [
+        "geometry",
+        "contact"
+      ],
+      "notes": [
+        "DFN module: command verb is 'fracture' even though docs call it 'dfn'",
+        "fracture generate creates statistical DFNs; fracture import reads explicit fracture files",
+        "fracture template defines reusable fracture geometries (fracture template create / delete / modify-default)",
+        "fracture intersections compute / scanline produces connectivity data for joint-set analysis",
+        "Use 'contact model smoothjoint' (or similar) to wire fractures into mechanical behavior"
+      ],
+      "commands": [
+        {
+          "name": "aperture",
+          "file": "_common/command_docs/commands/fracture/aperture.json",
+          "short_description": "Assign apertures to fractures",
+          "syntax": "fracture aperture keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "attribute",
+          "file": "_common/command_docs/commands/fracture/attribute.json",
+          "short_description": "Modify fracture attributes",
+          "syntax": "fracture attribute keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "cluster",
+          "file": "_common/command_docs/commands/fracture/cluster.json",
+          "short_description": "Compute fracture clusters",
+          "syntax": "fracture cluster keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "combine",
+          "file": "_common/command_docs/commands/fracture/combine.json",
+          "short_description": "Simplify fractures",
+          "syntax": "fracture combine keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "compute",
+          "file": "_common/command_docs/commands/fracture/compute.json",
+          "short_description": "Compute fracture statistics",
+          "syntax": "fracture compute keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "connectivity",
+          "file": "_common/command_docs/commands/fracture/connectivity.json",
+          "short_description": "Calculate fracture connectivity with a specified structure",
+          "syntax": "fracture connectivity keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "contact-model",
+          "file": "_common/command_docs/commands/fracture/contact-model.json",
+          "short_description": "Assign contact models via fractures",
+          "syntax": "fracture contact-model keyword ... [rangeof dfns]",
+          "python_available": false
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/fracture/copy.json",
+          "short_description": "Copy fractures",
+          "syntax": "fracture copy keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "create",
+          "file": "_common/command_docs/commands/fracture/create.json",
+          "short_description": "Create a deterministic fracture",
+          "syntax": "fracture create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/fracture/delete.json",
+          "short_description": "Delete fractures",
+          "syntax": "fracture delete [dfn [<s>] ][range]",
+          "python_available": false
+        },
+        {
+          "name": "dfn-extra",
+          "file": "_common/command_docs/commands/fracture/dfn-extra.json",
+          "short_description": "Set DFN extra variables",
+          "syntax": "fracture dfn-extra <i><a>[range]",
+          "python_available": false
+        },
+        {
+          "name": "dfn-group",
+          "file": "_common/command_docs/commands/fracture/dfn-group.json",
+          "short_description": "Specify DFN group names",
+          "syntax": "fracture dfn-group <s>keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/fracture/export.json",
+          "short_description": "Export fractures to file",
+          "syntax": "fracture export keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "extra",
+          "file": "_common/command_docs/commands/fracture/extra.json",
+          "short_description": "Set fracture extra variables",
+          "syntax": "fracture extra <i><a>[range]",
+          "python_available": false
+        },
+        {
+          "name": "generate",
+          "file": "_common/command_docs/commands/fracture/generate.json",
+          "short_description": "Generate fractures from a statistical description",
+          "syntax": "fracture generate keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "group",
+          "file": "_common/command_docs/commands/fracture/group.json",
+          "short_description": "Specify fracture group names",
+          "syntax": "fracture group <s>keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/fracture/import.json",
+          "short_description": "Import fractures",
+          "syntax": "fracture import keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "initialize",
+          "file": "_common/command_docs/commands/fracture/initialize.json",
+          "short_description": "Modify fracture attributes",
+          "syntax": "fracture initialize keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "intersections-automatic-update",
+          "file": "_common/command_docs/commands/fracture/intersections-automatic-update.json",
+          "short_description": "Set the intersection automatic-updating state",
+          "syntax": "fracture intersections automatic-update <b>",
+          "python_available": false
+        },
+        {
+          "name": "intersections-compute",
+          "file": "_common/command_docs/commands/fracture/intersections-compute.json",
+          "short_description": "Compute intersections",
+          "syntax": "fracture intersections compute keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "intersections-delete",
+          "file": "_common/command_docs/commands/fracture/intersections-delete.json",
+          "short_description": "Delete intersections",
+          "syntax": "fracture intersections delete [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "intersections-scanline",
+          "file": "_common/command_docs/commands/fracture/intersections-scanline.json",
+          "short_description": "Create intersections corresponding to scanline mapping",
+          "syntax": "fracture intersections scanline keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "joint-set",
+          "file": "_common/command_docs/commands/fracture/joint-set.json",
+          "short_description": "Create a set of sub-parallel fractures, or joint set, with specified origin, size, and spacing",
+          "syntax": "fracture joint-set keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/fracture/list.json",
+          "short_description": "List the fracture attributes",
+          "syntax": "fracture list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "property",
+          "file": "_common/command_docs/commands/fracture/property.json",
+          "short_description": "Assign fracture surface properties",
+          "syntax": "fracture property <s><a>[<s1><a1>...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "prune",
+          "file": "_common/command_docs/commands/fracture/prune.json",
+          "short_description": "Prune isolated fractures",
+          "syntax": "fracture prune keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/fracture/results.json",
+          "short_description": "Specify whether fracture information is stored in subsequent results files",
+          "syntax": "fracture results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "set-property",
+          "file": "_common/command_docs/commands/fracture/set-property.json",
+          "short_description": "Assign properties in objects that intersect fractures",
+          "syntax": "fracture set-property keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "template-create",
+          "file": "_common/command_docs/commands/fracture/template-create.json",
+          "short_description": "Create a fracture generation template",
+          "syntax": "fracture template create <s>keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "template-delete",
+          "file": "_common/command_docs/commands/fracture/template-delete.json",
+          "short_description": "Delete fracture generation templates",
+          "syntax": "fracture template delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "template-modify-default",
+          "file": "_common/command_docs/commands/fracture/template-modify-default.json",
+          "short_description": "Modify the default fracture generation template",
+          "syntax": "fracture template modify-default keyword",
+          "python_available": false
+        },
+        {
+          "name": "verify-file",
+          "file": "_common/command_docs/commands/fracture/verify-file.json",
+          "short_description": "Verify a DFN file",
+          "syntax": "fracture verify-file keyword",
+          "python_available": false
+        }
+      ]
+    },
+    "geometry": {
+      "full_name": "Geometry Commands",
+      "description": "Includes import/export, refinement, tessellation, and group/extra metadata.",
+      "command_prefix": "geometry",
+      "related_categories": [
+        "fracture",
+        "model"
+      ],
+      "notes": [
+        "geometry sets are containers of nodes/edges/polygons addressed via 'geometry set <name>'",
+        "geometry import / export are the primary I/O paths (STL, DXF, geometry-set format)",
+        "Sub-namespaces (edge / node / polygon) operate on individual element types within a set"
+      ],
+      "commands": [
+        {
+          "name": "assign-groups",
+          "file": "_common/command_docs/commands/geometry/assign-groups.json",
+          "short_description": "This command assigns group names to objects based on their relation to geometric sets",
+          "syntax": "geometry assign-groups keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/geometry/copy.json",
+          "short_description": "Copy geometric data",
+          "syntax": "geometry copy [source <s1>] [target <s2>] keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/geometry/delete.json",
+          "short_description": "Delete geometric sets",
+          "syntax": "geometry delete [set <s>]",
+          "python_available": false
+        },
+        {
+          "name": "edge-create",
+          "file": "_common/command_docs/commands/geometry/edge-create.json",
+          "short_description": "Create an edge in the current geometry set",
+          "syntax": "geometry edge create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "edge-delete",
+          "file": "_common/command_docs/commands/geometry/edge-delete.json",
+          "short_description": "Delete geometric edges",
+          "syntax": "geometry edge delete [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-export",
+          "file": "_common/command_docs/commands/geometry/edge-export.json",
+          "short_description": "Export geometry edges data",
+          "syntax": "geometry edge export <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-extra",
+          "file": "_common/command_docs/commands/geometry/edge-extra.json",
+          "short_description": "Set edge extra variables",
+          "syntax": "geometry edge extra <i><a>[set <s>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "edge-group",
+          "file": "_common/command_docs/commands/geometry/edge-group.json",
+          "short_description": "Assign the group s to the edges of the geometric set that fall within the range",
+          "syntax": "geometry edge group <s>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/geometry/export.json",
+          "short_description": "Export geometry data",
+          "syntax": "geometry export <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "fill",
+          "file": "_common/command_docs/commands/geometry/fill.json",
+          "short_description": "Fill the closed geometry set with nodes",
+          "syntax": "geometry fill <f>[<fs>]",
+          "python_available": false
+        },
+        {
+          "name": "generate",
+          "file": "_common/command_docs/commands/geometry/generate.json",
+          "short_description": "Generate objects with specified shapes",
+          "syntax": "geometry generate keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/geometry/import.json",
+          "short_description": "Import geometric data",
+          "syntax": "geometry import <s>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/geometry/list.json",
+          "short_description": "List geometry information",
+          "syntax": "geometry list keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "move-to",
+          "file": "_common/command_docs/commands/geometry/move-to.json",
+          "short_description": "Move nodes",
+          "syntax": "geometry move-to keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-create",
+          "file": "_common/command_docs/commands/geometry/node-create.json",
+          "short_description": "Create a node at the position v in the current geometry set",
+          "syntax": "geometry node create <v>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "node-delete",
+          "file": "_common/command_docs/commands/geometry/node-delete.json",
+          "short_description": "Delete geometric nodes",
+          "syntax": "geometry node delete [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-export",
+          "file": "_common/command_docs/commands/geometry/node-export.json",
+          "short_description": "Export geometry nodes data",
+          "syntax": "geometry node export <s>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-extra",
+          "file": "_common/command_docs/commands/geometry/node-extra.json",
+          "short_description": "Set node extra variables",
+          "syntax": "geometry node extra <i><a>[set <s>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-group",
+          "file": "_common/command_docs/commands/geometry/node-group.json",
+          "short_description": "Assign the group s to the nodes of the geometric set that fall within the range",
+          "syntax": "geometry node group <s>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "paint-extra",
+          "file": "_common/command_docs/commands/geometry/paint-extra.json",
+          "short_description": "“Paint” a scalar value from a zone field",
+          "syntax": "geometry paint-extra <i>keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "polygon-create",
+          "file": "_common/command_docs/commands/geometry/polygon-create.json",
+          "short_description": "Create a polygon in the current geometry set",
+          "syntax": "geometry polygon create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "polygon-delete",
+          "file": "_common/command_docs/commands/geometry/polygon-delete.json",
+          "short_description": "Delete geometric polygons",
+          "syntax": "geometry polygon delete [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "polygon-export",
+          "file": "_common/command_docs/commands/geometry/polygon-export.json",
+          "short_description": "Export geometry polygons data",
+          "syntax": "geometry polygon export <s>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "polygon-extra",
+          "file": "_common/command_docs/commands/geometry/polygon-extra.json",
+          "short_description": "Set polygon extra variables",
+          "syntax": "geometry polygon extra <i><a>[set <s>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "polygon-group",
+          "file": "_common/command_docs/commands/geometry/polygon-group.json",
+          "short_description": "Assign the group s to the polygons of the geometric set that fall within the range",
+          "syntax": "geometry polygon group <s>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "refine",
+          "file": "_common/command_docs/commands/geometry/refine.json",
+          "short_description": "Refine the triangular or quadrilateral polygons in the geometric set into smaller versions",
+          "syntax": "geometry refine [<i>] [set <s>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/geometry/results.json",
+          "short_description": "Specify whether geometry information is stored in subsequent results files",
+          "syntax": "geometry results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "rotate",
+          "file": "_common/command_docs/commands/geometry/rotate.json",
+          "short_description": "Rotate nodes",
+          "syntax": "geometry rotate keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "select",
+          "file": "_common/command_docs/commands/geometry/select.json",
+          "short_description": "Specify the current geometric set (or create a new set named s and make it the current set, if on...",
+          "syntax": "geometry select <s>",
+          "python_available": false
+        },
+        {
+          "name": "separate",
+          "file": "_common/command_docs/commands/geometry/separate.json",
+          "short_description": "Separate polygons into sets",
+          "syntax": "geometry separate keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "set",
+          "file": "_common/command_docs/commands/geometry/set.json",
+          "short_description": "Specify the current geometric set (or create a new set named s and make it the current set, if on...",
+          "syntax": "geometry set <s>",
+          "python_available": false
+        },
+        {
+          "name": "tessellate",
+          "file": "_common/command_docs/commands/geometry/tessellate.json",
+          "short_description": "Tessellate nodes",
+          "syntax": "geometry tessellate keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "translate",
+          "file": "_common/command_docs/commands/geometry/translate.json",
+          "short_description": "Translate nodes",
+          "syntax": "geometry translate <v>[keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "triangulate",
+          "file": "_common/command_docs/commands/geometry/triangulate.json",
+          "short_description": "Triangulate planar polygons",
+          "syntax": "geometry triangulate keyword ... [range]",
+          "python_available": false
+        }
+      ]
+    },
+    "group": {
+      "full_name": "Group Commands",
+      "description": "Groups occupy named slots and act as range filters in subsequent commands.",
+      "command_prefix": "group",
+      "related_categories": [
+        "contact"
+      ],
+      "notes": [
+        "'group slot' assigns/renames a slot (group categories that don't conflict — e.g., material slot, region slot)",
+        "'group list' enumerates known group names across slots (loggable output)",
+        "Use 'range group <name>' in any range-accepting command to filter by group"
+      ],
+      "commands": [
+        {
+          "name": "create",
+          "file": "flac/command_docs/commands/group/create.json",
+          "short_description": "Create a group",
+          "syntax": "group create <s>",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "flac/command_docs/commands/group/list.json",
+          "short_description": "Display the global list of group names and slot names that have been created",
+          "syntax": "group list",
+          "python_available": false
+        },
+        {
+          "name": "rename",
+          "file": "flac/command_docs/commands/group/rename.json",
+          "short_description": "Rename a group",
+          "syntax": "group rename <sold><snew>",
+          "python_available": false
+        },
+        {
+          "name": "slot",
+          "file": "flac/command_docs/commands/group/slot.json",
+          "short_description": "Create a slot",
+          "syntax": "group slot keyword",
+          "python_available": false
+        }
+      ]
+    },
+    "history": {
+      "full_name": "History Commands",
+      "description": "Commands for managing model histories: time-series recordings of scalar quantities sampled during cycling. Used for monitoring convergence, plotting trends, and exporting tabular data.",
+      "command_prefix": "history",
+      "related_categories": [
+        "model"
+      ],
+      "notes": [
+        "history list and history results print samples to stdout - capturable via log",
+        "history export writes tabular data to a file; history interval controls sampling cadence",
+        "history label / rename adjust display metadata; history delete / purge remove entries"
+      ],
+      "commands": [
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/history/delete.json",
+          "short_description": "All history traces are deleted",
+          "syntax": "history delete",
+          "python_available": false
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/history/export.json",
+          "short_description": "Write the contents of the list of histories to the screen, a file (with the file keyword) or a ta...",
+          "syntax": "history export [keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "interval",
+          "file": "_common/command_docs/commands/history/interval.json",
+          "short_description": "Specifies the history-sampling interval",
+          "syntax": "history interval <i>",
+          "python_available": false
+        },
+        {
+          "name": "label",
+          "file": "_common/command_docs/commands/history/label.json",
+          "short_description": "Assigns a label sl to history sn ",
+          "syntax": "history label <sl>name <sn>",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/history/list.json",
+          "short_description": "List history information",
+          "syntax": "history list keyword",
+          "python_available": false
+        },
+        {
+          "name": "purge",
+          "file": "_common/command_docs/commands/history/purge.json",
+          "short_description": "The contents of all history traces are erased, but the traces themselves remain",
+          "syntax": "history purge",
+          "python_available": false
+        },
+        {
+          "name": "rename",
+          "file": "_common/command_docs/commands/history/rename.json",
+          "short_description": "Rename the history with name sn to sr ",
+          "syntax": "history rename <sr>name <sn>",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/history/results.json",
+          "short_description": "Specify whether history information is stored in subsequent results files",
+          "syntax": "history results active <b>",
+          "python_available": false
+        }
+      ]
+    },
+    "model": {
+      "full_name": "Model Commands",
+      "description": "System-level commands for controlling simulation execution, configuration, and state management",
+      "command_prefix": "model",
+      "python_module": "itasca",
+      "python_functions": [
+        "itasca.cycle()",
+        "itasca.timestep()",
+        "itasca.set_timestep()"
+      ],
+      "common_keywords": {
+        "solve": [
+          "ratio",
+          "ratio-average",
+          "force-max",
+          "moment-max",
+          "cycles"
+        ],
+        "cycle": [
+          "number of cycles"
+        ],
+        "domain": [
+          "extent",
+          "condition",
+          "periodic",
+          "destroy"
+        ],
+        "configure": [
+          "threads",
+          "dynamic"
+        ]
+      },
+      "related_categories": [
+        "contact",
+        "set"
+      ],
+      "notes": [
+        "'model solve' is preferred for reaching equilibrium (not available in Python SDK)",
+        "'model cycle' is equivalent to itasca.cycle() in Python",
+        "Model state can be saved/restored for checkpointing",
+        "Domain settings must be configured before generating objects",
+        "Use 'model solve' with ratio criteria for automatic convergence"
+      ],
+      "commands": [
+        {
+          "name": "calm",
+          "file": "_common/command_docs/commands/model/calm.json",
+          "short_description": "Calm the model",
+          "syntax": "model calm",
+          "python_available": false,
+          "python_alternative": "itasca.command('model calm') - Python SDK does not provide direct calm method"
+        },
+        {
+          "name": "clean",
+          "file": "_common/command_docs/commands/model/clean.json",
+          "short_description": "Clean the model",
+          "syntax": "model clean [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model clean') or itasca.command('model clean all') - Python SDK does not provide direct clean method"
+        },
+        {
+          "name": "configure",
+          "file": "flac/command_docs/commands/model/configure.json",
+          "short_description": "Configure an additional calculation mode",
+          "syntax": "model configure keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('model configure cfd') - Python SDK does not provide direct configure method"
+        },
+        {
+          "name": "creep",
+          "file": "_common/command_docs/commands/model/creep.json",
+          "short_description": "Set parameters for a creep material analysis",
+          "syntax": "model creep [<b>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "cycle",
+          "file": "_common/command_docs/commands/model/cycle.json",
+          "short_description": "Execute timesteps",
+          "syntax": "model cycle <i>[calm <i2>]",
+          "python_available": true
+        },
+        {
+          "name": "deterministic",
+          "file": "_common/command_docs/commands/model/deterministic.json",
+          "short_description": "Set the deterministic mode",
+          "syntax": "model deterministic [default] <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model deterministic on') or itasca.command('model deterministic off') - Python SDK does not provide direct deterministic control"
+        },
+        {
+          "name": "display",
+          "file": "_common/command_docs/commands/model/display.json",
+          "short_description": "Set information to display during cycling",
+          "syntax": "model display keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model display ...') - Python SDK does not provide display control. For monitoring, use print statements or logging in Python loop with itasca.cycle() and itasca.fish_get()"
+        },
+        {
+          "name": "domain",
+          "file": "_common/command_docs/commands/model/domain.json",
+          "short_description": "Specify the domain boundaries and conditions",
+          "syntax": "model domain keyword",
+          "python_available": true
+        },
+        {
+          "name": "dynamic",
+          "file": "_common/command_docs/commands/model/dynamic.json",
+          "short_description": "Set parameters for a dynamic material analysis",
+          "syntax": "model dynamic keyword",
+          "python_available": false
+        },
+        {
+          "name": "energy",
+          "file": "_common/command_docs/commands/model/energy.json",
+          "short_description": "Specify the energy tracking state",
+          "syntax": "model energy keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "factor-of-safety",
+          "file": "_common/command_docs/commands/model/factor-of-safety.json",
+          "short_description": "Set factor of safety analysis parameters",
+          "syntax": "model factor-of-safety [keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "fluid",
+          "file": "_common/command_docs/commands/model/fluid.json",
+          "short_description": "Set parameters for a fluid flow analysis",
+          "syntax": "model fluid [<b>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "gravity",
+          "file": "_common/command_docs/commands/model/gravity.json",
+          "short_description": "Set the gravity as a vector or float",
+          "syntax": "model gravity <v3>| <f>",
+          "python_available": true
+        },
+        {
+          "name": "history",
+          "file": "_common/command_docs/commands/model/history.json",
+          "short_description": "Create a history of a model quantity",
+          "syntax": "model history [name <s>] keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model history mechanical ratio-average') - Python SDK does not provide direct history creation. For monitoring in Python, manually compute and store values in loops:\n\n# Example: track metrics over cycles\nhistory_data = []\nfor _ in range(100):\n    itasca.cycle(100)\n    # itasca.cycle() returns current cycle number\n    history_data.append({'cycle': itasca.cycle(), 'time': itasca.mech_age(), ...})"
+        },
+        {
+          "name": "large-strain",
+          "file": "_common/command_docs/commands/model/large-strain.json",
+          "short_description": "Sets the program to use the numerical formulation for large-strain deformation",
+          "syntax": "model large-strain <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model large-strain on') or itasca.command('model large-strain off') - Python SDK does not provide direct large-strain control"
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/model/list.json",
+          "short_description": "List a model related quantity",
+          "syntax": "model list keyword",
+          "python_available": false
+        },
+        {
+          "name": "mechanical",
+          "file": "_common/command_docs/commands/model/mechanical.json",
+          "short_description": "Set parameters for a mechanical analysis",
+          "syntax": "model mechanical [<b>] keyword",
+          "python_available": "partial"
+        },
+        {
+          "name": "new",
+          "file": "_common/command_docs/commands/model/new.json",
+          "short_description": "Clear model-state information",
+          "syntax": "model new [force]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model new') or itasca.command('model new force') - Python SDK does not provide direct model.new() function"
+        },
+        {
+          "name": "orientation-tracking",
+          "file": "_common/command_docs/commands/model/orientation-tracking.json",
+          "short_description": "Specify the orientation tracking state",
+          "syntax": "model orientation-tracking <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model orientation-tracking on') or itasca.command('model orientation-tracking off') - Python SDK does not provide direct orientation tracking control"
+        },
+        {
+          "name": "precision",
+          "file": "_common/command_docs/commands/model/precision.json",
+          "short_description": "Set the listing precision",
+          "syntax": "model precision <i>",
+          "python_available": false
+        },
+        {
+          "name": "random",
+          "file": "_common/command_docs/commands/model/random.json",
+          "short_description": "Set the seed for the random-number generator",
+          "syntax": "model random <i>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model random 12345') - Python SDK does not provide direct random seed control"
+        },
+        {
+          "name": "range",
+          "file": "_common/command_docs/commands/model/range.json",
+          "short_description": "Create/delete a named range",
+          "syntax": "model range keyword",
+          "python_available": false
+        },
+        {
+          "name": "restore",
+          "file": "_common/command_docs/commands/model/restore.json",
+          "short_description": "Restore program-state information",
+          "syntax": "model restore <s>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model restore \"filename.f3sav\"') - Python SDK does not provide direct restore function. Note: Use double quotes around filename in command string if path contains spaces"
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/model/results.json",
+          "short_description": "Perform file operations on results files",
+          "syntax": "model results keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model results ...') - Python SDK does not provide direct results file control. For exporting states in Python, use:\n\n# Setup automatic export\nitasca.command('model results prefix \"simulation\"')\nitasca.command('model results interval step 1000')\n\n# Manual export\nitasca.command('model results export \"snapshot.p3result\"')\n\n# Import\nitasca.command('model results import \"snapshot.p3result\"')"
+        },
+        {
+          "name": "save",
+          "file": "_common/command_docs/commands/model/save.json",
+          "short_description": "Save all model-state information",
+          "syntax": "model save <s>[keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model save \"filename.sav\"') or itasca.command('model save \"filename\" compress') - Python SDK does not provide direct save function. Note: Use double quotes around filename in command string if path contains spaces"
+        },
+        {
+          "name": "solve",
+          "file": "_common/command_docs/commands/model/solve.json",
+          "short_description": "Solve to a specified limit",
+          "syntax": "model solve keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('model solve ratio 1e-5') - Python SDK does not provide direct solve() function. Custom loops require manual force ratio calculations."
+        },
+        {
+          "name": "step",
+          "file": "_common/command_docs/commands/model/step.json",
+          "short_description": "Execute timesteps",
+          "syntax": "model step <i>[calm <i2>]",
+          "python_available": false
+        },
+        {
+          "name": "thermal",
+          "file": "_common/command_docs/commands/model/thermal.json",
+          "short_description": "This command sets parameters for a thermal material analysis (only available if 'model configure ...",
+          "syntax": "model thermal [<b>] keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model thermal ...') - Python SDK does not provide direct thermal configuration. For thermal time: itasca.thermal_time() may be available depending on version"
+        },
+        {
+          "name": "title",
+          "file": "_common/command_docs/commands/model/title.json",
+          "short_description": "Set the model title",
+          "syntax": "model title [<s>]",
+          "python_available": false
+        },
+        {
+          "name": "update-interval",
+          "file": "_common/command_docs/commands/model/update-interval.json",
+          "short_description": "Set the number of cycles taken between updating the existing plots in the user interface",
+          "syntax": "model update-interval <i>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model update-interval 100') - Python SDK does not provide direct update-interval control. Note: When running via Python SDK, visualization updates may behave differently"
+        }
+      ]
+    },
+    "plot": {
+      "full_name": "Plot Commands",
+      "description": "Commands for creating, modifying, and exporting visualization plots. Controls plot items, camera views, and image export.",
+      "command_prefix": "plot",
+      "related_categories": [
+        "contact",
+        "zone",
+        "geometry"
+      ],
+      "notes": [
+        "Plot commands control visualization, not simulation",
+        "Use 'plot export bitmap' to save plot images",
+        "Plot item keywords are extensive; use 'plot export datafile' to inspect syntax",
+        "Camera view controlled via center, eye, magnification, projection keywords"
+      ],
+      "commands": [
+        {
+          "name": "active",
+          "file": "_common/command_docs/commands/plot/active.json",
+          "short_description": "Activate or deactivate a plot",
+          "syntax": "plot [<s>] active <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> active <bool>') - no direct Python SDK method"
+        },
+        {
+          "name": "background",
+          "file": "_common/command_docs/commands/plot/background.json",
+          "short_description": "Specifies the background color of the plot",
+          "syntax": "plot [<s>] background color",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> background <color>') - no direct Python SDK method"
+        },
+        {
+          "name": "clear",
+          "file": "_common/command_docs/commands/plot/clear.json",
+          "short_description": "Removes all plot items from the plot",
+          "syntax": "plot [<s>] clear",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> clear') - no direct Python SDK method"
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/plot/copy.json",
+          "short_description": "Copy a plot to another plot",
+          "syntax": "plot [<s>] copy [<sDest>] [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> copy <dest> <keyword>') - no direct Python SDK method"
+        },
+        {
+          "name": "create",
+          "file": "_common/command_docs/commands/plot/create.json",
+          "short_description": "Create a new plot and make it the current (i",
+          "syntax": "plot create [<s>]",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot create <name>') - no direct Python SDK method"
+        },
+        {
+          "name": "current",
+          "file": "_common/command_docs/commands/plot/current.json",
+          "short_description": "Make the specified plot the current (i",
+          "syntax": "plot [<s>] current",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> current') - no direct Python SDK method"
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/plot/delete.json",
+          "short_description": "Delete the specified plot",
+          "syntax": "plot [<s>] delete",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> delete') - no direct Python SDK method"
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/plot/export.json",
+          "short_description": "Export the contents of a plot to a file",
+          "syntax": "plot [<s>] export keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot export bitmap filename <path>') - no direct Python SDK method"
+        },
+        {
+          "name": "item",
+          "file": "_common/command_docs/commands/plot/item.json",
+          "short_description": "Create, destroy, or modify plot items associated with a plot",
+          "syntax": "plot [<s>] item keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot item create <type>') - no direct Python SDK method"
+        },
+        {
+          "name": "rename",
+          "file": "_common/command_docs/commands/plot/rename.json",
+          "short_description": "Rename a plot",
+          "syntax": "plot <s>rename <sNew>",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> rename <newname>') - no direct Python SDK method"
+        },
+        {
+          "name": "title",
+          "file": "_common/command_docs/commands/plot/title.json",
+          "short_description": "Set the font and settings used to render the title at the top of the plot",
+          "syntax": "plot <s>title text",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> title <text>') - no direct Python SDK method"
+        },
+        {
+          "name": "update",
+          "file": "_common/command_docs/commands/plot/update.json",
+          "short_description": "Control automatic plot updates",
+          "syntax": "plot <s>update",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> update <bool>') - no direct Python SDK method"
+        },
+        {
+          "name": "view",
+          "file": "_common/command_docs/commands/plot/view.json",
+          "short_description": "Control the camera view of a plot",
+          "syntax": "plot [<s>] view keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot view <keyword> <value>') - no direct Python SDK method"
+        }
+      ]
+    },
+    "program": {
+      "full_name": "Program Commands",
+      "command_prefix": "program",
+      "related_categories": [
+        "model",
+        "history",
+        "fish"
+      ],
+      "notes": [
+        "These commands manage the executable itself, not the model state",
+        "program list and program license print to stdout - useful for environment diagnostics under itasca.command()",
+        "program log redirects subsequent command output to a file",
+        "program quit / exit / stop terminate execution; rarely used from MCP workflows",
+        "program threads controls multi-threaded solve parallelism"
+      ],
+      "commands": [
+        {
+          "name": "automatic-model-save",
+          "file": "_common/command_docs/commands/program/automatic-model-save.json",
+          "short_description": "Sets value controlling automatic safe file creating during cycling",
+          "syntax": "program automatic-model-save keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "call",
+          "file": "_common/command_docs/commands/program/call.json",
+          "short_description": "Process the specified data file(s)",
+          "syntax": "program call <s>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "continue",
+          "file": "_common/command_docs/commands/program/continue.json",
+          "short_description": "Resume processing after a program pause",
+          "syntax": "program continue",
+          "python_available": false
+        },
+        {
+          "name": "customer-title-1",
+          "file": "_common/command_docs/commands/program/customer-title-1.json",
+          "short_description": "Set the first line of customer information",
+          "syntax": "program customer-title-1 <s>",
+          "python_available": false
+        },
+        {
+          "name": "customer-title-2",
+          "file": "_common/command_docs/commands/program/customer-title-2.json",
+          "short_description": "Set the second line of customer information",
+          "syntax": "program customer-title-2 <s>",
+          "python_available": false
+        },
+        {
+          "name": "directory",
+          "file": "_common/command_docs/commands/program/directory.json",
+          "short_description": "Set the working directory",
+          "syntax": "program directory keyword",
+          "python_available": false
+        },
+        {
+          "name": "echo",
+          "file": "_common/command_docs/commands/program/echo.json",
+          "short_description": "Set the echo state",
+          "syntax": "program echo keyword",
+          "python_available": false
+        },
+        {
+          "name": "echo-line",
+          "file": "_common/command_docs/commands/program/echo-line.json",
+          "short_description": "Specify output to echo to the console",
+          "syntax": "program echo-line <s>",
+          "python_available": false
+        },
+        {
+          "name": "encrypt",
+          "file": "_common/command_docs/commands/program/encrypt.json",
+          "short_description": "Encrypt the source data file so that the contents are not visible or modifiable by the caller",
+          "syntax": "program encrypt <source>[<starget>]",
+          "python_available": false
+        },
+        {
+          "name": "exit",
+          "file": "_common/command_docs/commands/program/exit.json",
+          "short_description": "Close the program",
+          "syntax": "program exit",
+          "python_available": false
+        },
+        {
+          "name": "floating-point-check",
+          "file": "_common/command_docs/commands/program/floating-point-check.json",
+          "short_description": "Enable/disable the floating point check",
+          "syntax": "program floating-point-check <b>",
+          "python_available": false
+        },
+        {
+          "name": "license",
+          "file": "_common/command_docs/commands/program/license.json",
+          "short_description": "Get/Set license information",
+          "syntax": "program license keyword",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/program/list.json",
+          "short_description": "Print program information",
+          "syntax": "program list keyword",
+          "python_available": false
+        },
+        {
+          "name": "load",
+          "file": "_common/command_docs/commands/program/load.json",
+          "short_description": "Load a compatible DLL",
+          "syntax": "program load keyword",
+          "python_available": false
+        },
+        {
+          "name": "log",
+          "file": "_common/command_docs/commands/program/log.json",
+          "short_description": "Turn on/off logging",
+          "syntax": "program log <b>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "log-file",
+          "file": "_common/command_docs/commands/program/log-file.json",
+          "short_description": "Specify the log file by name",
+          "syntax": "program log-file <s>",
+          "python_available": false
+        },
+        {
+          "name": "mail",
+          "file": "_common/command_docs/commands/program/mail.json",
+          "short_description": "Compose and send email messages",
+          "syntax": "program mail keyword",
+          "python_available": false
+        },
+        {
+          "name": "notice",
+          "file": "_common/command_docs/commands/program/notice.json",
+          "short_description": "Set the notice state",
+          "syntax": "program notice <b>",
+          "python_available": false
+        },
+        {
+          "name": "pagination",
+          "file": "_common/command_docs/commands/program/pagination.json",
+          "short_description": "Set the pagination state",
+          "syntax": "program pagination <b>",
+          "python_available": false
+        },
+        {
+          "name": "pause",
+          "file": "_common/command_docs/commands/program/pause.json",
+          "short_description": "Pause command processing",
+          "syntax": "program pause [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "playback",
+          "file": "_common/command_docs/commands/program/playback.json",
+          "short_description": "Play back a record file",
+          "syntax": "program playback <s>",
+          "python_available": false
+        },
+        {
+          "name": "quit",
+          "file": "_common/command_docs/commands/program/quit.json",
+          "short_description": "Close the program",
+          "syntax": "program quit",
+          "python_available": false
+        },
+        {
+          "name": "return",
+          "file": "_common/command_docs/commands/program/return.json",
+          "short_description": "Return program control",
+          "syntax": "program return",
+          "python_available": false
+        },
+        {
+          "name": "stop",
+          "file": "_common/command_docs/commands/program/stop.json",
+          "short_description": "Close the program",
+          "syntax": "program stop",
+          "python_available": false
+        },
+        {
+          "name": "system",
+          "file": "_common/command_docs/commands/program/system.json",
+          "short_description": "Send commands to the operating system",
+          "syntax": "program system keyword",
+          "python_available": false
+        },
+        {
+          "name": "threads",
+          "file": "_common/command_docs/commands/program/threads.json",
+          "short_description": "Set the number of threads for calculations and plotting",
+          "syntax": "program threads keyword",
+          "python_available": false
+        },
+        {
+          "name": "undo",
+          "file": "_common/command_docs/commands/program/undo.json",
+          "short_description": "Undo commands",
+          "syntax": "program undo [<i>]",
+          "python_available": false
+        },
+        {
+          "name": "warning",
+          "file": "_common/command_docs/commands/program/warning.json",
+          "short_description": "Set the warning state",
+          "syntax": "program warning <b>",
+          "python_available": false
+        }
+      ]
+    },
+    "project": {
+      "full_name": "Project Commands",
+      "command_prefix": "project",
+      "related_categories": [
+        "program",
+        "model"
+      ],
+      "notes": [
+        "Project files (.prj) bundle multiple model saves + data files for a related study",
+        "project new / save / restore manage the active project; project list enumerates contents",
+        "project execute runs a data file in the project context",
+        "Mostly a GUI-oriented concept; scripted workflows usually skip projects and use 'model save'/'model restore' directly"
+      ],
+      "commands": [
+        {
+          "name": "execute",
+          "file": "_common/command_docs/commands/project/execute.json",
+          "short_description": "Execute the current project",
+          "syntax": "project execute [suppress]",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/project/list.json",
+          "short_description": "List project information",
+          "syntax": "project list information",
+          "python_available": false
+        },
+        {
+          "name": "new",
+          "file": "_common/command_docs/commands/project/new.json",
+          "short_description": "Clear program-state information",
+          "syntax": "project new [force]",
+          "python_available": false
+        },
+        {
+          "name": "restore",
+          "file": "_common/command_docs/commands/project/restore.json",
+          "short_description": "Restores the project file name s ",
+          "syntax": "project restore <s>",
+          "python_available": false
+        },
+        {
+          "name": "save",
+          "file": "_common/command_docs/commands/project/save.json",
+          "short_description": "Save the current project to a file",
+          "syntax": "project save <s>",
+          "python_available": false
+        },
+        {
+          "name": "save-plugins",
+          "file": "_common/command_docs/commands/project/save-plugins.json",
+          "short_description": "Save the currently loaded plugins with the project file",
+          "syntax": "project save-plugins <b>",
+          "python_available": false
+        }
+      ]
+    },
+    "structure": {
+      "full_name": "Structural Element Commands",
+      "description": "Commands for creating and managing structural elements (SEL) — beams, cables, piles, shells, liners, geogrids, hybrids — plus their nodes, links, properties, and results. Shared by the FLAC and 3DEC families.",
+      "command_prefix": "structure",
+      "python_module": "itasca.structure",
+      "python_object_class": "Structure (Beam, Cable, Pile, Shell, Liner, GeoGrid, ...)",
+      "doc_url": "https://docs.itascacg.com/flac3d900/common/sel/doc/manual/sel_manual/sel.html",
+      "related_categories": [
+        "zone",
+        "geometry",
+        "model"
+      ],
+      "notes": [
+        "Element type is part of the command: 'structure beam create', 'structure cable property', etc.",
+        "Structural nodes ('structure node') connect elements and attach to the zone grid via links ('structure link')",
+        "Constitutive behavior via 'structure <type> cmodel' / property; results via 'structure <type> results'",
+        "2D-specific syntax variants exist for some elements; this index ships the dimension-shared base command"
+      ],
+      "commands": [
+        {
+          "name": "beam-apply",
+          "file": "flac/command_docs/commands/structure/beam-apply.json",
+          "short_description": "Assign uniform applied distributed load (force per unit length) to all beam elements in the range",
+          "syntax": "structure beam apply <f1><f2>[range] only 1 component in 2D",
+          "python_available": false
+        },
+        {
+          "name": "beam-cmodel",
+          "file": "flac/command_docs/commands/structure/beam-cmodel.json",
+          "short_description": "Assign or get information about beam constitutive models",
+          "syntax": "structure beam cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "beam-create",
+          "file": "flac/command_docs/commands/structure/beam-create.json",
+          "short_description": "Create a beam consisting of a collection of beam finite elements",
+          "syntax": "structure beam create keyword",
+          "python_available": false
+        },
+        {
+          "name": "beam-delete",
+          "file": "flac/command_docs/commands/structure/beam-delete.json",
+          "short_description": "Delete all beam elements in the range",
+          "syntax": "structure beam delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-group",
+          "file": "flac/command_docs/commands/structure/beam-group.json",
+          "short_description": "Assign all beam elements in the range to the group with the name s ",
+          "syntax": "structure beam group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-hide",
+          "file": "flac/command_docs/commands/structure/beam-hide.json",
+          "short_description": "Hide or un-hide all beam elements in the range",
+          "syntax": "structure beam hide [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-history",
+          "file": "flac/command_docs/commands/structure/beam-history.json",
+          "short_description": "Sample beam responses",
+          "syntax": "structure beam history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "beam-import",
+          "file": "flac/command_docs/commands/structure/beam-import.json",
+          "short_description": "Create beam elements from an outside source (currently 3D ONLY)",
+          "syntax": "structure beam import keyword",
+          "python_available": false
+        },
+        {
+          "name": "beam-initialize",
+          "file": "flac/command_docs/commands/structure/beam-initialize.json",
+          "short_description": "Initialize quantities on the element",
+          "syntax": "structure beam initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "beam-list",
+          "file": "flac/command_docs/commands/structure/beam-list.json",
+          "short_description": "List properties and responses of beam elements in the range",
+          "syntax": "structure beam list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-property",
+          "file": "flac/command_docs/commands/structure/beam-property.json",
+          "short_description": "Assigns properties to beam elements in the range",
+          "syntax": "structure beam property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-property-{elastic}",
+          "file": "flac/command_docs/commands/structure/beam-property-{elastic}.json",
+          "short_description": "Young’s modulus, \\(E\\)",
+          "syntax": "elastic",
+          "python_available": false
+        },
+        {
+          "name": "beam-refine",
+          "file": "flac/command_docs/commands/structure/beam-refine.json",
+          "short_description": "Refine any existing element in the range by subdividing it into i equal-size segments",
+          "syntax": "structure beam refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "beam-select",
+          "file": "flac/command_docs/commands/structure/beam-select.json",
+          "short_description": "This command selects or de-selects all elements in the range",
+          "syntax": "structure beam select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "cable-apply",
+          "file": "flac/command_docs/commands/structure/cable-apply.json",
+          "short_description": "Create or modify cable apply conditions",
+          "syntax": "structure cable apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-create",
+          "file": "flac/command_docs/commands/structure/cable-create.json",
+          "short_description": "Create a cable consisting of a collection of cable finite elements",
+          "syntax": "structure cable create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "cable-delete",
+          "file": "flac/command_docs/commands/structure/cable-delete.json",
+          "short_description": "Delete all cable elements in the range",
+          "syntax": "structure cable delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-group",
+          "file": "flac/command_docs/commands/structure/cable-group.json",
+          "short_description": "Assign all cable elements in the range to the group with the name s ",
+          "syntax": "structure cable group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-hide",
+          "file": "flac/command_docs/commands/structure/cable-hide.json",
+          "short_description": "This commands hides or un-hides all cable elements in the range",
+          "syntax": "structure cable hide [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "cable-history",
+          "file": "flac/command_docs/commands/structure/cable-history.json",
+          "short_description": "Sample cable responses",
+          "syntax": "structure cable history keyword",
+          "python_available": false
+        },
+        {
+          "name": "cable-import",
+          "file": "flac/command_docs/commands/structure/cable-import.json",
+          "short_description": "Create cable elements from an outside source",
+          "syntax": "structure cable import keyword",
+          "python_available": false
+        },
+        {
+          "name": "cable-initialize",
+          "file": "flac/command_docs/commands/structure/cable-initialize.json",
+          "short_description": "Initializes quantities on the element",
+          "syntax": "structure cable initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "cable-list",
+          "file": "flac/command_docs/commands/structure/cable-list.json",
+          "short_description": "Lists properties and responses of cable elements in the range",
+          "syntax": "structure cable list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-property",
+          "file": "flac/command_docs/commands/structure/cable-property.json",
+          "short_description": "Assigns properties to cable elements in the range",
+          "syntax": "structure cable property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-refine",
+          "file": "flac/command_docs/commands/structure/cable-refine.json",
+          "short_description": "This command refines an existing element in the range by subdividing it into i equal-size segments",
+          "syntax": "structure cable refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "cable-select",
+          "file": "flac/command_docs/commands/structure/cable-select.json",
+          "short_description": "This commands selects or de-selects all elements in the range",
+          "syntax": "structure cable select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "dynamic-damping",
+          "file": "flac/command_docs/commands/structure/dynamic-damping.json",
+          "short_description": "Set the damping scheme used by the structural elements for dynamic analysis (see Structual Elemen...",
+          "syntax": "structure dynamic damping keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "dynamic-safety-factor",
+          "file": "flac/command_docs/commands/structure/dynamic-safety-factor.json",
+          "short_description": "Set the safety factor for dynamic analysis",
+          "syntax": "structure dynamic-safety-factor <f>",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-apply",
+          "file": "flac/command_docs/commands/structure/geogrid-apply.json",
+          "short_description": "Assign uniform applied pressure f to all geogrid elements in the range",
+          "syntax": "structure geogrid apply <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-cmodel",
+          "file": "flac/command_docs/commands/structure/geogrid-cmodel.json",
+          "short_description": "Assign or get information about shell constitutive models",
+          "syntax": "structure geogrid cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-create",
+          "file": "flac/command_docs/commands/structure/geogrid-create.json",
+          "short_description": "Create a geogrid consisting of a collection of shell finite elements",
+          "syntax": "structure geogrid create keyword",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-delete",
+          "file": "flac/command_docs/commands/structure/geogrid-delete.json",
+          "short_description": "Delete all geogrid elements in the range",
+          "syntax": "structure geogrid delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-group",
+          "file": "flac/command_docs/commands/structure/geogrid-group.json",
+          "short_description": "Assign all geogrid elements in the range to the group with the name s ",
+          "syntax": "structure geogrid group <s1>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-hide",
+          "file": "flac/command_docs/commands/structure/geogrid-hide.json",
+          "short_description": "Hide or un-hide all geogrid elements in the range",
+          "syntax": "structure geogrid hide keyword",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-history",
+          "file": "flac/command_docs/commands/structure/geogrid-history.json",
+          "short_description": "Sample geogrid responses",
+          "syntax": "structure geogrid history keyword",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-import",
+          "file": "flac/command_docs/commands/structure/geogrid-import.json",
+          "short_description": "Create a geogrid as a collection of shell finite elements, where the elements are obtained from a...",
+          "syntax": "structure geogrid import keyword",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-initialize",
+          "file": "flac/command_docs/commands/structure/geogrid-initialize.json",
+          "short_description": "Initializes quantities on the element",
+          "syntax": "structure geogrid initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-list",
+          "file": "flac/command_docs/commands/structure/geogrid-list.json",
+          "short_description": "Lists properties and responses of geogrid elements in the range",
+          "syntax": "structure geogrid list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-property",
+          "file": "flac/command_docs/commands/structure/geogrid-property.json",
+          "short_description": "Assign properties to geogrid elements in the range",
+          "syntax": "structure geogrid property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-recover",
+          "file": "flac/command_docs/commands/structure/geogrid-recover.json",
+          "short_description": "Recover stress and stress resultants for shell-type elements",
+          "syntax": "structure geogrid recover keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-refine",
+          "file": "flac/command_docs/commands/structure/geogrid-refine.json",
+          "short_description": "Refine elements in the range by subdividing them by a factor of i ",
+          "syntax": "structure geogrid refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "geogrid-select",
+          "file": "flac/command_docs/commands/structure/geogrid-select.json",
+          "short_description": "Selects or de-select all elements in the range",
+          "syntax": "structure geogrid select keyword",
+          "python_available": false
+        },
+        {
+          "name": "geometry-update",
+          "file": "flac/command_docs/commands/structure/geometry-update.json",
+          "short_description": "Updates associated with geometric or property changes are performed at the start of every model s...",
+          "syntax": "structure geometry-update <i>",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-apply",
+          "file": "flac/command_docs/commands/structure/hybrid-apply.json",
+          "short_description": "Create or modify hybrid bolt apply conditions",
+          "syntax": "structure hybrid apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-create",
+          "file": "flac/command_docs/commands/structure/hybrid-create.json",
+          "short_description": "Create a hybrid bolt consisting of a collection of cable finite elements and dowels",
+          "syntax": "structure hybrid create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-delete",
+          "file": "flac/command_docs/commands/structure/hybrid-delete.json",
+          "short_description": "Delete all hybrid bolt elements and associated dowels in the range",
+          "syntax": "structure hybrid delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-group",
+          "file": "flac/command_docs/commands/structure/hybrid-group.json",
+          "short_description": "Assign all hybrid bolt elements in the range to the group with the name s ",
+          "syntax": "structure hybrid group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-hide",
+          "file": "flac/command_docs/commands/structure/hybrid-hide.json",
+          "short_description": "This commands hides or un-hides all hybrid bolt elements in the range",
+          "syntax": "structure hybrid hide [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-history",
+          "file": "flac/command_docs/commands/structure/hybrid-history.json",
+          "short_description": "Sample hybrid bolt responses",
+          "syntax": "structure hybrid history keyword",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-import",
+          "file": "flac/command_docs/commands/structure/hybrid-import.json",
+          "short_description": "Create hybrid bolt elements from an outside source",
+          "syntax": "structure hybrid import keyword",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-initialize",
+          "file": "flac/command_docs/commands/structure/hybrid-initialize.json",
+          "short_description": "Initializes quantities on the element",
+          "syntax": "structure hybrid initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-list",
+          "file": "flac/command_docs/commands/structure/hybrid-list.json",
+          "short_description": "Lists properties and responses of hybrid bolt elements in the range",
+          "syntax": "structure hybrid list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-property",
+          "file": "flac/command_docs/commands/structure/hybrid-property.json",
+          "short_description": "Assigns properties to hybrid bolt elements in the range",
+          "syntax": "structure hybrid property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "hybrid-select",
+          "file": "flac/command_docs/commands/structure/hybrid-select.json",
+          "short_description": "This commands selects or de-selects all elements in the range",
+          "syntax": "structure hybrid select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "liner-apply",
+          "file": "flac/command_docs/commands/structure/liner-apply.json",
+          "short_description": "Assign uniform applied pressure f to all liner elements in the range",
+          "syntax": "structure liner apply <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-cmodel",
+          "file": "flac/command_docs/commands/structure/liner-cmodel.json",
+          "short_description": "Assign or get information about shell constitutive models",
+          "syntax": "structure liner cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "liner-create",
+          "file": "flac/command_docs/commands/structure/liner-create.json",
+          "short_description": "Create a liner consisting of a collection of shell finite elements",
+          "syntax": "structure liner create keyword",
+          "python_available": false
+        },
+        {
+          "name": "liner-delete",
+          "file": "flac/command_docs/commands/structure/liner-delete.json",
+          "short_description": "Delete all liner elements in the range",
+          "syntax": "structure liner delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-gap-factor",
+          "file": "flac/command_docs/commands/structure/liner-gap-factor.json",
+          "short_description": "Sets the gap factor used during large-strain sliding of liner elements",
+          "syntax": "structure liner gap-factor <f>",
+          "python_available": false
+        },
+        {
+          "name": "liner-group",
+          "file": "flac/command_docs/commands/structure/liner-group.json",
+          "short_description": "Assign all liner elements in the range to the group with the name s ",
+          "syntax": "structure liner group <s1>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-hide",
+          "file": "flac/command_docs/commands/structure/liner-hide.json",
+          "short_description": "Hide or un-hide all liner elements in the range",
+          "syntax": "structure liner hide [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-history",
+          "file": "flac/command_docs/commands/structure/liner-history.json",
+          "short_description": "Sample liner responses",
+          "syntax": "structure liner history keyword",
+          "python_available": false
+        },
+        {
+          "name": "liner-import",
+          "file": "flac/command_docs/commands/structure/liner-import.json",
+          "short_description": "Create a liner as a collection of shell finite elements, where the elements are obtained from an ...",
+          "syntax": "structure liner import keyword",
+          "python_available": false
+        },
+        {
+          "name": "liner-initialize",
+          "file": "flac/command_docs/commands/structure/liner-initialize.json",
+          "short_description": "Initialize quantities on the element",
+          "syntax": "structure liner initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "liner-list",
+          "file": "flac/command_docs/commands/structure/liner-list.json",
+          "short_description": "List properties and responses of liner elements in the range",
+          "syntax": "structure liner list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-property",
+          "file": "flac/command_docs/commands/structure/liner-property.json",
+          "short_description": "Assign properties to liner elements in the range",
+          "syntax": "structure liner property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-recover",
+          "file": "flac/command_docs/commands/structure/liner-recover.json",
+          "short_description": "Recover stress and stress resultants for shell-type elements",
+          "syntax": "structure liner recover keyword",
+          "python_available": false
+        },
+        {
+          "name": "liner-refine",
+          "file": "flac/command_docs/commands/structure/liner-refine.json",
+          "short_description": "this command refines elements in the range by subdividing them by a factor of i ",
+          "syntax": "structure liner refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "liner-select",
+          "file": "flac/command_docs/commands/structure/liner-select.json",
+          "short_description": "Select or de-select all elements in the range",
+          "syntax": "structure liner select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "link-attach",
+          "file": "flac/command_docs/commands/structure/link-attach.json",
+          "short_description": "Set attachment conditions for the specified link directions",
+          "syntax": "structure link attach keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-create",
+          "file": "flac/command_docs/commands/structure/link-create.json",
+          "short_description": "Creates new links on structure nodes in the range",
+          "syntax": "structure link create keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-delete",
+          "file": "flac/command_docs/commands/structure/link-delete.json",
+          "short_description": "Delete all links in the range",
+          "syntax": "structure link delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-dynamic-damping",
+          "file": "flac/command_docs/commands/structure/link-dynamic-damping.json",
+          "short_description": "Set dynamic damping type to the link",
+          "syntax": "structure link dynamic-damping keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-group",
+          "file": "flac/command_docs/commands/structure/link-group.json",
+          "short_description": "Assign all links in the range to the group with the name s ",
+          "syntax": "structure link group <s1>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-hide",
+          "file": "flac/command_docs/commands/structure/link-hide.json",
+          "short_description": "This commands hides or un-hides all links in the range",
+          "syntax": "structure link hide [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-history",
+          "file": "flac/command_docs/commands/structure/link-history.json",
+          "short_description": "Sample relative displacement or force from a single degree-of-freedom in a structural element link",
+          "syntax": "structure link history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "link-list",
+          "file": "flac/command_docs/commands/structure/link-list.json",
+          "short_description": "List properties and responses of structural element links in the range",
+          "syntax": "structure link list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-property",
+          "file": "flac/command_docs/commands/structure/link-property.json",
+          "short_description": "Set a property of a deformable force-displacement model in the link at the degree-of-freedom spec...",
+          "syntax": "structure link property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "link-select",
+          "file": "flac/command_docs/commands/structure/link-select.json",
+          "short_description": "This commands selects or de-selects all links in the range",
+          "syntax": "structure link select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "link-slide",
+          "file": "flac/command_docs/commands/structure/link-slide.json",
+          "short_description": "Set the large-strain sliding flag",
+          "syntax": "structure link slide <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "link-tolerance-contact",
+          "file": "flac/command_docs/commands/structure/link-tolerance-contact.json",
+          "short_description": "Set the tolerance used when establishing node-to-zone links",
+          "syntax": "structure link tolerance-contact <f>",
+          "python_available": false
+        },
+        {
+          "name": "link-tolerance-node",
+          "file": "flac/command_docs/commands/structure/link-tolerance-node.json",
+          "short_description": "Set the tolerance used when establishing node-to-node links",
+          "syntax": "structure link tolerance-node <f>",
+          "python_available": false
+        },
+        {
+          "name": "link-tolerance-slide",
+          "file": "flac/command_docs/commands/structure/link-tolerance-slide.json",
+          "short_description": "Set the tolerance used when updating node-to-zone links in response to large-strain motion",
+          "syntax": "structure link tolerance-slide <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "list-information",
+          "file": "flac/command_docs/commands/structure/list-information.json",
+          "short_description": "Lists global program settings and information related to structural elements",
+          "syntax": "structure list information",
+          "python_available": false
+        },
+        {
+          "name": "mechanical-damping",
+          "file": "flac/command_docs/commands/structure/mechanical-damping.json",
+          "short_description": "Set the damping scheme used by the structural elements for static analysis (see Mechanical Damping )",
+          "syntax": "structure mechanical damping keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-apply",
+          "file": "flac/command_docs/commands/structure/node-apply.json",
+          "short_description": "Set generalized point loads for all nodes in the range",
+          "syntax": "structure node apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-create",
+          "file": "flac/command_docs/commands/structure/node-create.json",
+          "short_description": "Create a structure node at location v ",
+          "syntax": "structure node create <v>[group <s1>[slot <s2>]]",
+          "python_available": false
+        },
+        {
+          "name": "node-damping-local",
+          "file": "flac/command_docs/commands/structure/node-damping-local.json",
+          "short_description": "Sets the local-damping factor to f for all nodes in the range (see the structure mechanical dampi...",
+          "syntax": "structure node damping-local <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "node-delete",
+          "file": "flac/command_docs/commands/structure/node-delete.json",
+          "short_description": "Delete all nodes in the range",
+          "syntax": "structure node delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-fix",
+          "file": "flac/command_docs/commands/structure/node-fix.json",
+          "short_description": "Fix the velocity-fixity conditions for all nodes in the range, thereby preventing these values fr...",
+          "syntax": "structure node fix keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-free",
+          "file": "flac/command_docs/commands/structure/node-free.json",
+          "short_description": "Free the velocity-fixity conditions for all nodes in the range, thereby allowing these values to ...",
+          "syntax": "structure node free keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-group",
+          "file": "flac/command_docs/commands/structure/node-group.json",
+          "short_description": "Assign all nodes in the range to the group with the name s1 ",
+          "syntax": "structure node group <s1>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-hide",
+          "file": "flac/command_docs/commands/structure/node-hide.json",
+          "short_description": "This command hides or un-hides all nodes in the range",
+          "syntax": "structure node hide [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "node-history",
+          "file": "flac/command_docs/commands/structure/node-history.json",
+          "short_description": "Samples nodal responses",
+          "syntax": "structure node history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "node-initialize",
+          "file": "flac/command_docs/commands/structure/node-initialize.json",
+          "short_description": "Initialize displacement, velocity and position of all structure nodes in the range",
+          "syntax": "structure node initialize keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-join",
+          "file": "flac/command_docs/commands/structure/node-join.json",
+          "short_description": "Create node-to-node links on all nodes in the range by attempting to find another node in the ran...",
+          "syntax": "structure node join [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-list",
+          "file": "flac/command_docs/commands/structure/node-list.json",
+          "short_description": "List properties and responses of structural element nodes in the range",
+          "syntax": "structure node list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-select",
+          "file": "flac/command_docs/commands/structure/node-select.json",
+          "short_description": "Select or de-select all structural nodes in the range",
+          "syntax": "structure node select [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "node-system-local",
+          "file": "flac/command_docs/commands/structure/node-system-local.json",
+          "short_description": "Set the orientation of the node-local system for all nodes in the range",
+          "syntax": "structure node system-local keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-apply",
+          "file": "flac/command_docs/commands/structure/pile-apply.json",
+          "short_description": "Assign uniform applied distributed load (force per unit length) to all pile elements in the range",
+          "syntax": "structure pile apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-cmodel",
+          "file": "flac/command_docs/commands/structure/pile-cmodel.json",
+          "short_description": "Assign or get information about beam constitutive models",
+          "syntax": "structure pile cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "pile-create",
+          "file": "flac/command_docs/commands/structure/pile-create.json",
+          "short_description": "Create a pile consisting of a collection of beam finite elements",
+          "syntax": "structure pile create keyword",
+          "python_available": false
+        },
+        {
+          "name": "pile-delete",
+          "file": "flac/command_docs/commands/structure/pile-delete.json",
+          "short_description": "Delete all pile elements in the range",
+          "syntax": "structure pile delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-group",
+          "file": "flac/command_docs/commands/structure/pile-group.json",
+          "short_description": "Assign all pile elements in the range to the group with the name s ",
+          "syntax": "structure pile group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-hide",
+          "file": "flac/command_docs/commands/structure/pile-hide.json",
+          "short_description": "This commands hides or un-hides all pile elements in the range",
+          "syntax": "structure pile hide [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-history",
+          "file": "flac/command_docs/commands/structure/pile-history.json",
+          "short_description": "Sample pile responses",
+          "syntax": "structure pile history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "pile-import",
+          "file": "flac/command_docs/commands/structure/pile-import.json",
+          "short_description": "Create pile elements from an outside source",
+          "syntax": "structure pile import keyword",
+          "python_available": false
+        },
+        {
+          "name": "pile-initialize",
+          "file": "flac/command_docs/commands/structure/pile-initialize.json",
+          "short_description": "Initializes quantities on the element",
+          "syntax": "structure pile initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "pile-list",
+          "file": "flac/command_docs/commands/structure/pile-list.json",
+          "short_description": "Lists properties and responses of pile elements in the range",
+          "syntax": "structure pile list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-property",
+          "file": "flac/command_docs/commands/structure/pile-property.json",
+          "short_description": "Assigns properties to pile elements in the range",
+          "syntax": "structure pile property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-refine",
+          "file": "flac/command_docs/commands/structure/pile-refine.json",
+          "short_description": "this command refines an existing element in the range by subdividing it into i equal-size segments",
+          "syntax": "structure pile refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "pile-select",
+          "file": "flac/command_docs/commands/structure/pile-select.json",
+          "short_description": "This command selects or de-selects all elements in the range",
+          "syntax": "structure pile select [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "ratio",
+          "file": "flac/command_docs/commands/structure/ratio.json",
+          "short_description": "Please see Reaching Equilibrium ",
+          "syntax": "structure ratio [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "flac/command_docs/commands/structure/results.json",
+          "short_description": "Controls if and what values are saved from zones in an exported results file",
+          "syntax": "structure results keyword",
+          "python_available": false
+        },
+        {
+          "name": "safety-factor",
+          "file": "flac/command_docs/commands/structure/safety-factor.json",
+          "short_description": "Set the safety factor for static analysis",
+          "syntax": "structure safety-factor <f>",
+          "python_available": false
+        },
+        {
+          "name": "scale-rotational-mass",
+          "file": "flac/command_docs/commands/structure/scale-rotational-mass.json",
+          "short_description": "This value applies to dynamic analysis only",
+          "syntax": "structure scale-rotational-mass [<b>]",
+          "python_available": false
+        },
+        {
+          "name": "shell-apply",
+          "file": "flac/command_docs/commands/structure/shell-apply.json",
+          "short_description": "Assign uniform applied pressure f to all shell elements in the range",
+          "syntax": "structure shell apply <f>[range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-cmodel",
+          "file": "flac/command_docs/commands/structure/shell-cmodel.json",
+          "short_description": "Assign or get information about shell constitutive models",
+          "syntax": "structure shell cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "shell-create",
+          "file": "flac/command_docs/commands/structure/shell-create.json",
+          "short_description": "Create a shell consisting of a collection of shell finite elements",
+          "syntax": "structure shell create keyword",
+          "python_available": false
+        },
+        {
+          "name": "shell-delete",
+          "file": "flac/command_docs/commands/structure/shell-delete.json",
+          "short_description": "Delete all shell elements in the range",
+          "syntax": "structure shell delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-group",
+          "file": "flac/command_docs/commands/structure/shell-group.json",
+          "short_description": "Assign all shell elements in the range to the group with the name s ",
+          "syntax": "structure shell group <s1>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-hide",
+          "file": "flac/command_docs/commands/structure/shell-hide.json",
+          "short_description": "This command hides or un-hides all shell elements in the range",
+          "syntax": "structure shell hide keyword",
+          "python_available": false
+        },
+        {
+          "name": "shell-history",
+          "file": "flac/command_docs/commands/structure/shell-history.json",
+          "short_description": "Add a shell element history ",
+          "syntax": "structure shell history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "shell-import",
+          "file": "flac/command_docs/commands/structure/shell-import.json",
+          "short_description": "Create a shell as a collection of shell finite elements, where the elements are obtained from an ...",
+          "syntax": "structure shell import keyword",
+          "python_available": false
+        },
+        {
+          "name": "shell-initialize",
+          "file": "flac/command_docs/commands/structure/shell-initialize.json",
+          "short_description": "Initializes quantities on the element",
+          "syntax": "structure shell initialize [keyword]",
+          "python_available": false
+        },
+        {
+          "name": "shell-list",
+          "file": "flac/command_docs/commands/structure/shell-list.json",
+          "short_description": "Lists properties and responses of shell elements in the range",
+          "syntax": "structure shell list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-property",
+          "file": "flac/command_docs/commands/structure/shell-property.json",
+          "short_description": "Assigns properties to shell elements in the range",
+          "syntax": "structure shell property keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-property-{elastic}",
+          "file": "flac/command_docs/commands/structure/shell-property-{elastic}.json",
+          "short_description": "Young’s modulus, \\(E\\)",
+          "syntax": "elastic",
+          "python_available": false
+        },
+        {
+          "name": "shell-recover",
+          "file": "flac/command_docs/commands/structure/shell-recover.json",
+          "short_description": "Stress and stress resultant recovery for shell-type elements",
+          "syntax": "structure shell recover keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-refine",
+          "file": "flac/command_docs/commands/structure/shell-refine.json",
+          "short_description": "This command refines elements in the range by subdividing them by a factor of i ",
+          "syntax": "structure shell refine <i>[range]",
+          "python_available": false
+        },
+        {
+          "name": "shell-select",
+          "file": "flac/command_docs/commands/structure/shell-select.json",
+          "short_description": "This commands selects or de-selects all elements in the range",
+          "syntax": "structure shell select keyword",
+          "python_available": false
+        }
+      ]
+    },
+    "table": {
+      "full_name": "Table Commands",
+      "description": "Commands for managing numerical tables — paired x/y data used as input for time-varying boundary conditions, property curves, and history post-processing.",
+      "command_prefix": "table",
+      "python_module": "itasca.table",
+      "related_categories": [
+        "history",
+        "model"
+      ],
+      "notes": [
+        "Tables are indexed by name (string) or numeric ID; created by 'table add' / 'table import'",
+        "'history export ... table <s>' pushes history data into a table for downstream use",
+        "table export / list dump current contents to stdout/file",
+        "Python SDK (itasca.table) exposes read/write for runtime queries; commands handle batch I/O"
+      ],
+      "commands": [
+        {
+          "name": "add",
+          "file": "_common/command_docs/commands/table/add.json",
+          "short_description": "Add an entry to the end of table s ",
+          "syntax": "table <s>add <v2>...",
+          "python_available": false
+        },
+        {
+          "name": "clear",
+          "file": "_common/command_docs/commands/table/clear.json",
+          "short_description": "Remove all entries of from table s ",
+          "syntax": "table <s>clear",
+          "python_available": false
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/table/delete.json",
+          "short_description": "Delete table s ",
+          "syntax": "table <s>delete",
+          "python_available": false
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/table/export.json",
+          "short_description": "The contents of the specified table are output to file sfile , with default file extension “",
+          "syntax": "table <s>export <sfile>[keyword ...]",
+          "python_available": false
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/table/import.json",
+          "short_description": "Read file sfile into table s ",
+          "syntax": "table <s>import <sfile>",
+          "python_available": false
+        },
+        {
+          "name": "insert",
+          "file": "_common/command_docs/commands/table/insert.json",
+          "short_description": "Insert an entry into table s , sorted by its x-value",
+          "syntax": "table <s>insert <v2>...",
+          "python_available": false
+        },
+        {
+          "name": "label",
+          "file": "_common/command_docs/commands/table/label.json",
+          "short_description": "Set a label for table s ",
+          "syntax": "table <s>label <slabel>",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/table/list.json",
+          "short_description": "List table information",
+          "syntax": "table [<s>] list",
+          "python_available": false
+        },
+        {
+          "name": "position",
+          "file": "_common/command_docs/commands/table/position.json",
+          "short_description": "Substitute the specified (x,y) pair for the stored x- and y-values in the i th entry of table s ",
+          "syntax": "table <s>position <i><v2>",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/table/results.json",
+          "short_description": "Determines if the contents of tables are included in any result file export",
+          "syntax": "table results active <b>",
+          "python_available": false
+        },
+        {
+          "name": "sort",
+          "file": "_common/command_docs/commands/table/sort.json",
+          "short_description": "Cause all entries in table s to be sorted in order of increasing x-value",
+          "syntax": "table <s>sort",
+          "python_available": false
+        }
+      ]
+    },
+    "zone": {
+      "full_name": "Zone Commands",
+      "description": "Commands for creating, configuring, and solving the FLAC continuum grid — zones (finite-volume elements) and their gridpoints, constitutive models, boundary/initial conditions, and coupled (fluid/thermal/dynamic/creep) processes.",
+      "command_prefix": "zone",
+      "python_module": "itasca.zone",
+      "python_object_class": "Zone",
+      "doc_url": "https://docs.itascacg.com/flac3d900/flac3d/zone/doc/manual/zone_manual/zone.html",
+      "related_categories": [
+        "structure",
+        "body",
+        "model",
+        "geometry"
+      ],
+      "notes": [
+        "Zones are the FLAC continuum primitive; 'zone create' builds primitive-shaped grids, 'zone generate' meshes from building blocks",
+        "'zone cmodel assign <model>' attaches a constitutive model; properties via 'zone property'",
+        "Gridpoint conditions (fix/initialize) are addressed via 'zone gridpoint ...' (Python: itasca.gridpoint)",
+        "Coupled physics live under zone subkeywords: 'zone fluid', 'zone thermal', 'zone dynamic', 'zone creep'",
+        "Use 'model solve' / 'model cycle' to step; 'zone relax' / 'zone initialize-stresses' for stress initialization"
+      ],
+      "commands": [
+        {
+          "name": "apply",
+          "file": "flac/command_docs/commands/zone/apply.json",
+          "short_description": "Create or modify zone apply conditions",
+          "syntax": "zone apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "apply-remove",
+          "file": "flac/command_docs/commands/zone/apply-remove.json",
+          "short_description": "Remove a zone condition",
+          "syntax": "zone apply-remove [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "attach",
+          "file": "flac/command_docs/commands/zone/attach.json",
+          "short_description": "Create attached gridpoints",
+          "syntax": "zone attach keyword",
+          "python_available": false
+        },
+        {
+          "name": "cmodel",
+          "file": "flac/command_docs/commands/zone/cmodel.json",
+          "short_description": "Assign, load, or get information on a zone constitutive model",
+          "syntax": "zone cmodel keyword",
+          "python_available": false
+        },
+        {
+          "name": "consolidation",
+          "file": "flac/command_docs/commands/zone/consolidation.json",
+          "short_description": "Perform fluid calculations, simplified",
+          "syntax": "zone consolidation <f>keyword",
+          "python_available": false
+        },
+        {
+          "name": "copy",
+          "file": "flac/command_docs/commands/zone/copy.json",
+          "short_description": "Copy zones",
+          "syntax": "zone copy <v>[merge <b>] [range]",
+          "python_available": false
+        },
+        {
+          "name": "create",
+          "file": "flac/command_docs/commands/zone/create.json",
+          "short_description": "Create 3D zone-filled primitive shapes ( brick , cylinder , etc",
+          "syntax": "zone create keyword",
+          "python_available": false
+        },
+        {
+          "name": "create2d",
+          "file": "flac/command_docs/commands/zone/create2d.json",
+          "short_description": "Create 2D zones for FLAC2D ",
+          "syntax": "zone create2d keyword",
+          "python_available": false
+        },
+        {
+          "name": "creep",
+          "file": "flac/command_docs/commands/zone/creep.json",
+          "short_description": "Sets parameters for a time-dependent creep material analysis (only available with the creep model...",
+          "syntax": "zone creep keyword",
+          "python_available": false
+        },
+        {
+          "name": "delete",
+          "file": "flac/command_docs/commands/zone/delete.json",
+          "short_description": "Delete zones",
+          "syntax": "zone delete [range]",
+          "python_available": false
+        },
+        {
+          "name": "densify",
+          "file": "flac/command_docs/commands/zone/densify.json",
+          "short_description": "Find all zones in the range and subdivide them into smaller zones that fill the same volume",
+          "syntax": "zone densify keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "dynamic",
+          "file": "flac/command_docs/commands/zone/dynamic.json",
+          "short_description": "Set parameters for a dynamic model (only available with the dynamic model option – see Dynamic An...",
+          "syntax": "zone dynamic keyword",
+          "python_available": false
+        },
+        {
+          "name": "export",
+          "file": "flac/command_docs/commands/zone/export.json",
+          "short_description": "Export a grid to a file",
+          "syntax": "zone export <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-apply",
+          "file": "flac/command_docs/commands/zone/face-apply.json",
+          "short_description": "This command is used to apply boundary conditions at surface faces of the model",
+          "syntax": "zone face apply keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-apply-remove",
+          "file": "flac/command_docs/commands/zone/face-apply-remove.json",
+          "short_description": "Remove zone face apply conditions, which are described in the documentation for that command",
+          "syntax": "zone face apply-remove [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-group",
+          "file": "flac/command_docs/commands/zone/face-group.json",
+          "short_description": "Adds a group name s to zone faces included in the optional range ",
+          "syntax": "zone face group <s>keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-hide",
+          "file": "flac/command_docs/commands/zone/face-hide.json",
+          "short_description": "Hide or un-hide zone faces in the range",
+          "syntax": "zone face hide [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-list",
+          "file": "flac/command_docs/commands/zone/face-list.json",
+          "short_description": "List information about zone faces",
+          "syntax": "zone face list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-select",
+          "file": "flac/command_docs/commands/zone/face-select.json",
+          "short_description": "Select or deselect zone faces in the range",
+          "syntax": "zone face select [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-skin",
+          "file": "flac/command_docs/commands/zone/face-skin.json",
+          "short_description": "Skin the model to automatically generate face groups",
+          "syntax": "zone face skin [keyword ... ][range]",
+          "python_available": false
+        },
+        {
+          "name": "face-westergaard",
+          "file": "flac/command_docs/commands/zone/face-westergaard.json",
+          "short_description": "Applies the Westergaard approximation for the dynamic response of water to the surface faces in t...",
+          "syntax": "zone face westergaard [keyword ...] [range]",
+          "python_available": false
+        },
+        {
+          "name": "face-westergaard-remove",
+          "file": "flac/command_docs/commands/zone/face-westergaard-remove.json",
+          "short_description": "Removes any applied westergaard condition on the faces in the range",
+          "syntax": "zone face westergaard-remove [range]",
+          "python_available": false
+        },
+        {
+          "name": "fluid",
+          "file": "flac/command_docs/commands/zone/fluid.json",
+          "short_description": "Set parameters for a groundwater fluid flow analysis",
+          "syntax": "zone fluid keyword",
+          "python_available": false
+        },
+        {
+          "name": "generate",
+          "file": "flac/command_docs/commands/zone/generate.json",
+          "short_description": "Generate zones based on an algorithm—generally from some other data structure",
+          "syntax": "zone generate keyword",
+          "python_available": false
+        },
+        {
+          "name": "geometry-test",
+          "file": "flac/command_docs/commands/zone/geometry-test.json",
+          "short_description": "Evaluate the integrity of model zones",
+          "syntax": "zone geometry-test [range]",
+          "python_available": false
+        },
+        {
+          "name": "geometry-tolerance",
+          "file": "flac/command_docs/commands/zone/geometry-tolerance.json",
+          "short_description": "Set the tolerance before an illegal geometry error happens in response to zone deformation",
+          "syntax": "zone geometry-tolerance <f>",
+          "python_available": false
+        },
+        {
+          "name": "geometry-update",
+          "file": "flac/command_docs/commands/zone/geometry-update.json",
+          "short_description": "Set a specific interval of steps at which to update zone geometry and property changes in large s...",
+          "syntax": "zone geometry-update <i>",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint",
+          "file": "flac/command_docs/commands/zone/gridpoint.json",
+          "short_description": "For each gridpoint in the range, in each of the the specified degree-of-freedoms, checks if the g...",
+          "syntax": "zone gridpoint [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-create",
+          "file": "flac/command_docs/commands/zone/gridpoint-create.json",
+          "short_description": "Create a single gridpoint",
+          "syntax": "zone gridpoint create <v>[keyword]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-fix",
+          "file": "flac/command_docs/commands/zone/gridpoint-fix.json",
+          "short_description": "Fix a property at all gridpoints in the range",
+          "syntax": "zone gridpoint fix keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-free",
+          "file": "flac/command_docs/commands/zone/gridpoint-free.json",
+          "short_description": "Free properties at gridpoints in the range",
+          "syntax": "zone gridpoint free keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-group",
+          "file": "flac/command_docs/commands/zone/gridpoint-group.json",
+          "short_description": "Assign group name s to zone gridpoints in the range",
+          "syntax": "zone gridpoint group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-import",
+          "file": "flac/command_docs/commands/zone/gridpoint-import.json",
+          "short_description": "Imports grid point data",
+          "syntax": "zone gridpoint import pore-pressure <sfile>[keyword ...] [range] 3D ONLY",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-initialize",
+          "file": "flac/command_docs/commands/zone/gridpoint-initialize.json",
+          "short_description": "Assign or initialize values to all gridpoints in the range",
+          "syntax": "zone gridpoint initialize keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-list",
+          "file": "flac/command_docs/commands/zone/gridpoint-list.json",
+          "short_description": "Display gridpoint information in the console",
+          "syntax": "zone gridpoint list keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-merge",
+          "file": "flac/command_docs/commands/zone/gridpoint-merge.json",
+          "short_description": "Attempts to merge all gridpoints in the range",
+          "syntax": "zone gridpoint merge [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "gridpoint-system",
+          "file": "flac/command_docs/commands/zone/gridpoint-system.json",
+          "short_description": "Set the local coordinate system for gridpoints within the range",
+          "syntax": "zone gridpoint system keyword",
+          "python_available": false
+        },
+        {
+          "name": "group",
+          "file": "flac/command_docs/commands/zone/group.json",
+          "short_description": "Add group name s to the zones in the range",
+          "syntax": "zone group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "hide",
+          "file": "flac/command_docs/commands/zone/hide.json",
+          "short_description": "Hide or un-hide all zones in the range",
+          "syntax": "zone hide [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "history",
+          "file": "flac/command_docs/commands/zone/history.json",
+          "short_description": "Add a zone history ",
+          "syntax": "zone history [name <s>] keyword",
+          "python_available": false
+        },
+        {
+          "name": "import",
+          "file": "flac/command_docs/commands/zone/import.json",
+          "short_description": "Import a grid from a file",
+          "syntax": "zone import <s>[<s2>]keyword",
+          "python_available": false
+        },
+        {
+          "name": "initialize",
+          "file": "flac/command_docs/commands/zone/initialize.json",
+          "short_description": "Initialize a variable on all zones in the range",
+          "syntax": "zone initialize keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "initialize-stresses",
+          "file": "flac/command_docs/commands/zone/initialize-stresses.json",
+          "short_description": "Initialize zone stresses based on the density of the zones above them and gravity",
+          "syntax": "zone initialize-stresses keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-create",
+          "file": "flac/command_docs/commands/zone/interface-create.json",
+          "short_description": "Create nodes or elements on interface s ",
+          "syntax": "zone interface [<s>] create keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "interface-effective",
+          "file": "flac/command_docs/commands/zone/interface-effective.json",
+          "short_description": "The effective stress will be used in the interface calculation if on ",
+          "syntax": "zone interface [<s>] effective <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-element",
+          "file": "flac/command_docs/commands/zone/interface-element.json",
+          "short_description": "Manage zone interface elements",
+          "syntax": "zone interface [<s>] element keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-group",
+          "file": "flac/command_docs/commands/zone/interface-group.json",
+          "short_description": "Add group name s to the interfaces in the range",
+          "syntax": "zone interface [<s>] group <s>[keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-list",
+          "file": "flac/command_docs/commands/zone/interface-list.json",
+          "short_description": "Show summary data on interfaces",
+          "syntax": "zone interface [<s>] list information [range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-node",
+          "file": "flac/command_docs/commands/zone/interface-node.json",
+          "short_description": "Configure interface nodes",
+          "syntax": "zone interface [<s>] node keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-permeability",
+          "file": "flac/command_docs/commands/zone/interface-permeability.json",
+          "short_description": "Interfaces are permeable by default",
+          "syntax": "zone interface [<s>] permeability <b>[range]",
+          "python_available": false
+        },
+        {
+          "name": "interface-tolerance-contact",
+          "file": "flac/command_docs/commands/zone/interface-tolerance-contact.json",
+          "short_description": "Sets the maximum depth of penetration (of faces that contact an interface) for which a contact is...",
+          "syntax": "zone interface [<s>] tolerance-contact <f>keyword [range]",
+          "python_available": false
+        },
+        {
+          "name": "list",
+          "file": "flac/command_docs/commands/zone/list.json",
+          "short_description": "List zone data",
+          "syntax": "zone list [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "mechanical",
+          "file": "flac/command_docs/commands/zone/mechanical.json",
+          "short_description": "Set parameters for a static mechanical analysis that are specific to zones",
+          "syntax": "zone mechanical keyword",
+          "python_available": false
+        },
+        {
+          "name": "nodal-mixed-discretization",
+          "file": "flac/command_docs/commands/zone/nodal-mixed-discretization.json",
+          "short_description": "Activate or deactivate the nodal mixed discretization (nmd) feature",
+          "syntax": "zone nodal-mixed-discretization <b>",
+          "python_available": false
+        },
+        {
+          "name": "property",
+          "file": "flac/command_docs/commands/zone/property.json",
+          "short_description": "Make a constitutive model(s) property assignment",
+          "syntax": "zone property [density <f>] keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "property-distribution",
+          "file": "flac/command_docs/commands/zone/property-distribution.json",
+          "short_description": "Modify a zone constitutive model property",
+          "syntax": "zone property-distribution [[property] <fvalue>] keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "ratio",
+          "file": "flac/command_docs/commands/zone/ratio.json",
+          "short_description": "Please see Reaching Equilibrium ",
+          "syntax": "zone ratio keyword",
+          "python_available": false
+        },
+        {
+          "name": "reflect",
+          "file": "flac/command_docs/commands/zone/reflect.json",
+          "short_description": "All zones within the given range are reflected across the plane",
+          "syntax": "zone reflect keyword ... [range]",
+          "python_available": false
+        },
+        {
+          "name": "relax",
+          "file": "flac/command_docs/commands/zone/relax.json",
+          "short_description": "Create and modify a special apply condition on the zones in the range",
+          "syntax": "zone relax keyword",
+          "python_available": false
+        },
+        {
+          "name": "results",
+          "file": "flac/command_docs/commands/zone/results.json",
+          "short_description": "Controls if and what values are saved from zones in an exported results file",
+          "syntax": "zone results keyword",
+          "python_available": false
+        },
+        {
+          "name": "select",
+          "file": "flac/command_docs/commands/zone/select.json",
+          "short_description": "Select or de-select all zones in the range",
+          "syntax": "zone select [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "separate",
+          "file": "flac/command_docs/commands/zone/separate.json",
+          "short_description": "Separates internal faces, making a new internal surface",
+          "syntax": "zone separate keyword",
+          "python_available": false
+        },
+        {
+          "name": "split",
+          "file": "flac/command_docs/commands/zone/split.json",
+          "short_description": "Split zones in the range into multiple hexahedral or quadrilateral zones",
+          "syntax": "zone split [keyword] [range]",
+          "python_available": false
+        },
+        {
+          "name": "thermal",
+          "file": "flac/command_docs/commands/zone/thermal.json",
+          "short_description": "Set parameters for a thermal analysis (only available if model configure thermal has been specified)",
+          "syntax": "zone thermal keyword",
+          "python_available": false
+        },
+        {
+          "name": "trace",
+          "file": "flac/command_docs/commands/zone/trace.json",
+          "short_description": "Trace zone position and velocity",
+          "syntax": "zone trace keyword",
+          "python_available": false
+        },
+        {
+          "name": "validate",
+          "file": "flac/command_docs/commands/zone/validate.json",
+          "short_description": "Attempt to validate the model by performing checks for common errors or omissions in the model setup",
+          "syntax": "zone validate keyword ...",
+          "python_available": false
+        },
+        {
+          "name": "vtk",
+          "file": "flac/command_docs/commands/zone/vtk.json",
+          "short_description": "Control if and what values are exported from zones to a VTK file",
+          "syntax": "zone vtk",
+          "python_available": false
+        },
+        {
+          "name": "water",
+          "file": "flac/command_docs/commands/zone/water.json",
+          "short_description": "This command initializes pore pressures, changing the effective stresses",
+          "syntax": "zone water keyword",
+          "python_available": false
+        }
+      ]
+    }
+  },
+  "python_sdk_alternatives": {
+    "model solve": {
+      "command": "model solve",
+      "reason": "Python SDK doesn't have automatic equilibrium detection",
+      "python_alternative": "itasca.cycle() - requires manual termination logic",
+      "python_workaround": "Use itasca.cycle() with manual ratio checking in a loop",
+      "recommendation": "use_command"
+    }
+  },
+  "command_patterns": {
+    "continuum_commands": [
+      "zone",
+      "structure"
+    ],
+    "model_setup_commands": [
+      "model",
+      "program",
+      "project",
+      "domain"
+    ],
+    "geometry_commands": [
+      "geometry",
+      "fracture",
+      "body",
+      "extruder"
+    ],
+    "data_commands": [
+      "table",
+      "data",
+      "group",
+      "history"
+    ],
+    "visualization_commands": [
+      "plot"
+    ],
+    "scripting_commands": [
+      "fish"
+    ],
+    "common_subcommands": [
+      "create",
+      "delete",
+      "property",
+      "group",
+      "list",
+      "import",
+      "export",
+      "history"
+    ]
+  },
+  "notes": [
+    "Commands are preferred over Python SDK for batch operations and specialized geometries",
+    "Python SDK is preferred for fine-grained control and programmatic logic",
+    "Commands return no value; use 'result' subcommands to query results",
+    "Most commands operate on ranges (groups, spatial regions, all objects)"
+  ]
+}

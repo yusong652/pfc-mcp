@@ -1,0 +1,95 @@
+{
+  "name": "zone-interface",
+  "dimension": "mixed",
+  "full_name": "Zone Interface Workflow",
+  "description": "Zone interfaces insert contact-like behavior between zone faces or between zones and other objects. They require creation commands plus interface-node properties for stiffness and strength.",
+  "primary_commands": [
+    "zone interface create",
+    "zone interface node property",
+    "zone interface node initialize-stresses",
+    "zone interface effective",
+    "zone interface permeability",
+    "zone interface tolerance-contact",
+    "zone interface list",
+    "zone interface group"
+  ],
+  "property_groups": [
+    {
+      "group": "stiffness",
+      "properties": [
+        "stiffness-normal",
+        "stiffness-shear"
+      ],
+      "notes": [
+        "Choose stiffness high enough to limit penetration but not so high that the timestep becomes unnecessarily small."
+      ]
+    },
+    {
+      "group": "strength",
+      "properties": [
+        "cohesion",
+        "friction",
+        "tension",
+        "dilation"
+      ],
+      "notes": [
+        "Set tensile strength deliberately; zero tension is common for opening joints."
+      ]
+    },
+    {
+      "group": "softening / residual strength",
+      "properties": [
+        "cohesion-residual",
+        "friction-residual",
+        "tension-residual",
+        "displacement-zero-dilation"
+      ],
+      "notes": [
+        "Residual values take over after the bond breaks; displacement-zero-dilation controls when dilation vanishes."
+      ]
+    },
+    {
+      "group": "bond control",
+      "properties": [
+        "bonded-slip",
+        "shear-bond-ratio"
+      ],
+      "notes": [
+        "Use bonded-slip to set whether the interface allows slip while still bonded; shear-bond-ratio scales bonded shear resistance."
+      ]
+    }
+  ],
+  "related_commands_not_properties": {
+    "permeability": "Set via 'zone interface permeability <value>' command (interface-level, not a node property keyword).",
+    "stress-normal / stress-shear": "Read-only node STATE — query via 'zone interface <id> node list stress' or via 'zone interface node ?' subcommands (NOT property keywords).",
+    "gap": "Not a documented interface node property in FLAC2D 9.0."
+  },
+  "common_patterns": [
+    {
+      "name": "Create interface on grouped faces (FLAC2D)",
+      "commands": [
+        "zone face skin",
+        "zone face group 'Fault' range position-x 0.5 0.5",
+        "zone interface create by-face range group 'Fault'",
+        "zone interface node property stiffness-normal 1e9 stiffness-shear 5e8 cohesion 1e4 friction 30 tension 0"
+      ]
+    },
+    {
+      "name": "Inspect interface state",
+      "commands": [
+        "zone interface list",
+        "zone interface 1 node list information",
+        "zone interface 1 node list stress"
+      ],
+      "notes": [
+        "'zone interface node list' alone is incomplete — must reference a specific interface first ('zone interface <id|name> node list <sub-kw>') with one of: displacement / extra / host / information / property / state / stress / target / velocity."
+      ]
+    }
+  ],
+  "validation_notes": [
+    "Check interface node count and groups immediately after creation.",
+    "Verify normal direction and selected faces before assigning properties.",
+    "For coupled flow, set and inspect permeability behavior explicitly."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/command_summary.html"
+}

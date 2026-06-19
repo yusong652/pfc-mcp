@@ -27,7 +27,7 @@ class CommandDocumentAdapter:
     """
 
     @staticmethod
-    def load_commands(version: str = CommandLoader.DEFAULT_VERSION) -> list[SearchDocument]:
+    def load_commands(version: str = CommandLoader.DEFAULT_VERSION, *, software: str) -> list[SearchDocument]:
         """Load all PFC command documents.
 
         Returns:
@@ -42,14 +42,20 @@ class CommandDocumentAdapter:
             <DocumentType.COMMAND: 'command'>
         """
         documents = []
-        all_commands = CommandLoader.get_all_commands()
+        all_commands = CommandLoader.get_all_commands(software=software)
 
         for cmd_meta in all_commands:
             category = cmd_meta["category"]
             cmd_name = cmd_meta["name"]
 
-            # Load full command documentation
-            cmd_doc = CommandLoader.load_command_doc(category, cmd_name, version)
+            # Load full command documentation. A KeyError means this command's
+            # doc has no entry for the requested version (some engines, e.g. FLAC,
+            # omit older-version keys entirely rather than marking available=False),
+            # so it is simply not part of this version's corpus.
+            try:
+                cmd_doc = CommandLoader.load_command_doc(category, cmd_name, version, software=software)
+            except KeyError:
+                continue
             if not cmd_doc or cmd_doc.get("available") is False:
                 continue
 
@@ -78,7 +84,9 @@ class CommandDocumentAdapter:
     load_all = load_commands
 
     @staticmethod
-    def load_by_id(doc_id: str, version: str = CommandLoader.DEFAULT_VERSION) -> SearchDocument | None:
+    def load_by_id(
+        doc_id: str, version: str = CommandLoader.DEFAULT_VERSION, *, software: str
+    ) -> SearchDocument | None:
         """Load a specific command document by ID.
 
         Args:
@@ -96,7 +104,10 @@ class CommandDocumentAdapter:
             return None
 
         category, cmd_name = doc_id.split(" ", 1)
-        cmd_doc = CommandLoader.load_command_doc(category, cmd_name, version)
+        try:
+            cmd_doc = CommandLoader.load_command_doc(category, cmd_name, version, software=software)
+        except KeyError:
+            return None
 
         if not cmd_doc or cmd_doc.get("available") is False:
             return None

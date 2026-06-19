@@ -1,0 +1,88 @@
+{
+  "name": "sketch-workflow",
+  "dimension": "mixed",
+  "full_name": "Sketch Workflow",
+  "description": "Sketch is the FLAC 9.0 name for workflows formerly called extrusion. A sketch is a 2D design made from points, edges, blocks, and mesh controls. FLAC2D can generate zones directly; FLAC3D extrudes the sketch before creating zones.",
+  "primary_commands": [
+    "sketch set",
+    "sketch point",
+    "sketch edge",
+    "sketch block",
+    "sketch mesh",
+    "sketch section",
+    "zone generate from-sketch"
+  ],
+  "valid_subcommands_binary": [
+    "block",
+    "edge",
+    "mesh",
+    "point",
+    "section",
+    "set"
+  ],
+  "objects": [
+    {
+      "object": "set",
+      "role": "Named sketch collection; commands operate on the active set."
+    },
+    {
+      "object": "point",
+      "role": "Coordinate anchors for edges and blocks."
+    },
+    {
+      "object": "edge",
+      "role": "Line or curved boundaries with zoning controls."
+    },
+    {
+      "object": "block",
+      "role": "Closed shape meshed as regular structured or irregular unstructured mesh."
+    },
+    {
+      "object": "mesh",
+      "role": "Mesh sizing, optimization, and meshing control parameters."
+    },
+    {
+      "object": "section",
+      "role": "Pre-defined section primitives (circle / polygon / rectangle) to seed a sketch."
+    }
+  ],
+  "workflow": [
+    {
+      "step": "Create geometry",
+      "commands": [
+        "sketch set create 'section'",
+        "sketch point create ...",
+        "sketch edge create ..."
+      ]
+    },
+    {
+      "step": "Configure mesh and zoning",
+      "commands": [
+        "sketch block create ...",
+        "sketch mesh target-size 0.1",
+        "sketch set automatic-zone size 10"
+      ],
+      "notes": [
+        "Use 'sketch mesh target-size <float>' / 'sketch mesh reset' / 'sketch mesh mode <mixed|quad>' / 'sketch mesh type <mixed|unstructured>' for mesh control.",
+        "Use 'sketch set automatic-zone <size|total|direction|edge> <value>' to drive automatic zoning. Sub-keyword types: size <int>=1, total <int>=1, direction <both|construction|extrusion>, edge <float 1e-5..1e5>.",
+        "'sketch mesh automatic' is NOT a valid subcommand."
+      ]
+    },
+    {
+      "step": "Generate zones",
+      "commands": [
+        "zone generate from-sketch"
+      ],
+      "notes": [
+        "FLAC2D generates zones from the 2D sketch.",
+        "FLAC3D requires extrusion/section setup before 3D zones are generated."
+      ]
+    }
+  ],
+  "rejected_subcommands_note": "'sketch segment' and 'sketch path' are NOT valid FLAC2D 9.0 subcommands ('Bad conversion of parameter number 2'). Only block / edge / mesh / point / section / set are accepted after 'sketch'.",
+  "version_notes": [
+    "In FLAC 9.0, sketch replaces the older extrude naming.",
+    "Some legacy documentation and command resources may still use extruder/extrude terminology."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/sketch/sketch.html"
+}

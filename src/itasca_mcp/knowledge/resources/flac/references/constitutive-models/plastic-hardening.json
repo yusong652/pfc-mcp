@@ -1,0 +1,254 @@
+{
+  "model": "plastic-hardening",
+  "full_name": "Plastic-Hardening (PH) Model*",
+  "search_keywords": [
+    "plastic",
+    "hardening",
+    "plastic-hardening",
+    "(ph)",
+    "model*",
+    "constitutive",
+    "cohesion",
+    "dilation",
+    "exponent",
+    "friction",
+    "stress-1-effective",
+    "stress-2-effective",
+    "stress-3-effective",
+    "pressure-reference",
+    "stiffness-50-reference",
+    "flag-brittle",
+    "stiffness-0-reference",
+    "stiffness-oedometer-reference",
+    "stiffness-ur-reference",
+    "coefficient-normally-consolidation",
+    "constant-alpha",
+    "factor-cut",
+    "factor-dilation-law",
+    "flag-initialization",
+    "flag-smallstrain",
+    "over-consolidation-ratio",
+    "poisson",
+    "stiffness-cap-hardening",
+    "strain-70",
+    "failure-ratio",
+    "tension",
+    "void-initial",
+    "void-maximum",
+    "bulk",
+    "shear",
+    "plastic-hardening-shear",
+    "plastic-hardening-volume",
+    "pressure-preconsolidation",
+    "void"
+  ],
+  "description": "Note *Not available in 3DEC . The Plastic-Hardening (PH) model is a shear and volumetric hardening constitutive model for the simulation of soil behavior. When subjected to deviatoric loading (e.g., during a conventional drained triaxial test), soils usually exhibit a decrease in stiffness, accompanied by irreversible deformation. In most cases, the plot of deviatoric stress versus axial strain obtained in a drained triaxial test may be approximated by a hyperbola. This feature was discussed by Duncan and Chang (1970) in their well-known “hyperbolic-soil” model, which is formulated as a non-li",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'plastic-hardening' zone constitutive model. Assign the model with 'zone cmodel assign plastic-hardening [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name plastic-hardening]'.",
+      "properties": [
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c. The default and cut-off (allowable minimum) value is 10^{-5} \\cdot p^{ref}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "ultimate dilation angle in degrees, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent",
+          "symbol": "m",
+          "description": "exponent for elastic moduli, m. Allowable value is 0 \\le m \\le 0.999.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "ultimate friction angle in degrees, \\phi. The default and cut-off (allowable minimum) value is 0.001 degrees.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-1-effective",
+          "symbol": "\\sigma^{ini}_1",
+          "description": "initial minimum principal effective stress, \\sigma^{ini}_1. See the note*.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-2-effective",
+          "symbol": "\\sigma^{ini}_2",
+          "description": "initial median principal effective stress, \\sigma^{ini}_2. See the note*.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-3-effective",
+          "symbol": "\\sigma^{ini}_3",
+          "description": "initial maximum principal effective stress, \\sigma^{ini}_3. See the note*.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p^{ref}",
+          "description": "reference pressure, p^{ref} . A non-zero value should be specified based on the unit of stress/pressure adopted in the model. The most commonly used and highly recommended reference pressure is the standard atmospheric pressure, e.g., 100.0 kPa/1.0e5 if in Pa (or other value compatible to the adopted stress/pressure unit).",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-50-reference",
+          "symbol": "E^{ref}_{50}",
+          "description": "secant stiffness, E^{ref}_{50}, at 50% of the ultimate deviatoric stress, q_f, when \\sigma_3 = - p^{ref} in a triaxial test. A non-zero value must be specified.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "stiffness-0-reference",
+          "symbol": "E^{ref}_{0}",
+          "description": "Initial stiffness, E^{ref}_{0}, at zero strain when \\sigma_3 = - p^{ref}. It is required that E^{ref}_{0} > E^{ref}_{ur}. If not specified, the default value is E^{ref}_{0} = 3 \\cdot E^{ref}_{ur}. This property is needed only when the flag for small-strain stiffness is on, otherwise its value is useless.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-oedometer-reference",
+          "symbol": "E^{ref}_{oed}",
+          "description": "tangent stiffness, E^{ref}_{oed}, when \\sigma_1 = - p^{ref} in an oedometer test. By default, E^{ref}_{oed} = E^{ref}_{50} if E^{ref}_{oed} is not specified while E^{ref}_{50} has been specified. If E^{ref}_{oed} < 0.5 E^{ref}_{50}, the soil is highly compressible, it is recommended to use the Soft-Soil (SS) model instead.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-ur-reference",
+          "symbol": "E^{ref}_{ur}",
+          "description": "unloading-reloading stiffness, E^{ref}_{ur}, when \\sigma_3 = - p^{ref} in a triaxial test. This value must be greater than 2 \\cdot E^{ref}_{50}. By default, E^{ref}_{ur} = 4 \\cdot E^{ref}_{50}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coefficient-normally-consolidation",
+          "symbol": "K_{nc}",
+          "description": "normal consolidation coefficient, K_{nc}. It is not allowed to be less than \\nu / (1-\\nu), a range 0.5 to 0.7 is common. The default is K_{nc} = 1 - \\sin \\phi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-alpha",
+          "symbol": "\\alpha",
+          "description": "dimensionless parameter in the cap yield function, \\alpha. Initialized internally. See the note* for an alternative option.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "factor-cut",
+          "symbol": "f_{cut}",
+          "description": "cut-off factor, f_{cut}. The default is 0.1.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "factor-dilation-law",
+          "symbol": "F_c",
+          "description": "factor of the dilation law, F_c, allowable range is 0.0 to 0.25. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-initialization",
+          "description": "flag for initialization. If set to on, the internal variables will be recalculated. The default is off.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-smallstrain",
+          "description": "flag for small-strain stiffness. If set on, small-strain stiffness is activated. The default is off.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "over-consolidation-ratio",
+          "symbol": "OCR",
+          "description": "over consolidation ratio, OCR. For normally consolidated soil, the value should be input as 1.0. The default is 100.0, which denotes an “apparent” non-cap shear plastic hardening model.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu. The default is 0.2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-cap-hardening",
+          "symbol": "H_c",
+          "description": "hardening modulus for cap hardening, H_c. Initialized internally. See the note* for an alternative option.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-70",
+          "symbol": "G_s / G_0",
+          "description": "Shear strain at which G_s / G_0 = 72.2%, If not specified, the default value is \\gamma_{70} = 2 \\times 10^{-4}. This property is needed only when the flag for small-strain stiffness is on, otherwise its value is useless.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "failure-ratio",
+          "symbol": "R_f",
+          "description": "failure ratio, R_f. The default is 0.9.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-initial",
+          "symbol": "e_{ini}",
+          "description": "initial void ratio, e_{ini}. If the current void ratio is not important, or you do not wish to activate the dilation smoothing technique, just use the default value. The default is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-maximum",
+          "symbol": "e_{max}",
+          "description": "allowable maximum void ratio, e_{max} . The default is 999.0, which is not realistic but it assures that dilation smoothing effectively will not be activated.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "current loading-unloading bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "current unloading-reloading shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "plastic-hardening-shear",
+          "symbol": "\\gamma^p",
+          "description": "accumulated shear plastic hardening parameter, \\gamma^p",
+          "type": "FLT"
+        },
+        {
+          "keyword": "plastic-hardening-volume",
+          "symbol": "\\varepsilon^p_v",
+          "description": "accumulated volumetric plastic hardening parameter, \\varepsilon^p_v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-preconsolidation",
+          "symbol": "p_c",
+          "description": "preconsolidation pressure, p_c. Determined by the current stress, \\alpha, and OCR.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void",
+          "symbol": "e",
+          "description": "current void ratio, e",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/hardening/doc/modelhardening.html",
+  "usage": {
+    "assign": "zone cmodel assign plastic-hardening [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name plastic-hardening]"
+  }
+}

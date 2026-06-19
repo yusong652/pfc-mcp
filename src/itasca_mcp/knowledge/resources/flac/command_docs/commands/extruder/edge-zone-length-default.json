@@ -1,0 +1,22 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "zone",
+    "length",
+    "default",
+    "sketch",
+    "zone-length-default"
+  ],
+  "description": "Set the default length of zones on the edge. This will also automatically be set to any new edges.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge zone-length-default",
+      "syntax": "sketch edge zone-length-default <f>",
+      "keywords": []
+    }
+  }
+}

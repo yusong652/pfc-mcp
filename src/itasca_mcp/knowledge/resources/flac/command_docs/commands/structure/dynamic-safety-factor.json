@@ -1,0 +1,37 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "dynamic",
+    "safety",
+    "factor",
+    "structure",
+    "dynamic-safety-factor"
+  ],
+  "description": "Set the safety factor for dynamic analysis. This is the factor by which the timestep necessary for solution stability of the structural element computations will be multiplied. The actual timestep used will be the minimum of the structural element timestep and the timesteps for the zones and other active modules (e.g., fluid, thermal or creep). The dynamic safety factor is multiplied into the calculated critical stable dynamic timestep for all nodes based on their accumulate stiffness contribution. The default is 2.0, and the minimum allowed is 1.2",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 7.0 contents command index.",
+      "source_urls": [
+        "https://docs.itascacg.com/flac3d700/contents.html"
+      ],
+      "target_version": "7.0"
+    },
+    "9.0": {
+      "command": "structure dynamic-safety-factor",
+      "syntax": "structure dynamic-safety-factor <f>"
+    }
+  }
+}

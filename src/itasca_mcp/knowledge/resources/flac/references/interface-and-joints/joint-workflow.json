@@ -1,0 +1,51 @@
+{
+  "name": "joint-workflow",
+  "dimension": "mixed",
+  "full_name": "Joint and Fracture Workflow",
+  "description": "Joint workflows define discontinuity geometry or joint sets, then connect those definitions to zone/interface behavior. In FLAC, joint-related commands are part of the zone/fracture command families.",
+  "primary_commands": [
+    "fracture joint-set",
+    "zone joint",
+    "zone interface create",
+    "geometry import",
+    "zone separate"
+  ],
+  "workflow": [
+    {
+      "step": "Define discontinuity geometry",
+      "commands": [
+        "geometry import 'fault.dxf'",
+        "fracture joint-set ..."
+      ],
+      "notes": [
+        "Use geometry for explicit surfaces and fracture/joint-set commands for statistical or set-based discontinuities."
+      ]
+    },
+    {
+      "step": "Map discontinuities to zones",
+      "commands": [
+        "zone separate ...",
+        "zone interface create ..."
+      ],
+      "notes": [
+        "Separating or interfacing zones changes connectivity and should be checked before solving."
+      ]
+    },
+    {
+      "step": "Assign and validate behavior",
+      "commands": [
+        "zone interface node property cohesion 0 friction 28 tension 0",
+        "zone interface list"
+      ],
+      "notes": [
+        "Joint behavior often depends more on normal/shear stiffness and strength than on geometry alone."
+      ]
+    }
+  ],
+  "validation_notes": [
+    "Plot groups and interfaces after generating joints.",
+    "Check that discontinuities cross the expected zones.",
+    "Use histories or FISH to monitor slip/opening at representative locations."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/flac3dhome.html"
+}

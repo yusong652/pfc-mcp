@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "select",
+    "sketch"
+  ],
+  "description": "Set the current sketch set. If there is not a set named s , a new set with that name is created.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set select",
+      "syntax": "sketch set select <s>",
+      "keywords": []
+    }
+  }
+}

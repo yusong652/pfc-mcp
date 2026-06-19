@@ -1,0 +1,41 @@
+{
+  "type": "boundary_condition_reference",
+  "description": "Boundary-condition reference topics for FLAC model setup. These topics summarize common command keyword families and when to use them.",
+  "items": [
+    {
+      "name": "mechanical-face",
+      "file": "mechanical-face.json",
+      "description": "Mechanical face boundary conditions with 'zone face apply': stresses, velocities, reactions, and local/global components.",
+      "common_use": "Apply stress or velocity constraints to model boundaries selected by face groups or ranges."
+    },
+    {
+      "name": "gridpoint-fixity",
+      "file": "gridpoint-fixity.json",
+      "description": "Gridpoint-level fixed/free conditions for velocity, force, pore pressure, temperature, and well flow.",
+      "common_use": "Set constraints directly on gridpoints when face apply logic is not appropriate."
+    },
+    {
+      "name": "fluid-flow",
+      "file": "fluid-flow.json",
+      "description": "Fluid-flow boundary condition keywords for pore pressure, discharge, leakage, head, and wells.",
+      "common_use": "Configure coupled or flow-only groundwater boundary conditions."
+    },
+    {
+      "name": "thermal-dynamic",
+      "file": "thermal-dynamic.json",
+      "description": "Thermal and dynamic boundary-condition keywords including temperature, flux, convection, quiet boundaries, and acceleration.",
+      "common_use": "Configure thermal transfer, dynamic shaking, and absorbing boundaries."
+    },
+    {
+      "name": "apply-modifiers",
+      "file": "apply-modifiers.json",
+      "description": "Modifiers used after a 'zone face apply' condition value: gradient, fish, table, servo, symmetry, and local variation.",
+      "common_use": "Vary a boundary condition in space, time, or by convergence response."
+    }
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/modeling/problemsolving/boundary_conditions.html",
+    "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.apply.html",
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/theory/fluid-mechanical/boundary_conditions/boundary_conditions.html"
+  ]
+}

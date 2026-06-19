@@ -1,0 +1,60 @@
+{
+  "name": "building-blocks",
+  "dimension": "3D",
+  "full_name": "Building Blocks Workflow",
+  "description": "Building Blocks are FLAC3D-only structured 3D mesh objects used to build, refine, group, and export 3D block meshes before zone generation.",
+  "primary_commands": [
+    "building-blocks block",
+    "building-blocks edge",
+    "building-blocks set",
+    "building-blocks block export",
+    "zone generate from-building-blocks"
+  ],
+  "workflow": [
+    {
+      "step": "Create or import blocks",
+      "commands": [
+        "building-blocks set create 'bb'",
+        "building-blocks block create ..."
+      ]
+    },
+    {
+      "step": "Refine structured mesh",
+      "commands": [
+        "building-blocks edge divisions ...",
+        "building-blocks block group 'rock'"
+      ]
+    },
+    {
+      "step": "Generate zones",
+      "commands": [
+        "zone generate from-building-blocks"
+      ]
+    }
+  ],
+  "compatibility_notes": [
+    "Building Blocks are FLAC3D-only.",
+    "FLAC2D 9.0 rejects 'building-blocks ...' commands at the parser level ('Bad conversion of parameter number 1 (building-blocks)'). 'zone generate from-building-blocks' is also rejected by FLAC2D — only 'zone generate from-sketch' is accepted in 2D.",
+    "FLAC3D 9.0 'zone generate ?' valid forms: from-building-blocks, from-geometry, from-sketch, from-topography.",
+    "Use sketch-workflow for FLAC2D zone generation.",
+    "Sketch can send fully structured FLAC3D sketches to Building Blocks."
+  ],
+  "binary_validated_subcommands_flac3d": [
+    "block",
+    "edge",
+    "face",
+    "point",
+    "set"
+  ],
+  "binary_validation_notes": [
+    "Top-level 'building-blocks ?' in FLAC3D 9.0 returns these five subcommands: block / edge / face / point / set.",
+    "'building-blocks set ?' subcommands include: arrest-triangle, automatic-zone, break-angle, create, delete, export, geometry, import, list, select, validate-all.",
+    "Subcommands 'building-blocks block / edge / point / face' do NOT accept a '?' help token directly ('Unused extra parameter 3 (?)') — they require a real subcommand and arguments. Probe via 'building-blocks <kw> create ?' or similar."
+  ],
+  "validation_notes": [
+    "Check block quality and grouping before zone generation.",
+    "Use structured meshes where local refinement or hexahedral control matters.",
+    "Do not expose this workflow for FLAC2D product-filtered sessions."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/elements/buildingblocks/buildingblocks.html"
+}

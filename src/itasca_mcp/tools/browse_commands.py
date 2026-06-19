@@ -7,7 +7,13 @@ from pydantic import Field
 
 from itasca_mcp.contracts import build_docs_data, build_error, build_ok
 from itasca_mcp.knowledge.commands import CommandLoader
-from itasca_mcp.utils import CommandDocVersion, normalize_command_doc_version, normalize_input
+from itasca_mcp.utils import (
+    CommandDocVersion,
+    SoftwareParam,
+    normalize_command_doc_version,
+    normalize_input,
+    normalize_software_value,
+)
 
 
 def register(mcp: FastMCP) -> None:
@@ -15,6 +21,7 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     def pfc_browse_commands(
+        software: SoftwareParam,
         command: str | None = Field(
             None,
             description=(
@@ -48,44 +55,52 @@ def register(mcp: FastMCP) -> None:
         """
         cmd = normalize_input(command, lowercase=True)
         version_value = normalize_command_doc_version(version)
+        sw = normalize_software_value(software)
 
         if not cmd:
-            return build_ok(_browse_root(version_value))
+            return build_ok(_browse_root(version_value, sw))
 
         parts = cmd.split()
 
         if len(parts) == 1:
-            payload = _browse_category(parts[0], version_value)
+            payload = _browse_category(parts[0], version_value, sw)
         else:
             category = parts[0]
             command_name = " ".join(parts[1:])
-            payload = _browse_command(category, command_name, version_value)
+            payload = _browse_command(category, command_name, version_value, sw)
         return _wrap_payload(payload)
 
 
-def _iter_available_category_commands(category: str, version: str) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+def _iter_available_category_commands(
+    category: str, version: str, software: str
+) -> list[tuple[dict[str, Any], dict[str, Any]]]:
     """Return commands that are available in the requested version."""
-    index = CommandLoader.load_index()
+    index = CommandLoader.load_index(software=software)
     category_data = index.get("categories", {}).get(category, {})
     available: list[tuple[dict[str, Any], dict[str, Any]]] = []
 
     for cmd_meta in category_data.get("commands", []):
-        cmd_doc = CommandLoader.load_command_doc(category, cmd_meta.get("name", ""), version)
+        # KeyError = command doc has no entry for this version (e.g. FLAC 9.0-only
+        # commands omit the 7.0 key); treat as not available in this version.
+        try:
+            cmd_doc = CommandLoader.load_command_doc(category, cmd_meta.get("name", ""), version, software=software)
+        except KeyError:
+            continue
         if cmd_doc and cmd_doc.get("available") is not False:
             available.append((cmd_meta, cmd_doc))
 
     return available
 
 
-def _browse_root(version: str) -> dict[str, Any]:
+def _browse_root(version: str, software: str) -> dict[str, Any]:
     """Level 0: Return overview of all command categories."""
-    index = CommandLoader.load_index()
+    index = CommandLoader.load_index(software=software)
     categories = index.get("categories", {})
     category_items: list[dict[str, Any]] = []
     total_commands = 0
 
     for category_name, category_data in categories.items():
-        available_commands = _iter_available_category_commands(category_name, version)
+        available_commands = _iter_available_category_commands(category_name, version, software)
         command_count = len(available_commands)
         total_commands += command_count
         category_items.append(
@@ -104,13 +119,14 @@ def _browse_root(version: str) -> dict[str, Any]:
             "count": len(category_items),
             "total_commands": total_commands,
             "version": version,
+            "software": software,
         },
     )
 
 
-def _browse_category(category: str, version: str) -> dict[str, Any]:
+def _browse_category(category: str, version: str, software: str) -> dict[str, Any]:
     """Level 1: Return list of commands in a category."""
-    index = CommandLoader.load_index()
+    index = CommandLoader.load_index(software=software)
     categories = index.get("categories", {})
 
     if category not in categories:
@@ -121,13 +137,13 @@ def _browse_category(category: str, version: str) -> dict[str, Any]:
                 "code": "category_not_found",
                 "message": f"Category '{category}' not found.",
             },
-            "input": {"category": category, "version": version},
+            "input": {"category": category, "version": version, "software": software},
             "available_categories": sorted(categories.keys()),
         }
 
     cat_data = categories[category]
     command_items: list[dict[str, Any]] = []
-    for cmd, cmd_doc in _iter_available_category_commands(category, version):
+    for cmd, cmd_doc in _iter_available_category_commands(category, version, software):
         command_items.append(
             {
                 "name": cmd.get("name", ""),
@@ -146,21 +162,36 @@ def _browse_category(category: str, version: str) -> dict[str, Any]:
             "category": category,
             "description": cat_data.get("description", ""),
             "version": version,
+            "software": software,
         },
     )
 
 
-def _browse_command(category: str, command_name: str, version: str) -> dict[str, Any]:
+def _browse_command(category: str, command_name: str, version: str, software: str) -> dict[str, Any]:
     """Level 2: Return full documentation for a specific command."""
     # JSON filenames use dash as sub-command separator (e.g. edge-create,
     # cmat-add, scalar-create) while PFC syntax separates them with spaces.
     # Accept either form on input.
-    cmd_doc = CommandLoader.load_command_doc(category, command_name, version)
-    if not cmd_doc and " " in command_name:
-        cmd_doc = CommandLoader.load_command_doc(category, command_name.replace(" ", "-"), version)
+    try:
+        cmd_doc = CommandLoader.load_command_doc(category, command_name, version, software=software)
+        if not cmd_doc and " " in command_name:
+            cmd_doc = CommandLoader.load_command_doc(
+                category, command_name.replace(" ", "-"), version, software=software
+            )
+    except KeyError:
+        # Command exists but its doc has no entry for this version.
+        return {
+            "source": "commands",
+            "action": "browse",
+            "error": {
+                "code": "command_unavailable_for_version",
+                "message": f"Command '{command_name}' is not available in {software} {version}.",
+            },
+            "input": {"category": category, "command": command_name, "version": version, "software": software},
+        }
 
     if not cmd_doc:
-        index = CommandLoader.load_index()
+        index = CommandLoader.load_index(software=software)
         categories = index.get("categories", {})
 
         if category not in categories:
@@ -171,12 +202,13 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
                     "code": "category_not_found",
                     "message": f"Category '{category}' not found.",
                 },
-                "input": {"category": category, "command": command_name, "version": version},
+                "input": {"category": category, "command": command_name, "version": version, "software": software},
                 "available_categories": sorted(categories.keys()),
             }
 
         available_cmds = [
-            cmd_meta.get("name") for cmd_meta, _cmd_doc in _iter_available_category_commands(category, version)
+            cmd_meta.get("name")
+            for cmd_meta, _cmd_doc in _iter_available_category_commands(category, version, software)
         ]
         return {
             "source": "commands",
@@ -185,7 +217,7 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
                 "code": "command_not_found",
                 "message": f"Command '{command_name}' not found in '{category}'.",
             },
-            "input": {"category": category, "command": command_name, "version": version},
+            "input": {"category": category, "command": command_name, "version": version, "software": software},
             "available_commands": available_cmds,
         }
 
@@ -195,9 +227,9 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
             "action": "browse",
             "error": {
                 "code": "command_unavailable_for_version",
-                "message": f"Command '{command_name}' is not available in PFC {version}.",
+                "message": f"Command '{command_name}' is not available in {software} {version}.",
             },
-            "input": {"category": category, "command": command_name, "version": version},
+            "input": {"category": category, "command": command_name, "version": version, "software": software},
             "available_versions": cmd_doc.get("versions", []),
         }
 
@@ -212,7 +244,7 @@ def _browse_command(category: str, command_name: str, version: str) -> dict[str,
                 "doc": cmd_doc,
             }
         ],
-        summary={"count": 1, "version": version},
+        summary={"count": 1, "version": version, "software": software},
     )
 
 

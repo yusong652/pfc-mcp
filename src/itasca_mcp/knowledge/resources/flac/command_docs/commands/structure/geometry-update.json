@@ -1,0 +1,36 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "geometry",
+    "update",
+    "structure",
+    "geometry-update"
+  ],
+  "description": "Updates associated with geometric or property changes are performed at the start of every model solve command (including model step and model cycle ). In large-strain mode, these calculations are also updated every 10 steps by default. The number of steps between these large strain updates can be changed with this command to every i steps. The update rate specified here is independent of the update rate for the zones (see zone geometry-update ).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 7.0 contents command index.",
+      "source_urls": [
+        "https://docs.itascacg.com/flac3d700/contents.html"
+      ],
+      "target_version": "7.0"
+    },
+    "9.0": {
+      "command": "structure geometry-update",
+      "syntax": "structure geometry-update <i>"
+    }
+  }
+}

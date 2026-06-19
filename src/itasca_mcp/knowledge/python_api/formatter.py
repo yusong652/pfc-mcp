@@ -227,7 +227,7 @@ class APIDocFormatter:
         return "\n".join(parts)
 
     @staticmethod
-    def _detect_component_methods(object_name: str, method_name: str) -> list[str]:
+    def _detect_component_methods(object_name: str, method_name: str, *, software: str) -> list[str]:
         """Detect if a method has component alternatives (_x, _y, _z).
 
         Checks the object's method_groups or methods list to see if component
@@ -248,7 +248,7 @@ class APIDocFormatter:
             []  # No component methods for id()
         """
         try:
-            object_doc = DocumentationLoader.load_object(object_name)
+            object_doc = DocumentationLoader.load_object(object_name, software=software)
             if not object_doc:
                 return []
 
@@ -294,7 +294,7 @@ class APIDocFormatter:
             return []
 
     @staticmethod
-    def format_signature(api_name: str, metadata: dict[str, Any] | None = None) -> str | None:
+    def format_signature(api_name: str, metadata: dict[str, Any] | None = None, *, software: str) -> str | None:
         """Format brief one-liner signature for quick reference.
 
         Args:
@@ -317,7 +317,7 @@ class APIDocFormatter:
             ... )
             "`contact.force_global() -> vec` - Get contact force (supports: BallBallContact, BallFacetContact, ...)"
         """
-        api_doc = DocumentationLoader.load_api_doc(api_name)
+        api_doc = DocumentationLoader.load_api_doc(api_name, software=software)
         if not api_doc:
             return None
 
@@ -595,7 +595,9 @@ class APIDocFormatter:
         return "\n".join(lines)
 
     @staticmethod
-    def format_method(method_doc: dict[str, Any], object_name: str, actual_object_name: str | None = None) -> str:
+    def format_method(
+        method_doc: dict[str, Any], object_name: str, actual_object_name: str | None = None, *, software: str
+    ) -> str:
         """Format method documentation for browse tool.
 
         Args:
@@ -651,7 +653,7 @@ class APIDocFormatter:
         # Detect if this method has component alternatives (_x, _y, _z)
         # Use actual_object_name if provided (for Contact type aliases)
         lookup_name = actual_object_name or object_name
-        components = APIDocFormatter._detect_component_methods(lookup_name, name)
+        components = APIDocFormatter._detect_component_methods(lookup_name, name, software=software)
         if components:
             component_list = ", ".join([f"`{name}_{c}()`" for c in components])
             lines.append(f"Component Access: {component_list}")

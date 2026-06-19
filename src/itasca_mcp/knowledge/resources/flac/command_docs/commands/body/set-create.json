@@ -1,0 +1,19 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "create",
+    "building-blocks"
+  ],
+  "description": "Create a building block set. The set named s is created and becomes the current set.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set create",
+      "syntax": "building-blocks set create <s>",
+      "keywords": []
+    }
+  }
+}

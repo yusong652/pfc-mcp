@@ -1,0 +1,19 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "select",
+    "building-blocks"
+  ],
+  "description": "Specify the current building blocks set. The set with the name s becomes the current building blocks set. All commands that operate on blocks, faces, edges, and points act on the current set only.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set select",
+      "syntax": "building-blocks set select <s>",
+      "keywords": []
+    }
+  }
+}

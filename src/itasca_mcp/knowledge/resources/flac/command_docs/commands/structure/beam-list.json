@@ -1,0 +1,312 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "beam",
+    "list",
+    "structure"
+  ],
+  "description": "List properties and responses of beam elements in the range. If no keyword is given, the default output of the command is that associated with the information keyword.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "structure beam list",
+      "syntax": "structure beam list keyword",
+      "description": "List information about beam elements.",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "list applied distributed loads"
+        },
+        {
+          "name": "force-end",
+          "syntax": "force-end",
+          "description": "forces exerted by the end nodes on the element, in element local coordinates"
+        },
+        {
+          "name": "group",
+          "syntax": "group <slot s >",
+          "description": "list group to which the element belongs. By default, lists all slots with group assignments. If the slot keyword is used, only the contents of that slot is listed."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "lists general element information, including id and component-id numbers, connected nodes, centroids, surface area, volume, and the hide and select status"
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "list length of the element"
+        },
+        {
+          "name": "force-node",
+          "syntax": "force-node keyword",
+          "description": "list nodal forces. By default, components are displayed in terms of the element local coordinate systems. These are the forces exerted by the nodes on the element."
+        },
+        {
+          "name": "force-node-local",
+          "syntax": "local",
+          "description": "list forces in terms of the element local coordinate system (the default)"
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "list forces in terms of the global coordinate system"
+        },
+        {
+          "name": "property",
+          "syntax": "property keyword",
+          "description": "list element property information"
+        },
+        {
+          "name": "property-density",
+          "syntax": "density",
+          "description": "density, ρ"
+        },
+        {
+          "name": "property-youngs",
+          "syntax": "youngs",
+          "description": "Young’s modulus, E"
+        },
+        {
+          "name": "property-poisson",
+          "syntax": "poisson",
+          "description": "Poisson’s ratio, ν"
+        },
+        {
+          "name": "property-plastic-moment",
+          "syntax": "plastic-moment",
+          "description": "plastic moment, MP"
+        },
+        {
+          "name": "property-thermal-expansion",
+          "syntax": "thermal-expansion",
+          "description": "thermal expansion coefficient, αt"
+        },
+        {
+          "name": "property-cross-sectional-area",
+          "syntax": "cross-sectional-area",
+          "description": "cross-sectional area, A"
+        },
+        {
+          "name": "property-moi-y",
+          "syntax": "moi-y",
+          "description": "second moment with respect to local y-axis, Iy"
+        },
+        {
+          "name": "property-moi-z",
+          "syntax": "moi-z",
+          "description": "second moment with respect to local z-axis, Iz"
+        },
+        {
+          "name": "property-moi-polar",
+          "syntax": "moi-polar",
+          "description": "polar moment of inertia, J"
+        },
+        {
+          "name": "property-direction-y",
+          "syntax": "direction-y",
+          "description": "y-axis vector components"
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "the element local coordinate system"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/beams/commands/cmd_structure.beam.list.html#structure.beam.list"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "structure beam list",
+      "syntax": "structure beam list keyword",
+      "description": "List information about beam elements.",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "list applied distributed loads"
+        },
+        {
+          "name": "force-end",
+          "syntax": "force-end",
+          "description": "forces exerted by the end nodes on the element, in element local coordinates"
+        },
+        {
+          "name": "group",
+          "syntax": "group <slot s >",
+          "description": "list group to which the element belongs. By default, lists all slots with group assignments. If the slot keyword is used, only the contents of that slot is listed."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "lists general element information, including id and component-id numbers, connected nodes, centroids, surface area, volume, and the hide and select status"
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "list length of the element"
+        },
+        {
+          "name": "force-node",
+          "syntax": "force-node keyword",
+          "description": "list nodal forces. By default, components are displayed in terms of the element local coordinate systems. These are the forces exerted by the nodes on the element."
+        },
+        {
+          "name": "force-node-local",
+          "syntax": "local",
+          "description": "list forces in terms of the element local coordinate system (the default)"
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "list forces in terms of the global coordinate system"
+        },
+        {
+          "name": "property",
+          "syntax": "property keyword...",
+          "description": "list element property information"
+        },
+        {
+          "name": "property-density",
+          "syntax": "density",
+          "description": "density, \\(ρ\\)"
+        },
+        {
+          "name": "property-youngs",
+          "syntax": "youngs",
+          "description": "Young’s modulus, \\(E\\)"
+        },
+        {
+          "name": "property-poisson",
+          "syntax": "poisson",
+          "description": "Poisson’s ratio, \\(ν\\)"
+        },
+        {
+          "name": "property-plastic-moment",
+          "syntax": "plastic-moment",
+          "description": "plastic moment, \\(M^P\\)"
+        },
+        {
+          "name": "property-thermal-expansion",
+          "syntax": "thermal-expansion",
+          "description": "thermal expansion coefficient, \\(α_t\\)"
+        },
+        {
+          "name": "property-cross-sectional-area",
+          "syntax": "cross-sectional-area",
+          "description": "cross-sectional area, \\(A\\)"
+        },
+        {
+          "name": "property-moi-y",
+          "syntax": "moi-y",
+          "description": "second moment with respect to local \\(y\\)-axis, \\(I_y\\)"
+        },
+        {
+          "name": "property-moi-z",
+          "syntax": "moi-z",
+          "description": "second moment with respect to local \\(z\\)-axis, \\(I_z\\)"
+        },
+        {
+          "name": "property-moi-polar",
+          "syntax": "moi-polar",
+          "description": "polar moment of inertia, \\(J\\)"
+        },
+        {
+          "name": "property-direction-y",
+          "syntax": "direction-y",
+          "description": "\\(y\\)-axis vector components"
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "the element local coordinate system"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/beams/commands/cmd_structure.beam.list.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure beam list",
+      "syntax": "structure beam list keyword [range]",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "List uniform applied distributed load acting on the element."
+        },
+        {
+          "name": "element-type",
+          "syntax": "element-type",
+          "description": "List the finite element type."
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "List the generalized nodal forces (force and moment) acting on the element. These are the generalized forces exerted by the nodes on the element. Express listed values in the element coordinate system (the default). Express listed values in the global coordinate system."
+        },
+        {
+          "name": "group",
+          "syntax": "group [slot <s>]",
+          "description": "List group assignment(s). If slot is specified, then list the group assignment, if any, in slot s ."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "List general element information: nodal connectivity, centroid, surface area, volume, and hide/select status."
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "List length of the element."
+        },
+        {
+          "name": "model",
+          "syntax": "model",
+          "description": "List the constitutive model of the element."
+        },
+        {
+          "name": "plastic-state",
+          "syntax": "plastic-state [integration-point <ind>] 3D ONLY",
+          "description": "List plasticity state indicators. Each beam element with a plastic material model has a number of integration points distributed throughout its volume, and each of them tracks its plasticity state. The plasticity states at all integration points are listed, unless integration-point is specified. The integration point locations are shown here and here . The plasticity states of the plastic constitutive models can be listed by the structure beam cmodel list states command."
+        },
+        {
+          "name": "plastic-stress",
+          "syntax": "plastic-stress [integration-point <ind>] 3D ONLY",
+          "description": "List stress for elements with a plastic material model. The plasticity is induced by axial and bending deformations; twisting deformation induces an elastic response. Each beam element with a plastic material model has a number of integration points distributed throughout its volume, and each of them tracks its axial stress. The axial stress is the only non-zero stress component arising from axial and bending deformation. The axial stress ( \\(\\sigma_{xx}\\) ) is expressed in the beam element coordinate system. The axial stress at all integration points is listed, unless integration-point is specified. The integration point locations are shown here and here ."
+        },
+        {
+          "name": "plastic-stress-bounds",
+          "syntax": "plastic-stress-bounds 3D ONLY",
+          "description": "List minimum and maximum axial stress for elements with a plastic material model by checking over all integration points."
+        },
+        {
+          "name": "property-torsion-constant",
+          "syntax": "torsion-constant 3D ONLY",
+          "description": "The properties consist of constitutive model properties, and additional properties of beam-type elements. The constitutive model properties are listed by specifying the constitutive model property name; these names are not listed here. Elastic-plastic constitutive model properties are stored at each integration point. Such properties are the same at all integration points, except for the softening properties of the strain-softening/hardening Mohr Coulomb constitutive model. The value at a particular integration point is listed by specifying the integration-point keyword — the integration point locations are shown here and here . Scaled properties are returned if the scaled keyword ( FLAC2D ONLY ) is set to true (the default is false). If the property cannot be scaled, an error is emitted. cross-sectional area. mass density. \\(y\\) -direction vector whose projection onto the element cross-section defines the \\(y\\) -axis of the element coordinate system. moment of inertia with respect to element \\(y\\) -axis. moment of inertia with respect to element \\(z\\) -axis. plastic moment capacity in Y and Z. plastic moment capacity in Y. plastic moment capacity in Z. plastic shear capacity in Y and Z. plastic shear capacity in Y. plastic shear capacity in Z. shear coefficient for transverse shear deformation in the \\(y\\) -direction (Timoshenko beam element only). shear coefficient for transverse shear deformation in the \\(z\\) -direction (Timoshenko beam element only). thermal-expansion coefficient. torsion constant."
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "element local coordinate system."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "hybrid",
+    "hide",
+    "structure"
+  ],
+  "description": "This commands hides or un-hides all hybrid bolt elements in the range. By default, commands that use a range filter will skip hidden objects. This can be overruled with the use-hidden keyword in the range specification.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "structure hybrid hide",
+      "syntax": "structure hybrid hide <keyword>",
+      "description": "This commands hides or un-hides all hybrid bolt elements in the range. By default, commands that use a range filter will skip hidden objects. This can be overruled with the use-hidden keyword in the range specification.",
+      "keywords": [
+        {
+          "name": "adummy",
+          "syntax": "b",
+          "description": "if a boolean type is specified, and if on, it hides all elements in the range. If off, it un-hides (or shows) all elements in the range, and the use-hidden keyword is applied to the range implicitly. on is the default if no keyword is given."
+        },
+        {
+          "name": "undo",
+          "syntax": "undo",
+          "description": "this will reverse the operation of the last structure hybrid hide`. The program keeps a maximum undo stack of size 12."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/hybrid/commands/cmd_structure.hybrid.hide.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure hybrid hide",
+      "syntax": "structure hybrid hide [keyword]",
+      "keywords": [
+        {
+          "name": "adummy",
+          "syntax": "<b>",
+          "description": "if a boolean type is specified, and if on , it hides all elements in the range. If off , it un-hides (or shows) all elements in the range, and the use-hidden keyword is applied to the range implicitly. on is the default if no keyword is given."
+        },
+        {
+          "name": "undo",
+          "syntax": "undo",
+          "description": "this will reverse the operation of the last structure hybrid hide` . The program keeps a maximum undo stack of size 12."
+        }
+      ]
+    }
+  }
+}

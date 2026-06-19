@@ -1,0 +1,106 @@
+{
+  "model": "anisotropic",
+  "full_name": "Anisotropic (Transversely) Elastic Model",
+  "search_keywords": [
+    "anisotropic",
+    "(transversely)",
+    "elastic",
+    "constitutive",
+    "dip",
+    "dip-direction",
+    "angle",
+    "normal",
+    "normal-x",
+    "normal-y",
+    "normal-z",
+    "poisson-normal",
+    "poisson-plane",
+    "shear-normal",
+    "young-plane",
+    "young-normal"
+  ],
+  "description": "The transversely isotropic model takes a plane of isotropy into consideration. Let the axis of rotational symmetry, normal to the plane of isotropy, correspond to the local \\(3'\\) axis. This axis is a principal direction of elasticity. Also, any two perpendicular directions \\(1',2'\\) , which are principal directions of elasticity, can be selected in the isotropic plane. With this convention, the transversely isotropic model may be considered as a particular case of the orthotropic model for which (1) \\[E_1 = E_2\\] (2) \\[G_{13} = G_{23}\\] (3) \\[\\nu_{13} = \\nu_{23}\\] (4) \\[G_{12} = {{E_1}\\over{2",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'anisotropic' zone constitutive model. Assign the model with 'zone cmodel assign anisotropic [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name anisotropic]'.",
+      "properties": [
+        {
+          "keyword": "dip",
+          "description": "dip angle [degrees] of the plane of isotropy",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "dip-direction",
+          "description": "dip direction [degrees] of the plane of isotropy",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "angle",
+          "description": "angle [degrees] of the plane of isotropy, taken counterclockwise from the x-axis",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal",
+          "description": "normal direction of the plane of isotropy, (2D or 3D vector)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x",
+          "symbol": "x",
+          "description": "x-component of unit normal to the plane of isotropy, n_x",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y",
+          "symbol": "y",
+          "description": "y-component of unit normal to the plane of isotropy, n_y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z",
+          "symbol": "z",
+          "description": "z-component of unit normal to the plane of isotropy, n_z (3D ONLY)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson-normal",
+          "symbol": "{\\nu}'",
+          "description": "Poisson’s ratio characterizing lateral contraction in the plane of isotropy when tension is applied normal to the plane, {\\nu}' = {\\nu}'_{13} = {\\nu}'_{23}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson-plane",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio characterizing lateral contraction in the plane of isotropy when tension is applied in the plane, \\nu = {\\nu}_{12}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-normal",
+          "symbol": "G'",
+          "description": "shear modulus for any plane normal to the plane of isotropy, G' = G'_{13} = G'_{23}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-plane",
+          "symbol": "E",
+          "description": "Young’s modulus in the plane of isotropy, E = E_1 = E_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-normal",
+          "symbol": "E'",
+          "description": "Young’s modulus normal to the plane of isotropy, E' = E_3",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/aniso/doc/modelaniso.html",
+  "usage": {
+    "assign": "zone cmodel assign anisotropic [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name anisotropic]"
+  }
+}

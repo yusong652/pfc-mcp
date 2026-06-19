@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "path",
+    "continuous",
+    "sketch"
+  ],
+  "description": "Keep the path continous when deleing a segment or a node.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch path continuous",
+      "syntax": "sketch path continuous <b>",
+      "keywords": []
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "size",
+    "sketch"
+  ],
+  "description": "Set the number of zones on the edge. The number of zones is limited to 1-10000 per edge.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge size",
+      "syntax": "sketch edge size <i>[range]",
+      "keywords": []
+    }
+  }
+}

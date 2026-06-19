@@ -1,0 +1,66 @@
+{
+  "model": "von-mises",
+  "full_name": "Von-Mises Model",
+  "search_keywords": [
+    "von",
+    "mises",
+    "von-mises",
+    "constitutive",
+    "bulk",
+    "modulus-plastic",
+    "poisson",
+    "shear",
+    "strength-yield",
+    "young"
+  ],
+  "description": "The yield envelope for this model involves a von-Mises criterion. The position of a stress point on this envelope is controlled by an associated flow rule for shear failure.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'von-mises' zone constitutive model. Assign the model with 'zone cmodel assign von-mises [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name von-mises]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "modulus-plastic",
+          "symbol": "H",
+          "description": "kinematic plastic (hardening) modulus, H (see Figure 2). The default value is zero. Be aware that this is not the elastoplastic tangent modulus, E_t. The relationship between H and E_t is shown in Figure 2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strength-yield",
+          "symbol": "\\sigma_Y",
+          "description": "yield strength, \\sigma_Y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/vonmises/doc/modelvonmises.html",
+  "usage": {
+    "assign": "zone cmodel assign von-mises [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name von-mises]"
+  }
+}

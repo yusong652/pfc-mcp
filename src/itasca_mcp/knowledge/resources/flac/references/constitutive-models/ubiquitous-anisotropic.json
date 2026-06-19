@@ -1,0 +1,162 @@
+{
+  "model": "ubiquitous-anisotropic",
+  "full_name": "Ubiquitous-Anisotropic Model",
+  "search_keywords": [
+    "ubiquitous",
+    "anisotropic",
+    "ubiquitous-anisotropic",
+    "constitutive",
+    "cohesion",
+    "dilation",
+    "dip",
+    "dip-direction",
+    "angle",
+    "friction",
+    "joint-cohesion",
+    "joint-dilation",
+    "joint-friction",
+    "joint-tension",
+    "normal",
+    "normal-x",
+    "normal-y",
+    "normal-z",
+    "poisson-normal",
+    "poisson-plane",
+    "shear-normal",
+    "tension",
+    "young-plane",
+    "young-normal"
+  ],
+  "description": "This model combines the logic of the anisotropic elastic model and Mohr-Coulomb model with that of the ubiquitous-joint model (note that “weak plane” and “joint” are used interchangeably in the text). The new model has a single orientation of weakness, which matches the orientation of the plane of isotropy. The criterion for failure on the plane, whose orientation is given, consists of a local Mohr-Coulomb yield criterion with tension cutoff. The model can be used to simulate the behavior of layered material, such as clay shales, and account for slip conditions in the direction of layering (we",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'ubiquitous-anisotropic' zone constitutive model. Assign the model with 'zone cmodel assign ubiquitous-anisotropic [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name ubiquitous-anisotropic]'.",
+      "properties": [
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion of the matrix, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle of the matrix, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dip",
+          "description": "dip angle [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "dip-direction",
+          "description": "dip direction [degrees] of weakness plane",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "angle",
+          "description": "angle [degrees] of weakness plane, taken counterclockwise from the x-axis",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction of the matrix, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-cohesion",
+          "symbol": "c_j",
+          "description": "joint cohesion, c_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-dilation",
+          "symbol": "\\psi_j",
+          "description": "joint dilation angle, \\psi_j. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-friction",
+          "symbol": "\\phi_j",
+          "description": "joint friction angle, \\phi_j",
+          "type": "FLT"
+        },
+        {
+          "keyword": "joint-tension",
+          "symbol": "\\sigma^t_j",
+          "description": "joint tension limit, \\sigma^t_j. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal",
+          "description": "normal direction of the weakness plane, (2D or 3D vector)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-x",
+          "symbol": "x",
+          "description": "x-component of the normal direction to the weakness plane, n_x",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-y",
+          "symbol": "y",
+          "description": "y-component of the normal direction to the weakness plane, n_y",
+          "type": "FLT"
+        },
+        {
+          "keyword": "normal-z",
+          "symbol": "z",
+          "description": "z-component of the normal direction to the weakness plane, n_z (3D ONLY)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson-normal",
+          "symbol": "{\\nu}'",
+          "description": "Poisson’s ratio characterizing lateral contraction in the plane of isotropy when tension is applied normal to the plane, {\\nu}' = \\nu_{13} = \\nu_{23}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson-plane",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio characterizing lateral contraction in the plane of isotropy when tension is applied in the plane, \\nu = \\nu_{12}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-normal",
+          "symbol": "G'",
+          "description": "shear modulus for any plane normal to the plane of isotropy, G' = G_{13} = G_{23}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "{\\sigma}^t",
+          "description": "tension limit of the matrix, {\\sigma}^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-plane",
+          "symbol": "E",
+          "description": "Young’s modulus in the plane of isotropy, E = E_1 = E_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young-normal",
+          "symbol": "E'",
+          "description": "Young’s modulus normal to the plane of isotropy, E' = E_3",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/caniso/doc/modelcaniso.html",
+  "usage": {
+    "assign": "zone cmodel assign ubiquitous-anisotropic [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name ubiquitous-anisotropic]"
+  }
+}

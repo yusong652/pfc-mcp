@@ -1,0 +1,23 @@
+{
+  "category": "domain",
+  "search_keywords": [
+    "condition"
+  ],
+  "description": "Set the domain boundary conditions.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false
+    },
+    "7.0": {
+      "command": "model domain condition",
+      "syntax": "model domain condition <sx>[<sy><sz>] <sz>"
+    },
+    "9.0": {
+      "command": "model domain condition",
+      "syntax": "model domain condition <sx>[<sy><sz>] <sz>is 3D only"
+    }
+  }
+}

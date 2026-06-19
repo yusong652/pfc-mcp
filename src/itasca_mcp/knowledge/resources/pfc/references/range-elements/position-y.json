@@ -1,0 +1,17 @@
+{
+  "name": "position-y",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "position-y <f1> <f2>",
+  "alt_syntax": "position-y <f1> tolerance <f>",
+  "description": "Filter by Y-coordinate range.",
+  "supports_extent": true,
+  "examples": [
+    "range position-y -5 5"
+  ],
+  "search_keywords": [
+    "position-y",
+    "position",
+    "y"
+  ]
+}

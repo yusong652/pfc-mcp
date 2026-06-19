@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "mesh",
+    "quad",
+    "weight",
+    "sketch",
+    "quad-weight"
+  ],
+  "description": "Specify a weight on quadrilaterals 0 ≤ f ≤ 1 for the unstructured mesher. The default value is 0.75.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch mesh quad-weight",
+      "syntax": "sketch mesh quad-weight <f>",
+      "keywords": []
+    }
+  }
+}

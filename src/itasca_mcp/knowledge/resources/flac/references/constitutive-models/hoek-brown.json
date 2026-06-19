@@ -1,0 +1,241 @@
+{
+  "model": "hoek-brown",
+  "full_name": "Hoek-Brown Model",
+  "search_keywords": [
+    "hoek",
+    "brown",
+    "hoek-brown",
+    "constitutive",
+    "bulk",
+    "constant-a",
+    "constant-dilation",
+    "constant-mb",
+    "constant-mi",
+    "constant-s",
+    "constant-sci",
+    "current-a",
+    "current-mb",
+    "current-s",
+    "current-sci",
+    "disturbance",
+    "geological-strength-index",
+    "poisson",
+    "shear",
+    "tension",
+    "young",
+    "flag-brittle",
+    "length-calibration",
+    "flag-dilation",
+    "flag-evolution",
+    "flag-fos",
+    "strain-plastic",
+    "table-a",
+    "table-mb",
+    "table-multiplier",
+    "table-s",
+    "table-sci",
+    "table-tension",
+    "cohesion",
+    "dilation",
+    "friction"
+  ],
+  "description": "This model is derived directly from the Mohr-Coulomb model , and, like the Mohr-Coulomb model, can be used to perform factor of safety calculations using the model factor-of-safety command. The Hoek-Brown-PAC model provides a representation for yielding that accounts for the changing failure condition. This model works well at higher confining stress states, but can produce excessive dilation at low confinement or under tensile-stress conditions. The alternative version, described in this section, is modified to include a tensile yield criterion, and also allow the user to specify a dilation a",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'hoek-brown' zone constitutive model. Assign the model with 'zone cmodel assign hoek-brown [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name hoek-brown]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a",
+          "symbol": "a",
+          "description": "Hoek-Brown parameter, a",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-dilation",
+          "symbol": "\\psi_c",
+          "description": "dilation angle, \\psi_c, required only when flag-dilation = 0. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-mb",
+          "symbol": "m_b",
+          "description": "Hoek-Brown parameter, m_b",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-mi",
+          "symbol": "m_i",
+          "description": "Hoek-Brown parameter, m_i",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-s",
+          "symbol": "s",
+          "description": "Hoek-Brown parameter, s",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-sci",
+          "symbol": "\\sigma_{ci}",
+          "description": "Hoek-Brown parameter, \\sigma_{ci}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "current-a",
+          "symbol": "a_c",
+          "description": "current value of a_c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "current-mb",
+          "symbol": "m_{b,c}",
+          "description": "current value of m_{b,c}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "current-s",
+          "symbol": "s_c",
+          "description": "current value of s_c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "current-sci",
+          "symbol": "\\sigma_{ci,c}",
+          "description": "current value of \\sigma_{ci,c}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "disturbance",
+          "symbol": "D",
+          "description": "Hoek-Brown parameter, D",
+          "type": "FLT"
+        },
+        {
+          "keyword": "geological-strength-index",
+          "description": "Hoek-Brown parameter, GSI",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "current value of tensile strength, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "length-calibration",
+          "description": "calibration length to calibrate model properties to account for zone size, default value is 0.0, which means that it does not perform length calibration to account for zone size.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-dilation",
+          "description": "= 0 (default flag) to input a constant dilation angle specified by constant-dilation",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-evolution",
+          "description": "= 0 (default flag) for evolution parameter set to plastic strain in direction of least compressive principal stress",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "flag-fos",
+          "description": "= 0 (default flag) for model factor-of-safety solution controlled by shear strength",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "strain-plastic",
+          "description": "plastic strain in direction of least compressive principal stress (if flag-evolution = 0), or plastic shear strain (if flag-evolution = 1)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-a",
+          "symbol": "a",
+          "description": "name of the table relating a to the evolution parameter.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-mb",
+          "symbol": "m_b",
+          "description": "name of the table relating m_b to the evolution parameter.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-multiplier",
+          "symbol": "\\sigma_3",
+          "description": "name of the table relating a multiplier to \\sigma_3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-s",
+          "symbol": "s",
+          "description": "name of the table relating s to the evolution parameter.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-sci",
+          "symbol": "\\sigma_{ci}",
+          "description": "name of the table relating \\sigma_{ci} to the evolution parameter.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "symbol": "\\sigma^t",
+          "description": "name of the table relating \\sigma^t to plastic tensile strain.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c_c",
+          "description": "current value of cohesion, c_c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi_c",
+          "description": "current value of dilation angle, \\psi_c, in any cases, this value never greater than the current friction angle.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi_c",
+          "description": "current value of friction angle, \\phi_c",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/hoek/doc/modelhoek.html",
+  "usage": {
+    "assign": "zone cmodel assign hoek-brown [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name hoek-brown]"
+  }
+}

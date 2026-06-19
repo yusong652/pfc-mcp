@@ -1,0 +1,30 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "point",
+    "create",
+    "sketch"
+  ],
+  "description": "Create a point. The point is created in the supplied position v2 (2D vector coordinates).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch point create",
+      "syntax": "sketch point create <v2>keyword",
+      "keywords": [
+        {
+          "name": "merge-tolerance",
+          "syntax": "merge-tolerance <f>",
+          "description": "The point creation is canceled if there are existing points within a tolerance f from the position."
+        },
+        {
+          "name": "group",
+          "syntax": "group <s1>[slot <s2>]",
+          "description": "Assign the created point the group name s1 (in slot s2 if provided, in slot Default if not). Use of the group logic is described in the Groups topic."
+        }
+      ]
+    }
+  }
+}

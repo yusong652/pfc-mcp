@@ -1,0 +1,80 @@
+{
+  "model": "drucker-prager",
+  "full_name": "Drucker-Prager Model",
+  "search_keywords": [
+    "drucker",
+    "prager",
+    "drucker-prager",
+    "constitutive",
+    "bulk",
+    "cohesion-drucker",
+    "dilation-drucker",
+    "friction-drucker",
+    "poisson",
+    "shear",
+    "tension",
+    "young"
+  ],
+  "description": "The failure envelope for this model involves a Drucker-Prager criterion with tension cutoff. The position of a stress point on this envelope is controlled by a nonassociated flow rule for shear failure, and an associated rule for tension failure.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'drucker-prager' zone constitutive model. Assign the model with 'zone cmodel assign drucker-prager [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name drucker-prager]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-drucker",
+          "symbol": "k_{\\phi}",
+          "description": "material parameter, k_{\\phi}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-drucker",
+          "symbol": "q_{\\psi}",
+          "description": "material parameter, q_{\\psi}. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-drucker",
+          "symbol": "q_{\\phi}",
+          "description": "material parameter, q_{\\phi}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "{\\sigma}^t",
+          "description": "tension limit, {\\sigma}^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/drucker/doc/modeldrucker.html",
+  "usage": {
+    "assign": "zone cmodel assign drucker-prager [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name drucker-prager]"
+  }
+}

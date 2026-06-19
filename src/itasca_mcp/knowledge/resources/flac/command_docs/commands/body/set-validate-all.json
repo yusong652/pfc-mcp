@@ -1,0 +1,21 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "validate",
+    "all",
+    "building-blocks",
+    "validate-all"
+  ],
+  "description": "Check the validity of blocks. Invalid blocks are marked.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set validate-all",
+      "syntax": "building-blocks set validate-all",
+      "keywords": []
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "model": "modified-cam-clay",
+  "full_name": "Modified Cam-Clay Model",
+  "search_keywords": [
+    "modified",
+    "cam",
+    "clay",
+    "cam-clay",
+    "constitutive",
+    "bulk-maximum",
+    "kappa",
+    "lambda",
+    "poisson",
+    "pressure-reference",
+    "pressure-effective",
+    "pressure-preconsolidation",
+    "ratio-critical-state",
+    "shear",
+    "specific-volume-reference",
+    "bulk",
+    "specific-volume",
+    "strain-volumetric-total",
+    "stress-deviatoric"
+  ],
+  "description": "The modified Cam-Clay model is an incremental hardening/softening elastoplastic model. Its features include a particular form of nonlinear elasticity and a hardening/softening behavior governed by volumetric plastic strain (“density” driven). The failure envelopes are self-similar in shape and correspond to ellipsoids of rotation about the mean stress axis in the principal stress space. The shear flow rule is associated; no resistance to tensile mean stress is offered in this model. See Roscoe and Burland (1968) and Wood (1990) for detailed discussions on the modified Cam-Clay model. For conve",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'modified-cam-clay' zone constitutive model. Assign the model with 'zone cmodel assign modified-cam-clay [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name modified-cam-clay]'.",
+      "properties": [
+        {
+          "keyword": "bulk-maximum",
+          "symbol": "K_{max}",
+          "description": "maximum elastic bulk modulus, K_{max}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kappa",
+          "symbol": "\\kappa",
+          "description": "slope of elastic swelling line, \\kappa",
+          "type": "FLT"
+        },
+        {
+          "keyword": "lambda",
+          "symbol": "\\lambda",
+          "description": "slope of normal consolidation line, \\lambda",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p_1",
+          "description": "reference pressure, p_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-effective",
+          "symbol": "p",
+          "description": "mean effective stress, p, required since this is a pressure-dependent model.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-preconsolidation",
+          "symbol": "p_{c0}",
+          "description": "pre-consolidation pressure, p_{c0}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ratio-critical-state",
+          "symbol": "M = q/p",
+          "description": "stress ratio at the critical state, M = q/p at the critical state",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "specific-volume-reference",
+          "symbol": "p_1",
+          "description": "specific volume at reference pressure p_1 on normal consolidation line, v_{\\lambda}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "current elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "specific-volume",
+          "symbol": "v",
+          "description": "current specific volume, v , initialized or updated internally.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-volumetric-total",
+          "description": "accumulated total volumetric strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-deviatoric",
+          "symbol": "q",
+          "description": "current deviatoric stress, q",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/camclay/doc/modelcamclay.html",
+  "usage": {
+    "assign": "zone cmodel assign modified-cam-clay [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name modified-cam-clay]"
+  }
+}

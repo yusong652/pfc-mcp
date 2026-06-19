@@ -1,0 +1,57 @@
+{
+  "model": "maxwell",
+  "full_name": "Maxwell Model",
+  "search_keywords": [
+    "maxwell",
+    "constitutive",
+    "bulk",
+    "poisson",
+    "shear",
+    "young",
+    "viscosity"
+  ],
+  "description": "The classical notion of Newtonian viscosity is that the rate of strain is proportional to stress. Stress-strain relations can be developed for viscous flow in a way similar to elastic deformation. The derivation of the equations in three dimensions can be found, for example, in Jaeger (1969). Viscoelastic materials exhibit both viscous and elastic behaviors. One such material is the Maxwell material, which can be represented in one dimension by a spring (with elastic constant \\(k\\) ) in series with dashpot (of viscous constant \\(\\eta\\) ). The incremental force/displacement law for this materia",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'maxwell' zone constitutive model. Assign the model with 'zone cmodel assign maxwell [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name maxwell]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "viscosity",
+          "symbol": "η",
+          "description": "dynamic viscosity, η",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/viscous/doc/modelviscous.html",
+  "usage": {
+    "assign": "zone cmodel assign maxwell [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name maxwell]"
+  }
+}

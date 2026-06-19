@@ -1,0 +1,194 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "vtk",
+    "zone"
+  ],
+  "description": "Control if and what values are exported from zones to a VTK file. The values exported by default are stresses , groups , and displacements .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone vtk",
+      "syntax": "zone vtk",
+      "description": "Controls if and what values are exported from zones to a VTK file. The values being exported by default are stresses, groups, and displacements.",
+      "keywords": [
+        {
+          "name": "displacements",
+          "syntax": "displacements b",
+          "description": "displacement vectors at gridpoints"
+        },
+        {
+          "name": "zone-extra",
+          "syntax": "zone-extra b <index i >",
+          "description": "extra variables with index i at zones"
+        },
+        {
+          "name": "gridpoint-extra",
+          "syntax": "gridpoint-extra b",
+          "description": "extra variables with index i at gridpoints"
+        },
+        {
+          "name": "forces",
+          "syntax": "forces b",
+          "description": "unbalanced force information at gridpoints, including the last local force ratio."
+        },
+        {
+          "name": "groups",
+          "syntax": "groups b <slot s >",
+          "description": "include group assignments to zones in the slot s in the vtk file"
+        },
+        {
+          "name": "model-fluid",
+          "syntax": "model-fluid b <prop s >",
+          "description": "include the fluid property s in the vtk file"
+        },
+        {
+          "name": "model-mechanical",
+          "syntax": "model-mechanical b <prop s >",
+          "description": "include the mechanical property s in the vtk file"
+        },
+        {
+          "name": "model-thermal",
+          "syntax": "model-thermal b <prop s >",
+          "description": "include the thermal property s in the vtk file"
+        },
+        {
+          "name": "pore-pressure",
+          "syntax": "pore-pressure b",
+          "description": "pore pressure values at gridpoints"
+        },
+        {
+          "name": "range",
+          "syntax": "range <range>",
+          "description": "Specifies a range used to filter which zones are included in a vtk file export."
+        },
+        {
+          "name": "saturation",
+          "syntax": "saturation b",
+          "description": "saturation values at gridpoints"
+        },
+        {
+          "name": "stresses",
+          "syntax": "stresses b",
+          "description": "average stresses in each zone. Note that the internal tetra stresses are never exported."
+        },
+        {
+          "name": "temperatures",
+          "syntax": "temperatures b",
+          "description": "temperature values at gridpoints"
+        },
+        {
+          "name": "velocities",
+          "syntax": "velocities b",
+          "description": "velocity vectors at gridpoints"
+        },
+        {
+          "name": "filename",
+          "syntax": "filename s",
+          "description": "specify the name of the vtk file"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.vtk.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone vtk",
+      "syntax": "zone vtk",
+      "keywords": [
+        {
+          "name": "displacements",
+          "syntax": "displacements <b>",
+          "description": "Displacement vectors at gridpoints."
+        },
+        {
+          "name": "zone-extra",
+          "syntax": "zone-extra <b>[index <i>]",
+          "description": "Extra variables with index i at zones."
+        },
+        {
+          "name": "gridpoint-extra",
+          "syntax": "gridpoint-extra <b>",
+          "description": "Extra variables with index i at gridpoints."
+        },
+        {
+          "name": "forces",
+          "syntax": "forces <b>",
+          "description": "Unbalanced force information at gridpoints, including the last local force ratio."
+        },
+        {
+          "name": "groups",
+          "syntax": "groups <b>[slot <s>]",
+          "description": "Include group assignments to zones in the slot s in the vtk file."
+        },
+        {
+          "name": "model-fluid",
+          "syntax": "model-fluid <b>[prop <s>]",
+          "description": "Include the fluid property s in the vtk file."
+        },
+        {
+          "name": "model-mechanical",
+          "syntax": "model-mechanical <b>[prop <s>]",
+          "description": "Include the mechanical property s in the vtk file."
+        },
+        {
+          "name": "model-thermal",
+          "syntax": "model-thermal <b>[prop <s>]",
+          "description": "Include the thermal property s in the vtk file."
+        },
+        {
+          "name": "pore-pressure",
+          "syntax": "pore-pressure <b>",
+          "description": "Pore pressure values at gridpoints."
+        },
+        {
+          "name": "range",
+          "syntax": "range [range]",
+          "description": "Specify a range used to filter which zones are included in a vtk file export."
+        },
+        {
+          "name": "saturation",
+          "syntax": "saturation <b>",
+          "description": "Saturation values at gridpoints."
+        },
+        {
+          "name": "stresses",
+          "syntax": "stresses <b>",
+          "description": "Average stresses in each zone. Note that subzone stresses (internal tetra in 3D or internal tria in 2D) are never exported."
+        },
+        {
+          "name": "temperatures",
+          "syntax": "temperatures <b>",
+          "description": "Temperature values at gridpoints."
+        },
+        {
+          "name": "velocities",
+          "syntax": "velocities <b>",
+          "description": "Velocity vectors at gridpoints."
+        },
+        {
+          "name": "filename",
+          "syntax": "filename <s>",
+          "description": "Specify the name of the vtk file."
+        }
+      ]
+    }
+  }
+}

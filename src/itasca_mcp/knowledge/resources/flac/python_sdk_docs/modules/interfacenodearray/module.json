@@ -1,0 +1,295 @@
+{
+  "module": "itasca.interfacenodearray",
+  "description": "Array interface for FLAC interface node.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.interfacenodearray.html",
+  "functions": [
+    {
+      "name": "area",
+      "signature": "itasca.interfacenodearray.area() -> array float{ninterface, nnode}",
+      "description": "(3D only) Get the effective area of the interface node.",
+      "returns": {
+        "type": "array float{ninterface, nnode}"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.interfacenodearray.disp() -> array float{nnode, dim}",
+      "description": "Get array with node displacement (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    },
+    {
+      "name": "disp_shear",
+      "signature": "itasca.interfacenodearray.disp_shear() -> array float{nnode, dim}",
+      "description": "Get array with node shear displacement (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.interfacenodearray.in_group(group_name: str, slot=\"default\") -> array bool{nnode}",
+      "description": "Return interface node group membership as a boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "array bool{nnode}"
+      }
+    },
+    {
+      "name": "normal",
+      "signature": "itasca.interfacenodearray.normal() -> array float{nnode, dim}",
+      "description": "Get array with node normal (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    },
+    {
+      "name": "of_interface",
+      "signature": "itasca.interfacenodearray.of_interface(string name) -> array bool{nnode}",
+      "description": "Return interface node of interface with 'name' as boolean array.",
+      "parameters": [
+        {
+          "name": "string name",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array bool{nnode}"
+      }
+    },
+    {
+      "name": "penetration",
+      "signature": "itasca.interfacenodearray.penetration() -> array float{nnode}",
+      "description": "Get array with node penetration.",
+      "returns": {
+        "type": "array float{nnode}"
+      }
+    },
+    {
+      "name": "porepressure",
+      "signature": "itasca.interfacenodearray.porepressure() -> array float{nnode}",
+      "description": "Get array with node porepressure.",
+      "returns": {
+        "type": "array float{nnode}"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.interfacenodearray.pos() -> array float{nnode, dim}",
+      "description": "Get array with node position (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    },
+    {
+      "name": "prop_scalar",
+      "signature": "itasca.interfacenodearray.prop_scalar(prop_name: str,) -> array double{nnode}",
+      "description": "Return an array of the property `prop_name` for each interface node. Only properties of type double are supported by this function.",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array double{nnode}"
+      }
+    },
+    {
+      "name": "set_disp_shear",
+      "signature": "itasca.interfacenodearray.set_disp_shear(array float{nnode, dim}) -> None",
+      "description": "Set node shear displacement (dim = 3 in 3D and dim = 2 in 2D).",
+      "parameters": [
+        {
+          "name": "array float{nnode",
+          "required": true
+        },
+        {
+          "name": "dim}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.interfacenodearray.set_group(membership: array bool{interface}, group_name: str, slot=\"default\") -> None",
+      "description": "Set interface node group from an array. Where membership True set the corresponding interface node to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{interface}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.interfacenodearray.set_pos(array float{nnode, dim}) -> None",
+      "description": "Set node position (dim = 3 in 3D and dim = 2 in 2D).",
+      "parameters": [
+        {
+          "name": "array float{nnode",
+          "required": true
+        },
+        {
+          "name": "dim}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop_scalar",
+      "signature": "itasca.interfacenodearray.set_prop_scalar(prop_name: str, array) -> None",
+      "description": "Set the property `prop_name` of each interface node. The input array should be size of (nnodes).",
+      "parameters": [
+        {
+          "name": "prop_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "array",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_slip",
+      "signature": "itasca.interfacenodearray.set_slip(array int{nnode}) -> None",
+      "description": "Set slip status (0-2).",
+      "parameters": [
+        {
+          "name": "array int{nnode}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_stress_shear",
+      "signature": "itasca.interfacenodearray.set_stress_shear(array float{nnode, dim}) -> None",
+      "description": "Set shear stress vector of the node (dim = 3 in 3D and dim = 2 in 2D).",
+      "parameters": [
+        {
+          "name": "array float{nnode",
+          "required": true
+        },
+        {
+          "name": "dim}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_tol",
+      "signature": "itasca.interfacenodearray.set_tol(array float{nnode}) -> None",
+      "description": "Set node tolerance.",
+      "parameters": [
+        {
+          "name": "array float{nnode}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.interfacenodearray.set_vel(array float{nnode, dim}) -> None",
+      "description": "Set velocities of the nodes (dim = 3 in 3D and dim = 2 in 2D).",
+      "parameters": [
+        {
+          "name": "array float{nnode",
+          "required": true
+        },
+        {
+          "name": "dim}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "slip",
+      "signature": "itasca.interfacenodearray.slip() -> array int{nnode}",
+      "description": "Get array with slip status (0-2).",
+      "returns": {
+        "type": "array int{nnode}"
+      }
+    },
+    {
+      "name": "stress_normal",
+      "signature": "itasca.interfacenodearray.stress_normal() -> array float{nnode}",
+      "description": "Get array with normal stress of the node.",
+      "returns": {
+        "type": "array float{nnode}"
+      }
+    },
+    {
+      "name": "stress_shear",
+      "signature": "itasca.interfacenodearray.stress_shear() -> array float{nnode, dim}",
+      "description": "Get array with shear stress vector of the node (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    },
+    {
+      "name": "tol",
+      "signature": "itasca.interfacenodearray.tol() -> array float{nnode}",
+      "description": "Get array with node tolerance.",
+      "returns": {
+        "type": "array float{nnode}"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.interfacenodearray.vel() -> array float{nnode, dim}",
+      "description": "Get array with velocity of the node (dim = 3 in 3D and dim = 2 in 2D).",
+      "returns": {
+        "type": "array float{nnode, dim}"
+      }
+    }
+  ]
+}

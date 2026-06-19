@@ -1,0 +1,43 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "face",
+    "westergaard",
+    "remove",
+    "zone",
+    "westergaard-remove"
+  ],
+  "description": "Removes any applied westergaard condition on the faces in the range.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone face westergaard-remove",
+      "syntax": "zone face westergaard-remove <range>",
+      "description": "Removes any applied westergaard condition on the faces in the range.",
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.westergaard-remove.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone face westergaard-remove",
+      "syntax": "zone face westergaard-remove [range]"
+    }
+  }
+}

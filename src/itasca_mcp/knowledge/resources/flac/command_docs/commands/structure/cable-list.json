@@ -1,0 +1,380 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "cable",
+    "list",
+    "structure"
+  ],
+  "description": "Lists properties and responses of cable elements in the range. If no keyword is given, the default output of the command is that associated with the information keyword.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "structure cable list",
+      "syntax": "structure cable list keyword",
+      "description": "List information about cables.",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "list applied distributed loads"
+        },
+        {
+          "name": "force-axial",
+          "syntax": "force-axial",
+          "description": "axial forces exerted by the nodes on the element"
+        },
+        {
+          "name": "force-node",
+          "syntax": "force-node keyword",
+          "description": "list nodal forces. By default, components are displayed in terms of the element local coordinate systems. These are the forces exerted by the nodes on the element."
+        },
+        {
+          "name": "force-node-local",
+          "syntax": "local",
+          "description": "list forces in terms of the element local coordinate system (the default)"
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "list forces in terms of the global coordinate system"
+        },
+        {
+          "name": "group",
+          "syntax": "group <slot s >",
+          "description": "list group to which the element belongs. By default, lists all slots with group assignments. If the slot keyword is used, only the contents of that slot is listed."
+        },
+        {
+          "name": "grout",
+          "syntax": "grout",
+          "description": "shear stress in the grout"
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "lists general element information, including id and component-id numbers, connected nodes, centroids, surface area, volume, and the hide and select status"
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "list length of the element"
+        },
+        {
+          "name": "property",
+          "syntax": "property keyword <range>"
+        },
+        {
+          "name": "property-density",
+          "syntax": "density",
+          "description": "density, ρ"
+        },
+        {
+          "name": "property-youngs",
+          "syntax": "youngs",
+          "description": "Young’s modulus, E"
+        },
+        {
+          "name": "property-poisson",
+          "syntax": "poisson",
+          "description": "Poisson’s ratio, ν"
+        },
+        {
+          "name": "property-grout-cohesion",
+          "syntax": "grout-cohesion",
+          "description": "grout cohesive strength, cg"
+        },
+        {
+          "name": "property-grout-friction",
+          "syntax": "grout-friction",
+          "description": "grout friction angle, φg"
+        },
+        {
+          "name": "property-grout-stiffness",
+          "syntax": "grout-stiffness",
+          "description": "grout stiffness, kg"
+        },
+        {
+          "name": "property-grout-perimeter",
+          "syntax": "grout-perimeter",
+          "description": "grout exposed perimeter, pg"
+        },
+        {
+          "name": "property-plastic-moment",
+          "syntax": "plastic-moment",
+          "description": "plastic moment, MP"
+        },
+        {
+          "name": "property-slide",
+          "syntax": "slide",
+          "description": "sliding flag"
+        },
+        {
+          "name": "property-slide-tolerance",
+          "syntax": "slide-tolerance",
+          "description": "sliding tolerance"
+        },
+        {
+          "name": "property-thermal-expansion",
+          "syntax": "thermal-expansion",
+          "description": "thermal expansion coefficient, αt"
+        },
+        {
+          "name": "property-cross-sectional-area",
+          "syntax": "cross-sectional-area",
+          "description": "cross-sectional area, A"
+        },
+        {
+          "name": "property-yield-compression",
+          "syntax": "yield-compression",
+          "description": "compressive yield strength, Fc"
+        },
+        {
+          "name": "property-yield-tension",
+          "syntax": "yield-tension",
+          "description": "tensile yield strength, Ft"
+        },
+        {
+          "name": "stress",
+          "syntax": "stress",
+          "description": "axial stress in the element"
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "the element local coordinate system"
+        },
+        {
+          "name": "yield",
+          "syntax": "yield",
+          "description": "indicator of whether or not the element itself has yielded"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/cables/commands/cmd_structure.cable.list.html#structure.cable.list"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "structure cable list",
+      "syntax": "structure cable list keyword",
+      "description": "List information about cables.",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "list applied distributed loads"
+        },
+        {
+          "name": "force-axial",
+          "syntax": "force-axial",
+          "description": "axial forces exerted by the nodes on the element"
+        },
+        {
+          "name": "force-node",
+          "syntax": "force-node keyword",
+          "description": "list nodal forces. By default, components are displayed in terms of the element local coordinate systems. These are the forces exerted by the nodes on the element."
+        },
+        {
+          "name": "force-node-local",
+          "syntax": "local",
+          "description": "list forces in terms of the element local coordinate system (the default)"
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "list forces in terms of the global coordinate system"
+        },
+        {
+          "name": "group",
+          "syntax": "group <slot s >",
+          "description": "list group to which the element belongs. By default, lists all slots with group assignments. If the slot keyword is used, only the contents of that slot is listed."
+        },
+        {
+          "name": "grout",
+          "syntax": "grout",
+          "description": "shear stress in the grout"
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "lists general element information, including id and component-id numbers, connected nodes, centroids, surface area, volume, and the hide and select status"
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "list length of the element"
+        },
+        {
+          "name": "property",
+          "syntax": "property keyword... <range>"
+        },
+        {
+          "name": "property-density",
+          "syntax": "density",
+          "description": "density, \\(ρ\\)"
+        },
+        {
+          "name": "property-youngs",
+          "syntax": "youngs",
+          "description": "Young’s modulus, \\(E\\)"
+        },
+        {
+          "name": "property-poisson",
+          "syntax": "poisson",
+          "description": "Poisson’s ratio, \\(ν\\)"
+        },
+        {
+          "name": "property-grout-cohesion",
+          "syntax": "grout-cohesion",
+          "description": "grout cohesive strength, \\(c_g\\)"
+        },
+        {
+          "name": "property-grout-friction",
+          "syntax": "grout-friction",
+          "description": "grout friction angle, \\(φ_g\\)"
+        },
+        {
+          "name": "property-grout-stiffness",
+          "syntax": "grout-stiffness",
+          "description": "grout stiffness, \\(k_g\\)"
+        },
+        {
+          "name": "property-grout-perimeter",
+          "syntax": "grout-perimeter",
+          "description": "grout exposed perimeter, \\(p_g\\)"
+        },
+        {
+          "name": "property-plastic-moment",
+          "syntax": "plastic-moment",
+          "description": "plastic moment, \\(M^P\\)"
+        },
+        {
+          "name": "property-slide",
+          "syntax": "slide",
+          "description": "sliding flag"
+        },
+        {
+          "name": "property-slide-tolerance",
+          "syntax": "slide-tolerance",
+          "description": "sliding tolerance"
+        },
+        {
+          "name": "property-tensile-failure-strain",
+          "syntax": "tensile-failure-strain",
+          "description": "tensile failure strain (nondimensional)"
+        },
+        {
+          "name": "property-thermal-expansion",
+          "syntax": "thermal-expansion",
+          "description": "thermal expansion coefficient, \\(α_t\\)"
+        },
+        {
+          "name": "property-cross-sectional-area",
+          "syntax": "cross-sectional-area",
+          "description": "cross-sectional area, \\(A\\)"
+        },
+        {
+          "name": "property-yield-compression",
+          "syntax": "yield-compression",
+          "description": "compressive yield strength, \\(F_c\\)"
+        },
+        {
+          "name": "property-yield-tension",
+          "syntax": "yield-tension",
+          "description": "tensile yield strength, \\(F_t\\)"
+        },
+        {
+          "name": "stress",
+          "syntax": "stress",
+          "description": "axial stress in the element"
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "the element local coordinate system"
+        },
+        {
+          "name": "yield",
+          "syntax": "yield",
+          "description": "indicator of whether or not the element itself has yielded"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/cables/commands/cmd_structure.cable.list.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure cable list",
+      "syntax": "structure cable list keyword [range]",
+      "keywords": [
+        {
+          "name": "apply",
+          "syntax": "apply",
+          "description": "axial tension that will be maintained during cycling"
+        },
+        {
+          "name": "force-axial",
+          "syntax": "force-axial",
+          "description": "axial force in the cable (average of the two end forces)"
+        },
+        {
+          "name": "force-node-global",
+          "syntax": "global",
+          "description": "generalized nodal forces (force and moment) acting on the element. These are the generalized forces exerted by the nodes on the element. express the values in the element coordinate system (the default) express the values in the global coordinate system"
+        },
+        {
+          "name": "group",
+          "syntax": "group [slot <s>]",
+          "description": "group assignment(s). If slot is specified, then list the group assignment, if any, in slot s ."
+        },
+        {
+          "name": "grout",
+          "syntax": "grout",
+          "description": "information about the grout that is modeled as coupling springs that connect the cable to the target object (zones in FLAC3D and 3DEC, and particles in PFC3D): confinement, displacement, stress, yield state and average axial direction"
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "general element information: nodal connectivity, centroid, surface area, volume, and hide/select status"
+        },
+        {
+          "name": "length",
+          "syntax": "length",
+          "description": "length of the cable"
+        },
+        {
+          "name": "property-young",
+          "syntax": "young <f>",
+          "description": "Scaled properties are returned if the scaled keyword ( FLAC2D ONLY ) is set to true (the default is false). If the property cannot be scaled, an error is emitted. cross-sectional area mass density grout cohesion per unit length name of the table relating grout cohesion to relative shear displacement grout friction angle name of the table relating grout friction angle to relative shear displacement grout exposed perimeter grout stiffness per unit length large-strain sliding flag large-strain sliding tolerance tensile failure strain thermal-expansion coefficient compressive yield strength tensile yield strength Young’s modulus"
+        },
+        {
+          "name": "stress",
+          "syntax": "stress",
+          "description": "axial stress in the cable (not to be confused with stress in the grout)"
+        },
+        {
+          "name": "system-local",
+          "syntax": "system-local",
+          "description": "element local coordinate system"
+        },
+        {
+          "name": "yield",
+          "syntax": "yield",
+          "description": "yield state indicating whether or not the cable has yielded"
+        }
+      ]
+    }
+  }
+}

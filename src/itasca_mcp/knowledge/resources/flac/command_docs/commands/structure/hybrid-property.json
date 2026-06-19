@@ -1,0 +1,225 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "hybrid",
+    "property",
+    "structure"
+  ],
+  "description": "Assigns properties to hybrid bolt elements in the range. Refer to Hybrid Properties for a detailed description of the properties. The following properties are available.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "structure hybrid property",
+      "syntax": "structure hybrid property keyword... <range>",
+      "description": "Assigns properties to hybrid bolt elements in the range. Refer to Hybrid Properties for a detailed description of the properties. The following properties are available.",
+      "keywords": [
+        {
+          "name": "cross-sectional-area",
+          "syntax": "cross-sectional-area f",
+          "description": "cross-sectional area"
+        },
+        {
+          "name": "density",
+          "syntax": "density f",
+          "description": "mass density"
+        },
+        {
+          "name": "dowel-active-length",
+          "syntax": "dowel-active-length f",
+          "description": "Active length of dowel segments [L]"
+        },
+        {
+          "name": "dowel-failure-strain",
+          "syntax": "dowel-failure-strain f",
+          "description": "Dowel shear strain limit [-]"
+        },
+        {
+          "name": "dowel-stiffness",
+          "syntax": "dowel-stiffness f",
+          "description": "Dowel shear stiffness [F/L]"
+        },
+        {
+          "name": "dowel-yield",
+          "syntax": "dowel-yield f",
+          "description": "Dowel shear yield strength [F]"
+        },
+        {
+          "name": "grout-cohesion",
+          "syntax": "grout-cohesion, f",
+          "description": "grout cohesion (force units) per unit length"
+        },
+        {
+          "name": "grout-friction",
+          "syntax": "grout-friction f",
+          "description": "grout friction angle"
+        },
+        {
+          "name": "grout-perimeter",
+          "syntax": "grout-perimeter f",
+          "description": "grout exposed perimeter"
+        },
+        {
+          "name": "grout-stiffness",
+          "syntax": "grout-stiffness f",
+          "description": "grout stiffness per unit length"
+        },
+        {
+          "name": "slide",
+          "syntax": "slide b",
+          "description": "large-strain sliding flag"
+        },
+        {
+          "name": "slide-tolerance",
+          "syntax": "slide-tolerance f",
+          "description": "large-strain sliding tolerance"
+        },
+        {
+          "name": "tensile-failure-strain",
+          "syntax": "tensile-failure-strain f",
+          "description": "tensile failure strain"
+        },
+        {
+          "name": "thermal-expansion",
+          "syntax": "thermal-expansion f",
+          "description": "thermal expansion coefficient"
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression f",
+          "description": "compressive yield strength"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension f",
+          "description": "tensile yield strength"
+        },
+        {
+          "name": "young",
+          "syntax": "young f",
+          "description": "Young’s modulus"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/hybrid/commands/cmd_structure.hybrid.property.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure hybrid property",
+      "syntax": "structure hybrid property keyword ... [range]",
+      "keywords": [
+        {
+          "name": "cross-sectional-area",
+          "syntax": "cross-sectional-area <f>",
+          "description": "cross-sectional area"
+        },
+        {
+          "name": "density",
+          "syntax": "density <f>",
+          "description": "mass density"
+        },
+        {
+          "name": "dowel-active-length",
+          "syntax": "dowel-active-length <f>",
+          "description": "Active length of dowel segments [L]"
+        },
+        {
+          "name": "dowel-failure-strain",
+          "syntax": "dowel-failure-strain <f>",
+          "description": "Dowel shear strain limit [-]"
+        },
+        {
+          "name": "dowel-stiffness",
+          "syntax": "dowel-stiffness <f>",
+          "description": "Dowel shear stiffness [F/L]"
+        },
+        {
+          "name": "dowel-yield",
+          "syntax": "dowel-yield <f>",
+          "description": "Dowel shear yield strength [F]"
+        },
+        {
+          "name": "grout-cohesion",
+          "syntax": "grout-cohesion <f>",
+          "description": "grout cohesion (force units) per unit length"
+        },
+        {
+          "name": "grout-cohesion-table",
+          "syntax": "grout-cohesion-table <s>",
+          "description": "name of the table relating grout cohesion to relative shear displacement"
+        },
+        {
+          "name": "grout-friction",
+          "syntax": "grout-friction <f>",
+          "description": "grout friction angle"
+        },
+        {
+          "name": "grout-friction-table",
+          "syntax": "grout-friction-table <s>",
+          "description": "name of the table relating grout friction angle to relative shear displacement"
+        },
+        {
+          "name": "grout-perimeter",
+          "syntax": "grout-perimeter <f>",
+          "description": "grout exposed perimeter"
+        },
+        {
+          "name": "grout-stiffness",
+          "syntax": "grout-stiffness <f>",
+          "description": "grout stiffness per unit length"
+        },
+        {
+          "name": "slide",
+          "syntax": "slide <b>",
+          "description": "large-strain sliding flag"
+        },
+        {
+          "name": "slide-tolerance",
+          "syntax": "slide-tolerance <f>",
+          "description": "large-strain sliding tolerance"
+        },
+        {
+          "name": "tensile-failure-strain",
+          "syntax": "tensile-failure-strain <f>",
+          "description": "tensile failure strain"
+        },
+        {
+          "name": "thermal-expansion",
+          "syntax": "thermal-expansion <f>",
+          "description": "thermal-expansion coefficient"
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression <f>",
+          "description": "compressive yield strength"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension <f>",
+          "description": "tensile yield strength"
+        },
+        {
+          "name": "young",
+          "syntax": "young <f>",
+          "description": "Young’s modulus"
+        }
+      ]
+    }
+  }
+}

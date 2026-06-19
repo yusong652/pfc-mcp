@@ -1,0 +1,104 @@
+{
+  "name": "mechanical-face",
+  "dimension": "mixed",
+  "full_name": "Mechanical Face Boundary Conditions",
+  "description": "Mechanical conditions applied to boundary faces with 'zone face apply'. Stress conditions are face based; velocity, acceleration, and reaction conditions are applied to attached gridpoints.",
+  "primary_commands": [
+    "zone face apply",
+    "zone face apply-remove",
+    "zone face skin",
+    "zone gridpoint fix",
+    "zone gridpoint initialize"
+  ],
+  "condition_families": [
+    {
+      "family": "stress",
+      "keywords": [
+        "stress-normal",
+        "stress-shear",
+        "stress-tensor",
+        "stress-xx",
+        "stress-yy",
+        "stress-zz",
+        "stress-xy",
+        "stress-xz",
+        "stress-yz"
+      ],
+      "keywords_3d_only": [
+        "stress-dip",
+        "stress-strike"
+      ],
+      "notes": [
+        "Use stress-normal for pressure-like loading normal to selected faces.",
+        "Use tensor components for global-axis stress loading; 'stress-tensor' accepts a full 6-component tensor.",
+        "Out-of-plane components (stress-zz/-xz/-yz) are accepted by FLAC2D for plane-strain state tracking even though they are 3D-flavored.",
+        "stress-dip / stress-strike are dimension-non-obvious 3D-only forms (FLAC2D uses angle-based alternatives). Accepted by FLAC3D 9.0 binary."
+      ]
+    },
+    {
+      "family": "velocity",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z",
+        "velocity-normal",
+        "velocity-tangential",
+        "velocity-local"
+      ],
+      "keywords_3d_only": [
+        "velocity-dip",
+        "velocity-strike"
+      ],
+      "notes": [
+        "Velocity boundary conditions are usually preferred for roller/fixed displacement boundaries.",
+        "Local components are interpreted from automatically generated gridpoint local axes.",
+        "velocity-dip / velocity-strike are dimension-non-obvious 3D-only forms; rejected by FLAC2D."
+      ]
+    },
+    {
+      "family": "reaction",
+      "keywords": [
+        "reaction",
+        "reaction-x",
+        "reaction-y",
+        "reaction-z",
+        "reaction-normal",
+        "reaction-tangential",
+        "reaction-local"
+      ],
+      "keywords_3d_only": [
+        "reaction-dip",
+        "reaction-strike"
+      ],
+      "notes": [
+        "Reaction conditions apply forces where the corresponding direction is fixed.",
+        "Use after fixity has been established.",
+        "reaction-dip / reaction-strike are dimension-non-obvious 3D-only forms; rejected by FLAC2D."
+      ]
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Roller side boundaries",
+      "commands": [
+        "zone face skin",
+        "zone face apply velocity-normal 0 range group 'East' or 'West'",
+        "zone face apply velocity-normal 0 range group 'Bottom'"
+      ]
+    },
+    {
+      "name": "Uniform normal stress",
+      "commands": [
+        "zone face apply stress-normal -1e5 range group 'Top'"
+      ]
+    },
+    {
+      "name": "Remove matching applied face conditions",
+      "commands": [
+        "zone face apply-remove range group 'Top'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.apply.html"
+}

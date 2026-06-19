@@ -1,0 +1,81 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "hide",
+    "zone"
+  ],
+  "description": "Hide or un-hide all zones in the range. By default, commands that use a range filter will skip hidden objects. This can be overruled with the use-hidden keyword in the range specification.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone hide",
+      "syntax": "zone hide <keyword> <range>",
+      "description": "This commands hides or un-hides all zones in the range. By default, commands that use a range filter will skip hidden objects. This can be overruled with the use-hidden keyword in the range specification.",
+      "keywords": [
+        {
+          "name": "b",
+          "syntax": "b",
+          "description": "If a boolean type is specified, then if on it hides all zones in the range. If off it un-hides (or shows) all zones in the range, and the use-hidden keyword is applied to the range implicitly. on is the default if no keyword is given."
+        },
+        {
+          "name": "undo",
+          "syntax": "undo",
+          "description": "This will reverse the operation of the last zone hide command. FLAC3D keeps a maximum undo stack of size 12."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.hide.html#zone.hide"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone hide",
+      "syntax": "zone hide <keyword> <range>",
+      "description": "This commands hides or un-hides all zones in the range. By default, commands that use a range filter will skip hidden objects. This can be overruled with the use-hidden keyword in the range specification.",
+      "keywords": [
+        {
+          "name": "adummy",
+          "syntax": "b",
+          "description": "If a boolean type is specified, then if on it hides all zones in the range. If off it un-hides (or shows) all zones in the range, and the use-hidden keyword is applied to the range implicitly. on is the default if no keyword is given."
+        },
+        {
+          "name": "undo",
+          "syntax": "undo",
+          "description": "This will reverse the operation of the last zone hide command. FLAC3D keeps a maximum undo stack of size 12."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.hide.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone hide",
+      "syntax": "zone hide [keyword] [range]",
+      "keywords": [
+        {
+          "name": "adummy",
+          "syntax": "<b>",
+          "description": "If on is specified, the command hides all zones in the range. If off is specified, the command un-hides (or shows) all zones in the range, and the use-hidden keyword is applied to the range implicitly. on is the default if no keyword is given."
+        },
+        {
+          "name": "undo",
+          "syntax": "undo",
+          "description": "Reverse the operation of the last zone hide command. FLAC keeps a maximum undo stack of size 12."
+        }
+      ]
+    }
+  }
+}

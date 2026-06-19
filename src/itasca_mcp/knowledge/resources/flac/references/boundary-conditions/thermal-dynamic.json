@@ -1,0 +1,73 @@
+{
+  "name": "thermal-dynamic",
+  "dimension": "mixed",
+  "full_name": "Thermal and Dynamic Boundary Conditions",
+  "description": "Thermal and dynamic boundary conditions cover temperature/heat-transfer values, acceleration inputs, and quiet boundaries for dynamic wave absorption.",
+  "primary_commands": [
+    "model configure thermal",
+    "model configure dynamic",
+    "zone face apply temperature",
+    "zone face apply flux",
+    "zone face apply convection",
+    "zone face apply acceleration",
+    "zone face apply quiet"
+  ],
+  "keyword_groups": [
+    {
+      "group": "thermal",
+      "keywords": [
+        "temperature",
+        "flux",
+        "convection"
+      ],
+      "notes": [
+        "Use temperature for prescribed temperature boundaries.",
+        "Use flux or convection for heat-transfer style boundaries."
+      ]
+    },
+    {
+      "group": "dynamic",
+      "keywords": [
+        "acceleration",
+        "acceleration-x",
+        "acceleration-y",
+        "acceleration-z",
+        "acceleration-normal",
+        "acceleration-tangential",
+        "acceleration-local",
+        "quiet",
+        "quiet-normal",
+        "quiet-tangential"
+      ],
+      "keywords_3d_only": [
+        "acceleration-dip",
+        "acceleration-strike",
+        "quiet-dip",
+        "quiet-strike"
+      ],
+      "notes": [
+        "Dynamic keywords require 'model configure dynamic' first.",
+        "FLAC2D users should avoid z-directed acceleration keywords; quiet normal/tangential forms and acceleration-local are dimension-neutral.",
+        "'acceleration-dip / acceleration-strike / quiet-dip / quiet-strike' accepted by FLAC3D 9.0 binary.",
+        "CAVEAT: 'zone face apply acceleration-dip <value>' was observed to crash the FLAC3D 9.0 process when applied to all faces without a configured dip axis. Probe with '?' first, or supply an explicit range and dip-axis setup before applying."
+      ]
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Quiet base boundary",
+      "commands": [
+        "model configure dynamic",
+        "zone face apply quiet-normal range group 'Bottom'"
+      ]
+    },
+    {
+      "name": "Prescribed temperature",
+      "commands": [
+        "model configure thermal",
+        "zone face apply temperature 20 range group 'Outer'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.apply.html"
+}

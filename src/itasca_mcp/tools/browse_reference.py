@@ -9,8 +9,10 @@ from itasca_mcp.contracts import build_docs_data, build_error, build_ok
 from itasca_mcp.knowledge.references import ReferenceLoader
 from itasca_mcp.utils import (
     CommandDocVersion,
+    SoftwareParam,
     normalize_command_doc_version,
     normalize_input,
+    normalize_software_value,
 )
 
 
@@ -19,6 +21,7 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     def pfc_browse_reference(
+        software: SoftwareParam,
         topic: str | None = Field(
             None,
             description=(
@@ -65,30 +68,31 @@ def register(mcp: FastMCP) -> None:
         """
         topic_str = normalize_input(topic, lowercase=True)
         version_value = normalize_command_doc_version(version)
+        sw = normalize_software_value(software)
 
         if not topic_str:
-            return build_ok(_browse_references_root(version_value))
+            return build_ok(_browse_references_root(version_value, sw))
 
         parts = topic_str.split()
         category = parts[0]
 
         if len(parts) == 1:
-            payload = _browse_category(category, version_value)
+            payload = _browse_category(category, version_value, sw)
         elif len(parts) == 2:
-            payload = _browse_item(category, parts[1], version_value)
+            payload = _browse_item(category, parts[1], version_value, sw)
         else:
             # 3+ parts: category + item + sub-item (remaining parts joined)
-            payload = _browse_sub_item(category, parts[1], " ".join(parts[2:]), version_value)
+            payload = _browse_sub_item(category, parts[1], " ".join(parts[2:]), version_value, sw)
         return _wrap_payload(payload)
 
 
-def _browse_references_root(version: str) -> dict[str, Any]:
-    refs_index = ReferenceLoader.load_index()
+def _browse_references_root(version: str, software: str) -> dict[str, Any]:
+    refs_index = ReferenceLoader.load_index(software=software)
     categories = refs_index.get("categories", {})
     category_items: list[dict[str, Any]] = []
 
     for category_name, category_data in categories.items():
-        items = ReferenceLoader.get_item_list(category_name, version)
+        items = ReferenceLoader.get_item_list(category_name, version, software=software)
         category_items.append(
             {
                 "name": category_name,
@@ -101,12 +105,12 @@ def _browse_references_root(version: str) -> dict[str, Any]:
         source="reference",
         action="browse",
         entries=category_items,
-        summary={"count": len(category_items), "version": version},
+        summary={"count": len(category_items), "version": version, "software": software},
     )
 
 
-def _browse_category(category: str, version: str) -> dict[str, Any]:
-    refs_index = ReferenceLoader.load_index()
+def _browse_category(category: str, version: str, software: str) -> dict[str, Any]:
+    refs_index = ReferenceLoader.load_index(software=software)
     categories = refs_index.get("categories", {})
 
     if category not in categories:
@@ -117,11 +121,11 @@ def _browse_category(category: str, version: str) -> dict[str, Any]:
                 "code": "category_not_found",
                 "message": f"Category '{category}' not found.",
             },
-            "input": {"category": category, "version": version},
+            "input": {"category": category, "version": version, "software": software},
             "available_categories": sorted(categories.keys()),
         }
 
-    cat_index = cast(dict[str, Any], ReferenceLoader.load_category_index(category))
+    cat_index = cast(dict[str, Any], ReferenceLoader.load_category_index(category, software=software))
     if not cat_index:
         return {
             "source": "reference",
@@ -130,9 +134,9 @@ def _browse_category(category: str, version: str) -> dict[str, Any]:
                 "code": "category_index_not_found",
                 "message": f"Category index not found for '{category}'.",
             },
-            "input": {"category": category, "version": version},
+            "input": {"category": category, "version": version, "software": software},
         }
-    raw_items = ReferenceLoader.get_item_list(category, version)
+    raw_items = ReferenceLoader.get_item_list(category, version, software=software)
     items = []
     for item in raw_items:
         entry: dict[str, Any] = {
@@ -157,12 +161,13 @@ def _browse_category(category: str, version: str) -> dict[str, Any]:
             "count": len(items),
             "category": category,
             "version": version,
+            "software": software,
         },
     )
 
 
-def _browse_item(category: str, item: str, version: str) -> dict[str, Any]:
-    refs_index = ReferenceLoader.load_index()
+def _browse_item(category: str, item: str, version: str, software: str) -> dict[str, Any]:
+    refs_index = ReferenceLoader.load_index(software=software)
     categories = refs_index.get("categories", {})
     if category not in categories:
         return {
@@ -172,14 +177,14 @@ def _browse_item(category: str, item: str, version: str) -> dict[str, Any]:
                 "code": "category_not_found",
                 "message": f"Category '{category}' not found.",
             },
-            "input": {"category": category, "item": item, "version": version},
+            "input": {"category": category, "item": item, "version": version, "software": software},
             "available_categories": sorted(categories.keys()),
         }
 
-    item_doc = ReferenceLoader.load_item_doc(category, item)
+    item_doc = ReferenceLoader.load_item_doc(category, item, software=software)
 
     if not item_doc:
-        items = ReferenceLoader.get_item_list(category, version)
+        items = ReferenceLoader.get_item_list(category, version, software=software)
         available = [i.get("name", "") for i in items]
         return {
             "source": "reference",
@@ -188,7 +193,7 @@ def _browse_item(category: str, item: str, version: str) -> dict[str, Any]:
                 "code": "item_not_found",
                 "message": f"Item '{item}' not found in '{category}'.",
             },
-            "input": {"category": category, "item": item, "version": version},
+            "input": {"category": category, "item": item, "version": version, "software": software},
             "available_items": available,
         }
 
@@ -204,12 +209,12 @@ def _browse_item(category: str, item: str, version: str) -> dict[str, Any]:
                     f"'{item}' is not available in PFC {version} (available in: {', '.join(supported) or 'none'})."
                 ),
             },
-            "input": {"category": category, "item": item, "version": version},
+            "input": {"category": category, "item": item, "version": version, "software": software},
             "available_versions": supported,
         }
 
     # Directory-based item: return overview with sub-item list instead of full doc
-    if ReferenceLoader.is_directory_item(category, item):
+    if ReferenceLoader.is_directory_item(category, item, software=software):
         sub_items = item_doc.get("sub_items", [])
         overview: dict[str, Any] = {
             "category": category,
@@ -250,8 +255,8 @@ def _browse_item(category: str, item: str, version: str) -> dict[str, Any]:
     )
 
 
-def _browse_sub_item(category: str, item: str, sub_item: str, version: str) -> dict[str, Any]:
-    refs_index = ReferenceLoader.load_index()
+def _browse_sub_item(category: str, item: str, sub_item: str, version: str, software: str) -> dict[str, Any]:
+    refs_index = ReferenceLoader.load_index(software=software)
     categories = refs_index.get("categories", {})
     if category not in categories:
         return {
@@ -266,11 +271,12 @@ def _browse_sub_item(category: str, item: str, sub_item: str, version: str) -> d
                 "item": item,
                 "sub_item": sub_item,
                 "version": version,
+                "software": software,
             },
             "available_categories": sorted(categories.keys()),
         }
 
-    if not ReferenceLoader.is_directory_item(category, item):
+    if not ReferenceLoader.is_directory_item(category, item, software=software):
         return {
             "source": "reference",
             "action": "browse",
@@ -283,12 +289,13 @@ def _browse_sub_item(category: str, item: str, sub_item: str, version: str) -> d
                 "item": item,
                 "sub_item": sub_item,
                 "version": version,
+                "software": software,
             },
         }
 
-    sub_doc = ReferenceLoader.load_sub_item_doc(category, item, sub_item)
+    sub_doc = ReferenceLoader.load_sub_item_doc(category, item, sub_item, software=software)
     if not sub_doc:
-        item_doc = ReferenceLoader.load_item_doc(category, item)
+        item_doc = ReferenceLoader.load_item_doc(category, item, software=software)
         available = [s["name"] for s in (item_doc or {}).get("sub_items", [])]
         return {
             "source": "reference",
@@ -302,6 +309,7 @@ def _browse_sub_item(category: str, item: str, sub_item: str, version: str) -> d
                 "item": item,
                 "sub_item": sub_item,
                 "version": version,
+                "software": software,
             },
             "available_sub_items": available,
         }

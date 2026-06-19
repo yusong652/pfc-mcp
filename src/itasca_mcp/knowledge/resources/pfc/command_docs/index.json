@@ -1,0 +1,3493 @@
+{
+  "version": "1.0",
+  "description": "PFC command documentation index for quick lookup and LLM-assisted command discovery",
+  "categories": {
+    "ball": {
+      "full_name": "Ball Commands",
+      "description": "Commands for creating, modifying, and managing ball objects in PFC discrete element simulations",
+      "command_prefix": "ball",
+      "python_module": "itasca.ball",
+      "python_object_class": "Ball",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/ball/ball.html",
+      "related_categories": [
+        "wall",
+        "clump",
+        "contact",
+        "model"
+      ],
+      "notes": [
+        "Ball commands typically operate on ranges (groups, spatial regions, or all balls)",
+        "Use Python SDK for fine-grained control and complex logic",
+        "Use commands for batch operations and initial model setup",
+        "Ball generation with packing patterns requires commands (not available in Python SDK)"
+      ],
+      "commands": [
+        {
+          "name": "accumulate-stress",
+          "file": "pfc/command_docs/commands/ball/accumulate-stress.json",
+          "short_description": "Specify that stresses are accumulated and stored during cycling",
+          "syntax": "ball accumulate-stress <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball accumulate-stress <bool>')"
+        },
+        {
+          "name": "attribute",
+          "file": "pfc/command_docs/commands/ball/attribute.json",
+          "short_description": "Set the value of ball attributes",
+          "syntax": "ball attribute keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Use Ball.set_*() methods (e.g., Ball.set_density(), Ball.set_vel(), Ball.set_pos()) - requires iteration over ball range"
+        },
+        {
+          "name": "clump",
+          "file": "pfc/command_docs/commands/ball/clump.json",
+          "short_description": "Create a single clump from the balls within range or add a ball to an existing clump",
+          "syntax": "ball clump keyword [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball clump ...') - Python SDK cannot convert balls to clump pebbles"
+        },
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/ball/create.json",
+          "short_description": "Create a single ball with the specified attributes",
+          "syntax": "ball create keyword ...",
+          "python_available": true,
+          "python_alternative": "itasca.ball.create(radius, centroid, id=None) - creates single ball with specified parameters"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/ball/delete.json",
+          "short_description": "Delete balls",
+          "syntax": "ball delete [range]",
+          "python_available": true,
+          "python_alternative": "Ball.delete() method - requires iteration: for b in itasca.ball.list(): b.delete()"
+        },
+        {
+          "name": "distribute",
+          "file": "pfc/command_docs/commands/ball/distribute.json",
+          "short_description": "Distribute balls with overlaps until a target porosity is achieved",
+          "syntax": "ball distribute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball distribute ...') - no Python SDK equivalent for porosity-based distribution with overlaps"
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/ball/export.json",
+          "short_description": "Export balls to geometry sets for post-processing or STL export",
+          "syntax": "ball export keyword [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball export geometry ...') - no Python SDK equivalent for geometry export"
+        },
+        {
+          "name": "extra",
+          "file": "pfc/command_docs/commands/ball/extra.json",
+          "short_description": "Set ball extra variables",
+          "syntax": "ball extra <i><a>[range]",
+          "python_available": true,
+          "python_alternative": "Ball.set_extra(slot, value) - requires iteration: for b in itasca.ball.list(): b.set_extra(i, value)"
+        },
+        {
+          "name": "fix",
+          "file": "pfc/command_docs/commands/ball/fix.json",
+          "short_description": "Fix the specified ball velocities",
+          "syntax": "ball fix keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Ball.set_fix(component, True) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration"
+        },
+        {
+          "name": "free",
+          "file": "pfc/command_docs/commands/ball/free.json",
+          "short_description": "Free the specified ball velocities",
+          "syntax": "ball free keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Ball.set_fix(component, False) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration"
+        },
+        {
+          "name": "generate",
+          "file": "pfc/command_docs/commands/ball/generate.json",
+          "short_description": "Generate non-overlapping balls",
+          "syntax": "ball generate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball generate ...') - Python SDK only has itasca.ball.create() for single ball creation"
+        },
+        {
+          "name": "group",
+          "file": "pfc/command_docs/commands/ball/group.json",
+          "short_description": "Specify ball group names",
+          "syntax": "ball group <s>[keyword ...] [range]",
+          "python_available": true,
+          "python_alternative": "Ball.set_group(group_name, slot=None) - requires iteration: for b in itasca.ball.list(): b.set_group('name')"
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/ball/history.json",
+          "short_description": "Add a history of a ball value",
+          "syntax": "ball history [name <sid>] keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball history ...') or manually record values using itasca.set_callback() with Ball getter methods"
+        },
+        {
+          "name": "initialize",
+          "file": "pfc/command_docs/commands/ball/initialize.json",
+          "short_description": "Modify ball attributes",
+          "syntax": "ball initialize keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Same as ball attribute: use Ball.set_*() methods - requires iteration"
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/ball/list.json",
+          "short_description": "List ball information",
+          "syntax": "ball list [keyword] [range]",
+          "python_available": true,
+          "python_alternative": "Ball getter methods: Ball.pos(), Ball.vel(), Ball.radius(), Ball.density(), etc. - requires iteration: for b in itasca.ball.list(): print(b.pos())"
+        },
+        {
+          "name": "property",
+          "file": "pfc/command_docs/commands/ball/property.json",
+          "short_description": "Assign ball surface properties used in contact models",
+          "syntax": "ball property <s><a>[<s1><a21>...] [range]",
+          "python_available": true,
+          "python_alternative": "Ball.set_prop(property_name, value) - requires iteration: for b in itasca.ball.list(): b.set_prop('kn', 1e8)"
+        },
+        {
+          "name": "results",
+          "file": "pfc/command_docs/commands/ball/results.json",
+          "short_description": "Configure ball results logic for efficient post-processing",
+          "syntax": "ball results keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball results ...') - Python SDK does not provide results configuration"
+        },
+        {
+          "name": "tolerance",
+          "file": "pfc/command_docs/commands/ball/tolerance.json",
+          "short_description": "Set contact detection tolerances",
+          "syntax": "ball tolerance keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball tolerance ...') - Python SDK does not provide tolerance settings"
+        },
+        {
+          "name": "trace",
+          "file": "pfc/command_docs/commands/ball/trace.json",
+          "short_description": "Add a ball particle trace to record and visualize ball motion path",
+          "syntax": "ball trace [id <id>] id <id2>| <v>",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball trace ...') - Python SDK does not provide trace creation. Use trace commands for manipulation."
+        },
+        {
+          "name": "tractions",
+          "file": "pfc/command_docs/commands/ball/tractions.json",
+          "short_description": "Compute contact tractions consistent with prescribed stress state using Voronoi tessellation",
+          "syntax": "ball tractions keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('ball tractions ...') - Python SDK does not provide Voronoi-based traction computation"
+        }
+      ]
+    },
+    "brick": {
+      "full_name": "Brick Commands",
+      "description": "Commands for creating, importing, assembling, and managing brick-based geometry and inlets used by rigid-body workflows.",
+      "command_prefix": "brick",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/brick/brick.html",
+      "related_categories": [
+        "rblock",
+        "ball",
+        "clump",
+        "model"
+      ],
+      "notes": [
+        "Brick commands manage reusable geometry definitions and inlets rather than simulation pieces directly",
+        "Use brick inlets to generate balls, clumps, or rblocks during cycling",
+        "Most brick operations currently rely on the command interface via itasca.command()"
+      ],
+      "commands": [
+        {
+          "name": "assemble",
+          "file": "pfc/command_docs/commands/brick/assemble.json",
+          "short_description": "Assemble an existing brick in the model",
+          "syntax": "brick assemble keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick assemble ...') via command interface"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/brick/delete.json",
+          "short_description": "Delete bricks from the model",
+          "syntax": "brick delete [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick delete ...') via command interface"
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/brick/export.json",
+          "short_description": "Export brick data to a file for later import or post-processing",
+          "syntax": "brick export keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick export ...') via command interface"
+        },
+        {
+          "name": "import",
+          "file": "pfc/command_docs/commands/brick/import.json",
+          "short_description": "Import brick data from a previously exported file",
+          "syntax": "brick import keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick import ...') via command interface"
+        },
+        {
+          "name": "inlet-create",
+          "file": "pfc/command_docs/commands/brick/inlet-create.json",
+          "short_description": "Create an inlet with the specified ID",
+          "syntax": "inlet create id <i>keyword",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick inlet create ...') via command interface"
+        },
+        {
+          "name": "inlet-modify",
+          "file": "pfc/command_docs/commands/brick/inlet-modify.json",
+          "short_description": "Modify the properties of an existing inlet identified by ID",
+          "syntax": "inlet modify id <i>keyword",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick inlet modify ...') via command interface"
+        },
+        {
+          "name": "make",
+          "file": "pfc/command_docs/commands/brick/make.json",
+          "short_description": "Create brick geometry by specifying a box region subdivided into elements for rigid body simulation",
+          "syntax": "brick make [id <i>]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('brick make ...') via command interface"
+        }
+      ]
+    },
+    "clump": {
+      "full_name": "Clump Commands",
+      "description": "Clump object creation, modification, and template management commands. Clumps are rigid aggregates of overlapping or touching balls (pebbles) that behave as single rigid bodies.",
+      "command_prefix": "clump",
+      "python_module": "itasca.clump",
+      "python_object_class": "Clump",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/clump/clump.html",
+      "related_categories": [
+        "ball",
+        "wall",
+        "contact",
+        "model"
+      ],
+      "notes": [
+        "Clumps are rigid bodies composed of pebbles (component balls)",
+        "Clump templates enable efficient replication of complex shapes",
+        "clump generate creates non-overlapping clumps; clump distribute allows overlaps for target porosity",
+        "Most clump operations (template, generate, distribute) not available in Python SDK"
+      ],
+      "commands": [
+        {
+          "name": "accumulate-stress",
+          "file": "pfc/command_docs/commands/clump/accumulate-stress.json",
+          "short_description": "Specify that stresses are accumulated and stored during cycling",
+          "syntax": "clump accumulate-stress <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump accumulate-stress <bool>')"
+        },
+        {
+          "name": "attribute",
+          "file": "pfc/command_docs/commands/clump/attribute.json",
+          "short_description": "Set the value of clump attributes",
+          "syntax": "clump attribute keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Use Clump.set_*() methods (e.g., Clump.set_density(), Clump.set_vel(), Clump.set_pos()) - requires iteration over clump range"
+        },
+        {
+          "name": "break",
+          "file": "pfc/command_docs/commands/clump/break.json",
+          "short_description": "Break clumps into pebbles",
+          "syntax": "clump break [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump break ...') - Python SDK cannot directly break clumps into pebbles"
+        },
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/clump/create.json",
+          "short_description": "Create a single clump with the specified attributes",
+          "syntax": "clump create keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump create ...') - Python SDK cannot directly create clumps with pebbles"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/clump/delete.json",
+          "short_description": "Delete clumps and/or pebbles",
+          "syntax": "clump delete [keyword] [range]",
+          "python_available": true,
+          "python_alternative": "Use Clump.delete() method - requires iteration over clump range to delete multiple clumps"
+        },
+        {
+          "name": "distribute",
+          "file": "pfc/command_docs/commands/clump/distribute.json",
+          "short_description": "Distribute clumps with overlaps",
+          "syntax": "clump distribute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump distribute ...') - Python SDK cannot directly distribute clumps with templating system"
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/clump/export.json",
+          "short_description": "Export clumps to geometry sets for post-processing or STL export",
+          "syntax": "clump export keyword [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump export geometry ...') - no Python SDK equivalent for geometry export"
+        },
+        {
+          "name": "extra",
+          "file": "pfc/command_docs/commands/clump/extra.json",
+          "short_description": "Set clump or pebble extra variables",
+          "syntax": "clump extra <i><a>[pebble] [range]",
+          "python_available": true,
+          "python_alternative": "Clump.set_extra(slot, value) for clumps - requires iteration: for c in itasca.clump.list(): c.set_extra(i, value). For pebbles: use Ball.set_extra() on pebble balls"
+        },
+        {
+          "name": "fix",
+          "file": "pfc/command_docs/commands/clump/fix.json",
+          "short_description": "Fix the specified clump velocities",
+          "syntax": "clump fix keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Clump.set_fix(component, True) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration: for c in itasca.clump.list(): c.set_fix(component, True)"
+        },
+        {
+          "name": "free",
+          "file": "pfc/command_docs/commands/clump/free.json",
+          "short_description": "Free the specified clump velocities",
+          "syntax": "clump free keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Clump.set_fix(component, False) where component: 0=X, 1=Y, 2=Z, 3=RX, 4=RY, 5=RZ - requires iteration: for c in itasca.clump.list(): c.set_fix(component, False)"
+        },
+        {
+          "name": "generate",
+          "file": "pfc/command_docs/commands/clump/generate.json",
+          "short_description": "Generate non-overlapping clumps",
+          "syntax": "clump generate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump generate ...') - Python SDK cannot directly generate clumps with templating system"
+        },
+        {
+          "name": "group",
+          "file": "pfc/command_docs/commands/clump/group.json",
+          "short_description": "Specify clump or pebble group names",
+          "syntax": "clump group <s>keyword ... [pebble] [range]",
+          "python_available": true,
+          "python_alternative": "Clump.set_group(group_name, slot=None) for clumps - requires iteration: for c in itasca.clump.list(): c.set_group('name'). For pebbles: use Ball.set_group() on pebble balls"
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/clump/history.json",
+          "short_description": "Add a history of a clump value",
+          "syntax": "clump history [name <sid>] keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump history ...') or manually record values using itasca.set_callback() with Clump getter methods"
+        },
+        {
+          "name": "initialize",
+          "file": "pfc/command_docs/commands/clump/initialize.json",
+          "short_description": "Modify clump attributes",
+          "syntax": "clump initialize keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Same as clump attribute: use Clump.set_*() methods (e.g., Clump.set_density(), Clump.set_vel(), Clump.set_pos()) - requires iteration over clump range"
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/clump/list.json",
+          "short_description": "List clump information",
+          "syntax": "clump list [keyword] [range]",
+          "python_available": true,
+          "python_alternative": "Clump getter methods: Clump.pos(), Clump.vel(), Clump.density(), Clump.volume(), etc. - requires iteration: for c in itasca.clump.list(): print(c.pos())"
+        },
+        {
+          "name": "order",
+          "file": "pfc/command_docs/commands/clump/order.json",
+          "short_description": "Set the rotational EOM (Equations of Motion) order for clumps (3D ONLY)",
+          "syntax": "clump order <i>",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump order <i>') - no direct Python SDK method to set rotational EOM order"
+        },
+        {
+          "name": "property",
+          "file": "pfc/command_docs/commands/clump/property.json",
+          "short_description": "Assign clump or pebble surface properties used in contact models",
+          "syntax": "clump property <s><a>[<s1><a1>...] [range]",
+          "python_available": true,
+          "python_alternative": "For pebbles: iterate over clumps, then over pebbles (balls) in each clump, and use Ball.set_prop(property_name, value). Example: for c in itasca.clump.list(): for p in c.pebbles(): p.set_prop('kn', 1e8)"
+        },
+        {
+          "name": "replicate",
+          "file": "pfc/command_docs/commands/clump/replicate.json",
+          "short_description": "Create a single clump from a template",
+          "syntax": "clump replicate keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump replicate ...') - Python SDK cannot directly replicate clumps from templates"
+        },
+        {
+          "name": "results",
+          "file": "pfc/command_docs/commands/clump/results.json",
+          "short_description": "Configure clump results logic for efficient post-processing",
+          "syntax": "clump results keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump results ...') - Python SDK does not provide results configuration"
+        },
+        {
+          "name": "rotate",
+          "file": "pfc/command_docs/commands/clump/rotate.json",
+          "short_description": "Rotate clumps using right-hand rule",
+          "syntax": "clump rotate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump rotate ...') - Python SDK does not provide direct clump rotation method"
+        },
+        {
+          "name": "scale",
+          "file": "pfc/command_docs/commands/clump/scale.json",
+          "short_description": "Scale clumps",
+          "syntax": "clump scale keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump scale ...') - Python SDK does not provide direct clump scaling method"
+        },
+        {
+          "name": "template",
+          "file": "pfc/command_docs/commands/clump/template.json",
+          "short_description": "Operate on a single clump template",
+          "syntax": "clump template keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump template ...') - Python SDK does not provide direct clump template management"
+        },
+        {
+          "name": "tolerance",
+          "file": "pfc/command_docs/commands/clump/tolerance.json",
+          "short_description": "Set contact detection tolerances",
+          "syntax": "clump tolerance keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump tolerance ...') - Python SDK does not provide direct tolerance control"
+        },
+        {
+          "name": "trace",
+          "file": "pfc/command_docs/commands/clump/trace.json",
+          "short_description": "Add a clump or pebble particle trace",
+          "syntax": "clump trace [id <id>] [pebble] id <id2>| <v>",
+          "python_available": false,
+          "python_alternative": "itasca.command('clump trace ...') - Python SDK does not provide direct particle trace creation"
+        }
+      ]
+    },
+    "contact": {
+      "full_name": "Contact Commands",
+      "description": "Commands for configuring contact models and managing contact properties between objects",
+      "command_prefix": "contact",
+      "python_module": "itasca.contact",
+      "python_object_class": "Contact (BallBallContact, BallFacetContact, etc.)",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/contact/contact.html",
+      "related_categories": [
+        "ball",
+        "wall",
+        "clump",
+        "model"
+      ],
+      "notes": [
+        "Contact models define mechanical behavior at contact points",
+        "Common contact models: linear, linearpbond, linearcbond, hertz",
+        "Contact properties are model-specific (e.g., 'kn' for normal stiffness)",
+        "Use 'contact model' commands to assign and configure models"
+      ],
+      "commands": [
+        {
+          "name": "activate",
+          "file": "pfc/command_docs/commands/contact/activate.json",
+          "short_description": "Change the contact activate flag for existing contacts",
+          "syntax": "contact activate <b>[keyword] [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "apply-group",
+          "file": "pfc/command_docs/commands/contact/apply-group.json",
+          "short_description": "Apply contact group names to contacting pieces or bodies",
+          "syntax": "contact [<sprocess>] apply-group [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact apply-group ...') - Python SDK does not provide direct apply-group functionality. Manual implementation requires:\n1. Iterate through contacts\n2. Get contact group name: contact.group(slot)\n3. Get contact ends: contact.end1(), contact.end2()\n4. Apply group to pieces/bodies: piece.set_group() or body.set_group()\n\nExample:\nfor c in it.contact.list():\n    group_name = c.group('Default')\n    if group_name:\n        c.end1().set_group(group_name, 'Default')\n        c.end2().set_group(group_name, 'Default')"
+        },
+        {
+          "name": "cmat-add",
+          "file": "pfc/command_docs/commands/contact/cmat-add.json",
+          "short_description": "Adds a new entry to the CMAT (Contact Model Assignment Table)",
+          "syntax": "contact cmat add [<i>] keyword ... range",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat add ...') - Python SDK does not provide direct CMAT API, must use command interface"
+        },
+        {
+          "name": "cmat-apply",
+          "file": "pfc/command_docs/commands/contact/cmat-apply.json",
+          "short_description": "Apply the CMAT to existing contacts",
+          "syntax": "contact cmat apply [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat apply ...') - Python SDK does not provide direct CMAT API, must use command interface"
+        },
+        {
+          "name": "cmat-default",
+          "file": "pfc/command_docs/commands/contact/cmat-default.json",
+          "short_description": "Set the default slot(s) of the CMAT",
+          "syntax": "contact cmat default [type <stype>] keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat default ...') - Python SDK does not provide direct CMAT API, must use command interface"
+        },
+        {
+          "name": "cmat-list",
+          "file": "pfc/command_docs/commands/contact/cmat-list.json",
+          "short_description": "Lists the CMAT (Contact Model Assignment Table)",
+          "syntax": "contact cmat list [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat list') - Python SDK does not provide direct CMAT API, must use command interface."
+        },
+        {
+          "name": "cmat-modify",
+          "file": "pfc/command_docs/commands/contact/cmat-modify.json",
+          "short_description": "Modify an existing entry in the CMAT (Contact Model Assignment Table)",
+          "syntax": "contact cmat modify <i>keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat modify ...') - Python SDK does not provide direct CMAT API, must use command interface"
+        },
+        {
+          "name": "cmat-proximity",
+          "file": "pfc/command_docs/commands/contact/cmat-proximity.json",
+          "short_description": "Set the contact detection distance for the CMAT (Contact Model Assignment Table)",
+          "syntax": "contact cmat [<sprocess>] proximity <fd>",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat proximity <value>') - Python SDK does not provide direct CMAT proximity API, must use command interface"
+        },
+        {
+          "name": "cmat-remove",
+          "file": "pfc/command_docs/commands/contact/cmat-remove.json",
+          "short_description": "Remove an entry from the CMAT (Contact Model Assignment Table)",
+          "syntax": "contact cmat remove [<i>or all] [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact cmat remove <i>') - Python SDK does not provide direct CMAT API, must use command interface"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/contact/delete.json",
+          "short_description": "Delete contacts in the specified range",
+          "syntax": "contact delete [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact delete range ...') - Python SDK does not provide direct contact deletion API. Individual Contact objects become invalid when deleted, but there's no contact.delete() method. Use command interface for contact deletion."
+        },
+        {
+          "name": "detection",
+          "file": "pfc/command_docs/commands/contact/detection.json",
+          "short_description": "Control whether contacts are automatically detected during simulation",
+          "syntax": "contact detection <b>[keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact detection <on/off>') - Python SDK does not provide direct contact detection control API. Must use command interface."
+        },
+        {
+          "name": "extra",
+          "file": "pfc/command_docs/commands/contact/extra.json",
+          "short_description": "Set contact extra variables",
+          "syntax": "contact extra <i><a>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "fix",
+          "file": "pfc/command_docs/commands/contact/fix.json",
+          "short_description": "Fix contacts in the specified range",
+          "syntax": "contact fix <bval>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('contact fix <bval> range ...') - Python SDK does not provide direct contact fix functionality. No contact.fix() method exists in the SDK."
+        },
+        {
+          "name": "group",
+          "file": "pfc/command_docs/commands/contact/group.json",
+          "short_description": "Assign group names to contacts for organization and range-based selection",
+          "syntax": "contact group <s>keyword ... [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/contact/history.json",
+          "short_description": "Add a contact history",
+          "syntax": "contact history [id <id>] <s>keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "inhibit",
+          "file": "pfc/command_docs/commands/contact/inhibit.json",
+          "short_description": "Inhibit (disable) contacts in the specified range",
+          "syntax": "contact inhibit <bval>[keyword] [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/contact/list.json",
+          "short_description": "List contact information",
+          "syntax": "contact list [keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "method",
+          "file": "pfc/command_docs/commands/contact/method.json",
+          "short_description": "Execute contact model methods on existing contacts",
+          "syntax": "contact method keyword ... [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "model",
+          "file": "pfc/command_docs/commands/contact/model.json",
+          "short_description": "Assign contact models to existing contacts",
+          "syntax": "contact model keyword [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "persist",
+          "file": "pfc/command_docs/commands/contact/persist.json",
+          "short_description": "Set the contact persistence flag for contacts in the specified range",
+          "syntax": "contact persist <bval>[keyword] [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "property",
+          "file": "pfc/command_docs/commands/contact/property.json",
+          "short_description": "Assign contact properties to existing contacts",
+          "syntax": "contact property keyword ... [inheritance <b>] ...",
+          "python_available": true,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "data": {
+      "full_name": "Data Commands",
+      "description": "Commands for creating user-defined data containers — labels, scalars, vectors, and tensors — attached to model objects. Used for visualizing imported field data or computed quantities.",
+      "command_prefix": "data",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/data/data.html",
+      "related_categories": [
+        "ball",
+        "geometry",
+        "plot"
+      ],
+      "notes": [
+        "Four sub-namespaces: data label / scalar / vector / tensor — each with create/delete/list/import/export/group/results",
+        "Useful for piping external CSV / field data into the model for visualization or sampling",
+        "Sub-namespace is part of the JSON key: 'data scalar create' → commands/data/scalar-create.json",
+        "Plot items can color/size objects by data values stored in these containers"
+      ],
+      "commands": [
+        {
+          "name": "label-create",
+          "file": "_common/command_docs/commands/data/label-create.json",
+          "short_description": "Create a user-defined label at a point in space",
+          "syntax": "data label create keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label-delete",
+          "file": "_common/command_docs/commands/data/label-delete.json",
+          "short_description": "Delete all labels within the specified range ",
+          "syntax": "data label delete [name <s>] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label-list",
+          "file": "_common/command_docs/commands/data/label-list.json",
+          "short_description": "List label information",
+          "syntax": "data label list [name <s>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label-modify",
+          "file": "_common/command_docs/commands/data/label-modify.json",
+          "short_description": "Modify an existing label",
+          "syntax": "data label modify keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label-results",
+          "file": "_common/command_docs/commands/data/label-results.json",
+          "short_description": "Include label data in results files",
+          "syntax": "data label results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-create",
+          "file": "_common/command_docs/commands/data/scalar-create.json",
+          "short_description": "Create a scalar data entry",
+          "syntax": "data scalar create <v>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-delete",
+          "file": "_common/command_docs/commands/data/scalar-delete.json",
+          "short_description": "Delete scalars in the range",
+          "syntax": "data scalar delete [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-export",
+          "file": "_common/command_docs/commands/data/scalar-export.json",
+          "short_description": "Export scalars to the file with name s ",
+          "syntax": "data scalar export <s>[binary] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-group",
+          "file": "_common/command_docs/commands/data/scalar-group.json",
+          "short_description": "Specify scalar group names",
+          "syntax": "data scalar group <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-import",
+          "file": "_common/command_docs/commands/data/scalar-import.json",
+          "short_description": "Import scalars from file s ",
+          "syntax": "data scalar import <s>[keyword]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-list",
+          "file": "_common/command_docs/commands/data/scalar-list.json",
+          "short_description": "List scalar information on data in the range specified",
+          "syntax": "data scalar list [keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "scalar-results",
+          "file": "_common/command_docs/commands/data/scalar-results.json",
+          "short_description": "Include scalar data in results files",
+          "syntax": "data scalar results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-create",
+          "file": "_common/command_docs/commands/data/tensor-create.json",
+          "short_description": "Create a tensor data entry",
+          "syntax": "data tensor create <v>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-delete",
+          "file": "_common/command_docs/commands/data/tensor-delete.json",
+          "short_description": "Delete tensors in the range",
+          "syntax": "data tensor delete [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-export",
+          "file": "_common/command_docs/commands/data/tensor-export.json",
+          "short_description": "Export tensors to the file with name s ",
+          "syntax": "data tensor export <s>[binary] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-group",
+          "file": "_common/command_docs/commands/data/tensor-group.json",
+          "short_description": "Specify tensor group names",
+          "syntax": "data tensor group <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-import",
+          "file": "_common/command_docs/commands/data/tensor-import.json",
+          "short_description": "Import tensors from file s ",
+          "syntax": "data tensor import <s>[group <s>[slot <s>]]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-list",
+          "file": "_common/command_docs/commands/data/tensor-list.json",
+          "short_description": "List tensor information on data in the range specified",
+          "syntax": "data tensor list [keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tensor-results",
+          "file": "_common/command_docs/commands/data/tensor-results.json",
+          "short_description": "Include tensor data in results files",
+          "syntax": "data tensor results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-create",
+          "file": "_common/command_docs/commands/data/vector-create.json",
+          "short_description": "Create a vector",
+          "syntax": "data vector create <v>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-delete",
+          "file": "_common/command_docs/commands/data/vector-delete.json",
+          "short_description": "Delete vector data objets in the range",
+          "syntax": "data vector delete [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-export",
+          "file": "_common/command_docs/commands/data/vector-export.json",
+          "short_description": "Export vectors to the file with name s ",
+          "syntax": "data vector export <s>[binary] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-group",
+          "file": "_common/command_docs/commands/data/vector-group.json",
+          "short_description": "Specify vector group names",
+          "syntax": "data vector group <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-import",
+          "file": "_common/command_docs/commands/data/vector-import.json",
+          "short_description": "Import vectors from file s ",
+          "syntax": "data vector import <s>[group <s>[slot <s>]]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-list",
+          "file": "_common/command_docs/commands/data/vector-list.json",
+          "short_description": "List vector information",
+          "syntax": "data vector list [keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "vector-results",
+          "file": "_common/command_docs/commands/data/vector-results.json",
+          "short_description": "Include vector data in results files",
+          "syntax": "data vector results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "domain": {
+      "full_name": "Domain Commands",
+      "description": "Commands for configuring the model domain — the bounding box, boundary conditions (rigid/destroy/periodic/reflect), and strain-rate for periodic-cell simulations.",
+      "command_prefix": "domain",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/domain/domain.html",
+      "related_categories": [
+        "model",
+        "ball",
+        "wall"
+      ],
+      "notes": [
+        "Domain must be configured before generating particles ('model domain extent ...')",
+        "'domain condition' sets per-face boundary behavior (rigid, destroy, periodic, reflect)",
+        "'domain strain-rate' drives periodic-cell deformation for representative-volume-element (REV) studies",
+        "Most domain configuration is done via 'model domain' shortcuts; standalone 'domain' commands are lower-level overrides"
+      ],
+      "commands": [
+        {
+          "name": "condition",
+          "file": "pfc/command_docs/commands/domain/condition.json",
+          "short_description": "Set the domain boundary conditions",
+          "syntax": "domain condition <sx>[<sy><sz>] <sz>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "extent",
+          "file": "pfc/command_docs/commands/domain/extent.json",
+          "short_description": "Specify the locations of the sides of the domain",
+          "syntax": "domain extent <fxl><fxu>[<fyl><fyu><fzl><fzu>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "strain-rate",
+          "file": "pfc/command_docs/commands/domain/strain-rate.json",
+          "short_description": "Specify the domain strain rate",
+          "syntax": "domain strain-rate <v>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "fish": {
+      "full_name": "FISH Commands",
+      "description": "Commands controlling the FISH embedded scripting language: function definition, callbacks, debugging, tracing, and runtime configuration.",
+      "command_prefix": "fish",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/fish/fish.html",
+      "related_categories": [
+        "model",
+        "program",
+        "history"
+      ],
+      "notes": [
+        "FISH is PFC's in-process scripting language; these commands manage its runtime",
+        "fish define introduces a function; fish list prints all symbols (loggable)",
+        "fish callback registers per-cycle FISH execution; fish-halt in 'model solve' is a stop-condition callback",
+        "fish trace / debug emit diagnostic output capturable via log",
+        "Prefer Python SDK for new scripting; FISH remains required for callbacks and in-cycle hooks"
+      ],
+      "commands": [
+        {
+          "name": "automatic-create",
+          "file": "_common/command_docs/commands/fish/automatic-create.json",
+          "short_description": "Set the FISH symbol automatic creation status",
+          "syntax": "fish automatic-create <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "boolean-convert",
+          "file": "_common/command_docs/commands/fish/boolean-convert.json",
+          "short_description": "Convert other types to Boolean values",
+          "syntax": "fish boolean-convert <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "callback",
+          "file": "_common/command_docs/commands/fish/callback.json",
+          "short_description": "Add/remove functions to be executed in response to callback events",
+          "syntax": "fish callback keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "debug",
+          "file": "_common/command_docs/commands/fish/debug.json",
+          "short_description": "Launch the FISH function s in debug mode",
+          "syntax": "fish debug <s>keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "define",
+          "file": "_common/command_docs/commands/fish/define.json",
+          "short_description": "Define a new FISH function",
+          "syntax": "fish define <s>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "history",
+          "file": "_common/command_docs/commands/fish/history.json",
+          "short_description": "Create a history of the FISH variable sym ",
+          "syntax": "fish history [name <s>] <sym>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/fish/list.json",
+          "short_description": "List FISH -related quantities",
+          "syntax": "fish list [keyword] | <s>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "operator",
+          "file": "_common/command_docs/commands/fish/operator.json",
+          "short_description": "Define a new FISH operator",
+          "syntax": "fish operator <s>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "result",
+          "file": "_common/command_docs/commands/fish/result.json",
+          "short_description": "Set storage of FISH information in results files",
+          "syntax": "fish results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "structure",
+          "file": "_common/command_docs/commands/fish/structure.json",
+          "short_description": "Define a new FISH structure",
+          "syntax": "fish structure <s>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "trace",
+          "file": "_common/command_docs/commands/fish/trace.json",
+          "short_description": "Create a particle trace of the FISH variable sym ",
+          "syntax": "fish trace [name <s>] <sym>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "fracture": {
+      "full_name": "Fracture (DFN) Commands",
+      "description": "Discrete Fracture Network commands for creating, importing, and analyzing planar discontinuities (fractures) and their intersections. Drives Smooth-Joint and similar contact models.",
+      "command_prefix": "fracture",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/dfn/dfn.html",
+      "related_categories": [
+        "geometry",
+        "contact",
+        "ball"
+      ],
+      "notes": [
+        "DFN module: command verb is 'fracture' even though docs call it 'dfn'",
+        "fracture generate creates statistical DFNs; fracture import reads explicit fracture files",
+        "fracture template defines reusable fracture geometries (fracture template create / delete / modify-default)",
+        "fracture intersections compute / scanline produces connectivity data for joint-set analysis",
+        "Use 'contact model smoothjoint' (or similar) to wire fractures into mechanical behavior"
+      ],
+      "commands": [
+        {
+          "name": "aperture",
+          "file": "_common/command_docs/commands/fracture/aperture.json",
+          "short_description": "Assign apertures to fractures",
+          "syntax": "fracture aperture keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "attribute",
+          "file": "_common/command_docs/commands/fracture/attribute.json",
+          "short_description": "Modify fracture attributes",
+          "syntax": "fracture attribute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "cluster",
+          "file": "_common/command_docs/commands/fracture/cluster.json",
+          "short_description": "Compute fracture clusters",
+          "syntax": "fracture cluster keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "combine",
+          "file": "_common/command_docs/commands/fracture/combine.json",
+          "short_description": "Simplify fractures",
+          "syntax": "fracture combine keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "compute",
+          "file": "_common/command_docs/commands/fracture/compute.json",
+          "short_description": "Compute fracture statistics",
+          "syntax": "fracture compute keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "connectivity",
+          "file": "_common/command_docs/commands/fracture/connectivity.json",
+          "short_description": "Calculate fracture connectivity with a specified structure",
+          "syntax": "fracture connectivity keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "contact-model",
+          "file": "_common/command_docs/commands/fracture/contact-model.json",
+          "short_description": "Assign contact models via fractures",
+          "syntax": "fracture contact-model keyword ... [rangeof dfns]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/fracture/copy.json",
+          "short_description": "Copy fractures",
+          "syntax": "fracture copy keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "create",
+          "file": "_common/command_docs/commands/fracture/create.json",
+          "short_description": "Create a deterministic fracture",
+          "syntax": "fracture create keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/fracture/delete.json",
+          "short_description": "Delete fractures",
+          "syntax": "fracture delete [dfn [<s>] ][range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "dfn-extra",
+          "file": "_common/command_docs/commands/fracture/dfn-extra.json",
+          "short_description": "Set DFN extra variables",
+          "syntax": "fracture dfn-extra <i><a>[range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "dfn-group",
+          "file": "_common/command_docs/commands/fracture/dfn-group.json",
+          "short_description": "Specify DFN group names",
+          "syntax": "fracture dfn-group <s>keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/fracture/export.json",
+          "short_description": "Export fractures to file",
+          "syntax": "fracture export keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "extra",
+          "file": "_common/command_docs/commands/fracture/extra.json",
+          "short_description": "Set fracture extra variables",
+          "syntax": "fracture extra <i><a>[range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "generate",
+          "file": "_common/command_docs/commands/fracture/generate.json",
+          "short_description": "Generate fractures from a statistical description",
+          "syntax": "fracture generate keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "group",
+          "file": "_common/command_docs/commands/fracture/group.json",
+          "short_description": "Specify fracture group names",
+          "syntax": "fracture group <s>keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/fracture/import.json",
+          "short_description": "Import fractures",
+          "syntax": "fracture import keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "initialize",
+          "file": "_common/command_docs/commands/fracture/initialize.json",
+          "short_description": "Modify fracture attributes",
+          "syntax": "fracture initialize keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "intersections-automatic-update",
+          "file": "_common/command_docs/commands/fracture/intersections-automatic-update.json",
+          "short_description": "Set the intersection automatic-updating state",
+          "syntax": "fracture intersections automatic-update <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "intersections-compute",
+          "file": "_common/command_docs/commands/fracture/intersections-compute.json",
+          "short_description": "Compute intersections",
+          "syntax": "fracture intersections compute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "intersections-delete",
+          "file": "_common/command_docs/commands/fracture/intersections-delete.json",
+          "short_description": "Delete intersections",
+          "syntax": "fracture intersections delete [keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "intersections-scanline",
+          "file": "_common/command_docs/commands/fracture/intersections-scanline.json",
+          "short_description": "Create intersections corresponding to scanline mapping",
+          "syntax": "fracture intersections scanline keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "joint-set",
+          "file": "_common/command_docs/commands/fracture/joint-set.json",
+          "short_description": "Create a set of sub-parallel fractures, or joint set, with specified origin, size, and spacing",
+          "syntax": "fracture joint-set keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/fracture/list.json",
+          "short_description": "List the fracture attributes",
+          "syntax": "fracture list keyword [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "property",
+          "file": "_common/command_docs/commands/fracture/property.json",
+          "short_description": "Assign fracture surface properties",
+          "syntax": "fracture property <s><a>[<s1><a1>...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "prune",
+          "file": "_common/command_docs/commands/fracture/prune.json",
+          "short_description": "Prune isolated fractures",
+          "syntax": "fracture prune keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/fracture/results.json",
+          "short_description": "Specify whether fracture information is stored in subsequent results files",
+          "syntax": "fracture results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "set-property",
+          "file": "_common/command_docs/commands/fracture/set-property.json",
+          "short_description": "Assign properties in objects that intersect fractures",
+          "syntax": "fracture set-property keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "template-create",
+          "file": "_common/command_docs/commands/fracture/template-create.json",
+          "short_description": "Create a fracture generation template",
+          "syntax": "fracture template create <s>keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "template-delete",
+          "file": "_common/command_docs/commands/fracture/template-delete.json",
+          "short_description": "Delete fracture generation templates",
+          "syntax": "fracture template delete [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "template-modify-default",
+          "file": "_common/command_docs/commands/fracture/template-modify-default.json",
+          "short_description": "Modify the default fracture generation template",
+          "syntax": "fracture template modify-default keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "verify-file",
+          "file": "_common/command_docs/commands/fracture/verify-file.json",
+          "short_description": "Verify a DFN file",
+          "syntax": "fracture verify-file keyword",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "fragment": {
+      "full_name": "Fragment Commands",
+      "description": "Fragment tracking and analysis commands for connected component detection in contact networks. Fragments identify groups of connected bodies based on contact connectivity.",
+      "command_prefix": "fragment",
+      "python_module": null,
+      "python_functions": [
+        "ball.fragment()",
+        "clump.fragment()"
+      ],
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/fragment/fragment.html",
+      "typical_workflow": [
+        "1. Register fragments: fragment register",
+        "2. Compute or activate: fragment compute OR fragment activate cycles 100",
+        "3. Query fragment IDs: ball.fragment() or clump.fragment() in Python",
+        "4. Clear when done: fragment clear"
+      ],
+      "related_categories": [
+        "ball",
+        "clump",
+        "contact",
+        "model"
+      ],
+      "notes": [
+        "Fragment registration (fragment register) is required before any computation",
+        "By default, only bonded contacts contribute to fragment connectivity (use ignorebond for all contacts)",
+        "Fragment ID 0 indicates isolated body (no contacts)",
+        "fragment activate enables automatic periodic computation; fragment compute is one-time",
+        "After computation, query fragment IDs via ball.fragment() or clump.fragment() in Python"
+      ],
+      "commands": [
+        {
+          "name": "activate",
+          "file": "pfc/command_docs/commands/fragment/activate.json",
+          "short_description": "Activate fragment auto-computation",
+          "syntax": "fragment activate keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "clear",
+          "file": "pfc/command_docs/commands/fragment/clear.json",
+          "short_description": "Clear all fragment information",
+          "syntax": "fragment clear",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "compute",
+          "file": "pfc/command_docs/commands/fragment/compute.json",
+          "short_description": "Compute fragments based on current contact connectivity",
+          "syntax": "fragment compute [keyword]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "deactivate",
+          "file": "pfc/command_docs/commands/fragment/deactivate.json",
+          "short_description": "Deactivate fragment auto-computation",
+          "syntax": "fragment deactivate",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "groupisolated",
+          "file": "pfc/command_docs/commands/fragment/groupisolated.json",
+          "short_description": "Assign groups to isolated fragments",
+          "syntax": "fragment group-isolated <s>[slot <slot>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "groupslot",
+          "file": "pfc/command_docs/commands/fragment/groupslot.json",
+          "short_description": "Assign fragment IDs to groups",
+          "syntax": "fragment group-slot <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/fragment/list.json",
+          "short_description": "List fragment information",
+          "syntax": "fragment list [keyword]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "map",
+          "file": "pfc/command_docs/commands/fragment/map.json",
+          "short_description": "Get a map of fragment tabulation",
+          "syntax": "fragment map <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "register",
+          "file": "pfc/command_docs/commands/fragment/register.json",
+          "short_description": "Register contact types for fragment analysis",
+          "syntax": "fragment register [<s>...] [keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "geometry": {
+      "full_name": "Geometry Commands",
+      "description": "Commands for managing geometry sets — nodes, edges, polygons — used as boundaries, wall sources, and reference shapes. Includes import/export, refinement, tessellation, and group/extra metadata.",
+      "command_prefix": "geometry",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/geometry/geometry.html",
+      "related_categories": [
+        "wall",
+        "fracture",
+        "model"
+      ],
+      "notes": [
+        "geometry sets are containers of nodes/edges/polygons addressed via 'geometry set <name>'",
+        "geometry import / export are the primary I/O paths (STL, DXF, geometry-set format)",
+        "Sub-namespaces (edge / node / polygon) operate on individual element types within a set",
+        "Use 'wall import from-geometry' or 'fracture import' to convert geometry into simulation entities"
+      ],
+      "commands": [
+        {
+          "name": "assign-groups",
+          "file": "_common/command_docs/commands/geometry/assign-groups.json",
+          "short_description": "This command assigns group names to objects based on their relation to geometric sets",
+          "syntax": "geometry assign-groups keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/geometry/copy.json",
+          "short_description": "Copy geometric data",
+          "syntax": "geometry copy [source <s1>] [target <s2>] keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/geometry/delete.json",
+          "short_description": "Delete geometric sets",
+          "syntax": "geometry delete [set <s>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "edge-create",
+          "file": "_common/command_docs/commands/geometry/edge-create.json",
+          "short_description": "Create an edge in the current geometry set",
+          "syntax": "geometry edge create keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "edge-delete",
+          "file": "_common/command_docs/commands/geometry/edge-delete.json",
+          "short_description": "Delete geometric edges",
+          "syntax": "geometry edge delete [keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "edge-export",
+          "file": "_common/command_docs/commands/geometry/edge-export.json",
+          "short_description": "Export geometry edges data",
+          "syntax": "geometry edge export <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "edge-extra",
+          "file": "_common/command_docs/commands/geometry/edge-extra.json",
+          "short_description": "Set edge extra variables",
+          "syntax": "geometry edge extra <i><a>[set <s>] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "edge-group",
+          "file": "_common/command_docs/commands/geometry/edge-group.json",
+          "short_description": "Assign the group s to the edges of the geometric set that fall within the range",
+          "syntax": "geometry edge group <s>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/geometry/export.json",
+          "short_description": "Export geometry data",
+          "syntax": "geometry export <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "fill",
+          "file": "_common/command_docs/commands/geometry/fill.json",
+          "short_description": "Fill the closed geometry set with nodes",
+          "syntax": "geometry fill <f>[<fs>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "generate",
+          "file": "_common/command_docs/commands/geometry/generate.json",
+          "short_description": "Generate objects with specified shapes",
+          "syntax": "geometry generate keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/geometry/import.json",
+          "short_description": "Import geometric data",
+          "syntax": "geometry import <s>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/geometry/list.json",
+          "short_description": "List geometry information",
+          "syntax": "geometry list keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "move-to",
+          "file": "_common/command_docs/commands/geometry/move-to.json",
+          "short_description": "Move nodes",
+          "syntax": "geometry move-to keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "node-create",
+          "file": "_common/command_docs/commands/geometry/node-create.json",
+          "short_description": "Create a node at the position v in the current geometry set",
+          "syntax": "geometry node create <v>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "node-delete",
+          "file": "_common/command_docs/commands/geometry/node-delete.json",
+          "short_description": "Delete geometric nodes",
+          "syntax": "geometry node delete [keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "node-export",
+          "file": "_common/command_docs/commands/geometry/node-export.json",
+          "short_description": "Export geometry nodes data",
+          "syntax": "geometry node export <s>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "node-extra",
+          "file": "_common/command_docs/commands/geometry/node-extra.json",
+          "short_description": "Set node extra variables",
+          "syntax": "geometry node extra <i><a>[set <s>] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "node-group",
+          "file": "_common/command_docs/commands/geometry/node-group.json",
+          "short_description": "Assign the group s to the nodes of the geometric set that fall within the range",
+          "syntax": "geometry node group <s>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "paint-extra",
+          "file": "_common/command_docs/commands/geometry/paint-extra.json",
+          "short_description": "“Paint” a scalar value from a zone field",
+          "syntax": "geometry paint-extra <i>keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "polygon-create",
+          "file": "_common/command_docs/commands/geometry/polygon-create.json",
+          "short_description": "Create a polygon in the current geometry set",
+          "syntax": "geometry polygon create keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "polygon-delete",
+          "file": "_common/command_docs/commands/geometry/polygon-delete.json",
+          "short_description": "Delete geometric polygons",
+          "syntax": "geometry polygon delete [keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "polygon-export",
+          "file": "_common/command_docs/commands/geometry/polygon-export.json",
+          "short_description": "Export geometry polygons data",
+          "syntax": "geometry polygon export <s>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "polygon-extra",
+          "file": "_common/command_docs/commands/geometry/polygon-extra.json",
+          "short_description": "Set polygon extra variables",
+          "syntax": "geometry polygon extra <i><a>[set <s>] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "polygon-group",
+          "file": "_common/command_docs/commands/geometry/polygon-group.json",
+          "short_description": "Assign the group s to the polygons of the geometric set that fall within the range",
+          "syntax": "geometry polygon group <s>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "refine",
+          "file": "_common/command_docs/commands/geometry/refine.json",
+          "short_description": "Refine the triangular or quadrilateral polygons in the geometric set into smaller versions",
+          "syntax": "geometry refine [<i>] [set <s>] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/geometry/results.json",
+          "short_description": "Specify whether geometry information is stored in subsequent results files",
+          "syntax": "geometry results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "rotate",
+          "file": "_common/command_docs/commands/geometry/rotate.json",
+          "short_description": "Rotate nodes",
+          "syntax": "geometry rotate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "select",
+          "file": "_common/command_docs/commands/geometry/select.json",
+          "short_description": "Specify the current geometric set (or create a new set named s and make it the current set, if on...",
+          "syntax": "geometry select <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "separate",
+          "file": "_common/command_docs/commands/geometry/separate.json",
+          "short_description": "Separate polygons into sets",
+          "syntax": "geometry separate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "set",
+          "file": "_common/command_docs/commands/geometry/set.json",
+          "short_description": "Specify the current geometric set (or create a new set named s and make it the current set, if on...",
+          "syntax": "geometry set <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "tessellate",
+          "file": "_common/command_docs/commands/geometry/tessellate.json",
+          "short_description": "Tessellate nodes",
+          "syntax": "geometry tessellate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "translate",
+          "file": "_common/command_docs/commands/geometry/translate.json",
+          "short_description": "Translate nodes",
+          "syntax": "geometry translate <v>[keyword ...] [range]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "triangulate",
+          "file": "_common/command_docs/commands/geometry/triangulate.json",
+          "short_description": "Triangulate planar polygons",
+          "syntax": "geometry triangulate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "group": {
+      "full_name": "Group Commands",
+      "description": "Commands for creating and renaming named groups across all object types (balls, walls, contacts, etc.). Groups occupy named slots and act as range filters in subsequent commands.",
+      "command_prefix": "group",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/group/group.html",
+      "related_categories": [
+        "ball",
+        "wall",
+        "clump",
+        "contact"
+      ],
+      "notes": [
+        "Group membership is set by object-specific commands ('ball group X', 'wall group Y'), not by 'group' commands",
+        "'group slot' assigns/renames a slot (group categories that don't conflict — e.g., material slot, region slot)",
+        "'group list' enumerates known group names across slots (loggable output)",
+        "Use 'range group <name>' in any range-accepting command to filter by group"
+      ],
+      "commands": [
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/group/create.json",
+          "short_description": "Create a group",
+          "syntax": "group create <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/group/list.json",
+          "short_description": "Display the global list of group names and slot names that have been created",
+          "syntax": "group list",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "rename",
+          "file": "pfc/command_docs/commands/group/rename.json",
+          "short_description": "Rename a group",
+          "syntax": "group rename <sold><snew>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "slot",
+          "file": "pfc/command_docs/commands/group/slot.json",
+          "short_description": "Create a slot",
+          "syntax": "group slot keyword",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "history": {
+      "full_name": "History Commands",
+      "description": "Commands for managing model histories: time-series recordings of scalar quantities sampled during cycling. Used for monitoring convergence, plotting trends, and exporting tabular data.",
+      "command_prefix": "history",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/history/history.html",
+      "related_categories": [
+        "model",
+        "ball",
+        "wall",
+        "clump"
+      ],
+      "notes": [
+        "Histories are created by domain-specific commands (e.g., 'ball history', 'model history'), then managed here",
+        "history list and history results print samples to stdout - capturable via log",
+        "history export writes tabular data to a file; history interval controls sampling cadence",
+        "history label / rename adjust display metadata; history delete / purge remove entries"
+      ],
+      "commands": [
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/history/delete.json",
+          "short_description": "All history traces are deleted",
+          "syntax": "history delete",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/history/export.json",
+          "short_description": "Write the contents of the list of histories to the screen, a file (with the file keyword) or a ta...",
+          "syntax": "history export [keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "interval",
+          "file": "_common/command_docs/commands/history/interval.json",
+          "short_description": "Specifies the history-sampling interval",
+          "syntax": "history interval <i>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label",
+          "file": "_common/command_docs/commands/history/label.json",
+          "short_description": "Assigns a label sl to history sn ",
+          "syntax": "history label <sl>name <sn>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/history/list.json",
+          "short_description": "List history information",
+          "syntax": "history list keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "purge",
+          "file": "_common/command_docs/commands/history/purge.json",
+          "short_description": "The contents of all history traces are erased, but the traces themselves remain",
+          "syntax": "history purge",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "rename",
+          "file": "_common/command_docs/commands/history/rename.json",
+          "short_description": "Rename the history with name sn to sr ",
+          "syntax": "history rename <sr>name <sn>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/history/results.json",
+          "short_description": "Specify whether history information is stored in subsequent results files",
+          "syntax": "history results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "measure": {
+      "full_name": "Measurement Commands",
+      "description": "Measurement region creation and property analysis commands. Measurement regions calculate porosity, stress, strain, coordination number, and particle size distributions within spherical (3D) or circular (2D) regions.",
+      "command_prefix": "measure",
+      "python_module": "itasca.measure",
+      "python_object_class": "Measurement",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/measure/measure.html",
+      "measured_quantities": [
+        "porosity",
+        "coordination_number",
+        "stress",
+        "strain",
+        "particle_size_distribution"
+      ],
+      "typical_workflow": [
+        "1. Create measurement region: measure create radius 5.0",
+        "2. Trigger calculation: model clean",
+        "3. View results: measure list",
+        "4. Export if needed: measure dump"
+      ],
+      "related_categories": [
+        "ball",
+        "clump",
+        "model"
+      ],
+      "notes": [
+        "Measurement regions are disks (2D) or spheres (3D)",
+        "Measurements calculated when 'model clean' is called or when FISH intrinsic queries measurement",
+        "Can measure: porosity, coordination number, stress, strain, size distribution",
+        "Use 'bins' keyword in create to enable particle size distribution calculation",
+        "Tolerance parameter controls accuracy vs. speed trade-off for porosity calculation"
+      ],
+      "commands": [
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/measure/create.json",
+          "short_description": "Create a measurement region",
+          "syntax": "measure create keyword ...",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/measure/delete.json",
+          "short_description": "Delete one or more measurement objects",
+          "syntax": "measure delete [range]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "dump",
+          "file": "pfc/command_docs/commands/measure/dump.json",
+          "short_description": "Dump the cumulative size distribution data from a measurement region",
+          "syntax": "measure dump id <i>keyword",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/measure/history.json",
+          "short_description": "Add a measurement history",
+          "syntax": "measure history [id <id>] keyword ...",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/measure/list.json",
+          "short_description": "List information related to measurement regions",
+          "syntax": "measure list",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "modify",
+          "file": "pfc/command_docs/commands/measure/modify.json",
+          "short_description": "Modify measurement region attributes",
+          "syntax": "measure modify keyword ...",
+          "python_available": true,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "model": {
+      "full_name": "Model Commands",
+      "description": "System-level commands for controlling simulation execution, configuration, and state management",
+      "command_prefix": "model",
+      "python_module": "itasca",
+      "python_functions": [
+        "itasca.cycle()",
+        "itasca.timestep()",
+        "itasca.set_timestep()"
+      ],
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/model/model.html",
+      "common_keywords": {
+        "solve": [
+          "ratio",
+          "ratio-average",
+          "force-max",
+          "moment-max",
+          "cycles"
+        ],
+        "cycle": [
+          "number of cycles"
+        ],
+        "domain": [
+          "extent",
+          "condition",
+          "periodic",
+          "destroy"
+        ],
+        "configure": [
+          "threads",
+          "dynamic"
+        ]
+      },
+      "related_categories": [
+        "ball",
+        "wall",
+        "contact",
+        "set"
+      ],
+      "notes": [
+        "'model solve' is preferred for reaching equilibrium (not available in Python SDK)",
+        "'model cycle' is equivalent to itasca.cycle() in Python",
+        "Model state can be saved/restored for checkpointing",
+        "Domain settings must be configured before generating objects",
+        "Use 'model solve' with ratio criteria for automatic convergence"
+      ],
+      "commands": [
+        {
+          "name": "calm",
+          "file": "_common/command_docs/commands/model/calm.json",
+          "short_description": "Calm the model",
+          "syntax": "model calm",
+          "python_available": false,
+          "python_alternative": "itasca.command('model calm') - Python SDK does not provide direct calm method"
+        },
+        {
+          "name": "clean",
+          "file": "_common/command_docs/commands/model/clean.json",
+          "short_description": "Clean the model",
+          "syntax": "model clean [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model clean') or itasca.command('model clean all') - Python SDK does not provide direct clean method"
+        },
+        {
+          "name": "configure",
+          "file": "pfc/command_docs/commands/model/configure.json",
+          "short_description": "Configure an additional calculation mode",
+          "syntax": "model configure keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('model configure cfd') - Python SDK does not provide direct configure method"
+        },
+        {
+          "name": "creep",
+          "file": "_common/command_docs/commands/model/creep.json",
+          "short_description": "Set parameters for a creep material analysis",
+          "syntax": "model creep [<b>] keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "cycle",
+          "file": "_common/command_docs/commands/model/cycle.json",
+          "short_description": "Execute timesteps",
+          "syntax": "model cycle <i>[calm <i2>]",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "deterministic",
+          "file": "_common/command_docs/commands/model/deterministic.json",
+          "short_description": "Set the deterministic mode",
+          "syntax": "model deterministic [default] <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model deterministic on') or itasca.command('model deterministic off') - Python SDK does not provide direct deterministic control"
+        },
+        {
+          "name": "display",
+          "file": "_common/command_docs/commands/model/display.json",
+          "short_description": "Set information to display during cycling",
+          "syntax": "model display keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model display ...') - Python SDK does not provide display control. For monitoring, use print statements or logging in Python loop with itasca.cycle() and itasca.fish_get()"
+        },
+        {
+          "name": "domain",
+          "file": "_common/command_docs/commands/model/domain.json",
+          "short_description": "Specify the domain boundaries and conditions",
+          "syntax": "model domain keyword",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "dynamic",
+          "file": "_common/command_docs/commands/model/dynamic.json",
+          "short_description": "Set parameters for a dynamic material analysis",
+          "syntax": "model dynamic keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "energy",
+          "file": "_common/command_docs/commands/model/energy.json",
+          "short_description": "Specify the energy tracking state",
+          "syntax": "model energy keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "factor-of-safety",
+          "file": "_common/command_docs/commands/model/factor-of-safety.json",
+          "short_description": "Set factor of safety analysis parameters",
+          "syntax": "model factor-of-safety [keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "fluid",
+          "file": "_common/command_docs/commands/model/fluid.json",
+          "short_description": "Set parameters for a fluid flow analysis",
+          "syntax": "model fluid [<b>] keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "gravity",
+          "file": "_common/command_docs/commands/model/gravity.json",
+          "short_description": "Set the gravity as a vector or float",
+          "syntax": "model gravity <v3>| <f>",
+          "python_available": true,
+          "python_alternative": ""
+        },
+        {
+          "name": "history",
+          "file": "_common/command_docs/commands/model/history.json",
+          "short_description": "Create a history of a model quantity",
+          "syntax": "model history [name <s>] keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model history mechanical ratio-average') - Python SDK does not provide direct history creation. For monitoring in Python, manually compute and store values in loops:\n\n# Example: track metrics over cycles\nhistory_data = []\nfor _ in range(100):\n    itasca.cycle(100)\n    # itasca.cycle() returns current cycle number\n    history_data.append({'cycle': itasca.cycle(), 'time': itasca.mech_age(), ...})"
+        },
+        {
+          "name": "large-strain",
+          "file": "_common/command_docs/commands/model/large-strain.json",
+          "short_description": "Sets the program to use the numerical formulation for large-strain deformation",
+          "syntax": "model large-strain <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model large-strain on') or itasca.command('model large-strain off') - Python SDK does not provide direct large-strain control"
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/model/list.json",
+          "short_description": "List a model related quantity",
+          "syntax": "model list keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "mechanical",
+          "file": "_common/command_docs/commands/model/mechanical.json",
+          "short_description": "Set parameters for a mechanical analysis",
+          "syntax": "model mechanical [<b>] keyword",
+          "python_available": "partial",
+          "python_alternative": ""
+        },
+        {
+          "name": "new",
+          "file": "_common/command_docs/commands/model/new.json",
+          "short_description": "Clear model-state information",
+          "syntax": "model new [force]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model new') or itasca.command('model new force') - Python SDK does not provide direct model.new() function"
+        },
+        {
+          "name": "orientation-tracking",
+          "file": "_common/command_docs/commands/model/orientation-tracking.json",
+          "short_description": "Specify the orientation tracking state",
+          "syntax": "model orientation-tracking <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model orientation-tracking on') or itasca.command('model orientation-tracking off') - Python SDK does not provide direct orientation tracking control"
+        },
+        {
+          "name": "precision",
+          "file": "_common/command_docs/commands/model/precision.json",
+          "short_description": "Set the listing precision",
+          "syntax": "model precision <i>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "random",
+          "file": "_common/command_docs/commands/model/random.json",
+          "short_description": "Set the seed for the random-number generator",
+          "syntax": "model random <i>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model random 12345') - Python SDK does not provide direct random seed control"
+        },
+        {
+          "name": "range",
+          "file": "_common/command_docs/commands/model/range.json",
+          "short_description": "Create/delete a named range",
+          "syntax": "model range keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model range create \"walls\" group \"West\" or \"East\"')\nitasca.command('ball attribute density 2500 range named-range \"walls\"')\n\n# Python SDK does not provide direct range management. For dynamic range-based operations in Python, filter objects manually:\n\nimport itasca\n\n# Example: filter balls by position\nfor ball in itasca.ball.list():\n    pos = ball.pos()\n    if 0 <= pos[0] <= 1 and 0 <= pos[1] <= 1:\n        ball.set_density(2500)"
+        },
+        {
+          "name": "restore",
+          "file": "_common/command_docs/commands/model/restore.json",
+          "short_description": "Restore program-state information",
+          "syntax": "model restore <s>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model restore \"filename.f3sav\"') - Python SDK does not provide direct restore function. Note: Use double quotes around filename in command string if path contains spaces"
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/model/results.json",
+          "short_description": "Perform file operations on results files",
+          "syntax": "model results keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model results ...') - Python SDK does not provide direct results file control. For exporting states in Python, use:\n\n# Setup automatic export\nitasca.command('model results prefix \"simulation\"')\nitasca.command('model results interval step 1000')\n\n# Manual export\nitasca.command('model results export \"snapshot.p3result\"')\n\n# Import\nitasca.command('model results import \"snapshot.p3result\"')"
+        },
+        {
+          "name": "save",
+          "file": "_common/command_docs/commands/model/save.json",
+          "short_description": "Save all model-state information",
+          "syntax": "model save <s>[keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('model save \"filename.sav\"') or itasca.command('model save \"filename\" compress') - Python SDK does not provide direct save function. Note: Use double quotes around filename in command string if path contains spaces"
+        },
+        {
+          "name": "solve",
+          "file": "_common/command_docs/commands/model/solve.json",
+          "short_description": "Solve to a specified limit",
+          "syntax": "model solve keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('model solve ratio 1e-5') - Python SDK does not provide direct solve() function. For custom solve loops in Python, manually compute equilibrium metrics:\n\nimport math\ndef vec_mag(v): return math.sqrt(v[0]**2 + v[1]**2 + v[2]**2)\n\nwhile True:\n    itasca.cycle(100)\n    # Compute unbalanced force ratio manually:\n    unbal_sum = sum(vec_mag(b.force_unbal()) for b in itasca.ball.list())\n    contact_sum = sum(vec_mag(b.force_contact()) for b in itasca.ball.list())\n    ratio = unbal_sum / contact_sum if contact_sum > 0 else 0\n    if ratio < 1e-5:\n        break\n\nNote: Prefer 'model solve' command for standard equilibrium. Custom loops require manual force ratio calculations."
+        },
+        {
+          "name": "step",
+          "file": "_common/command_docs/commands/model/step.json",
+          "short_description": "Execute timesteps",
+          "syntax": "model step <i>[calm <i2>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "thermal",
+          "file": "_common/command_docs/commands/model/thermal.json",
+          "short_description": "This command sets parameters for a thermal material analysis (only available if 'model configure ...",
+          "syntax": "model thermal [<b>] keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('model thermal ...') - Python SDK does not provide direct thermal configuration. For thermal time: itasca.thermal_time() may be available depending on version"
+        },
+        {
+          "name": "title",
+          "file": "_common/command_docs/commands/model/title.json",
+          "short_description": "Set the model title",
+          "syntax": "model title [<s>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "update-interval",
+          "file": "_common/command_docs/commands/model/update-interval.json",
+          "short_description": "Set the number of cycles taken between updating the existing plots in the user interface",
+          "syntax": "model update-interval <i>",
+          "python_available": false,
+          "python_alternative": "itasca.command('model update-interval 100') - Python SDK does not provide direct update-interval control. Note: When running via Python SDK, visualization updates may behave differently"
+        }
+      ]
+    },
+    "plot": {
+      "full_name": "Plot Commands",
+      "description": "Commands for creating, modifying, and exporting visualization plots. Controls plot items, camera views, and image export.",
+      "command_prefix": "plot",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/plot/plot.html",
+      "related_categories": [
+        "ball",
+        "wall",
+        "clump",
+        "contact",
+        "zone",
+        "geometry"
+      ],
+      "notes": [
+        "Plot commands control visualization, not simulation",
+        "Use 'plot export bitmap' to save plot images",
+        "Plot item keywords are extensive; use 'plot export datafile' to inspect syntax",
+        "Camera view controlled via center, eye, magnification, projection keywords"
+      ],
+      "commands": [
+        {
+          "name": "active",
+          "file": "_common/command_docs/commands/plot/active.json",
+          "short_description": "Activate or deactivate a plot",
+          "syntax": "plot [<s>] active <b>",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> active <bool>') - no direct Python SDK method"
+        },
+        {
+          "name": "background",
+          "file": "_common/command_docs/commands/plot/background.json",
+          "short_description": "Specifies the background color of the plot",
+          "syntax": "plot [<s>] background color",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> background <color>') - no direct Python SDK method"
+        },
+        {
+          "name": "clear",
+          "file": "_common/command_docs/commands/plot/clear.json",
+          "short_description": "Removes all plot items from the plot",
+          "syntax": "plot [<s>] clear",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> clear') - no direct Python SDK method"
+        },
+        {
+          "name": "copy",
+          "file": "_common/command_docs/commands/plot/copy.json",
+          "short_description": "Copy a plot to another plot",
+          "syntax": "plot [<s>] copy [<sDest>] [keyword]",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> copy <dest> <keyword>') - no direct Python SDK method"
+        },
+        {
+          "name": "create",
+          "file": "_common/command_docs/commands/plot/create.json",
+          "short_description": "Create a new plot and make it the current (i",
+          "syntax": "plot create [<s>]",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot create <name>') - no direct Python SDK method"
+        },
+        {
+          "name": "current",
+          "file": "_common/command_docs/commands/plot/current.json",
+          "short_description": "Make the specified plot the current (i",
+          "syntax": "plot [<s>] current",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> current') - no direct Python SDK method"
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/plot/delete.json",
+          "short_description": "Delete the specified plot",
+          "syntax": "plot [<s>] delete",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> delete') - no direct Python SDK method"
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/plot/export.json",
+          "short_description": "Export the contents of a plot to a file",
+          "syntax": "plot [<s>] export keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot export bitmap filename <path>') - no direct Python SDK method"
+        },
+        {
+          "name": "item",
+          "file": "_common/command_docs/commands/plot/item.json",
+          "short_description": "Create, destroy, or modify plot items associated with a plot",
+          "syntax": "plot [<s>] item keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot item create <type>') - no direct Python SDK method"
+        },
+        {
+          "name": "rename",
+          "file": "_common/command_docs/commands/plot/rename.json",
+          "short_description": "Rename a plot",
+          "syntax": "plot <s>rename <sNew>",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> rename <newname>') - no direct Python SDK method"
+        },
+        {
+          "name": "title",
+          "file": "_common/command_docs/commands/plot/title.json",
+          "short_description": "Set the font and settings used to render the title at the top of the plot",
+          "syntax": "plot <s>title text",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> title <text>') - no direct Python SDK method"
+        },
+        {
+          "name": "update",
+          "file": "_common/command_docs/commands/plot/update.json",
+          "short_description": "Control automatic plot updates",
+          "syntax": "plot <s>update",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot <name> update <bool>') - no direct Python SDK method"
+        },
+        {
+          "name": "view",
+          "file": "_common/command_docs/commands/plot/view.json",
+          "short_description": "Control the camera view of a plot",
+          "syntax": "plot [<s>] view keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('plot view <keyword> <value>') - no direct Python SDK method"
+        }
+      ]
+    },
+    "program": {
+      "full_name": "Program Commands",
+      "description": "Program-level commands controlling the PFC executable: license, threads, working directory, logging, encryption, undo, system shell, and lifecycle (quit/exit/stop/return/continue).",
+      "command_prefix": "program",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/program/program.html",
+      "related_categories": [
+        "model",
+        "history",
+        "fish"
+      ],
+      "notes": [
+        "These commands manage the executable itself, not the model state",
+        "program list and program license print to stdout - useful for environment diagnostics under itasca.command()",
+        "program log redirects subsequent command output to a file",
+        "program quit / exit / stop terminate execution; rarely used from MCP workflows",
+        "program threads controls multi-threaded solve parallelism"
+      ],
+      "commands": [
+        {
+          "name": "automatic-model-save",
+          "file": "_common/command_docs/commands/program/automatic-model-save.json",
+          "short_description": "Sets value controlling automatic safe file creating during cycling",
+          "syntax": "program automatic-model-save keyword ...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "call",
+          "file": "_common/command_docs/commands/program/call.json",
+          "short_description": "Process the specified data file(s)",
+          "syntax": "program call <s>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "continue",
+          "file": "_common/command_docs/commands/program/continue.json",
+          "short_description": "Resume processing after a program pause",
+          "syntax": "program continue",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "customer-title-1",
+          "file": "_common/command_docs/commands/program/customer-title-1.json",
+          "short_description": "Set the first line of customer information",
+          "syntax": "program customer-title-1 <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "customer-title-2",
+          "file": "_common/command_docs/commands/program/customer-title-2.json",
+          "short_description": "Set the second line of customer information",
+          "syntax": "program customer-title-2 <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "directory",
+          "file": "_common/command_docs/commands/program/directory.json",
+          "short_description": "Set the working directory",
+          "syntax": "program directory keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "echo-line",
+          "file": "_common/command_docs/commands/program/echo-line.json",
+          "short_description": "Specify output to echo to the console",
+          "syntax": "program echo-line <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "echo",
+          "file": "_common/command_docs/commands/program/echo.json",
+          "short_description": "Set the echo state",
+          "syntax": "program echo keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "encrypt",
+          "file": "_common/command_docs/commands/program/encrypt.json",
+          "short_description": "Encrypt the source data file so that the contents are not visible or modifiable by the caller",
+          "syntax": "program encrypt <source>[<starget>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "exit",
+          "file": "_common/command_docs/commands/program/exit.json",
+          "short_description": "Close the program",
+          "syntax": "program exit",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "floating-point-check",
+          "file": "_common/command_docs/commands/program/floating-point-check.json",
+          "short_description": "Enable/disable the floating point check",
+          "syntax": "program floating-point-check <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "license",
+          "file": "_common/command_docs/commands/program/license.json",
+          "short_description": "Get/Set license information",
+          "syntax": "program license keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/program/list.json",
+          "short_description": "Print program information",
+          "syntax": "program list keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "load",
+          "file": "_common/command_docs/commands/program/load.json",
+          "short_description": "Load a compatible DLL",
+          "syntax": "program load keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "log-file",
+          "file": "_common/command_docs/commands/program/log-file.json",
+          "short_description": "Specify the log file by name",
+          "syntax": "program log-file <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "log",
+          "file": "_common/command_docs/commands/program/log.json",
+          "short_description": "Turn on/off logging",
+          "syntax": "program log <b>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "mail",
+          "file": "_common/command_docs/commands/program/mail.json",
+          "short_description": "Compose and send email messages",
+          "syntax": "program mail keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "notice",
+          "file": "_common/command_docs/commands/program/notice.json",
+          "short_description": "Set the notice state",
+          "syntax": "program notice <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "pagination",
+          "file": "_common/command_docs/commands/program/pagination.json",
+          "short_description": "Set the pagination state",
+          "syntax": "program pagination <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "pause",
+          "file": "_common/command_docs/commands/program/pause.json",
+          "short_description": "Pause command processing",
+          "syntax": "program pause [keyword]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "playback",
+          "file": "_common/command_docs/commands/program/playback.json",
+          "short_description": "Play back a record file",
+          "syntax": "program playback <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "quit",
+          "file": "_common/command_docs/commands/program/quit.json",
+          "short_description": "Close the program",
+          "syntax": "program quit",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "return",
+          "file": "_common/command_docs/commands/program/return.json",
+          "short_description": "Return program control",
+          "syntax": "program return",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "stop",
+          "file": "_common/command_docs/commands/program/stop.json",
+          "short_description": "Close the program",
+          "syntax": "program stop",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "system",
+          "file": "_common/command_docs/commands/program/system.json",
+          "short_description": "Send commands to the operating system",
+          "syntax": "program system keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "threads",
+          "file": "_common/command_docs/commands/program/threads.json",
+          "short_description": "Set the number of threads for calculations and plotting",
+          "syntax": "program threads keyword",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "undo",
+          "file": "_common/command_docs/commands/program/undo.json",
+          "short_description": "Undo commands",
+          "syntax": "program undo [<i>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "warning",
+          "file": "_common/command_docs/commands/program/warning.json",
+          "short_description": "Set the warning state",
+          "syntax": "program warning <b>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "project": {
+      "full_name": "Project Commands",
+      "description": "Commands for managing PFC project containers — bundles of model save states, data files, and plugins maintained by the GUI project view.",
+      "command_prefix": "project",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/project/project.html",
+      "related_categories": [
+        "program",
+        "model"
+      ],
+      "notes": [
+        "Project files (.prj) bundle multiple model saves + data files for a related study",
+        "project new / save / restore manage the active project; project list enumerates contents",
+        "project execute runs a data file in the project context",
+        "Mostly a GUI-oriented concept; scripted workflows usually skip projects and use 'model save'/'model restore' directly"
+      ],
+      "commands": [
+        {
+          "name": "execute",
+          "file": "_common/command_docs/commands/project/execute.json",
+          "short_description": "Execute the current project",
+          "syntax": "project execute [suppress]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/project/list.json",
+          "short_description": "List project information",
+          "syntax": "project list information",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "new",
+          "file": "_common/command_docs/commands/project/new.json",
+          "short_description": "Clear program-state information",
+          "syntax": "project new [force]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "restore",
+          "file": "_common/command_docs/commands/project/restore.json",
+          "short_description": "Restores the project file name s ",
+          "syntax": "project restore <s>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "save-plugins",
+          "file": "_common/command_docs/commands/project/save-plugins.json",
+          "short_description": "Save the currently loaded plugins with the project file",
+          "syntax": "project save-plugins <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "save",
+          "file": "_common/command_docs/commands/project/save.json",
+          "short_description": "Save the current project to a file",
+          "syntax": "project save <s>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "rblock": {
+      "full_name": "RBlock Commands",
+      "description": "Commands for creating, configuring, and managing rigid blocks (rblocks) and their template-driven workflows.",
+      "command_prefix": "rblock",
+      "python_module": "itasca.rblock",
+      "python_object_class": "RBlock",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/rblock/rblock.html",
+      "related_categories": [
+        "brick",
+        "ball",
+        "clump",
+        "contact",
+        "model"
+      ],
+      "notes": [
+        "RBlocks are rigid polyhedral bodies with dedicated creation, cutting, and surface-management commands",
+        "Template-based workflows are common for rblock generation and replication",
+        "Python SDK supports querying and manipulating existing rblocks, while many creation workflows still require commands"
+      ],
+      "commands": [
+        {
+          "name": "apply-facet-groups",
+          "file": "pfc/command_docs/commands/rblock/apply-facet-groups.json",
+          "short_description": "Apply group assignments to rblock facets based on contact or geometric criteria",
+          "syntax": "rblock apply-facet-groups [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock apply facet groups ...') via command interface"
+        },
+        {
+          "name": "attribute",
+          "file": "pfc/command_docs/commands/rblock/attribute.json",
+          "short_description": "Set kinematic attributes (position, velocity, displacement, spin) on rblocks within a range",
+          "syntax": "rblock attribute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock attribute ...') via command interface"
+        },
+        {
+          "name": "clump",
+          "file": "pfc/command_docs/commands/rblock/clump.json",
+          "short_description": "Convert selected rblocks into clump objects",
+          "syntax": "rblock clump keyword [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock clump ...') via command interface"
+        },
+        {
+          "name": "configure",
+          "file": "pfc/command_docs/commands/rblock/configure.json",
+          "short_description": "Configure rblock-specific model parameters such as bond-block model (BBM) settings",
+          "syntax": "rblock configure bbm keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock configure ...') via command interface"
+        },
+        {
+          "name": "construct",
+          "file": "pfc/command_docs/commands/rblock/construct.json",
+          "short_description": "Construct rblocks by assembling existing geometry or template data",
+          "syntax": "rblock construct keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock construct ...') via command interface"
+        },
+        {
+          "name": "contact-resolution",
+          "file": "pfc/command_docs/commands/rblock/contact-resolution.json",
+          "short_description": "Control the contact detection resolution for rblock facets",
+          "syntax": "rblock contact-resolution keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock contact resolution ...') via command interface"
+        },
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/rblock/create.json",
+          "short_description": "Create a single rigid block (rblock) with specified geometry and attributes",
+          "syntax": "rblock create keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock create ...') via command interface"
+        },
+        {
+          "name": "cut",
+          "file": "pfc/command_docs/commands/rblock/cut.json",
+          "short_description": "Cut rblocks along a plane or surface, splitting them into sub-blocks",
+          "syntax": "rblock cut keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock cut ...') via command interface"
+        },
+        {
+          "name": "damping",
+          "file": "pfc/command_docs/commands/rblock/damping.json",
+          "short_description": "Set damping parameters for rblocks to control energy dissipation during cycling",
+          "syntax": "rblock damping [keyword]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock damping ...') via command interface"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/rblock/delete.json",
+          "short_description": "Delete rblocks from the model",
+          "syntax": "rblock delete [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock delete ...') via command interface"
+        },
+        {
+          "name": "densify",
+          "file": "pfc/command_docs/commands/rblock/densify.json",
+          "short_description": "Densify rblock surface meshes by subdividing facets to improve contact resolution",
+          "syntax": "rblock densify keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock densify ...') via command interface"
+        },
+        {
+          "name": "dilate",
+          "file": "pfc/command_docs/commands/rblock/dilate.json",
+          "short_description": "Apply dilation to rblock surfaces, expanding or contracting facet positions",
+          "syntax": "rblock dilate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock dilate ...') via command interface"
+        },
+        {
+          "name": "distribute",
+          "file": "pfc/command_docs/commands/rblock/distribute.json",
+          "short_description": "Distribute rblocks throughout a domain region, similar to ball distribute, allowing overlap to ac...",
+          "syntax": "rblock distribute keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock distribute ...') via command interface"
+        },
+        {
+          "name": "erode",
+          "file": "pfc/command_docs/commands/rblock/erode.json",
+          "short_description": "Erode rblock surface facets, removing material from surfaces based on criteria",
+          "syntax": "rblock erode keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock erode ...') via command interface"
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/rblock/export.json",
+          "short_description": "Export rblock data to a file for later import or post-processing",
+          "syntax": "rblock export keyword [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock export ...') via command interface"
+        },
+        {
+          "name": "extra",
+          "file": "pfc/command_docs/commands/rblock/extra.json",
+          "short_description": "Set or modify extra (user-defined) variables on rblocks within a range",
+          "syntax": "rblock extra <i><a>[range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock extra ...') via command interface"
+        },
+        {
+          "name": "facet-apply-remove",
+          "file": "pfc/command_docs/commands/rblock/facet-apply-remove.json",
+          "short_description": "Remove applied contact surface properties from rblock facets",
+          "syntax": "rblock facet apply-remove [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock facet apply remove ...') via command interface"
+        },
+        {
+          "name": "facet-apply",
+          "file": "pfc/command_docs/commands/rblock/facet-apply.json",
+          "short_description": "Apply contact surface properties to rblock facets",
+          "syntax": "rblock facet apply keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock facet apply ...') via command interface"
+        },
+        {
+          "name": "facet-group",
+          "file": "pfc/command_docs/commands/rblock/facet-group.json",
+          "short_description": "Assign group labels to rblock facets for contact model application and filtering",
+          "syntax": "rblock facet group <s>[keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock facet group ...') via command interface"
+        },
+        {
+          "name": "fix",
+          "file": "pfc/command_docs/commands/rblock/fix.json",
+          "short_description": "Fix (constrain) rblock degrees of freedom to prevent motion during cycling",
+          "syntax": "rblock fix keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock fix ...') via command interface"
+        },
+        {
+          "name": "free",
+          "file": "pfc/command_docs/commands/rblock/free.json",
+          "short_description": "Free (release) previously fixed rblock degrees of freedom",
+          "syntax": "rblock free keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock free ...') via command interface"
+        },
+        {
+          "name": "generate",
+          "file": "pfc/command_docs/commands/rblock/generate.json",
+          "short_description": "Generate multiple rblocks within a domain region using template-based packing",
+          "syntax": "rblock generate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock generate ...') via command interface"
+        },
+        {
+          "name": "group",
+          "file": "pfc/command_docs/commands/rblock/group.json",
+          "short_description": "Assign rblocks to named groups (with optional slot) for range-based operations",
+          "syntax": "rblock group <s>keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock group ...') via command interface"
+        },
+        {
+          "name": "hide",
+          "file": "pfc/command_docs/commands/rblock/hide.json",
+          "short_description": "Hide rblocks from visualization without deleting them from the model",
+          "syntax": "rblock hide [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock hide ...') via command interface"
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/rblock/history.json",
+          "short_description": "Record rblock properties over time for plotting and post-processing",
+          "syntax": "rblock history [name <sid>] keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock history ...') via command interface"
+        },
+        {
+          "name": "import",
+          "file": "pfc/command_docs/commands/rblock/import.json",
+          "short_description": "Import rblock geometry from an external file (e",
+          "syntax": "rblock import keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock import ...') via command interface"
+        },
+        {
+          "name": "initialize",
+          "file": "pfc/command_docs/commands/rblock/initialize.json",
+          "short_description": "Set initial state variables (stress, displacement, velocity) for rblocks",
+          "syntax": "rblock initialize keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock initialize ...') via command interface"
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/rblock/list.json",
+          "short_description": "List rblock properties and state information to the console or a file",
+          "syntax": "rblock list [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock list ...') via command interface"
+        },
+        {
+          "name": "merge",
+          "file": "pfc/command_docs/commands/rblock/merge.json",
+          "short_description": "Merge multiple rblocks into a single rigid body",
+          "syntax": "rblock merge [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock merge ...') via command interface"
+        },
+        {
+          "name": "property",
+          "file": "pfc/command_docs/commands/rblock/property.json",
+          "short_description": "Set contact model properties on rblock contacts within a range",
+          "syntax": "rblock property <s><a>[<s1><a1>...] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock property ...') via command interface"
+        },
+        {
+          "name": "refine",
+          "file": "pfc/command_docs/commands/rblock/refine.json",
+          "short_description": "Refine rblock surface mesh resolution for improved contact accuracy",
+          "syntax": "rblock refine [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock refine ...') via command interface"
+        },
+        {
+          "name": "reflect",
+          "file": "pfc/command_docs/commands/rblock/reflect.json",
+          "short_description": "Reflect (mirror) rblocks about a specified plane",
+          "syntax": "rblock reflect keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock reflect ...') via command interface"
+        },
+        {
+          "name": "remap-interval",
+          "file": "pfc/command_docs/commands/rblock/remap-interval.json",
+          "short_description": "Set the interval at which rblock positions are remapped for periodic boundary conditions",
+          "syntax": "rblock remap-interval <i>",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock remap interval ...') via command interface"
+        },
+        {
+          "name": "replicate",
+          "file": "pfc/command_docs/commands/rblock/replicate.json",
+          "short_description": "Replicate existing rblocks to create copies at offset positions or orientations",
+          "syntax": "rblock replicate <s>keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock replicate ...') via command interface"
+        },
+        {
+          "name": "result",
+          "file": "pfc/command_docs/commands/rblock/result.json",
+          "short_description": "Export or configure rblock result output for post-processing",
+          "syntax": "rblock results keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock result ...') via command interface"
+        },
+        {
+          "name": "rotate",
+          "file": "pfc/command_docs/commands/rblock/rotate.json",
+          "short_description": "Rotate rblocks about a specified axis and origin",
+          "syntax": "rblock rotate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock rotate ...') via command interface"
+        },
+        {
+          "name": "scale",
+          "file": "pfc/command_docs/commands/rblock/scale.json",
+          "short_description": "Scale rblock geometry by a specified factor",
+          "syntax": "rblock scale keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock scale ...') via command interface"
+        },
+        {
+          "name": "select",
+          "file": "pfc/command_docs/commands/rblock/select.json",
+          "short_description": "Select rblocks for interactive highlighting or subsequent operations",
+          "syntax": "rblock select [keyword] [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock select ...') via command interface"
+        },
+        {
+          "name": "template",
+          "file": "pfc/command_docs/commands/rblock/template.json",
+          "short_description": "Create or manage rblock shape templates used for rblock generate operations",
+          "syntax": "rblock template keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock template ...') via command interface"
+        },
+        {
+          "name": "tolerance",
+          "file": "pfc/command_docs/commands/rblock/tolerance.json",
+          "short_description": "Set tolerance parameters for rblock contact detection and overlap calculations",
+          "syntax": "rblock tolerance keyword ...",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock tolerance ...') via command interface"
+        },
+        {
+          "name": "trace",
+          "file": "pfc/command_docs/commands/rblock/trace.json",
+          "short_description": "Configure trace monitoring of rblock properties for debugging and analysis",
+          "syntax": "rblock trace [id <id>] id <id2>| <v>",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock trace ...') via command interface"
+        },
+        {
+          "name": "tractions",
+          "file": "pfc/command_docs/commands/rblock/tractions.json",
+          "short_description": "Apply surface tractions (forces per unit area) to rblock facets",
+          "syntax": "rblock tractions keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "Use itasca.command('rblock tractions ...') via command interface"
+        }
+      ]
+    },
+    "table": {
+      "full_name": "Table Commands",
+      "description": "Commands for managing numerical tables — paired x/y data used as input for time-varying boundary conditions, property curves, and history post-processing.",
+      "command_prefix": "table",
+      "python_module": "itasca.table",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/table/table.html",
+      "related_categories": [
+        "history",
+        "model"
+      ],
+      "notes": [
+        "Tables are indexed by name (string) or numeric ID; created by 'table add' / 'table import'",
+        "'history export ... table <s>' pushes history data into a table for downstream use",
+        "table export / list dump current contents to stdout/file",
+        "Python SDK (itasca.table) exposes read/write for runtime queries; commands handle batch I/O"
+      ],
+      "commands": [
+        {
+          "name": "add",
+          "file": "_common/command_docs/commands/table/add.json",
+          "short_description": "Add an entry to the end of table s ",
+          "syntax": "table <s>add <v2>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "clear",
+          "file": "_common/command_docs/commands/table/clear.json",
+          "short_description": "Remove all entries of from table s ",
+          "syntax": "table <s>clear",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "delete",
+          "file": "_common/command_docs/commands/table/delete.json",
+          "short_description": "Delete table s ",
+          "syntax": "table <s>delete",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "export",
+          "file": "_common/command_docs/commands/table/export.json",
+          "short_description": "The contents of the specified table are output to file sfile , with default file extension “",
+          "syntax": "table <s>export <sfile>[keyword ...]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "import",
+          "file": "_common/command_docs/commands/table/import.json",
+          "short_description": "Read file sfile into table s ",
+          "syntax": "table <s>import <sfile>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "insert",
+          "file": "_common/command_docs/commands/table/insert.json",
+          "short_description": "Insert an entry into table s , sorted by its x-value",
+          "syntax": "table <s>insert <v2>...",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "label",
+          "file": "_common/command_docs/commands/table/label.json",
+          "short_description": "Set a label for table s ",
+          "syntax": "table <s>label <slabel>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "_common/command_docs/commands/table/list.json",
+          "short_description": "List table information",
+          "syntax": "table [<s>] list",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "position",
+          "file": "_common/command_docs/commands/table/position.json",
+          "short_description": "Substitute the specified (x,y) pair for the stored x- and y-values in the i th entry of table s ",
+          "syntax": "table <s>position <i><v2>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "results",
+          "file": "_common/command_docs/commands/table/results.json",
+          "short_description": "Determines if the contents of tables are included in any result file export",
+          "syntax": "table results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "sort",
+          "file": "_common/command_docs/commands/table/sort.json",
+          "short_description": "Cause all entries in table s to be sorted in order of increasing x-value",
+          "syntax": "table <s>sort",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "trace": {
+      "full_name": "Trace Commands",
+      "description": "Commands for managing particle traces — recordings of per-object scalar/vector quantities sampled during cycling, used for path visualization and post-hoc analysis.",
+      "command_prefix": "trace",
+      "python_module": null,
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/trace/trace.html",
+      "related_categories": [
+        "history",
+        "ball",
+        "clump",
+        "wall"
+      ],
+      "notes": [
+        "Traces are created by object-specific commands ('ball trace', 'wall trace'); these commands manage lifecycle",
+        "Similar to histories but record per-object trajectories instead of scalar time-series",
+        "trace list / export prints sample data; trace interval controls cadence; trace purge erases samples but keeps definitions"
+      ],
+      "commands": [
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/trace/delete.json",
+          "short_description": "Delete all traces",
+          "syntax": "trace delete",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/trace/export.json",
+          "short_description": "Export the contents of the list of traces to the screen",
+          "syntax": "trace export <s>... [file <sfile>]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "interval",
+          "file": "pfc/command_docs/commands/trace/interval.json",
+          "short_description": "Specify the step interval on which trace values will be recorded",
+          "syntax": "trace interval <i>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/trace/list.json",
+          "short_description": "List trace information",
+          "syntax": "trace list [keyword]",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "name",
+          "file": "pfc/command_docs/commands/trace/name.json",
+          "short_description": "Specify the label for trace s ",
+          "syntax": "trace name <s>label <slabel>",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "purge",
+          "file": "pfc/command_docs/commands/trace/purge.json",
+          "short_description": "Clear the contents of all traces while retaining the list of objects to trace",
+          "syntax": "trace purge",
+          "python_available": false,
+          "python_alternative": ""
+        },
+        {
+          "name": "results",
+          "file": "pfc/command_docs/commands/trace/results.json",
+          "short_description": "Specify whether trace information is stored in subsequent results files",
+          "syntax": "trace results active <b>",
+          "python_available": false,
+          "python_alternative": ""
+        }
+      ]
+    },
+    "wall": {
+      "full_name": "Wall Commands",
+      "description": "Commands for creating, modifying, and managing wall objects (faceted boundaries) in PFC",
+      "command_prefix": "wall",
+      "python_module": "itasca.wall",
+      "python_object_class": "Wall",
+      "doc_url": "https://docs.itascacg.com/pfc700/pfc/docproject/source/manual/wall/wall.html",
+      "related_categories": [
+        "ball",
+        "clump",
+        "contact",
+        "model"
+      ],
+      "notes": [
+        "Walls are composed of triangular facets (Facet objects)",
+        "Wall generation commands (box, cylinder) are not available in Python SDK",
+        "Use Python SDK for programmatic wall manipulation",
+        "Walls can be moved via velocity or displacement attributes"
+      ],
+      "commands": [
+        {
+          "name": "active-sides",
+          "file": "pfc/command_docs/commands/wall/active-sides.json",
+          "short_description": "Specify which side(s) of facets are active",
+          "syntax": "wall active-sides keyword [range]",
+          "python_available": true,
+          "python_alternative": "Facet.set_active(code) - codes: 0=both, 1=top (normal dir), -1=bottom, 2=neither. Requires iteration over facets"
+        },
+        {
+          "name": "addfacet",
+          "file": "pfc/command_docs/commands/wall/addfacet.json",
+          "short_description": "Add a facet to a wall",
+          "syntax": "wall addfacet keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall addfacet ...') - Python SDK does not provide facet creation methods"
+        },
+        {
+          "name": "attribute",
+          "file": "pfc/command_docs/commands/wall/attribute.json",
+          "short_description": "Set the value of wall attributes",
+          "syntax": "wall attribute [facet] [vertex] keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Wall.set_*() methods (e.g., Wall.set_vel(), Wall.set_spin(), Wall.set_pos(), Wall.set_disp(), Wall.set_rotation_center()) - requires iteration over wall range"
+        },
+        {
+          "name": "create",
+          "file": "pfc/command_docs/commands/wall/create.json",
+          "short_description": "Create a wall from vertices",
+          "syntax": "wall create keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall create ...') - Python SDK does not provide wall creation from vertices"
+        },
+        {
+          "name": "delete",
+          "file": "pfc/command_docs/commands/wall/delete.json",
+          "short_description": "Delete walls and/or facets",
+          "syntax": "wall delete [keyword] [range]",
+          "python_available": true,
+          "python_alternative": "Wall.delete() or Facet.delete() methods - requires iteration: for w in itasca.wall.list(): w.delete() or for f in itasca.wall.facet.list(): f.delete()"
+        },
+        {
+          "name": "export",
+          "file": "pfc/command_docs/commands/wall/export.json",
+          "short_description": "Exports walls to geometry sets",
+          "syntax": "wall export keyword [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall export geometry ...') - Python SDK does not provide wall export functionality"
+        },
+        {
+          "name": "extra",
+          "file": "pfc/command_docs/commands/wall/extra.json",
+          "short_description": "Set wall or facet extra variables",
+          "syntax": "wall extra <i><a>[facet] [range]",
+          "python_available": true,
+          "python_alternative": "Wall.set_extra(slot, value) or Facet.set_extra(slot, value) - requires iteration over wall/facet range"
+        },
+        {
+          "name": "generate",
+          "file": "pfc/command_docs/commands/wall/generate.json",
+          "short_description": "Generate walls with specified shapes",
+          "syntax": "wall generate keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall generate ...') - Python SDK does not provide wall geometry generation"
+        },
+        {
+          "name": "group",
+          "file": "pfc/command_docs/commands/wall/group.json",
+          "short_description": "Specify wall or facet group names",
+          "syntax": "wall group <s>keyword ... [facet] [range]",
+          "python_available": true,
+          "python_alternative": "Wall.set_group(group_name, slot) or Facet.set_group(group_name, slot) for setting; Wall.group_remove(group_name, slot) or Facet.group_remove(group_name, slot) for removing - requires iteration over wall/facet range"
+        },
+        {
+          "name": "history",
+          "file": "pfc/command_docs/commands/wall/history.json",
+          "short_description": "Adds a history of a wall value",
+          "syntax": "wall history [name <sid>] keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall history ...') - Python SDK does not provide history recording. Use history commands for manipulation"
+        },
+        {
+          "name": "import",
+          "file": "pfc/command_docs/commands/wall/import.json",
+          "short_description": "Import a wall",
+          "syntax": "wall import keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall import ...') - Python SDK does not provide wall import functionality"
+        },
+        {
+          "name": "initialize",
+          "file": "pfc/command_docs/commands/wall/initialize.json",
+          "short_description": "Synonym for the wall attribute command",
+          "syntax": "wall initialize keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "See wall attribute command for Python SDK methods"
+        },
+        {
+          "name": "list",
+          "file": "pfc/command_docs/commands/wall/list.json",
+          "short_description": "List wall information",
+          "syntax": "wall list [keyword] [range]",
+          "python_available": true,
+          "python_alternative": "Use Wall object getter methods: wall.pos(), wall.vel(), wall.spin(), wall.disp(), wall.cutoff(), wall.extra(i), wall.group(slot), etc. Access walls via itasca.wall.list(). For contacts: wall.contacts(). For properties: iterate through wall.facets() and use facet.prop(name)"
+        },
+        {
+          "name": "property",
+          "file": "pfc/command_docs/commands/wall/property.json",
+          "short_description": "Assign facet surface properties used in contact models",
+          "syntax": "wall property <s><a>[<s1><a1>...] [range]",
+          "python_available": true,
+          "python_alternative": "Wall.set_prop(name, value) to set property for all facets in a wall, or Facet.set_prop(name, value) for individual facets - requires iteration: for w in itasca.wall.list(): w.set_prop('kn', 1e7) or for f in itasca.wall.facet.list(): f.set_prop('kn', 1e7)"
+        },
+        {
+          "name": "resolution",
+          "file": "pfc/command_docs/commands/wall/resolution.json",
+          "short_description": "Modify the contact-resolution strategy for faceted walls",
+          "syntax": "wall resolution keyword",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall resolution ...') - Python SDK does not provide wall resolution settings. This is a global contact resolution strategy"
+        },
+        {
+          "name": "results",
+          "file": "pfc/command_docs/commands/wall/results.json",
+          "short_description": "Modify the usage of the wall results logic",
+          "syntax": "wall results keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall results ...') - Python SDK does not provide wall results logic control. This is a global post-processing utility"
+        },
+        {
+          "name": "rotate",
+          "file": "pfc/command_docs/commands/wall/rotate.json",
+          "short_description": "Rotate walls",
+          "syntax": "wall rotate keyword ... [range]",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall rotate ...') - Python SDK does not provide wall rotation functionality"
+        },
+        {
+          "name": "servo",
+          "file": "pfc/command_docs/commands/wall/servo.json",
+          "short_description": "The wall servo provides the ability to control the translational velocity of select walls using a...",
+          "syntax": "wall servo keyword ... [range]",
+          "python_available": true,
+          "python_alternative": "Wall.servo_set_active(bool), Wall.servo_set_force(vec), Wall.servo_set_gainfactor(float), Wall.servo_set_gainupdate(int), Wall.servo_set_vmax(float) - requires iteration: for w in itasca.wall.list(): w.servo_set_active(True)"
+        },
+        {
+          "name": "tolerance",
+          "file": "pfc/command_docs/commands/wall/tolerance.json",
+          "short_description": "Set contact detection tolerances",
+          "syntax": "wall tolerance keyword ...",
+          "python_available": false,
+          "python_alternative": "itasca.command('wall tolerance ...') - Python SDK does not provide contact detection tolerance settings. This is a low-level algorithmic control"
+        },
+        {
+          "name": "velocity-conveyor",
+          "file": "pfc/command_docs/commands/wall/velocity-conveyor.json",
+          "short_description": "Assign a rotational conveyor velocity to facets",
+          "syntax": "wall velocity-conveyor keyword ... [range...]",
+          "python_available": true,
+          "python_alternative": "Facet.set_conveyor(vec) or Facet.set_conveyor_x/y/z(float) - requires manual calculation of tangential velocities and iteration: for w in itasca.wall.list(): for f in w.facets(): v_tangent = omega_cross_r; f.set_conveyor(v_tangent). For automatic calculation, use itasca.command('wall velocity-conveyor ...')"
+        }
+      ]
+    }
+  },
+  "python_sdk_alternatives": {
+    "ball generate": {
+      "command": "ball generate",
+      "reason": "Python SDK doesn't support packing patterns for batch ball creation",
+      "python_alternative": "itasca.ball.create() - can create individual balls only",
+      "python_workaround": "Use itasca.ball.create() in a loop with manual positioning logic",
+      "recommendation": "use_command"
+    },
+    "wall generate": {
+      "command": "wall generate",
+      "reason": "Python SDK doesn't support geometric wall generation (box, cylinder, etc.)",
+      "python_alternative": "Manual wall creation using Python SDK requires vertex-by-vertex construction",
+      "python_workaround": "Calculate vertices manually and use itasca.wall module",
+      "recommendation": "use_command"
+    },
+    "clump template": {
+      "command": "clump template",
+      "reason": "Python SDK does not provide clump template management",
+      "python_alternative": "itasca.command('clump template ...') - must use command interface",
+      "python_workaround": "Use command interface via itasca.command()",
+      "recommendation": "use_command"
+    },
+    "clump generate": {
+      "command": "clump generate",
+      "reason": "Python SDK cannot generate clumps with templates and packing patterns",
+      "python_alternative": "itasca.command('clump generate ...') - must use command interface",
+      "python_workaround": "Use command interface via itasca.command()",
+      "recommendation": "use_command"
+    },
+    "model solve": {
+      "command": "model solve",
+      "reason": "Python SDK doesn't have automatic equilibrium detection",
+      "python_alternative": "itasca.cycle() - requires manual termination logic",
+      "python_workaround": "Use itasca.cycle() with manual ratio checking in a loop",
+      "recommendation": "use_command"
+    },
+    "fragment register": {
+      "command": "fragment register",
+      "reason": "Fragment registration is a global initialization operation",
+      "python_alternative": "itasca.command('fragment register ...') - no direct SDK method",
+      "python_workaround": "Use command interface via itasca.command()",
+      "recommendation": "use_command"
+    }
+  },
+  "command_patterns": {
+    "object_commands": [
+      "ball",
+      "wall",
+      "clump",
+      "measure",
+      "brick",
+      "rblock"
+    ],
+    "system_commands": [
+      "model",
+      "contact",
+      "program",
+      "project",
+      "domain"
+    ],
+    "analysis_commands": [
+      "fragment",
+      "measure",
+      "history",
+      "trace"
+    ],
+    "geometry_commands": [
+      "geometry",
+      "fracture"
+    ],
+    "data_commands": [
+      "table",
+      "data",
+      "group"
+    ],
+    "visualization_commands": [
+      "plot"
+    ],
+    "scripting_commands": [
+      "fish"
+    ],
+    "common_subcommands": [
+      "generate",
+      "create",
+      "delete",
+      "attribute",
+      "property",
+      "group",
+      "result",
+      "history"
+    ]
+  },
+  "notes": [
+    "Commands are preferred over Python SDK for batch operations and specialized geometries",
+    "Python SDK is preferred for fine-grained control and programmatic logic",
+    "Use 'itasca.command()' to execute any PFC command from Python",
+    "Commands return no value; use 'result' subcommands to query results",
+    "Most commands operate on ranges (groups, spatial regions, all objects)"
+  ]
+}

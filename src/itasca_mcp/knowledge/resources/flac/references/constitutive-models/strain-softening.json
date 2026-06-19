@@ -1,0 +1,124 @@
+{
+  "model": "strain-softening",
+  "full_name": "Strain-Softening/Hardening Mohr-Coulomb (SSoft) Model",
+  "search_keywords": [
+    "strain",
+    "softening",
+    "strain-softening/hardening",
+    "mohr-coulomb",
+    "(ssoft)",
+    "constitutive",
+    "bulk",
+    "cohesion",
+    "dilation",
+    "friction",
+    "poisson",
+    "shear",
+    "tension",
+    "young",
+    "flag-brittle",
+    "table-cohesion",
+    "table-dilation",
+    "table-friction",
+    "table-tension",
+    "strain-shear-plastic",
+    "strain-tension-plastic"
+  ],
+  "description": "This model is based on the Mohr-Coulomb model with non-associated shear and associated tension flow rules, as described earlier. The difference, however, lies in the possibility that the cohesion, friction, dilation, and tensile strength may soften or harden after the onset of plastic yield. In the Mohr-Coulomb model , those properties are assumed to remain constant. Here, the user can define the cohesion, friction and dilation as piecewise-linear functions of a hardening parameter measuring the plastic shear strain. A piecewise-linear softening law for the tensile strength can also be prescri",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'strain-softening' zone constitutive model. Assign the model with 'zone cmodel assign strain-softening [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name strain-softening]'.",
+      "properties": [
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "elastic bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion, c",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "\\psi",
+          "description": "dilation angle, \\psi. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "\\phi",
+          "description": "internal angle of friction, \\phi",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "\\sigma^t",
+          "description": "tension limit, \\sigma^t. The default is 0.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-brittle",
+          "description": "If true, the tension limit is set to 0 in the event of tensile failure. The default is false.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "table-cohesion",
+          "description": "name of the table relating cohesion to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-dilation",
+          "description": "name of the table relating dilation angle to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-friction",
+          "description": "name of the table relating friction angle to plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "table-tension",
+          "description": "name of the table relating tension limit to plastic tensile strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-shear-plastic",
+          "description": "accumulated plastic shear strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "strain-tension-plastic",
+          "description": "accumulated plastic tensile strain",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/ssoft/doc/modelssoft.html",
+  "usage": {
+    "assign": "zone cmodel assign strain-softening [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name strain-softening]"
+  }
+}

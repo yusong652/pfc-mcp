@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "delete",
+    "sketch"
+  ],
+  "description": "Delete edges. All edges are deleted if < range > is not supplied. Only edges that not connected to a block will be deleted if invalid is used.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge delete",
+      "syntax": "sketch edge delete [invalid] [range]",
+      "keywords": []
+    }
+  }
+}

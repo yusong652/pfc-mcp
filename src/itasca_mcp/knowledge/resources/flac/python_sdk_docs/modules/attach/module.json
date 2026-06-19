@@ -1,0 +1,71 @@
+{
+  "module": "itasca.attach",
+  "description": "Functions and classes for working with FLAC3D gridpoint attaches.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.attach.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.attach.count() -> int",
+      "description": "Get the number of attaches.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "create",
+      "signature": "itasca.attach.create(follower: Gridpoint object, a1: Zone or Gridpoint object, a2=None: Gridpoint object (in 3D only) or face index (0-3 in 2D or 0-5 in 3D)) -> int",
+      "description": "Create a new attach. The first parameter is the follower gridpoint. The number and type of the subsequent argument depends on the type of attach being created. If only one Gridpoint object is given a gridpoint attachment is created. If two Gridpoint objects are given, an edge attachment is created (3D ONLY). If a Zone object and a face index are given, a face attachment is created. Function returns None if the attach cannot be created. Attachment weights are determined automatically based on current geometry, but may be overridden by using the weight_edge (3D ONLY) or weight_face methods.",
+      "parameters": [
+        {
+          "name": "follower",
+          "type": "Gridpoint object",
+          "required": true
+        },
+        {
+          "name": "a1",
+          "type": "Zone or Gridpoint object",
+          "required": true
+        },
+        {
+          "name": "a2",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.attach.find(id: int) -> Attach object",
+      "description": "Get the attach object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Attach object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.attach.list() -> Attach iterator object",
+      "description": "Get a attach iterator object.",
+      "returns": {
+        "type": "Attach iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.attach.maxid() -> int",
+      "description": "Get the maximum attach ID.",
+      "returns": {
+        "type": "int"
+      }
+    }
+  ]
+}

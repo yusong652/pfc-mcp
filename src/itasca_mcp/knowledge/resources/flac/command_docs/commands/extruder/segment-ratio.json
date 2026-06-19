@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "ratio",
+    "sketch"
+  ],
+  "description": "Set the ratio. The value f (a number between 0.1 and 10.1 ) is used to distribute zone lengths along the segment (each zone will be f of the size of the zone preceding it).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment ratio",
+      "syntax": "sketch segment ratio <f>[range]",
+      "keywords": []
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "ratio",
+    "zone"
+  ],
+  "description": "Please see Reaching Equilibrium . The ratio limit for mechanical and thermal calculations using the model solve can be calculated in three ways, as defined by the following keywords.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone ratio",
+      "syntax": "zone ratio keyword",
+      "description": "The ratio limit for mechanical, thermal and fluid-flow calculations using the model solve can be calculated in three ways, as defined by the following keywords:",
+      "keywords": [
+        {
+          "name": "average",
+          "syntax": "average",
+          "description": "The ratio is defined to be the average unbalanced mechanical force (or heat-flux or fluid-flow) magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux or fluid flow) magnitude for all the gridpoints (default)."
+        },
+        {
+          "name": "local",
+          "syntax": "local",
+          "description": "The ratio is defined to be the maximum value of the ratio of the unbalanced mechanical force (or heat-flux or fluid-flow) magnitude to the applied mechanical force (or heat-flux or fluid-flow) magnitude for all the gridpoints in the model."
+        },
+        {
+          "name": "maximum",
+          "syntax": "maximum",
+          "description": "The ratio is defined to be the maximum unbalanced mechanical force (or heat-flux or fluid-flow) magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux or fluid flow) magnitude for all the gridpoints."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.ratio.html#zone.ratio"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone ratio",
+      "syntax": "zone ratio keyword",
+      "description": "Please see Reaching Equilibrium. The ratio limit for mechanical and thermal calculations using the model solve can be calculated in three ways, as defined by the following keywords:",
+      "keywords": [
+        {
+          "name": "average",
+          "syntax": "average",
+          "description": "The ratio is defined to be the average unbalanced mechanical force (or heat-flux) magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux) magnitude for all the gridpoints (default)."
+        },
+        {
+          "name": "local",
+          "syntax": "local",
+          "description": "The ratio is defined to be the maximum value of the ratio of the unbalanced mechanical force (or heat-flux) magnitude to the applied mechanical force (or heat-flux) magnitude for all the gridpoints in the model. The ratio used is scaled by 0.1 to make it mean approximately the same as average."
+        },
+        {
+          "name": "maximum",
+          "syntax": "maximum",
+          "description": "The ratio is defined to be the maximum unbalanced mechanical force magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux) magnitude for all the gridpoints. The ratio used is scaled by 0.1 to make it mean approximately the same as average."
+        },
+        {
+          "name": "convergence",
+          "syntax": "convergence",
+          "description": "The ratio is defined as the maximum convergence of all the grid points in the model, with the convergence of a grid point defined as the local ratio divided by the target ratio. The ratio used is scaled by 1e-5 to make it mean approximately the same as average. For the zone thermal process this criteria is the same as local."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.ratio.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone ratio",
+      "syntax": "zone ratio keyword",
+      "keywords": [
+        {
+          "name": "average",
+          "syntax": "average",
+          "description": "The ratio is defined to be the average unbalanced mechanical force (or heat-flux) magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux) magnitude for all the gridpoints. This is the default setting."
+        },
+        {
+          "name": "local",
+          "syntax": "local",
+          "description": "The ratio is defined to be the maximum value of the ratio of the unbalanced mechanical force (or heat-flux) magnitude to the applied mechanical force (or heat-flux) magnitude for all the gridpoints in the model. The ratio used is scaled by 0.1 to make it mean approximately the same as average ."
+        },
+        {
+          "name": "maximum",
+          "syntax": "maximum",
+          "description": "The ratio is defined to be the maximum unbalanced mechanical force magnitude for all the gridpoints in the model divided by the average applied mechanical force (or heat flux) magnitude for all the gridpoints. The ratio used is scaled by 0.1 to make it mean approximately the same as average ."
+        },
+        {
+          "name": "convergence",
+          "syntax": "convergence",
+          "description": "The ratio is defined as the maximum convergence of all the gridpoints in the model, with the convergence of a gridpoint defined as the local ratio divided by the target ratio . The ratio used is scaled by 1e-5 to make it mean approximately the same as average . For the zone thermal process this criteria is the same as local ."
+        }
+      ]
+    }
+  }
+}

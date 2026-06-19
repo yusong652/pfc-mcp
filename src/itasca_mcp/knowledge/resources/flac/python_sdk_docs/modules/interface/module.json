@@ -1,0 +1,31 @@
+{
+  "module": "itasca.interface",
+  "description": "Functions and classes for working with FLAC interfaces.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.interface.html",
+  "functions": [
+    {
+      "name": "find",
+      "signature": "itasca.interface.find(name: str) -> Interface object",
+      "description": "Get the interface object with the given ID number.",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Interface object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.interface.list() -> Interface iterator object",
+      "description": "Get an interface iterator object.",
+      "returns": {
+        "type": "Interface iterator object"
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "cable",
+  "dimension": "mixed",
+  "full_name": "Cable Structural Element Properties",
+  "description": "Cable elements model axial reinforcement with grout interaction. They are used for cable bolts, tendons, and support members where axial tensile capacity dominates.",
+  "primary_commands": [
+    "structure cable create",
+    "structure cable property",
+    "structure cable apply tension",
+    "structure cable list",
+    "structure cable history"
+  ],
+  "property_groups": [
+    {
+      "group": "reinforcement material",
+      "properties": [
+        "young",
+        "cross-sectional-area",
+        "density",
+        "yield-tension",
+        "yield-compression",
+        "tensile-failure-strain",
+        "thermal-expansion"
+      ]
+    },
+    {
+      "group": "grout coupling",
+      "properties": [
+        "grout-stiffness",
+        "grout-cohesion",
+        "grout-cohesion-table",
+        "grout-friction",
+        "grout-friction-table",
+        "grout-perimeter"
+      ]
+    },
+    {
+      "group": "large-strain sliding and FLAC2D spacing",
+      "properties": [
+        "slide",
+        "slide-tolerance",
+        "spacing"
+      ],
+      "notes": [
+        "spacing is a FLAC2D-only out-of-plane spacing property."
+      ]
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Basic grouted cable",
+      "commands": [
+        "structure cable create by-line (0,0,0) (0,0,5) segments 5",
+        "structure cable property young 2e11 cross-sectional-area 5e-4 grout-stiffness 1e9 grout-cohesion 1e5 grout-friction 30"
+      ]
+    },
+    {
+      "name": "Pretension and release",
+      "commands": [
+        "structure cable apply tension value 1000 range group 'pretension'",
+        "model solve",
+        "structure cable apply tension active off range group 'pretension'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/cables/cables.html"
+}

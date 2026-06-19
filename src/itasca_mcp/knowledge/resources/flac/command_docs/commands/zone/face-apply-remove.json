@@ -1,0 +1,399 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "face",
+    "apply",
+    "remove",
+    "zone",
+    "apply-remove"
+  ],
+  "description": "Remove zone face apply conditions, which are described in the documentation for that command. If an optional range is supplied, the condition is removed only from those faces within the range. If no keyword is specified, then all conditions applied to the specified faces are removed.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone face apply-remove",
+      "syntax": "zone face apply-remove <keyword> <range>",
+      "description": "Remove zone face apply conditions, which are described in the documentation for that command. If an optional range is supplied, the condition is removed only from those faces within the range. If no keyword is specified, then all conditions applied to the specified faces are removed.",
+      "keywords": [
+        {
+          "name": "acceleration",
+          "syntax": "acceleration"
+        },
+        {
+          "name": "acceleration-dip",
+          "syntax": "acceleration-dip"
+        },
+        {
+          "name": "acceleration-local",
+          "syntax": "acceleration-local"
+        },
+        {
+          "name": "acceleration-normal",
+          "syntax": "acceleration-normal"
+        },
+        {
+          "name": "acceleration-strike",
+          "syntax": "acceleration-strike"
+        },
+        {
+          "name": "acceleration-x",
+          "syntax": "acceleration-x"
+        },
+        {
+          "name": "acceleration-y",
+          "syntax": "acceleration-y"
+        },
+        {
+          "name": "acceleration-z",
+          "syntax": "acceleration-z"
+        },
+        {
+          "name": "convection",
+          "syntax": "convection"
+        },
+        {
+          "name": "discharge",
+          "syntax": "discharge"
+        },
+        {
+          "name": "flux",
+          "syntax": "flux"
+        },
+        {
+          "name": "leakage",
+          "syntax": "leakage"
+        },
+        {
+          "name": "pore-pressure",
+          "syntax": "pore-pressure"
+        },
+        {
+          "name": "quiet-dip",
+          "syntax": "quiet-dip"
+        },
+        {
+          "name": "quiet-normal",
+          "syntax": "quiet-normal"
+        },
+        {
+          "name": "quiet-strike",
+          "syntax": "quiet-strike"
+        },
+        {
+          "name": "reaction",
+          "syntax": "reaction"
+        },
+        {
+          "name": "reaction-dip",
+          "syntax": "reaction-dip"
+        },
+        {
+          "name": "reaction-local",
+          "syntax": "reaction-local"
+        },
+        {
+          "name": "reaction-normal",
+          "syntax": "reaction-normal"
+        },
+        {
+          "name": "reaction-strike",
+          "syntax": "reaction-strike"
+        },
+        {
+          "name": "reaction-x",
+          "syntax": "reaction-x"
+        },
+        {
+          "name": "reaction-y",
+          "syntax": "reaction-y"
+        },
+        {
+          "name": "reaction-z",
+          "syntax": "reaction-z"
+        },
+        {
+          "name": "stress-dip",
+          "syntax": "stress-dip"
+        },
+        {
+          "name": "stress-normal",
+          "syntax": "stress-normal"
+        },
+        {
+          "name": "stress-strike",
+          "syntax": "stress-strike"
+        },
+        {
+          "name": "stress-xx",
+          "syntax": "stress-xx"
+        },
+        {
+          "name": "stress-xy",
+          "syntax": "stress-xy"
+        },
+        {
+          "name": "stress-xz",
+          "syntax": "stress-xz"
+        },
+        {
+          "name": "stress-yy",
+          "syntax": "stress-yy"
+        },
+        {
+          "name": "stress-zz",
+          "syntax": "stress-zz"
+        },
+        {
+          "name": "velocity",
+          "syntax": "velocity"
+        },
+        {
+          "name": "velocity-dip",
+          "syntax": "velocity-dip"
+        },
+        {
+          "name": "velocity-local",
+          "syntax": "velocity-local"
+        },
+        {
+          "name": "velocity-normal",
+          "syntax": "velocity-normal"
+        },
+        {
+          "name": "velocity-strike",
+          "syntax": "velocity-strike"
+        },
+        {
+          "name": "velocity-x",
+          "syntax": "velocity-x"
+        },
+        {
+          "name": "velocity-y",
+          "syntax": "velocity-y"
+        },
+        {
+          "name": "velocity-z",
+          "syntax": "velocity-z"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/zoneface/cmd_zone.face.apply-remove.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone face apply-remove",
+      "syntax": "zone face apply-remove [keyword] [range]",
+      "keywords": [
+        {
+          "name": "acceleration",
+          "syntax": "acceleration"
+        },
+        {
+          "name": "acceleration-dip",
+          "syntax": "acceleration-dip 3D ONLY"
+        },
+        {
+          "name": "acceleration-local",
+          "syntax": "acceleration-local"
+        },
+        {
+          "name": "acceleration-normal",
+          "syntax": "acceleration-normal"
+        },
+        {
+          "name": "acceleration-strike",
+          "syntax": "acceleration-strike 3D ONLY"
+        },
+        {
+          "name": "acceleration-tangential",
+          "syntax": "acceleration-tangential 2D ONLY"
+        },
+        {
+          "name": "acceleration-x",
+          "syntax": "acceleration-x"
+        },
+        {
+          "name": "acceleration-y",
+          "syntax": "acceleration-y"
+        },
+        {
+          "name": "acceleration-z",
+          "syntax": "acceleration-z 3D ONLY"
+        },
+        {
+          "name": "convection",
+          "syntax": "convection"
+        },
+        {
+          "name": "discharge",
+          "syntax": "discharge"
+        },
+        {
+          "name": "flux",
+          "syntax": "flux"
+        },
+        {
+          "name": "head",
+          "syntax": "head"
+        },
+        {
+          "name": "leakage",
+          "syntax": "leakage"
+        },
+        {
+          "name": "pore-pressure",
+          "syntax": "pore-pressure"
+        },
+        {
+          "name": "quiet",
+          "syntax": "quiet"
+        },
+        {
+          "name": "quiet-dip",
+          "syntax": "quiet-dip 3D ONLY"
+        },
+        {
+          "name": "quiet-normal",
+          "syntax": "quiet-normal"
+        },
+        {
+          "name": "quiet-strike",
+          "syntax": "quiet-strike 3D ONLY"
+        },
+        {
+          "name": "quiet-tangential",
+          "syntax": "quiet-tangential 2D ONLY"
+        },
+        {
+          "name": "reaction",
+          "syntax": "reaction"
+        },
+        {
+          "name": "reaction-dip",
+          "syntax": "reaction-dip 3D ONLY"
+        },
+        {
+          "name": "reaction-local",
+          "syntax": "reaction-local"
+        },
+        {
+          "name": "reaction-normal",
+          "syntax": "reaction-normal"
+        },
+        {
+          "name": "reaction-strike",
+          "syntax": "reaction-strike 3D ONLY"
+        },
+        {
+          "name": "reaction-tangential",
+          "syntax": "reaction-tangential 2D ONLY"
+        },
+        {
+          "name": "reaction-x",
+          "syntax": "reaction-x"
+        },
+        {
+          "name": "reaction-y",
+          "syntax": "reaction-y"
+        },
+        {
+          "name": "reaction-z",
+          "syntax": "reaction-z 3D ONLY"
+        },
+        {
+          "name": "stress-dip",
+          "syntax": "stress-dip 3D ONLY"
+        },
+        {
+          "name": "stress-normal",
+          "syntax": "stress-normal"
+        },
+        {
+          "name": "stress-strike",
+          "syntax": "stress-strike 3D ONLY"
+        },
+        {
+          "name": "stress-tangential",
+          "syntax": "stress-tangential 2D ONLY"
+        },
+        {
+          "name": "stress-xx",
+          "syntax": "stress-xx"
+        },
+        {
+          "name": "stress-xy",
+          "syntax": "stress-xy"
+        },
+        {
+          "name": "stress-xz",
+          "syntax": "stress-xz 3D ONLY"
+        },
+        {
+          "name": "stress-yy",
+          "syntax": "stress-yy"
+        },
+        {
+          "name": "stress-zz",
+          "syntax": "stress-zz 3D ONLY"
+        },
+        {
+          "name": "temperature",
+          "syntax": "temperature"
+        },
+        {
+          "name": "velocity",
+          "syntax": "velocity"
+        },
+        {
+          "name": "velocity-dip",
+          "syntax": "velocity-dip 3D ONLY"
+        },
+        {
+          "name": "velocity-local",
+          "syntax": "velocity-local"
+        },
+        {
+          "name": "velocity-normal",
+          "syntax": "velocity-normal"
+        },
+        {
+          "name": "velocity-strike",
+          "syntax": "velocity-strike 3D ONLY"
+        },
+        {
+          "name": "velocity-tangential",
+          "syntax": "velocity-tangential 2D ONLY"
+        },
+        {
+          "name": "velocity-x",
+          "syntax": "velocity-x"
+        },
+        {
+          "name": "velocity-y",
+          "syntax": "velocity-y"
+        },
+        {
+          "name": "velocity-z",
+          "syntax": "velocity-z 3D ONLY"
+        }
+      ]
+    }
+  }
+}

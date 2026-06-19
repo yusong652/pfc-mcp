@@ -1,0 +1,178 @@
+{
+  "model": "wipp-salt",
+  "full_name": "WIPP-Salt Model",
+  "search_keywords": [
+    "wipp",
+    "salt",
+    "wipp-salt",
+    "constitutive",
+    "activation-energy",
+    "bulk",
+    "bulk-final",
+    "constant-a",
+    "constant-b",
+    "constant-d",
+    "constant-gas",
+    "compaction-0",
+    "compaction-1",
+    "compaction-2",
+    "creep-rate-critical",
+    "density-final",
+    "density-salt",
+    "exponent",
+    "poisson",
+    "shear",
+    "shear-final",
+    "temperature",
+    "young",
+    "compaction-bulk",
+    "compaction-shear",
+    "density-fractional"
+  ],
+  "description": "A crushed-salt constitutive model is implemented in FLAC3D / 3DEC to simulate volumetric and deviatoric creep compaction behaviors. The model is a variation of the WIPP model , and is based on the model described by Sjaardema and Krieg (1987), with an added deviatoric component as proposed by Callahan and DeVries (1991).",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'wipp-salt' zone constitutive model. Assign the model with 'zone cmodel assign wipp-salt [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name wipp-salt]'.",
+      "properties": [
+        {
+          "keyword": "activation-energy",
+          "symbol": "Q",
+          "description": "activation energy, Q",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "bulk modulus, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk-final",
+          "symbol": "K_f",
+          "description": "final, intact salt, bulk modulus, K_f",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-a",
+          "symbol": "A",
+          "description": "WIPP model constant, A",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-b",
+          "symbol": "B",
+          "description": "WIPP model constant, B",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-d",
+          "symbol": "D",
+          "description": "WIPP model constant, D",
+          "type": "FLT"
+        },
+        {
+          "keyword": "constant-gas",
+          "symbol": "R",
+          "description": "gas constant, R",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compaction-0",
+          "symbol": "B_0",
+          "description": "creep compaction parameter, B_0",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compaction-1",
+          "symbol": "B_1",
+          "description": "creep compaction parameter, B_1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compaction-2",
+          "symbol": "B_2",
+          "description": "creep compaction parameter, B_2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "creep-rate-critical",
+          "symbol": "ε̇^*_{ss}",
+          "description": "critical steady-state creep rate, ε̇^*_{ss}",
+          "type": "FLT"
+        },
+        {
+          "keyword": "density-final",
+          "symbol": "ρ_f",
+          "description": "final, intact salt, density, ρ_f",
+          "type": "FLT"
+        },
+        {
+          "keyword": "density-salt",
+          "symbol": "ρ",
+          "description": "density, ρ",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent",
+          "symbol": "n",
+          "description": "WIPP model exponent, n",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "v",
+          "description": "Poisson’s ratio, v",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "elastic shear modulus, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-final",
+          "symbol": "G_f",
+          "description": "final, intact salt, shear modulus, G_f",
+          "type": "FLT"
+        },
+        {
+          "keyword": "temperature",
+          "symbol": "T",
+          "description": "zone temperature, T",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "symbol": "E",
+          "description": "Young’s modulus, E",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compaction-bulk",
+          "symbol": "K",
+          "description": "creep compaction parameter, K",
+          "type": "FLT"
+        },
+        {
+          "keyword": "compaction-shear",
+          "symbol": "G",
+          "description": "creep compaction parameter, G",
+          "type": "FLT"
+        },
+        {
+          "keyword": "density-fractional",
+          "symbol": "F_d",
+          "description": "current fractional density, F_d",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/cwipp/doc/modelcwipp.html",
+  "usage": {
+    "assign": "zone cmodel assign wipp-salt [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name wipp-salt]"
+  }
+}

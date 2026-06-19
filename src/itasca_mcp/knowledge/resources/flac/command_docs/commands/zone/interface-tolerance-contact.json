@@ -1,0 +1,59 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "interface",
+    "tolerance",
+    "contact",
+    "zone",
+    "tolerance-contact"
+  ],
+  "description": "Sets the maximum depth of penetration (of faces that contact an interface) for which a contact is detected. If this depth (or overlap) is greater than value, then no contact is detected. By default, the value is determined from zone dimensions and is updated if deformation occurs during a simulation.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 7.0 contents command index.",
+      "source_urls": [
+        "https://docs.itascacg.com/flac3d700/contents.html"
+      ],
+      "target_version": "7.0"
+    },
+    "9.0": {
+      "command": "zone interface tolerance-contact",
+      "syntax": "zone interface [<s>] tolerance-contact <f>keyword [range]",
+      "keywords": [
+        {
+          "name": "add",
+          "syntax": "add",
+          "description": "Add the specified value to the existing value."
+        },
+        {
+          "name": "gradient",
+          "syntax": "gradient <v>[origin <v>]",
+          "description": "Apply a gradient to the scalar-value provided. Note the origin keyword is optional, however, the default value (0,0,0) is used if the origin keyword is not included in the command — which may not produce the intended result."
+        },
+        {
+          "name": "multiply",
+          "syntax": "multiply",
+          "description": "Multiply the existing value by the specified value."
+        },
+        {
+          "name": "vary",
+          "syntax": "vary <v>",
+          "description": "Apply a linear variation to the scalar-value provided."
+        }
+      ]
+    }
+  }
+}

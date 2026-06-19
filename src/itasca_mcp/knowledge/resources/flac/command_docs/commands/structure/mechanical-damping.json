@@ -1,0 +1,47 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "mechanical",
+    "damping",
+    "structure"
+  ],
+  "description": "Set the damping scheme used by the structural elements for static analysis (see Mechanical Damping ). The following keywords are available:",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 7.0 contents command index.",
+      "source_urls": [
+        "https://docs.itascacg.com/flac3d700/contents.html"
+      ],
+      "target_version": "7.0"
+    },
+    "9.0": {
+      "command": "structure mechanical damping",
+      "syntax": "structure mechanical damping keyword ... [range]",
+      "keywords": [
+        {
+          "name": "combined-local",
+          "syntax": "combined-local <f1>",
+          "description": "combined damping. The combined damping factor is f1 ."
+        },
+        {
+          "name": "local",
+          "syntax": "local <f1>",
+          "description": "local damping. This is the default setting for static mode . The local damping factor is f1 with the default value 0.8."
+        }
+      ]
+    }
+  }
+}

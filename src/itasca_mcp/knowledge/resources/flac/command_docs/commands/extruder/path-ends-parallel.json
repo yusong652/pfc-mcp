@@ -1,0 +1,23 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "path",
+    "ends",
+    "parallel",
+    "paralle",
+    "sketch",
+    "ends-parallel",
+    "ends-paralle"
+  ],
+  "description": "Keep the cross-sections at the ends of the path parallel to the construction plane.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch path ends-parallel",
+      "syntax": "sketch path ends-parallel <b>",
+      "keywords": []
+    }
+  }
+}

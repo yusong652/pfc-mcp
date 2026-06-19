@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "rename",
+    "sketch"
+  ],
+  "description": "Rename sketch set from name s1 to s2 . If s1 is not provided, a current (active) sketch set is renamed.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set rename",
+      "syntax": "sketch set <s1>rename <s2>",
+      "keywords": []
+    }
+  }
+}

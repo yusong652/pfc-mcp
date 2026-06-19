@@ -1,0 +1,65 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "gridpoint",
+    "merge",
+    "zone"
+  ],
+  "description": "Attempts to merge all gridpoints in the range. A gridpoint will be merged if another gridpoint falls within a distance given by the tolerances specified. The following optional keywords are available to manually specify the tolerances used.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "available": false,
+      "reason": "Not listed in the official FLAC3D 6.0 command indexes.",
+      "source_urls": [
+        "https://docs.itascacg.com/pfc600/flac3d/docproject/source/elements/command_summary.html",
+        "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/sel_commands/sel_commands.html"
+      ],
+      "target_version": "6.0"
+    },
+    "7.0": {
+      "command": "zone gridpoint merge",
+      "syntax": "zone gridpoint merge <keyword> <range>",
+      "description": "Attempts to merge all gridpoints in the range. A gridpoint will be merged if another gridpoint falls within a distance given by the tolerances specified. The following optional keywords are available to manually specify the tolerances used.",
+      "keywords": [
+        {
+          "name": "tolerance-relative",
+          "syntax": "tolerance-relative f",
+          "description": "Specifies a relative tolerance value. This is converted to an absolute tolerance by multiplying it to the minimum edge length of all zones connected to the gridpoint. The default value is 0.01. If both an absolute and a relative tolerance is specified, the value used an any given gridpoint is the maximum of the two."
+        },
+        {
+          "name": "tolerance-absolute",
+          "syntax": "tolerance-absolute f",
+          "description": "Specifies an absolute tolerance value. The default value is 0. If both an absolute and a relative tolerance is specified, the value used an any given gridpoint is the maximum of the two."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/zonegridpoint/cmd_zone.gridpoint.merge.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone gridpoint merge",
+      "syntax": "zone gridpoint merge [keyword] [range]",
+      "keywords": [
+        {
+          "name": "tolerance-relative",
+          "syntax": "tolerance-relative <f>",
+          "description": "Specifies a relative tolerance value. This is converted to an absolute tolerance by multiplying it to the minimum edge length of all zones connected to the gridpoint. The default value is 0.01 . If both an absolute and a relative tolerance are specified, the value used on any given gridpoint is the maximum of the two."
+        },
+        {
+          "name": "tolerance-absolute",
+          "syntax": "tolerance-absolute <f>",
+          "description": "Specifies an absolute tolerance value. The default value is 0 . If both an absolute and a relative tolerance are specified, the value used on any given gridpoint is the maximum of the two."
+        }
+      ]
+    }
+  }
+}

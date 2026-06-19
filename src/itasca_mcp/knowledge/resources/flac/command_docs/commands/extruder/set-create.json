@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "create",
+    "sketch"
+  ],
+  "description": "Create a new sketch set with name s .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set create",
+      "syntax": "sketch set create <s>",
+      "keywords": []
+    }
+  }
+}

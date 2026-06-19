@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "zone",
+    "length",
+    "sketch",
+    "zone-length"
+  ],
+  "description": "Set the length of zones on the edge. If the specified zone length causes the number of zones on the edge to exceed the limits (1-10000), the limit value is used for the edge.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge zone-length",
+      "syntax": "sketch edge zone-length <f>[range]",
+      "keywords": []
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "polygon",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "polygon vertices <v1> <v2> ... [origin <v>]",
+  "description": "Polygonal cylinder extending perpendicular to polygon plane. Optional origin creates truncated cone.",
+  "examples": [
+    "range polygon vertices (0,0,0) (10,0,0) (10,10,0) (0,10,0)"
+  ],
+  "search_keywords": [
+    "polygon",
+    "polygonal",
+    "vertices"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "edge",
+    "factor",
+    "building-blocks"
+  ],
+  "description": "Apply a sizing factor to zones on edges. The factor is applied to edges in the current < range >, if supplied, or on all edges if not. The factor f must be between 0.001 and 1000.0 (the default is 1.0).",
+  "notes": [
+    "Requires a current building-blocks set: run 'building-blocks set create <name>' then 'building-blocks set select <name>' before any block/edge/face/point operation; otherwise FLAC rejects the command with 'Unused extra parameter'."
+  ],
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks edge factor",
+      "syntax": "building-blocks edge factor <f>[range]",
+      "keywords": []
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "type": "structural_property_reference",
+  "description": "Structural-element property keyword reference for FLAC support and reinforcement models.",
+  "items": [
+    {
+      "name": "cable",
+      "file": "cable.json",
+      "description": "Cable element material, grout, sliding, yield, thermal, and 2D spacing properties.",
+      "common_use": "Rock bolts, cable bolts, tendons, and reinforcement with axial behavior."
+    },
+    {
+      "name": "beam-pile",
+      "file": "beam-pile.json",
+      "description": "Beam-type and pile property groups including elastic section properties and pile coupling springs.",
+      "common_use": "Beams, piles, struts, and flexural support members."
+    },
+    {
+      "name": "liner",
+      "file": "liner.json",
+      "description": "FLAC2D liner properties (section + double-sided coupling springs). Shell and geogrid types are FLAC3D-only and noted here.",
+      "common_use": "Tunnel linings, shotcrete, embedded membranes (FLAC2D). Use FLAC3D docs for shell/geogrid types."
+    },
+    {
+      "name": "link",
+      "file": "link.json",
+      "description": "Structural link per-DOF property selectors (x / y / rotation in FLAC2D) plus attachment concepts.",
+      "common_use": "Control how structural nodes interact with zones or other structural objects."
+    }
+  ],
+  "notes": [
+    "Property keyword sets are binary-validated against FLAC2D 9.0 (probed via 'structure <type> property ?').",
+    "'shell' and 'geogrid' are FLAC3D-only structure types — rejected by FLAC2D 9.0. They are documented inline in liner.json under 'related_3d_only'."
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/cables/cables.html",
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/beamtypes/beamtypes.html",
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/piles/piles.html",
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/shelltypes/shelltypes.html",
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/geogrids/geogrids.html",
+    "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/liners/liners.html"
+  ]
+}

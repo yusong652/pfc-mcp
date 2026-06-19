@@ -1,0 +1,29 @@
+{
+  "type": "initial_condition_reference",
+  "description": "Initial-condition reference topics for FLAC setup. These topics help agents choose initialization commands and validation checks before solving.",
+  "items": [
+    {
+      "name": "stress-initialization",
+      "file": "stress-initialization.json",
+      "description": "Uniform stresses, stress gradients, gravity-based stress initialization, and K0 ratio workflows.",
+      "common_use": "Install in-situ stresses before excavation, support installation, or staged loading."
+    },
+    {
+      "name": "state-reset",
+      "file": "state-reset.json",
+      "description": "Reset displacement, velocity, state variables, and model history after reaching initial equilibrium.",
+      "common_use": "Prepare a clean construction-stage baseline after gravity or elastic initialization."
+    },
+    {
+      "name": "fluid-thermal",
+      "file": "fluid-thermal.json",
+      "description": "Initial pore pressure, saturation, fluid density, temperature, and thermal state setup.",
+      "common_use": "Initialize coupled fluid/thermal analyses."
+    }
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/flac3d/docproject/source/modeling/problemsolving/initial_conditions.html",
+    "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.initialize-stresses.html",
+    "https://docs.itascacg.com/itasca900/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.initialize.html"
+  ]
+}

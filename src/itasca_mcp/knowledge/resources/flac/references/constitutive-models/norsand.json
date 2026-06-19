@@ -1,0 +1,269 @@
+{
+  "model": "norsand",
+  "full_name": "NorSand Model*",
+  "search_keywords": [
+    "norsand",
+    "model*",
+    "constitutive",
+    "critical-state-1",
+    "critical-state-2",
+    "critical-state-3",
+    "factor-coupling",
+    "factor-dilatancy",
+    "hardening-0",
+    "modulus-annealing",
+    "shear-reference",
+    "ratio-critical",
+    "exponent",
+    "flag-inner",
+    "hardening-inner",
+    "index-elasticity",
+    "index-softening",
+    "over-consolidation-ratio",
+    "hardening-y",
+    "pressure-reference",
+    "poisson",
+    "void-reference",
+    "stress-xx-initial",
+    "stress-yy-initial",
+    "stress-zz-initial",
+    "stress-xy-initial",
+    "stress-yz-initial",
+    "stress-xz-initial",
+    "state-parameter-initial",
+    "void-initial",
+    "angle-psr",
+    "bulk",
+    "shear",
+    "ratio-image",
+    "stress-image",
+    "stress-image-maximum",
+    "state-parameter",
+    "state-parameter-image",
+    "void"
+  ],
+  "description": "Note *Not available in 3DEC . NorSand (Jefferies 1993, Jefferies and Been 2015) is a critical state model applicable to soils in which particle to particle interactions are controlled by contact forces and slips rather than bonds, intrinsically incorporating the state parameter so that it captures the behavior of granular soils over a wide range of confining stresses and densities. NorSand requires relatively few soil properties which are familiar and can be estimated from the routine laboratory or in-situ tests. NorSand explicitly captures the full range of soil behavior from static liquefact",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Material properties for the 'norsand' zone constitutive model. Assign the model with 'zone cmodel assign norsand [range ...]', then set these with 'zone property <keyword> <value> [range cmodel-name norsand]'.",
+      "properties": [
+        {
+          "keyword": "critical-state-1",
+          "type": "FLT"
+        },
+        {
+          "keyword": "critical-state-2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "critical-state-3",
+          "symbol": "C_1",
+          "description": "critical state parameters, C_1, C_2 and C_3. Parameters to determine the critical state line. If C_3=0 (by default), the critical state is based on the 2-parameter equation, assuming C_1=\\Gamma and C_2=\\gamma; If C_3>0, the critical state is based on the 3-parameter equation.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "factor-coupling",
+          "symbol": "N",
+          "description": "volumetric coupling factor, N. The default value is 0.3.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "factor-dilatancy",
+          "symbol": "\\psi",
+          "description": "parameter relating minimum dilatancy to the corresponding \\psi at the TC condition, \\chi_{tc}. The default value is 4.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "hardening-0",
+          "symbol": "\\psi=0",
+          "description": "plastic hardening modulus when \\psi=0, H_0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "modulus-annealing",
+          "symbol": "Z",
+          "description": "plastic softening modulus for PSR, Z. The default value is 0, which will not consider PSR effect.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear-reference",
+          "symbol": "G_{ref}",
+          "description": "reference shear modulus, G_{ref}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ratio-critical",
+          "symbol": "M_{tc}",
+          "description": "stress ratio at the critical state at the TC condition, M_{tc}. The default value is 1.2, which corresponds to a critical friction angle of 30 degrees.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent",
+          "symbol": "m",
+          "description": "exponent of pressure dependence defining elasticity, m. The default value is 1.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "flag-inner",
+          "description": "flag to activate the inner cap hardening. The default value is off.",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "hardening-inner",
+          "symbol": "H_i",
+          "description": "plastic hardening modulus value for the hardening of inner cap, H_i. This value is meaningful only when flag-inner = :lbool:`on`. The default value is 5.0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "index-elasticity",
+          "description": "index of elasticity refers to the elasticity case used by the NorSand model, with a default value of 0. If choosing to set it to 1 or 2, a positive value for void-reference must be input.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "index-softening",
+          "symbol": "T_S",
+          "description": "index of considering an additional softening term of T_S. The default is 0. The allowable range is 0 \\le S \\le 1. A larger S value will lead to faster softening (larger softening rate) of a loose sand during an undrained shearing loading. Please be aware that the additional term T_S is still in debate, it should be cautious to use S>0. It is not recommended to use S>0 for any case of drained loading.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "over-consolidation-ratio",
+          "symbol": "OCR",
+          "description": "over consolidation ratio, OCR. The default is 1.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "hardening-y",
+          "symbol": "H_y",
+          "description": "another hardening modulus parameter, H_y, so that the real plastic hardening modulus is following H=H_0 - H_y\\psi. The default value is zero.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "pressure-reference",
+          "symbol": "p_{atm}",
+          "description": "reference pressure (usually the standard atmospheric pressure), p_{atm}. The default value is 100.0 if in kPa. This parameter should always be referred to the standard atmospheric pressure and it does not need extra calibration. Its value should be input in a unit of stress/pressure consistent with the other parameters used in the simulation.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "poisson",
+          "symbol": "\\nu",
+          "description": "Poisson’s ratio, \\nu. The default value is 0.2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-reference",
+          "symbol": "e_{ref}",
+          "description": "Reference void ratio for elasticity, e_{ref}. It is required if void-reference = 1 or 2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-xx-initial",
+          "symbol": "\\sigma^0_{xx}",
+          "description": "initial xx component of the effective stress, \\sigma^0_{xx}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-yy-initial",
+          "symbol": "\\sigma^0_{yy}",
+          "description": "initial yy component of the effective stress, \\sigma^0_{yy}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-zz-initial",
+          "symbol": "\\sigma^0_{zz}",
+          "description": "initial zz component of the effective stress, \\sigma^0_{zz}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-xy-initial",
+          "symbol": "\\sigma^0_{xy}",
+          "description": "initial xy component of the effective stress, \\sigma^0_{xy}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-yz-initial",
+          "symbol": "\\sigma^0_{yz}",
+          "description": "initial yz component of the effective stress, \\sigma^0_{yz}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-xz-initial",
+          "symbol": "\\sigma^0_{xz}",
+          "description": "initial xz component of the effective stress, \\sigma^0_{xz}. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "state-parameter-initial",
+          "symbol": "\\psi_0",
+          "description": "initial state parameter, \\psi_0. If e_0 \\le 0, the initial state will be represented by this initial state parameter, and e_0 will be calculated by \\psi_0. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void-initial",
+          "symbol": "e_0",
+          "description": "initial void ratio, e_0. If e_0 \\ge 0, the initial state will be represented by this initial void ratio instead of initial state parameter, and \\psi_0 will be calculated by e_0. This parameter will not be updating.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "angle-psr",
+          "symbol": "\\alpha",
+          "description": "Current included angle between direction of major principal stress and z-coordinate frame of reference, \\alpha.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "bulk",
+          "symbol": "K",
+          "description": "current elastic bulk modulus, K.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "shear",
+          "symbol": "G",
+          "description": "current elastic shear modulus, G.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ratio-image",
+          "symbol": "M_{i,tc}",
+          "description": "current stress ratio for image state at the TC condition, M_{i,tc}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-image",
+          "symbol": "p_i",
+          "description": "current image stress, p_i.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stress-image-maximum",
+          "symbol": "p_{i,max}",
+          "description": "current allowable maximum image stress, p_{i,max}.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "state-parameter",
+          "symbol": "\\psi",
+          "description": "current state parameter, \\psi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "state-parameter-image",
+          "symbol": "\\psi_i",
+          "description": "current state parameter for image stress, \\psi_i.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "void",
+          "symbol": "e",
+          "description": "current void ratio, e.",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/models/norsand/doc/modelnorsand.html",
+  "usage": {
+    "assign": "zone cmodel assign norsand [range ...]",
+    "property": "zone property <keyword> <value> [range cmodel-name norsand]"
+  }
+}

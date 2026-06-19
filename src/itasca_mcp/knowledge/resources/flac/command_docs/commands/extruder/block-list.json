@@ -1,0 +1,40 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "block",
+    "list",
+    "sketch"
+  ],
+  "description": "Print information about blocks. If < range > is not supplied, information for all blocks is provided.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch block list",
+      "syntax": "sketch block list keyword [range]",
+      "keywords": [
+        {
+          "name": "extra",
+          "syntax": "extra <i>",
+          "description": "List FISH extra information. A valid integer index i must be supplied."
+        },
+        {
+          "name": "group",
+          "syntax": "group",
+          "description": "Print group information."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "Print comprehensive block information. This includes: groups, extras, zone multiplier, number of zones, and edge IDs for each block."
+        },
+        {
+          "name": "points",
+          "syntax": "points",
+          "description": "Print point IDs for each block."
+        }
+      ]
+    }
+  }
+}

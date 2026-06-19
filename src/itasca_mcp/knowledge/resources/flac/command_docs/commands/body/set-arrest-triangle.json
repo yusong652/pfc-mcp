@@ -1,0 +1,21 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "set",
+    "arrest",
+    "triangle",
+    "building-blocks",
+    "arrest-triangle"
+  ],
+  "description": "Specify how to split a wedge block. The default for this flag is false .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks set arrest-triangle",
+      "syntax": "building-blocks set arrest-triangle <b>",
+      "keywords": []
+    }
+  }
+}

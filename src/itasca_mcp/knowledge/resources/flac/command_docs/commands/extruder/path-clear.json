@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "path",
+    "clear",
+    "sketch"
+  ],
+  "description": "Clear all path data (segments, nodes).",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch path clear",
+      "syntax": "sketch path clear keyword",
+      "keywords": []
+    }
+  }
+}

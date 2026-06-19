@@ -1,0 +1,37 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "node",
+    "list",
+    "sketch",
+    "segment-node"
+  ],
+  "description": "Print information about nodes. If < range > is not supplied, information for all nodes is provided.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment-node list",
+      "syntax": "sketch segment-node list keyword",
+      "keywords": [
+        {
+          "name": "segments",
+          "syntax": "segments",
+          "description": "Print segment IDs for each node."
+        },
+        {
+          "name": "group",
+          "syntax": "group",
+          "description": "Print group information."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "Print comprehensive node information. This includes: groups, extras, edge IDs, position."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "block",
+    "multiplier",
+    "sketch"
+  ],
+  "description": "The command only applies to regular (3- or 4-sided) blocks with structured mesh. The multiplier for irregular blocks is always 1.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch block multiplier",
+      "syntax": "sketch block multiplier <i>[range]",
+      "keywords": []
+    }
+  }
+}

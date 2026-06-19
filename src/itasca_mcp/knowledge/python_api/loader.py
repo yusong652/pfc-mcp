@@ -17,7 +17,12 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, cast
 
-from itasca_mcp.knowledge.config import PFC_DOCS_SOURCE
+from itasca_mcp.knowledge.config import (
+    python_docs_root,
+    python_index_path,
+    python_keywords_path,
+    resolve,
+)
 
 
 class DocumentationLoader:
@@ -28,8 +33,8 @@ class DocumentationLoader:
     """
 
     @staticmethod
-    @lru_cache(maxsize=1)
-    def load_index() -> dict[str, Any]:
+    @lru_cache(maxsize=8)
+    def load_index(*, software: str) -> dict[str, Any]:
         """Load the main index file with caching.
 
         The index file contains:
@@ -55,7 +60,7 @@ class DocumentationLoader:
             >>> "BallBallContact.gap" in quick_ref  # Expanded from Contact.gap
             True
         """
-        index_path = PFC_DOCS_SOURCE / "index.json"
+        index_path = python_index_path(software)
         if not index_path.exists():
             raise FileNotFoundError(f"Index file not found: {index_path}")
 
@@ -71,8 +76,8 @@ class DocumentationLoader:
         return index
 
     @staticmethod
-    @lru_cache(maxsize=1)
-    def load_all_keywords() -> dict[str, list[str]]:
+    @lru_cache(maxsize=8)
+    def load_all_keywords(*, software: str) -> dict[str, list[str]]:
         """Load keywords from all modules with caching and merging.
 
         Aggregates keywords from:
@@ -102,14 +107,14 @@ class DocumentationLoader:
         all_keywords: defaultdict[str, list[str]] = defaultdict(list)
 
         # Load itasca top-level keywords
-        itasca_keywords_path = PFC_DOCS_SOURCE / "itasca_keywords.json"
+        itasca_keywords_path = python_keywords_path(software)
         if itasca_keywords_path.exists():
             with open(itasca_keywords_path, encoding="utf-8") as f:
                 data = json.load(f)
                 DocumentationLoader._merge_keywords(all_keywords, data.get("keywords", {}))
 
         # Load keywords from all sub-modules (recursive)
-        modules_dir = PFC_DOCS_SOURCE / "modules"
+        modules_dir = python_docs_root(software) / "modules"
         if modules_dir.exists():
             DocumentationLoader._load_keywords_recursive(modules_dir, all_keywords)
 
@@ -120,7 +125,7 @@ class DocumentationLoader:
         return dict(all_keywords)
 
     @staticmethod
-    def load_api_doc(api_name: str) -> dict[str, Any] | None:
+    def load_api_doc(api_name: str, *, software: str) -> dict[str, Any] | None:
         """Load documentation for a specific API or module.
 
         Args:
@@ -162,7 +167,7 @@ class DocumentationLoader:
             >>> len(doc["available_functions"])
             9
         """
-        index = DocumentationLoader.load_index()
+        index = DocumentationLoader.load_index(software=software)
 
         # Try 1: Get file reference from quick_ref (functions/methods)
         ref = index["quick_ref"].get(api_name)
@@ -177,7 +182,7 @@ class DocumentationLoader:
         # Parse file path and anchor
         # Format: "file_name.json#function_name"
         file_name, anchor = ref.split("#")
-        doc_path = PFC_DOCS_SOURCE / file_name
+        doc_path = resolve(file_name)
 
         if not doc_path.exists():
             return None
@@ -476,7 +481,7 @@ class DocumentationLoader:
                 DocumentationLoader._load_keywords_recursive(item, all_keywords)
 
     @staticmethod
-    def load_module(module_key: str) -> dict[str, Any] | None:
+    def load_module(module_key: str, *, software: str) -> dict[str, Any] | None:
         """Load module documentation by index key.
 
         Args:
@@ -497,7 +502,7 @@ class DocumentationLoader:
             >>> len(doc["functions"])
             9
         """
-        index = DocumentationLoader.load_index()
+        index = DocumentationLoader.load_index(software=software)
         modules = index.get("modules", {})
 
         if module_key not in modules:
@@ -515,7 +520,7 @@ class DocumentationLoader:
             }
 
         # Load full module documentation
-        doc_path = PFC_DOCS_SOURCE / file_path
+        doc_path = resolve(file_path)
         if not doc_path.exists():
             # Return basic info from index
             return {
@@ -528,7 +533,7 @@ class DocumentationLoader:
             return cast(dict[str, Any], json.load(f))
 
     @staticmethod
-    def load_function(module_key: str, func_name: str) -> dict[str, Any] | None:
+    def load_function(module_key: str, func_name: str, *, software: str) -> dict[str, Any] | None:
         """Load function documentation from a module.
 
         Args:
@@ -551,7 +556,7 @@ class DocumentationLoader:
             >>> doc["signature"]
             "itasca.ball.create(radius: float, centroid: vec, id: int = None) -> Ball"
         """
-        module_doc = DocumentationLoader.load_module(module_key)
+        module_doc = DocumentationLoader.load_module(module_key, software=software)
         if not module_doc:
             return None
 
@@ -563,7 +568,7 @@ class DocumentationLoader:
         return None
 
     @staticmethod
-    def load_object(object_name: str) -> dict[str, Any] | None:
+    def load_object(object_name: str, *, software: str) -> dict[str, Any] | None:
         """Load object documentation by class name.
 
         Args:
@@ -586,7 +591,7 @@ class DocumentationLoader:
             >>> "position" in doc["method_groups"]
             True
         """
-        index = DocumentationLoader.load_index()
+        index = DocumentationLoader.load_index(software=software)
         objects = index.get("objects", {})
 
         concrete_contact_type = None
@@ -611,7 +616,7 @@ class DocumentationLoader:
             return object_doc
 
         # Load full object documentation
-        doc_path = PFC_DOCS_SOURCE / file_path
+        doc_path = resolve(file_path)
         if not doc_path.exists():
             object_doc = cast(dict[str, Any], deepcopy(object_info))
             if concrete_contact_type:
@@ -625,7 +630,7 @@ class DocumentationLoader:
             return object_doc
 
     @staticmethod
-    def load_method(object_name: str, method_name: str) -> dict[str, Any] | None:
+    def load_method(object_name: str, method_name: str, *, software: str) -> dict[str, Any] | None:
         """Load method documentation from an object.
 
         Args:
@@ -647,7 +652,7 @@ class DocumentationLoader:
             >>> doc["signature"]
             "ball.pos() -> vec"
         """
-        object_doc = DocumentationLoader.load_object(object_name)
+        object_doc = DocumentationLoader.load_object(object_name, software=software)
         if not object_doc:
             return None
 

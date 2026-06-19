@@ -1,0 +1,354 @@
+{
+  "category": "zone",
+  "search_keywords": [
+    "dynamic",
+    "zone"
+  ],
+  "description": "Set parameters for a dynamic model (only available with the dynamic model option – see Dynamic Analysis . These parameters apply to zones only, other model elements may have different values.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "zone dynamic",
+      "syntax": "zone dynamic keyword",
+      "description": "This command sets parameters for a dynamic model (only available with the dynamic model option – see Dynamic Analysis. These parameters apply to zones only, other model elements may have different values.",
+      "keywords": [
+        {
+          "name": "active",
+          "syntax": "active b"
+        },
+        {
+          "name": "damping",
+          "syntax": "damping keyword <range>",
+          "description": "This command selects the damping type for the dynamic analysis. Damping in dynamic analysis is described in the topic Mechanical Damping and Material Response. Damping values can vary from region to region within the model. The following keywords apply:"
+        },
+        {
+          "name": "damping-artificial-viscosity",
+          "syntax": "artificial-viscosity f1 f2",
+          "description": "Sets the von Neumann (f2) and Landshoff (f2) constants, which in general should both be 1.0. This damping only applies to the main grid. See the topic Artificial Viscosity."
+        },
+        {
+          "name": "damping-combined",
+          "syntax": "combined f <gradient v >",
+          "description": "combined local damping (see Combined Damping). The damping value is 0.8, by default. A gradient map be applied to vary the parameter in space."
+        },
+        {
+          "name": "damping-local",
+          "syntax": "local f <gradient v >",
+          "description": "local damping (see Local Nonviscous Damping). The damping value is 0.8, by default. A gradient map be applied to vary the parameter in space."
+        },
+        {
+          "name": "damping-hysteretic",
+          "syntax": "hysteretic keyword",
+          "description": "Hysteretic damping is invoked (see Hysteretic Damping). The following keywords and coefficients are the functions available to represent the variation in G / Gmax."
+        },
+        {
+          "name": "damping-hysteretic-default",
+          "syntax": "default f1 f2",
+          "description": "Default model represented by a cubic equation with two parameters."
+        },
+        {
+          "name": "damping-hysteretic-hardin",
+          "syntax": "hardin f1",
+          "description": "Hardin/Dernevich equation with one parameter."
+        },
+        {
+          "name": "damping-hysteretic-off",
+          "syntax": "off",
+          "description": "Turns hysteretic damping off."
+        },
+        {
+          "name": "damping-hysteretic-sig3",
+          "syntax": "sig3 f1 f2 f3",
+          "description": "sigmoidal equation with three parameters."
+        },
+        {
+          "name": "damping-hysteretic-sig4",
+          "syntax": "sig4 f1 f2 f3 f4",
+          "description": "sigmoidal equation with four parameters."
+        },
+        {
+          "name": "damping-rayleigh",
+          "syntax": "rayleigh <f1 <gradient v > f2 <gradient v > <mass> <stiffness>>",
+          "description": "For dynamic calculations, a certain fraction of critical damping is usually required over a given frequency range. This type of damping is known as Rayleigh damping (see Rayleigh Damping), where f1 = the fraction of critical damping operating at center frequency of f2. (NOTE: Input frequencies for the program are in cycles/sec or Hertz – not radians/sec.) The optional modifiers stiffness and mass denote that the damping is to be restricted to stiffness- or mass-proportional, respectively. If they are left out, normal Rayleigh damping is used."
+        },
+        {
+          "name": "free-field",
+          "syntax": "free-field keyword",
+          "description": "Controls the free-field boundary condition (available only for dynamic option; see Free-Field Boundaries). The following keywords are also available instead of a boolean value:"
+        },
+        {
+          "name": "free-field-b",
+          "syntax": "b",
+          "description": "If on, creates free field boundary zones. If off, destroys the free field boundary zones and the rest of the associated apply conditions."
+        },
+        {
+          "name": "free-field-plane-x",
+          "syntax": "plane-x",
+          "description": "Creates free field zones only on the planes perpendicular to the X axis. So free field zones will be created on the -X and +X sides of the model, but not on the -Y and +Y side of the mode, and corner zones will not be created. This is useful when FLAC3D is used to model 2D dynamic problems."
+        },
+        {
+          "name": "free-field-plane-y",
+          "syntax": "plane-y",
+          "description": "Creates free field zones only on the planes perpendicular to the Y axis. So free field zones will be created on the -Y and +Y sides of the model, but not on the -X and +X side of the mode, and corner zones will not be created. This is useful when FLAC3D is used to model 2D dynamic problems."
+        },
+        {
+          "name": "list",
+          "syntax": "list",
+          "description": "dynamic calculation-mode information"
+        },
+        {
+          "name": "multi-step",
+          "syntax": "multi-step b",
+          "description": "turns multi-stepping on or off (see Dynamic Multi-stepping). Multi-stepping speeds up calculations in dynamic models which have a large zone size or modulus contrast. Areas of the grid with critical timesteps greater than the global critical timestep are updated less frequently, thus saving execution time. The logic is general in the sense that all zones, gridpoints and structures are included. The user does not need to do anything beyond switching it on."
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total f",
+          "description": "Specifies the accumulated zone dynamic time, defined as the sum of all the timesteps over which zone dynamic mode is active. Once set, dynamic time will continue to accumulate with subsequent cycles."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.dynamic.html#zone.dynamic"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "zone dynamic",
+      "syntax": "zone dynamic keyword",
+      "description": "This command sets parameters for a dynamic model (only available with the dynamic model option – see Dynamic Analysis. These parameters apply to zones only, other model elements may have different values.",
+      "keywords": [
+        {
+          "name": "active",
+          "syntax": "active b"
+        },
+        {
+          "name": "damping",
+          "syntax": "damping keyword <range>",
+          "description": "This command selects the damping type for the dynamic analysis. Damping in dynamic analysis is described in the topic Mechanical Damping and Material Response. Damping values can vary from region to region within the model. The following keywords apply:"
+        },
+        {
+          "name": "damping-artificial-viscosity",
+          "syntax": "artificial-viscosity f1 f2",
+          "description": "Sets the von Neumann (f2) and Landshoff (f2) constants, which in general should both be 1.0. This damping only applies to the main grid. See the topic Artificial Viscosity."
+        },
+        {
+          "name": "damping-combined",
+          "syntax": "combined f <gradient v >",
+          "description": "combined local damping (see Combined Damping). For example, for a target 0.05 (5%) damping ratio the input should be \\(0.05*\\pi\\). A gradient map be applied to vary the parameter in space."
+        },
+        {
+          "name": "damping-local",
+          "syntax": "local f <gradient v >",
+          "description": "local damping (see Local Nonviscous Damping). For example, for a target 0.05 (5%) damping ratio the input should be \\(0.05*\\pi\\). A gradient map be applied to vary the parameter in space."
+        },
+        {
+          "name": "damping-hysteretic",
+          "syntax": "hysteretic keyword",
+          "description": "Hysteretic damping is invoked (see Hysteretic Damping). The following keywords and coefficients are the functions available to represent the variation in G / Gmax."
+        },
+        {
+          "name": "damping-hysteretic-default",
+          "syntax": "default f1 f2",
+          "description": "Default model represented by a cubic equation with two parameters."
+        },
+        {
+          "name": "damping-hysteretic-hardin",
+          "syntax": "hardin f1",
+          "description": "Hardin/Dernevich equation with one parameter."
+        },
+        {
+          "name": "damping-hysteretic-off",
+          "syntax": "off",
+          "description": "Turns hysteretic damping off."
+        },
+        {
+          "name": "damping-hysteretic-sigmoidal-3",
+          "syntax": "sigmoidal-3 f1 f2 f3",
+          "description": "sigmoidal equation with three parameters."
+        },
+        {
+          "name": "damping-hysteretic-sigmoidal-4",
+          "syntax": "sigmoidal-4 f1 f2 f3 f4",
+          "description": "sigmoidal equation with four parameters."
+        },
+        {
+          "name": "damping-hysteretic-reduction-minimum",
+          "syntax": "reduction-minimum",
+          "description": "Sets the minimum (lower-bound) of the modulus reduction factor. The default is 0.005."
+        },
+        {
+          "name": "damping-rayleigh",
+          "syntax": "rayleigh <f1 <gradient v > f2 <gradient v > <mass> <stiffness>>",
+          "description": "For dynamic calculations, a certain fraction of critical damping is usually required over a given frequency range. This type of damping is known as Rayleigh damping (see Rayleigh Damping), where f1 = the fraction of critical damping operating at center frequency of f2. (NOTE: Input frequencies for the program are in cycles/sec or Hertz – not radians/sec.) The optional modifiers stiffness and mass denote that the damping is to be restricted to stiffness- or mass-proportional, respectively. If they are left out, normal Rayleigh damping is used."
+        },
+        {
+          "name": "free-field",
+          "syntax": "free-field keyword",
+          "description": "Controls the free-field boundary condition (available only for dynamic option; see Free-Field Boundaries). The following keywords are also available instead of a boolean value:"
+        },
+        {
+          "name": "free-field-adummy",
+          "syntax": "b",
+          "description": "If on, creates free field boundary zones. If off, destroys the free field boundary zones and the rest of the associated apply conditions."
+        },
+        {
+          "name": "free-field-plane-x",
+          "syntax": "plane-x",
+          "description": "Creates free field zones only on the planes perpendicular to the X axis. So free field zones will be created on the -X and +X sides of the model, but not on the -Y and +Y side of the mode, and corner zones will not be created. This is useful when FLAC3D is used to model 2D dynamic problems."
+        },
+        {
+          "name": "free-field-plane-y",
+          "syntax": "plane-y",
+          "description": "Creates free field zones only on the planes perpendicular to the Y axis. So free field zones will be created on the -Y and +Y sides of the model, but not on the -X and +X side of the mode, and corner zones will not be created. This is useful when FLAC3D is used to model 2D dynamic problems."
+        },
+        {
+          "name": "list",
+          "syntax": "list",
+          "description": "dynamic calculation-mode information"
+        },
+        {
+          "name": "multi-step",
+          "syntax": "multi-step b",
+          "description": "turns multi-stepping on or off (see Dynamic Multi-stepping). Multi-stepping speeds up calculations in dynamic models which have a large zone size or modulus contrast. Areas of the grid with critical timesteps greater than the global critical timestep are updated less frequently, thus saving execution time. The logic is general in the sense that all zones, gridpoints and structures are included. The user does not need to do anything beyond switching it on."
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total f",
+          "description": "Specifies the accumulated zone dynamic time, defined as the sum of all the timesteps over which zone dynamic mode is active. Once set, dynamic time will continue to accumulate with subsequent cycles."
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/flac3d/zone/doc/manual/zone_manual/zone_commands/cmd_zone.dynamic.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "zone dynamic",
+      "syntax": "zone dynamic keyword",
+      "keywords": [
+        {
+          "name": "active",
+          "syntax": "active <b>",
+          "description": "Turn dynamic-module computations on or off. Active by default once the dynamic process is configured."
+        },
+        {
+          "name": "damping",
+          "syntax": "damping keyword <range>",
+          "description": "Set the damping scheme for dynamic zones in the range. Sub-keywords: artificial-viscosity, combined, hysteretic, local, maxwell, rayleigh."
+        },
+        {
+          "name": "damping-artificial-viscosity",
+          "syntax": "artificial-viscosity <f1> <f2>",
+          "description": "Apply artificial viscosity (linear bulk viscosity f1 and quadratic bulk viscosity f2) to damp out spurious oscillations in zones in the range."
+        },
+        {
+          "name": "damping-combined",
+          "syntax": "combined <f> <gradient <v>>",
+          "description": "Apply combined damping with fraction f to zones in the range. Optional gradient v varies the damping fraction linearly through the zone."
+        },
+        {
+          "name": "damping-local",
+          "syntax": "local <f> <gradient <v>>",
+          "description": "Apply local damping with fraction f to zones in the range. Optional gradient v varies the damping fraction linearly. The local algorithm is mass-proportional and adapts to the energy of motion."
+        },
+        {
+          "name": "damping-maxwell",
+          "syntax": "maxwell <f>",
+          "description": "Apply Maxwell-element damping with relaxation parameter f to zones in the range (frequency-dependent dashpot in parallel with the constitutive stiffness)."
+        },
+        {
+          "name": "damping-rayleigh",
+          "syntax": "rayleigh <<f1> <gradient <v>> <f2> <gradient <v>> <mass> <stiffness>>",
+          "description": "Apply Rayleigh damping to zones in the range. f1 is the fraction of critical damping; f2 is the centre frequency. Either or both mass-proportional and stiffness-proportional components may be selected with the mass and stiffness sub-keywords (default is both)."
+        },
+        {
+          "name": "damping-hysteretic",
+          "syntax": "hysteretic keyword",
+          "description": "Apply hysteretic damping (strain-amplitude-dependent shear modulus reduction). Sub-keywords select the backbone curve: default, hardin, sigmoidal-3, sigmoidal-4, off; reduction-minimum sets a floor on the modulus reduction."
+        },
+        {
+          "name": "damping-hysteretic-default",
+          "syntax": "default <f1> <f2>",
+          "description": "Use the default sigmoidal modulus-reduction curve with parameters f1, f2."
+        },
+        {
+          "name": "damping-hysteretic-hardin",
+          "syntax": "hardin <f1>",
+          "description": "Use the Hardin/Drnevich modulus-reduction curve with reference strain f1."
+        },
+        {
+          "name": "damping-hysteretic-sigmoidal-3",
+          "syntax": "sigmoidal-3 <f1> <f2> <f3>",
+          "description": "Use a three-parameter sigmoidal modulus-reduction curve."
+        },
+        {
+          "name": "damping-hysteretic-sigmoidal-4",
+          "syntax": "sigmoidal-4 <f1> <f2> <f3> <f4>",
+          "description": "Use a four-parameter sigmoidal modulus-reduction curve."
+        },
+        {
+          "name": "damping-hysteretic-off",
+          "syntax": "off",
+          "description": "Disable hysteretic damping in the range."
+        },
+        {
+          "name": "damping-hysteretic-reduction-minimum",
+          "syntax": "reduction-minimum <f>",
+          "description": "Floor on the hysteretic modulus reduction; the secant shear modulus will not fall below f times its small-strain value."
+        },
+        {
+          "name": "free-field",
+          "syntax": "free-field keyword",
+          "description": "Configure or toggle free-field boundary conditions. Sub-keywords: on/off (boolean), plane-x, plane-y (3D only)."
+        },
+        {
+          "name": "free-field-b",
+          "syntax": "<b>",
+          "description": "Turn free-field boundary conditions on or off (boolean form). When on, FLAC3D creates the surrounding free-field columns/planes used to absorb outgoing dynamic waves."
+        },
+        {
+          "name": "free-field-plane-x",
+          "syntax": "plane-x",
+          "description": "Use the free-field condition in the y-z plane (3D only)."
+        },
+        {
+          "name": "free-field-plane-y",
+          "syntax": "plane-y",
+          "description": "Use the free-field condition in the x-z plane (3D only)."
+        },
+        {
+          "name": "list",
+          "syntax": "list",
+          "description": "List current dynamic-module settings (configured/active state, multi-step state, total accumulated time, safety factor, damping summary)."
+        },
+        {
+          "name": "multi-step",
+          "syntax": "multi-step <b>",
+          "description": "Turn multi-step dynamic mode on or off. When on, the dynamic solver advances multiple stable sub-steps per global cycle, allowing larger global timesteps."
+        },
+        {
+          "name": "safety-factor",
+          "syntax": "safety-factor <f>",
+          "description": "Set the safety factor applied to the dynamic critical timestep. Smaller values give a more conservative (smaller) actual timestep."
+        },
+        {
+          "name": "time-total",
+          "syntax": "time-total <f>",
+          "description": "Set the total accumulated dynamic time."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,619 @@
+{
+  "module": "itasca.gridpointarray",
+  "description": "Array interface for FLAC gridpoints.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.gridpointarray.html",
+  "functions": [
+    {
+      "name": "accel",
+      "signature": "itasca.gridpointarray.accel() -> (array double{gridpoint,3})",
+      "description": "Get a NumPy array of the acceleration of each gridpoint.",
+      "returns": {
+        "type": "(array double{gridpoint,3})"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "itasca.gridpointarray.disp() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint displacement.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.gridpointarray.extra(slot: int) -> array float{gridpoint} or float{gridpoint,3}",
+      "description": "Get the gridpoint extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{gridpoint} or float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.gridpointarray.fill_disp(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_force_app",
+      "signature": "itasca.gridpointarray.fill_force_app(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint applied force (including forces due to gravity). The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_force_load",
+      "signature": "itasca.gridpointarray.fill_force_load(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint applied force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_force_unbal",
+      "signature": "itasca.gridpointarray.fill_force_unbal(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint unbalanced force. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.gridpointarray.fill_pos(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.gridpointarray.fill_vel(data: array float{gridpoint,3}) -> None",
+      "description": "Fill an existing array with the gridpoint velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fixity",
+      "signature": "itasca.gridpointarray.fixity() -> array int{gridpoint,3}",
+      "description": "Get a NumPy array of the gridpoint fixity condition.",
+      "returns": {
+        "type": "array int{gridpoint,3}"
+      }
+    },
+    {
+      "name": "flow",
+      "signature": "itasca.gridpointarray.flow() -> array double{gridpoint}",
+      "description": "Get a numpy array of the unbalanced flow discharge at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_load",
+      "signature": "itasca.gridpointarray.fluid_load() -> array double{gridpoint}",
+      "description": "Get a numpy array of the additional fluid load at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_modulus",
+      "signature": "itasca.gridpointarray.fluid_modulus() -> array double{gridpoint}",
+      "description": "Get a numpy array of the fluid bulk modulus at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_modulus_confined",
+      "signature": "itasca.gridpointarray.fluid_modulus_confined() -> array double{gridpoint}",
+      "description": "Get a numpy array of the fluid flow confined modulus times nodal volume at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_tension",
+      "signature": "itasca.gridpointarray.fluid_tension() -> array double{gridpoint}",
+      "description": "Get a numpy array of the fluid tension at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_unbal",
+      "signature": "itasca.gridpointarray.fluid_unbal() -> array double{gridpoint}",
+      "description": "Get a numpy array of the fluid out-of-balance flow at each gridpoint: used in the fastflow solution scheme.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "fluid_vol_inv",
+      "signature": "itasca.gridpointarray.fluid_vol_inv() -> array double{gridpoint}",
+      "description": "Get a numpy array of the inverse of the fluid nodal volume at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "flux",
+      "signature": "itasca.gridpointarray.flux() -> array double{gridpoint}",
+      "description": "Get the unbalanced thermal flux at a each gridpoint as a NumPy array.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "force_app",
+      "signature": "itasca.gridpointarray.force_app() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint applied force. This includes all sources, including forces due to gravity.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "force_load",
+      "signature": "itasca.gridpointarray.force_load() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint applied force.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "force_unbal",
+      "signature": "itasca.gridpointarray.force_unbal() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint unbalanced force.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.gridpointarray.ids() -> array int{gridpoint}",
+      "description": "Get the gridpoint ids as an array.",
+      "returns": {
+        "type": "array int{gridpoint}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.gridpointarray.in_group(group_name: str, slot=1) -> array bool{gridpoint}",
+      "description": "Return gridpoint group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "array bool{gridpoint}"
+      }
+    },
+    {
+      "name": "live_mechanical",
+      "signature": "itasca.gridpointarray.live_mechanical() -> array bool{nzone}",
+      "description": "Return an array of True/False values for each gridpoint, a value of True indicates that a gridpoint is attached to at least one zone with an active mechanical model.",
+      "returns": {
+        "type": "array bool{nzone}"
+      }
+    },
+    {
+      "name": "porepressure",
+      "signature": "itasca.gridpointarray.porepressure() -> array double{gridpoint}",
+      "description": "Get a numpy array of the porepressure at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.gridpointarray.pos() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint centroid location.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.gridpointarray.set_disp(data: array float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.gridpointarray.set_extra(slot: int, data: array float{gridpoint} or float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{gridpoint} or float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fixity",
+      "signature": "itasca.gridpointarray.set_fixity(array bool{gridpoint,3}) -> None",
+      "description": "Set the gridpoint fixity condition.",
+      "parameters": [
+        {
+          "name": "array bool{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_flow",
+      "signature": "itasca.gridpointarray.set_flow(array double{gridpoint,3}) -> None",
+      "description": "Set the unbalanced flow discharge at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_load",
+      "signature": "itasca.gridpointarray.set_fluid_load(array double{gridpoint,3}) -> None",
+      "description": "Set the additional fluid load at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_modulus",
+      "signature": "itasca.gridpointarray.set_fluid_modulus(array double{gridpoint,3}) -> None",
+      "description": "Set the fluid bulk modulus at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_tension",
+      "signature": "itasca.gridpointarray.set_fluid_tension(array double{gridpoint,3}) -> None",
+      "description": "Set the fluid tension at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fluid_unbal",
+      "signature": "itasca.gridpointarray.set_fluid_unbal(array double{gridpoint,3}) -> None",
+      "description": "Set the fluid out-of-balance flow at each gridpoin with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_app",
+      "signature": "itasca.gridpointarray.set_force_app(data: array float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint applied force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_load",
+      "signature": "itasca.gridpointarray.set_force_load(data: array float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint applied force from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.gridpointarray.set_group(membership: array bool{gridpoint}, group_name: str, slot=1) -> None",
+      "description": "Set gridpoint group from an array. Where membership True set the corresponding gridpoint to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{gridpoint}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_porepressure",
+      "signature": "itasca.gridpointarray.set_porepressure(array double{gridpoint,3}) -> None",
+      "description": "Set the pore pressure at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pos",
+      "signature": "itasca.gridpointarray.set_pos(data: array float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint centroid location from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temperature",
+      "signature": "itasca.gridpointarray.set_temperature(array double{gridpoint,3}) -> None",
+      "description": "Set the temperature at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.gridpointarray.set_vel(data: array float{gridpoint,3}) -> None",
+      "description": "Set the gridpoint velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stiffness",
+      "signature": "itasca.gridpointarray.stiffness() -> array double{gridpoint}",
+      "description": "Get a NumPy array of the accumulated gridpoint effective stiffness.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "temperature",
+      "signature": "itasca.gridpointarray.temperature() -> array double{gridpoint}",
+      "description": "Get a numpy array of the temperature at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.gridpointarray.vel() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint velocity.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "zones",
+      "signature": "itasca.gridpointarray.zones() -> tuple of tuples of int",
+      "description": "Return the indices of the zones which each gridpoint is attached to. The indices are relative to the arrays returned by the zonearray interface functions. Note that the return type is not a numpy array in this case.",
+      "returns": {
+        "type": "tuple of tuples of int"
+      }
+    }
+  ]
+}

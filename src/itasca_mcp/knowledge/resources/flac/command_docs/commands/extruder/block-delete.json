@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "block",
+    "delete",
+    "sketch"
+  ],
+  "description": "Delete block(s). If < range > is not supplied, all blocks are deleted.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch block delete",
+      "syntax": "sketch block delete [range]",
+      "keywords": []
+    }
+  }
+}

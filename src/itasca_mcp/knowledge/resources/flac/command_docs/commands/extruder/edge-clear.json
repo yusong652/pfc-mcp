@@ -1,0 +1,19 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "edge",
+    "clear",
+    "sketch"
+  ],
+  "description": "Clear all zone size and ratio settings on edges. All defined blocks in the set will also be removed.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch edge clear",
+      "syntax": "sketch edge clear",
+      "keywords": []
+    }
+  }
+}

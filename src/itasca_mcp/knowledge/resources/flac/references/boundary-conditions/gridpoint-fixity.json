@@ -1,0 +1,85 @@
+{
+  "name": "gridpoint-fixity",
+  "dimension": "mixed",
+  "full_name": "Gridpoint Fixity and Direct Gridpoint Conditions",
+  "description": "Gridpoint fix/free commands constrain or release specific degrees of freedom or scalar gridpoint quantities. They are useful for direct nodal constraints and for non-surface selections.",
+  "primary_commands": [
+    "zone gridpoint fix",
+    "zone gridpoint free",
+    "zone gridpoint initialize",
+    "zone gridpoint system"
+  ],
+  "keyword_groups": [
+    {
+      "group": "mechanical velocity fixity",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z"
+      ],
+      "notes": [
+        "FLAC2D uses x/y translational degrees of freedom; z velocity fixity is FLAC3D-only.",
+        "Use 'zone gridpoint free velocity-x' or related keywords to release a condition.",
+        "Local / normal / tangential components are FACE-apply concepts only — they are NOT accepted by 'zone gridpoint fix'. Use 'zone face apply velocity-local 0 ...' instead."
+      ]
+    },
+    {
+      "group": "mechanical acceleration fixity",
+      "keywords": [
+        "acceleration",
+        "acceleration-x",
+        "acceleration-y",
+        "acceleration-z"
+      ],
+      "notes": [
+        "Requires dynamic configuration (model configure dynamic).",
+        "z component is FLAC3D-only; FLAC2D uses x/y."
+      ]
+    },
+    {
+      "group": "applied force",
+      "keywords": [
+        "force-applied",
+        "force-applied-x",
+        "force-applied-y",
+        "force-applied-z"
+      ],
+      "notes": [
+        "Direct forces do not account for boundary face area; use face stress conditions when traction is intended."
+      ]
+    },
+    {
+      "group": "coupled scalar conditions",
+      "keywords": [
+        "pore-pressure",
+        "temperature",
+        "source",
+        "well"
+      ],
+      "keywords_3d_only": [
+        "head"
+      ],
+      "notes": [
+        "Fluid and thermal keywords require the corresponding model configuration when solving coupled processes.",
+        "'source' is a heat-source term (thermal); 'well' is a fluid source/sink.",
+        "'head' (hydraulic-head fixity) is accepted by 'zone gridpoint fix' in FLAC3D 9.0 but NOT in FLAC2D 9.0 — use 'pore-pressure' on FLAC2D gridpoints."
+      ]
+    }
+  ],
+  "common_patterns": [
+    {
+      "name": "Fixed base in vertical direction",
+      "commands": [
+        "zone gridpoint fix velocity-y 0 range position-y 0"
+      ]
+    },
+    {
+      "name": "Release a pore-pressure constraint",
+      "commands": [
+        "zone gridpoint free pore-pressure range group 'drain'"
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/flac3d/docproject/source/modeling/problemsolving/boundary_conditions.html"
+}

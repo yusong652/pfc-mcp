@@ -1,0 +1,762 @@
+{
+  "class": "Node",
+  "description": "Node object instance in itasca.interface.node.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.interface.node.Node.html",
+  "note": "Do not instantiate directly; use itasca.interface.node module functions.",
+  "method_groups": {
+    "area": [
+      "area"
+    ],
+    "disp": [
+      "disp",
+      "disp_shear",
+      "disp_shear_set",
+      "disp_shear_x",
+      "disp_shear_x_set",
+      "disp_shear_y",
+      "disp_shear_y_set",
+      "disp_shear_z",
+      "disp_shear_z_set"
+    ],
+    "extra": [
+      "extra",
+      "set_extra"
+    ],
+    "group": [
+      "group",
+      "group_remove",
+      "set_group"
+    ],
+    "groups": [
+      "groups"
+    ],
+    "id": [
+      "id"
+    ],
+    "in": [
+      "in_group"
+    ],
+    "normal": [
+      "normal",
+      "normal_x",
+      "normal_y",
+      "normal_z"
+    ],
+    "penetration": [
+      "penetration"
+    ],
+    "pos": [
+      "pos",
+      "pos_set",
+      "pos_x",
+      "pos_x_set",
+      "pos_y",
+      "pos_y_set",
+      "pos_z",
+      "pos_z_set"
+    ],
+    "pp": [
+      "pp"
+    ],
+    "prop": [
+      "prop",
+      "prop_set"
+    ],
+    "slip": [
+      "slip",
+      "slip_set"
+    ],
+    "stress": [
+      "stress_normal",
+      "stress_shear",
+      "stress_shear_set",
+      "stress_shear_x",
+      "stress_shear_x_set",
+      "stress_shear_y",
+      "stress_shear_y_set",
+      "stress_shear_z",
+      "stress_shear_z_set"
+    ],
+    "tol": [
+      "tol",
+      "tol_set"
+    ],
+    "valid": [
+      "valid"
+    ],
+    "vel": [
+      "vel",
+      "vel_set",
+      "vel_x",
+      "vel_x_set",
+      "vel_y",
+      "vel_y_set",
+      "vel_z",
+      "vel_z_set"
+    ]
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "interface.node.area() -> float",
+      "description": "(3D only) Get the effective area of the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp",
+      "signature": "interface.node.disp(i: int) -> vec or float",
+      "description": "Get the displacement vector for the interface node. Returns a vector, unless an optional component argument i is supplied, in which case it returns the component value.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "vec or float"
+      }
+    },
+    {
+      "name": "disp_shear",
+      "signature": "interface.node.disp_shear() -> vec or float",
+      "description": "Get the shear displacement vector for the interface node. Returns a vector, unless an optional component argument i is supplied, in which case it returns the component value.",
+      "returns": {
+        "type": "vec or float"
+      }
+    },
+    {
+      "name": "disp_shear_set",
+      "signature": "interface.node.disp_shear_set(v: vec) -> None",
+      "description": "Set the shear displacement vector for the interface node.",
+      "parameters": [
+        {
+          "name": "v",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "disp_shear_x",
+      "signature": "interface.node.disp_shear_x() -> float",
+      "description": "Get the x-component of the shear displacement vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear_x_set",
+      "signature": "interface.node.disp_shear_x_set(f: float) -> None",
+      "description": "Set the shear displacement vector x-component for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "disp_shear_y",
+      "signature": "interface.node.disp_shear_y() -> float",
+      "description": "Get the y-component of the shear displacement vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear_y_set",
+      "signature": "interface.node.disp_shear_y_set(f: float) -> None",
+      "description": "Set the shear displacement vector y-component for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "disp_shear_z",
+      "signature": "interface.node.disp_shear_z() -> float",
+      "description": "Get the z-component of the shear displacement vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear_z_set",
+      "signature": "interface.node.disp_shear_z_set(f: float) -> None",
+      "description": "Set the shear displacement vector z-component for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "interface.node.extra(slot: int) -> any",
+      "description": "Get the node extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "interface.node.group([slot: str or int]) -> str",
+      "description": "Get the node group name in a given slot.",
+      "parameters": [
+        {
+          "name": "[slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "interface.node.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the node. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "interface.node.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this node is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "interface.node.id() -> int",
+      "description": "Get the node id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "interface.node.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the node is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "normal",
+      "signature": "interface.node.normal() -> vec",
+      "description": "Get the normal vector for the interface node, which is an area (in 3D) or length (in 2D) weighted average of the interface elements it is connected to. Returns a vector.",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "normal_x",
+      "signature": "interface.node.normal_x() -> float",
+      "description": "Get the x-component for the interface normal.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_y",
+      "signature": "interface.node.normal_y() -> float",
+      "description": "Get the y-component for the interface normal.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_z",
+      "signature": "interface.node.normal_z() -> float",
+      "description": "Get the z-component for the interface normal.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "penetration",
+      "signature": "interface.node.penetration(i: int) -> float",
+      "description": "Get interface node penetration with the contacting zone face (only valid after cycling). A value <= 0 is returned if there is no contact.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "interface.node.pos() -> vec",
+      "description": "Get the position vector for the interface node.",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_set",
+      "signature": "interface.node.pos_set(v: vec) -> None",
+      "description": "Set the position vector for the interface node.",
+      "parameters": [
+        {
+          "name": "v",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "interface.node.pos_x() -> float",
+      "description": "Get the the x-component of the position vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_x_set",
+      "signature": "interface.node.pos_x_set(f: float) -> None",
+      "description": "Set the x-component of the position vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "interface.node.pos_y() -> float",
+      "description": "Get the the y-component of the position vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y_set",
+      "signature": "interface.node.pos_y_set(f: float) -> None",
+      "description": "Set the y-component of the position vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "interface.node.pos_z() -> float",
+      "description": "Get the the z-component of the position vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z_set",
+      "signature": "interface.node.pos_z_set(f: float) -> None",
+      "description": "Set the z-component of the position vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "interface.node.pp() -> float",
+      "description": "Get the pore pressure of the node (only valid after cycling).",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "interface.node.prop(string name) -> value v",
+      "description": "Get property name of this interface node.",
+      "parameters": [
+        {
+          "name": "string name",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "value v"
+      }
+    },
+    {
+      "name": "prop_set",
+      "signature": "interface.node.prop_set(string name, value v) -> None",
+      "description": "Set property name of this interface node to value v.",
+      "parameters": [
+        {
+          "name": "string name",
+          "required": true
+        },
+        {
+          "name": "value v",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "interface.node.set_extra(slot: int, value: any) -> None",
+      "description": "Set the node extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "interface.node.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the node group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int[",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int]",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "slip",
+      "signature": "interface.node.slip() -> int",
+      "description": "Get the slip status (0-2) of the interface node: 0 is for shear-now; 1 is for shear-past; and 2 is for no shear failure now or in the past.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "slip_set",
+      "signature": "interface.node.slip_set(i: int) -> None",
+      "description": "Set the slip status (0-2) of the interface node: 0 is for shear-now; 1 is for shear-past; and 2 is for no shear failure now or in the past.",
+      "parameters": [
+        {
+          "name": "i",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stress_normal",
+      "signature": "interface.node.stress_normal() -> float",
+      "description": "Get normal stress at the node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_shear",
+      "signature": "interface.node.stress_shear() -> vec",
+      "description": "Get the shear stress vector for the interface node.",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "stress_shear_set",
+      "signature": "interface.node.stress_shear_set(v: vec) -> None",
+      "description": "Get the shear stress vector for the interface node.",
+      "parameters": [
+        {
+          "name": "v",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stress_shear_x",
+      "signature": "interface.node.stress_shear_x() -> float",
+      "description": "Get the x-component of the shear stress vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_shear_x_set",
+      "signature": "interface.node.stress_shear_x_set(f: float) -> None",
+      "description": "Set the x-component of the shear stress vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stress_shear_y",
+      "signature": "interface.node.stress_shear_y() -> float",
+      "description": "Get the y-component of the shear stress vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_shear_y_set",
+      "signature": "interface.node.stress_shear_y_set(f: float) -> None",
+      "description": "Set the y-component of the shear stress vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stress_shear_z",
+      "signature": "interface.node.stress_shear_z() -> float",
+      "description": "Get the z-component of the shear stress vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_shear_z_set",
+      "signature": "interface.node.stress_shear_z_set(f: float) -> None",
+      "description": "Set the z-component of the shear stress vector for the interface node.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "tol",
+      "signature": "interface.node.tol() -> float",
+      "description": "Get the interface node contact tolerance, a dimensionless measure of how close a face has to be to register a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "tol_set",
+      "signature": "interface.node.tol_set(f: float) -> None",
+      "description": "Set the interface node contact tolerance, a dimensionless measure of how close a face has to be to register a contact.",
+      "parameters": [
+        {
+          "name": "f",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "interface.node.valid() -> bool",
+      "description": "Returns True if this node is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "interface.node.vel() -> vec",
+      "description": "Get the velocity vector for the interface node.",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "vel_set",
+      "signature": "interface.node.vel_set(vec) -> None",
+      "description": "Set the velocity vector for the interface node.",
+      "parameters": [
+        {
+          "name": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "vel_x",
+      "signature": "interface.node.vel_x() -> float",
+      "description": "Get x-component of the velocity vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_x_set",
+      "signature": "interface.node.vel_x_set(float) -> None",
+      "description": "Set x-component of the velocity vector for the interface node.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "vel_y",
+      "signature": "interface.node.vel_y() -> float",
+      "description": "Get y-component of the velocity vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_y_set",
+      "signature": "interface.node.vel_y_set(float) -> None",
+      "description": "Set y-component of the velocity vector for the interface node.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "vel_z",
+      "signature": "interface.node.vel_z() -> float",
+      "description": "Get z-component of the velocity vector for the interface node.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_z_set",
+      "signature": "interface.node.vel_z_set(float) -> None",
+      "description": "Set z-component of the velocity vector for the interface node.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

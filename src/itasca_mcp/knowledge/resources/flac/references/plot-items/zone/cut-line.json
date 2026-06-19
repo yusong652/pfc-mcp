@@ -1,0 +1,21 @@
+{
+  "name": "cut-line",
+  "parent": "zone",
+  "description": "2D cut-line settings for FLAC2D zone plot items (clips the displayed zones along a line). Validated against 'plot item create zone cut-line ?' in FLAC2D 9.0.",
+  "syntax": "plot item create zone cut-line width <integer>",
+  "keywords": [
+    {
+      "keyword": "width",
+      "description": "Width of the cut-line in pixels.",
+      "syntax": "width <integer>"
+    }
+  ],
+  "examples": [
+    "plot item create zone cut-line width 2"
+  ],
+  "notes": [
+    "FLAC2D cuts use a 2D line geometry via 'cut-line width <int>'.",
+    "FLAC3D uses a separate 3D 'cut' keyword (plane geometry) on zone items: 'plot item create zone cut active on type plane origin (x,y,z) normal (nx,ny,nz)'. The 3D form is binary-verified in FLAC3D 9.0 and is NOT accepted by FLAC2D 9.0.",
+    "Once the item is created, position the cut line interactively in the FLAC GUI or via 'plot item modify <id> cut-line ...'."
+  ]
+}

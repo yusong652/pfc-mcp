@@ -1,0 +1,35 @@
+{
+  "name": "position",
+  "category": "geometric",
+  "category_name": "Geometric Elements",
+  "syntax": "position <v_lower> <v_upper>",
+  "alt_syntax": "position <v_center> tolerance <f>",
+  "description": "Bounding box selection. Two vectors define opposite corners.",
+  "parameters": [
+    {
+      "name": "v_lower",
+      "type": "vector",
+      "description": "Lower corner (x1,y1,z1)"
+    },
+    {
+      "name": "v_upper",
+      "type": "vector",
+      "description": "Upper corner (x2,y2,z2)"
+    },
+    {
+      "name": "tolerance",
+      "type": "float",
+      "description": "Half-width around center point"
+    }
+  ],
+  "supports_extent": true,
+  "examples": [
+    "range position (0,0,0) (10,10,10)",
+    "range position (5,5,5) tolerance 2.5"
+  ],
+  "search_keywords": [
+    "position",
+    "bounding",
+    "box"
+  ]
+}

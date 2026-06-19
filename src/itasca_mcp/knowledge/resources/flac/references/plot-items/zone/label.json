@@ -1,0 +1,37 @@
+{
+  "name": "label",
+  "parent": "zone",
+  "description": "Categorical labeling / coloring of zones (group, state, model, property, etc.). Validated against 'plot item create zone label ?' in FLAC2D 9.0.",
+  "syntax": "plot item create zone label <type> [<sub-keyword> ...]",
+  "available_types": [
+    "apply-zone",
+    "density",
+    "density-fluid",
+    "extra",
+    "group",
+    "model",
+    "multiplier",
+    "property",
+    "property-fluid",
+    "property-thermal",
+    "state",
+    "type",
+    "uniform"
+  ],
+  "examples": [
+    "plot item create zone label group legend active on",
+    "plot item create zone label state any legend active on",
+    "plot item create zone label state average",
+    "plot item create zone label model legend active on",
+    "plot item create zone label property \"young\"",
+    "plot item create zone label extra index 1"
+  ],
+  "notes": [
+    "'group' / 'state' / 'model' / 'type' are categorical: each unique value gets a distinct color.",
+    "'group' takes an optional 'slot' sub-keyword for group slot filtering.",
+    "'state' REQUIRES 'any' or 'average' as its next sub-keyword before any further options (legend, range, etc.).",
+    "'property' takes a String name directly: 'label property \"young\"' (no 'name' prefix here — different from 'contour property name \"...\"').",
+    "'extra' selects an extra slot: 'label extra index <n>'.",
+    "For continuous color mapping by a numeric field, use 'contour' instead of 'label'."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "named-range",
+  "category": "attribute",
+  "category_name": "Attribute Elements",
+  "syntax": "named-range <name>",
+  "description": "Reference a previously created named range (via 'model range create').",
+  "examples": [
+    "range named-range 'my_region'"
+  ],
+  "related": [
+    "model range create",
+    "model range delete"
+  ],
+  "search_keywords": [
+    "named-range",
+    "named",
+    "range"
+  ]
+}

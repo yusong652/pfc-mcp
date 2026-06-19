@@ -1,0 +1,21 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "segment",
+    "ratio",
+    "reverse",
+    "sketch",
+    "ratio-reverse"
+  ],
+  "description": "The ratio direction is reversed on the segments.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch segment ratio-reverse",
+      "syntax": "sketch segment ratio-reverse [range]",
+      "keywords": []
+    }
+  }
+}

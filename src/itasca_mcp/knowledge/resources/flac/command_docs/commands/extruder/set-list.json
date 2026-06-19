@@ -1,0 +1,45 @@
+{
+  "category": "extruder",
+  "search_keywords": [
+    "set",
+    "list",
+    "sketch"
+  ],
+  "description": "List sketch set information.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "sketch set list",
+      "syntax": "sketch set list keyword",
+      "keywords": [
+        {
+          "name": "all",
+          "syntax": "all",
+          "description": "List all sketch sets."
+        },
+        {
+          "name": "information",
+          "syntax": "information",
+          "description": "Print detailed information about the current sketch set."
+        },
+        {
+          "name": "metadata",
+          "syntax": "metadata",
+          "description": "Print all metadata assigned to the current sketch set."
+        },
+        {
+          "name": "polygons",
+          "syntax": "polygons",
+          "description": "For each closed polygon detected in the set, list edge IDs that form polygon’s external boundary."
+        },
+        {
+          "name": "quality",
+          "syntax": "quality",
+          "description": "Print a zone quality report for the current sketch set. This includes the number of zones that, when created from the set, may result in “bad geometry” errors."
+        }
+      ]
+    }
+  }
+}

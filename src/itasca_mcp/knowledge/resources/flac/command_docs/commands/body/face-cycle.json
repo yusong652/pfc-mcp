@@ -1,0 +1,22 @@
+{
+  "category": "body",
+  "search_keywords": [
+    "face",
+    "cycle",
+    "building-blocks"
+  ],
+  "description": "Rotate (cycle) the topology of triangular faces. Aspects of the face, such as the degeneracy point, edge zone sizes, and ratio, are affected when the topology is changed.",
+  "notes": [
+    "Requires a current building-blocks set: run 'building-blocks set create <name>' then 'building-blocks set select <name>' before any block/edge/face/point operation; otherwise FLAC rejects the command with 'Unused extra parameter'."
+  ],
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "building-blocks face cycle",
+      "syntax": "building-blocks face cycle [range]",
+      "keywords": []
+    }
+  }
+}

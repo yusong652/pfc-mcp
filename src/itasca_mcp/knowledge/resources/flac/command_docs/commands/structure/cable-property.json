@@ -1,0 +1,272 @@
+{
+  "category": "structure",
+  "search_keywords": [
+    "cable",
+    "property",
+    "structure"
+  ],
+  "description": "Assigns properties to cable elements in the range. Refer to Cable Properties for a detailed description of the properties. The following properties are available.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "6.0": {
+      "command": "structure cable property",
+      "syntax": "structure cable property keyword",
+      "description": "Assigns a property to elements in the range. The following properties are available:",
+      "keywords": [
+        {
+          "name": "density",
+          "syntax": "density f",
+          "description": "density (needed if dynamic mode or gravity are active), ρ"
+        },
+        {
+          "name": "young",
+          "syntax": "young f",
+          "description": "Young’s modulus, E"
+        },
+        {
+          "name": "grout-cohesion",
+          "syntax": "grout-cohesion, f",
+          "description": "grout cohesive strength, cg"
+        },
+        {
+          "name": "grout-friction",
+          "syntax": "grout-friction f",
+          "description": "grout friction angle, φg"
+        },
+        {
+          "name": "grout-stiffness",
+          "syntax": "grout-stiffness f",
+          "description": "grout stiffness, kg"
+        },
+        {
+          "name": "grout-perimeter",
+          "syntax": "grout-perimeter f",
+          "description": "grout exposed perimeter, pg"
+        },
+        {
+          "name": "plastic-moment",
+          "syntax": "plastic-moment f",
+          "description": "plastic moment, MP"
+        },
+        {
+          "name": "slide",
+          "syntax": "slide b",
+          "description": "sliding flag"
+        },
+        {
+          "name": "slide-tolerance",
+          "syntax": "slide-tolerance f",
+          "description": "sliding tolerance"
+        },
+        {
+          "name": "thermal-expansion",
+          "syntax": "thermal-expansion f",
+          "description": "thermal expansion coefficient, αt"
+        },
+        {
+          "name": "cross-sectional-area",
+          "syntax": "cross-sectional-area f",
+          "description": "cross-sectional area, A"
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression f",
+          "description": "compressive yield strength, Fc"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension f",
+          "description": "tensile yield strength, Ft"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 6.0 command indexes",
+        "source_urls": [
+          "https://docs.itascacg.com/pfc600/flac3d/sel/doc/manual/sel_manual/cables/commands/cmd_structure.cable.property.html#structure.cable.property"
+        ],
+        "syntax_basis": "official FLAC3D 6.0 detailed command page",
+        "target_version": "6.0"
+      }
+    },
+    "7.0": {
+      "command": "structure cable property",
+      "syntax": "structure cable property keyword... <range>",
+      "description": "Assigns a property to elements in the range. The following properties are available:",
+      "keywords": [
+        {
+          "name": "density",
+          "syntax": "density f",
+          "description": "density (needed if dynamic mode or gravity are active), \\(ρ\\)"
+        },
+        {
+          "name": "young",
+          "syntax": "young f",
+          "description": "Young’s modulus, \\(E\\)"
+        },
+        {
+          "name": "grout-cohesion",
+          "syntax": "grout-cohesion f",
+          "description": "grout cohesive strength \\(c_g\\)"
+        },
+        {
+          "name": "grout-cohesion-table",
+          "syntax": "grout-cohesion-table s",
+          "description": "name of the table relating group cohesion strength"
+        },
+        {
+          "name": "grout-friction",
+          "syntax": "grout-friction f",
+          "description": "grout friction angle, \\(φ_g\\)"
+        },
+        {
+          "name": "grout-friction-table",
+          "syntax": "grout-friction-table s",
+          "description": "name of the table relating group friction strength"
+        },
+        {
+          "name": "grout-stiffness",
+          "syntax": "grout-stiffness f",
+          "description": "grout stiffness, \\(k_g\\)"
+        },
+        {
+          "name": "grout-perimeter",
+          "syntax": "grout-perimeter f",
+          "description": "grout exposed perimeter, \\(p_g\\)"
+        },
+        {
+          "name": "slide",
+          "syntax": "slide b",
+          "description": "sliding flag"
+        },
+        {
+          "name": "slide-tolerance",
+          "syntax": "slide-tolerance f",
+          "description": "sliding tolerance"
+        },
+        {
+          "name": "tensile-failure-strain",
+          "syntax": "tensile-failure-strain f",
+          "description": "tensile failure strain (non-dimensional), active when a positive value is input."
+        },
+        {
+          "name": "thermal-expansion",
+          "syntax": "thermal-expansion f",
+          "description": "thermal expansion coefficient, \\(α_t\\)"
+        },
+        {
+          "name": "cross-sectional-area",
+          "syntax": "cross-sectional-area f",
+          "description": "cross-sectional area, \\(A\\)"
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression f",
+          "description": "compressive yield strength, \\(F_c\\)"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension f",
+          "description": "tensile yield strength, \\(F_t\\)"
+        }
+      ],
+      "legacy_documentation": {
+        "availability_verified": true,
+        "source": "official FLAC3D 7.0 contents command index",
+        "source_urls": [
+          "https://docs.itascacg.com/flac3d700/common/sel/doc/manual/sel_manual/cables/commands/cmd_structure.cable.property.html"
+        ],
+        "syntax_basis": "official FLAC3D 7.0 detailed command page",
+        "target_version": "7.0"
+      }
+    },
+    "9.0": {
+      "command": "structure cable property",
+      "syntax": "structure cable property keyword ... [range]",
+      "keywords": [
+        {
+          "name": "cross-sectional-area",
+          "syntax": "cross-sectional-area <f>",
+          "description": "cross-sectional area"
+        },
+        {
+          "name": "density",
+          "syntax": "density <f>",
+          "description": "mass density"
+        },
+        {
+          "name": "grout-cohesion",
+          "syntax": "grout-cohesion <f>",
+          "description": "grout cohesion per unit length"
+        },
+        {
+          "name": "grout-cohesion-table",
+          "syntax": "grout-cohesion-table <s>",
+          "description": "name of the table relating grout cohesion to relative shear displacement"
+        },
+        {
+          "name": "grout-friction",
+          "syntax": "grout-friction <f>",
+          "description": "grout friction angle"
+        },
+        {
+          "name": "grout-friction-table",
+          "syntax": "grout-friction-table <s>",
+          "description": "name of the table relating grout friction angle to relative shear displacement"
+        },
+        {
+          "name": "grout-perimeter",
+          "syntax": "grout-perimeter <f>",
+          "description": "grout exposed perimeter"
+        },
+        {
+          "name": "grout-stiffness",
+          "syntax": "grout-stiffness <f>",
+          "description": "grout stiffness per unit length"
+        },
+        {
+          "name": "slide",
+          "syntax": "slide <b>",
+          "description": "large-strain sliding flag"
+        },
+        {
+          "name": "slide-tolerance",
+          "syntax": "slide-tolerance <f>",
+          "description": "large-strain sliding tolerance"
+        },
+        {
+          "name": "spacing",
+          "syntax": "spacing <f>",
+          "description": "spacing ( 2D only)"
+        },
+        {
+          "name": "tensile-failure-strain",
+          "syntax": "tensile-failure-strain <f>",
+          "description": "tensile failure strain"
+        },
+        {
+          "name": "thermal-expansion",
+          "syntax": "thermal-expansion <f>",
+          "description": "thermal-expansion coefficient"
+        },
+        {
+          "name": "yield-compression",
+          "syntax": "yield-compression <f>",
+          "description": "compressive yield strength"
+        },
+        {
+          "name": "yield-tension",
+          "syntax": "yield-tension <f>",
+          "description": "tensile yield strength"
+        },
+        {
+          "name": "young",
+          "syntax": "young <f>",
+          "description": "Young’s modulus"
+        }
+      ]
+    }
+  }
+}

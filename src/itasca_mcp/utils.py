@@ -61,6 +61,25 @@ def normalize_software_value(value: "Software | str") -> str:
     return str(value).strip().lower()
 
 
+# Engines that ship only the Itasca 9.x unified kernel: their command/reference
+# docs carry a single "9.0" key. The documentation tools' version selector
+# defaults to 7.0 (a PFC-era leftover), which would otherwise make every
+# 9.0-only command resolve as "unavailable", so the effective version is coerced
+# to 9.0 for these engines. PFC (6.0/7.0/9.0) and FLAC (6.0/7.0/9.0) keep their
+# multi-version behavior.
+NINE_ZERO_ONLY_SOFTWARE = frozenset({"3dec", "mpoint", "massflow"})
+
+
+def effective_doc_version(software: str, version: str) -> str:
+    """Return the doc version to use, coercing 9.0-only engines to 9.0.
+
+    ``software`` must already be normalized (see :func:`normalize_software_value`).
+    """
+    if software in NINE_ZERO_ONLY_SOFTWARE:
+        return "9.0"
+    return version
+
+
 def normalize_input(value: str | None, lowercase: bool = False) -> str:
     """Normalize user input: collapse whitespace, optionally lowercase."""
     if value is None:

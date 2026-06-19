@@ -492,6 +492,29 @@ async def test_massflow_python_api_exposes_itasca_core() -> None:
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
 
+def test_massflow_python_exposes_kernel_modules_only() -> None:
+    # MassFlow has no proprietary Python package; itasca is flat and exposes only
+    # the generic 9.0-kernel sub-modules (contact/history/fish) beyond the core.
+    index = DocumentationLoader.load_index(software="massflow")
+    mods = set(index["modules"])
+    assert {"itasca", "contact", "history", "fish"} <= mods
+    # No zone-family / other-engine / fabricated 'massflow' python modules.
+    assert not ({"zone", "block", "ball", "structure", "massflow", "dfn"} & mods)
+
+
+def test_massflow_python_contact_module_resolves() -> None:
+    doc = DocumentationLoader.load_api_doc("itasca.contact.find", software="massflow")
+    assert doc is not None
+    assert doc["signature"].startswith("itasca.contact.find(")
+    # Generic kernel module: identical content to the same 3DEC module.
+    assert doc == DocumentationLoader.load_api_doc("itasca.contact.find", software="3dec")
+
+
+def test_massflow_python_search_finds_fish_intrinsic_api() -> None:
+    hits = APISearch.search("call fish function", top_k=5, software="massflow")
+    assert hits and any("fish" in h.document.name.lower() for h in hits)
+
+
 def test_massflow_command_families_are_isolated() -> None:
     massflow = CommandLoader.load_index(software="massflow")["categories"]
     assert "massflow" in massflow  # proprietary family

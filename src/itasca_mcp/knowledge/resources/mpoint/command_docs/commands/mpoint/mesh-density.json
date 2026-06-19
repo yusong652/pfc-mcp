@@ -1,0 +1,19 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "mesh-density"
+  ],
+  "description": "Get the distribution of the number of material points per background cell.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint mesh-density",
+      "syntax": "mpoint mesh-density",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

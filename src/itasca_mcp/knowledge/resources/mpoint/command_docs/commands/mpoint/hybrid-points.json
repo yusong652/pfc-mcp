@@ -1,0 +1,19 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "hybrid-points"
+  ],
+  "description": "Set existing gridpoints to couple with mpoints via the background grid. These gridpoints are called hybrid-points (coupled gridpoints). If no range is specified, then all gridpoints become coupled gridpoints.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint hybrid-points",
+      "syntax": "mpoint hybrid-points [range]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

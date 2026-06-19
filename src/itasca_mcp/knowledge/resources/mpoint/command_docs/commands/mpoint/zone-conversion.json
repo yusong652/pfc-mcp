@@ -1,0 +1,45 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "zone-conversion"
+  ],
+  "description": "Set the dynamic conversion of zones to mpoints. Zones with a condition number below the specified tolerance are converted to mpoints. The condition number is defined as the minimum of the zone measures defined in zone geometry-test . The converted zones are assigned a null constitutive model.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint zone-conversion",
+      "syntax": "mpoint zone-conversion [keyword] ... [range]",
+      "keywords": [
+        {
+          "name": "interpolate",
+          "syntax": "interpolate",
+          "description": "If the interpolation keyword is given, the mpoint velocity, displacement and stress are interpolated from gridpoints. This behavior depends on the number of mpoints created per zone, as specified by the number keyword, and the zone type. For more details on the behavior of this keyword, see the mpoint import command and the interpolate keyword, which has identical behavior."
+        },
+        {
+          "name": "interval",
+          "syntax": "interval <i>",
+          "description": "The condition number of zones is checked every i number of cycles, and all zones failing the test are converted to mpoints. The default value is 1."
+        },
+        {
+          "name": "number",
+          "syntax": "number <i>",
+          "description": "Create i number of mpoints per direction per zone. Only values of 1, 2, 3 or 4 are allowed. The default value is 2 (one mpoint per gridpoint). For more details on the behavior of this keyword, see the mpoint import command and the number keyword, which has identical behavior."
+        },
+        {
+          "name": "radius-ratio",
+          "syntax": "radius-ratio <f>",
+          "description": "All zone gridpoints within a radius of the converted zone’s centroid are converted to hybrid points . The radius is set to f times the background grid spacing plus half the diagonal of the zone extent (the axis-aligned bounding box of the zone). The default value is 4.0."
+        },
+        {
+          "name": "tolerance",
+          "syntax": "tolerance <f>",
+          "description": "The zone condition tolerance. The default value is 0.4. See zone geometry-test for more details on this test."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

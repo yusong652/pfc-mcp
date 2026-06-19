@@ -1,0 +1,19 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "delete"
+  ],
+  "description": "Delete mpoints in range. If no range is specified, then all mpoints are deleted.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint delete",
+      "syntax": "mpoint delete [range]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "property"
+  ],
+  "description": "Make a constitutive model(s) property assignment. Properties are name-value pairs where the name is the keyword given in the command and the value type is specific to the property. The assignment will affect any mpoint whose constitutive model includes the property named (noting that some properties, such as bulk , for instance, appear in many constitutive models) that is in range.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint property",
+      "syntax": "mpoint property keyword ... [range]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

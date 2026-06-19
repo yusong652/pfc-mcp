@@ -32,7 +32,7 @@ def _parse_tool_payload(result) -> dict:
 
 
 def test_supported_software_set() -> None:
-    assert set(SUPPORTED_SOFTWARE) == {"pfc", "flac", "3dec"}
+    assert set(SUPPORTED_SOFTWARE) == {"pfc", "flac", "3dec", "mpoint"}
 
 
 def test_normalize_software_validates() -> None:
@@ -199,3 +199,77 @@ def test_3dec_command_families_are_isolated() -> None:
 def test_3dec_ships_no_references_yet() -> None:
     # references are optional; 3DEC ships none this round -> empty index, no error.
     assert ReferenceLoader.load_index(software="3dec").get("categories", {}) == {}
+
+
+# --- MPoint / MPM coverage (9.0-only engine) --------------------------------
+# MPoint is the Material Point Method product; like 3DEC/FLAC it ships only the
+# 9.x unified kernel, so commands are 9.0-only (queries pass version="9.0").
+
+
+@pytest.mark.asyncio
+async def test_mpoint_browse_commands_root() -> None:
+    result = await mcp.call_tool("pfc_browse_commands", {"software": "mpoint", "version": "9.0"})
+    data = _parse_tool_payload(result)["data"]
+    names = {e["name"] for e in data["entries"]}
+    assert "mpoint" in names  # MPoint-only family
+    assert "model" in names  # shared kernel family
+    assert "ball" not in names  # PFC-only family must not leak
+    assert "block" not in names  # 3DEC-only family must not leak
+    assert "zone" not in names  # FLAC-only top-level family
+    assert data["summary"]["software"] == "mpoint"
+
+
+@pytest.mark.asyncio
+async def test_mpoint_browse_mpoint_create() -> None:
+    result = await mcp.call_tool(
+        "pfc_browse_commands", {"software": "mpoint", "command": "mpoint create", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["entries"][0]["doc"]["command"] == "mpoint create"
+
+
+@pytest.mark.asyncio
+async def test_mpoint_browse_node_subcommand() -> None:
+    # 'mpoint node fix' is keyed as node-fix.json but addressed with spaces.
+    result = await mcp.call_tool(
+        "pfc_browse_commands", {"software": "mpoint", "command": "mpoint node fix", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["entries"][0]["doc"]["command"] == "mpoint node fix"
+
+
+@pytest.mark.asyncio
+async def test_mpoint_query_command_finds_mpoint_create() -> None:
+    result = await mcp.call_tool(
+        "pfc_query_command", {"software": "mpoint", "query": "create material point", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["summary"]["software"] == "mpoint"
+    assert any(e["name"] == "mpoint create" for e in data["entries"])
+
+
+@pytest.mark.asyncio
+async def test_mpoint_python_api_exposes_itasca_core() -> None:
+    result = await mcp.call_tool("pfc_query_python_api", {"software": "mpoint", "query": "run command"})
+    data = _parse_tool_payload(result)["data"]
+    assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
+
+
+def test_mpoint_command_families_are_isolated() -> None:
+    mpoint = CommandLoader.load_index(software="mpoint")["categories"]
+    assert "mpoint" in mpoint  # proprietary family
+    assert "model" in mpoint and "fish" in mpoint  # shared kernel borrowed
+    # other engines' proprietary families must not leak in
+    assert "ball" not in mpoint and "block" not in mpoint and "zone" not in mpoint
+
+
+def test_mpoint_borrows_common_kernel_verbatim() -> None:
+    mpoint = CommandLoader.load_index(software="mpoint")["categories"]
+    # every borrowed kernel command points back into _common/ (single source)
+    for fam in ("data", "fish", "geometry", "history", "model", "plot", "table"):
+        cmds = mpoint[fam]["commands"]
+        assert cmds and all(str(c["file"]).startswith("_common/") for c in cmds)
+
+
+def test_mpoint_ships_no_references_yet() -> None:
+    assert ReferenceLoader.load_index(software="mpoint").get("categories", {}) == {}

@@ -20,7 +20,7 @@ RESOURCES_DIR = Path(__file__).parent / "resources"
 # Engines exposed through the (required) ``software`` parameter on the
 # documentation tools. There is deliberately no default engine: a unified
 # itasca-mcp must not silently bias toward one product.
-SUPPORTED_SOFTWARE = ("pfc", "flac", "3dec")
+SUPPORTED_SOFTWARE = ("pfc", "flac", "3dec", "mpoint")
 
 # Maximum number of API matches to return from keyword search.
 SDK_SEARCH_TOP_N = 3

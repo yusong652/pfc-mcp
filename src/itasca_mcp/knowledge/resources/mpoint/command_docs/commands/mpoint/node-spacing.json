@@ -1,0 +1,20 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "node",
+    "spacing"
+  ],
+  "description": "Specify the spacing between background nodes. The nodal spacing is uniform in each direction and fills the entire domain. For uniform mpoint spacing, we recommend that the node spacing be twice the mpoint spacing, or about 2 mpoints per node spacing.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint node spacing",
+      "syntax": "mpoint node spacing <fl>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

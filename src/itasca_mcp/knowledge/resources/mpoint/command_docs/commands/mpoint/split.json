@@ -1,0 +1,50 @@
+{
+  "category": "mpoint",
+  "search_keywords": [
+    "mpoint",
+    "split"
+  ],
+  "description": "Set mpoint splitting parameters. An mpoint is split when its deformation is larger than the tolerance f . Deformation is defined either in terms of the deformation gradient, or in terms of the accumulated strain. The default behavior is to use the deformation gradient, unless one of the \\(strain\\) keywords is provided. Splitting is triggered if the ratio of the absolute values of the entries of the deformation gradient tensor exceeds the tolerance. By default, f is 0, meaning that splitting is inactive. The number entered must be greater than 1 if the deformation gradient is used. A material point is only split if the position of the two points, after splitting, is inside the model domain.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "mpoint split",
+      "syntax": "mpoint split [<f>] [keyword] [range]",
+      "keywords": [
+        {
+          "name": "slot",
+          "syntax": "slot <s>",
+          "description": "Assign the group name s to newly created mpoints. Assign the group to the slot named s . If not supplied, a group name created by the command is assigned to the slot named Default ."
+        },
+        {
+          "name": "limit",
+          "syntax": "limit <i>",
+          "description": "The maximum number of times an mpoint can split (default value is 3)."
+        },
+        {
+          "name": "interval",
+          "syntax": "interval <i>",
+          "description": "Check for splitting every i cycles (default value is 100)."
+        },
+        {
+          "name": "strain",
+          "syntax": "strain",
+          "description": "The accumulated strain tensor is used to define deformation, instead of the deformation gradient. Splitting is triggered if a normal strain component in tension exceeds the tolerance, or if a strain component (independent of its sign) exceeds the tolerance. A tolerance of 1, for example, is equal to 100% strain."
+        },
+        {
+          "name": "strain-normal",
+          "syntax": "strain-normal",
+          "description": "The accumulated strain tensor is used to define deformation, instead of the deformation gradient. Splitting is triggered if a normal strain component in tension exceeds the tolerance. Shear strain components are not considered."
+        },
+        {
+          "name": "strain-shear",
+          "syntax": "strain-shear",
+          "description": "The accumulated strain tensor is used to define deformation, instead of the deformation gradient. Splitting is triggered if a shear strain component exceeds the tolerance (independent of sign). Strain normal components are not considered."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

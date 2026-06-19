@@ -271,5 +271,16 @@ def test_mpoint_borrows_common_kernel_verbatim() -> None:
         assert cmds and all(str(c["file"]).startswith("_common/") for c in cmds)
 
 
-def test_mpoint_ships_no_references_yet() -> None:
-    assert ReferenceLoader.load_index(software="mpoint").get("categories", {}) == {}
+def test_mpoint_plot_items_are_engine_specific() -> None:
+    cat = ReferenceLoader.load_category_index("plot-items", software="mpoint")
+    assert cat is not None
+    names = {i["name"] for i in cat["items"]}
+    # MPoint's distinctive plottable entities (material points + background grid).
+    assert {"mpoint", "mpoint-vector", "mpoint-tensor", "meshpoint"} <= names
+    # 'mpoint' is a directory item with a color-by sub-item (contour vs label).
+    assert ReferenceLoader.is_directory_item("plot-items", "mpoint", software="mpoint")
+    cb = ReferenceLoader.load_sub_item_doc("plot-items", "mpoint", "color-by", software="mpoint")
+    assert {m["mode"] for m in cb["modes"]} == {"contour", "label"}
+    # mpoint-vector documents the live-probed vector value set.
+    vec = ReferenceLoader.load_item_doc("plot-items", "mpoint-vector", software="mpoint")
+    assert "meshnode-vector" in vec["item_types"]  # shares the keyword set

@@ -1,0 +1,24 @@
+{
+  "type": "mpoint_references",
+  "description": "MPoint (MPM) reference documentation: syntax elements (property vocabularies) used within commands.",
+  "categories": {
+    "plot-items": {
+      "name": "Plot Items",
+      "description": "MPoint plot item types — material points (mpoint), vector/tensor fields (mpoint-vector/meshnode-vector, mpoint-tensor), hybrid points (mpoint-hybrid) and the background grid (meshpoint). Vocabulary for 'plot item create <type> ...'.",
+      "directory": "plot-items",
+      "index_file": "plot-items/index.json",
+      "summary": "5 MPoint plot item groups (mpoint/vector/tensor/hybrid/meshpoint)",
+      "usage": "plot item create mpoint color-by contour value <q> | plot item create mpoint-vector value velocity ..."
+    }
+  },
+  "navigation": {
+    "root": "List all reference categories",
+    "category": "List items in category (e.g., 'plot-items')",
+    "item": "Full documentation (e.g., 'plot-items mpoint')"
+  },
+  "notes": [
+    "References are syntax elements used within commands, not standalone commands",
+    "Use pfc_browse_commands (software='mpoint') for command syntax",
+    "Use pfc_browse_reference (software='mpoint') for reference documentation"
+  ]
+}

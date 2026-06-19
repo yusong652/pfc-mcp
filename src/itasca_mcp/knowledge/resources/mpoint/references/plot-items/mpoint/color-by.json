@@ -1,0 +1,50 @@
+{
+  "name": "color-by",
+  "parent_item": "mpoint",
+  "description": "Colour material points continuously ('contour') or categorically ('label'), probed against MPoint 3D 9.",
+  "base_syntax": "plot item create mpoint color-by <contour|label> ...",
+  "modes": [
+    {
+      "mode": "contour",
+      "syntax": "color-by contour value <quantity> | color-by contour property <name>",
+      "description": "Continuous field colouring. The quantity is given by 'value <name>' (built-in field) or 'property <name>' (named property), not a fixed keyword enum.",
+      "modifiers": [
+        "value",
+        "property",
+        "component",
+        "compression-positive",
+        "above",
+        "below",
+        "interval",
+        "log",
+        "maximum",
+        "minimum",
+        "ramp",
+        "reversed",
+        "hide-null",
+        "legend",
+        "map",
+        "range"
+      ]
+    },
+    {
+      "mode": "label",
+      "syntax": "color-by label <string>",
+      "description": "Categorical colouring by a named attribute (takes a string)."
+    }
+  ],
+  "categorical_keywords": [
+    "state",
+    "model",
+    "fixity",
+    "group",
+    "label",
+    "uniform",
+    "extra"
+  ],
+  "notes": [
+    "For built-in vector quantities (velocity, displacement) prefer the 'mpoint-vector' item.",
+    "'state' / 'model' / 'fixity' / 'group' are accepted directly on the mpoint item for categorical colouring.",
+    "Probe live with 'plot item create <type> ?' to list top-level keywords, then 'plot item create <type> <kw> ?' for sub-options. Keyword sets here are binary-validated against MPoint 3D 9."
+  ]
+}

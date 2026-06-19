@@ -562,6 +562,35 @@ def test_massflow_range_elements_shared_via_common() -> None:
     assert mf is not None and mf == flac
 
 
+def test_massflow_plot_items_are_engine_specific() -> None:
+    cat = ReferenceLoader.load_category_index("plot-items", software="massflow")
+    assert cat is not None
+    names = {i["name"] for i in cat["items"]}
+    # MassFlow's caving / gravity-flow plottable entities (not PFC ball / FLAC zone).
+    assert {
+        "drawpoint",
+        "mineblock",
+        "imz",
+        "marker",
+        "flow-vector",
+        "particle-trace",
+        "history-locations",
+    } <= names
+    # drawpoint is a directory item: color-by sub-item = categorical 'colorby' + 'contour'.
+    assert ReferenceLoader.is_directory_item("plot-items", "drawpoint", software="massflow")
+    cb = ReferenceLoader.load_sub_item_doc("plot-items", "drawpoint", "color-by", software="massflow")
+    assert {m["mode"] for m in cb["modes"]} == {"colorby", "contour"}
+    # mineblock's colorby exposes the rich grade/state vocabulary.
+    mb = ReferenceLoader.load_sub_item_doc("plot-items", "mineblock", "color-by", software="massflow")
+    mb_attrs = next(m["attributes"] for m in mb["modes"] if m["mode"] == "colorby")
+    assert {"ucs", "caved", "meandiameter"} <= set(mb_attrs)
+    # marker merges marker-extracted and carries the size-by vocabulary.
+    marker = ReferenceLoader.load_item_doc("plot-items", "marker", software="massflow")
+    assert "marker-extracted" in marker["item_types"]
+    mcb = ReferenceLoader.load_sub_item_doc("plot-items", "marker", "color-by", software="massflow")
+    assert "meanDiameter" in mcb["size_by"]
+
+
 # --- 9.0-only engines: version selector coerces to 9.0 ----------------------
 # 3DEC/MPoint/MassFlow ship a single 9.0 doc key. The tools' version default is
 # 7.0 (a PFC-era leftover); without coercion every 9.0-only command would resolve

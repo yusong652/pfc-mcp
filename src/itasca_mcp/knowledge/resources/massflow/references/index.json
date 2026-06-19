@@ -17,6 +17,14 @@
       "index_file": "range-elements/index.json",
       "summary": "22 range filter elements (shared 9.0 kernel via _common)",
       "usage": "<any command> ... range <element> <args> [union|intersect|not ...]"
+    },
+    "plot-items": {
+      "name": "Plot Items",
+      "description": "MassFlow plot item types — drawpoints, mine-blocks, isolated movement zones (imz), provenance markers (marker/marker-extracted), the flow vector field, particle traces, and history locations. Vocabulary for 'plot item create <type> ...'.",
+      "directory": "plot-items",
+      "index_file": "plot-items/index.json",
+      "summary": "7 MassFlow plot item groups (drawpoint/mineblock/imz/marker/flow-vector/particle-trace/history-locations)",
+      "usage": "plot item create drawpoint colorby dpactive | plot item create mineblock colorby ucs | plot item create flow-vector draw-as arrow"
     }
   }
 }

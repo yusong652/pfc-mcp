@@ -1,0 +1,61 @@
+{
+  "name": "geogrid",
+  "dimension": "3D",
+  "full_name": "Geogrid Structural-Element Properties",
+  "description": "Property keywords for the 3DEC geogrid structural element. Assign with 'structure geogrid create ...', set elastic behavior with 'structure geogrid cmodel ...', then set these with 'structure geogrid property <keyword> <value> [range ...]'.",
+  "primary_commands": [
+    "structure geogrid create",
+    "structure geogrid cmodel",
+    "structure geogrid property",
+    "structure geogrid list"
+  ],
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "'structure geogrid property' keywords (2D-only keywords omitted; 3DEC is 3D).",
+      "properties": [
+        {
+          "keyword": "density",
+          "description": "",
+          "type": "FLT"
+        },
+        {
+          "keyword": "thermal-expansion",
+          "description": "thermal-expansion coefficient",
+          "type": "FLT"
+        },
+        {
+          "keyword": "thickness",
+          "description": "thickness",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-cohesion",
+          "description": "coupling spring cohesion (stress units)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-friction",
+          "description": "coupling spring friction angle (degrees)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-stiffness",
+          "description": "coupling spring stiffness per unit area",
+          "type": "FLT"
+        },
+        {
+          "keyword": "slide",
+          "description": "large-strain sliding flag",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "slide-tolerance",
+          "description": "large-strain sliding tolerance",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/geogrids/commands/cmd_structure.geogrid.property.html"
+}

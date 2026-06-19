@@ -1,0 +1,111 @@
+{
+  "name": "liner",
+  "dimension": "3D",
+  "full_name": "Liner Structural-Element Properties",
+  "description": "Property keywords for the 3DEC liner structural element. Assign with 'structure liner create ...', set elastic behavior with 'structure liner cmodel ...', then set these with 'structure liner property <keyword> <value> [range ...]'.",
+  "primary_commands": [
+    "structure liner create",
+    "structure liner cmodel",
+    "structure liner property",
+    "structure liner list"
+  ],
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "'structure liner property' keywords (2D-only keywords omitted; 3DEC is 3D).",
+      "properties": [
+        {
+          "keyword": "density",
+          "description": "",
+          "type": "FLT"
+        },
+        {
+          "keyword": "thermal-expansion",
+          "description": "thermal-expansion coefficient",
+          "type": "FLT"
+        },
+        {
+          "keyword": "thickness",
+          "description": "thickness",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-cohesion-shear",
+          "description": "shear coupling spring cohesion (stress units)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-cohesion-shear-2",
+          "description": "shear coupling spring cohesion (stress units) on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-cohesion-shear-residual",
+          "description": "shear coupling spring residual cohesion (stress units)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-cohesion-shear-residual-2",
+          "description": "shear coupling spring residual cohesion (stress units) on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-friction-shear",
+          "description": "shear coupling spring friction angle (degrees)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-friction-shear-2",
+          "description": "shear coupling spring friction angle (degrees) on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-stiffness-normal",
+          "description": "coupling spring normal stiffness per unit area",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-stiffness-normal-2",
+          "description": "coupling spring normal stiffness per unit area on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-stiffness-shear",
+          "description": "coupling spring shear stiffness per unit area",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-stiffness-shear-2",
+          "description": "coupling spring shear stiffness per unit area on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-yield-normal",
+          "description": "normal coupling spring tensile strength (stress units)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "coupling-yield-normal-2",
+          "description": "normal coupling spring tensile strength (stress units) on side 2",
+          "type": "FLT"
+        },
+        {
+          "keyword": "effective",
+          "description": "effective stress flag (default: on )",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "slide",
+          "description": "large-strain sliding flag (default: off )",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "slide-tolerance",
+          "description": "large-strain sliding tolerance",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/liners/commands/cmd_structure.liner.property.html"
+}

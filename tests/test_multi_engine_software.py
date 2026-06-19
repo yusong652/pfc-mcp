@@ -469,3 +469,29 @@ def test_3dec_geometry_data_table_topics() -> None:
     geo = ReferenceLoader.load_item_doc("geometry-data-table", "geometry-workflow", software="3dec")
     # 3DEC geometry guides block cutting (not FLAC zone meshing).
     assert "block cut" in geo["primary_commands"]
+
+
+def test_3dec_structural_properties_all_sel_types() -> None:
+    cat = ReferenceLoader.load_category_index("structural-properties", software="3dec")
+    assert cat is not None
+    # 3DEC's six SEL types (more than FLAC's set — geogrid/shell included).
+    assert {m["name"] for m in cat["models"]} == {"beam", "cable", "geogrid", "liner", "pile", "shell"}
+    beam = ReferenceLoader.load_item_doc("structural-properties", "beam", software="3dec")
+    kws = {p["keyword"] for p in beam["property_groups"][0]["properties"]}
+    assert "cross-sectional-area" in kws
+    # 3DEC is 3D: 2D-only keywords are omitted.
+    assert "moi" not in kws and "shear-coefficient" not in kws
+
+
+def test_3dec_now_has_seven_reference_categories() -> None:
+    cats = set(ReferenceLoader.load_index(software="3dec").get("categories", {}))
+    assert {
+        "joint-models",
+        "constitutive-models",
+        "range-elements",
+        "fish-intrinsics",
+        "initial-conditions",
+        "boundary-conditions",
+        "geometry-data-table",
+        "structural-properties",
+    } <= cats

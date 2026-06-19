@@ -1,0 +1,42 @@
+{
+  "type": "structural_element_properties",
+  "description": "Structural-element (SEL) property keyword reference for 3DEC — beam, cable, geogrid, liner, pile, shell. Property vocabulary for 'structure <type> property'. Elastic moduli are set via 'structure <type> cmodel'. Parsed from the shared SEL command docs; 2D-only keywords omitted.",
+  "models": [
+    {
+      "name": "beam",
+      "file": "beam.json",
+      "full_name": "Beam Structural-Element Properties",
+      "property_count": 15
+    },
+    {
+      "name": "cable",
+      "file": "cable.json",
+      "full_name": "Cable Structural-Element Properties",
+      "property_count": 16
+    },
+    {
+      "name": "geogrid",
+      "file": "geogrid.json",
+      "full_name": "Geogrid Structural-Element Properties",
+      "property_count": 8
+    },
+    {
+      "name": "liner",
+      "file": "liner.json",
+      "full_name": "Liner Structural-Element Properties",
+      "property_count": 18
+    },
+    {
+      "name": "pile",
+      "file": "pile.json",
+      "full_name": "Pile Structural-Element Properties",
+      "property_count": 34
+    },
+    {
+      "name": "shell",
+      "file": "shell.json",
+      "full_name": "Shell Structural-Element Properties",
+      "property_count": 3
+    }
+  ]
+}

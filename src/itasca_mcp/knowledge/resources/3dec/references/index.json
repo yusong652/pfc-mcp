@@ -57,6 +57,14 @@
       "index_file": "geometry-data-table/index.json",
       "summary": "3 topics: geometry workflow, data sets, table curves",
       "usage": "geometry import '<file>' ; data scalar create ... ; table '<name>' add (x,y) ..."
+    },
+    "structural-properties": {
+      "name": "Structural-Element Properties",
+      "description": "3DEC structural-element property keywords — beam, cable, geogrid, liner, pile, shell. Vocabulary for 'structure <type> property' (elastic behavior via 'structure <type> cmodel').",
+      "directory": "structural-properties",
+      "index_file": "structural-properties/index.json",
+      "summary": "6 3DEC SEL types (beam/cable/geogrid/liner/pile/shell) — 'structure <type> property' keywords",
+      "usage": "structure <type> create ... ; structure <type> cmodel ... ; structure <type> property <kw> <value> [range ...]"
     }
   },
   "navigation": {

@@ -1,0 +1,101 @@
+{
+  "name": "cable",
+  "dimension": "3D",
+  "full_name": "Cable Structural-Element Properties",
+  "description": "Property keywords for the 3DEC cable structural element. Assign with 'structure cable create ...', set elastic behavior with 'structure cable cmodel ...', then set these with 'structure cable property <keyword> <value> [range ...]'.",
+  "primary_commands": [
+    "structure cable create",
+    "structure cable cmodel",
+    "structure cable property",
+    "structure cable list"
+  ],
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "'structure cable property' keywords (2D-only keywords omitted; 3DEC is 3D).",
+      "properties": [
+        {
+          "keyword": "cross-sectional-area",
+          "description": "",
+          "type": "FLT"
+        },
+        {
+          "keyword": "density",
+          "description": "mass density",
+          "type": "FLT"
+        },
+        {
+          "keyword": "grout-cohesion",
+          "description": "grout cohesion per unit length",
+          "type": "FLT"
+        },
+        {
+          "keyword": "grout-cohesion-table",
+          "description": "name of the table relating grout cohesion to relative shear displacement",
+          "type": "STR"
+        },
+        {
+          "keyword": "grout-friction",
+          "description": "grout friction angle",
+          "type": "FLT"
+        },
+        {
+          "keyword": "grout-friction-table",
+          "description": "name of the table relating grout friction angle to relative shear displacement",
+          "type": "STR"
+        },
+        {
+          "keyword": "grout-perimeter",
+          "description": "grout exposed perimeter",
+          "type": "FLT"
+        },
+        {
+          "keyword": "grout-stiffness",
+          "description": "grout stiffness per unit length",
+          "type": "FLT"
+        },
+        {
+          "keyword": "slide",
+          "description": "large-strain sliding flag",
+          "type": "BOOL"
+        },
+        {
+          "keyword": "slide-tolerance",
+          "description": "large-strain sliding tolerance",
+          "type": "FLT"
+        },
+        {
+          "keyword": "spacing",
+          "description": "spacing ( 2D only)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tensile-failure-strain",
+          "description": "tensile failure strain",
+          "type": "FLT"
+        },
+        {
+          "keyword": "thermal-expansion",
+          "description": "thermal-expansion coefficient",
+          "type": "FLT"
+        },
+        {
+          "keyword": "yield-compression",
+          "description": "compressive yield strength",
+          "type": "FLT"
+        },
+        {
+          "keyword": "yield-tension",
+          "description": "tensile yield strength",
+          "type": "FLT"
+        },
+        {
+          "keyword": "young",
+          "description": "Young’s modulus",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/cables/commands/cmd_structure.cable.property.html"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "background-node",
+  "dimension": "3D",
+  "full_name": "Background-Grid Node FISH Intrinsics",
+  "description": "Pointer-based FISH access to the background-grid nodes — the fixed computational mesh that material points move through and exchange momentum with. Use for grid-side velocity/force/pore-pressure probes and convergence checks.",
+  "intrinsic_families": [
+    {
+      "family": "iteration & identity",
+      "examples": [
+        "mpoint.node.list",
+        "mpoint.node.num",
+        "mpoint.node.find",
+        "mpoint.node.id",
+        "mpoint.node.maxid",
+        "mpoint.node.near",
+        "mpoint.node.inbox",
+        "mpoint.node.typeid"
+      ],
+      "notes": [
+        "Loop over mpoint.node.list; nodes are the fixed grid points (not material points)."
+      ]
+    },
+    {
+      "family": "geometry",
+      "examples": [
+        "mpoint.node.pos",
+        "mpoint.node.spacing"
+      ],
+      "notes": [
+        "mpoint.node.spacing is the background-grid cell spacing."
+      ]
+    },
+    {
+      "family": "state & motion",
+      "examples": [
+        "mpoint.node.disp",
+        "mpoint.node.vel",
+        "mpoint.node.pp",
+        "mpoint.node.stress"
+      ],
+      "notes": [
+        "Grid-node kinematics are interpolated to/from the material points each step."
+      ]
+    },
+    {
+      "family": "convergence",
+      "examples": [
+        "mpoint.node.force.unbal"
+      ],
+      "notes": [
+        "mpoint.node.force.unbal is the per-node unbalanced force used for convergence."
+      ]
+    },
+    {
+      "family": "groups",
+      "examples": [
+        "mpoint.node.group",
+        "mpoint.node.group.list",
+        "mpoint.node.group.remove",
+        "mpoint.node.groupmap",
+        "mpoint.node.isgroup"
+      ],
+      "notes": []
+    }
+  ]
+}

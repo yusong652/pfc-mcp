@@ -25,6 +25,14 @@
       "index_file": "range-elements/index.json",
       "summary": "22 range filter elements (shared 9.0 kernel via _common)",
       "usage": "<any command> ... range <element> <args> [union|intersect|not ...]"
+    },
+    "fish-intrinsics": {
+      "name": "FISH Intrinsics",
+      "description": "MPoint FISH intrinsic families for scripted inspection — material points and background-grid nodes (iteration, geometry, stress/strain/state, properties, groups, convergence).",
+      "directory": "fish-intrinsics",
+      "index_file": "fish-intrinsics/index.json",
+      "summary": "2 MPoint FISH intrinsic family groups (material-point, background-node)",
+      "usage": "Use in FISH: loop foreach over mpoint.list / mpoint.node.list; read with mpoint.<intrinsic>(ptr)"
     }
   },
   "navigation": {

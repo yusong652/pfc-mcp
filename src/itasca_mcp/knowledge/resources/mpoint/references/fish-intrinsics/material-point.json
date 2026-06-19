@@ -1,0 +1,100 @@
+{
+  "name": "material-point",
+  "dimension": "3D",
+  "full_name": "Material Point FISH Intrinsics",
+  "description": "Pointer-based FISH access to material points — the core MPM carriers of mass, stress and history. Best for scripted stress/strain probes, convergence checks, and validation reports after command-driven setup. MPoint is 3D.",
+  "intrinsic_families": [
+    {
+      "family": "iteration & identity",
+      "examples": [
+        "mpoint.list",
+        "mpoint.num",
+        "mpoint.find",
+        "mpoint.id",
+        "mpoint.maxid",
+        "mpoint.near",
+        "mpoint.containing",
+        "mpoint.inbox",
+        "mpoint.typeid"
+      ],
+      "notes": [
+        "Loop with 'loop foreach' over mpoint.list rather than assuming contiguous IDs.",
+        "mpoint.containing(pos) / mpoint.near(pos) locate a point by position."
+      ]
+    },
+    {
+      "family": "geometry & motion",
+      "examples": [
+        "mpoint.pos",
+        "mpoint.vol",
+        "mpoint.density",
+        "mpoint.disp",
+        "mpoint.vel"
+      ],
+      "notes": [
+        "mpoint.pos is the current material-point position; it moves through the fixed grid."
+      ]
+    },
+    {
+      "family": "state (stress / strain)",
+      "examples": [
+        "mpoint.stress",
+        "mpoint.strain",
+        "mpoint.deformation",
+        "mpoint.pp"
+      ],
+      "notes": [
+        "mpoint.stress / mpoint.strain are the carried tensors; mpoint.pp is pore pressure."
+      ]
+    },
+    {
+      "family": "constitutive model & properties",
+      "examples": [
+        "mpoint.prop",
+        "mpoint.prop.index",
+        "mpoint.extra"
+      ],
+      "notes": [
+        "mpoint.prop reads/writes the assigned cmodel's properties; see the 'constitutive-models' reference."
+      ]
+    },
+    {
+      "family": "fixity & loading",
+      "examples": [
+        "mpoint.fix",
+        "mpoint.pp.fix",
+        "mpoint.force.app",
+        "mpoint.mass.gravity",
+        "mpoint.fluid.prop"
+      ],
+      "notes": [
+        "mpoint.force.app is the applied force; mpoint.fix flags fixed velocity components."
+      ]
+    },
+    {
+      "family": "groups",
+      "examples": [
+        "mpoint.group",
+        "mpoint.group.list",
+        "mpoint.group.remove",
+        "mpoint.groupmap",
+        "mpoint.isgroup"
+      ],
+      "notes": [
+        "Use named groups + slots for stable selection."
+      ]
+    },
+    {
+      "family": "convergence (unbalance)",
+      "examples": [
+        "mpoint.mech.ratio.avg",
+        "mpoint.mech.ratio.local",
+        "mpoint.mech.ratio.max",
+        "mpoint.mech.unbal.max"
+      ],
+      "notes": [
+        "The mech.ratio.* intrinsics are the MPM equilibrium-convergence measures."
+      ]
+    }
+  ]
+}

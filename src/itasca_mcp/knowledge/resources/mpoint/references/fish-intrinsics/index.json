@@ -1,0 +1,21 @@
+{
+  "type": "fish_intrinsics",
+  "description": "MPoint (MPM) FISH intrinsic families for scripted model inspection, validation, and data extraction — material points and the background-grid nodes.",
+  "items": [
+    {
+      "name": "material-point",
+      "file": "material-point.json",
+      "full_name": "Material Point FISH Intrinsics",
+      "intrinsic_count": 35
+    },
+    {
+      "name": "background-node",
+      "file": "background-node.json",
+      "full_name": "Background-Grid Node FISH Intrinsics",
+      "intrinsic_count": 20
+    }
+  ],
+  "official_sources": [
+    "https://docs.itascacg.com/itasca900/mpm/mpm/doc/source/manual/fish/fish.html"
+  ]
+}

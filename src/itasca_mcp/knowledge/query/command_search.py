@@ -1,7 +1,7 @@
 """High-level command search interface.
 
-This module provides a simple, user-friendly API for searching PFC commands.
-Model properties are handled separately via pfc_browse_reference tool.
+This module provides a simple, user-friendly API for searching Itasca commands.
+Model properties are handled separately via itasca_browse_reference tool.
 """
 
 from typing import Any
@@ -13,9 +13,9 @@ from itasca_mcp.knowledge.search.engines.bm25_engine import BM25SearchEngine
 
 
 class CommandSearch:
-    """Command search interface for PFC documentation.
+    """Command search interface for Itasca documentation.
 
-    This class provides a high-level API for searching PFC commands
+    This class provides a high-level API for searching Itasca commands
     using BM25 algorithm with multi-field scoring.
 
     Features:
@@ -24,7 +24,7 @@ class CommandSearch:
     - Support for filtering by category
     - BM25 with multi-field scoring (name=0.5, keywords=0.3, description=0.2)
 
-    Note: For contact model properties, use pfc_browse_reference tool directly.
+    Note: For contact model properties, use itasca_browse_reference tool directly.
 
     Usage:
         >>> # Basic search
@@ -68,7 +68,7 @@ class CommandSearch:
         *,
         software: str,
     ) -> list[SearchResult]:
-        """Search for PFC commands.
+        """Search for Itasca commands.
 
         Args:
             query: Search query string

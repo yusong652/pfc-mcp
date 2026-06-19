@@ -1,4 +1,4 @@
-"""PFC task execution tool backed by itasca-mcp-bridge."""
+"""Itasca task execution tool backed by itasca-mcp-bridge."""
 
 import uuid
 from typing import Any
@@ -12,41 +12,41 @@ from itasca_mcp.utils import ScriptPath, TaskDescription
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_execute_task tool."""
+    """Register itasca_execute_task tool."""
 
     @mcp.tool()
-    async def pfc_execute_task(
+    async def itasca_execute_task(
         entry_script: ScriptPath,
         description: TaskDescription,
     ) -> dict[str, Any]:
-        """Submit a Python script file for asynchronous execution in PFC.
+        """Submit a Python script file for asynchronous execution in the Itasca engine.
 
         Returns a task_id immediately; the script runs in the background.
         Use the companion tools to manage the task lifecycle:
-        - pfc_check_task_status: poll output, progress, and final status
-        - pfc_interrupt_task: cancel a running task
-        - pfc_list_tasks: browse task history
+        - itasca_check_task_status: poll output, progress, and final status
+        - itasca_interrupt_task: cancel a running task
+        - itasca_list_tasks: browse task history
 
-        While the task is cycling, you can call pfc_execute_code at any
+        While the task is cycling, you can call itasca_execute_code at any
         time to inspect or modify simulation state — including variables
         the task depends on. This is the standard way to probe progress,
         tune parameters mid-run, swap callbacks, or trigger early
         termination via a sentinel variable. Both tools share the same
-        __main__ namespace in PFC's main thread.
+        __main__ namespace in the engine's main thread.
 
         Console output from itasca.command() inside the script —
         table dumps, list output, command summaries — is captured
         and interleaved with Python prints in the task log, visible
-        through pfc_check_task_status.
+        through itasca_check_task_status.
 
         Having the script invoke `program call '<file>.p3dat'` (or
-        .p2dat / .dat) is PFC-version-gated. On PFC 6/7 the
+        .p2dat / .dat) is engine-version-gated. On 6/7 the
         command-script interpreter blocks the bridge for the
         script's entire duration with no cycle-gap interleaving,
-        leaving the bridge unreachable until PFC is stopped
+        leaving the bridge unreachable until the engine is stopped
         manually. Never emit it there, and treat unknown or
-        unverified versions (including PFC 9.0-9.6) the same way.
-        On PFC 9.7+ the bridge stays fully responsive during a
+        unverified versions (including 9.0-9.6) the same way.
+        On 9.7+ the bridge stays fully responsive during a
         `program call` (verified on 9.7: status polling, cycle-gap
         interleaving, and interrupt all work mid-call). Even where
         it is safe, prefer reading the file and translating its
@@ -56,15 +56,15 @@ def register(mcp: FastMCP) -> None:
         `program call` cannot give.
 
         This is the async / background execution path: pollable via
-        pfc_check_task_status, cancellable via pfc_interrupt_task.
+        itasca_check_task_status, cancellable via itasca_interrupt_task.
         Submission does not lock parameters — start with reasonable
-        values and refine live via pfc_execute_code as the task
+        values and refine live via itasca_execute_code as the task
         cycles. For synchronous, inline execution, use
-        pfc_execute_code directly.
+        itasca_execute_code directly.
 
         Submission uses the bridge's `execute_task` protocol message. If
         a submission times out, the connected bridge may predate it —
-        confirm its version with pfc_execute_code (`import
+        confirm its version with itasca_execute_code (`import
         itasca_mcp_bridge; print(itasca_mcp_bridge.__version__)`). To
         upgrade, fetch and follow the bootstrap guide, then resubmit:
         https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md

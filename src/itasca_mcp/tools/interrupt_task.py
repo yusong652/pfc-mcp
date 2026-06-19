@@ -11,11 +11,11 @@ from itasca_mcp.utils import TaskId
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_interrupt_task tool."""
+    """Register itasca_interrupt_task tool."""
 
     @mcp.tool()
-    async def pfc_interrupt_task(task_id: TaskId) -> dict[str, Any]:
-        """Request graceful interruption of a running PFC task."""
+    async def itasca_interrupt_task(task_id: TaskId) -> dict[str, Any]:
+        """Request graceful interruption of a running Itasca task."""
         try:
             client = await get_bridge_client()
             response = await client.interrupt_task(task_id)
@@ -31,7 +31,7 @@ def register(mcp: FastMCP) -> None:
                     "task_id": task_id,
                     "interrupt_requested": True,
                     "message": message or "signal sent",
-                    "next_action": f'call pfc_check_task_status(task_id="{task_id}")',
+                    "next_action": f'call itasca_check_task_status(task_id="{task_id}")',
                 }
             )
 

@@ -1,4 +1,4 @@
-"""BM25-based search engine for PFC documentation with multi-field support.
+"""BM25-based search engine for Itasca documentation with multi-field support.
 
 This module implements a complete search engine using BM25 algorithm with
 multi-field scoring, providing a high-level interface for document search.

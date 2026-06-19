@@ -1,4 +1,4 @@
-"""PFC Python API Browse Tool - Navigate and retrieve Python SDK documentation."""
+"""Itasca Python API Browse Tool - Navigate and retrieve Python SDK documentation."""
 
 from typing import Any
 
@@ -11,15 +11,15 @@ from itasca_mcp.utils import SoftwareParam, normalize_software_value
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_browse_python_api tool with the MCP server."""
+    """Register itasca_browse_python_api tool with the MCP server."""
 
     @mcp.tool()
-    def pfc_browse_python_api(
+    def itasca_browse_python_api(
         software: SoftwareParam,
         api: str | None = Field(
             None,
             description=(
-                "PFC Python API path to browse (dot-separated, starting from itasca). Examples:\n"
+                "Itasca Python API path to browse (dot-separated, starting from itasca). Examples:\n"
                 "- None or '': Root overview - all modules and objects\n"
                 "- 'itasca': Core module functions (command, cycle, gravity, etc.)\n"
                 "- 'itasca.ball': Ball module functions (create, find, list, etc.)\n"
@@ -31,7 +31,7 @@ def register(mcp: FastMCP) -> None:
             ),
         ),
     ) -> dict[str, Any]:
-        """Browse PFC Python SDK documentation by path (like glob + cat)."""
+        """Browse Itasca Python SDK documentation by path (like glob + cat)."""
         normalized = _normalize_api_path(api)
         sw = normalize_software_value(software)
 

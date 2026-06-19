@@ -1,7 +1,7 @@
-"""PFC Reference Documentation System.
+"""Itasca Reference Documentation System.
 
 This module provides reference documentation loading and formatting capabilities
-for PFC reference items (contact models, range elements).
+for Itasca reference items (contact models, range elements).
 
 Components:
     - ReferenceLoader: Load reference docs from JSON files

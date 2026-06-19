@@ -114,7 +114,7 @@ class APIDocFormatter:
 
             object_lines.append(f"- {obj_path}: {desc}")
 
-        parts.append("## PFC Python SDK Documentation")
+        parts.append("## Itasca Python SDK Documentation")
         parts.append("")
         parts.append(f"Modules ({len(modules)}):")
         parts.append("\n".join(module_lines))
@@ -527,7 +527,7 @@ class APIDocFormatter:
         Example output:
             **Python SDK**: Not available for this operation
 
-            **Next Step**: Use pfc_query_command tool to search for PFC commands instead
+            **Next Step**: Use itasca_query_command tool to search for Itasca commands instead
         """
         hint_text = f"\nNote: {hints[0]}" if hints else ""
 

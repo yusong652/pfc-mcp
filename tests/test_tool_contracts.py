@@ -141,8 +141,8 @@ async def mock_bridge(tmp_path):
     server = await websockets.serve(_mock_bridge_handler, "127.0.0.1", 0)
     port = server.sockets[0].getsockname()[1]
 
-    prev = os.environ.get("PFC_MCP_BRIDGE_URL")
-    os.environ["PFC_MCP_BRIDGE_URL"] = f"ws://127.0.0.1:{port}"
+    prev = os.environ.get("ITASCA_MCP_BRIDGE_URL")
+    os.environ["ITASCA_MCP_BRIDGE_URL"] = f"ws://127.0.0.1:{port}"
 
     await close_bridge_client()
 
@@ -150,14 +150,14 @@ async def mock_bridge(tmp_path):
 
     await close_bridge_client()
     if prev is None:
-        os.environ.pop("PFC_MCP_BRIDGE_URL", None)
+        os.environ.pop("ITASCA_MCP_BRIDGE_URL", None)
     else:
-        os.environ["PFC_MCP_BRIDGE_URL"] = prev
+        os.environ["ITASCA_MCP_BRIDGE_URL"] = prev
     server.close()
     await server.wait_closed()
 
 
-# ── pfc_execute_task ─────────────────────────────────────
+# ── itasca_execute_task ─────────────────────────────────────
 
 
 @pytest.mark.asyncio
@@ -166,7 +166,7 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
     script.write_text("print('hello')")
 
     result = await mcp.call_tool(
-        "pfc_execute_task",
+        "itasca_execute_task",
         {"entry_script": str(script), "description": "test task"},
     )
 
@@ -190,7 +190,7 @@ async def test_execute_task_success_fields(mock_bridge, tmp_path):
         assert "message" in data
 
 
-# ── pfc_check_task_status ────────────────────────────────
+# ── itasca_check_task_status ────────────────────────────────
 
 
 @pytest.mark.asyncio
@@ -200,7 +200,7 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     script.write_text("print('running')")
 
     exec_result = await mcp.call_tool(
-        "pfc_execute_task",
+        "itasca_execute_task",
         {"entry_script": str(script), "description": "simulation"},
     )
     exec_text = exec_result.content[0].text
@@ -208,7 +208,7 @@ async def test_check_task_status_running_fields(mock_bridge, tmp_path):
     task_id = exec_data.get("data", {}).get("task_id", list(TASK_STORE.keys())[0])
 
     result = await mcp.call_tool(
-        "pfc_check_task_status",
+        "itasca_check_task_status",
         {"task_id": task_id, "wait_seconds": 1},
     )
 
@@ -262,7 +262,7 @@ async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, t
     monkeypatch.setattr(client, "check_task_status", fake_check)
 
     result = await mcp.call_tool(
-        "pfc_check_task_status",
+        "itasca_check_task_status",
         {"task_id": "abc123", "wait_seconds": 1},
     )
     parsed = json.loads(result.content[0].text)
@@ -278,7 +278,7 @@ async def test_check_task_status_passes_through_bridge_pagination(mock_bridge, t
 @pytest.mark.asyncio
 async def test_check_task_status_not_found(mock_bridge):
     result = await mcp.call_tool(
-        "pfc_check_task_status",
+        "itasca_check_task_status",
         {"task_id": "nonexistent", "wait_seconds": 1},
     )
 
@@ -290,7 +290,7 @@ async def test_check_task_status_not_found(mock_bridge):
         assert parsed["error"]["code"] == "not_found"
 
 
-# ── pfc_list_tasks ───────────────────────────────────────
+# ── itasca_list_tasks ───────────────────────────────────────
 
 
 @pytest.mark.asyncio
@@ -299,11 +299,11 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
     script = tmp_path / "job.py"
     script.write_text("print('done')")
     await mcp.call_tool(
-        "pfc_execute_task",
+        "itasca_execute_task",
         {"entry_script": str(script), "description": "list test"},
     )
 
-    result = await mcp.call_tool("pfc_list_tasks", {})
+    result = await mcp.call_tool("itasca_list_tasks", {})
 
     text = result.content[0].text
     parsed = json.loads(text) if text.startswith("{") else None
@@ -325,13 +325,13 @@ async def test_list_tasks_with_tasks(mock_bridge, tmp_path):
         assert "has_more" in data
 
 
-# ── pfc_execute_code ──────────────────────────────────────
+# ── itasca_execute_code ──────────────────────────────────────
 
 
 @pytest.mark.asyncio
 async def test_execute_code_success_fields(mock_bridge):
     result = await mcp.call_tool(
-        "pfc_execute_code",
+        "itasca_execute_code",
         {"code": "print(42)"},
     )
 
@@ -346,13 +346,13 @@ async def test_execute_code_success_fields(mock_bridge):
         assert data["result"] == 42
 
 
-# ── pfc_list_tasks (continued) ──────────────────────────
+# ── itasca_list_tasks (continued) ──────────────────────────
 
 
 @pytest.mark.asyncio
 async def test_list_tasks_empty(mock_bridge):
     # No tasks submitted — TASK_STORE is cleared by fixture
-    result = await mcp.call_tool("pfc_list_tasks", {})
+    result = await mcp.call_tool("itasca_list_tasks", {})
 
     text = result.content[0].text
     parsed = json.loads(text) if text.startswith("{") else None

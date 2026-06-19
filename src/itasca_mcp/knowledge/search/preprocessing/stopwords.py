@@ -1,4 +1,4 @@
-"""Stopwords list for PFC technical documentation.
+"""Stopwords list for Itasca technical documentation.
 
 This module provides a curated stopwords list optimized for scientific and
 technical documentation, preserving technical terms while filtering common
@@ -125,11 +125,11 @@ STOPWORDS = {
 }
 
 # Technical terms to PRESERVE (not stopwords)
-# These are often confused with stopwords but are meaningful in PFC context
+# These are often confused with stopwords but are meaningful in Itasca context
 TECHNICAL_PRESERVE = {
     "set",  # set property, set value
     "get",  # get value, get property
-    "command",  # PFC command
+    "command",  # Itasca command
     "generate",  # generate balls
     "create",  # create objects
     "delete",  # delete objects

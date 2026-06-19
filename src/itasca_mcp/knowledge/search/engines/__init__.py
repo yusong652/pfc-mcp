@@ -1,4 +1,4 @@
-"""Search engine implementations for PFC documentation search.
+"""Search engine implementations for Itasca documentation search.
 
 This module provides high-level search engines that orchestrate
 indexing, scoring, and result formatting.

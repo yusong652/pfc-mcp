@@ -1,4 +1,4 @@
-"""High-level query interfaces for PFC documentation search.
+"""High-level query interfaces for Itasca documentation search.
 
 This module provides user-facing search APIs that abstract away
 the complexity of search engines and adapters.

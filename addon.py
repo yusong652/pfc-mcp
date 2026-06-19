@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-PFC Bridge bootstrap script.
+Itasca Bridge bootstrap script.
 
-Use it inside PFC in either of these ways:
-1. Copy the file contents into the PFC IPython console and run them
-2. Or save/download this file and execute it in PFC GUI
+Use it inside the Itasca engine (PFC/FLAC/3DEC/…) in either of these ways:
+1. Copy the file contents into the engine's IPython console and run them
+2. Or save/download this file and execute it in the engine GUI
 
 What it does:
 1. Detects the currently installed `itasca-mcp-bridge`, if any
@@ -71,7 +71,7 @@ def _resolve_pip_main():
     There is no single stable location. `pip.main` exists in pip <= 9
     (what PFC 6.0 ships), was removed in pip 10.0, and was later restored
     as an internal-only shim; `pip._internal.main` covers pip 10 .. 19.2;
-    `pip._internal.cli.main.main` covers pip >= 19.3. The embedded PFC
+    `pip._internal.cli.main.main` covers pip >= 19.3. The embedded engine
     Python may carry any pip version, so probe each location in turn
     rather than guessing from the pip or Python version.
     """
@@ -100,12 +100,12 @@ def _run_pip(args):
     pip_main = _resolve_pip_main()
     if pip_main is None:
         raise RuntimeError(
-            "Could not locate pip's Python entry point in this PFC interpreter. "
+            "Could not locate pip's Python entry point in this engine interpreter. "
             "Install the bridge manually, then re-run this script:\n"
             "    python -m pip install --user itasca-mcp-bridge"
         )
 
-    # PFC runs pip inside an IPython host; temporarily suppress logging
+    # The engine runs pip inside an IPython host; temporarily suppress logging
     # handler tracebacks that don't reflect actual installation failures.
     previous_raise_exceptions = logging.raiseExceptions
     logging.raiseExceptions = False
@@ -118,7 +118,7 @@ def _run_pip(args):
 def _install_bridge():
     os.environ["PIP_DISABLE_PIP_VERSION_CHECK"] = "1"
 
-    override = os.environ.get("PFC_MCP_PIP_INDEX_URL")
+    override = os.environ.get("ITASCA_MCP_PIP_INDEX_URL")
     if override:
         indexes = [(override, ())]
     else:
@@ -178,7 +178,7 @@ def _should_install(current_version):
 
 def main():
     print("=" * 60)
-    print("PFC MCP Bridge Bootstrap")
+    print("Itasca MCP Bridge Bootstrap")
     print("=" * 60)
     print("Python:", sys.version.split()[0])
 

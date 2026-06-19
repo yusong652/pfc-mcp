@@ -1,4 +1,4 @@
-"""Data models for PFC command documentation system.
+"""Data models for Itasca command documentation system.
 
 DEPRECATED: This module is kept for backward compatibility only.
 New code should use itasca_mcp.knowledge.search.legacy_models instead.

@@ -1,4 +1,4 @@
-"""PFC Command Browse Tool - Navigate and retrieve command documentation."""
+"""Itasca Command Browse Tool - Navigate and retrieve command documentation."""
 
 from typing import Any
 
@@ -18,15 +18,15 @@ from itasca_mcp.utils import (
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_browse_commands tool with the MCP server."""
+    """Register itasca_browse_commands tool with the MCP server."""
 
     @mcp.tool()
-    def pfc_browse_commands(
+    def itasca_browse_commands(
         software: SoftwareParam,
         command: str | None = Field(
             None,
             description=(
-                "PFC command to browse (space-separated, matching PFC syntax). Examples:\n"
+                "Itasca command to browse (space-separated, matching Itasca command syntax). Examples:\n"
                 "- None or '': List all command categories\n"
                 "- 'ball': List all ball commands\n"
                 "- 'ball create': Get ball create documentation\n"
@@ -42,7 +42,7 @@ def register(mcp: FastMCP) -> None:
             ),
         ),
     ) -> dict[str, Any]:
-        """Browse PFC command documentation by path (like glob + cat).
+        """Browse Itasca command documentation by path (like glob + cat).
 
         Navigation levels:
         - No command: All command categories overview
@@ -54,8 +54,8 @@ def register(mcp: FastMCP) -> None:
         - You want to explore available commands
 
         Related tools:
-        - pfc_query_command: Search commands by keywords (when path unknown)
-        - pfc_browse_reference: Browse reference docs (e.g., "contact-models linear")
+        - itasca_query_command: Search commands by keywords (when path unknown)
+        - itasca_browse_reference: Browse reference docs (e.g., "contact-models linear")
         """
         cmd = normalize_input(command, lowercase=True)
         sw = normalize_software_value(software)
@@ -174,7 +174,7 @@ def _browse_category(category: str, version: str, software: str) -> dict[str, An
 def _browse_command(category: str, command_name: str, version: str, software: str) -> dict[str, Any]:
     """Level 2: Return full documentation for a specific command."""
     # JSON filenames use dash as sub-command separator (e.g. edge-create,
-    # cmat-add, scalar-create) while PFC syntax separates them with spaces.
+    # cmat-add, scalar-create) while Itasca command syntax separates them with spaces.
     # Accept either form on input.
     try:
         cmd_doc = CommandLoader.load_command_doc(category, command_name, version, software=software)

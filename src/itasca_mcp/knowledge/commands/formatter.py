@@ -1,4 +1,4 @@
-"""Markdown formatter for PFC command documentation.
+"""Markdown formatter for Itasca command documentation.
 
 This module formats command documentation and model properties as markdown
 for LLM consumption.
@@ -16,7 +16,7 @@ from itasca_mcp.knowledge.commands.models import CommandSearchResult, DocumentTy
 
 
 class CommandFormatter:
-    """Format PFC command documentation as markdown.
+    """Format Itasca command documentation as markdown.
 
     This class provides static methods for formatting commands and model
     properties in a consistent, LLM-friendly markdown format.
@@ -27,7 +27,7 @@ class CommandFormatter:
         """Prepend error message to fallback content.
 
         Used when a requested path doesn't exist but we can show the parent level.
-        Format matches pfc_browse_python_api for consistency.
+        Format matches itasca_browse_python_api for consistency.
 
         Args:
             error_msg: Error message describing what wasn't found
@@ -52,7 +52,7 @@ class CommandFormatter:
 
         total_commands = sum(len(cat_data.get("commands", [])) for cat_data in categories.values())
 
-        parts.append("## PFC Command Documentation")
+        parts.append("## Itasca Command Documentation")
         parts.append("")
         parts.append(f"Total: {len(categories)} categories, {total_commands} commands")
         parts.append("")
@@ -288,7 +288,7 @@ class CommandFormatter:
         Returns:
             Formatted markdown string with suggestions
         """
-        return f"""No PFC command documentation found for '{query}'.
+        return f"""No Itasca command documentation found for '{query}'.
 
 Suggestions:
 - Try simpler keywords (e.g., "ball create" instead of "how to create a ball")

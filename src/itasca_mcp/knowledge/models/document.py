@@ -1,8 +1,8 @@
-"""Unified document model for PFC search system.
+"""Unified document model for Itasca documentation search system.
 
 This module provides a unified representation of different document types
 (commands, model properties, Python API) to enable consistent search operations
-across the entire PFC documentation system.
+across the entire Itasca documentation system.
 """
 
 from dataclasses import dataclass, field
@@ -13,8 +13,8 @@ from typing import Any
 class DocumentType(Enum):
     """Document type enumeration.
 
-    Defines the types of searchable documents in the PFC system:
-    - COMMAND: PFC command documentation (e.g., "ball create", "contact property")
+    Defines the types of searchable documents in the Itasca system:
+    - COMMAND: Itasca command documentation (e.g., "ball create", "contact property")
     - MODEL_PROPERTY: Contact model property documentation (e.g., "linear", "hertz")
     - PYTHON_API: Python SDK API documentation (e.g., "itasca.ball.create")
 

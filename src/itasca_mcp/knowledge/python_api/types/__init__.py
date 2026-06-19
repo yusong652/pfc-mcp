@@ -1,4 +1,4 @@
-"""Type handling for PFC SDK documentation.
+"""Type handling for Itasca SDK documentation.
 
 This package provides specialized handling for PFC type systems,
 including Contact type aliasing and class-to-module mappings.

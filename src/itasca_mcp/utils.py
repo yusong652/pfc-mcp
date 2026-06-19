@@ -1,4 +1,4 @@
-"""Validation models and utilities for PFC MCP tools."""
+"""Validation models and utilities for Itasca MCP tools."""
 
 from enum import Enum
 from pathlib import PurePosixPath, PureWindowsPath
@@ -30,7 +30,7 @@ DESCRIPTION_MAX_LENGTH = 200
 
 
 class CommandDocVersion(str, Enum):
-    """Supported PFC documentation versions for command tools."""
+    """Supported Itasca documentation versions for command tools."""
 
     V6_0 = "6.0"
     V7_0 = "7.0"
@@ -120,7 +120,7 @@ SearchQuery = Annotated[
         ...,
         min_length=1,
         description=(
-            "Search keywords for PFC commands. Examples: 'ball create', "
+            "Search keywords for Itasca commands. Examples: 'ball create', "
             "'contact property', 'model solve'. Case-insensitive."
         ),
     ),
@@ -134,7 +134,7 @@ PythonAPISearchQuery = Annotated[
         ...,
         min_length=1,
         description=(
-            "Search keywords for PFC Python SDK API. Examples: 'ball pos', "
+            "Search keywords for Itasca Python SDK API. Examples: 'ball pos', "
             "'contact force', 'model solve'. Case-insensitive."
         ),
     ),
@@ -163,13 +163,13 @@ SearchLimit = Annotated[
 TaskId = Annotated[
     str,
     AfterValidator(validate_non_empty_string),
-    Field(..., description="Task ID returned by pfc_execute_task"),
+    Field(..., description="Task ID returned by itasca_execute_task"),
 ]
 
 ScriptPath = Annotated[
     str,
     AfterValidator(validate_script_path),
-    Field(..., description="Absolute path to entry Python script in PFC workspace"),
+    Field(..., description="Absolute path to entry Python script in the Itasca engine workspace"),
 ]
 
 TaskDescription = Annotated[
@@ -216,7 +216,7 @@ WaitSeconds = Annotated[
 ConsoleCode = Annotated[
     str,
     AfterValidator(validate_non_empty_string),
-    Field(..., min_length=1, description="Python code to execute in PFC user console"),
+    Field(..., min_length=1, description="Python code to execute in the Itasca engine user console"),
 ]
 
 ConsoleTimeoutSeconds = Annotated[

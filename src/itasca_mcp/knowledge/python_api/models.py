@@ -1,4 +1,4 @@
-"""Data models for PFC SDK documentation system.
+"""Data models for Itasca SDK documentation system.
 
 This module defines the core data structures used throughout the SDK
 documentation system, providing type-safe contracts for search results
@@ -50,7 +50,7 @@ class SearchResult:
 class APIDocumentation:
     """Structured API documentation.
 
-    This model represents the complete documentation for a PFC Python SDK API,
+    This model represents the complete documentation for a Itasca Python SDK API,
     parsed from JSON documentation files.
 
     Attributes:
@@ -61,7 +61,7 @@ class APIDocumentation:
         returns: Return value information (type and description)
         examples: Usage examples with code snippets
         limitations: Known limitations (optional)
-        fallback_commands: Alternative PFC commands to use instead (optional)
+        fallback_commands: Alternative Itasca commands to use instead (optional)
         best_practices: Recommended usage patterns (optional)
         notes: Additional notes (optional)
         see_also: Related APIs (optional)

@@ -1,4 +1,4 @@
-"""Document adapters for PFC search system.
+"""Document adapters for Itasca documentation search system.
 
 This package provides adapters to convert raw documentation data from loaders
 into unified SearchDocument models. Each adapter handles a specific document

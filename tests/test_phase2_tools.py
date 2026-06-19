@@ -10,13 +10,13 @@ def test_phase2_tools_registered() -> None:
     tools = asyncio.run(mcp.list_tools())
     tool_names = {tool.name for tool in tools}
     expected = {
-        "pfc_execute_task",
-        "pfc_check_task_status",
-        "pfc_list_tasks",
-        "pfc_interrupt_task",
+        "itasca_execute_task",
+        "itasca_check_task_status",
+        "itasca_list_tasks",
+        "itasca_interrupt_task",
     }
     assert expected.issubset(tool_names)
-    assert "pfc_execute_code" in tool_names
+    assert "itasca_execute_code" in tool_names
 
 
 def test_pagination() -> None:
@@ -50,6 +50,6 @@ def test_bridge_error_message_is_friendly() -> None:
     assert envelope["ok"] is False
     error = envelope["error"]
     assert error["code"] == "bridge_unavailable"
-    assert error["message"] == "PFC bridge unavailable"
+    assert error["message"] == "Itasca bridge unavailable"
     assert error["details"]["reason"] == "cannot connect to bridge service"
-    assert error["details"]["action"] == "start itasca-mcp-bridge in PFC GUI, then retry"
+    assert error["details"]["action"] == "start itasca-mcp-bridge in the Itasca engine GUI, then retry"

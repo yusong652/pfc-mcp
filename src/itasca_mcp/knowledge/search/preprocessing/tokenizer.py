@@ -1,4 +1,4 @@
-"""Text tokenization for PFC search system.
+"""Text tokenization for Itasca documentation search system.
 
 This module provides tokenization functionality optimized for technical
 documentation, handling special cases like hyphenated terms, numbers,

@@ -1,4 +1,4 @@
-"""PFC execute_code tool — synchronous code execution in PFC process."""
+"""execute_code tool — synchronous code execution in the Itasca engine process."""
 
 from typing import Any
 
@@ -11,36 +11,37 @@ from itasca_mcp.utils import ConsoleCode, ConsoleTimeoutSeconds
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_execute_code tool."""
+    """Register itasca_execute_code tool."""
 
     @mcp.tool()
-    async def pfc_execute_code(
+    async def itasca_execute_code(
         code: ConsoleCode,
         timeout: ConsoleTimeoutSeconds = 10,
     ) -> dict[str, Any]:
-        """Execute Python code synchronously in the running PFC process.
+        """Execute Python code synchronously in the running Itasca engine process.
 
         Returns stdout and an optional result variable immediately.
-        Code runs in PFC's main thread, sharing the same __main__
+        Code runs in the engine's main thread, sharing the same __main__
         namespace as any running task — side effects persist and are
         immediately visible to the task on its next cycle.
 
         This tool remains responsive EVEN WHILE a simulation task is
-        running (submitted via pfc_execute_task), as long as the task
+        running (submitted via itasca_execute_task), as long as the task
         is actively cycling — execute_code interleaves at cycle gaps.
         Use it as a live REPL to inspect simulation state in real
         time — no need to pre-script print statements, and parameter
         sweeps or sentinel-based control don't have to be baked into
         the task script up front.
 
-        Environment: PFC's embedded Python interpreter. The version
-        is bundled with PFC (PFC 6/7 → Python 3.6, PFC 9 → 3.10);
-        the PFC version is encoded in sys.executable (e.g. PFC700,
-        PFC900). When unsure, write code compatible with Python 3.6+.
+        Environment: the Itasca engine's embedded Python interpreter.
+        The version is bundled with the engine (Itasca 6/7 → Python 3.6,
+        Itasca 9 → 3.10); the product+version is encoded in sys.executable
+        (e.g. PFC900, FLAC900). When unsure, write code compatible with
+        Python 3.6+.
 
         Typical uses:
         - Query model state: ball/wall/contact counts, current cycle
-        - Issue PFC commands and read their console output:
+        - Issue Itasca commands and read their console output:
           itasca.command('ball list'), itasca.command('model list
           information'). Table dumps, list output, and command
           summaries are captured and interleaved with Python prints
@@ -56,13 +57,13 @@ def register(mcp: FastMCP) -> None:
         - Development and REPL-style testing
 
         `program call '<file>.p3dat'` (or .p2dat / .dat) through this
-        tool is PFC-version-gated. On PFC 6/7 the command-script
+        tool is engine-version-gated. On 6/7 the command-script
         interpreter blocks the bridge for the script's entire
         duration with no cycle-gap interleaving — any long
         `model cycle` inside the file leaves the bridge unreachable
-        until PFC is stopped manually. Never emit it there, and
-        treat unknown or unverified versions (including PFC
-        9.0-9.6) the same way. On PFC 9.7+ the bridge stays fully
+        until the engine is stopped manually. Never emit it there, and
+        treat unknown or unverified versions (including 9.0-9.6) the
+        same way. On 9.7+ the bridge stays fully
         responsive during a `program call` (verified on 9.7: status
         polling, cycle-gap interleaving, and interrupt all work
         mid-call). Even where it is safe, prefer reading the file
@@ -73,10 +74,10 @@ def register(mcp: FastMCP) -> None:
 
         This is a synchronous tool: the request blocks until the code
         finishes or hits the timeout (default 10s, max 600s). Output
-        is returned in full; the call is NOT tracked by pfc_list_tasks
+        is returned in full; the call is NOT tracked by itasca_list_tasks
         and cannot be interrupted mid-execution. For cancellable,
-        pollable, or background work, submit it via pfc_execute_task
-        instead — and you can still call pfc_execute_code against the
+        pollable, or background work, submit it via itasca_execute_task
+        instead — and you can still call itasca_execute_code against the
         task while it cycles.
         """
         try:
@@ -103,12 +104,12 @@ def register(mcp: FastMCP) -> None:
 
         if status == "terminated":
             # Bridge aborted the snippet at the timeout deadline and the
-            # worker thread settled. PFC state may be partially modified.
+            # worker thread settled. Engine state may be partially modified.
             return build_operation_error(
                 "terminated",
                 "Execution aborted by bridge timeout",
                 reason=message,
-                action="PFC state may be partially modified; verify with pfc_execute_code before retrying",
+                action="Engine state may be partially modified; verify with itasca_execute_code before retrying",
                 output=partial_output,
             )
 
@@ -117,7 +118,7 @@ def register(mcp: FastMCP) -> None:
                 action = (
                     "Bridge could not terminate the code (likely stuck "
                     "in a C extension). It may recover when the C call "
-                    "returns; otherwise restart PFC bridge."
+                    "returns; otherwise restart the Itasca bridge."
                 )
             else:
                 action = "Reduce code complexity or increase timeout"

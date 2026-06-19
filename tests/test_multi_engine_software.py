@@ -47,7 +47,7 @@ def test_normalize_software_validates() -> None:
 async def test_software_is_required_on_tools() -> None:
     """Omitting ``software`` is a validation error (there is no default engine)."""
     with pytest.raises(Exception, match="(?i)software"):
-        await mcp.call_tool("pfc_browse_commands", {})
+        await mcp.call_tool("itasca_browse_commands", {})
 
 
 # --- FLAC coverage through the tools ----------------------------------------
@@ -55,7 +55,7 @@ async def test_software_is_required_on_tools() -> None:
 
 @pytest.mark.asyncio
 async def test_flac_browse_commands_root() -> None:
-    result = await mcp.call_tool("pfc_browse_commands", {"software": "flac"})
+    result = await mcp.call_tool("itasca_browse_commands", {"software": "flac"})
     data = _parse_tool_payload(result)["data"]
     names = {e["name"] for e in data["entries"]}
     assert "zone" in names  # FLAC-only family
@@ -67,7 +67,7 @@ async def test_flac_browse_commands_root() -> None:
 @pytest.mark.asyncio
 async def test_flac_browse_zone_command() -> None:
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "flac", "command": "zone create", "version": "9.0"}
+        "itasca_browse_commands", {"software": "flac", "command": "zone create", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "zone create"
@@ -75,7 +75,7 @@ async def test_flac_browse_zone_command() -> None:
 
 @pytest.mark.asyncio
 async def test_flac_query_command_finds_zone() -> None:
-    result = await mcp.call_tool("pfc_query_command", {"software": "flac", "query": "zone create"})
+    result = await mcp.call_tool("itasca_query_command", {"software": "flac", "query": "zone create"})
     data = _parse_tool_payload(result)["data"]
     assert data["summary"]["software"] == "flac"
     assert any("zone" in e["name"] for e in data["entries"])
@@ -83,7 +83,7 @@ async def test_flac_query_command_finds_zone() -> None:
 
 @pytest.mark.asyncio
 async def test_flac_browse_python_api_has_zone_not_ball() -> None:
-    result = await mcp.call_tool("pfc_browse_python_api", {"software": "flac"})
+    result = await mcp.call_tool("itasca_browse_python_api", {"software": "flac"})
     data = _parse_tool_payload(result)["data"]
     module_paths = {e.get("path") for e in data["entries"] if e.get("entry_type") == "module"}
     assert "itasca.zone" in module_paths
@@ -92,7 +92,7 @@ async def test_flac_browse_python_api_has_zone_not_ball() -> None:
 
 @pytest.mark.asyncio
 async def test_flac_browse_reference_root() -> None:
-    result = await mcp.call_tool("pfc_browse_reference", {"software": "flac"})
+    result = await mcp.call_tool("itasca_browse_reference", {"software": "flac"})
     data = _parse_tool_payload(result)["data"]
     names = {e["name"] for e in data["entries"]}
     assert "constitutive-models" in names
@@ -153,7 +153,7 @@ def test_reference_categories_are_engine_specific() -> None:
 
 @pytest.mark.asyncio
 async def test_3dec_browse_commands_root() -> None:
-    result = await mcp.call_tool("pfc_browse_commands", {"software": "3dec", "version": "9.0"})
+    result = await mcp.call_tool("itasca_browse_commands", {"software": "3dec", "version": "9.0"})
     data = _parse_tool_payload(result)["data"]
     names = {e["name"] for e in data["entries"]}
     assert "block" in names  # 3DEC-only family
@@ -166,7 +166,7 @@ async def test_3dec_browse_commands_root() -> None:
 @pytest.mark.asyncio
 async def test_3dec_browse_block_zone_generate() -> None:
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "3dec", "command": "block zone generate", "version": "9.0"}
+        "itasca_browse_commands", {"software": "3dec", "command": "block zone generate", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "block zone generate"
@@ -174,7 +174,9 @@ async def test_3dec_browse_block_zone_generate() -> None:
 
 @pytest.mark.asyncio
 async def test_3dec_query_command_finds_block_create() -> None:
-    result = await mcp.call_tool("pfc_query_command", {"software": "3dec", "query": "create block", "version": "9.0"})
+    result = await mcp.call_tool(
+        "itasca_query_command", {"software": "3dec", "query": "create block", "version": "9.0"}
+    )
     data = _parse_tool_payload(result)["data"]
     assert data["summary"]["software"] == "3dec"
     assert any(e["name"] == "block create" for e in data["entries"])
@@ -182,7 +184,7 @@ async def test_3dec_query_command_finds_block_create() -> None:
 
 @pytest.mark.asyncio
 async def test_3dec_python_api_exposes_itasca_core() -> None:
-    result = await mcp.call_tool("pfc_query_python_api", {"software": "3dec", "query": "run command"})
+    result = await mcp.call_tool("itasca_query_python_api", {"software": "3dec", "query": "run command"})
     data = _parse_tool_payload(result)["data"]
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
@@ -296,7 +298,7 @@ def test_3dec_command_families_are_isolated() -> None:
 
 @pytest.mark.asyncio
 async def test_mpoint_browse_commands_root() -> None:
-    result = await mcp.call_tool("pfc_browse_commands", {"software": "mpoint", "version": "9.0"})
+    result = await mcp.call_tool("itasca_browse_commands", {"software": "mpoint", "version": "9.0"})
     data = _parse_tool_payload(result)["data"]
     names = {e["name"] for e in data["entries"]}
     assert "mpoint" in names  # MPoint-only family
@@ -310,7 +312,7 @@ async def test_mpoint_browse_commands_root() -> None:
 @pytest.mark.asyncio
 async def test_mpoint_browse_mpoint_create() -> None:
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "mpoint", "command": "mpoint create", "version": "9.0"}
+        "itasca_browse_commands", {"software": "mpoint", "command": "mpoint create", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "mpoint create"
@@ -320,7 +322,7 @@ async def test_mpoint_browse_mpoint_create() -> None:
 async def test_mpoint_browse_node_subcommand() -> None:
     # 'mpoint node fix' is keyed as node-fix.json but addressed with spaces.
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "mpoint", "command": "mpoint node fix", "version": "9.0"}
+        "itasca_browse_commands", {"software": "mpoint", "command": "mpoint node fix", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "mpoint node fix"
@@ -329,7 +331,7 @@ async def test_mpoint_browse_node_subcommand() -> None:
 @pytest.mark.asyncio
 async def test_mpoint_query_command_finds_mpoint_create() -> None:
     result = await mcp.call_tool(
-        "pfc_query_command", {"software": "mpoint", "query": "create material point", "version": "9.0"}
+        "itasca_query_command", {"software": "mpoint", "query": "create material point", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["summary"]["software"] == "mpoint"
@@ -338,7 +340,7 @@ async def test_mpoint_query_command_finds_mpoint_create() -> None:
 
 @pytest.mark.asyncio
 async def test_mpoint_python_api_exposes_itasca_core() -> None:
-    result = await mcp.call_tool("pfc_query_python_api", {"software": "mpoint", "query": "run command"})
+    result = await mcp.call_tool("itasca_query_python_api", {"software": "mpoint", "query": "run command"})
     data = _parse_tool_payload(result)["data"]
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
@@ -444,7 +446,7 @@ def test_mpoint_initial_conditions_field_and_gravity() -> None:
 
 @pytest.mark.asyncio
 async def test_massflow_browse_commands_root() -> None:
-    result = await mcp.call_tool("pfc_browse_commands", {"software": "massflow", "version": "9.0"})
+    result = await mcp.call_tool("itasca_browse_commands", {"software": "massflow", "version": "9.0"})
     data = _parse_tool_payload(result)["data"]
     names = {e["name"] for e in data["entries"]}
     assert "massflow" in names  # MassFlow-only family
@@ -459,7 +461,7 @@ async def test_massflow_browse_commands_root() -> None:
 @pytest.mark.asyncio
 async def test_massflow_browse_compute_command() -> None:
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "massflow", "command": "massflow compute", "version": "9.0"}
+        "itasca_browse_commands", {"software": "massflow", "command": "massflow compute", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "massflow compute"
@@ -469,7 +471,7 @@ async def test_massflow_browse_compute_command() -> None:
 async def test_massflow_browse_subnamespace_command() -> None:
     # 'massflow drawpoint import' is keyed as drawpoint-import.json but addressed with spaces.
     result = await mcp.call_tool(
-        "pfc_browse_commands", {"software": "massflow", "command": "massflow drawpoint import", "version": "9.0"}
+        "itasca_browse_commands", {"software": "massflow", "command": "massflow drawpoint import", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["entries"][0]["doc"]["command"] == "massflow drawpoint import"
@@ -478,7 +480,7 @@ async def test_massflow_browse_subnamespace_command() -> None:
 @pytest.mark.asyncio
 async def test_massflow_query_command_finds_compute() -> None:
     result = await mcp.call_tool(
-        "pfc_query_command", {"software": "massflow", "query": "compute flow solution", "version": "9.0"}
+        "itasca_query_command", {"software": "massflow", "query": "compute flow solution", "version": "9.0"}
     )
     data = _parse_tool_payload(result)["data"]
     assert data["summary"]["software"] == "massflow"
@@ -487,7 +489,7 @@ async def test_massflow_query_command_finds_compute() -> None:
 
 @pytest.mark.asyncio
 async def test_massflow_python_api_exposes_itasca_core() -> None:
-    result = await mcp.call_tool("pfc_query_python_api", {"software": "massflow", "query": "run command"})
+    result = await mcp.call_tool("itasca_query_python_api", {"software": "massflow", "query": "run command"})
     data = _parse_tool_payload(result)["data"]
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
@@ -613,7 +615,7 @@ def test_effective_doc_version_coerces_nine_zero_only() -> None:
 async def test_nine_zero_only_browse_without_version_resolves() -> None:
     # No version passed -> must NOT fail with "unavailable for 7.0".
     for sw, cmd in (("3dec", "block create"), ("mpoint", "mpoint create"), ("massflow", "massflow compute")):
-        result = await mcp.call_tool("pfc_browse_commands", {"software": sw, "command": cmd})
+        result = await mcp.call_tool("itasca_browse_commands", {"software": sw, "command": cmd})
         payload = _parse_tool_payload(result)
         assert payload["ok"] is True, (sw, payload)
         assert payload["data"]["entries"][0]["doc"]["command"] == cmd
@@ -622,7 +624,7 @@ async def test_nine_zero_only_browse_without_version_resolves() -> None:
 @pytest.mark.asyncio
 async def test_nine_zero_only_reference_summary_reports_9_0() -> None:
     for sw in ("3dec", "mpoint", "massflow"):
-        result = await mcp.call_tool("pfc_browse_reference", {"software": sw})
+        result = await mcp.call_tool("itasca_browse_reference", {"software": sw})
         data = _parse_tool_payload(result)["data"]
         assert data["summary"]["version"] == "9.0", sw
 
@@ -679,7 +681,7 @@ def test_3dec_joint_model_item_has_property_vocabulary() -> None:
 
 @pytest.mark.asyncio
 async def test_3dec_browse_reference_joint_models() -> None:
-    result = await mcp.call_tool("pfc_browse_reference", {"software": "3dec", "topic": "joint-models"})
+    result = await mcp.call_tool("itasca_browse_reference", {"software": "3dec", "topic": "joint-models"})
     data = _parse_tool_payload(result)["data"]
     assert {e.get("name") for e in data["entries"]} >= {"mohr", "cyjm", "nonlinear"}
 

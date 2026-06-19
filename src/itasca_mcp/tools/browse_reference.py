@@ -18,10 +18,10 @@ from itasca_mcp.utils import (
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_browse_reference tool with the MCP server."""
+    """Register itasca_browse_reference tool with the MCP server."""
 
     @mcp.tool()
-    def pfc_browse_reference(
+    def itasca_browse_reference(
         software: SoftwareParam,
         topic: str | None = Field(
             None,
@@ -66,8 +66,8 @@ def register(mcp: FastMCP) -> None:
         - Configuring "plot item create" commands
 
         Related tools:
-        - pfc_browse_commands: Command syntax (e.g., "zone create")
-        - pfc_query_command: Search commands by keywords
+        - itasca_browse_commands: Command syntax (e.g., "zone create")
+        - itasca_query_command: Search commands by keywords
         """
         topic_str = normalize_input(topic, lowercase=True)
         sw = normalize_software_value(software)
@@ -209,7 +209,7 @@ def _browse_item(category: str, item: str, version: str, software: str) -> dict[
             "error": {
                 "code": "item_unavailable_for_version",
                 "message": (
-                    f"'{item}' is not available in PFC {version} (available in: {', '.join(supported) or 'none'})."
+                    f"'{item}' is not available in {software} {version} (available in: {', '.join(supported) or 'none'})."
                 ),
             },
             "input": {"category": category, "item": item, "version": version, "software": software},
@@ -238,7 +238,7 @@ def _browse_item(category: str, item: str, version: str, software: str) -> dict[
                 "count": 1,
                 "sub_item_count": len(sub_items),
                 "version": version,
-                "hint": f"Use pfc_browse_reference('{category} {item} <sub_item>') for details",
+                "hint": f"Use itasca_browse_reference('{category} {item} <sub_item>') for details",
             },
         )
 

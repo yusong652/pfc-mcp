@@ -1,4 +1,4 @@
-"""WebSocket client for communicating with the PFC bridge server."""
+"""WebSocket client for communicating with the Itasca bridge server."""
 
 import asyncio
 import json
@@ -13,7 +13,7 @@ from itasca_mcp.config import get_bridge_config
 logger = logging.getLogger("itasca-mcp.bridge")
 
 
-class PFCBridgeClient:
+class ItascaBridgeClient:
     """Async request/response client for itasca-mcp-bridge WebSocket protocol."""
 
     def __init__(
@@ -265,17 +265,17 @@ class PFCBridgeClient:
         return data.get("working_directory")
 
 
-_client: PFCBridgeClient | None = None
+_client: ItascaBridgeClient | None = None
 _client_lock = asyncio.Lock()
 
 
-async def get_bridge_client() -> PFCBridgeClient:
+async def get_bridge_client() -> ItascaBridgeClient:
     """Return the global bridge client instance with lazy initialization."""
     global _client
     async with _client_lock:
         if _client is None:
             config = get_bridge_config()
-            _client = PFCBridgeClient(
+            _client = ItascaBridgeClient(
                 url=config.url,
                 reconnect_interval_s=config.reconnect_interval_s,
                 max_retries=config.max_retries,

@@ -1,4 +1,4 @@
-"""Text preprocessing utilities for PFC search system.
+"""Text preprocessing utilities for Itasca documentation search system.
 
 This package provides text processing utilities for search, including
 tokenization and stopword filtering optimized for technical documentation.

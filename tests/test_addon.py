@@ -141,7 +141,7 @@ def test_run_pip_restores_logging_even_on_failure(monkeypatch):
 @pytest.fixture
 def clean_pip_env(monkeypatch):
     """Neutralize the env vars `_install_bridge` reads and writes."""
-    monkeypatch.delenv("PFC_MCP_PIP_INDEX_URL", raising=False)
+    monkeypatch.delenv("ITASCA_MCP_PIP_INDEX_URL", raising=False)
     monkeypatch.delenv("PIP_DISABLE_PIP_VERSION_CHECK", raising=False)
 
 
@@ -185,7 +185,7 @@ def test_install_bridge_returns_last_code_when_all_fail(monkeypatch, clean_pip_e
 
 
 def test_install_bridge_honors_index_override(monkeypatch, clean_pip_env):
-    monkeypatch.setenv("PFC_MCP_PIP_INDEX_URL", "https://override.test/simple/")
+    monkeypatch.setenv("ITASCA_MCP_PIP_INDEX_URL", "https://override.test/simple/")
     calls = _stub_run_pip(monkeypatch, [0])
 
     assert addon._install_bridge() == 0

@@ -1,4 +1,4 @@
-"""Runtime configuration for PFC MCP server."""
+"""Runtime configuration for Itasca MCP server."""
 
 import os
 from dataclasses import dataclass
@@ -43,9 +43,9 @@ class BridgeConfig:
 def get_bridge_config() -> BridgeConfig:
     """Load bridge config from environment variables."""
     return BridgeConfig(
-        url=os.getenv("PFC_MCP_BRIDGE_URL", "ws://localhost:9001"),
-        reconnect_interval_s=_env_float("PFC_MCP_RECONNECT_INTERVAL_S", 0.5),
-        max_retries=max(0, _env_int("PFC_MCP_MAX_RETRIES", 2)),
-        request_timeout_s=max(1.0, _env_float("PFC_MCP_REQUEST_TIMEOUT_S", 10.0)),
-        auto_reconnect=_env_bool("PFC_MCP_AUTO_RECONNECT", True),
+        url=os.getenv("ITASCA_MCP_BRIDGE_URL", "ws://localhost:9001"),
+        reconnect_interval_s=_env_float("ITASCA_MCP_RECONNECT_INTERVAL_S", 0.5),
+        max_retries=max(0, _env_int("ITASCA_MCP_MAX_RETRIES", 2)),
+        request_timeout_s=max(1.0, _env_float("ITASCA_MCP_REQUEST_TIMEOUT_S", 10.0)),
+        auto_reconnect=_env_bool("ITASCA_MCP_AUTO_RECONNECT", True),
     )

@@ -1,4 +1,4 @@
-"""PFC Command Query Tool - Keyword search for command documentation."""
+"""Itasca Command Query Tool - Keyword search for command documentation."""
 
 from typing import Any
 
@@ -20,10 +20,10 @@ from itasca_mcp.utils import (
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_query_command tool with the MCP server."""
+    """Register itasca_query_command tool with the MCP server."""
 
     @mcp.tool()
-    def pfc_query_command(
+    def itasca_query_command(
         query: SearchQuery,
         software: SoftwareParam,
         limit: SearchLimit = 10,
@@ -35,18 +35,18 @@ def register(mcp: FastMCP) -> None:
             ),
         ),
     ) -> dict[str, Any]:
-        """Search PFC command documentation by keywords (like grep).
+        """Search Itasca command documentation by keywords (like grep).
 
-        Returns matching command paths. Use pfc_browse_commands for full documentation.
+        Returns matching command paths. Use itasca_browse_commands for full documentation.
 
         When to use:
         - You have keywords but don't know exact command path
         - Example: "ball create", "contact property", "model solve"
 
         Related tools:
-        - pfc_browse_commands: Get full documentation for a known command path
-        - pfc_browse_reference: Browse reference docs (e.g., "contact-models linear")
-        - pfc_query_python_api: Search Python SDK by keywords
+        - itasca_browse_commands: Get full documentation for a known command path
+        - itasca_browse_reference: Browse reference docs (e.g., "contact-models linear")
+        - itasca_query_python_api: Search Python SDK by keywords
         """
         sw = normalize_software_value(software)
         version_value = effective_doc_version(sw, normalize_command_doc_version(version))

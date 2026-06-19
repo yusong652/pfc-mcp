@@ -1,4 +1,4 @@
-"""PFC MCP Server - ITASCA PFC tools exposed over MCP."""
+"""Itasca MCP Server - ITASCA simulation tools exposed over MCP."""
 
 import argparse
 import asyncio
@@ -25,12 +25,13 @@ from itasca_mcp.tools import (
 )
 
 mcp = FastMCP(
-    "PFC MCP Server",
+    "Itasca MCP Server",
     instructions=(
-        "PFC (Particle Flow Code) MCP server. "
-        "Provides tools for browsing/searching PFC documentation "
-        "and for executing simulation tasks and managing runs "
-        "through an itasca-mcp-bridge WebSocket service running inside PFC GUI."
+        "ITASCA MCP server for PFC, FLAC, 3DEC, MPoint, and MassFlow. "
+        "Provides tools for browsing/searching engine documentation (select the "
+        "engine via the required 'software' parameter) and for executing simulation "
+        "tasks and managing runs through an itasca-mcp-bridge service running inside "
+        "the Itasca engine GUI."
     ),
 )
 
@@ -62,10 +63,10 @@ def _override_bridge_port(url: str, port: int) -> str:
 
 
 def main() -> None:
-    """Entry point for the PFC MCP server."""
+    """Entry point for the Itasca MCP server."""
     parser = argparse.ArgumentParser(
         prog="itasca-mcp",
-        description="PFC MCP Server - ITASCA PFC tools exposed over MCP",
+        description="Itasca MCP Server - ITASCA simulation tools exposed over MCP",
     )
     parser.add_argument("--version", "-v", action="version", version=f"itasca-mcp {__version__}")
     parser.add_argument(
@@ -88,7 +89,7 @@ def main() -> None:
     parser.add_argument(
         "--bridge-url",
         default=None,
-        help="Bridge WebSocket URL (default: ws://localhost:9001, or PFC_MCP_BRIDGE_URL env)",
+        help="Bridge WebSocket URL (default: ws://localhost:9001, or ITASCA_MCP_BRIDGE_URL env)",
     )
     parser.add_argument(
         "--bridge-port",
@@ -96,7 +97,7 @@ def main() -> None:
         default=None,
         help=(
             "Bridge WebSocket port; shorthand for --bridge-url ws://localhost:PORT. "
-            "Overrides only the port of --bridge-url / PFC_MCP_BRIDGE_URL when both "
+            "Overrides only the port of --bridge-url / ITASCA_MCP_BRIDGE_URL when both "
             "are given (default: 9001)"
         ),
     )
@@ -109,16 +110,16 @@ def main() -> None:
     args = parser.parse_args()
 
     # Resolve the bridge URL from (in order of precedence) --bridge-url,
-    # the PFC_MCP_BRIDGE_URL env, then the default. --bridge-port then
+    # the ITASCA_MCP_BRIDGE_URL env, then the default. --bridge-port then
     # overrides just the port, so users can point at a non-default bridge
     # port without spelling out the whole ws:// URL.
-    bridge_url = args.bridge_url or os.environ.get("PFC_MCP_BRIDGE_URL")
+    bridge_url = args.bridge_url or os.environ.get("ITASCA_MCP_BRIDGE_URL")
     if args.bridge_port is not None:
         if not 1 <= args.bridge_port <= 65535:
             parser.error("--bridge-port must be between 1 and 65535")
         bridge_url = _override_bridge_port(bridge_url or DEFAULT_BRIDGE_URL, args.bridge_port)
     if bridge_url:
-        os.environ["PFC_MCP_BRIDGE_URL"] = bridge_url
+        os.environ["ITASCA_MCP_BRIDGE_URL"] = bridge_url
 
     # Configure logging
     level = getattr(logging, args.log_level.upper())

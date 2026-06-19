@@ -1,6 +1,6 @@
 """High-level Python API search interface.
 
-This module provides a simple, user-friendly API for searching PFC Python SDK
+This module provides a simple, user-friendly API for searching Itasca Python SDK
 documentation using BM25 algorithm with multi-field scoring.
 
 Features:
@@ -23,7 +23,7 @@ from itasca_mcp.knowledge.search.postprocessing import consolidate_component_api
 class APISearch:
     """Python SDK API search interface.
 
-    This class provides a high-level API for searching PFC Python SDK
+    This class provides a high-level API for searching Itasca Python SDK
     documentation using BM25 algorithm with multi-field scoring.
 
     Search Scope:

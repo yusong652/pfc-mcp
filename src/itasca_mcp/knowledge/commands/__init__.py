@@ -1,7 +1,7 @@
-"""PFC Command Documentation System.
+"""Itasca Command Documentation System.
 
 This module provides command documentation loading and formatting capabilities
-for PFC commands.
+for Itasca commands.
 
 Components:
     - CommandLoader: Load command docs from JSON files

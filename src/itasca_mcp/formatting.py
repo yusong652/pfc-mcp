@@ -109,11 +109,11 @@ def build_bridge_error(exc: Exception, *, task_id: str | None = None) -> dict[st
     details: dict[str, Any] = {
         "bridge_url": cfg.url,
         "reason": reason,
-        "action": "start itasca-mcp-bridge in PFC GUI, then retry",
+        "action": "start itasca-mcp-bridge in the Itasca engine GUI, then retry",
     }
     if task_id:
         details["task_id"] = task_id
-    return build_error("bridge_unavailable", "PFC bridge unavailable", details)
+    return build_error("bridge_unavailable", "Itasca bridge unavailable", details)
 
 
 def build_operation_error(

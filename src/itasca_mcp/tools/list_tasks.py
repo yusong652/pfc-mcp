@@ -16,14 +16,14 @@ from itasca_mcp.utils import SkipNewestTasks, TaskListLimit
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_list_tasks tool."""
+    """Register itasca_list_tasks tool."""
 
     @mcp.tool()
-    async def pfc_list_tasks(
+    async def itasca_list_tasks(
         skip_newest: SkipNewestTasks = 0,
         limit: TaskListLimit = 32,
     ) -> dict[str, Any]:
-        """List tracked PFC tasks with pagination."""
+        """List tracked Itasca tasks with pagination."""
         try:
             client = await get_bridge_client()
             response = await client.list_tasks(

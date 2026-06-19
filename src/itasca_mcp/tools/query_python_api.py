@@ -1,4 +1,4 @@
-"""PFC Python API Query Tool - Keyword search for SDK documentation."""
+"""Itasca Python API Query Tool - Keyword search for SDK documentation."""
 
 from typing import Any
 
@@ -11,25 +11,25 @@ from itasca_mcp.utils import PythonAPISearchQuery, SearchLimit, SoftwareParam, n
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_query_python_api tool with the MCP server."""
+    """Register itasca_query_python_api tool with the MCP server."""
 
     @mcp.tool()
-    def pfc_query_python_api(
+    def itasca_query_python_api(
         query: PythonAPISearchQuery,
         software: SoftwareParam,
         limit: SearchLimit = 10,
     ) -> dict[str, Any]:
-        """Search PFC Python SDK documentation by keywords (like grep).
+        """Search Itasca Python SDK documentation by keywords (like grep).
 
-        Returns matching API paths with signatures. Use pfc_browse_python_api for full documentation.
+        Returns matching API paths with signatures. Use itasca_browse_python_api for full documentation.
 
         When to use:
         - You have keywords but don't know exact API path
         - Example: "ball velocity", "create", "contact force"
 
         Related tools:
-        - pfc_browse_python_api: Get full documentation for a known API path
-        - pfc_query_command: Search PFC commands by keywords
+        - itasca_browse_python_api: Get full documentation for a known API path
+        - itasca_query_command: Search Itasca commands by keywords
         """
         sw = normalize_software_value(software)
         matches = APISearch.search(query, top_k=limit, software=sw)

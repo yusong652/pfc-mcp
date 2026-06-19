@@ -1,4 +1,4 @@
-"""Search result model for PFC search system.
+"""Search result model for Itasca documentation search system.
 
 This module defines the structure of search results returned by search engines,
 including relevance scores, ranking information, and match details for

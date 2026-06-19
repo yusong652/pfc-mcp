@@ -17,19 +17,19 @@ from itasca_mcp.utils import FilterText, OutputLimit, SkipNewestLines, TaskId, W
 
 
 def register(mcp: FastMCP) -> None:
-    """Register pfc_check_task_status tool."""
+    """Register itasca_check_task_status tool."""
 
     @mcp.tool()
-    async def pfc_check_task_status(
+    async def itasca_check_task_status(
         task_id: TaskId,
         skip_newest: SkipNewestLines = 0,
         limit: OutputLimit = 64,
         filter: FilterText = None,
         wait_seconds: WaitSeconds = 1,
     ) -> dict[str, Any]:
-        """Check status and paginated output for a submitted PFC task.
+        """Check status and paginated output for a submitted Itasca task.
 
-        Output combines Python prints and PFC console output from
+        Output combines Python prints and Itasca console output from
         itasca.command() calls (table dumps, list output, command
         summaries) interleaved in execution order. Use skip_newest /
         limit to paginate, or filter to keep only matching lines.

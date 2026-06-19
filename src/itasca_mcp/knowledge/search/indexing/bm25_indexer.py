@@ -1,4 +1,4 @@
-"""BM25 inverted index builder for PFC search system with multi-field support.
+"""BM25 inverted index builder for Itasca documentation search system with multi-field support.
 
 This module implements BM25 indexing using only Python standard library
 (no NumPy dependency), optimized for technical documentation search.

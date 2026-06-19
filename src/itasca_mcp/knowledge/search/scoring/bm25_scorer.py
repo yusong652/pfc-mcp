@@ -1,4 +1,4 @@
-"""BM25 scoring algorithm for PFC search system with multi-field support.
+"""BM25 scoring algorithm for Itasca documentation search system with multi-field support.
 
 This module implements BM25 ranking with multi-field scoring and weighted combination,
 using only Python standard library (no NumPy dependency).

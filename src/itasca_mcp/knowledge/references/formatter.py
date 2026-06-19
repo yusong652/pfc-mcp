@@ -1,4 +1,4 @@
-"""Markdown formatter for PFC reference documentation.
+"""Markdown formatter for Itasca reference documentation.
 
 This module formats reference documentation (contact models, range elements)
 as markdown for LLM consumption.
@@ -13,7 +13,7 @@ from typing import Any
 
 
 class ReferenceFormatter:
-    """Format PFC reference documentation as markdown.
+    """Format Itasca reference documentation as markdown.
 
     This class provides static methods for formatting contact models and
     range elements in a consistent, LLM-friendly markdown format.
@@ -24,7 +24,7 @@ class ReferenceFormatter:
         """Prepend error message to fallback content.
 
         Used when a requested path doesn't exist but we can show the parent level.
-        Format matches pfc_browse_python_api for consistency.
+        Format matches itasca_browse_python_api for consistency.
 
         Args:
             error_msg: Error message describing what wasn't found
@@ -47,7 +47,7 @@ class ReferenceFormatter:
         """
         parts = []
 
-        parts.append("## PFC Reference Documentation")
+        parts.append("## Itasca Reference Documentation")
         parts.append("")
         parts.append(f"Total: {len(categories)} categories")
         parts.append("")
@@ -82,12 +82,12 @@ class ReferenceFormatter:
         if "models" in index:
             items = index["models"]
             item_type = "model"
-            title = "PFC Contact Models"
+            title = "Contact Models"
             intro = "Contact models define mechanical behavior at contact points."
         elif "elements" in index:
             items = index["elements"]
             item_type = "element"
-            title = "PFC Range Elements"
+            title = "Range Elements"
             intro = "Range elements filter objects by geometric regions, attributes, or logical conditions."
         else:
             return "Unknown reference index format."
@@ -147,7 +147,7 @@ class ReferenceFormatter:
         availability = doc.get("availability")
         if isinstance(availability, dict):
             avail_in = [v for v, ok in availability.items() if ok]
-            parts.append(f"*Available in PFC: {', '.join(avail_in) or 'none'}*")
+            parts.append(f"*Available in versions: {', '.join(avail_in) or 'none'}*")
         parts.append("")
 
         # Description
@@ -373,7 +373,7 @@ class ReferenceFormatter:
         parts.append(f"- **Inheritable**: {'Yes' if inheritable else 'No'}")
         since = target_property.get("since")
         if since:
-            parts.append(f"- **Since**: PFC {since}")
+            parts.append(f"- **Since**: version {since}")
         parts.append("")
 
         # Notes

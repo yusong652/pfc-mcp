@@ -1,4 +1,4 @@
-"""Unified search result models for PFC documentation systems.
+"""Unified search result models for Itasca documentation systems.
 
 This module provides shared data structures for search results across
 command and Python API documentation systems.
@@ -12,8 +12,8 @@ from typing import Any
 class DocumentType(Enum):
     """Type of documentation being searched.
 
-    This enum unifies document types across all PFC documentation systems:
-    - COMMAND: PFC commands (e.g., "ball create", "contact property")
+    This enum unifies document types across all Itasca documentation systems:
+    - COMMAND: Itasca commands (e.g., "ball create", "contact property")
     - MODEL_PROPERTY: Contact model properties (e.g., "linear", "rrlinear")
     - API: Python SDK APIs (e.g., "itasca.ball.create", "Ball.pos")
     """
@@ -39,7 +39,7 @@ class SearchStrategy(Enum):
 
 @dataclass
 class SearchResult:
-    """Unified search result across all PFC documentation types.
+    """Unified search result across all Itasca documentation types.
 
     This model replaces both CommandSearchResult and the Python API SearchResult,
     providing a single unified interface for all search operations.

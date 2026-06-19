@@ -1,11 +1,11 @@
-"""Type system mappings for PFC SDK.
+"""Type system mappings for Itasca SDK.
 
 This module defines mappings between PFC object classes and their
 parent modules, used for generating official API paths.
 """
 
 # Object class to module mapping
-# Maps class names to their parent module names in PFC Python SDK
+# Maps class names to their parent module names in Itasca Python SDK
 # Format: "ClassName" -> "module_name" or "module.submodule"
 # Official API path structure: itasca.{module}.{Class}.{method}
 #

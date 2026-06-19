@@ -1,6 +1,6 @@
-"""PFC SDK Documentation System - Direct Access Interface.
+"""Itasca SDK Documentation System - Direct Access Interface.
 
-This module provides direct access to the PFC Python SDK documentation
+This module provides direct access to the Itasca Python SDK documentation
 components without wrapper layers.
 
 Usage:

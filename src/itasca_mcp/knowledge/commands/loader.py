@@ -1,4 +1,4 @@
-"""Data loading layer for PFC command documentation.
+"""Data loading layer for Itasca command documentation.
 
 This module loads command documentation from JSON files with caching
 for performance.
@@ -18,7 +18,7 @@ from itasca_mcp.knowledge.config import command_index_path, resolve
 
 
 class CommandLoader:
-    """Loads and caches PFC command documentation.
+    """Loads and caches Itasca command documentation.
 
     This class provides static methods for loading command docs.
     All methods use caching to avoid repeated file I/O.
@@ -108,7 +108,7 @@ class CommandLoader:
         Args:
             category: Command category (e.g., "ball", "contact", "model")
             command_name: Command name (e.g., "create", "property", "cycle")
-            version: PFC version string to resolve (defaults to 7.0)
+            version: engine version string to resolve (defaults to 7.0)
 
         Returns:
             Command documentation dict with fields:

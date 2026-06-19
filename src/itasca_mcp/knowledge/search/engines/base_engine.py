@@ -1,4 +1,4 @@
-"""Base search engine interface for PFC documentation search.
+"""Base search engine interface for Itasca documentation search.
 
 This module defines the abstract interface that all search engines must implement,
 ensuring consistent behavior across different search algorithms.

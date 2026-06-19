@@ -1,4 +1,4 @@
-"""Data loading layer for PFC reference documentation.
+"""Data loading layer for Itasca reference documentation.
 
 This module loads reference documentation from JSON files with caching
 for performance.
@@ -23,7 +23,7 @@ from itasca_mcp.knowledge.config import SUPPORTED_SOFTWARE, references_root, res
 
 
 class ReferenceLoader:
-    """Loads and caches PFC reference documentation.
+    """Loads and caches Itasca reference documentation.
 
     This class provides static methods for loading reference docs
     (contact models, range elements). All methods use caching
@@ -238,7 +238,7 @@ class ReferenceLoader:
 
         Args:
             category: Category name (e.g., "contact-models", "range-elements")
-            version: Optional PFC version (e.g. "6.0"). When given, items
+            version: Optional engine version (e.g. "6.0"). When given, items
                 whose ``availability`` map excludes that version are filtered
                 out. Items without an ``availability`` map are kept.
 

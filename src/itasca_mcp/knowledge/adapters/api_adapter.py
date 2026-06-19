@@ -1,4 +1,4 @@
-"""Python API document adapter for PFC search system.
+"""Python API document adapter for Itasca documentation search system.
 
 This module converts Python SDK API documentation from the DocumentationLoader
 format into unified SearchDocument models for search.

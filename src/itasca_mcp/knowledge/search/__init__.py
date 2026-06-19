@@ -1,4 +1,4 @@
-"""Search infrastructure for PFC documentation systems.
+"""Search infrastructure for Itasca documentation systems.
 
 Provides unified search components used by both command search
 and Python API search systems.

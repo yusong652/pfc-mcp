@@ -1,4 +1,4 @@
-"""Data loading layer for PFC SDK documentation.
+"""Data loading layer for Itasca SDK documentation.
 
 This module is responsible for loading documentation data from JSON files
 and providing cached access to avoid repeated I/O operations.

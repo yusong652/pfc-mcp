@@ -1,0 +1,148 @@
+{
+  "model": "nonlinear",
+  "full_name": "Nonlinear Joint Model",
+  "search_keywords": [
+    "nonlinear",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "kn-maximum",
+    "kn-minimum",
+    "kn-current",
+    "exponent-normal",
+    "stiffness-shear",
+    "ks-maximum",
+    "ks-minimum",
+    "ks-current",
+    "exponent-shear",
+    "friction",
+    "friction-residual",
+    "cohesion",
+    "cohesion-residual",
+    "dilation",
+    "dilation-zero",
+    "tension",
+    "tension-residual"
+  ],
+  "description": "The Nonlinear model is the same as the Mohr-Coulomb Joint Model In 3DEC except that the normal and shear stiffness may depend on the normal stress as in the Continuously Yielding Joint Model In 3DEC . The tiffness behavior differs from the Continuously-Yielding Joint Model in that during unloading, the stiffness is constant and is equal to the stiffness at the point of unloading.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'nonlinear' joint constitutive model. Assign the model with 'block contact jmodel assign nonlinear [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel nonlinear]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "initial joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kn-maximum",
+          "symbol": "k^max_n",
+          "description": "maximum joint normal stiffness (STRESS/LENGTH). Defaults to k_n.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kn-minimum",
+          "symbol": "k^min_n",
+          "description": "minimum joint normal stiffness (STRESS/LENGTH). Defaults to k_n.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kn-current",
+          "symbol": "k^current_n",
+          "description": "current calculated joint normal stiffness (read only)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-normal",
+          "symbol": "e_n",
+          "description": "joint normal stiffness exponent",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "initial joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ks-maximum",
+          "symbol": "k^max_s",
+          "description": "maximum joint shear stiffness (STRESS/LENGTH). Defaults to k_s.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ks-minimum",
+          "symbol": "k^min_s",
+          "description": "minimum joint shear stiffness (STRESS/LENGTH). Defaults to k_s.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ks-current",
+          "symbol": "k^current_s",
+          "description": "current calculated joint shear stiffness (read only)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-shear",
+          "symbol": "e_s",
+          "description": "joint shear stiffness exponent",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "φ",
+          "description": "friction angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-residual",
+          "symbol": "φ_res",
+          "description": "residual friction angle (DEGREES). Defaults to phi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-residual",
+          "symbol": "c_res",
+          "description": "residual cohesion (STRESS). Defaults to 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-zero",
+          "symbol": "u_cs",
+          "description": "shear displacement at which dilation stops (LENGTH). Default is infinity",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "T_f",
+          "description": "tensile strength (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension-residual",
+          "symbol": "T_f^res",
+          "description": "residual tensile strength (STRESS). Default is 0.",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/nonlinear/nonlinear.html",
+  "usage": "block contact jmodel assign nonlinear ; block contact property <prop> <value> [range jmodel nonlinear]"
+}

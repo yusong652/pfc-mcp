@@ -1,0 +1,24 @@
+{
+  "type": "3dec_references",
+  "description": "3DEC reference documentation: syntax elements (property vocabularies) used within commands.",
+  "categories": {
+    "joint-models": {
+      "name": "Joint Constitutive Models",
+      "description": "3DEC joint (sub-contact) constitutive model properties — elastic, mohr, bilinear-mohr, softening-mohr, cyjm, nonlinear, power, ratestate. Property vocabulary for 'block contact jmodel' / 'block contact property'.",
+      "directory": "joint-models",
+      "index_file": "joint-models/index.json",
+      "summary": "8 3DEC joint constitutive models — the keywords for 'block contact jmodel assign' + 'block contact property'",
+      "usage": "block contact jmodel assign <name> ; block contact property <prop> <value> [range jmodel <name>]"
+    }
+  },
+  "navigation": {
+    "root": "List all reference categories",
+    "category": "List items in category (e.g., 'joint-models')",
+    "item": "Full documentation (e.g., 'joint-models mohr')"
+  },
+  "notes": [
+    "References are syntax elements used within commands, not standalone commands",
+    "Use pfc_browse_commands (software='3dec') for command syntax",
+    "Use pfc_browse_reference (software='3dec') for reference documentation"
+  ]
+}

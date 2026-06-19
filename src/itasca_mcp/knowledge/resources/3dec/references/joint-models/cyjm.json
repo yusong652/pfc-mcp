@@ -1,0 +1,87 @@
+{
+  "model": "cyjm",
+  "full_name": "Continuously Yielding Joint Model",
+  "search_keywords": [
+    "cyjm",
+    "continuously",
+    "yielding",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "kn-initial",
+    "exponent-normal",
+    "ks-initial",
+    "exponent-shear",
+    "roughness",
+    "friction-initial",
+    "kwd: \\(kn-current\\)",
+    "kwd: \\(ks-current\\)",
+    "plastic-strain"
+  ],
+  "description": "Background",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'cyjm' joint constitutive model. Assign the model with 'block contact jmodel assign cyjm [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel cyjm]'.",
+      "properties": [
+        {
+          "keyword": "kn-initial",
+          "symbol": "a_n",
+          "description": "joint normal stiffness (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-normal",
+          "symbol": "e_n",
+          "description": "joint normal stiffness exponent (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "ks-initial",
+          "symbol": "a_s",
+          "description": "joint shear stiffness (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "exponent-shear",
+          "symbol": "e_s",
+          "description": "joint shear stiffness exponent (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "roughness",
+          "symbol": "R",
+          "description": "joint roughness parameter (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-initial",
+          "symbol": "φ^(i)_m",
+          "description": "joint initial friction angle (input)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kwd: \\(kn-current\\)",
+          "symbol": "k_n",
+          "description": "normal stiffness defined as a function of \\(\\sigma_n\\)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "kwd: \\(ks-current\\)",
+          "symbol": "k_s",
+          "description": "shear stiffness defined as a function of \\(\\sigma_n\\)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "plastic-strain",
+          "symbol": "u^(p)_s",
+          "description": "accumulated plastic shear displacement",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/cyjoint/cyjoint.html",
+  "usage": "block contact jmodel assign cyjm ; block contact property <prop> <value> [range jmodel cyjm]"
+}

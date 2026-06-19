@@ -1,0 +1,38 @@
+{
+  "model": "ratestate",
+  "full_name": "Rate-State Joint Model",
+  "search_keywords": [
+    "ratestate",
+    "rate",
+    "state",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "stiffness-shear"
+  ],
+  "description": "Rate- and state-dependent friction joint model (laboratory rate-state friction law), available via 'block contact jmodel assign ratestate'.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'ratestate' joint constitutive model. Assign the model with 'block contact jmodel assign ratestate [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel ratestate]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "note": "Detailed property documentation is not present in the local 9.0 manual; only the universal joint stiffness terms are listed. Use 'block contact property' against the running engine for the full rate-state parameter set.",
+  "usage": "block contact jmodel assign ratestate ; block contact property <prop> <value> [range jmodel ratestate]"
+}

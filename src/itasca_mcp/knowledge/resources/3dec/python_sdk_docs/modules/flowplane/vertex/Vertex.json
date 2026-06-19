@@ -1,0 +1,371 @@
+{
+  "class": "Vertex",
+  "description": "Vertex object instance in itasca.flowplane.vertex.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowplane.vertex.Vertex.html",
+  "note": "Do not instantiate directly; use itasca.flowplane.vertex module functions.",
+  "method_groups": {
+    "aperture": "aperture_hydraulic, aperture_mech, set_aperture_mech",
+    "area": "area",
+    "extra": "extra, set_extra",
+    "flowplane": "flowplane",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "knot": "knot",
+    "local1": "local1",
+    "local2": "local2",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "prop": "prop, set_prop",
+    "proppant": "proppant_mconc, proppant_thick, proppant_vconc",
+    "subcontact1": "subcontact1",
+    "subcontact2": "subcontact2",
+    "valid": "valid",
+    "visc": "visc",
+    "weight1": "weight1",
+    "weight2": "weight2"
+  },
+  "methods": [
+    {
+      "name": "aperture_hydraulic",
+      "signature": "vertex.aperture_hydraulic() -> float",
+      "description": "Get the hydraulic aperture limited by specified maximum (flowplane property aperture-maximum).",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "aperture_mech",
+      "signature": "vertex.aperture_mech() -> float",
+      "description": "Get the mechanical aperture.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "area",
+      "signature": "vertex.area() -> float",
+      "description": "Get the lumped area to the vertex.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "vertex.extra(slot: int) -> any",
+      "description": "Get the flowplane vertex extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "flowplane",
+      "signature": "vertex.flowplane() -> flow plane pointer",
+      "description": "Get the flowplane associated with a given flow plane vertex.",
+      "returns": {
+        "type": "flow plane pointer"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "vertex.group([slot: str or int]) -> str",
+      "description": "Get the flowplane vertex group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "vertex.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the flowplane vertex. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "vertex.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this flowplane vertex is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "vertex.id() -> int",
+      "description": "Get the flowplane vertex id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "vertex.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the flowplane vertex is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "vertex.index() -> int",
+      "description": "Get the index (offset) of the flow plane vertex.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "knot",
+      "signature": "vertex.knot() -> flow knot pointer",
+      "description": "Get the flow knot associated with a given flow plane vertex.",
+      "returns": {
+        "type": "flow knot pointer"
+      }
+    },
+    {
+      "name": "local1",
+      "signature": "vertex.local1() -> float",
+      "description": "Get the local x-coordinate of a flow plane vertex.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "local2",
+      "signature": "vertex.local2() -> float",
+      "description": "Get the local x-coordinate of a flow plane vertex.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "vertex.pos() -> vec",
+      "description": "Get the flowplane vertex flowplane vertex position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "vertex.pos_x() -> float",
+      "description": "Get the x-component of the flowplane vertex flowplane vertex position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "vertex.pos_y() -> float",
+      "description": "Get the y-component of the flowplane vertex flowplane vertex position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "vertex.pos_z() -> float",
+      "description": "Get the z-component of the flowplane vertex flowplane vertex position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "vertex.prop(str) -> float",
+      "description": "Get a flow plane property.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "proppant_mconc",
+      "signature": "vertex.proppant_mconc() -> float",
+      "description": "Get the mass concentration of proppant of a flow plane vertex.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "proppant_thick",
+      "signature": "vertex.proppant_thick() -> float",
+      "description": "Get the proppant thickness of a flow plane vertex (volume concentration times aperture).",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "proppant_vconc",
+      "signature": "vertex.proppant_vconc() -> float",
+      "description": "Get the proppant volume concentration.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_aperture_mech",
+      "signature": "vertex.set_aperture_mech(float) -> None",
+      "description": "Set the mechanical aperture.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "vertex.set_extra(slot: int, value: any) -> None",
+      "description": "Set the flowplane vertex extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "vertex.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the flowplane vertex group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop",
+      "signature": "vertex.set_prop(str, float) -> None",
+      "description": "Set a flow plane property.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        },
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "subcontact1",
+      "signature": "vertex.subcontact1() -> contact pointer",
+      "description": "Get one of the sub-contacts of face-to-face contact used for interpolation.",
+      "returns": {
+        "type": "contact pointer"
+      }
+    },
+    {
+      "name": "subcontact2",
+      "signature": "vertex.subcontact2() -> contact pointer",
+      "description": "Get one of the sub-contacts of face-to-face contact used for interpolation.",
+      "returns": {
+        "type": "contact pointer"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "vertex.valid() -> bool",
+      "description": "Returns True if this flowplane vertex is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "visc",
+      "signature": "vertex.visc() -> float",
+      "description": "Get the viscosity of fluid at the vertex (viscosity will increase from the global value if the proppant concentration is greater than 0).",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "weight1",
+      "signature": "vertex.weight1() -> float",
+      "description": "Get the interpolation weight associated with subcontact 1 for a flow plane vertex.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "weight2",
+      "signature": "vertex.weight2() -> float",
+      "description": "Get the interpolation weight associated with subcontact 2 for a flow plane vertex.",
+      "returns": {
+        "type": "float"
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "module": "itasca.block.zone",
+  "description": "Functions and classes for working with zones.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.zone.html",
+  "functions": [
+    {
+      "name": "containing",
+      "signature": "itasca.block.zone.containing(point: vec3, search_start=None) -> Zone object or None",
+      "description": "Get the zone that contains point. The optional argument search_start can be given to first search the a given zone. This can speed up the check.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec3",
+          "required": true
+        },
+        {
+          "name": "search_start",
+          "required": false,
+          "default": "None"
+        }
+      ],
+      "returns": {
+        "type": "Zone object or None"
+      }
+    },
+    {
+      "name": "count",
+      "signature": "itasca.block.zone.count() -> int",
+      "description": "Get the number of zones.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.block.zone.find(id: int) -> Zone object",
+      "description": "Get the zone object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Zone object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.block.zone.list() -> Zone iterator object",
+      "description": "Get a zone iterator object.",
+      "returns": {
+        "type": "Zone iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.block.zone.maxid() -> int",
+      "description": "Get the maximum zone ID.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.block.zone.near(point: vec) -> Zone object",
+      "description": "Find the closest zone to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Zone object"
+      }
+    }
+  ]
+}

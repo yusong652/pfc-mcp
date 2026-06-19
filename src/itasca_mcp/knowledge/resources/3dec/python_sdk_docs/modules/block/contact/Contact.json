@@ -1,0 +1,373 @@
+{
+  "class": "Contact",
+  "description": "Contact object instance in itasca.block.contact.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.contact.Contact.html",
+  "note": "Do not instantiate directly; use itasca.block.contact module functions.",
+  "method_groups": {
+    "area": "area",
+    "b1": "b1",
+    "b2": "b2",
+    "energy": "energy_fric, energy_strain_comp, energy_strain_shear, energy_strain_tensile, energy_strain_total",
+    "extra": "extra, set_extra",
+    "fb1": "fb1",
+    "fb2": "fb2",
+    "fid": "fid",
+    "flowplane": "flowplane",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_excavated, is_hidden",
+    "jset": "jset",
+    "normal": "normal, normal_x, normal_y, normal_z",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "subcontacts": "subcontacts",
+    "type": "type",
+    "valid": "valid"
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "contact.area() -> float",
+      "description": "Get surface area of a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "b1",
+      "signature": "contact.b1() -> blockptr",
+      "description": "Get block 1 at a contact.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "b2",
+      "signature": "contact.b2() -> blockptr",
+      "description": "Get block 2 at a contact.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "energy_fric",
+      "signature": "contact.energy_fric() -> float",
+      "description": "Get the frictional energy dissipated at a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "energy_strain_comp",
+      "signature": "contact.energy_strain_comp() -> float",
+      "description": "Get the compressive strain energy for the contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "energy_strain_shear",
+      "signature": "contact.energy_strain_shear() -> float",
+      "description": "Get the shear strain energy at a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "energy_strain_tensile",
+      "signature": "contact.energy_strain_tensile() -> float",
+      "description": "Get the tensile strain energy at a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "energy_strain_total",
+      "signature": "contact.energy_strain_total() -> float",
+      "description": "Get the total strain energy at a contact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "contact.extra(slot: int) -> any",
+      "description": "Get the contact extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "fb1",
+      "signature": "contact.fb1() -> blockptr",
+      "description": "Get face block 1 associated with the contact.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "fb2",
+      "signature": "contact.fb2() -> blockptr",
+      "description": "Get face block 2 associated with the contact.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "fid",
+      "signature": "contact.fid() -> int",
+      "description": "Get the DFN fracture ID number at a contact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "flowplane",
+      "signature": "contact.flowplane() -> flowplaneptr",
+      "description": "Get the flow plane associated with a contact.",
+      "returns": {
+        "type": "flowplaneptr"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "contact.group([slot: str or int]) -> str",
+      "description": "Get the contact group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "contact.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the contact. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "contact.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this contact is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "contact.id() -> int",
+      "description": "Get the contact id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "contact.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the contact is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "contact.index() -> int",
+      "description": "Get the index (offset) for the block contact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "contact.is_excavated() -> bool",
+      "description": "Get excavated flag of the contact.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "contact.is_hidden() -> bool",
+      "description": "Get hidden flag of the contact.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "jset",
+      "signature": "contact.jset() -> int",
+      "description": "Get the joint set ID for the contact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "normal",
+      "signature": "contact.normal() -> vec",
+      "description": "Get the contact contact normal vector (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "normal_x",
+      "signature": "contact.normal_x() -> float",
+      "description": "Get the x-component of the contact contact normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_y",
+      "signature": "contact.normal_y() -> float",
+      "description": "Get the y-component of the contact contact normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_z",
+      "signature": "contact.normal_z() -> float",
+      "description": "Get the z-component of the contact contact normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "contact.pos() -> vec",
+      "description": "Get the contact contact position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "contact.pos_x() -> float",
+      "description": "Get the x-component of the contact contact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "contact.pos_y() -> float",
+      "description": "Get the y-component of the contact contact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "contact.pos_z() -> float",
+      "description": "Get the z-component of the contact contact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "contact.set_extra(slot: int, value: any) -> None",
+      "description": "Set the contact extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "contact.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the contact group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "subcontacts",
+      "signature": "contact.subcontacts() -> tuple of subcontacts",
+      "description": "Get subcontact list of a block.",
+      "returns": {
+        "type": "tuple of subcontacts"
+      }
+    },
+    {
+      "name": "type",
+      "signature": "contact.type() -> int",
+      "description": "Get contact type.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "contact.valid() -> bool",
+      "description": "Returns True if this contact is live.",
+      "returns": {
+        "type": "bool"
+      }
+    }
+  ]
+}

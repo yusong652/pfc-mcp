@@ -1,0 +1,143 @@
+{
+  "model": "bilinear-mohr",
+  "full_name": "Bilinear Mohr-Coulomb Joint Model",
+  "search_keywords": [
+    "bilinear",
+    "mohr",
+    "coulomb",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "stiffness-shear",
+    "friction",
+    "friction-2",
+    "friction-residual",
+    "f2-residual",
+    "cohesion",
+    "cohesion-2",
+    "cohesion-residual",
+    "c2-residual",
+    "dilation",
+    "dilation-2",
+    "dilation-zero",
+    "tension",
+    "tension-residual",
+    "nstress",
+    "nstress-residual"
+  ],
+  "description": "The Bilinear Mohr-Coulomb Joint Model has two different shear strength envelopes. The failure envelope changes when a critical level of normal stress is exceeded. By default, the normal stress threshold is automatically calculated at the intersection of the two failure envelopes, but the user may override this default and specify any value. Both the peak and residual shear strengths can have bilinear envelopes and there may be different normal stress thresholds for the peak and the residual.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'bilinear-mohr' joint constitutive model. Assign the model with 'block contact jmodel assign bilinear-mohr [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel bilinear-mohr]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "φ",
+          "description": "friction angle below sigma_n^c (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-2",
+          "symbol": "φ_2",
+          "description": "friction angle above sigma_n^c (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-residual",
+          "symbol": "φ_res",
+          "description": "residual friction angle below sigma_n^c (DEGREES). Defaults to phi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "f2-residual",
+          "symbol": "φ_2^res",
+          "description": "residual friction angle above sigma_n^c (DEGREES). Defaults to phi_2.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion below sigma_n^c (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-2",
+          "symbol": "c_2",
+          "description": "cohesion above sigma_n^c (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-residual",
+          "symbol": "c_res",
+          "description": "residual cohesion below sigma_n^c (STRESS). Defaults to 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "c2-residual",
+          "symbol": "c_2^res",
+          "description": "residual cohesion above sigma_n^c (STRESS). Defaults to 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle below sigma_n^c (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-2",
+          "symbol": "ψ_2",
+          "description": "dilation angle above sigma_n^c (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-zero",
+          "symbol": "u_cs",
+          "description": "shear displacement at which dilation stops (LENGTH). Default is infinity",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "T_f",
+          "description": "tensile strength (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension-residual",
+          "symbol": "T_f^res",
+          "description": "residual tensile strength (STRESS). Default is 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "nstress",
+          "symbol": "σ_n^c",
+          "description": "normal stress threshold (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "nstress-residual",
+          "symbol": "σ_n^c",
+          "description": "normal stress threshold for residual envelope (STRESS)",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/bilinear/bilinearmc.html",
+  "usage": "block contact jmodel assign bilinear-mohr ; block contact property <prop> <value> [range jmodel bilinear-mohr]"
+}

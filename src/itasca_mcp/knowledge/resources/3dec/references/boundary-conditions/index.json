@@ -1,0 +1,31 @@
+{
+  "type": "boundary_conditions",
+  "description": "Boundary-condition reference topics for 3DEC — mechanical face tractions, gridpoint & rigid-block fixity, fluid flow, thermal/dynamic, and shared apply modifiers. Commands use the 'block ...' family (block face apply / block gridpoint apply / block fix / block apply).",
+  "items": [
+    {
+      "name": "mechanical-face",
+      "file": "mechanical-face.json",
+      "full_name": "Mechanical Face Boundary Conditions"
+    },
+    {
+      "name": "gridpoint-and-block-fixity",
+      "file": "gridpoint-and-block-fixity.json",
+      "full_name": "Gridpoint and Rigid-Block Fixity / Prescribed Motion"
+    },
+    {
+      "name": "fluid-flow",
+      "file": "fluid-flow.json",
+      "full_name": "Fluid-Flow Boundary Conditions"
+    },
+    {
+      "name": "thermal-and-dynamic",
+      "file": "thermal-and-dynamic.json",
+      "full_name": "Thermal and Dynamic (Absorbing) Boundary Conditions"
+    },
+    {
+      "name": "apply-modifiers",
+      "file": "apply-modifiers.json",
+      "full_name": "Apply Modifiers (Spatial / Functional Variation, Removal)"
+    }
+  ]
+}

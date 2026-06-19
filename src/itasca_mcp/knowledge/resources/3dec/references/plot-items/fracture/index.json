@@ -1,0 +1,108 @@
+{
+  "name": "fracture",
+  "item_type": "fracture",
+  "item_types": [
+    "fracture"
+  ],
+  "dimension": "3D",
+  "search_keywords": [
+    "fracture",
+    "dfn",
+    "discrete fracture network",
+    "orientation",
+    "stereonet",
+    "rosette"
+  ],
+  "description": "Discrete Fracture Network (DFN) fractures — draw fracture polygons/shapes, colour by numeric/tensor/text/vector property via 'color-by', show 'intersections' and 'ghosts', and analyse orientation with 'stereonet' / 'rosette'. 'scale-by-magnitude' sizes fractures by a property.",
+  "base_syntax": "plot item create fracture <keywords...>",
+  "top_level_keywords": [
+    "active",
+    "both-directions",
+    "clip",
+    "color-by",
+    "color-options",
+    "cut",
+    "display",
+    "ghosts",
+    "intersections",
+    "legend",
+    "map",
+    "orientation",
+    "range",
+    "rosette",
+    "scale-by-magnitude",
+    "selected-only",
+    "shape",
+    "stereonet",
+    "transparency"
+  ],
+  "basic_keywords": [
+    {
+      "keyword": "color-by",
+      "description": "Colour fractures by a numeric/tensor/text/vector property or attribute. See sub-item 'color-by'.",
+      "syntax": "color-by <property|attribute spec>"
+    },
+    {
+      "keyword": "orientation",
+      "description": "Colour/group fractures by their orientation.",
+      "syntax": "orientation <sub-keyword>"
+    },
+    {
+      "keyword": "stereonet",
+      "description": "Render orientations on a stereonet projection.",
+      "syntax": "stereonet <sub-keyword> [<value>]"
+    },
+    {
+      "keyword": "rosette",
+      "description": "Render a strike/dip rosette of fracture orientations.",
+      "syntax": "rosette <sub-keyword>"
+    },
+    {
+      "keyword": "intersections",
+      "description": "Draw fracture-fracture intersection traces.",
+      "syntax": "intersections <bool>"
+    },
+    {
+      "keyword": "scale-by-magnitude",
+      "description": "Scale fracture size by a magnitude property.",
+      "syntax": "scale-by-magnitude <bool>"
+    },
+    {
+      "keyword": "range",
+      "description": "Filter which entities are drawn using range elements (see references/range-elements).",
+      "syntax": "range <range-element> [...]"
+    },
+    {
+      "keyword": "transparency",
+      "description": "Set item transparency (0 opaque .. 100 fully transparent).",
+      "syntax": "transparency <0-100>"
+    }
+  ],
+  "sub_items": [
+    {
+      "name": "color-by",
+      "file": "color-by.json",
+      "description": "Colour DFN fractures by numeric/tensor/text/vector property or attribute."
+    }
+  ],
+  "common_usage_patterns": [
+    {
+      "use_case": "DFN by orientation",
+      "command": "plot item create fracture orientation dip legend active on",
+      "description": "Colour fractures by dip."
+    },
+    {
+      "use_case": "Stereonet of DFN",
+      "command": "plot item create fracture stereonet active on",
+      "description": "Orientation density on a stereonet."
+    },
+    {
+      "use_case": "Colour by property",
+      "command": "plot item create fracture color-by numeric-property aperture legend active on",
+      "description": "Colour fractures by a numeric property (e.g. aperture)."
+    }
+  ],
+  "notes": [
+    "Probe live with 'plot item create <type> ?' to list top-level keywords, then 'plot item create <type> <kw> ?' for sub-options. Keyword sets here are binary-validated against 3DEC 9.0."
+  ]
+}

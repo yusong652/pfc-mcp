@@ -1,0 +1,96 @@
+{
+  "type": "3dec_references",
+  "description": "3DEC reference documentation: syntax elements (property vocabularies) used within commands.",
+  "categories": {
+    "joint-models": {
+      "name": "Joint Constitutive Models",
+      "description": "3DEC joint (sub-contact) constitutive model properties — elastic, mohr, bilinear-mohr, softening-mohr, cyjm, nonlinear, power, ratestate. Property vocabulary for 'block contact jmodel' / 'block contact property'.",
+      "directory": "joint-models",
+      "index_file": "joint-models/index.json",
+      "summary": "8 3DEC joint constitutive models — the keywords for 'block contact jmodel assign' + 'block contact property'",
+      "usage": "block contact jmodel assign <name> ; block contact property <prop> <value> [range jmodel <name>]"
+    },
+    "constitutive-models": {
+      "name": "Constitutive Models (Zone)",
+      "description": "3DEC zone (deformable-block) constitutive material model properties — mohr-coulomb, drucker-prager, hoek-brown, ubiquitous-joint, creep models, etc. Property vocabulary for 'block zone cmodel assign' + 'block zone property'. Shared 9.0 kernel with FLAC3D.",
+      "directory": "constitutive-models",
+      "index_file": "constitutive-models/index.json",
+      "summary": "26 3DEC zone material models (subset of FLAC3D's set; docs shared via _common)",
+      "usage": "block zone cmodel assign <name> ; block zone property <prop> <value> [range cmodel-name <name>]"
+    },
+    "range-elements": {
+      "name": "Range Elements",
+      "description": "Geometric and logical 'range ...' filters (cylinder, sphere, plane, position, group, id, polygon, union, not, ...) used to scope any 3DEC command. Shared 9.0 kernel.",
+      "directory": "range-elements",
+      "index_file": "range-elements/index.json",
+      "summary": "22 range filter elements (shared 9.0 kernel via _common)",
+      "usage": "<any command> ... range <element> <args> [union|intersect|not ...]"
+    },
+    "fish-intrinsics": {
+      "name": "FISH Intrinsics",
+      "description": "3DEC FISH intrinsic families for scripted inspection — blocks & joints (sub-contacts), deformable-block zones/gridpoints, fracture-flow network.",
+      "directory": "fish-intrinsics",
+      "index_file": "fish-intrinsics/index.json",
+      "summary": "3 3DEC FISH intrinsic family groups (block/joint, zone/gridpoint, fluid-flow)",
+      "usage": "Use in FISH: loop foreach over <entity>.list; read with <entity>.<intrinsic>(ptr)"
+    },
+    "initial-conditions": {
+      "name": "Initial Conditions",
+      "description": "3DEC initial conditions — stress initialization (block zone initialize / block insitu), velocity & displacement reset, fluid/thermal fields.",
+      "directory": "initial-conditions",
+      "index_file": "initial-conditions/index.json",
+      "summary": "3 3DEC initial-condition topics (block zone initialize / insitu / gridpoint initialize)",
+      "usage": "block zone initialize <stress-*> ... ; block insitu stress ... gradient ... ; block gridpoint initialize <field> ..."
+    },
+    "boundary-conditions": {
+      "name": "Boundary Conditions",
+      "description": "3DEC boundary conditions — mechanical face tractions, gridpoint & rigid-block fixity, fluid-flow, thermal/dynamic, apply modifiers. Uses 'block face apply' / 'block gridpoint apply' / 'block fix'.",
+      "directory": "boundary-conditions",
+      "index_file": "boundary-conditions/index.json",
+      "summary": "5 3DEC boundary-condition topics (block face/gridpoint apply, block fix)",
+      "usage": "block face apply <cond> ... range ... ; block gridpoint apply <cond> ... ; block fix <velocity|rotation> ..."
+    },
+    "geometry-data-table": {
+      "name": "Geometry, Data & Tables",
+      "description": "3DEC geometry import/generation (guides block cutting), data sets (scalar/vector/tensor/label), and table curves (load histories, property curves).",
+      "directory": "geometry-data-table",
+      "index_file": "geometry-data-table/index.json",
+      "summary": "3 topics: geometry workflow, data sets, table curves",
+      "usage": "geometry import '<file>' ; data scalar create ... ; table '<name>' add (x,y) ..."
+    },
+    "structural-properties": {
+      "name": "Structural-Element Properties",
+      "description": "3DEC structural-element property keywords — beam, cable, geogrid, liner, pile, shell. Vocabulary for 'structure <type> property' (elastic behavior via 'structure <type> cmodel').",
+      "directory": "structural-properties",
+      "index_file": "structural-properties/index.json",
+      "summary": "6 3DEC SEL types (beam/cable/geogrid/liner/pile/shell) — 'structure <type> property' keywords",
+      "usage": "structure <type> create ... ; structure <type> cmodel ... ; structure <type> property <kw> <value> [range ...]"
+    },
+    "plot-items": {
+      "name": "Plot Items",
+      "description": "3DEC plot item types and their keyword sets — block / bzone (continuum) / blockcontact / subcontact (joint mechanics) / joint / structure (SEL) / fracture (DFN) / flow. Vocabulary for 'plot item create <type> ...'.",
+      "directory": "plot-items",
+      "index_file": "plot-items/index.json",
+      "summary": "8 3DEC plot item groups (block/bzone/contacts/joint/structure/fracture/flow)",
+      "usage": "plot item create <type> contour <attr> | label <type> | colorby <attr> [range ...]"
+    },
+    "histories-and-results": {
+      "name": "Histories & Results",
+      "description": "3DEC history sampling (block / block contact / model / fish / structure history), management (interval/list/export), and results files (model results map/export, model save). Sampled field names share the plot-items contour vocabulary.",
+      "directory": "histories-and-results",
+      "index_file": "histories-and-results/index.json",
+      "summary": "2 topics: history-workflow (sampling targets + management), results-export",
+      "usage": "block history <field> ; block contact history <field> ; history interval <n> ; model results map ... export '<f>.result'"
+    }
+  },
+  "navigation": {
+    "root": "List all reference categories",
+    "category": "List items in category (e.g., 'joint-models')",
+    "item": "Full documentation (e.g., 'joint-models mohr')"
+  },
+  "notes": [
+    "References are syntax elements used within commands, not standalone commands",
+    "Use pfc_browse_commands (software='3dec') for command syntax",
+    "Use pfc_browse_reference (software='3dec') for reference documentation"
+  ]
+}

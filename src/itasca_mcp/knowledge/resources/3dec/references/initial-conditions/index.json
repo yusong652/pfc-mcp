@@ -1,0 +1,21 @@
+{
+  "type": "initial_conditions",
+  "description": "Initial-condition reference topics for 3DEC setup — stress initialization (zone / in-situ), velocity & displacement reset, and fluid/thermal fields. Commands use the 'block ...' family.",
+  "items": [
+    {
+      "name": "stress-initialization",
+      "file": "stress-initialization.json",
+      "full_name": "Stress Initialization"
+    },
+    {
+      "name": "velocity-and-state-reset",
+      "file": "velocity-and-state-reset.json",
+      "full_name": "Velocity and Displacement / State Reset"
+    },
+    {
+      "name": "fluid-thermal",
+      "file": "fluid-thermal.json",
+      "full_name": "Fluid and Thermal Initial Conditions"
+    }
+  ]
+}

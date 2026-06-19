@@ -1,0 +1,287 @@
+{
+  "module": "itasca.block.gridpointarray",
+  "description": "Array interface for 3DEC girdpoints.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.gridpointarray.html",
+  "functions": [
+    {
+      "name": "disp",
+      "signature": "itasca.block.gridpointarray.disp() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint displacement.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.block.gridpointarray.extra(slot: int) -> array float{gridpoint} or float{gridpoint,3}",
+      "description": "Get the gridpoint extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{gridpoint} or float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "fill_disp",
+      "signature": "itasca.block.gridpointarray.fill_disp(data: array float{gridpoint, 3}) -> None",
+      "description": "Fill an existing array with the gridpoint displacement. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.block.gridpointarray.fill_pos(data: array float{gridpoint, 3}) -> None",
+      "description": "Fill an existing array with the gridpoint centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "fill_vel",
+      "signature": "itasca.block.gridpointarray.fill_vel(data: array float{gridpoint, 3}) -> None",
+      "description": "Fill an existing array with the gridpoint velocity. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "hostblock",
+      "signature": "itasca.block.gridpointarray.hostblock() -> array int{ngp}",
+      "description": "Return an array of the host block ID.",
+      "returns": {
+        "type": "array int{ngp}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.block.gridpointarray.ids() -> array int{gridpoint}",
+      "description": "Get the gridpoint ids as an array.",
+      "returns": {
+        "type": "array int{gridpoint}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.block.gridpointarray.in_group(group_name: str, slot='default') -> array bool{ngp}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{ngp}"
+      }
+    },
+    {
+      "name": "mass",
+      "signature": "itasca.block.gridpointarray.mass() -> array int{ngp}",
+      "description": "Return an array of the gridpoint mass.",
+      "returns": {
+        "type": "array int{ngp}"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.block.gridpointarray.pos() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint centroid location.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "itasca.block.gridpointarray.pp() -> array double{gridpoint}",
+      "description": "Get a numpy array of the porepressure at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "set_disp",
+      "signature": "itasca.block.gridpointarray.set_disp(data: array float{gridpoint, 3}) -> None",
+      "description": "Set the gridpoint displacement from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.block.gridpointarray.set_extra(slot: int, data: array float{gridpoint} or float{gridpoint, 3}) -> None",
+      "description": "Set the gridpoint extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{gridpoint} or float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.block.gridpointarray.set_group(membership: array bool{ngp}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{ngp}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp",
+      "signature": "itasca.block.gridpointarray.set_pp(array double{gridpoint, 3}) -> None",
+      "description": "Set the pore pressure at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temperature",
+      "signature": "itasca.block.gridpointarray.set_temperature(array double{gridpoint, 3}) -> None",
+      "description": "Set the temperature at each gridpoint with a NumPy array.",
+      "parameters": [
+        {
+          "name": "array double{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_vel",
+      "signature": "itasca.block.gridpointarray.set_vel(data: array float{gridpoint, 3}) -> None",
+      "description": "Set the gridpoint velocity from an array.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{gridpoint",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "temperature",
+      "signature": "itasca.block.gridpointarray.temperature() -> array double{gridpoint}",
+      "description": "Get a numpy array of the temperature at each gridpoint.",
+      "returns": {
+        "type": "array double{gridpoint}"
+      }
+    },
+    {
+      "name": "vel",
+      "signature": "itasca.block.gridpointarray.vel() -> array float{gridpoint,3}",
+      "description": "Get a numpy array of the gridpoint velocity.",
+      "returns": {
+        "type": "array float{gridpoint,3}"
+      }
+    }
+  ]
+}

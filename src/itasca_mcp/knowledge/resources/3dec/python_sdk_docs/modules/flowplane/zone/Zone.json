@@ -1,0 +1,291 @@
+{
+  "class": "Zone",
+  "description": "Zone object instance in itasca.flowplane.zone.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowplane.zone.Zone.html",
+  "note": "Do not instantiate directly; use itasca.flowplane.zone module functions.",
+  "method_groups": {
+    "area": "area",
+    "discharge": "discharge, discharge_x, discharge_y, discharge_z",
+    "extra": "extra, set_extra",
+    "flowplane": "flowplane",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "valid": "valid",
+    "velocity": "velocity, velocity_x, velocity_y, velocity_z",
+    "vertex": "vertex"
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "zone.area() -> float",
+      "description": "Get the area of the flow plane zone.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "discharge",
+      "signature": "zone.discharge() -> vec",
+      "description": "Get the flowplane zone flowplane zone discharg (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "discharge_x",
+      "signature": "zone.discharge_x() -> float",
+      "description": "Get the x-component of the flowplane zone flowplane zone discharg.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "discharge_y",
+      "signature": "zone.discharge_y() -> float",
+      "description": "Get the y-component of the flowplane zone flowplane zone discharg.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "discharge_z",
+      "signature": "zone.discharge_z() -> float",
+      "description": "Get the z-component of the flowplane zone flowplane zone discharg.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "zone.extra(slot: int) -> any",
+      "description": "Get the flowplane zone extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "flowplane",
+      "signature": "zone.flowplane() -> flowplane pointer",
+      "description": "Get the flow plane associated with a given flow plane zone.",
+      "returns": {
+        "type": "flowplane pointer"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "zone.group([slot: str or int]) -> str",
+      "description": "Get the flowplane zone group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "zone.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the flowplane zone. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "zone.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this flowplane zone is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "zone.id() -> int",
+      "description": "Get the flowplane zone id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "zone.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the flowplane zone is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "zone.index() -> int",
+      "description": "Get the index (offset) of a given flow plane zone.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "zone.pos() -> vec",
+      "description": "Get the flowplane zone flowplane zone position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "zone.pos_x() -> float",
+      "description": "Get the x-component of the flowplane zone flowplane zone position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "zone.pos_y() -> float",
+      "description": "Get the y-component of the flowplane zone flowplane zone position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "zone.pos_z() -> float",
+      "description": "Get the z-component of the flowplane zone flowplane zone position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "zone.set_extra(slot: int, value: any) -> None",
+      "description": "Set the flowplane zone extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "zone.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the flowplane zone group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "zone.valid() -> bool",
+      "description": "Returns True if this flowplane zone is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "velocity",
+      "signature": "zone.velocity() -> vec",
+      "description": "Get the flowplane zone flowplane zone veloclity (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "velocity_x",
+      "signature": "zone.velocity_x() -> float",
+      "description": "Get the x-component of the flowplane zone flowplane zone veloclity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "velocity_y",
+      "signature": "zone.velocity_y() -> float",
+      "description": "Get the y-component of the flowplane zone flowplane zone veloclity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "velocity_z",
+      "signature": "zone.velocity_z() -> float",
+      "description": "Get the z-component of the flowplane zone flowplane zone veloclity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vertex",
+      "signature": "zone.vertex(int) -> vertex pointer",
+      "description": "Get a flow plane zone vertex.",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "vertex pointer"
+      }
+    }
+  ]
+}

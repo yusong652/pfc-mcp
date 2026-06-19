@@ -1,0 +1,62 @@
+{
+  "module": "itasca.flowknot",
+  "description": "Functions and classes for working with flowplanes.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowknot.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.flowknot.count() -> int",
+      "description": "Get the number of flowknots.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.flowknot.find(id: int) -> Flowknot object",
+      "description": "Get the flowknot object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Flowknot object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.flowknot.list() -> Flowknot iterator object",
+      "description": "Get a flowknot iterator object.",
+      "returns": {
+        "type": "Flowknot iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.flowknot.maxid() -> int",
+      "description": "Get the maximum flowknot ID.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.flowknot.near(point: vec) -> Flowknot object",
+      "description": "Find the closest flowknot to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Flowknot object"
+      }
+    }
+  ]
+}

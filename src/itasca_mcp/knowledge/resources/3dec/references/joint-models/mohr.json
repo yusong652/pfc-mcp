@@ -1,0 +1,93 @@
+{
+  "model": "mohr",
+  "full_name": "Mohr-Coulomb Joint Model",
+  "search_keywords": [
+    "mohr",
+    "coulomb",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "stiffness-shear",
+    "friction",
+    "friction-residual",
+    "cohesion",
+    "cohesion-residual",
+    "dilation",
+    "dilation-zero",
+    "tension",
+    "tension-residual"
+  ],
+  "description": "The Coulomb slip model provides a linear representation of joint stiffness and yield limit, and is based upon elastic stiffness, frictional, cohesive, and tensile strength properties, and dilation characteristics common to rock joints. The model (optionally) simulates displacement-weakening of the joint by loss of cohesive and tensile strength at the onset of shear or tensile failure.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'mohr' joint constitutive model. Assign the model with 'block contact jmodel assign mohr [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel mohr]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "φ",
+          "description": "friction angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-residual",
+          "symbol": "φ_res",
+          "description": "residual friction angle (DEGREES). Defaults to phi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-residual",
+          "symbol": "c_res",
+          "description": "residual cohesion (STRESS). Defaults to 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-zero",
+          "symbol": "u_cs",
+          "description": "shear displacement at which dilation stops (LENGTH). Default is infinity",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "T_f",
+          "description": "tensile strength (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension-residual",
+          "symbol": "T_f^res",
+          "description": "residual tensile strength (STRESS). Default is 0.",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/mohrcoulomb/mohrcoulomb.html",
+  "usage": "block contact jmodel assign mohr ; block contact property <prop> <value> [range jmodel mohr]"
+}

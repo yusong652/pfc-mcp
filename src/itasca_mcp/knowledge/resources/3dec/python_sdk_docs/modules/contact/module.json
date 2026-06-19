@@ -1,0 +1,123 @@
+{
+  "module": "itasca.contact",
+  "description": "Functions and classes for working with Itasca contacts.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.contact.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.contact.count(<process: str>, <type: TypeObject>, <all=False>) -> int",
+      "description": "Get the number of contacts. All the arguments to this function are optional. The first argument is the contact class, this defaults to “mechanical”. If the (optional) keyword argument type is given the count is limited to that type. The type keyword argument should be a Python type object (itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact or itasca.PebbleFacetContact). If the (optional) keyword argument all is given, virtual contacts are included in the count.",
+      "parameters": [
+        {
+          "name": "<process",
+          "type": "str>",
+          "required": true
+        },
+        {
+          "name": "<type",
+          "type": "TypeObject>",
+          "required": true
+        },
+        {
+          "name": "<all",
+          "required": false,
+          "default": "False>"
+        }
+      ],
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "energy",
+      "signature": "itasca.contact.energy(energy_name: str, process='mechanical', type=TypeObject) -> float",
+      "description": "Get energy values accumulated over contacts. The first argument should be the name of an energy quantity. Two optional keyword arguments are accepted, process which should be a string (defaults to “mechanical”) and type which should be a Python contact type object.",
+      "parameters": [
+        {
+          "name": "energy_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "process",
+          "required": false,
+          "default": "'mechanical'"
+        },
+        {
+          "name": "type",
+          "required": false,
+          "default": "TypeObject"
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.contact.find(type: TypeObject, id: int or (object1, object2)) -> Contact object",
+      "description": "Get the contact of the given type, the second argument is either an integer ID or a length two tuple containing two objects (for example a wall object and a ball object).",
+      "parameters": [
+        {
+          "name": "type",
+          "type": "TypeObject",
+          "required": true
+        },
+        {
+          "name": "id",
+          "type": "int or (object1, object2)",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Contact object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.contact.list(process_name='Mechanical', type=None, all=False) -> Contact iterator object",
+      "description": "Get a contact iterator object. The optional argument is the name of a process, the default is “mechanical”. If the (optional) keyword argument type is given the returned contacts are limited to that type. The type keyword argument should be a Python type object (itasca.BallBallContact, itasca.BallFacetContact, itasca.BallPebbleContact, itasca.PebblePebbleContact or itasca.PebbleFacetContact). If the (optional) keyword argument all is given, virtual contacts are also returned.",
+      "parameters": [
+        {
+          "name": "process_name",
+          "required": false,
+          "default": "'Mechanical'"
+        },
+        {
+          "name": "type",
+          "required": false,
+          "default": "None"
+        },
+        {
+          "name": "all",
+          "required": false,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "Contact iterator object"
+      }
+    },
+    {
+      "name": "model_prop_index",
+      "signature": "itasca.contact.model_prop_index(model_name: str, property_name: str) -> int",
+      "description": "Get a contact model property index.",
+      "parameters": [
+        {
+          "name": "model_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "property_name",
+          "type": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "int"
+      }
+    }
+  ]
+}

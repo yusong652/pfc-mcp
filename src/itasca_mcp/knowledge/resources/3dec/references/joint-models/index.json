@@ -1,0 +1,73 @@
+{
+  "type": "joint_constitutive_model_properties",
+  "description": "Reference documentation for 3DEC joint (sub-contact) constitutive model properties — the property vocabulary for 'block contact jmodel assign' and 'block contact property'.",
+  "usage_contexts": [
+    "block contact jmodel assign <name> [range ...]",
+    "block contact property <prop> <value> [range jmodel <name>]",
+    "Python: subcontact.set_model('<name>') ; subcontact.set_prop('<prop>', value)"
+  ],
+  "property_metadata_fields": {
+    "keyword": "Property name used in 'block contact property' commands",
+    "symbol": "Mathematical symbol used in the model documentation",
+    "description": "Description including physical meaning and units",
+    "type": "Coarse data type (FLT=float, BOOL=boolean) — heuristic"
+  },
+  "models": [
+    {
+      "name": "elastic",
+      "file": "elastic.json",
+      "full_name": "Elastic Joint Model",
+      "description": "The Elastic model provides a linear representation of joint stiffness (normal and shear). There is no yield. Elastic joints are infinitely strong.",
+      "property_count": 2
+    },
+    {
+      "name": "mohr",
+      "file": "mohr.json",
+      "full_name": "Mohr-Coulomb Joint Model",
+      "description": "The Coulomb slip model provides a linear representation of joint stiffness and yield limit, and is based upon elastic stiffness, frictional, cohesive, and tensi",
+      "property_count": 10
+    },
+    {
+      "name": "bilinear-mohr",
+      "file": "bilinear-mohr.json",
+      "full_name": "Bilinear Mohr-Coulomb Joint Model",
+      "description": "The Bilinear Mohr-Coulomb Joint Model has two different shear strength envelopes. The failure envelope changes when a critical level of normal stress is exceede",
+      "property_count": 17
+    },
+    {
+      "name": "softening-mohr",
+      "file": "softening-mohr.json",
+      "full_name": "Softening-Healing Mohr-Coulomb Joint Model",
+      "description": "The Mohr-Coulomb joint model has the following deficiencies when used to model seismicity.",
+      "property_count": 15
+    },
+    {
+      "name": "cyjm",
+      "file": "cyjm.json",
+      "full_name": "Continuously Yielding Joint Model",
+      "description": "Background",
+      "property_count": 9
+    },
+    {
+      "name": "nonlinear",
+      "file": "nonlinear.json",
+      "full_name": "Nonlinear Joint Model",
+      "description": "The Nonlinear model is the same as the Mohr-Coulomb Joint Model In 3DEC except that the normal and shear stiffness may depend on the normal stress as in the Con",
+      "property_count": 18
+    },
+    {
+      "name": "power",
+      "file": "power.json",
+      "full_name": "Power-Law Creeping Joint Model",
+      "description": "The creep behavior in a discontinuity is of a different nature depending on the joint surface (planar or rough) and on the filling material.",
+      "property_count": 2
+    },
+    {
+      "name": "ratestate",
+      "file": "ratestate.json",
+      "full_name": "Rate-State Joint Model",
+      "description": "Rate- and state-dependent friction joint model (laboratory rate-state friction law), available via 'block contact jmodel assign ratestate'.",
+      "property_count": 2
+    }
+  ]
+}

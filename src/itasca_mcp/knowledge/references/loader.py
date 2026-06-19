@@ -16,9 +16,10 @@ Responsibilities:
 
 import json
 from functools import lru_cache
+from pathlib import Path
 from typing import Any, cast
 
-from itasca_mcp.knowledge.config import references_root
+from itasca_mcp.knowledge.config import SUPPORTED_SOFTWARE, references_root, resolve
 
 
 class ReferenceLoader:
@@ -117,6 +118,16 @@ class ReferenceLoader:
         cat_data = categories[category]
         directory = cat_data.get("directory", category)
 
+        # Shared-content borrow: if the category index gives this item a
+        # RESOURCES-root-relative ``file`` pointer (e.g. into ``_common/``),
+        # resolve it there. This lets engines that share a kernel reference set
+        # (FLAC/3DEC zone constitutive models) point at one copy instead of
+        # duplicating it, mirroring how command docs borrow ``_common``.
+        pointer = ReferenceLoader._item_file_pointer(category, item_name, software=software)
+        if pointer:
+            with open(pointer, encoding="utf-8") as f:
+                return cast(dict[str, Any], json.load(f))
+
         # Try file-based item first: {category}/{item}.json
         doc_path = references_root(software) / directory / f"{item_name}.json"
         if doc_path.exists():
@@ -129,6 +140,36 @@ class ReferenceLoader:
             with open(dir_index, encoding="utf-8") as f:
                 return cast(dict[str, Any], json.load(f))
 
+        return None
+
+    # RESOURCES-root prefixes that mark a ``file`` pointer as cross-root (vs a
+    # bare filename relative to the category directory).
+    _ROOT_PREFIXES = ("_common/", *(f"{sw}/" for sw in SUPPORTED_SOFTWARE))
+
+    @staticmethod
+    def _item_file_pointer(category: str, item_name: str, *, software: str) -> Path | None:
+        """RESOURCES-root-relative ``file`` for an item, resolved to a real path.
+
+        Looks the item up in the category index and, if its ``file`` is a
+        cross-root pointer (starts with ``_common/`` or ``<software>/``),
+        resolves it against the RESOURCES root. Returns None when there is no
+        such pointer (the caller then uses the legacy directory-based layout).
+        """
+        cat_index = ReferenceLoader.load_category_index(category, software=software)
+        if not cat_index:
+            return None
+        for value in cat_index.values():
+            if not isinstance(value, list):
+                continue
+            for entry in value:
+                if not isinstance(entry, dict):
+                    continue
+                if item_name in (entry.get("name"), entry.get("model"), entry.get("element")):
+                    file_ref = entry.get("file")
+                    if isinstance(file_ref, str) and file_ref.startswith(ReferenceLoader._ROOT_PREFIXES):
+                        path = resolve(file_ref)
+                        return path if path.exists() else None
+                    return None
         return None
 
     @staticmethod

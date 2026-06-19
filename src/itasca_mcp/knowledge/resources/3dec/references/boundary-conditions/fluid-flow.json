@@ -1,0 +1,33 @@
+{
+  "name": "fluid-flow",
+  "dimension": "3D",
+  "full_name": "Fluid-Flow Boundary Conditions",
+  "description": "Hydraulic boundary conditions for the fracture-flow / pore-pressure model — fluid flux and sources, plus pore pressure applied to joints via 'block contact apply'.",
+  "primary_commands": [
+    "block face apply",
+    "block gridpoint apply",
+    "block contact apply"
+  ],
+  "condition_families": [
+    {
+      "family": "flux & sources",
+      "keywords": [
+        "flux",
+        "source"
+      ],
+      "notes": [
+        "'block face apply flux ...' for boundary inflow; 'block gridpoint apply source ...' for point sources."
+      ]
+    },
+    {
+      "family": "pore pressure (joints)",
+      "keywords": [
+        "pore-pressure"
+      ],
+      "notes": [
+        "'block contact apply pore-pressure <f>' sets joint pore pressure for hydro-mechanical coupling."
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/boundaryconditions.html"
+}

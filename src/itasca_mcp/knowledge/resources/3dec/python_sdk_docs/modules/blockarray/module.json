@@ -1,0 +1,175 @@
+{
+  "module": "itasca.blockarray",
+  "description": "Array interface for 3DEC blocks.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.blockarray.html",
+  "functions": [
+    {
+      "name": "area",
+      "signature": "itasca.blockarray.area() -> array float{block}",
+      "description": "Get a numpy array of the block area.",
+      "returns": {
+        "type": "array float{block}"
+      }
+    },
+    {
+      "name": "density",
+      "signature": "itasca.blockarray.density() -> array float{block}",
+      "description": "Get a numpy array of the block density.",
+      "returns": {
+        "type": "array float{block}"
+      }
+    },
+    {
+      "name": "dsf",
+      "signature": "itasca.blockarray.dsf() -> array float{block}",
+      "description": "Get a numpy array of the block density scaling factor.",
+      "returns": {
+        "type": "array float{block}"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "itasca.blockarray.extra(slot: int) -> array float{block} or float{block,3}",
+      "description": "Get the block extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{block} or float{block,3}"
+      }
+    },
+    {
+      "name": "fill_pos",
+      "signature": "itasca.blockarray.fill_pos(data: array float{block, 3}) -> None",
+      "description": "Fill an existing array with the block centroid location. The array must be the correct shape.",
+      "parameters": [
+        {
+          "name": "data",
+          "type": "array float{block",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.blockarray.ids() -> array int{block}",
+      "description": "Get the block ids as an array.",
+      "returns": {
+        "type": "array int{block}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.blockarray.in_group(group_name: str, slot='default') -> array bool{nblock}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{nblock}"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "itasca.blockarray.is_excavated() -> array bool{block}",
+      "description": "Get a numpy array of the block excavated flag.",
+      "returns": {
+        "type": "array bool{block}"
+      }
+    },
+    {
+      "name": "is_rigid",
+      "signature": "itasca.blockarray.is_rigid() -> array bool{block}",
+      "description": "Get a numpy array of the block rigid flag.",
+      "returns": {
+        "type": "array bool{block}"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "itasca.blockarray.pos() -> array float{block,3}",
+      "description": "Get a numpy array of the block centroid location.",
+      "returns": {
+        "type": "array float{block,3}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.blockarray.set_extra(slot: int, data: array float{block} or float{block, 3}) -> None",
+      "description": "Set the block extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{block} or float{block",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.blockarray.set_group(membership: array bool{nblock}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{nblock}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "vol",
+      "signature": "itasca.blockarray.vol() -> array float{block}",
+      "description": "Get a numpy array of the block volumic.",
+      "returns": {
+        "type": "array float{block}"
+      }
+    }
+  ]
+}

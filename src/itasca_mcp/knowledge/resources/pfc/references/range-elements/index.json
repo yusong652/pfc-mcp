@@ -78,25 +78,25 @@
   "elements": [
     {
       "name": "position",
-      "file": "position.json",
+      "file": "_common/references/range-elements/position.json",
       "short_description": "Bounding box selection. Two vectors define opposit...",
       "category": "geometric"
     },
     {
       "name": "position-x",
-      "file": "position-x.json",
+      "file": "_common/references/range-elements/position-x.json",
       "short_description": "Filter by X-coordinate range.",
       "category": "geometric"
     },
     {
       "name": "position-y",
-      "file": "position-y.json",
+      "file": "_common/references/range-elements/position-y.json",
       "short_description": "Filter by Y-coordinate range.",
       "category": "geometric"
     },
     {
       "name": "position-z",
-      "file": "position-z.json",
+      "file": "_common/references/range-elements/position-z.json",
       "short_description": "Filter by Z-coordinate range.",
       "category": "geometric"
     },
@@ -108,61 +108,61 @@
     },
     {
       "name": "cylinder",
-      "file": "cylinder.json",
+      "file": "_common/references/range-elements/cylinder.json",
       "short_description": "Cylindrical region. Two radii create annular (holl...",
       "category": "geometric"
     },
     {
       "name": "annulus",
-      "file": "annulus.json",
+      "file": "_common/references/range-elements/annulus.json",
       "short_description": "Spherical annulus (hollow sphere) selection.",
       "category": "geometric"
     },
     {
       "name": "plane",
-      "file": "plane.json",
+      "file": "_common/references/range-elements/plane.json",
       "short_description": "Infinite plane selection. Use above/below or dista...",
       "category": "geometric"
     },
     {
       "name": "polygon",
-      "file": "polygon.json",
+      "file": "_common/references/range-elements/polygon.json",
       "short_description": "Polygonal cylinder extending perpendicular to poly...",
       "category": "geometric"
     },
     {
       "name": "rectangle",
-      "file": "rectangle.json",
+      "file": "_common/references/range-elements/rectangle.json",
       "short_description": "Rectangular cylinder. Four vertices define the rec...",
       "category": "geometric"
     },
     {
       "name": "ellipse",
-      "file": "ellipse.json",
+      "file": "_common/references/range-elements/ellipse.json",
       "short_description": "Ellipse inscribed in rectangle defined by four ver...",
       "category": "geometric"
     },
     {
       "name": "id",
-      "file": "id.json",
+      "file": "_common/references/range-elements/id.json",
       "short_description": "Select by ID range. Single value for exact match, ...",
       "category": "attribute"
     },
     {
       "name": "id-list",
-      "file": "id-list.json",
+      "file": "_common/references/range-elements/id-list.json",
       "short_description": "Select by explicit list of IDs. Non-sequential val...",
       "category": "attribute"
     },
     {
       "name": "group",
-      "file": "group.json",
+      "file": "_common/references/range-elements/group.json",
       "short_description": "Select by group membership. Supports slot specific...",
       "category": "attribute"
     },
     {
       "name": "named-range",
-      "file": "named-range.json",
+      "file": "_common/references/range-elements/named-range.json",
       "short_description": "Reference a previously created named range (via 'm...",
       "category": "attribute"
     },
@@ -174,43 +174,43 @@
     },
     {
       "name": "extra",
-      "file": "extra.json",
+      "file": "_common/references/range-elements/extra.json",
       "short_description": "Filter by extra variable value at specified index.",
       "category": "user_defined"
     },
     {
       "name": "extra-list",
-      "file": "extra-list.json",
+      "file": "_common/references/range-elements/extra-list.json",
       "short_description": "Filter by extra variable matching integer list.",
       "category": "user_defined"
     },
     {
       "name": "fish",
-      "file": "fish.json",
+      "file": "_common/references/range-elements/fish.json",
       "short_description": "Custom FISH function for filtering. Function recei...",
       "category": "user_defined"
     },
     {
       "name": "not",
-      "file": "not.json",
+      "file": "_common/references/range-elements/not.json",
       "short_description": "Invert the element's selection (exclude instead of...",
       "category": "element_modifiers"
     },
     {
       "name": "extent",
-      "file": "extent.json",
+      "file": "_common/references/range-elements/extent.json",
       "short_description": "Require entire object extent inside region (not ju...",
       "category": "element_modifiers"
     },
     {
       "name": "by",
-      "file": "by.json",
+      "file": "_common/references/range-elements/by.json",
       "short_description": "Specify object hierarchy level for evaluation.",
       "category": "element_modifiers"
     },
     {
       "name": "union",
-      "file": "union.json",
+      "file": "_common/references/range-elements/union.json",
       "short_description": "Change from intersection (AND) to union (OR) logic...",
       "category": "phrase_modifiers"
     }

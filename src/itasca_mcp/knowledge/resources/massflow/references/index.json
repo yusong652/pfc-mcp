@@ -1,0 +1,22 @@
+{
+  "type": "reference_index",
+  "description": "MassFlow (gravity flow / caving) reference documentation: shared 9.0 kernel constitutive models and range filters used in coupled mechanical analysis.",
+  "categories": {
+    "constitutive-models": {
+      "name": "Constitutive Models (Zone)",
+      "description": "MassFlow zone constitutive material model properties for coupled mechanical analysis — mohr-coulomb, drucker-prager, hoek-brown, cam-clay, creep models, etc. Property vocabulary for 'zone cmodel assign' + 'zone property'. Shared 9.0 FLAC3D kernel (docs via _common).",
+      "directory": "constitutive-models",
+      "index_file": "constitutive-models/index.json",
+      "summary": "38 zone material models (shared with FLAC3D via _common; 5 models not yet documented)",
+      "usage": "zone cmodel assign <name> ; zone property <prop> <value> [range ...]"
+    },
+    "range-elements": {
+      "name": "Range Elements",
+      "description": "Geometric and logical 'range ...' filters (cylinder, sphere, plane, position, group, id, polygon, union, not, ...) used to scope any MassFlow command. Shared 9.0 kernel.",
+      "directory": "range-elements",
+      "index_file": "range-elements/index.json",
+      "summary": "22 range filter elements (shared 9.0 kernel via _common)",
+      "usage": "<any command> ... range <element> <args> [union|intersect|not ...]"
+    }
+  }
+}

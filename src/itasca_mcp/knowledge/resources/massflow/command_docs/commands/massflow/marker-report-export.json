@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "report-export"
+  ],
+  "description": "Export marker report for current day to filename s . If s is not given, a default file name of \\(markers_Day000.txt\\) where 000 is replaced by the current day.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker report-export",
+      "syntax": "massflow marker report-export <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

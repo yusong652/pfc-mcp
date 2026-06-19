@@ -1,0 +1,36 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "trace"
+  ],
+  "description": "Specify a name and location for a trace marker. The trace marker will be created within the appropriate Mine Blocks during the marker generation step.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker trace",
+      "syntax": "massflow marker trace keyword",
+      "keywords": [
+        {
+          "name": "name",
+          "syntax": "name <s>",
+          "description": "Set the name for the trace mafker. This is optional."
+        },
+        {
+          "name": "id",
+          "syntax": "id <i>",
+          "description": "Specify an ID of an existing marker to trace."
+        },
+        {
+          "name": "position",
+          "syntax": "position <v>",
+          "description": "Specify a position for a trace marker. The trace marker will be created when the host mine block is activated."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

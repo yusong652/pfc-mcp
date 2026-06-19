@@ -1,0 +1,36 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "dump-drawperiod"
+  ],
+  "description": "Export a drawbell extraction schedule to a specified table. A table is a list of x,y pairs that can be plotted, exported and queried with FISH . See Table for more details about tables in MassFlow . In these tables, x is the period and y is the mass.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint dump-drawperiod",
+      "syntax": "massflow drawpoint dump-drawperiod <s>",
+      "keywords": [
+        {
+          "name": "cumulative",
+          "syntax": "cumulative <b>",
+          "description": "If set to true , then the cumulative mass is recorded. The default is false , such that the mass for each period is recorded."
+        },
+        {
+          "name": "drawpoint",
+          "syntax": "drawpoint <s>",
+          "description": "If this keyword is not given, the default is the sum of the mass for all drawpoints."
+        },
+        {
+          "name": "name",
+          "syntax": "name <s>",
+          "description": "Specify a name for the table."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

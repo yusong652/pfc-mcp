@@ -1,0 +1,36 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "list"
+  ],
+  "description": "List information about markers.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker list",
+      "syntax": "massflow marker list [keyword] [range]",
+      "keywords": [
+        {
+          "name": "extra",
+          "syntax": "extra <i>",
+          "description": "List marker extra variable information in slot i ."
+        },
+        {
+          "name": "group",
+          "syntax": "group",
+          "description": "List marker group names."
+        },
+        {
+          "name": "info",
+          "syntax": "info",
+          "description": "List information about markers."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

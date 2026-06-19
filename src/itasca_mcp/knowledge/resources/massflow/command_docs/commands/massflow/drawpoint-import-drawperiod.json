@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "import-drawperiod"
+  ],
+  "description": "Import a drawbell extraction schedule. The schedule is contained in the comma-delimited CSV file s .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint import-drawperiod",
+      "syntax": "massflow drawpoint import-drawperiod <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

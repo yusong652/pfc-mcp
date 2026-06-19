@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "trace-report"
+  ],
+  "description": "Generate a trace marker report. A filename may be given. If not specified, the filename will be “traceMarkerReport.txt” by default.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker trace-report",
+      "syntax": "massflow marker trace-report [filename s:str]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

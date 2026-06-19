@@ -1,0 +1,19 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "secondary-fragmentation"
+  ],
+  "description": "Toggle secondary fragmentation. The default value is off.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow secondary-fragmentation",
+      "syntax": "massflow secondary-fragmentation <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

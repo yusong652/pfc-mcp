@@ -1,0 +1,19 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "clean"
+  ],
+  "description": "Clean the model.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow clean",
+      "syntax": "massflow clean",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

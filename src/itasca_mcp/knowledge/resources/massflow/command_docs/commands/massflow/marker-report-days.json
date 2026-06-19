@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "report-days"
+  ],
+  "description": "Set frequency for marker report generation in days. See Marker Report for details of what is in the marker report.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker report-days",
+      "syntax": "massflow marker report-days <i>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

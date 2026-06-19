@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "import"
+  ],
+  "description": "Import a drawpoint description. The description is contained in the comma-delimited CSV file s . See Draw Points for more infomation.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint import",
+      "syntax": "massflow drawpoint import <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

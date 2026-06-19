@@ -1,0 +1,36 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "mine-block",
+    "list"
+  ],
+  "description": "List information about mine blocks.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow mine-block list",
+      "syntax": "massflow mine-block list [keyword] [range]",
+      "keywords": [
+        {
+          "name": "extra",
+          "syntax": "extra <i>",
+          "description": "List mine block extra variable information in slot i ."
+        },
+        {
+          "name": "group",
+          "syntax": "group",
+          "description": "List mine block group names."
+        },
+        {
+          "name": "info",
+          "syntax": "info",
+          "description": "List information about mineblocks."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

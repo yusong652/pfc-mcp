@@ -1,0 +1,36 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "list"
+  ],
+  "description": "List information about drawpoints.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint list",
+      "syntax": "massflow drawpoint list [keyword] [range]",
+      "keywords": [
+        {
+          "name": "extra",
+          "syntax": "extra <i>",
+          "description": "List drawpoint extra variable information in slot i ."
+        },
+        {
+          "name": "group",
+          "syntax": "group",
+          "description": "List drawpoint group names."
+        },
+        {
+          "name": "info",
+          "syntax": "info",
+          "description": "List information about drawpoints."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

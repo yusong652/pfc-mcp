@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "import-trace"
+  ],
+  "description": "Import trace markers positions. The positions are contained in the space-delimited ASCII text file s .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker import-trace",
+      "syntax": "massflow marker import-trace <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

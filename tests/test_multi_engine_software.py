@@ -32,7 +32,7 @@ def _parse_tool_payload(result) -> dict:
 
 
 def test_supported_software_set() -> None:
-    assert set(SUPPORTED_SOFTWARE) == {"pfc", "flac", "3dec", "mpoint"}
+    assert set(SUPPORTED_SOFTWARE) == {"pfc", "flac", "3dec", "mpoint", "massflow"}
 
 
 def test_normalize_software_validates() -> None:
@@ -432,6 +432,111 @@ def test_mpoint_initial_conditions_field_and_gravity() -> None:
     field = ReferenceLoader.load_item_doc("initial-conditions", "field-initialization", software="mpoint")
     all_fields = {f for g in field["field_groups"] for f in g["fields"]}
     assert {"stress", "pore-pressure", "biot-modulus"} <= all_fields
+
+
+# --- MassFlow (gravity flow / caving) coverage (9.0-only engine) ------------
+# MassFlow is the caving / gravity-flow product. Its one proprietary family is
+# ``massflow`` (initialize/compute, drawpoints, markers, mine-blocks, fines
+# migration); everything else is the shared 9.0 kernel. The FLAC3D ``zone``
+# family is reachable on the binary for coupled analysis but is documented under
+# software="flac" (MassFlow3D's zone set diverges, e.g. no zone create2d).
+
+
+@pytest.mark.asyncio
+async def test_massflow_browse_commands_root() -> None:
+    result = await mcp.call_tool("pfc_browse_commands", {"software": "massflow", "version": "9.0"})
+    data = _parse_tool_payload(result)["data"]
+    names = {e["name"] for e in data["entries"]}
+    assert "massflow" in names  # MassFlow-only family
+    assert "model" in names  # shared kernel family
+    assert "ball" not in names  # PFC-only family must not leak
+    assert "block" not in names  # 3DEC-only family must not leak
+    assert "mpoint" not in names  # MPoint-only family must not leak
+    assert "zone" not in names  # FLAC3D zone family documented under software="flac"
+    assert data["summary"]["software"] == "massflow"
+
+
+@pytest.mark.asyncio
+async def test_massflow_browse_compute_command() -> None:
+    result = await mcp.call_tool(
+        "pfc_browse_commands", {"software": "massflow", "command": "massflow compute", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["entries"][0]["doc"]["command"] == "massflow compute"
+
+
+@pytest.mark.asyncio
+async def test_massflow_browse_subnamespace_command() -> None:
+    # 'massflow drawpoint import' is keyed as drawpoint-import.json but addressed with spaces.
+    result = await mcp.call_tool(
+        "pfc_browse_commands", {"software": "massflow", "command": "massflow drawpoint import", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["entries"][0]["doc"]["command"] == "massflow drawpoint import"
+
+
+@pytest.mark.asyncio
+async def test_massflow_query_command_finds_compute() -> None:
+    result = await mcp.call_tool(
+        "pfc_query_command", {"software": "massflow", "query": "compute flow solution", "version": "9.0"}
+    )
+    data = _parse_tool_payload(result)["data"]
+    assert data["summary"]["software"] == "massflow"
+    assert any(e["name"] == "massflow compute" for e in data["entries"])
+
+
+@pytest.mark.asyncio
+async def test_massflow_python_api_exposes_itasca_core() -> None:
+    result = await mcp.call_tool("pfc_query_python_api", {"software": "massflow", "query": "run command"})
+    data = _parse_tool_payload(result)["data"]
+    assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
+
+
+def test_massflow_command_families_are_isolated() -> None:
+    massflow = CommandLoader.load_index(software="massflow")["categories"]
+    assert "massflow" in massflow  # proprietary family
+    assert "model" in massflow and "fish" in massflow  # shared kernel borrowed
+    # other engines' proprietary families must not leak in
+    assert "ball" not in massflow
+    assert "block" not in massflow
+    assert "mpoint" not in massflow
+    assert "zone" not in massflow  # FLAC3D zone not borrowed (diverges on massflow3d)
+
+
+def test_massflow_borrows_common_kernel_verbatim() -> None:
+    massflow = CommandLoader.load_index(software="massflow")["categories"]
+    for fam in ("data", "fish", "geometry", "history", "model", "plot", "table"):
+        cmds = massflow[fam]["commands"]
+        assert cmds and all(str(c["file"]).startswith("_common/") for c in cmds)
+
+
+def test_massflow_compute_resolves_with_keywords() -> None:
+    doc = CommandLoader.load_command_doc("massflow", "compute", "9.0", software="massflow")
+    assert doc is not None
+    assert doc["command"] == "massflow compute"
+    kw = {k["name"] for k in doc.get("keywords", [])}
+    assert {"days", "periods"} <= kw  # live-probed keyword set
+
+
+def test_massflow_constitutive_models_shared_via_common() -> None:
+    cats = ReferenceLoader.load_index(software="massflow").get("categories", {})
+    assert "constitutive-models" in cats
+    cat = ReferenceLoader.load_category_index("constitutive-models", software="massflow")
+    # MassFlow's coupled analysis shares the FLAC3D zone models; docs live in _common.
+    entry = next(m for m in cat["models"] if m["name"] == "mohr-coulomb")
+    assert entry["file"].startswith("_common/references/constitutive-models/")
+    doc = ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="massflow")
+    assert doc == ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="flac")
+    # The 5 superset models without a _common doc are disclosed, not fabricated.
+    assert "jones-wilkins-lee" in cat["note"]
+
+
+def test_massflow_range_elements_shared_via_common() -> None:
+    cats = ReferenceLoader.load_index(software="massflow").get("categories", {})
+    assert "range-elements" in cats
+    mf = ReferenceLoader.load_item_doc("range-elements", "cylinder", software="massflow")
+    flac = ReferenceLoader.load_item_doc("range-elements", "cylinder", software="flac")
+    assert mf is not None and mf == flac
 
 
 # --- 3DEC references (joint constitutive models) ----------------------------

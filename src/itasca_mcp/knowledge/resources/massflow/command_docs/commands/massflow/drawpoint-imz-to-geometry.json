@@ -1,0 +1,26 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "imz-to-geometry"
+  ],
+  "description": "Create a geometry set of the IMZs in the specified range. Polygons in the geometry will have extra variable 1 set to the ID of the associated drawpoint.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint imz-to-geometry",
+      "syntax": "massflow drawpoint imz-to-geometry [keyword] [range]",
+      "keywords": [
+        {
+          "name": "set",
+          "syntax": "set <s>",
+          "description": "The geometry set will have the name s . If no set name is given, the geometry set will be imz ."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

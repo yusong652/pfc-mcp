@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "import-drawbell"
+  ],
+  "description": "Import a drawbell description. The description is contained in the file s .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint import-drawbell",
+      "syntax": "massflow drawpoint import-drawbell <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "mine-block",
+    "group"
+  ],
+  "description": "Assign group name s to mine block in the range. Use of the group logic is described in Groups .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow mine-block group",
+      "syntax": "massflow mine-block group <s>[keyword] [range]",
+      "keywords": [
+        {
+          "name": "remove",
+          "syntax": "remove",
+          "description": "Remove group s from the mine block. If no slot is specified the group assignment is removed from all slots it is found in."
+        },
+        {
+          "name": "slot",
+          "syntax": "slot <s>",
+          "description": "Assign the group to the slot named s . The default slot is Default ."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

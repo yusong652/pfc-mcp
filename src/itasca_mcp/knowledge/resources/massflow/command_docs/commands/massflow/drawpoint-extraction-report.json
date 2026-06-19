@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "extraction-report"
+  ],
+  "description": "Generate an extraction report. An optional filename may be given. If not specified, the filename will default to “periodExtractionReport.txt”.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint extraction-report",
+      "syntax": "massflow drawpoint extraction-report [filename s:str]",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

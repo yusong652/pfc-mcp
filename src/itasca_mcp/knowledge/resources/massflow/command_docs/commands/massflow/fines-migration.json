@@ -1,0 +1,19 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "fines-migration"
+  ],
+  "description": "Toggle fines migration. The default value is off.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow fines-migration",
+      "syntax": "massflow fines-migration <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

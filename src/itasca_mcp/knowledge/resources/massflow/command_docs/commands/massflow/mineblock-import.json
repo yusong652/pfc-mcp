@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "mine-block",
+    "import"
+  ],
+  "description": "Import a mine block description. The description is contained in the file s .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow mine-block import",
+      "syntax": "massflow mine-block import <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

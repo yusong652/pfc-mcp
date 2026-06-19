@@ -1,0 +1,20 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "drawpoint",
+    "add-drawperiod"
+  ],
+  "description": "Import a drawbell extraction schedule to be added to the end of the existing schedule. This is useful if you run an analysis and need to run more draw periods. The schedule is contained in the tab-delimited ACII text file s that is of exactly the same format as that used for massflow drawpoint import-drawperiod .",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow drawpoint add-drawperiod",
+      "syntax": "massflow drawpoint add-drawperiod <s>",
+      "keywords": [],
+      "examples": []
+    }
+  }
+}

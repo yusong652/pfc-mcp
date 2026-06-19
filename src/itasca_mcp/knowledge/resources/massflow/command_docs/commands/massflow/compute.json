@@ -1,0 +1,30 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "compute"
+  ],
+  "description": "Solve using the parameters previously specified with the massflow initialize command. Alternatively a number of days or periods can be specified for this compute step.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow compute",
+      "syntax": "massflow compute [keyword]",
+      "keywords": [
+        {
+          "name": "days",
+          "syntax": "days <i>",
+          "description": "Specify the number of days for this compute step. This is the number of days in addition to what has already been run (not the total number of days)."
+        },
+        {
+          "name": "periods",
+          "syntax": "periods <i>",
+          "description": "Specify the number of periods for this compute step. This is the number of periods in addition to what has already been run (not the total number of periods)."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "initialize"
+  ],
+  "description": "Set the value of parameters that affect the entire model, as well as parameters related to solving and saving.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow initialize",
+      "syntax": "massflow initialize keyword",
+      "keywords": [
+        {
+          "name": "base-fragment-size",
+          "syntax": "base-fragment-size <f>",
+          "description": "Set Base Fragment Size. The default value is 0.05."
+        },
+        {
+          "name": "compute-days",
+          "syntax": "compute-days <i>",
+          "description": "Set number of days the massflow compute command is going to solve. Alternatively, compute-period can be set."
+        },
+        {
+          "name": "compute-period",
+          "syntax": "compute-period <i>",
+          "description": "Set number of periods the massflow compute command is going to solve. Alternatively, compute-days can be set."
+        },
+        {
+          "name": "filename",
+          "syntax": "filename <s>",
+          "description": "Set the filename prefix for generated save files. If not given, it will default to “massflow”."
+        },
+        {
+          "name": "imz-update",
+          "syntax": "imz-update <i>",
+          "description": "Set the frequency of updating the IMZ geometries. By default, the IMZs are updated every two days."
+        },
+        {
+          "name": "layer-thickness",
+          "syntax": "layer-thickness <f>",
+          "description": "Set slice thickness of the Isolated Movement Zone (IMZ). This is a multiplier relative to the Mine Block size. The default value is 0.5, meaning the slice thickness is half the Mine Block size."
+        },
+        {
+          "name": "massbalance-lower",
+          "syntax": "massbalance-lower <f>",
+          "description": "Set the lower limit for massbalance correction factor. Default is 0.1."
+        },
+        {
+          "name": "massbalance-upper",
+          "syntax": "massbalance-upper <f>",
+          "description": "Set the upper limit for massbalance correction factor. Default is 2."
+        },
+        {
+          "name": "percent-empty",
+          "syntax": "percent-empty <f>",
+          "description": "Set fraction of Mine Block volume that must be empty before adding air. The default value is 0.75."
+        },
+        {
+          "name": "rill-days",
+          "syntax": "rill-days <i>",
+          "description": "Set how often, in days, rilling calculations are performed. Default is 1."
+        },
+        {
+          "name": "save-days",
+          "syntax": "save-days <i>",
+          "description": "Set how often, in days, save files will be created. Alternatively, save-period can be set."
+        },
+        {
+          "name": "save-period",
+          "syntax": "save-period <i>",
+          "description": "Set how often, in periods, save files will be created. Alternatively, save-days can be set."
+        },
+        {
+          "name": "tensile-ucs-ratio",
+          "syntax": "tensile-ucs-ratio <f>",
+          "description": "Set ratio of tensile strength to unconfined compressive strength. The default value is 0.1."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

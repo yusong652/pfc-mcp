@@ -1,0 +1,26 @@
+{
+  "category": "massflow",
+  "search_keywords": [
+    "massflow",
+    "marker",
+    "initialize"
+  ],
+  "description": "Set the value parameters that affect the markers.",
+  "python_sdk_alternative": {
+    "available": false
+  },
+  "versions": {
+    "9.0": {
+      "command": "massflow marker initialize",
+      "syntax": "massflow marker initialize keyword",
+      "keywords": [
+        {
+          "name": "spacing",
+          "syntax": "spacing <f>",
+          "description": "Set spacing between the markers. This parameters is used when generating the markers inside a Mine Block that can cave. This is a multiplier relative to the Mine Block size. The default value is 0.25, meaning the spacing between the markers will not be less than one quarter of the Mine Block size."
+        }
+      ],
+      "examples": []
+    }
+  }
+}

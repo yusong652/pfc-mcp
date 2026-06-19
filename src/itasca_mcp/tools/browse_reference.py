@@ -10,6 +10,7 @@ from itasca_mcp.knowledge.references import ReferenceLoader
 from itasca_mcp.utils import (
     CommandDocVersion,
     SoftwareParam,
+    effective_doc_version,
     normalize_command_doc_version,
     normalize_input,
     normalize_software_value,
@@ -40,7 +41,8 @@ def register(mcp: FastMCP) -> None:
             description=(
                 "Documentation version (6.0/7.0/9.0). Only gates version-specific items "
                 "(e.g. PFC contact models by availability). range-elements, plot-items, and the "
-                "FLAC/3DEC reference sets are version-agnostic, so the value is ignored for them."
+                "FLAC/3DEC reference sets are version-agnostic, so the value is ignored for them. "
+                "9.0-only engines (3DEC, MPoint, MassFlow) always resolve at 9.0."
             ),
         ),
     ) -> dict[str, Any]:
@@ -68,8 +70,8 @@ def register(mcp: FastMCP) -> None:
         - pfc_query_command: Search commands by keywords
         """
         topic_str = normalize_input(topic, lowercase=True)
-        version_value = normalize_command_doc_version(version)
         sw = normalize_software_value(software)
+        version_value = effective_doc_version(sw, normalize_command_doc_version(version))
 
         if not topic_str:
             return build_ok(_browse_references_root(version_value, sw))

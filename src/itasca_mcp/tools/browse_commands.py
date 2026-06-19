@@ -10,6 +10,7 @@ from itasca_mcp.knowledge.commands import CommandLoader
 from itasca_mcp.utils import (
     CommandDocVersion,
     SoftwareParam,
+    effective_doc_version,
     normalize_command_doc_version,
     normalize_input,
     normalize_software_value,
@@ -35,7 +36,10 @@ def register(mcp: FastMCP) -> None:
         ),
         version: CommandDocVersion = Field(
             CommandDocVersion.V7_0,
-            description="PFC documentation version to browse. Defaults to 7.0.",
+            description=(
+                "Documentation version to browse. Defaults to 7.0 for multi-version engines "
+                "(PFC, FLAC); 9.0-only engines (3DEC, MPoint, MassFlow) always resolve at 9.0."
+            ),
         ),
     ) -> dict[str, Any]:
         """Browse PFC command documentation by path (like glob + cat).
@@ -54,8 +58,8 @@ def register(mcp: FastMCP) -> None:
         - pfc_browse_reference: Browse reference docs (e.g., "contact-models linear")
         """
         cmd = normalize_input(command, lowercase=True)
-        version_value = normalize_command_doc_version(version)
         sw = normalize_software_value(software)
+        version_value = effective_doc_version(sw, normalize_command_doc_version(version))
 
         if not cmd:
             return build_ok(_browse_root(version_value, sw))

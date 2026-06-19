@@ -13,6 +13,7 @@ from itasca_mcp.utils import (
     SearchLimit,
     SearchQuery,
     SoftwareParam,
+    effective_doc_version,
     normalize_command_doc_version,
     normalize_software_value,
 )
@@ -28,7 +29,10 @@ def register(mcp: FastMCP) -> None:
         limit: SearchLimit = 10,
         version: CommandDocVersion = Field(
             CommandDocVersion.V7_0,
-            description="PFC documentation version to search. Defaults to 7.0.",
+            description=(
+                "Documentation version to search. Defaults to 7.0 for multi-version engines "
+                "(PFC, FLAC); 9.0-only engines (3DEC, MPoint, MassFlow) always resolve at 9.0."
+            ),
         ),
     ) -> dict[str, Any]:
         """Search PFC command documentation by keywords (like grep).
@@ -44,8 +48,8 @@ def register(mcp: FastMCP) -> None:
         - pfc_browse_reference: Browse reference docs (e.g., "contact-models linear")
         - pfc_query_python_api: Search Python SDK by keywords
         """
-        version_value = normalize_command_doc_version(version)
         sw = normalize_software_value(software)
+        version_value = effective_doc_version(sw, normalize_command_doc_version(version))
         results = CommandSearch.search_commands_only(query, top_k=limit, version=version_value, software=sw)
         matches: list[dict[str, Any]] = []
         for result in results:

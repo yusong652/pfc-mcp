@@ -17,52 +17,6 @@
     "workaround": "itasca.command('model configure fluid') - Python SDK does not provide a direct configure method"
   },
   "versions": {
-    "7.0": {
-      "command": "model configure",
-      "syntax": "model configure keyword ...",
-      "keywords": [
-        {
-          "name": "creep",
-          "syntax": "creep",
-          "description": "Creep material analysis*"
-        },
-        {
-          "name": "dynamic",
-          "syntax": "dynamic",
-          "description": "Fully dynamic analysis*"
-        },
-        {
-          "name": "fluid",
-          "syntax": "fluid",
-          "description": "Fluid-flow analysis"
-        },
-        {
-          "name": "imass",
-          "syntax": "imass",
-          "description": "The Itasca Model for Advanced Strain Softening*"
-        },
-        {
-          "name": "plugins",
-          "syntax": "plugins",
-          "description": "C++ user-defined models and/or FISH intrinsic plugins.* FISH plugins can be loaded (but cycling is disabled) without this configuration."
-        },
-        {
-          "name": "thermal",
-          "syntax": "thermal",
-          "description": "Thermal analysis"
-        }
-      ],
-      "examples": [
-        {
-          "command": "model configure fluid",
-          "description": "Enable fluid-flow analysis mode before solving"
-        },
-        {
-          "command": "model configure dynamic",
-          "description": "Enable dynamic analysis mode before cycling"
-        }
-      ]
-    },
     "6.0": {
       "command": "model configure",
       "syntax": "model configure keyword ...",
@@ -109,15 +63,10 @@
         }
       ]
     },
-    "9.0": {
+    "7.0": {
       "command": "model configure",
       "syntax": "model configure keyword ...",
       "keywords": [
-        {
-          "name": "axisymmetry",
-          "syntax": "axisymmetry",
-          "description": "FLAC2D axisymmetric analysis. Currently available for standard mechanical analysis only (no full dynamics)."
-        },
         {
           "name": "creep",
           "syntax": "creep",
@@ -160,7 +109,7 @@
         }
       ]
     },
-    "9.1": {
+    "9.0": {
       "command": "model configure",
       "syntax": "model configure keyword ...",
       "keywords": [
@@ -219,10 +168,6 @@
           "https://docs.itascacg.com/itasca910/common/kernel/doc/manual/model/commands/cmd_model.configure.html"
         ]
       }
-    },
-    "9.3": {
-      "alias_of": "9.1",
-      "reason": "FLAC 9.3+ uses the bundled 9.1 fluid-flow syntax block for this command until an exact 9.3 page is bundled."
     }
   }
 }

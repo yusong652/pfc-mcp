@@ -451,3 +451,12 @@ def test_3dec_initial_conditions_uses_block_syntax() -> None:
     cmds = " ".join(si["primary_commands"])
     # 3DEC syntax (block ...), not FLAC's bare 'zone initialize'.
     assert "block zone initialize" in cmds and "block insitu" in cmds
+
+
+def test_3dec_boundary_conditions_uses_block_syntax() -> None:
+    cat = ReferenceLoader.load_category_index("boundary-conditions", software="3dec")
+    assert cat is not None
+    names = {i["name"] for i in cat["items"]}
+    assert {"mechanical-face", "gridpoint-and-block-fixity", "apply-modifiers"} <= names
+    mf = ReferenceLoader.load_item_doc("boundary-conditions", "mechanical-face", software="3dec")
+    assert "block face apply" in mf["primary_commands"]  # 3DEC, not FLAC's 'zone face apply'

@@ -41,6 +41,14 @@
       "index_file": "initial-conditions/index.json",
       "summary": "3 3DEC initial-condition topics (block zone initialize / insitu / gridpoint initialize)",
       "usage": "block zone initialize <stress-*> ... ; block insitu stress ... gradient ... ; block gridpoint initialize <field> ..."
+    },
+    "boundary-conditions": {
+      "name": "Boundary Conditions",
+      "description": "3DEC boundary conditions — mechanical face tractions, gridpoint & rigid-block fixity, fluid-flow, thermal/dynamic, apply modifiers. Uses 'block face apply' / 'block gridpoint apply' / 'block fix'.",
+      "directory": "boundary-conditions",
+      "index_file": "boundary-conditions/index.json",
+      "summary": "5 3DEC boundary-condition topics (block face/gridpoint apply, block fix)",
+      "usage": "block face apply <cond> ... range ... ; block gridpoint apply <cond> ... ; block fix <velocity|rotation> ..."
     }
   },
   "navigation": {

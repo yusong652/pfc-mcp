@@ -1,0 +1,40 @@
+{
+  "name": "thermal-and-dynamic",
+  "dimension": "3D",
+  "full_name": "Thermal and Dynamic (Absorbing) Boundary Conditions",
+  "description": "Thermal conditions (temperature, convection, heat flux) and dynamic absorbing/quiet boundaries that prevent reflection of outgoing waves in dynamic analyses.",
+  "primary_commands": [
+    "block face apply",
+    "block gridpoint apply"
+  ],
+  "condition_families": [
+    {
+      "family": "thermal",
+      "keywords": [
+        "temperature",
+        "convection",
+        "flux"
+      ],
+      "notes": [
+        "'block gridpoint apply temperature ...' fixes temperature; 'block face apply convection ...' sets film coefficient."
+      ]
+    },
+    {
+      "family": "dynamic absorbing (quiet / viscous)",
+      "keywords": [
+        "quiet",
+        "quiet-x",
+        "quiet-y",
+        "quiet-z",
+        "viscous",
+        "viscous-x",
+        "viscous-y",
+        "viscous-z"
+      ],
+      "notes": [
+        "Viscous (quiet) gridpoint boundaries absorb outgoing waves in dynamic runs."
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/boundaryconditions.html"
+}

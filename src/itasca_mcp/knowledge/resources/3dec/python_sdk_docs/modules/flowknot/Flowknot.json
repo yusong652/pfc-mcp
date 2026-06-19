@@ -1,0 +1,514 @@
+{
+  "class": "Flowknot",
+  "description": "Flowknot object instance in itasca.flowknot.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowknot.Flowknot.html",
+  "note": "Do not instantiate directly; use itasca.flowknot module functions.",
+  "method_groups": {
+    "area": "area",
+    "bulk": "bulk, set_bulk",
+    "extra": "extra, set_extra",
+    "fix": "fix_fluid, fix_proppant, fix_thermal, set_fix_fluid, set_fix_proppant, set_fix_thermal",
+    "flux": "flux_fluid_app, flux_thermal, flux_thermal_app, flux_thermal_unbal, set_flux_fluid_app, set_flux_thermal_app",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "htc": "htc, set_htc",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_hidden",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "pp": "pp, set_pp",
+    "propin": "propin_vol, set_propin_vol",
+    "stiffness": "stiffness",
+    "temp": "set_temp, temp",
+    "timestep": "timestep",
+    "trans": "trans",
+    "valid": "valid",
+    "vertexlist": "vertexlist",
+    "vol": "vol, vol_unbal, vol_unbal_max"
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "flowknot.area() -> float",
+      "description": "Get the area corresponding to the knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "bulk",
+      "signature": "flowknot.bulk() -> float",
+      "description": "Get the fluid bulk modulus used by this flow knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "flowknot.extra(slot: int) -> any",
+      "description": "Get the flowknot extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "fix_fluid",
+      "signature": "flowknot.fix_fluid() -> int",
+      "description": "Get the indicator of pore pressure variation.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "fix_proppant",
+      "signature": "flowknot.fix_proppant() -> bool",
+      "description": "Get the flag of proppant variation (true = free; false = constant volume fraction).",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "fix_thermal",
+      "signature": "flowknot.fix_thermal() -> int",
+      "description": "Get the thermal condition code (0 = free; 1 = constant temperature; 2 = constant flux).",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "flux_fluid_app",
+      "signature": "flowknot.flux_fluid_app() -> float",
+      "description": "Get the additional flux source value.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "flux_thermal",
+      "signature": "flowknot.flux_thermal() -> float",
+      "description": "Get the heat flow sum.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "flux_thermal_app",
+      "signature": "flowknot.flux_thermal_app() -> float",
+      "description": "Get the heat flux on the boundary.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "flux_thermal_unbal",
+      "signature": "flowknot.flux_thermal_unbal() -> float",
+      "description": "Get the unbalanced themral flux.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "flowknot.group([slot: str or int]) -> str",
+      "description": "Get the flowknot group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "flowknot.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the flowknot. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "flowknot.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this flowknot is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "htc",
+      "signature": "flowknot.htc() -> float",
+      "description": "Get the heat transfer coefficient.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "flowknot.id() -> int",
+      "description": "Get the flowknot id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "flowknot.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the flowknot is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "flowknot.index() -> int",
+      "description": "Get the index (offset) of a given flow knot.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "flowknot.is_hidden() -> bool",
+      "description": "Get the hidden state of the zone.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "flowknot.pos() -> vec",
+      "description": "Get the flowknot flowknot position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "flowknot.pos_x() -> float",
+      "description": "Get the x-component of the flowknot flowknot position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "flowknot.pos_y() -> float",
+      "description": "Get the y-component of the flowknot flowknot position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "flowknot.pos_z() -> float",
+      "description": "Get the z-component of the flowknot flowknot position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "flowknot.pp() -> float",
+      "description": "Get the flow knot pore pressure.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "propin_vol",
+      "signature": "flowknot.propin_vol() -> float",
+      "description": "Get the proppant volume concentration in injected fluid.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_bulk",
+      "signature": "flowknot.set_bulk(float) -> None",
+      "description": "Set the fluid bulk modulus used by this flow knot.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "flowknot.set_extra(slot: int, value: any) -> None",
+      "description": "Set the flowknot extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fix_fluid",
+      "signature": "flowknot.set_fix_fluid(int) -> None",
+      "description": "Set the indicator of pore pressure variation.",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fix_proppant",
+      "signature": "flowknot.set_fix_proppant(bool) -> None",
+      "description": "Set the flag of proppant variation (true = free; false = constant volume fraction).",
+      "parameters": [
+        {
+          "name": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fix_thermal",
+      "signature": "flowknot.set_fix_thermal(int) -> None",
+      "description": "Set the thermal condition code (0 = free; 1 = constant temperature; 2 = constant flux).",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_flux_fluid_app",
+      "signature": "flowknot.set_flux_fluid_app(float) -> None",
+      "description": "Set the additional flux source value.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_flux_thermal_app",
+      "signature": "flowknot.set_flux_thermal_app(float) -> None",
+      "description": "Set the heat flux on the boundary.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "flowknot.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the flowknot group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_htc",
+      "signature": "flowknot.set_htc(float) -> None",
+      "description": "Set the heat transfer coefficient.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp",
+      "signature": "flowknot.set_pp(float) -> None",
+      "description": "Set the flow knot pore pressure.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_propin_vol",
+      "signature": "flowknot.set_propin_vol(float) -> None",
+      "description": "Set the proppant volume concentration in injected fluid.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_temp",
+      "signature": "flowknot.set_temp(float) -> None",
+      "description": "Set the flow knot temperature.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "stiffness",
+      "signature": "flowknot.stiffness() -> float",
+      "description": "Get the fluid stiffness corresponding to the knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "temp",
+      "signature": "flowknot.temp() -> float",
+      "description": "Get the flow knot temperature.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "timestep",
+      "signature": "flowknot.timestep() -> float",
+      "description": "Get the fluidflow timestep corresponding to the knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "trans",
+      "signature": "flowknot.trans() -> float",
+      "description": "Get the total transmissivity of elements connected to the knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "flowknot.valid() -> bool",
+      "description": "Returns True if this flowknot is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vertexlist",
+      "signature": "flowknot.vertexlist() -> vertex list",
+      "description": "Get vertex list of the flowknot.",
+      "returns": {
+        "type": "vertex list"
+      }
+    },
+    {
+      "name": "vol",
+      "signature": "flowknot.vol() -> float",
+      "description": "Get the volume corresponding to the knot.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vol_unbal",
+      "signature": "flowknot.vol_unbal() -> float",
+      "description": "Get the unbalanced flow volume for the current cycle.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vol_unbal_max",
+      "signature": "flowknot.vol_unbal_max() -> float",
+      "description": "Get the maximum unbalanced volume during simulation.",
+      "returns": {
+        "type": "float"
+      }
+    }
+  ]
+}

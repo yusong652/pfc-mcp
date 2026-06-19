@@ -1,0 +1,100 @@
+{
+  "module": "itasca.flowplane.zonearray",
+  "description": "Array interface for flowplane zones.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowplane.zonearray.html",
+  "functions": [
+    {
+      "name": "extra",
+      "signature": "itasca.flowplane.zonearray.extra(slot: int) -> array float{flowplane zone} or float{flowplane zone,3}",
+      "description": "Get the flowplane zone extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{flowplane zone} or float{flowplane zone,3}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.flowplane.zonearray.ids() -> array int{flowplane zone}",
+      "description": "Get the flowplane zone ids as an array.",
+      "returns": {
+        "type": "array int{flowplane zone}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.flowplane.zonearray.in_group(group_name: str, slot='default') -> array bool{nzone}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{nzone}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.flowplane.zonearray.set_extra(slot: int, data: array float{flowplane zone} or float{flowplane zone, 3}) -> None",
+      "description": "Set the flowplane zone extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{flowplane zone} or float{flowplane zone",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.flowplane.zonearray.set_group(membership: array bool{nzone}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{nzone}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

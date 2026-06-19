@@ -187,9 +187,11 @@ async def test_3dec_python_api_exposes_itasca_core() -> None:
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
 
-# --- 3DEC engine-specific Python API (itasca.block family) ------------------
-# Parsed from the local 9.0 Sphinx python docs by scripts/corpus/parse_3dec_python.py.
-# These modules are 3DEC-only (no PFC/FLAC equivalent) and must not leak across engines.
+# --- 3DEC engine-specific Python API ----------------------------------------
+# The full 3DEC proprietary namespace (block / flowknot / flowplane / structure /
+# dfn / contact / history / fish) is parsed from the local 9.0 Sphinx python docs
+# by scripts/corpus/parse_3dec_python.py. These modules are 3DEC-only (no PFC/FLAC
+# equivalent) and must not leak across engines.
 
 
 def test_3dec_block_module_and_class_resolve() -> None:
@@ -232,8 +234,50 @@ def test_3dec_python_block_family_is_engine_isolated() -> None:
 
 
 def test_3dec_python_search_finds_block_method() -> None:
-    hits = APISearch.search("block volume", top_k=5, software="3dec")
-    assert any(h.document.name == "itasca.block.Block.vol" for h in hits)
+    # API-path style query (a documented use case) ranks the exact method first.
+    hits = APISearch.search("Block.vol", top_k=5, software="3dec")
+    assert hits and hits[0].document.name == "itasca.block.Block.vol"
+
+
+def test_3dec_structure_exposes_all_element_classes() -> None:
+    # itasca.structure carries six element classes directly (no PFC/FLAC analogue).
+    index = DocumentationLoader.load_index(software="3dec")
+    for cls in ("Beam", "Cable", "Geogrid", "Liner", "Pile", "Shell"):
+        assert cls in index["objects"], cls
+    pile = DocumentationLoader.load_api_doc("itasca.structure.Pile.force", software="3dec")
+    assert pile is not None and pile["signature"].startswith("pile.force(")
+
+
+def test_3dec_dfn_and_flow_modules_resolve() -> None:
+    frac = DocumentationLoader.load_api_doc("itasca.dfn.DFN.create_fracture", software="3dec")
+    assert frac is not None
+    fk = DocumentationLoader.load_api_doc("itasca.flowknot.find", software="3dec")
+    assert fk is not None and fk["signature"].startswith("itasca.flowknot.find(")
+
+
+def test_3dec_colliding_class_names_disambiguate_by_full_path() -> None:
+    # Zone exists in both block.zone and flowplane.zone; Vertex in flowplane.vertex
+    # and dfn.vertex; Contact in contact and block.contact. The shallower/earlier
+    # one keeps the bare object key, the other is registered under its full path.
+    index = DocumentationLoader.load_index(software="3dec")
+    objects = index["objects"]
+    assert "Zone" in objects and "itasca.flowplane.zone.Zone" in objects
+    assert "Vertex" in objects and "itasca.flowplane.vertex.Vertex" in objects
+    # Bare Zone resolves to the block.zone variant; the flowplane variant is reachable
+    # under its full path. Both keep correct, distinct method docs.
+    bare = DocumentationLoader.load_object("Zone", software="3dec")
+    flow = DocumentationLoader.load_object("itasca.flowplane.zone.Zone", software="3dec")
+    assert bare is not None and "block.zone" in bare["note"]
+    assert flow is not None and "flowplane.zone" in flow["note"]
+
+
+def test_3dec_python_proprietary_modules_isolated_from_pfc_flac() -> None:
+    threedec = set(DocumentationLoader.load_index(software="3dec")["modules"])
+    for sw in ("pfc", "flac"):
+        other = set(DocumentationLoader.load_index(software=sw)["modules"])
+        # None of the 3DEC-only families leak into the other engines.
+        assert not ({"block", "flowknot", "flowplane", "structure", "dfn"} & other)
+    assert {"block", "flowknot", "flowplane", "structure", "dfn", "contact"} <= threedec
 
 
 def test_3dec_command_families_are_isolated() -> None:

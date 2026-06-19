@@ -6,17 +6,32 @@ These are the same pages docs.itascacg.com mirrors online, and the same format
 the FLAC ``python_sdk_docs`` were derived from, so the output matches
 ``flac/python_sdk_docs/modules/zone/{module.json,Zone.json}`` field-for-field.
 
-For each requested module (dotted, e.g. ``block`` or ``block.contact``):
+For each module (dotted, e.g. ``block`` or ``block.contact``):
   - ``itasca.<dotted>.html``         -> ``modules/<path>/module.json``  (functions)
   - ``itasca.<dotted>.<Class>.html`` -> ``modules/<path>/<Class>.json`` (methods)
 
-Array modules (``blockarray``, ``block.contactarray``, ...) carry functions only,
-no class. ``<path>`` is the dotted name with dots turned into directory separators
-(matching how FLAC lays out ``interface.element`` under ``modules/interface/element``).
+A module may expose several classes (``structure`` -> Beam/Cable/Geogrid/Liner/
+Pile/Shell); class pages are discovered by filename (``itasca.<dotted>.<Cap>.html``,
+which naturally excludes the page-less ``*Iter`` helpers). Array modules carry
+functions only. ``<path>`` is the dotted name with dots turned into directory
+separators (matching how FLAC lays out ``interface.element``).
 
 Module functions and class methods are both registered in the engine index's
 ``quick_ref`` as full dotted paths (``itasca.block.Block.area``), which is how the
-loader/search consume them; the shared ``itasca`` core skeleton is preserved.
+loader/search consume them. The shared ``itasca`` core skeleton is preserved.
+
+Some bare class names collide across sub-modules (``Contact`` in both
+``itasca.contact`` and ``itasca.block.contact``; ``Zone`` in ``block.zone`` and
+``flowplane.zone``; ``Vertex`` in ``flowplane.vertex`` and ``dfn.vertex``).
+Modules are processed shallowest-first, so the most top-level class keeps the bare
+``objects`` key and the deeper one is registered under its full path key
+(``itasca.flowplane.zone.Zone``). browse_python_api resolves the full-path key
+when present (see _parse_api_path), so every class is reachable; quick_ref always
+uses unambiguous full paths regardless.
+
+The MODULES list is the 3DEC-specific namespace confirmed against the running
+bridge (``dir(itasca)`` and recursively ``dir(itasca.<mod>)``); ``util`` is
+intentionally skipped (interop *_Connection bridges, not modelling API).
 
 Usage:
     uv run python scripts/corpus/parse_3dec_python.py
@@ -33,10 +48,10 @@ RESOURCES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
 OUT_PY = RESOURCES / "3dec" / "python_sdk_docs"
 SRC_BASE = "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc"
 
-# 3DEC ``itasca.block`` family, confirmed against the running bridge namespace
-# (dir(itasca.block)). Each entry is a dotted module name; class presence is
-# detected from a sibling ``itasca.<dotted>.<Class>.html`` page.
-BLOCK_FAMILY = [
+# 3DEC engine-specific Python modules (dotted), confirmed against the running
+# bridge namespace. ``util`` is deliberately excluded.
+MODULES = [
+    # block family
     "block",
     "block.contact",
     "block.contactarray",
@@ -49,6 +64,30 @@ BLOCK_FAMILY = [
     "block.zone",
     "block.zonearray",
     "blockarray",
+    # flow knots / flow planes (hydro-mechanical coupling)
+    "flowknot",
+    "flowknotarray",
+    "flowplane",
+    "flowplane.vertex",
+    "flowplane.vertexarray",
+    "flowplane.zone",
+    "flowplane.zonearray",
+    "flowplanearray",
+    # structural elements
+    "structure",
+    "structure.link",
+    "structure.node",
+    # discrete fracture network
+    "dfn",
+    "dfn.fracture",
+    "dfn.inter",
+    "dfn.setinter",
+    "dfn.template",
+    "dfn.vertex",
+    # misc engine modules
+    "contact",
+    "history",
+    "fish",
 ]
 
 
@@ -116,9 +155,7 @@ def _parse_sig_block(block: str) -> dict[str, Any] | None:
     dd = re.search(r"<dd[^>]*>(.*?)</dd>", block, re.S)
     description = _norm(_text(dd.group(1))) if dd else ""
 
-    entry: dict[str, Any] = {"name": name}
-    entry["_sig_text"] = full  # internal; callers rewrite into a final signature
-    entry["description"] = description
+    entry: dict[str, Any] = {"name": name, "_sig_text": full, "description": description}
     if params:
         entry["parameters"] = params
     if ret:
@@ -126,36 +163,7 @@ def _parse_sig_block(block: str) -> dict[str, Any] | None:
     return entry
 
 
-def _functions(html_text: str, module_path: str) -> list[dict[str, Any]]:
-    """All module-level functions, signatures prefixed with ``itasca.<dotted>.``."""
-    out = []
-    for block in re.findall(r'<dl class="py function">.*?</dl>', html_text, re.S):
-        entry = _parse_sig_block(block)
-        if not entry:
-            continue
-        sig = entry.pop("_sig_text")
-        # Module function dt text already carries the ``itasca.<dotted>.`` prefix.
-        if not sig.startswith("itasca."):
-            sig = f"itasca.{module_path}.{sig}"
-        entry["signature"] = sig
-        out.append(_ordered_func(entry))
-    return out
-
-
-def _methods(html_text: str, inst: str) -> list[dict[str, Any]]:
-    """All class methods, signatures prefixed with the lowercase instance name."""
-    out = []
-    for block in re.findall(r'<dl class="py method">.*?</dl>', html_text, re.S):
-        entry = _parse_sig_block(block)
-        if not entry:
-            continue
-        sig = entry.pop("_sig_text")
-        entry["signature"] = f"{inst}.{sig}"
-        out.append(_ordered_func(entry))
-    return out
-
-
-def _ordered_func(entry: dict[str, Any]) -> dict[str, Any]:
+def _ordered(entry: dict[str, Any]) -> dict[str, Any]:
     """Reorder keys to match the FLAC corpus: name, signature, description, ..."""
     ordered: dict[str, Any] = {"name": entry["name"], "signature": entry["signature"]}
     if entry.get("description"):
@@ -165,6 +173,31 @@ def _ordered_func(entry: dict[str, Any]) -> dict[str, Any]:
     if "returns" in entry:
         ordered["returns"] = entry["returns"]
     return ordered
+
+
+def _functions(html_text: str, dotted: str) -> list[dict[str, Any]]:
+    out = []
+    for block in re.findall(r'<dl class="py function">.*?</dl>', html_text, re.S):
+        entry = _parse_sig_block(block)
+        if not entry:
+            continue
+        sig = entry.pop("_sig_text")
+        if not sig.startswith("itasca."):  # dt text already carries the module prefix
+            sig = f"itasca.{dotted}.{sig}"
+        entry["signature"] = sig
+        out.append(_ordered(entry))
+    return out
+
+
+def _methods(html_text: str, inst: str) -> list[dict[str, Any]]:
+    out = []
+    for block in re.findall(r'<dl class="py method">.*?</dl>', html_text, re.S):
+        entry = _parse_sig_block(block)
+        if not entry:
+            continue
+        entry["signature"] = f"{inst}.{entry.pop('_sig_text')}"
+        out.append(_ordered(entry))
+    return out
 
 
 def _group_key(name: str) -> str:
@@ -180,14 +213,41 @@ def _method_groups(methods: list[dict[str, Any]]) -> dict[str, str]:
     return {k: ", ".join(sorted(v)) for k, v in sorted(groups.items())}
 
 
-def main() -> None:
-    index = json.loads((OUT_PY / "index.json").read_text(encoding="utf-8"))
-    index["description"] = "3DEC Python SDK documentation index for quick lookup and LLM-assisted API discovery"
-    modules = index.setdefault("modules", {})
-    objects = index.setdefault("objects", {})
-    quick_ref = index.setdefault("quick_ref", {})
+def _class_names(dotted: str) -> list[str]:
+    """Class pages for a module: ``itasca.<dotted>.<Cap>.html`` (single segment)."""
+    prefix = f"itasca.{dotted}."
+    names = []
+    for f in DOC.glob(f"itasca.{dotted}.*.html"):
+        rest = f.name[len(prefix) : -len(".html")]
+        if "." not in rest and rest[:1].isupper():
+            names.append(rest)
+    return sorted(names)
 
-    for dotted in BLOCK_FAMILY:
+
+def _preserve_core() -> dict[str, Any]:
+    """Reset to just the shared itasca core skeleton (so re-runs drop stale entries)."""
+    existing = json.loads((OUT_PY / "index.json").read_text(encoding="utf-8"))
+    core_modules = {"itasca": existing["modules"]["itasca"]}
+    core_quick_ref = {k: v for k, v in existing.get("quick_ref", {}).items() if str(v).startswith("_common/")}
+    return {
+        "version": existing.get("version", "1.0"),
+        "description": "3DEC Python SDK documentation index for quick lookup and LLM-assisted API discovery",
+        "modules": core_modules,
+        "objects": {},
+        "quick_ref": core_quick_ref,
+    }
+
+
+def main() -> None:
+    index = _preserve_core()
+    modules = index["modules"]
+    objects = index["objects"]
+    quick_ref = index["quick_ref"]
+
+    # Shallowest-first: a top-level class keeps the bare ``objects`` key; deeper
+    # collisions fall back to a full-path key.
+    counts = {"mod": 0, "cls": 0}
+    for dotted in sorted(MODULES, key=lambda m: (m.count("."), m)):
         mod_html = (DOC / f"itasca.{dotted}.html").read_text(encoding="utf-8")
         rel_dir = Path("modules") / dotted.replace(".", "/")
         out_dir = OUT_PY / rel_dir
@@ -202,60 +262,59 @@ def main() -> None:
             "source_url": f"{SRC_BASE}/itasca.{dotted}.html",
             "functions": funcs,
         }
-        (out_dir / "module.json").write_text(
-            json.dumps(module_doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-        )
+        (out_dir / "module.json").write_text(json.dumps(module_doc, indent=2, ensure_ascii=False) + "\n", "utf-8")
 
         module_file = f"3dec/python_sdk_docs/{rel_dir.as_posix()}/module.json"
-        modules[dotted] = {
-            "description": mod_desc,
-            "file": module_file,
-            "functions": [f["name"] for f in funcs],
-        }
+        modules[dotted] = {"description": mod_desc, "file": module_file, "functions": [f["name"] for f in funcs]}
         for f in funcs:
             quick_ref[f"itasca.{dotted}.{f['name']}"] = f"{module_file}#{f['name']}"
+        counts["mod"] += 1
 
-        # Class page: last dotted segment, capitalised (block.zone -> Zone).
-        class_name = dotted.split(".")[-1].capitalize()
-        class_path = DOC / f"itasca.{dotted}.{class_name}.html"
-        if class_path.exists():
-            cls_html = class_path.read_text(encoding="utf-8")
+        class_notes = []
+        for class_name in _class_names(dotted):
+            cls_html = (DOC / f"itasca.{dotted}.{class_name}.html").read_text(encoding="utf-8")
             methods = _methods(cls_html, class_name.lower())
             cls_desc = _first_paragraph(cls_html) or f"{class_name} object instance in itasca.{dotted}."
+            note = f"Do not instantiate directly; use itasca.{dotted} module functions."
             class_doc = {
                 "class": class_name,
                 "description": cls_desc,
                 "source_url": f"{SRC_BASE}/itasca.{dotted}.{class_name}.html",
-                "note": f"Do not instantiate directly; use itasca.{dotted} module functions.",
+                "note": note,
                 "method_groups": _method_groups(methods),
                 "methods": methods,
             }
             (out_dir / f"{class_name}.json").write_text(
-                json.dumps(class_doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+                json.dumps(class_doc, indent=2, ensure_ascii=False) + "\n", "utf-8"
             )
 
             class_file = f"3dec/python_sdk_docs/{rel_dir.as_posix()}/{class_name}.json"
-            objects[class_name] = {
+            obj_entry = {
                 "description": cls_desc,
                 "file": class_file,
-                "note": class_doc["note"],
+                "note": note,
                 "method_groups": class_doc["method_groups"],
             }
+            # First (shallowest) wins the bare key; later collisions go full-path.
+            bare_taken = class_name in objects and objects[class_name]["file"] != class_file
+            obj_key = f"itasca.{dotted}.{class_name}" if bare_taken else class_name
+            objects[obj_key] = obj_entry
             for m in methods:
                 quick_ref[f"itasca.{dotted}.{class_name}.{m['name']}"] = f"{class_file}#{m['name']}"
+            counts["cls"] += 1
+            class_notes.append(f"{class_name}({len(methods)}){'*' if bare_taken else ''}")
 
-            print(f"  {dotted:<26} {len(funcs):>3} funcs  +  {class_name} ({len(methods)} methods)")
-        else:
-            print(f"  {dotted:<26} {len(funcs):>3} funcs")
+        suffix = "  +  " + ", ".join(class_notes) if class_notes else ""
+        print(f"  {dotted:<26} {len(funcs):>3} funcs{suffix}")
 
-    # Stable ordering for a clean diff.
     index["modules"] = {k: modules[k] for k in sorted(modules)}
     index["objects"] = {k: objects[k] for k in sorted(objects)}
     index["quick_ref"] = {k: quick_ref[k] for k in sorted(quick_ref)}
+    (OUT_PY / "index.json").write_text(json.dumps(index, indent=2, ensure_ascii=False) + "\n", "utf-8")
 
-    (OUT_PY / "index.json").write_text(json.dumps(index, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"\nWrote {OUT_PY / 'index.json'}")
-    print(f"  modules: {len(index['modules'])}  objects: {len(index['objects'])}  quick_ref: {len(index['quick_ref'])}")
+    print(f"  modules: {counts['mod']} (+itasca core)   object classes: {counts['cls']}   quick_ref: {len(quick_ref)}")
+    print("  ('*' = bare class-name collision, registered under its full-path key)")
 
 
 if __name__ == "__main__":

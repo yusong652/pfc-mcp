@@ -107,14 +107,24 @@ def _parse_api_path(api: str, software: str) -> dict[str, Any]:
         module_path = ".".join(module_parts)
         object_name = parts[object_index]
 
-        actual_object_name = object_name
-        if object_name not in objects:
+        # Disambiguate classes whose bare name collides across sub-modules
+        # (e.g. itasca.block.zone.Zone vs itasca.flowplane.zone.Zone). When a
+        # module-qualified key exists in the index it wins over the bare name;
+        # otherwise behaviour is unchanged (engines without collisions never
+        # carry qualified keys, so this always falls back to the bare lookup).
+        qualified = f"{module_path}.{object_name}" if module_path else object_name
+        if qualified in objects:
+            actual_object_name = qualified
+        elif object_name in objects:
+            actual_object_name = object_name
+        else:
             if not _is_documented_object_type(object_name, objects):
                 return {
                     "type": "error",
                     "error": f"Object '{object_name}' not found",
                     "fallback_path": module_path,
                 }
+            actual_object_name = object_name
 
         if len(parts) == object_index + 1:
             return {

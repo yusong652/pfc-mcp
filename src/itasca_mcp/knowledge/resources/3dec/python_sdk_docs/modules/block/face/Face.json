@@ -1,0 +1,354 @@
+{
+  "class": "Face",
+  "description": "Face object instance in itasca.block.face.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.face.Face.html",
+  "note": "Do not instantiate directly; use itasca.block.face module functions.",
+  "method_groups": {
+    "area": "area",
+    "extra": "extra, set_extra",
+    "fblock": "fblock",
+    "fid": "fid",
+    "flowplane": "flowplane",
+    "gp": "gp",
+    "gridpoints": "gridpoints",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "hostblock": "hostblock",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_excavated, is_hidden, is_original, is_planar",
+    "jset": "jset",
+    "ngp": "ngp",
+    "normal": "normal, normal_x, normal_y, normal_z",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "valid": "valid",
+    "zone": "zone"
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "face.area() -> float",
+      "description": "Get the area of a face.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "face.extra(slot: int) -> any",
+      "description": "Get the face extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "fblock",
+      "signature": "face.fblock() -> blockptr",
+      "description": "Get the face block associated with this face.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "fid",
+      "signature": "face.fid() -> int",
+      "description": "Get the DFN fracture ID for this face.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "flowplane",
+      "signature": "face.flowplane() -> flowplanptr",
+      "description": "Get the fluid flow plane associated with this face.",
+      "returns": {
+        "type": "flowplanptr"
+      }
+    },
+    {
+      "name": "gp",
+      "signature": "face.gp(int) -> gridpointptr",
+      "description": "Get the index of vertex number (int) of a face.",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "gridpointptr"
+      }
+    },
+    {
+      "name": "gridpoints",
+      "signature": "face.gridpoints() -> gp list",
+      "description": "Get a list of gridpoints that make up this face.",
+      "returns": {
+        "type": "gp list"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "face.group([slot: str or int]) -> str",
+      "description": "Get the face group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "face.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the face. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "face.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this face is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "hostblock",
+      "signature": "face.hostblock() -> blockptr",
+      "description": "Get the block to which a face belongs.",
+      "returns": {
+        "type": "blockptr"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "face.id() -> int",
+      "description": "Get the face id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "face.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the face is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "face.index() -> int",
+      "description": "Get the index (offset) for the face.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "face.is_excavated() -> bool",
+      "description": "Get the excavated status of the host block.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "face.is_hidden() -> bool",
+      "description": "Get the hidden state of the host block.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_original",
+      "signature": "face.is_original() -> bool",
+      "description": "Get the original block face indicator.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_planar",
+      "signature": "face.is_planar() -> bool",
+      "description": "Get the planar flag for a face.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "jset",
+      "signature": "face.jset() -> int",
+      "description": "Get the joint set ID for this face.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "ngp",
+      "signature": "face.ngp() -> int",
+      "description": "Get the number of vertices (gridpoints) on a face.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "normal",
+      "signature": "face.normal() -> vec",
+      "description": "Get the face face normal vector (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "normal_x",
+      "signature": "face.normal_x() -> float",
+      "description": "Get the x-component of the face face normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_y",
+      "signature": "face.normal_y() -> float",
+      "description": "Get the y-component of the face face normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "normal_z",
+      "signature": "face.normal_z() -> float",
+      "description": "Get the z-component of the face face normal vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "face.pos() -> vec",
+      "description": "Get the face location (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "face.pos_x() -> float",
+      "description": "Get the x-component of the face location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "face.pos_y() -> float",
+      "description": "Get the y-component of the face location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "face.pos_z() -> float",
+      "description": "Get the z-component of the face location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "face.set_extra(slot: int, value: any) -> None",
+      "description": "Set the face extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "face.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the face group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "face.valid() -> bool",
+      "description": "Returns True if this face is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "zone",
+      "signature": "face.zone() -> zoneptr",
+      "description": "Get the index of that zone that contains the given face.",
+      "returns": {
+        "type": "zoneptr"
+      }
+    }
+  ]
+}

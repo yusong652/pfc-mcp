@@ -1,0 +1,78 @@
+{
+  "name": "history-workflow",
+  "dimension": "3D",
+  "full_name": "History Sampling & Monitoring Workflow",
+  "description": "Histories sample a single quantity at a common interval during cycling — used for convergence checks, load/displacement curves, joint force/slip response, pore-pressure and dynamic traces. 3DEC samples from blocks, block contacts (joints), the global model, FISH symbols, and structural elements; results are listed/plotted (chart-history) and exported as time/step series.",
+  "primary_commands": [
+    "block history",
+    "block contact history",
+    "model history",
+    "fish history",
+    "history interval",
+    "history list",
+    "history export",
+    "history delete",
+    "history purge",
+    "history rename"
+  ],
+  "sampling_targets": [
+    {
+      "command": "block history <field>",
+      "samples": "Deformable-block zone / gridpoint field at the nearest location — stress, displacement, velocity, strain-rate, pore-pressure, temperature, etc.",
+      "field_names": "Same vocabulary as plot-items: see references/plot-items 'block contour' / 'bzone contour'."
+    },
+    {
+      "command": "block contact history <field>",
+      "samples": "Joint (sub-contact) response — force-normal, force-shear, stress-normal, stress-shear, displacement-normal, displacement-shear[-x/-y/-z], area, *-sum aggregates.",
+      "field_names": "force-normal, force-shear, force-normal-sum, force-shear-sum, stress-normal, stress-shear[-x/-y/-z], displacement-normal, displacement-shear[-maximum/-x/-y/-z], velocity-shear[-x/-y/-z], area, area-sum."
+    },
+    {
+      "command": "model history <type>",
+      "samples": "Global scalars — mechanical (unbalanced force ratio), energy, timestep, damping, dynamic time, creep, fluid, thermal.",
+      "field_names": "creep, damping, dynamic, energy, fluid, mechanical, thermal, timestep."
+    },
+    {
+      "command": "fish history <symbol>",
+      "samples": "The value of a FISH symbol each interval — for custom/derived monitoring quantities.",
+      "field_names": "Any FISH symbol name."
+    }
+  ],
+  "management_keywords": [
+    {
+      "keyword": "interval",
+      "description": "Set the cycle/step interval at which all histories sample.",
+      "syntax": "history interval <n>"
+    },
+    {
+      "keyword": "list",
+      "description": "List defined histories (ids, sampled quantity, location).",
+      "syntax": "history list"
+    },
+    {
+      "keyword": "export",
+      "description": "Write history series to a table or text file (for validation/plotting).",
+      "syntax": "history export <id...> [table '<name>' | file '<name>']"
+    },
+    {
+      "keyword": "delete",
+      "description": "Delete specific histories by id.",
+      "syntax": "history delete <id...>"
+    },
+    {
+      "keyword": "purge",
+      "description": "Discard stored samples while keeping the history definitions.",
+      "syntax": "history purge"
+    },
+    {
+      "keyword": "rename",
+      "description": "Rename a history.",
+      "syntax": "history rename <id> '<name>'"
+    }
+  ],
+  "notes": [
+    "Sampling sub-forms 'block gridpoint history <field>' and 'structure history <type> ...' (beam/cable/liner/pile/shell/geogrid/node/link) also exist (bridge-probed); SELs are not standalone command-corpus pages.",
+    "Field/quantity names for block sampling are the same set documented under plot-items contour — query references/plot-items instead of duplicating them here.",
+    "Plot a history with 'plot item create chart-history'."
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/common/kernel/doc/manual/history_manual/history.html"
+}

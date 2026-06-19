@@ -1,0 +1,61 @@
+{
+  "name": "gridpoint-and-block-fixity",
+  "dimension": "3D",
+  "full_name": "Gridpoint and Rigid-Block Fixity / Prescribed Motion",
+  "description": "Constrain or drive motion at gridpoints (deformable blocks) with 'block gridpoint apply', and at rigid blocks with 'block fix' / 'block apply'. Velocity/force here are the workhorse mechanical BCs.",
+  "primary_commands": [
+    "block gridpoint apply",
+    "block gridpoint apply-remove",
+    "block fix",
+    "block apply"
+  ],
+  "condition_families": [
+    {
+      "family": "gridpoint velocity (prescribed)",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z",
+        "velocity-normal"
+      ],
+      "notes": [
+        "Applying a velocity fixes that component; use 0 to pin a boundary."
+      ]
+    },
+    {
+      "family": "gridpoint force / reaction",
+      "keywords": [
+        "force",
+        "force-x",
+        "force-y",
+        "force-z",
+        "reaction",
+        "reaction-x",
+        "reaction-y",
+        "reaction-z"
+      ],
+      "notes": [
+        "'reaction' reports/holds the reaction force at constrained gridpoints."
+      ]
+    },
+    {
+      "family": "rigid-block fixity",
+      "keywords": [
+        "velocity",
+        "velocity-x",
+        "velocity-y",
+        "velocity-z",
+        "rotation",
+        "rotation-x",
+        "rotation-y",
+        "rotation-z"
+      ],
+      "notes": [
+        "'block fix velocity|rotation ...' fixes rigid-block translation/rotation;",
+        "'block apply velocity ...' drives rigid-block translation."
+      ]
+    }
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/boundaryconditions.html"
+}

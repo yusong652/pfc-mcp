@@ -1,0 +1,100 @@
+{
+  "module": "itasca.block.contactarray",
+  "description": "Array interface for 3DEC contacts.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.contactarray.html",
+  "functions": [
+    {
+      "name": "extra",
+      "signature": "itasca.block.contactarray.extra(slot: int) -> array float{contact} or float{contact,3}",
+      "description": "Get the contact extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{contact} or float{contact,3}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.block.contactarray.ids() -> array int{contact}",
+      "description": "Get the contact ids as an array.",
+      "returns": {
+        "type": "array int{contact}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.block.contactarray.in_group(group_name: str, slot='default') -> array bool{ncontact}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{ncontact}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.block.contactarray.set_extra(slot: int, data: array float{contact} or float{contact, 3}) -> None",
+      "description": "Set the contact extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{contact} or float{contact",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.block.contactarray.set_group(membership: array bool{ncontact}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{ncontact}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

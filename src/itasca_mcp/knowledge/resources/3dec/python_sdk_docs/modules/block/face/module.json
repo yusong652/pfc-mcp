@@ -1,0 +1,47 @@
+{
+  "module": "itasca.block.face",
+  "description": "Functions and classes for working with 3DEC gridpoints.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.face.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.block.face.count() -> int",
+      "description": "Get the number of face.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.block.face.find(id: int) -> Face object",
+      "description": "Get the face object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Face object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.block.face.list() -> Face iterator object",
+      "description": "Get a face iterator object.",
+      "returns": {
+        "type": "Face iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.block.face.maxid() -> int",
+      "description": "Get the maximum face ID.",
+      "returns": {
+        "type": "int"
+      }
+    }
+  ]
+}

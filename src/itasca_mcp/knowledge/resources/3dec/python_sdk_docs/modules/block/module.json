@@ -1,0 +1,77 @@
+{
+  "module": "itasca.block",
+  "description": "Functions and classes for working with 3DEC blocks.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.html",
+  "functions": [
+    {
+      "name": "containing",
+      "signature": "itasca.block.containing(point: vec3) -> Block object",
+      "description": "Get the zone that contains point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec3",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Block object"
+      }
+    },
+    {
+      "name": "count",
+      "signature": "itasca.block.count() -> int",
+      "description": "Get the number of blocks.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.block.find(id: int) -> Block object",
+      "description": "Get the block object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Block object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.block.list() -> Block iterator object",
+      "description": "Get a block iterator object.",
+      "returns": {
+        "type": "Block iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.block.maxid() -> int",
+      "description": "Get the maximum block ID.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "near",
+      "signature": "itasca.block.near(point: vec) -> Block object",
+      "description": "Find the closest block to a point.",
+      "parameters": [
+        {
+          "name": "point",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Block object"
+      }
+    }
+  ]
+}

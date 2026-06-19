@@ -1,0 +1,129 @@
+{
+  "model": "softening-mohr",
+  "full_name": "Softening-Healing Mohr-Coulomb Joint Model",
+  "search_keywords": [
+    "softening",
+    "mohr",
+    "healing",
+    "coulomb",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "stiffness-shear",
+    "friction",
+    "friction-residual",
+    "cohesion",
+    "cohesion-residual",
+    "dilation",
+    "dilation-zero",
+    "tension",
+    "tension-residual",
+    "dc",
+    "alpha",
+    "friction-current",
+    "slip"
+  ],
+  "description": "The Mohr-Coulomb joint model has the following deficiencies when used to model seismicity.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'softening-mohr' joint constitutive model. Assign the model with 'block contact jmodel assign softening-mohr [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel softening-mohr]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction",
+          "symbol": "φ",
+          "description": "friction angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-residual",
+          "symbol": "φ_res",
+          "description": "residual friction angle (DEGREES). Defaults to phi.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion",
+          "symbol": "c",
+          "description": "cohesion (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "cohesion-residual",
+          "symbol": "c_res",
+          "description": "residual cohesion (STRESS). Defaults to 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation",
+          "symbol": "ψ",
+          "description": "dilation angle (DEGREES)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dilation-zero",
+          "symbol": "u_cs",
+          "description": "shear displacement at which dilation stops (LENGTH). Default is infinity",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension",
+          "symbol": "T_f",
+          "description": "tensile strength (STRESS)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "tension-residual",
+          "symbol": "T_f^res",
+          "description": "residual tensile strength (STRESS). Default is 0.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "dc",
+          "symbol": "D_c",
+          "description": "critical slip distance (LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "alpha",
+          "symbol": "α",
+          "description": "exponent that dictates the severity of non-linear stress drop",
+          "type": "FLT"
+        },
+        {
+          "keyword": "healing",
+          "symbol": "",
+          "description": "boolean to indicate if healing is on or off (default is on)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "friction-current",
+          "symbol": "φ_current",
+          "description": "current friction angle (DEGREES). Read only.",
+          "type": "FLT"
+        },
+        {
+          "keyword": "slip",
+          "symbol": "u_s^p",
+          "description": "plastic slip (LENGTH). Read only.",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/softhealmc/softhealmc.html",
+  "usage": "block contact jmodel assign softening-mohr ; block contact property <prop> <value> [range jmodel softening-mohr]"
+}

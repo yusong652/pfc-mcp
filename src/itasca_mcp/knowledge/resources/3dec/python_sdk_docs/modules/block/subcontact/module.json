@@ -1,0 +1,47 @@
+{
+  "module": "itasca.block.subcontact",
+  "description": "Functions and classes for working with block subcontact.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.subcontact.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.block.subcontact.count() -> int",
+      "description": "Get the number of Subcontact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.block.subcontact.find(id: int) -> Gridpoint object",
+      "description": "Get the Subcontact object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Gridpoint object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.block.subcontact.list() -> Subcontact iterator object",
+      "description": "Get a Subcontact iterator object.",
+      "returns": {
+        "type": "Subcontact iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.block.subcontact.maxid() -> int",
+      "description": "Get the maximum Subcontact ID.",
+      "returns": {
+        "type": "int"
+      }
+    }
+  ]
+}

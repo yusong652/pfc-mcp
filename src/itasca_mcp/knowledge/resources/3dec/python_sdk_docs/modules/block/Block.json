@@ -1,0 +1,742 @@
+{
+  "class": "Block",
+  "description": "Block object instance in itasca.block.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.Block.html",
+  "note": "Do not instantiate directly; use itasca.block module functions.",
+  "method_groups": {
+    "area": "area",
+    "contacts": "contacts",
+    "density": "density, set_density",
+    "dsf": "dsf",
+    "extra": "extra, set_extra",
+    "faces": "faces",
+    "fix": "set_fix",
+    "force": "force_app, force_app_x, force_app_y, force_app_z, force_unbal, force_unbal_x, force_unbal_y, force_unbal_z, set_force_app, set_force_app_x, set_force_app_y, set_force_app_z",
+    "gridpoints": "gridpoints",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "hidden": "set_hidden",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_excavated, is_fix, is_hidden, is_rigid",
+    "mass": "mass",
+    "master": "master_slave",
+    "moi": "moi, moi_x, moi_y, moi_z",
+    "moment": "moment, moment_x, moment_y, moment_z",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "rvel": "rvel, rvel_x, rvel_y, rvel_z, set_rvel, set_rvel_x, set_rvel_y, set_rvel_z",
+    "valid": "valid",
+    "velocity": "set_velocity, set_velocity_x, set_velocity_y, set_velocity_z, velocity, velocity_x, velocity_y, velocity_z",
+    "vol": "vol",
+    "zones": "zones"
+  },
+  "methods": [
+    {
+      "name": "area",
+      "signature": "block.area() -> float",
+      "description": "Get the surface area of a block.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "contacts",
+      "signature": "block.contacts() -> tuple of Contact objects",
+      "description": "Get contact list of a block.",
+      "returns": {
+        "type": "tuple of Contact objects"
+      }
+    },
+    {
+      "name": "density",
+      "signature": "block.density() -> float",
+      "description": "Get the block density.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "dsf",
+      "signature": "block.dsf() -> float",
+      "description": "Get the block density scaling factor.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "block.extra(slot: int) -> any",
+      "description": "Get the block extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "faces",
+      "signature": "block.faces(bool) -> tuple of faces",
+      "description": "Get face list of a block.",
+      "parameters": [
+        {
+          "name": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "tuple of faces"
+      }
+    },
+    {
+      "name": "force_app",
+      "signature": "block.force_app() -> vec",
+      "description": "Get the block block appliad force (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_app_x",
+      "signature": "block.force_app_x() -> float",
+      "description": "Get the x-component of the block block appliad force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_app_y",
+      "signature": "block.force_app_y() -> float",
+      "description": "Get the y-component of the block block appliad force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_app_z",
+      "signature": "block.force_app_z() -> float",
+      "description": "Get the z-component of the block block appliad force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal",
+      "signature": "block.force_unbal() -> vec",
+      "description": "Get the block block unbalance force (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_unbal_x",
+      "signature": "block.force_unbal_x() -> float",
+      "description": "Get the x-component of the block block unbalance force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal_y",
+      "signature": "block.force_unbal_y() -> float",
+      "description": "Get the y-component of the block block unbalance force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_unbal_z",
+      "signature": "block.force_unbal_z() -> float",
+      "description": "Get the z-component of the block block unbalance force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "gridpoints",
+      "signature": "block.gridpoints() -> tuple of Gridpoint objects",
+      "description": "Get a tuple the gridpoint objects which are part of this block.",
+      "returns": {
+        "type": "tuple of Gridpoint objects"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "block.group([slot: str or int]) -> str",
+      "description": "Get the block group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "block.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the block. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "block.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this block is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "block.id() -> int",
+      "description": "Get the block id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "block.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the block is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "block.index() -> int",
+      "description": "Get the block index.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "block.is_excavated() -> bool",
+      "description": "Check if the block is excavated.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_fix",
+      "signature": "block.is_fix() -> bool",
+      "description": "Check if the block is fixed.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "block.is_hidden() -> bool",
+      "description": "Get hidden flag of a block.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_rigid",
+      "signature": "block.is_rigid() -> bool",
+      "description": "Get rigid flag of a block.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "mass",
+      "signature": "block.mass() -> float",
+      "description": "Get the block mass.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "master_slave",
+      "signature": "block.master_slave() -> int",
+      "description": "Get master_slave flag of a block.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "moi",
+      "signature": "block.moi() -> vec",
+      "description": "Get the block block inertia (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "moi_x",
+      "signature": "block.moi_x() -> float",
+      "description": "Get the x-component of the block block inertia.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "moi_y",
+      "signature": "block.moi_y() -> float",
+      "description": "Get the y-component of the block block inertia.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "moi_z",
+      "signature": "block.moi_z() -> float",
+      "description": "Get the z-component of the block block inertia.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "moment",
+      "signature": "block.moment() -> vec",
+      "description": "Get the block block moment (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "moment_x",
+      "signature": "block.moment_x() -> float",
+      "description": "Get the x-component of the block block moment.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "moment_y",
+      "signature": "block.moment_y() -> float",
+      "description": "Get the y-component of the block block moment.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "moment_z",
+      "signature": "block.moment_z() -> float",
+      "description": "Get the z-component of the block block moment.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "block.pos() -> vec",
+      "description": "Get the block block position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "block.pos_x() -> float",
+      "description": "Get the x-component of the block block position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "block.pos_y() -> float",
+      "description": "Get the y-component of the block block position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "block.pos_z() -> float",
+      "description": "Get the z-component of the block block position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "rvel",
+      "signature": "block.rvel() -> vec",
+      "description": "Get the block rotational veolcity (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "rvel_x",
+      "signature": "block.rvel_x() -> float",
+      "description": "Get the x-component of the block rotational veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "rvel_y",
+      "signature": "block.rvel_y() -> float",
+      "description": "Get the y-component of the block rotational veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "rvel_z",
+      "signature": "block.rvel_z() -> float",
+      "description": "Get the z-component of the block rotational veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_density",
+      "signature": "block.set_density(float) -> float",
+      "description": "Set the block density.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "block.set_extra(slot: int, value: any) -> None",
+      "description": "Set the block extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_fix",
+      "signature": "block.set_fix(bool) -> bool",
+      "description": "Set the block.",
+      "parameters": [
+        {
+          "name": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "set_force_app",
+      "signature": "block.set_force_app(value: vec) -> None",
+      "description": "Set the block block appliad force (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_app_x",
+      "signature": "block.set_force_app_x(value: float) -> None",
+      "description": "Set the x-component of the block block appliad force.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_app_y",
+      "signature": "block.set_force_app_y(value: float) -> None",
+      "description": "Set the y-component of the block block appliad force.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_app_z",
+      "signature": "block.set_force_app_z(value: float) -> None",
+      "description": "Set the z-component of the block block appliad force.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "block.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the block group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_hidden",
+      "signature": "block.set_hidden(bool) -> bool",
+      "description": "Set hidden flag of a block.",
+      "parameters": [
+        {
+          "name": "bool",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "set_rvel",
+      "signature": "block.set_rvel(value: vec) -> None",
+      "description": "Set the block rotational veolcity (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_rvel_x",
+      "signature": "block.set_rvel_x(value: float) -> None",
+      "description": "Set the x-component of the block rotational veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_rvel_y",
+      "signature": "block.set_rvel_y(value: float) -> None",
+      "description": "Set the y-component of the block rotational veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_rvel_z",
+      "signature": "block.set_rvel_z(value: float) -> None",
+      "description": "Set the z-component of the block rotational veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_velocity",
+      "signature": "block.set_velocity(value: vec) -> None",
+      "description": "Set the block block veolcity (vector).",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "vec",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_velocity_x",
+      "signature": "block.set_velocity_x(value: float) -> None",
+      "description": "Set the x-component of the block block veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_velocity_y",
+      "signature": "block.set_velocity_y(value: float) -> None",
+      "description": "Set the y-component of the block block veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_velocity_z",
+      "signature": "block.set_velocity_z(value: float) -> None",
+      "description": "Set the z-component of the block block veolcity.",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "block.valid() -> bool",
+      "description": "Returns True if this block is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "velocity",
+      "signature": "block.velocity() -> vec",
+      "description": "Get the block block veolcity (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "velocity_x",
+      "signature": "block.velocity_x() -> float",
+      "description": "Get the x-component of the block block veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "velocity_y",
+      "signature": "block.velocity_y() -> float",
+      "description": "Get the y-component of the block block veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "velocity_z",
+      "signature": "block.velocity_z() -> float",
+      "description": "Get the z-component of the block block veolcity.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vol",
+      "signature": "block.vol() -> float",
+      "description": "Get the volume of a block.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "zones",
+      "signature": "block.zones() -> tuple of block zones",
+      "description": "Get zone list of a block.",
+      "returns": {
+        "type": "tuple of block zones"
+      }
+    }
+  ]
+}

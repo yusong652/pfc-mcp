@@ -1,0 +1,37 @@
+{
+  "model": "elastic",
+  "full_name": "Elastic Joint Model",
+  "search_keywords": [
+    "elastic",
+    "joint",
+    "constitutive",
+    "jmodel",
+    "subcontact",
+    "stiffness-normal",
+    "stiffness-shear"
+  ],
+  "description": "The Elastic model provides a linear representation of joint stiffness (normal and shear). There is no yield. Elastic joints are infinitely strong.",
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "Joint properties for the 'elastic' joint constitutive model. Assign the model with 'block contact jmodel assign elastic [range ...]', then set these with 'block contact property <keyword> <value> [range jmodel elastic]'.",
+      "properties": [
+        {
+          "keyword": "stiffness-normal",
+          "symbol": "k_n",
+          "description": "joint normal stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        },
+        {
+          "keyword": "stiffness-shear",
+          "symbol": "k_s",
+          "description": "joint shear stiffness (STRESS/LENGTH)",
+          "type": "FLT"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory/elastic/elastic.html",
+  "note": "Elastic joints have no yield (infinitely strong); the only properties are the normal and shear stiffnesses.",
+  "usage": "block contact jmodel assign elastic ; block contact property <prop> <value> [range jmodel elastic]"
+}

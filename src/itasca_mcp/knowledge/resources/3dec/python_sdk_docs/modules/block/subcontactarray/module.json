@@ -1,0 +1,100 @@
+{
+  "module": "itasca.block.subcontactarray",
+  "description": "Array interface for 3DEC contacts.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.subcontactarray.html",
+  "functions": [
+    {
+      "name": "extra",
+      "signature": "itasca.block.subcontactarray.extra(slot: int) -> array float{subcontact} or float{subcontact,3}",
+      "description": "Get the subcontact extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{subcontact} or float{subcontact,3}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.block.subcontactarray.ids() -> array int{subcontact}",
+      "description": "Get the subcontact ids as an array.",
+      "returns": {
+        "type": "array int{subcontact}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.block.subcontactarray.in_group(group_name: str, slot='default') -> array bool{nsubcontact}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{nsubcontact}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.block.subcontactarray.set_extra(slot: int, data: array float{subcontact} or float{subcontact, 3}) -> None",
+      "description": "Set the subcontact extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{subcontact} or float{subcontact",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.block.subcontactarray.set_group(membership: array bool{nsubcontact}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{nsubcontact}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

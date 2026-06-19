@@ -1,0 +1,37 @@
+{
+  "name": "velocity-and-state-reset",
+  "dimension": "3D",
+  "full_name": "Velocity and Displacement / State Reset",
+  "description": "Initialize or reset block and gridpoint velocities and accumulated displacements between staged-loading phases, so reported displacements measure only the current stage.",
+  "primary_commands": [
+    "block initialize",
+    "block gridpoint initialize"
+  ],
+  "methods": [
+    {
+      "name": "reset velocities",
+      "commands": [
+        "block initialize velocity 0 0 0",
+        "block initialize rvelocity 0 0 0",
+        "block gridpoint initialize velocity 0 0 0"
+      ],
+      "notes": [
+        "Rigid blocks carry block velocity / rvelocity; deformable blocks carry gridpoint velocity."
+      ]
+    },
+    {
+      "name": "reset accumulated displacement",
+      "commands": [
+        "block gridpoint initialize displacement 0 0 0",
+        "block gridpoint initialize displacement-x 0"
+      ],
+      "notes": [
+        "Zeroing displacement does not move the mesh; it only resets the accumulator."
+      ]
+    }
+  ],
+  "validation_checks": [
+    "FISH: block.gridpoint.disp(gp) / block.gridpoint.vel(gp) read back zero after reset"
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/initialconditions.html"
+}

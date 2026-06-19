@@ -187,6 +187,99 @@ async def test_3dec_python_api_exposes_itasca_core() -> None:
     assert any(e.get("api_path") == "itasca.command" for e in data["entries"])
 
 
+# --- 3DEC engine-specific Python API ----------------------------------------
+# The full 3DEC proprietary namespace (block / flowknot / flowplane / structure /
+# dfn / contact / history / fish) is parsed from the local 9.0 Sphinx python docs
+# by scripts/corpus/parse_3dec_python.py. These modules are 3DEC-only (no PFC/FLAC
+# equivalent) and must not leak across engines.
+
+
+def test_3dec_block_module_and_class_resolve() -> None:
+    # Module function.
+    find = DocumentationLoader.load_api_doc("itasca.block.find", software="3dec")
+    assert find is not None
+    assert find["signature"].startswith("itasca.block.find(")
+    # Class method via its full official path.
+    vol = DocumentationLoader.load_api_doc("itasca.block.Block.vol", software="3dec")
+    assert vol is not None
+    assert vol["signature"] == "block.vol() -> float"
+
+
+def test_3dec_block_submodule_class_resolves() -> None:
+    # Sub-namespace class (itasca.block.subcontact.Subcontact) resolves end to end.
+    fs = DocumentationLoader.load_api_doc("itasca.block.subcontact.Subcontact.force_shear", software="3dec")
+    assert fs is not None
+    assert "force_shear" in fs["signature"]
+
+
+def test_3dec_block_objects_registered_in_index() -> None:
+    index = DocumentationLoader.load_index(software="3dec")
+    assert "block" in index["modules"]
+    assert "Block" in index["objects"]
+    # The Block module exposes exactly the six confirmed namespace functions.
+    assert set(index["modules"]["block"]["functions"]) == {
+        "containing",
+        "count",
+        "find",
+        "list",
+        "maxid",
+        "near",
+    }
+
+
+def test_3dec_python_block_family_is_engine_isolated() -> None:
+    # block family is 3DEC-only: it must not appear in PFC/FLAC python indices.
+    for sw in ("pfc", "flac"):
+        assert "block" not in DocumentationLoader.load_index(software=sw)["modules"]
+
+
+def test_3dec_python_search_finds_block_method() -> None:
+    # API-path style query (a documented use case) ranks the exact method first.
+    hits = APISearch.search("Block.vol", top_k=5, software="3dec")
+    assert hits and hits[0].document.name == "itasca.block.Block.vol"
+
+
+def test_3dec_structure_exposes_all_element_classes() -> None:
+    # itasca.structure carries six element classes directly (no PFC/FLAC analogue).
+    index = DocumentationLoader.load_index(software="3dec")
+    for cls in ("Beam", "Cable", "Geogrid", "Liner", "Pile", "Shell"):
+        assert cls in index["objects"], cls
+    pile = DocumentationLoader.load_api_doc("itasca.structure.Pile.force", software="3dec")
+    assert pile is not None and pile["signature"].startswith("pile.force(")
+
+
+def test_3dec_dfn_and_flow_modules_resolve() -> None:
+    frac = DocumentationLoader.load_api_doc("itasca.dfn.DFN.create_fracture", software="3dec")
+    assert frac is not None
+    fk = DocumentationLoader.load_api_doc("itasca.flowknot.find", software="3dec")
+    assert fk is not None and fk["signature"].startswith("itasca.flowknot.find(")
+
+
+def test_3dec_colliding_class_names_disambiguate_by_full_path() -> None:
+    # Zone exists in both block.zone and flowplane.zone; Vertex in flowplane.vertex
+    # and dfn.vertex; Contact in contact and block.contact. The shallower/earlier
+    # one keeps the bare object key, the other is registered under its full path.
+    index = DocumentationLoader.load_index(software="3dec")
+    objects = index["objects"]
+    assert "Zone" in objects and "itasca.flowplane.zone.Zone" in objects
+    assert "Vertex" in objects and "itasca.flowplane.vertex.Vertex" in objects
+    # Bare Zone resolves to the block.zone variant; the flowplane variant is reachable
+    # under its full path. Both keep correct, distinct method docs.
+    bare = DocumentationLoader.load_object("Zone", software="3dec")
+    flow = DocumentationLoader.load_object("itasca.flowplane.zone.Zone", software="3dec")
+    assert bare is not None and "block.zone" in bare["note"]
+    assert flow is not None and "flowplane.zone" in flow["note"]
+
+
+def test_3dec_python_proprietary_modules_isolated_from_pfc_flac() -> None:
+    threedec = set(DocumentationLoader.load_index(software="3dec")["modules"])
+    for sw in ("pfc", "flac"):
+        other = set(DocumentationLoader.load_index(software=sw)["modules"])
+        # None of the 3DEC-only families leak into the other engines.
+        assert not ({"block", "flowknot", "flowplane", "structure", "dfn"} & other)
+    assert {"block", "flowknot", "flowplane", "structure", "dfn", "contact"} <= threedec
+
+
 def test_3dec_command_families_are_isolated() -> None:
     threedec = CommandLoader.load_index(software="3dec")["categories"]
     pfc = CommandLoader.load_index(software="pfc")["categories"]
@@ -194,11 +287,6 @@ def test_3dec_command_families_are_isolated() -> None:
     assert "block" in threedec and "block" not in pfc and "block" not in flac
     assert "model" in threedec  # shared kernel present
     assert "ball" not in threedec and "zone" not in threedec
-
-
-def test_3dec_ships_no_references_yet() -> None:
-    # references are optional; 3DEC ships none this round -> empty index, no error.
-    assert ReferenceLoader.load_index(software="3dec").get("categories", {}) == {}
 
 
 # --- MPoint / MPM coverage (9.0-only engine) --------------------------------
@@ -284,3 +372,266 @@ def test_mpoint_plot_items_are_engine_specific() -> None:
     # mpoint-vector documents the live-probed vector value set.
     vec = ReferenceLoader.load_item_doc("plot-items", "mpoint-vector", software="mpoint")
     assert "meshnode-vector" in vec["item_types"]  # shares the keyword set
+
+
+def test_mpoint_borrows_constitutive_models_from_common() -> None:
+    cats = ReferenceLoader.load_index(software="mpoint").get("categories", {})
+    assert "constitutive-models" in cats
+    cat = ReferenceLoader.load_category_index("constitutive-models", software="mpoint")
+    # MPoint shares zone models with FLAC3D/3DEC; the docs live once in _common.
+    entry = next(m for m in cat["models"] if m["name"] == "mohr-coulomb")
+    assert entry["file"].startswith("_common/references/constitutive-models/")
+    # Resolving the borrowed item returns the shared _common doc (same as FLAC's).
+    doc = ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="mpoint")
+    assert doc == ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="flac")
+    # The 5 MPoint-only models without a _common doc are disclosed, not fabricated.
+    assert "jones-wilkins-lee" in cat["note"]
+
+
+def test_mpoint_range_elements_shared_via_common() -> None:
+    cats = ReferenceLoader.load_index(software="mpoint").get("categories", {})
+    assert "range-elements" in cats
+    # Same _common cylinder doc as the other engines.
+    mp = ReferenceLoader.load_item_doc("range-elements", "cylinder", software="mpoint")
+    flac = ReferenceLoader.load_item_doc("range-elements", "cylinder", software="flac")
+    assert mp is not None and mp == flac
+
+
+# --- 3DEC references (joint constitutive models) ----------------------------
+# Joint (sub-contact) constitutive models are 3DEC's defining reference and have
+# no FLAC/PFC equivalent. Generated by scripts/corpus/generate_3dec_joint_models.py.
+
+
+def test_3dec_joint_models_reference_category() -> None:
+    cats = ReferenceLoader.load_index(software="3dec").get("categories", {})
+    assert "joint-models" in cats
+    # PFC contact-models (ball/clump contacts) is a different physics and stays out.
+    assert "contact-models" not in cats
+
+
+def test_3dec_joint_models_lists_all_eight() -> None:
+    cat = ReferenceLoader.load_category_index("joint-models", software="3dec")
+    assert cat is not None
+    names = {m["name"] for m in cat["models"]}
+    assert names == {
+        "elastic",
+        "mohr",
+        "bilinear-mohr",
+        "softening-mohr",
+        "cyjm",
+        "nonlinear",
+        "power",
+        "ratestate",
+    }
+
+
+def test_3dec_joint_model_item_has_property_vocabulary() -> None:
+    mohr = ReferenceLoader.load_item_doc("joint-models", "mohr", software="3dec")
+    assert mohr is not None
+    keywords = {p["keyword"] for grp in mohr["property_groups"] for p in grp["properties"]}
+    # Core Coulomb-slip joint property keywords parsed from the theory page.
+    assert {"stiffness-normal", "stiffness-shear", "friction", "cohesion", "tension"} <= keywords
+
+
+@pytest.mark.asyncio
+async def test_3dec_browse_reference_joint_models() -> None:
+    result = await mcp.call_tool("pfc_browse_reference", {"software": "3dec", "topic": "joint-models"})
+    data = _parse_tool_payload(result)["data"]
+    assert {e.get("name") for e in data["entries"]} >= {"mohr", "cyjm", "nonlinear"}
+
+
+def test_3dec_references_isolated_from_flac() -> None:
+    # joint-models is 3DEC-only; it must not appear in the FLAC reference index.
+    flac = set(ReferenceLoader.load_index(software="flac").get("categories", {}))
+    assert "joint-models" not in flac
+
+
+# --- shared (_common) zone constitutive-models borrow -----------------------
+# Zone (continuum / deformable-block) constitutive models are a 9.0 kernel shared
+# by FLAC3D and 3DEC; the per-model docs live once in _common and each engine
+# borrows them via RESOURCES-root-relative file pointers (same as command _common).
+
+
+def test_zone_constitutive_models_shared_via_common() -> None:
+    flac = ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="flac")
+    tdec = ReferenceLoader.load_item_doc("constitutive-models", "mohr-coulomb", software="3dec")
+    assert flac is not None and tdec is not None
+    # Both engines resolve the very same _common document.
+    assert flac == tdec
+    assert flac["full_name"] == "Mohr-Coulomb Model"
+
+
+def test_3dec_zone_models_are_engine_filtered_subset() -> None:
+    flac_names = {
+        m["name"] for m in ReferenceLoader.load_category_index("constitutive-models", software="flac")["models"]
+    }
+    tdec_names = {
+        m["name"] for m in ReferenceLoader.load_category_index("constitutive-models", software="3dec")["models"]
+    }
+    # 3DEC exposes a strict subset of FLAC's zone models (block zone cmodel list).
+    assert tdec_names < flac_names
+    assert len(tdec_names) == 26
+    # 3DEC-supported model present; FLAC-only models (no 3DEC support) excluded.
+    assert "columnar-basalt" in tdec_names
+    assert {"plastic-hardening", "norsand", "soft-soil"}.isdisjoint(tdec_names)
+
+
+def test_pfc_has_no_zone_constitutive_models() -> None:
+    # PFC has no zones; it must not carry the zone constitutive-models category.
+    assert "constitutive-models" not in ReferenceLoader.load_index(software="pfc").get("categories", {})
+
+
+def test_common_borrowed_item_pointer_resolves_to_common_path() -> None:
+    # The 3DEC catalog entry points into _common (no duplicated item file under 3dec/).
+    cat = ReferenceLoader.load_category_index("constitutive-models", software="3dec")
+    entry = next(m for m in cat["models"] if m["name"] == "drucker-prager")
+    assert entry["file"].startswith("_common/references/constitutive-models/")
+
+
+# --- shared (_common) range-elements borrow ---------------------------------
+# Range filters are 9.0 kernel shared by every engine; the docs live once in
+# _common, with per-engine locals preserved (PFC's ball-contact range + its
+# "ball"-keyworded sphere).
+
+
+def test_range_elements_shared_across_all_engines() -> None:
+    for sw in SUPPORTED_SOFTWARE:
+        cyl = ReferenceLoader.load_item_doc("range-elements", "cylinder", software=sw)
+        assert cyl is not None and cyl["name"] == "cylinder"
+    # The same _common document backs cylinder for every engine.
+    docs = [ReferenceLoader.load_item_doc("range-elements", "cylinder", software=sw) for sw in SUPPORTED_SOFTWARE]
+    assert all(d == docs[0] for d in docs)
+
+
+def test_range_elements_engine_specific_locals_preserved() -> None:
+    # PFC keeps a ball-contact range filter; FLAC/3DEC (no ball contacts) do not.
+    assert ReferenceLoader.load_item_doc("range-elements", "contact", software="pfc") is not None
+    assert ReferenceLoader.load_item_doc("range-elements", "contact", software="3dec") is None
+    # PFC's sphere stays local with its "ball" search keyword; the shared one is neutral.
+    pfc_sphere = ReferenceLoader.load_item_doc("range-elements", "sphere", software="pfc")
+    common_sphere = ReferenceLoader.load_item_doc("range-elements", "sphere", software="3dec")
+    assert "ball" in pfc_sphere.get("search_keywords", [])
+    assert "ball" not in common_sphere.get("search_keywords", [])
+
+
+def test_3dec_range_elements_registered() -> None:
+    cats = ReferenceLoader.load_index(software="3dec").get("categories", {})
+    assert "range-elements" in cats
+    assert len(ReferenceLoader.load_category_index("range-elements", software="3dec")["elements"]) == 22
+
+
+# --- 3DEC FISH intrinsics (engine-specific, authored not borrowed) ----------
+# FLAC's fish-intrinsics are zone/structure-specific, so 3DEC's are authored
+# around blocks/joints/zones/flow (validated against the real 9.0 FISH docs).
+
+
+def test_3dec_fish_intrinsics_category() -> None:
+    cat = ReferenceLoader.load_category_index("fish-intrinsics", software="3dec")
+    assert cat is not None
+    assert {i["name"] for i in cat["items"]} == {"block-and-joints", "block-zone-gridpoint", "fluid-flow"}
+
+
+def test_3dec_fish_intrinsics_item_lists_real_families() -> None:
+    item = ReferenceLoader.load_item_doc("fish-intrinsics", "block-and-joints", software="3dec")
+    assert item is not None
+    examples = {ex for fam in item["intrinsic_families"] for ex in fam["examples"]}
+    # 3DEC joint behavior lives on sub-contacts.
+    assert "block.subcontact.model" in examples
+    assert "block.subcontact.force.shear" in examples
+
+
+def test_3dec_fish_intrinsics_is_engine_local_not_flac() -> None:
+    # 3DEC's set is its own (block/joint/flow), not FLAC's (zone/gridpoint/structure).
+    flac = ReferenceLoader.load_category_index("fish-intrinsics", software="flac")
+    flac_names = {i["name"] for i in flac["items"]}
+    assert "block-and-joints" not in flac_names
+
+
+def test_3dec_initial_conditions_uses_block_syntax() -> None:
+    cat = ReferenceLoader.load_category_index("initial-conditions", software="3dec")
+    assert cat is not None
+    assert {i["name"] for i in cat["items"]} == {
+        "stress-initialization",
+        "velocity-and-state-reset",
+        "fluid-thermal",
+    }
+    si = ReferenceLoader.load_item_doc("initial-conditions", "stress-initialization", software="3dec")
+    cmds = " ".join(si["primary_commands"])
+    # 3DEC syntax (block ...), not FLAC's bare 'zone initialize'.
+    assert "block zone initialize" in cmds and "block insitu" in cmds
+
+
+def test_3dec_boundary_conditions_uses_block_syntax() -> None:
+    cat = ReferenceLoader.load_category_index("boundary-conditions", software="3dec")
+    assert cat is not None
+    names = {i["name"] for i in cat["items"]}
+    assert {"mechanical-face", "gridpoint-and-block-fixity", "apply-modifiers"} <= names
+    mf = ReferenceLoader.load_item_doc("boundary-conditions", "mechanical-face", software="3dec")
+    assert "block face apply" in mf["primary_commands"]  # 3DEC, not FLAC's 'zone face apply'
+
+
+def test_3dec_geometry_data_table_topics() -> None:
+    cat = ReferenceLoader.load_category_index("geometry-data-table", software="3dec")
+    assert cat is not None
+    assert {i["name"] for i in cat["items"]} == {"geometry-workflow", "data-sets", "table-curves"}
+    geo = ReferenceLoader.load_item_doc("geometry-data-table", "geometry-workflow", software="3dec")
+    # 3DEC geometry guides block cutting (not FLAC zone meshing).
+    assert "block cut" in geo["primary_commands"]
+
+
+def test_3dec_structural_properties_all_sel_types() -> None:
+    cat = ReferenceLoader.load_category_index("structural-properties", software="3dec")
+    assert cat is not None
+    # 3DEC's six SEL types (more than FLAC's set — geogrid/shell included).
+    assert {m["name"] for m in cat["models"]} == {"beam", "cable", "geogrid", "liner", "pile", "shell"}
+    beam = ReferenceLoader.load_item_doc("structural-properties", "beam", software="3dec")
+    kws = {p["keyword"] for p in beam["property_groups"][0]["properties"]}
+    assert "cross-sectional-area" in kws
+    # 3DEC is 3D: 2D-only keywords are omitted.
+    assert "moi" not in kws and "shear-coefficient" not in kws
+
+
+def test_3dec_plot_items_are_engine_specific() -> None:
+    cat = ReferenceLoader.load_category_index("plot-items", software="3dec")
+    assert cat is not None
+    names = {i["name"] for i in cat["items"]}
+    # 3DEC's distinctive plottable entities (not PFC's ball/clump, not FLAC's zone-only).
+    assert {"block", "bzone", "subcontact", "joint", "fracture", "flow"} <= names
+    # subcontact is where joint mechanics live: colorby exposes state / model.
+    assert ReferenceLoader.is_directory_item("plot-items", "subcontact", software="3dec")
+    cb = ReferenceLoader.load_sub_item_doc("plot-items", "subcontact", "colorby", software="3dec")
+    assert {"state", "model"} <= set(cb["attributes"])
+    # bzone field contour carries the continuum stress/displacement vocabulary.
+    contour = ReferenceLoader.load_sub_item_doc("plot-items", "bzone", "contour", software="3dec")
+    assert {"stress-zz", "displacement", "pore-pressure"} <= set(contour["attributes"])
+    # 3DEC's structure item covers all six SEL types as one plot group.
+    assert "structure-shell" in {
+        i for it in cat["items"] if it["name"] == "structure" for i in it.get("common_use", "").split(", ")
+    }
+
+
+def test_3dec_histories_and_results_sampling_is_engine_specific() -> None:
+    cat = ReferenceLoader.load_category_index("histories-and-results", software="3dec")
+    assert cat is not None
+    assert {i["name"] for i in cat["items"]} == {"history-workflow", "results-export"}
+    wf = ReferenceLoader.load_item_doc("histories-and-results", "history-workflow", software="3dec")
+    cmds = wf["primary_commands"]
+    # 3DEC samples blocks / joints, not FLAC's 'zone history' / 'gridpoint history'.
+    assert "block history" in cmds and "block contact history" in cmds
+    assert "zone history" not in cmds
+
+
+def test_3dec_now_has_ten_reference_categories() -> None:
+    cats = set(ReferenceLoader.load_index(software="3dec").get("categories", {}))
+    assert {
+        "joint-models",
+        "constitutive-models",
+        "range-elements",
+        "fish-intrinsics",
+        "initial-conditions",
+        "boundary-conditions",
+        "geometry-data-table",
+        "structural-properties",
+        "plot-items",
+        "histories-and-results",
+    } <= cats

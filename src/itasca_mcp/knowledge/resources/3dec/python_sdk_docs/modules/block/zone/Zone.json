@@ -1,0 +1,548 @@
+{
+  "class": "Zone",
+  "description": "Zone object instance in itasca.block.zone.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.zone.Zone.html",
+  "note": "Do not instantiate directly; use itasca.block.zone module functions.",
+  "method_groups": {
+    "extra": "extra, set_extra",
+    "gp": "gp",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "hostblock": "hostblock",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_excavated, is_hidden",
+    "mass": "mass",
+    "model": "model, set_model",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "pp": "pp",
+    "prop": "prop, prop_fluid, prop_thermal, set_prop, set_prop_fluid, set_prop_thermal",
+    "props": "props",
+    "state": "set_state, state",
+    "strain": "strain_inc, strain_rate, strain_rotation_inc, strain_rotation_rate, strain_shear_int, strain_shear_rate, strain_total, strain_vol_int, strain_vol_rate",
+    "stress": "set_stress, stress, stress_effective, stress_int, stress_max, stress_min, stress_prin_dir",
+    "valid": "valid",
+    "vol": "vol"
+  },
+  "methods": [
+    {
+      "name": "extra",
+      "signature": "zone.extra(slot: int) -> any",
+      "description": "Get the zone extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "gp",
+      "signature": "zone.gp(int) -> gpptr",
+      "description": "Get a zone gridpoint int (1, 2, 3 or 4), indicating the four surrounding gridpoints.",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "gpptr"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "zone.group([slot: str or int]) -> str",
+      "description": "Get the zone group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "zone.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the zone. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "zone.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this zone is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "hostblock",
+      "signature": "zone.hostblock() -> bptr",
+      "description": "Get the block to which a zone belongs.",
+      "returns": {
+        "type": "bptr"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "zone.id() -> int",
+      "description": "Get the zone id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "zone.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the zone is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "zone.index() -> int",
+      "description": "Get the index (offset) for the zone.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "zone.is_excavated() -> bool",
+      "description": "Get the excavated state of the zone.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "zone.is_hidden() -> bool",
+      "description": "Get the hidden state of the zone.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "mass",
+      "signature": "zone.mass() -> float",
+      "description": "Get zone mass.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "model",
+      "signature": "zone.model() -> float",
+      "description": "Get the zone material model as a string.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "zone.pos() -> vec",
+      "description": "Get the zone location (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "zone.pos_x() -> float",
+      "description": "Get the x-component of the zone location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "zone.pos_y() -> float",
+      "description": "Get the y-component of the zone location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "zone.pos_z() -> float",
+      "description": "Get the z-component of the zone location.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "zone.pp() -> float",
+      "description": "Get the zone pore pressure (average of gridpoint pore pressures).",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "zone.prop(str) -> float",
+      "description": "Get a property.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop_fluid",
+      "signature": "zone.prop_fluid(str) -> float",
+      "description": "Get a fluid property of the zone.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop_thermal",
+      "signature": "zone.prop_thermal(str) -> float",
+      "description": "Get a thermal property of the zone.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "props",
+      "signature": "zone.props() -> dict {str: any}",
+      "description": "Get a list of all properies.",
+      "returns": {
+        "type": "dict {str: any}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "zone.set_extra(slot: int, value: any) -> None",
+      "description": "Set the zone extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "zone.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the zone group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_model",
+      "signature": "zone.set_model(str) -> None",
+      "description": "Set the zone material model as a string.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop",
+      "signature": "zone.set_prop(str, float) -> None",
+      "description": "Set the a property.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        },
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop_fluid",
+      "signature": "zone.set_prop_fluid(str, float) -> float",
+      "description": "Set a thermal property of the zone.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        },
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_prop_thermal",
+      "signature": "zone.set_prop_thermal(str, float) -> None",
+      "description": "Set a thermal property of the zone.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        },
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_state",
+      "signature": "zone.set_state(int) -> None",
+      "description": "Set the plasticity state indicator (sum of integer values).",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_stress",
+      "signature": "zone.set_stress(stens3) -> None",
+      "description": "Set the zone stress tensor.",
+      "parameters": [
+        {
+          "name": "stens3",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "state",
+      "signature": "zone.state() -> int",
+      "description": "Get the plasticity state indicator (sum of integer values).",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "strain_inc",
+      "signature": "zone.strain_inc() -> stens3",
+      "description": "Get the zone strain increment, based on the current displacement field.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "strain_rate",
+      "signature": "zone.strain_rate() -> stens3",
+      "description": "Get the zone strain rate, based on the current velocity field.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "strain_rotation_inc",
+      "signature": "zone.strain_rotation_inc() -> stens3",
+      "description": "Get the zone rotational increment tensor, based on the current displacement field.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "strain_rotation_rate",
+      "signature": "zone.strain_rotation_rate() -> stens3",
+      "description": "Get the zone rotation rate tensor, based on the current velocity field.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "strain_shear_int",
+      "signature": "zone.strain_shear_int() -> float",
+      "description": "Get the zone shear strain increment based on the current displacement field.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "strain_shear_rate",
+      "signature": "zone.strain_shear_rate() -> float",
+      "description": "Get the zone shear strain rate based on the current velocity field.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "strain_total",
+      "signature": "zone.strain_total() -> float",
+      "description": "Get the value of the von Mises strain for a zone.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "strain_vol_int",
+      "signature": "zone.strain_vol_int() -> float",
+      "description": "Get the zone volumetric strain increment based on the current displacement field.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "strain_vol_rate",
+      "signature": "zone.strain_vol_rate() -> float",
+      "description": "Get the zone volumetric strain rate based on the current velocity field.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress",
+      "signature": "zone.stress() -> stens3",
+      "description": "Get the zone stress tensor.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "stress_effective",
+      "signature": "zone.stress_effective() -> stens3",
+      "description": "Get the zone effective stress.",
+      "returns": {
+        "type": "stens3"
+      }
+    },
+    {
+      "name": "stress_int",
+      "signature": "zone.stress_int() -> float",
+      "description": "Get the intermediate principal stress.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_max",
+      "signature": "zone.stress_max() -> float",
+      "description": "Get the maximum (most positive) principal stress.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_min",
+      "signature": "zone.stress_min() -> float",
+      "description": "Get the minimum (most negative) principal stress.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_prin_dir",
+      "signature": "zone.stress_prin_dir() -> [vec3,sten3]",
+      "description": "Get the zone principal stress directions.",
+      "returns": {
+        "type": "[vec3,sten3]"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "zone.valid() -> bool",
+      "description": "Returns True if this zone is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vol",
+      "signature": "zone.vol() -> float",
+      "description": "Get the zone volume.",
+      "returns": {
+        "type": "float"
+      }
+    }
+  ]
+}

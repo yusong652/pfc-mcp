@@ -1,0 +1,583 @@
+{
+  "class": "Subcontact",
+  "description": "Subcontact object instance in itasca.block.subcontact.",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.subcontact.Subcontact.html",
+  "note": "Do not instantiate directly; use itasca.block.subcontact module functions.",
+  "method_groups": {
+    "apini": "apini",
+    "area": "area",
+    "b1": "b1",
+    "b2": "b2",
+    "contact": "contact",
+    "disp": "disp_norm, disp_shear, disp_shear_x, disp_shear_y, disp_shear_z, set_disp_norm",
+    "extra": "extra, set_extra",
+    "face": "face",
+    "fid": "fid",
+    "force": "force_norm, force_pp, force_shear, force_shear_x, force_shear_y, force_shear_z, set_force_norm",
+    "fpZone": "fpZone",
+    "gp": "gp",
+    "group": "group, group_remove, set_group",
+    "groups": "groups",
+    "id": "id",
+    "in": "in_group",
+    "index": "index",
+    "is": "is_excavated, is_hidden",
+    "model": "model, set_model",
+    "pos": "pos, pos_x, pos_y, pos_z",
+    "pp": "pp, set_pp",
+    "prop": "prop, set_prop",
+    "shear": "set_shear_max, shear_max",
+    "sratio": "sratio",
+    "state": "set_state, state",
+    "stress": "stress_norm, stress_shear",
+    "type": "type",
+    "valid": "valid",
+    "vel": "vel_shear, vel_shear_x, vel_shear_y, vel_shear_z"
+  },
+  "methods": [
+    {
+      "name": "apini",
+      "signature": "subcontact.apini() -> float",
+      "description": "Get the initial mechanical aperture.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "area",
+      "signature": "subcontact.area() -> float",
+      "description": "Get the subcontact area.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "b1",
+      "signature": "subcontact.b1() -> bptr",
+      "description": "Get block 1 of the subcontact.",
+      "returns": {
+        "type": "bptr"
+      }
+    },
+    {
+      "name": "b2",
+      "signature": "subcontact.b2() -> bptr",
+      "description": "Get block 2 of the subcontact.",
+      "returns": {
+        "type": "bptr"
+      }
+    },
+    {
+      "name": "contact",
+      "signature": "subcontact.contact() -> cptr",
+      "description": "Get the contact index to which this subcontact belongs.",
+      "returns": {
+        "type": "cptr"
+      }
+    },
+    {
+      "name": "disp_norm",
+      "signature": "subcontact.disp_norm() -> float",
+      "description": "Get the normal displacement of a subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear",
+      "signature": "subcontact.disp_shear() -> vec",
+      "description": "Get the subcontact contact shear displacement vector (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "disp_shear_x",
+      "signature": "subcontact.disp_shear_x() -> float",
+      "description": "Get the x-component of the subcontact contact shear displacement vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear_y",
+      "signature": "subcontact.disp_shear_y() -> float",
+      "description": "Get the y-component of the subcontact contact shear displacement vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "disp_shear_z",
+      "signature": "subcontact.disp_shear_z() -> float",
+      "description": "Get the z-component of the subcontact contact shear displacement vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "extra",
+      "signature": "subcontact.extra(slot: int) -> any",
+      "description": "Get the subcontact extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "any"
+      }
+    },
+    {
+      "name": "face",
+      "signature": "subcontact.face() -> fptr",
+      "description": "Get the face of a vertex-face subcontact.",
+      "returns": {
+        "type": "fptr"
+      }
+    },
+    {
+      "name": "fid",
+      "signature": "subcontact.fid() -> int",
+      "description": "Get the DFN fracture ID number at a subcontact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "force_norm",
+      "signature": "subcontact.force_norm() -> float",
+      "description": "Get the normal force at a subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_pp",
+      "signature": "subcontact.force_pp() -> float",
+      "description": "Get the subcontact pore pressure force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_shear",
+      "signature": "subcontact.force_shear() -> vec",
+      "description": "Get the subcontact contact shear force vector (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "force_shear_x",
+      "signature": "subcontact.force_shear_x() -> float",
+      "description": "Get the x-component of the subcontact contact shear force vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_shear_y",
+      "signature": "subcontact.force_shear_y() -> float",
+      "description": "Get the y-component of the subcontact contact shear force vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "force_shear_z",
+      "signature": "subcontact.force_shear_z() -> float",
+      "description": "Get the z-component of the subcontact contact shear force vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "fpZone",
+      "signature": "subcontact.fpZone() -> float",
+      "description": "Get the flow zone associated with the subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "gp",
+      "signature": "subcontact.gp() -> gpptr",
+      "description": "Get the vertex for a vertex-face subcontact.",
+      "returns": {
+        "type": "gpptr"
+      }
+    },
+    {
+      "name": "group",
+      "signature": "subcontact.group([slot: str or int]) -> str",
+      "description": "Get the subcontact group name in a given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "group_remove",
+      "signature": "subcontact.group_remove(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Remove from the given group from all group slots of the subcontact. One argument of type string, giving the group name, is required. The return value is a bool which is True if the group was removed from any slot, otherwise False.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "groups",
+      "signature": "subcontact.groups() -> {slot: group_name}",
+      "description": "Get a dictionary describing which groups this subcontact is part of. The keys of the dictionary are the slot names and the values are the group names.",
+      "returns": {
+        "type": "{slot: group_name}"
+      }
+    },
+    {
+      "name": "id",
+      "signature": "subcontact.id() -> int",
+      "description": "Get the subcontact id.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "subcontact.in_group(group_name: str or int[, slot: str or int]) -> bool",
+      "description": "Test if the subcontact is part of a given group. If the optional argument slot is given, only that slot is searched. Otherwise, all group slots are searched.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "index",
+      "signature": "subcontact.index() -> int",
+      "description": "Get the index (offset) for the subcontact.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "is_excavated",
+      "signature": "subcontact.is_excavated() -> bool",
+      "description": "Get the excavation status of the subcontact.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "is_hidden",
+      "signature": "subcontact.is_hidden() -> bool",
+      "description": "Get the hidden indicator for the subcontact.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "model",
+      "signature": "subcontact.model() -> str",
+      "description": "Get the assign joint constitutive model at a subcontact.",
+      "returns": {
+        "type": "str"
+      }
+    },
+    {
+      "name": "pos",
+      "signature": "subcontact.pos() -> vec",
+      "description": "Get the subcontact subcontact position (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "pos_x",
+      "signature": "subcontact.pos_x() -> float",
+      "description": "Get the x-component of the subcontact subcontact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_y",
+      "signature": "subcontact.pos_y() -> float",
+      "description": "Get the y-component of the subcontact subcontact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pos_z",
+      "signature": "subcontact.pos_z() -> float",
+      "description": "Get the z-component of the subcontact subcontact position.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "pp",
+      "signature": "subcontact.pp() -> float",
+      "description": "Get the subcontact pore pressure force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "prop",
+      "signature": "subcontact.prop(str) -> float",
+      "description": "Get the assigned property values of subcontact models.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_disp_norm",
+      "signature": "subcontact.set_disp_norm() -> float",
+      "description": "Set the normal displacement of a subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "subcontact.set_extra(slot: int, value: any) -> None",
+      "description": "Set the subcontact extra data in the given slot.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_force_norm",
+      "signature": "subcontact.set_force_norm() -> float",
+      "description": "Set the normal force at a subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "subcontact.set_group(group_name: str or int[, slot: str or int]) -> None",
+      "description": "Set the subcontact group name in a given slot.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str or int",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "type": "str or int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_model",
+      "signature": "subcontact.set_model(str) -> None",
+      "description": "Set the assign joint constitutive model at a subcontact.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_pp",
+      "signature": "subcontact.set_pp(float) -> None",
+      "description": "Set the subcontact pore pressure force.",
+      "parameters": [
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_prop",
+      "signature": "subcontact.set_prop(str, float) -> None",
+      "description": "Set the assigned property values of subcontact models.",
+      "parameters": [
+        {
+          "name": "str",
+          "required": true
+        },
+        {
+          "name": "float",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_shear_max",
+      "signature": "subcontact.set_shear_max() -> float",
+      "description": "Set the maximum shear displacement magnitude at any point in the past.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "set_state",
+      "signature": "subcontact.set_state(int) -> None",
+      "description": "Set the subcontact state indicator.",
+      "parameters": [
+        {
+          "name": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "shear_max",
+      "signature": "subcontact.shear_max() -> float",
+      "description": "Get the maximum shear displacement magnitude at any point in the past.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "sratio",
+      "signature": "subcontact.sratio() -> float",
+      "description": "Get the ratio of shear force magnitude to normal force.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "state",
+      "signature": "subcontact.state() -> int",
+      "description": "Get the subcontact state indicator.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "stress_norm",
+      "signature": "subcontact.stress_norm() -> float",
+      "description": "Get the normal stress at the subcontact.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "stress_shear",
+      "signature": "subcontact.stress_shear() -> float",
+      "description": "Get the shear stress magnitude.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "type",
+      "signature": "subcontact.type() -> int",
+      "description": "Get the subcontact type.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "valid",
+      "signature": "subcontact.valid() -> bool",
+      "description": "Returns True if this subcontact is live.",
+      "returns": {
+        "type": "bool"
+      }
+    },
+    {
+      "name": "vel_shear",
+      "signature": "subcontact.vel_shear() -> vec",
+      "description": "Get the subcontact contact shear velocity vector (vector).",
+      "returns": {
+        "type": "vec"
+      }
+    },
+    {
+      "name": "vel_shear_x",
+      "signature": "subcontact.vel_shear_x() -> float",
+      "description": "Get the x-component of the subcontact contact shear velocity vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_shear_y",
+      "signature": "subcontact.vel_shear_y() -> float",
+      "description": "Get the y-component of the subcontact contact shear velocity vector.",
+      "returns": {
+        "type": "float"
+      }
+    },
+    {
+      "name": "vel_shear_z",
+      "signature": "subcontact.vel_shear_z() -> float",
+      "description": "Get the z-component of the subcontact contact shear velocity vector.",
+      "returns": {
+        "type": "float"
+      }
+    }
+  ]
+}

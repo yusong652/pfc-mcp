@@ -9,6 +9,22 @@
       "index_file": "plot-items/index.json",
       "summary": "5 MPoint plot item groups (mpoint/vector/tensor/hybrid/meshpoint)",
       "usage": "plot item create mpoint color-by contour value <q> | plot item create mpoint-vector value velocity ..."
+    },
+    "constitutive-models": {
+      "name": "Constitutive Models (Material Point)",
+      "description": "MPoint material-point constitutive material model properties — mohr-coulomb, drucker-prager, hoek-brown, cam-clay, creep models, etc. Property vocabulary for 'mpoint cmodel assign' + 'mpoint property'. Shared 9.0 kernel with FLAC3D (docs via _common).",
+      "directory": "constitutive-models",
+      "index_file": "constitutive-models/index.json",
+      "summary": "38 material-point material models (shared with FLAC3D via _common; 5 MPoint-only models not yet documented)",
+      "usage": "mpoint cmodel assign <name> ; mpoint property <prop> <value> [range ...]"
+    },
+    "range-elements": {
+      "name": "Range Elements",
+      "description": "Geometric and logical 'range ...' filters (cylinder, sphere, plane, position, group, id, polygon, union, not, ...) used to scope any MPoint command. Shared 9.0 kernel.",
+      "directory": "range-elements",
+      "index_file": "range-elements/index.json",
+      "summary": "22 range filter elements (shared 9.0 kernel via _common)",
+      "usage": "<any command> ... range <element> <args> [union|intersect|not ...]"
     }
   },
   "navigation": {

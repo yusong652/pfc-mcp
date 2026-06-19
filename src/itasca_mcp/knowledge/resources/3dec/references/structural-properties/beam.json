@@ -1,0 +1,105 @@
+{
+  "name": "beam",
+  "dimension": "3D",
+  "full_name": "Beam Structural-Element Properties",
+  "description": "Property keywords for the 3DEC beam structural element. Assign with 'structure beam create ...', set elastic behavior with 'structure beam cmodel ...', then set these with 'structure beam property <keyword> <value> [range ...]'.",
+  "primary_commands": [
+    "structure beam create",
+    "structure beam cmodel",
+    "structure beam property",
+    "structure beam list"
+  ],
+  "property_groups": [
+    {
+      "name": "Properties",
+      "description": "'structure beam property' keywords (2D-only keywords omitted; 3DEC is 3D).",
+      "properties": [
+        {
+          "keyword": "cross-sectional-area",
+          "description": "",
+          "type": "FLT"
+        },
+        {
+          "keyword": "density",
+          "description": "mass density",
+          "type": "FLT"
+        },
+        {
+          "keyword": "direction-y",
+          "description": "direction-y vector whose projection onto the element cross-section defines the \\(y\\) -axis of the element coordinate system",
+          "type": "VEC"
+        },
+        {
+          "keyword": "moi-y",
+          "description": "moment of inertia with respect to element \\(y\\) -axis",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "moi-z",
+          "description": "moment of inertia with respect to element \\(z\\) -axis",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "plastic-moment",
+          "description": "plastic moment capacity in Y and Z",
+          "type": "FLT"
+        },
+        {
+          "keyword": "plastic-moment-y",
+          "description": "plastic moment capacity in Y",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "plastic-moment-z",
+          "description": "plastic moment capacity in Z",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "plastic-shear",
+          "description": "plastic shear capacity in Y and Z",
+          "type": "FLT"
+        },
+        {
+          "keyword": "plastic-shear-y",
+          "description": "plastic shear capacity in Y",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "plastic-shear-z",
+          "description": "plastic shear capacity in Z",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "shear-coefficient-y",
+          "description": "shear coefficient for transverse shear deformation in the \\(y\\) -direction (Timoshenko beam element only)",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "shear-coefficient-z",
+          "description": "shear coefficient for transverse shear deformation in the \\(z\\) -direction (Timoshenko beam element only)",
+          "type": "FLT",
+          "dim": "3D"
+        },
+        {
+          "keyword": "thermal-expansion",
+          "description": "thermal-expansion coefficient",
+          "type": "FLT"
+        },
+        {
+          "keyword": "torsion-constant",
+          "description": "torsion constant",
+          "type": "FLT",
+          "dim": "3D"
+        }
+      ]
+    }
+  ],
+  "source": "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual/beams/commands/cmd_structure.beam.property.html"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "stress-initialization",
+  "dimension": "3D",
+  "full_name": "Stress Initialization",
+  "description": "Set initial stresses in deformable-block zones directly, or establish gravitational in-situ stresses, before solving. Initial stresses should be consistent with boundary conditions, gravity, and the assigned zone constitutive model. Compression is negative.",
+  "primary_commands": [
+    "model gravity",
+    "block zone initialize",
+    "block insitu",
+    "model solve"
+  ],
+  "methods": [
+    {
+      "name": "uniform / anisotropic stress",
+      "commands": [
+        "block zone initialize stress-xx -5e6",
+        "block zone initialize stress-yy -1e7",
+        "block zone initialize stress-zz -5e6",
+        "block zone initialize stress-xy 0"
+      ],
+      "notes": [
+        "Components: stress-xx/yy/zz (normal) and stress-xy/xz/yz (shear).",
+        "Use modifier keywords add / gradient / multiply / vary to build depth-varying fields."
+      ]
+    },
+    {
+      "name": "gravitational in-situ stress",
+      "commands": [
+        "model gravity 0 0 -9.81",
+        "block insitu stress -1e6 -1e6 -2e6 0 0 0 gradient 0 0 1e4 0 0 2e4 0 0 0",
+        "block insitu stress ... nodisplacements"
+      ],
+      "notes": [
+        "'block insitu stress' sets the full tensor with optional 'gradient' (per-axis variation).",
+        "'nodisplacements' suppresses displacements during the seating solve; 'total' includes pore pressure."
+      ]
+    }
+  ],
+  "validation_checks": [
+    "block zone list information",
+    "FISH: block.zone.stress(z) to confirm the assigned field",
+    "Solve elastically and confirm small block.gridpoint.force.unbal (near equilibrium)"
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/initialconditions.html"
+}

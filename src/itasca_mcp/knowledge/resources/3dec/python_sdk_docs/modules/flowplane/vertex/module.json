@@ -1,0 +1,47 @@
+{
+  "module": "itasca.flowplane.vertex",
+  "description": "Functions and classes for working with flowplane vertexs.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.flowplane.vertex.html",
+  "functions": [
+    {
+      "name": "count",
+      "signature": "itasca.flowplane.vertex.count() -> int",
+      "description": "Get the number of zones.",
+      "returns": {
+        "type": "int"
+      }
+    },
+    {
+      "name": "find",
+      "signature": "itasca.flowplane.vertex.find(id: int) -> Zone object",
+      "description": "Get the zone object with the given ID number.",
+      "parameters": [
+        {
+          "name": "id",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "Zone object"
+      }
+    },
+    {
+      "name": "list",
+      "signature": "itasca.flowplane.vertex.list() -> Zone iterator object",
+      "description": "Get a zone iterator object.",
+      "returns": {
+        "type": "Zone iterator object"
+      }
+    },
+    {
+      "name": "maxid",
+      "signature": "itasca.flowplane.vertex.maxid() -> int",
+      "description": "Get the maximum zone ID.",
+      "returns": {
+        "type": "int"
+      }
+    }
+  ]
+}

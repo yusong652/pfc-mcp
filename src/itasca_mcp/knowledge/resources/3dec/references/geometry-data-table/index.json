@@ -1,0 +1,21 @@
+{
+  "type": "geometry_data_table",
+  "description": "Geometry, data, and table references for 3DEC model setup, imported measurements, and time/property curves. geometry guides block cutting; data/table are shared 9.0 kernel.",
+  "items": [
+    {
+      "name": "geometry-workflow",
+      "file": "geometry-workflow.json",
+      "full_name": "Geometry Import / Generation Workflow"
+    },
+    {
+      "name": "data-sets",
+      "file": "data-sets.json",
+      "full_name": "Data Set Workflows"
+    },
+    {
+      "name": "table-curves",
+      "file": "table-curves.json",
+      "full_name": "Table Curves"
+    }
+  ]
+}

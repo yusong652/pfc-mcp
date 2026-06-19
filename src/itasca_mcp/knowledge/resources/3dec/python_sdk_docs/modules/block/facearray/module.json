@@ -1,0 +1,100 @@
+{
+  "module": "itasca.block.facearray",
+  "description": "Array interface for 3DEC faces.",
+  "import_statement": "import itasca",
+  "source_url": "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc/itasca.block.facearray.html",
+  "functions": [
+    {
+      "name": "extra",
+      "signature": "itasca.block.facearray.extra(slot: int) -> array float{block} or float{block,3}",
+      "description": "Get the block extra data in the given slot as an array. Extra variables accessed by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "array float{block} or float{block,3}"
+      }
+    },
+    {
+      "name": "ids",
+      "signature": "itasca.block.facearray.ids() -> array int{block}",
+      "description": "Get the block ids as an array.",
+      "returns": {
+        "type": "array int{block}"
+      }
+    },
+    {
+      "name": "in_group",
+      "signature": "itasca.block.facearray.in_group(group_name: str, slot='default') -> array bool{nface}",
+      "description": "Return block group membership as a Boolean array.",
+      "parameters": [
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "'default'"
+        }
+      ],
+      "returns": {
+        "type": "array bool{nface}"
+      }
+    },
+    {
+      "name": "set_extra",
+      "signature": "itasca.block.facearray.set_extra(slot: int, data: array float{block} or float{block, 3}) -> None",
+      "description": "Set the block extra data in the given slot with an array. Extra variables set by array must be of type float or vec.",
+      "parameters": [
+        {
+          "name": "slot",
+          "type": "int",
+          "required": true
+        },
+        {
+          "name": "data",
+          "type": "array float{block} or float{block",
+          "required": true
+        },
+        {
+          "name": "3}",
+          "required": true
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    },
+    {
+      "name": "set_group",
+      "signature": "itasca.block.facearray.set_group(membership: array bool{nface}, group_name: str, slot=\"default\") -> None",
+      "description": "Set block group from an array. Where membership True set the corresponding block to be a member of group group_name in the given slot.",
+      "parameters": [
+        {
+          "name": "membership",
+          "type": "array bool{nface}",
+          "required": true
+        },
+        {
+          "name": "group_name",
+          "type": "str",
+          "required": true
+        },
+        {
+          "name": "slot",
+          "required": false,
+          "default": "\"default\""
+        }
+      ],
+      "returns": {
+        "type": "None"
+      }
+    }
+  ]
+}

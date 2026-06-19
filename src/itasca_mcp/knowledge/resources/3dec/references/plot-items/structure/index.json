@@ -1,0 +1,157 @@
+{
+  "name": "structure",
+  "item_type": "structure",
+  "item_types": [
+    "structure-beam",
+    "structure-cable",
+    "structure-pile",
+    "structure-geogrid",
+    "structure-liner",
+    "structure-shell",
+    "structure-vector"
+  ],
+  "dimension": "3D",
+  "search_keywords": [
+    "structure",
+    "sel",
+    "beam",
+    "cable",
+    "pile",
+    "liner",
+    "shell",
+    "geogrid",
+    "force",
+    "moment"
+  ],
+  "description": "Structural-element (SEL) visualization, one item type per element: structure-beam / structure-cable / structure-pile (line elements, carry the 'line' keyword) and structure-geogrid / structure-liner / structure-shell (surface elements, carry 'polygons'). 'contour <attribute>' maps forces/moments/resultants; 'label <type>' colours by group/model/state. 'structure-vector' draws nodal vectors.",
+  "base_syntax": "plot item create structure-<type> <keywords...>",
+  "top_level_keywords": [
+    "active",
+    "clip",
+    "color-list",
+    "contour",
+    "cut",
+    "deformation-factor",
+    "label",
+    "legend",
+    "line",
+    "map",
+    "marker",
+    "range",
+    "shrink",
+    "slot",
+    "system",
+    "transparency"
+  ],
+  "basic_keywords": [
+    {
+      "keyword": "active",
+      "description": "Show or hide the item without removing it.",
+      "syntax": "active <bool>"
+    },
+    {
+      "keyword": "clip",
+      "description": "Clip the item against the global model clip box.",
+      "syntax": "clip <bool>"
+    },
+    {
+      "keyword": "color-list",
+      "description": "Set the discrete colour list used for categorical colouring.",
+      "syntax": "color-list <Color> [<Color> ...]"
+    },
+    {
+      "keyword": "contour",
+      "description": "Colour entities by a scalar/vector/tensor field attribute. See sub-item 'contour'.",
+      "syntax": "contour <attribute> [...]"
+    },
+    {
+      "keyword": "cut",
+      "description": "Apply a 3D cutting plane to the item.",
+      "syntax": "cut active on origin (x,y,z) normal (nx,ny,nz)"
+    },
+    {
+      "keyword": "deformation-factor",
+      "description": "Exaggerate displacement when drawing.",
+      "syntax": "deformation-factor <float>"
+    },
+    {
+      "keyword": "label",
+      "description": "Categorical colour/label entities (group, model, state, id, ...). See sub-item 'label'.",
+      "syntax": "label <type> [...]"
+    },
+    {
+      "keyword": "legend",
+      "description": "Show/configure the item legend.",
+      "syntax": "legend <sub-keyword> [<value>]"
+    },
+    {
+      "keyword": "map",
+      "description": "Configure the contour colour map (ranges, intervals, colours).",
+      "syntax": "map <sub-keyword> [<value>]"
+    },
+    {
+      "keyword": "marker",
+      "description": "Configure node markers on the element.",
+      "syntax": "marker <sub-keyword> [<value>]"
+    },
+    {
+      "keyword": "range",
+      "description": "Filter which entities are drawn using range elements (see references/range-elements).",
+      "syntax": "range <range-element> [...]"
+    },
+    {
+      "keyword": "slot",
+      "description": "Restrict categorical colouring to one group slot.",
+      "syntax": "slot <slot-name>"
+    },
+    {
+      "keyword": "system",
+      "description": "Choose the coordinate system used for component output.",
+      "syntax": "system <global|local>"
+    },
+    {
+      "keyword": "transparency",
+      "description": "Set item transparency (0 opaque .. 100 fully transparent).",
+      "syntax": "transparency <0-100>"
+    }
+  ],
+  "sub_items": [
+    {
+      "name": "contour",
+      "file": "contour.json",
+      "description": "Contour attributes for line elements (force/moment) and shells (resultants/stress)."
+    },
+    {
+      "name": "label",
+      "file": "label.json",
+      "description": "Categorical colour SELs by group, model, id, type-element, plastic state, ..."
+    }
+  ],
+  "common_usage_patterns": [
+    {
+      "use_case": "Cable axial force",
+      "command": "plot item create structure-cable contour force legend active on",
+      "description": "Colour cable elements by axial force."
+    },
+    {
+      "use_case": "Beam bending moment",
+      "command": "plot item create structure-beam contour moment-bending legend active on",
+      "description": "Bending-moment distribution along beams."
+    },
+    {
+      "use_case": "Shell resultants",
+      "command": "plot item create structure-shell contour resultants-mx legend active on",
+      "description": "Shell moment resultant Mx."
+    },
+    {
+      "use_case": "SELs by group",
+      "command": "plot item create structure-liner label group legend active on",
+      "description": "Colour liner elements by group."
+    }
+  ],
+  "notes": [
+    "Probe live with 'plot item create <type> ?' to list top-level keywords, then 'plot item create <type> <kw> ?' for sub-options. Keyword sets here are binary-validated against 3DEC 9.0.",
+    "Line elements (beam/cable/pile) accept 'line'; surface elements (geogrid/liner/shell) accept 'polygons' — otherwise the top-level keyword set is identical.",
+    "structure-shell adds resultants-* and stress-elastic/plastic-* and coupling-* contour attributes that line elements do not have."
+  ]
+}

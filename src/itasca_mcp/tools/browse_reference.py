@@ -1,4 +1,4 @@
-"""PFC Reference Browse Tool - Navigate syntax elements and model properties."""
+"""ITASCA Reference Browse Tool - Navigate syntax elements and model properties."""
 
 from typing import Any, cast
 
@@ -25,45 +25,46 @@ def register(mcp: FastMCP) -> None:
         topic: str | None = Field(
             None,
             description=(
-                "Reference topic to browse (space-separated path). Examples:\n"
-                "- None or '': List all reference categories\n"
-                "- 'contact-models': List all contact models\n"
-                "- 'contact-models linear': Linear model properties\n"
-                "- 'range-elements': Range elements overview (24 elements)\n"
-                "- 'range-elements position': Position range syntax\n"
-                "- 'plot-items': Plot item types (ball, wall, contact keywords)\n"
-                "- 'plot-items ball': Ball overview + available sub-topics\n"
-                "- 'plot-items ball color-by': Ball color-by keyword details"
+                "Reference topic to browse (space-separated path). Categories vary by engine — "
+                "call with no topic first to discover them. Examples (by engine):\n"
+                "- None or '': List all reference categories for the chosen engine\n"
+                "- PFC 'contact-models' / 'contact-models linear': contact model + its properties\n"
+                "- FLAC 'constitutive-models' / 'constitutive-models mohr-coulomb': zone model + properties\n"
+                "- 3DEC 'joint-models' / 'joint-models mohr': joint (sub-contact) model + properties\n"
+                "- 'range-elements' / 'range-elements cylinder': range filter syntax (all engines)\n"
+                "- 'plot-items' / 'plot-items <type>' / 'plot-items <type> <sub>': plot item keywords"
             ),
         ),
         version: CommandDocVersion = Field(
             CommandDocVersion.V7_0,
             description=(
-                "PFC documentation version (6.0/7.0/9.0). Defaults to 7.0. "
-                "Filters contact models by version availability; "
-                "range-elements and plot-items are version-agnostic."
+                "Documentation version (6.0/7.0/9.0). Only gates version-specific items "
+                "(e.g. PFC contact models by availability). range-elements, plot-items, and the "
+                "FLAC/3DEC reference sets are version-agnostic, so the value is ignored for them."
             ),
         ),
     ) -> dict[str, Any]:
-        """Browse PFC reference documentation (syntax elements, model properties).
+        """Browse ITASCA reference documentation (syntax elements, model properties).
 
+        Works across engines via the required ``software`` selector (pfc/flac/3dec).
         References are language elements used within commands, not standalone commands.
 
         Navigation levels:
-        - No topic: All reference categories
-        - Category (e.g., "contact-models"): List items in category
-        - Full path (e.g., "contact-models linear"): Full documentation
+        - No topic: All reference categories for the engine
+        - Category (e.g., "constitutive-models"): List items in category
+        - Full path (e.g., "constitutive-models mohr-coulomb"): Full documentation
+        - Sub-item path (e.g., "plot-items zone contour"): Sub-item details
 
         When to use:
-        - Need contact model property names (kn, ks, fric, pb_*)
+        - Need material/contact/joint model property names (kn, ks, fric, cohesion, friction, ...)
         - Need range filtering syntax (position, cylinder, group, id)
-        - Need plot item configuration (color-by, cut plane, transparency, legend)
-        - Setting up "contact cmat add model ... property ..." commands
-        - Using range filters in any PFC command
+        - Need plot item configuration (contour, label, color-by, cut, transparency, legend)
+        - Setting up model-assignment commands (e.g. "... cmodel assign ... property ...")
+        - Using range filters in any command
         - Configuring "plot item create" commands
 
         Related tools:
-        - pfc_browse_commands: Command syntax (e.g., "ball create")
+        - pfc_browse_commands: Command syntax (e.g., "zone create")
         - pfc_query_command: Search commands by keywords
         """
         topic_str = normalize_input(topic, lowercase=True)

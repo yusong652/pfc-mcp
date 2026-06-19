@@ -1,0 +1,36 @@
+{
+  "name": "fluid-thermal",
+  "dimension": "3D",
+  "full_name": "Fluid and Thermal Initial Conditions",
+  "description": "Initialize pore pressure and temperature fields for hydro-mechanical and thermal analyses, directly on gridpoints or as a depth gradient.",
+  "primary_commands": [
+    "block gridpoint initialize",
+    "block insitu"
+  ],
+  "methods": [
+    {
+      "name": "pore pressure",
+      "commands": [
+        "block gridpoint initialize pore-pressure 1e5",
+        "block gridpoint initialize pore-pressure 0 gradient 0 0 -9810"
+      ],
+      "notes": [
+        "Use 'gradient' for a hydrostatic profile; pair with the fluid/effective-stress workflow."
+      ]
+    },
+    {
+      "name": "temperature",
+      "commands": [
+        "block gridpoint initialize temperature 20",
+        "block insitu fluid-temperature 20"
+      ],
+      "notes": [
+        "'block insitu fluid-temperature' seats the fluid temperature for thermal-fluid coupling."
+      ]
+    }
+  ],
+  "validation_checks": [
+    "FISH: block.gridpoint.pp(gp) / block.gridpoint.temp(gp) confirm the initialized field"
+  ],
+  "official_documentation": "https://docs.itascacg.com/itasca900/3dec/docproject/source/modeling/problemsolving/initialconditions.html"
+}

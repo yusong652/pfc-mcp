@@ -8,7 +8,7 @@
 #
 # After it boots:
 #   - GUI in browser:  http://localhost:6080/vnc.html
-#   - Bridge socket:   ws://localhost:9001
+#   - Bridge socket:   http://localhost:9001
 #
 # Stop with Ctrl-C (or `docker compose down` from another terminal).
 

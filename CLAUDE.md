@@ -9,7 +9,7 @@ Guidance for coding agents working in the `pfc-mcp` repository.
 This repository has two runtime contexts:
 
 - `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
-- `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): WebSocket bridge running inside PFC GUI
+- `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): HTTP bridge running inside PFC GUI
 
 Treat these as separate deployment targets. End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first install happens via the agentic bootstrap's terminal pip step or `addon.py`, and from then on `itasca_mcp_bridge.start()` self-upgrades on every start. The submodule exists only so contributors can edit bridge code alongside MCP code without two clones.
 
@@ -20,7 +20,7 @@ The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is depre
 ### MCP side (`src/pfc_mcp`)
 
 - Exposes documentation tools and execution tools through FastMCP
-- Communicates with bridge via WebSocket client (`pfc_mcp.bridge.client`)
+- Communicates with bridge via HTTP client (`pfc_mcp.bridge.client`)
 - Returns a unified tool envelope: `ok`, `data`, `error`
 - Dual execution model: synchronous REPL (`pfc_execute_code`) for quick queries, script-first async (`pfc_execute_task` + `pfc_check_task_status`) for long-running simulations
 
@@ -96,8 +96,30 @@ uv run pytest tests/test_tool_contracts.py
    - If moving shared helpers, keep thin compatibility re-exports when tests or downstream code rely on old import paths.
 
 5. Respect runtime constraints.
-   - MCP package uses modern deps (`websockets>=15`).
-   - Bridge side may require legacy-compatible deps (`websockets==9.1`) in PFC Python.
+   - MCP package talks to the bridge over HTTP (`httpx`).
+   - Bridge side is stdlib-only (HTTP + SSE via `http.server`): no third-party
+     runtime dependency, so it installs into any ITASCA embedded Python (3.6+)
+     with no version pins.
+
+6. Judge each dependency by the complexity it carries, not by a blanket
+   "fewer deps is better" rule. The two runtime contexts land on opposite
+   answers for the same reason, not different ones:
+   - Keep a dependency when it owns hard correctness you would not write
+     better yourself. On the MCP side, FastMCP + Pydantic own tool-schema
+     declaration, JSON Schema generation, input validation, and alignment
+     with the MCP protocol — protocol-boundary complexity. Do not reimplement
+     it; do not drop these deps to chase minimalism.
+   - Drop a dependency when it is not carrying real complexity for your
+     semantics. The bridge transport is self-hosted on stdlib HTTP + SSE
+     because the interaction is just request → execute → result, with the
+     server->client push reduced to a payload-free doorbell — a transport
+     library's extra machinery (duplex/heartbeat/version negotiation) is not
+     load-bearing here, and a pinned dependency is itself a liability in the
+     engine's embedded Python.
+   - The rule of thumb: validation at the protocol boundary is outsourced;
+     the execution transport is self-hosted when the semantics are simple
+     enough to not need a library. Minimalism is a consequence of this test,
+     never the goal itself.
 
 ## Testing Expectations
 

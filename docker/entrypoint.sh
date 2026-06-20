@@ -3,7 +3,7 @@
 #
 # Default (console mode, lighter):
 #   pfc3d9_console + bridge with blocking task pump.
-#   No X stack started -- ws://localhost:9001 only.
+#   No X stack started -- http://localhost:9001 only.
 #
 # GUI mode (set PFC_GUI=1):
 #   In-container X stack (Xvfb + fluxbox + x11vnc + noVNC) + pfc3d9_gui
@@ -23,7 +23,7 @@ cd /workspace 2>/dev/null || true
 # never runs its event loop, so mode=auto (bridge >= 0.1.4, PySide6 probe)
 # would attach a QTimer that never fires and return from start(), parking
 # the main thread at the console prompt -- which starves every bridge
-# thread and leaves ws://:9001 accepting TCP but never answering.
+# thread and leaves http://:9001 accepting TCP but never answering.
 BRIDGE_MODE=console
 if [ "${PFC_GUI:-}" = "1" ]; then
     BRIDGE_MODE=gui
@@ -63,7 +63,7 @@ if [ "${PFC_GUI:-}" = "1" ]; then
 
     echo "================================================================"
     echo "  GUI:     http://localhost:6080/vnc.html"
-    echo "  bridge:  ws://localhost:9001"
+    echo "  bridge:  http://localhost:9001"
     echo "================================================================"
 
     if [ "$#" -eq 0 ]; then
@@ -75,7 +75,7 @@ fi
 
 # ── Console mode (default) ────────────────────────────────────
 echo "================================================================"
-echo "  bridge:  ws://localhost:9001"
+echo "  bridge:  http://localhost:9001"
 echo "  (set PFC_GUI=1 to also expose the GUI via noVNC)"
 echo "================================================================"
 

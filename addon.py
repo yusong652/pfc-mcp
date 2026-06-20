@@ -10,7 +10,7 @@ What it does:
 1. Detects the currently installed `itasca-mcp-bridge`, if any
 2. Installs or upgrades `itasca-mcp-bridge` according to `AUTO_UPGRADE`
 3. Ensures the user site-packages directory is importable
-4. Imports `itasca_mcp_bridge` and `websockets`
+4. Imports `itasca_mcp_bridge`
 5. Starts the bridge
 
 Set `AUTO_UPGRADE = False` near the top if you want to pin the locally
@@ -153,14 +153,12 @@ def _import_bridge():
     _ensure_user_site_on_path()
     importlib.invalidate_caches()
 
-    for module_name in ("itasca_mcp_bridge", "websockets"):
-        if module_name in sys.modules:
-            del sys.modules[module_name]
+    if "itasca_mcp_bridge" in sys.modules:
+        del sys.modules["itasca_mcp_bridge"]
 
     import itasca_mcp_bridge
-    import websockets
 
-    return itasca_mcp_bridge, websockets
+    return itasca_mcp_bridge
 
 
 def _should_install(current_version):
@@ -199,10 +197,9 @@ def main():
                 "    python -m pip install --user itasca-mcp-bridge".format(code)
             )
 
-    itasca_mcp_bridge, websockets = _import_bridge()
+    itasca_mcp_bridge = _import_bridge()
 
     print("Using itasca-mcp-bridge:", getattr(itasca_mcp_bridge, "__version__", "unknown"))
-    print("Installed websockets:", getattr(websockets, "__version__", "unknown"))
     print("Starting bridge on port {} ...".format(PORT))
 
     # This script already handled install/upgrade above; tell start() to skip

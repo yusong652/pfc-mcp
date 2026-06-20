@@ -52,14 +52,14 @@ interrupt_task.register(mcp)
 execute_code.register(mcp)
 
 
-DEFAULT_BRIDGE_URL = "ws://localhost:9001"
+DEFAULT_BRIDGE_URL = "http://localhost:9001"
 
 
 def _override_bridge_port(url: str, port: int) -> str:
     """Return ``url`` with its port replaced, preserving scheme/host/path."""
     parts = urlsplit(url)
     host = parts.hostname or "localhost"
-    return urlunsplit((parts.scheme or "ws", f"{host}:{port}", parts.path, parts.query, parts.fragment))
+    return urlunsplit((parts.scheme or "http", f"{host}:{port}", parts.path, parts.query, parts.fragment))
 
 
 def main() -> None:
@@ -89,14 +89,14 @@ def main() -> None:
     parser.add_argument(
         "--bridge-url",
         default=None,
-        help="Bridge WebSocket URL (default: ws://localhost:9001, or ITASCA_MCP_BRIDGE_URL env)",
+        help="Bridge HTTP URL (default: http://localhost:9001, or ITASCA_MCP_BRIDGE_URL env)",
     )
     parser.add_argument(
         "--bridge-port",
         type=int,
         default=None,
         help=(
-            "Bridge WebSocket port; shorthand for --bridge-url ws://localhost:PORT. "
+            "Bridge HTTP port; shorthand for --bridge-url http://localhost:PORT. "
             "Overrides only the port of --bridge-url / ITASCA_MCP_BRIDGE_URL when both "
             "are given (default: 9001)"
         ),
@@ -112,7 +112,7 @@ def main() -> None:
     # Resolve the bridge URL from (in order of precedence) --bridge-url,
     # the ITASCA_MCP_BRIDGE_URL env, then the default. --bridge-port then
     # overrides just the port, so users can point at a non-default bridge
-    # port without spelling out the whole ws:// URL.
+    # port without spelling out the whole http:// URL.
     bridge_url = args.bridge_url or os.environ.get("ITASCA_MCP_BRIDGE_URL")
     if args.bridge_port is not None:
         if not 1 <= args.bridge_port <= 65535:

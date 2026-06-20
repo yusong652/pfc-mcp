@@ -9,7 +9,7 @@ Guidance for coding agents working in the `pfc-mcp` repository.
 This repository has two runtime contexts:
 
 - `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
-- `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): WebSocket bridge running inside PFC GUI
+- `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): HTTP bridge running inside PFC GUI
 
 End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first install happens via the agentic bootstrap's terminal pip step or `addon.py`, and from then on `itasca_mcp_bridge.start()` self-upgrades on every start. The submodule exists only so contributors can edit bridge code alongside MCP code without two clones. The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is deprecated.
 
@@ -18,7 +18,7 @@ End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first inst
 ### MCP side (`src/pfc_mcp`)
 
 - Exposes documentation tools and execution tools through FastMCP
-- Communicates with bridge via WebSocket client (`pfc_mcp.bridge.client`)
+- Communicates with bridge via HTTP client (`pfc_mcp.bridge.client`)
 - Returns a unified tool envelope: `ok`, `data`, `error`
 - Uses script-first execution model (`pfc_execute_task` + `pfc_check_task_status`)
 
@@ -85,8 +85,10 @@ uv run pytest tests/test_tool_contracts.py
    - If moving shared helpers, keep thin compatibility re-exports when tests or downstream code rely on old import paths.
 
 5. Respect runtime constraints.
-   - MCP package uses modern deps (`websockets>=15`).
-   - Bridge side may require legacy-compatible deps (`websockets==9.1`) in PFC Python.
+   - MCP package talks to the bridge over HTTP (`httpx`).
+   - Bridge side is stdlib-only (HTTP + SSE via `http.server`): no third-party
+     runtime dependency, so it installs into any ITASCA embedded Python (3.6+)
+     with no version pins.
 
 ## Testing Expectations
 

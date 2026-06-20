@@ -166,19 +166,6 @@ Verify import and version:
 
 Ignore pip upgrade warnings in this environment. Older embedded interpreters commonly use older pip builds.
 
-If websocket dependency errors appear, install the version that matches the embedded Python:
-
-```powershell
-# PFC 6.0/7.0
-& "{pfc_python}" -m pip install --user websockets==9.1
-
-# PFC 9.0
-& "{pfc_python}" -m pip install --user websockets==16.0
-```
-
-If PyPI is unreachable here too, add the same `--index-url` /
-`--trusted-host` Tsinghua-mirror flags shown above.
-
 ## Step 4 - Start Bridge in PFC GUI
 
 [AGENT]
@@ -215,7 +202,7 @@ installed version.
 Expected output includes:
 
 - `Itasca MCP Bridge Server`
-- `ws://localhost:9001`
+- `http://localhost:9001`
 - `Task loop running via Qt timer`
 
 ## Step 5 - Verify from MCP Client
@@ -253,8 +240,6 @@ Success example (shape may vary by client):
     <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/addon.py> into the
     PFC IPython console -- it installs (with mirror fallback) and starts the
     bridge in one go.
-- `No module named websockets`:
-  - Install `websockets==9.1` for PFC 6/7 or `websockets==16.0` for PFC 9 in the embedded Python environment.
 - `status remains pending / plot diagnostic timeout during solve`:
   - Upgrade to the latest `itasca-mcp-bridge` release.
 - `pip` upgrade warning after install:

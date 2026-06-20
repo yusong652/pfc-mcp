@@ -4,13 +4,15 @@ Verifies that each tool returns the expected field structure,
 ensuring the API contract between pfc-mcp and its consumers is stable.
 """
 
+import http.server
 import json
 import os
+import socketserver
+import threading
 import time
 from pathlib import Path
 
 import pytest
-import websockets
 
 from itasca_mcp.bridge.client import close_bridge_client
 from itasca_mcp.server import mcp
@@ -21,116 +23,161 @@ from itasca_mcp.server import mcp
 TASK_STORE = {}
 
 
-async def _mock_bridge_handler(websocket):
-    """Mock itasca-mcp-bridge that handles all task-related message types."""
-    async for raw in websocket:
-        req = json.loads(raw)
-        req_id = req.get("request_id", "unknown")
-        msg_type = req.get("type", "execute_task")
+def _build_response(msg_type, req):
+    """Build the mock bridge response for a single request (transport-agnostic)."""
+    req_id = req.get("request_id", "unknown")
 
-        if msg_type == "execute_task":
-            task_id = req.get("task_id", "000000")
-            TASK_STORE[task_id] = {
-                "status": "running",
-                "start_time": time.time(),
-                "script_path": req.get("script_path", ""),
-                "description": req.get("description", ""),
-            }
-            resp = {
+    if msg_type == "execute_task":
+        task_id = req.get("task_id", "000000")
+        TASK_STORE[task_id] = {
+            "status": "running",
+            "start_time": time.time(),
+            "script_path": req.get("script_path", ""),
+            "description": req.get("description", ""),
+        }
+        return {
+            "type": "result",
+            "request_id": req_id,
+            "status": "pending",
+            "message": f"Script submitted: {Path(req.get('script_path', '')).name}",
+        }
+
+    if msg_type == "check_task_status":
+        task_id = req.get("task_id", "")
+        stored = TASK_STORE.get(task_id)
+        if stored:
+            return {
                 "type": "result",
                 "request_id": req_id,
-                "status": "pending",
-                "message": f"Script submitted: {Path(req.get('script_path', '')).name}",
-            }
-
-        elif msg_type == "check_task_status":
-            task_id = req.get("task_id", "")
-            stored = TASK_STORE.get(task_id)
-            if stored:
-                resp = {
-                    "type": "result",
-                    "request_id": req_id,
-                    "status": stored["status"],
-                    "message": "ok",
-                    "data": {
-                        "task_id": task_id,
-                        "status": stored["status"],
-                        "start_time": stored["start_time"],
-                        "end_time": None,
-                        "elapsed_time": "5.0s",
-                        "script_path": stored["script_path"],
-                        "description": stored["description"],
-                        "output": "Cycle 100: unbalanced=1e-3\nCycle 200: unbalanced=5e-4\n",
-                        "result": None,
-                        "error": None,
-                    },
-                }
-            else:
-                resp = {
-                    "type": "result",
-                    "request_id": req_id,
-                    "status": "not_found",
-                    "message": f"Task not found: {task_id}",
-                    "data": None,
-                }
-
-        elif msg_type == "list_tasks":
-            tasks = [
-                {
-                    "task_id": tid,
-                    "status": t["status"],
-                    "source": "agent",
-                    "elapsed_time": "5.0s",
-                    "entry_script": t["script_path"],
-                    "description": t["description"],
-                }
-                for tid, t in TASK_STORE.items()
-            ]
-            resp = {
-                "type": "result",
-                "request_id": req_id,
-                "status": "success",
-                "message": f"Found {len(tasks)} task(s)",
-                "data": tasks,
-                "pagination": {
-                    "total_count": len(tasks),
-                    "displayed_count": len(tasks),
-                    "offset": 0,
-                    "limit": 32,
-                    "has_more": False,
-                },
-            }
-
-        elif msg_type == "interrupt_task":
-            resp = {
-                "type": "result",
-                "request_id": req_id,
-                "status": "success",
-                "message": f"Interrupt requested for task: {req.get('task_id')}",
-                "data": {"task_id": req.get("task_id"), "interrupt_requested": True},
-            }
-
-        elif msg_type == "execute_code":
-            resp = {
-                "type": "execute_code_result",
-                "request_id": req_id,
-                "status": "success",
-                "message": "Code executed",
+                "status": stored["status"],
+                "message": "ok",
                 "data": {
-                    "output": "42\n",
-                    "result": 42,
+                    "task_id": task_id,
+                    "status": stored["status"],
+                    "start_time": stored["start_time"],
+                    "end_time": None,
+                    "elapsed_time": "5.0s",
+                    "script_path": stored["script_path"],
+                    "description": stored["description"],
+                    "output": "Cycle 100: unbalanced=1e-3\nCycle 200: unbalanced=5e-4\n",
+                    "result": None,
+                    "error": None,
                 },
             }
+        return {
+            "type": "result",
+            "request_id": req_id,
+            "status": "not_found",
+            "message": f"Task not found: {task_id}",
+            "data": None,
+        }
 
-        else:
-            resp = {
-                "type": "result",
-                "request_id": req_id,
-                "status": "error",
-                "message": f"unsupported: {msg_type}",
+    if msg_type == "list_tasks":
+        tasks = [
+            {
+                "task_id": tid,
+                "status": t["status"],
+                "source": "agent",
+                "elapsed_time": "5.0s",
+                "entry_script": t["script_path"],
+                "description": t["description"],
             }
+            for tid, t in TASK_STORE.items()
+        ]
+        return {
+            "type": "result",
+            "request_id": req_id,
+            "status": "success",
+            "message": f"Found {len(tasks)} task(s)",
+            "data": tasks,
+            "pagination": {
+                "total_count": len(tasks),
+                "displayed_count": len(tasks),
+                "offset": 0,
+                "limit": 32,
+                "has_more": False,
+            },
+        }
 
-        await websocket.send(json.dumps(resp))
+    if msg_type == "interrupt_task":
+        return {
+            "type": "result",
+            "request_id": req_id,
+            "status": "success",
+            "message": f"Interrupt requested for task: {req.get('task_id')}",
+            "data": {"task_id": req.get("task_id"), "interrupt_requested": True},
+        }
+
+    if msg_type == "execute_code":
+        return {
+            "type": "execute_code_result",
+            "request_id": req_id,
+            "status": "success",
+            "message": "Code executed",
+            "data": {
+                "output": "42\n",
+                "result": 42,
+            },
+        }
+
+    return {
+        "type": "result",
+        "request_id": req_id,
+        "status": "error",
+        "message": f"unsupported: {msg_type}",
+    }
+
+
+class _MockBridgeHandler(http.server.BaseHTTPRequestHandler):
+    """Mock itasca-mcp-bridge over HTTP + SSE, mirroring the real transport.
+
+    ``POST /<command>`` dispatches to ``_build_response``; ``GET /events``
+    serves a keepalive-only SSE stream (no doorbells needed: the contract
+    tests re-poll status directly).
+    """
+
+    protocol_version = "HTTP/1.1"
+
+    def log_message(self, *args):
+        pass
+
+    def do_GET(self):
+        if self.path.split("?", 1)[0] != "/events":
+            self.send_response(404)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        try:
+            self.wfile.write(b": connected\n\n")
+            self.wfile.flush()
+            while not self.server.stop_event.is_set():
+                self.wfile.write(b": keepalive\n\n")
+                self.wfile.flush()
+                time.sleep(0.2)
+        except (BrokenPipeError, ConnectionResetError, ValueError, OSError):
+            pass
+
+    def do_POST(self):
+        length = int(self.headers.get("Content-Length", 0) or 0)
+        raw = self.rfile.read(length) if length > 0 else b""
+        req = json.loads(raw.decode("utf-8")) if raw else {}
+        command = self.path.split("?", 1)[0].strip("/")
+        resp = _build_response(command, req)
+        body = json.dumps(resp).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+
+class _ThreadingHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
+    daemon_threads = True
+    allow_reuse_address = True
 
 
 @pytest.fixture()
@@ -138,11 +185,14 @@ async def mock_bridge(tmp_path):
     """Start mock bridge and configure environment."""
     TASK_STORE.clear()
 
-    server = await websockets.serve(_mock_bridge_handler, "127.0.0.1", 0)
-    port = server.sockets[0].getsockname()[1]
+    server = _ThreadingHTTPServer(("127.0.0.1", 0), _MockBridgeHandler)
+    server.stop_event = threading.Event()
+    port = server.server_address[1]
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
 
     prev = os.environ.get("ITASCA_MCP_BRIDGE_URL")
-    os.environ["ITASCA_MCP_BRIDGE_URL"] = f"ws://127.0.0.1:{port}"
+    os.environ["ITASCA_MCP_BRIDGE_URL"] = f"http://127.0.0.1:{port}"
 
     await close_bridge_client()
 
@@ -153,8 +203,9 @@ async def mock_bridge(tmp_path):
         os.environ.pop("ITASCA_MCP_BRIDGE_URL", None)
     else:
         os.environ["ITASCA_MCP_BRIDGE_URL"] = prev
-    server.close()
-    await server.wait_closed()
+    server.stop_event.set()
+    server.shutdown()
+    server.server_close()
 
 
 # ── itasca_execute_task ─────────────────────────────────────

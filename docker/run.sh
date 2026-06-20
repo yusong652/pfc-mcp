@@ -28,7 +28,7 @@ echo "[run.sh] Bringing up pfc-mcp..."
 if [ "${PFC_GUI:-}" = "1" ]; then
     echo "  GUI:    http://localhost:6080/vnc.html"
 fi
-echo "  bridge: ws://localhost:9001"
+echo "  bridge: http://localhost:9001"
 echo "  stop with Ctrl-C"
 echo ""
 

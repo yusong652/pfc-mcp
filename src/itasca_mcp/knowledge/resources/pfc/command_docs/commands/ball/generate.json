@@ -88,7 +88,32 @@
           "command": "ball generate id 1 500 radius 0.5 group 'layer1'",
           "description": "Generate balls with IDs 1-500, assign to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-ballgenerate1.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate1.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate2.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate2.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate3.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate3.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate4.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate4.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate5.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate5.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "ball generate",
@@ -166,7 +191,32 @@
           "command": "ball generate id 1 500 radius 0.5 group 'layer1'",
           "description": "Generate balls with IDs 1-500, assign to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-ballgenerate1.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate1.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate2.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate2.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate3.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate3.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate4.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate4.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate5.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate5.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "ball generate",
@@ -244,7 +294,32 @@
           "command": "ball generate id 1 500 radius 0.5 group 'layer1'",
           "description": "Generate balls with IDs 1-500, assign to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-ballgenerate1.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate1.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate2.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate2.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate3.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate3.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate4.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate4.png"
+          },
+          {
+            "name": "p3d-cmd-ballgenerate5.png",
+            "doc_path": "_images/p3d-cmd-ballgenerate5.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

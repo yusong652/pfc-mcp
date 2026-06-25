@@ -46,7 +46,20 @@
           "command": "wall export geometry range id 1 10",
           "description": "Export walls with IDs 1-10 into geometry set 'walls'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "wallexportgeometry1.png",
+            "doc_path": "_images/wallexportgeometry1.png"
+          },
+          {
+            "name": "wallexportgeometry2.png",
+            "doc_path": "_images/wallexportgeometry2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "wall export",
@@ -83,7 +96,20 @@
           "command": "wall export geometry range id 1 10",
           "description": "Export walls with IDs 1-10 into geometry set 'walls'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "wallexportgeometry1.png",
+            "doc_path": "_images/wallexportgeometry1.png"
+          },
+          {
+            "name": "wallexportgeometry2.png",
+            "doc_path": "_images/wallexportgeometry2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "wall export",
@@ -120,7 +146,20 @@
           "command": "wall export geometry range id 1 10",
           "description": "Export walls with IDs 1-10 into geometry set 'walls'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "wallexportgeometry1.png",
+            "doc_path": "_images/wallexportgeometry1.png"
+          },
+          {
+            "name": "wallexportgeometry2.png",
+            "doc_path": "_images/wallexportgeometry2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

@@ -132,13 +132,71 @@
         "target_version": "6.0"
       },
       "figure_reference": {
+        "figures": [
+          {
+            "name": "brick.png",
+            "doc_path": "_images/brick.png"
+          },
+          {
+            "name": "cshell.png",
+            "doc_path": "_images/cshell.png"
+          },
+          {
+            "name": "cylinder.png",
+            "doc_path": "_images/cylinder.png"
+          },
+          {
+            "name": "cylint.png",
+            "doc_path": "_images/cylint.png"
+          },
+          {
+            "name": "dbrick.png",
+            "doc_path": "_images/dbrick.png"
+          },
+          {
+            "name": "pyramid.png",
+            "doc_path": "_images/pyramid.png"
+          },
+          {
+            "name": "radbrick.png",
+            "doc_path": "_images/radbrick.png"
+          },
+          {
+            "name": "radcylinder.png",
+            "doc_path": "_images/radcylinder.png"
+          },
+          {
+            "name": "radtunnel.png",
+            "doc_path": "_images/radtunnel.png"
+          },
+          {
+            "name": "tetrahedron.png",
+            "doc_path": "_images/tetrahedron.png"
+          },
+          {
+            "name": "tunint.png",
+            "doc_path": "_images/tunint.png"
+          },
+          {
+            "name": "uwedge.png",
+            "doc_path": "_images/uwedge.png"
+          },
+          {
+            "name": "wedge.png",
+            "doc_path": "_images/wedge.png"
+          },
+          {
+            "name": "wwedge.png",
+            "doc_path": "_images/wwedge.png"
+          }
+        ],
         "text_incomplete": true,
-        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
         "deferrals": [
           "Refer to the figures above for entries and dimensions.",
           "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
           "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
-        ]
+        ],
+        "note": "The text below explicitly defers to figures that are not captured in this corpus, so load-bearing detail (reference-point ordering point 0..N, size -> direction mapping, dimension meaning) is missing here. Do not guess it: read the figure -- Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly. Or confirm empirically: build one primitive and read back gridpoint coordinates via itasca_execute_code to deduce the convention."
       }
     },
     "7.0": {
@@ -277,13 +335,71 @@
         "target_version": "7.0"
       },
       "figure_reference": {
+        "figures": [
+          {
+            "name": "brick.png",
+            "doc_path": "_images/brick.png"
+          },
+          {
+            "name": "cshell.png",
+            "doc_path": "_images/cshell.png"
+          },
+          {
+            "name": "cylinder.png",
+            "doc_path": "_images/cylinder.png"
+          },
+          {
+            "name": "cylint.png",
+            "doc_path": "_images/cylint.png"
+          },
+          {
+            "name": "dbrick.png",
+            "doc_path": "_images/dbrick.png"
+          },
+          {
+            "name": "pyramid.png",
+            "doc_path": "_images/pyramid.png"
+          },
+          {
+            "name": "radbrick.png",
+            "doc_path": "_images/radbrick.png"
+          },
+          {
+            "name": "radcylinder.png",
+            "doc_path": "_images/radcylinder.png"
+          },
+          {
+            "name": "radtunnel.png",
+            "doc_path": "_images/radtunnel.png"
+          },
+          {
+            "name": "tetrahedron.png",
+            "doc_path": "_images/tetrahedron.png"
+          },
+          {
+            "name": "tunint.png",
+            "doc_path": "_images/tunint.png"
+          },
+          {
+            "name": "uwedge.png",
+            "doc_path": "_images/uwedge.png"
+          },
+          {
+            "name": "wedge.png",
+            "doc_path": "_images/wedge.png"
+          },
+          {
+            "name": "wwedge.png",
+            "doc_path": "_images/wwedge.png"
+          }
+        ],
         "text_incomplete": true,
-        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
         "deferrals": [
           "Refer to the figures above for entries and dimensions.",
           "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
           "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
-        ]
+        ],
+        "note": "The text below explicitly defers to figures that are not captured in this corpus, so load-bearing detail (reference-point ordering point 0..N, size -> direction mapping, dimension meaning) is missing here. Do not guess it: read the figure -- Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly. Or confirm empirically: build one primitive and read back gridpoint coordinates via itasca_execute_code to deduce the convention."
       }
     },
     "9.0": {
@@ -402,14 +518,72 @@
         }
       ],
       "figure_reference": {
+        "figures": [
+          {
+            "name": "brick.png",
+            "doc_path": "_images/brick.png"
+          },
+          {
+            "name": "cshell.png",
+            "doc_path": "_images/cshell.png"
+          },
+          {
+            "name": "cylinder.png",
+            "doc_path": "_images/cylinder.png"
+          },
+          {
+            "name": "cylint.png",
+            "doc_path": "_images/cylint.png"
+          },
+          {
+            "name": "dbrick.png",
+            "doc_path": "_images/dbrick.png"
+          },
+          {
+            "name": "pyramid.png",
+            "doc_path": "_images/pyramid.png"
+          },
+          {
+            "name": "radbrick.png",
+            "doc_path": "_images/radbrick.png"
+          },
+          {
+            "name": "radcylinder.png",
+            "doc_path": "_images/radcylinder.png"
+          },
+          {
+            "name": "radtunnel.png",
+            "doc_path": "_images/radtunnel.png"
+          },
+          {
+            "name": "tetrahedron.png",
+            "doc_path": "_images/tetrahedron.png"
+          },
+          {
+            "name": "tunint.png",
+            "doc_path": "_images/tunint.png"
+          },
+          {
+            "name": "uwedge.png",
+            "doc_path": "_images/uwedge.png"
+          },
+          {
+            "name": "wedge.png",
+            "doc_path": "_images/wedge.png"
+          },
+          {
+            "name": "wwedge.png",
+            "doc_path": "_images/wwedge.png"
+          }
+        ],
         "text_incomplete": true,
-        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
         "deferrals": [
           "Refer to the figures above for entries and dimensions.",
           "The locations of these points are illustrated in the reference images (click on any thumbnail above to access).",
           "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
           "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
-        ]
+        ],
+        "note": "The text below explicitly defers to figures that are not captured in this corpus, so load-bearing detail (reference-point ordering point 0..N, size -> direction mapping, dimension meaning) is missing here. Do not guess it: read the figure -- Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly. Or confirm empirically: build one primitive and read back gridpoint coordinates via itasca_execute_code to deduce the convention."
       }
     }
   }

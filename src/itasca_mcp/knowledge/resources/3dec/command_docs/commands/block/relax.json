@@ -44,7 +44,16 @@
           "description": "When a block relax command is given, all faces in the range are automatically assigned a group name. By default, the group name is relax in the slot relax . It is possible to overwrite this default by assigning a specific group name (and, optionally, slot) to the faces in the range. Note that if a group name is chosen that already exists, the string _1 will be appended to the specified group name."
         }
       ],
-      "examples": []
+      "examples": [],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "cmd-relax.png",
+            "doc_path": "_images/cmd-relax.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

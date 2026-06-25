@@ -67,7 +67,20 @@
           "command": "ball create position (2,3,4)",
           "description": "Create ball at (2,3,4) with default radius (1/40th of domain extent)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballcreate1.png",
+            "doc_path": "_images/ballcreate1.png"
+          },
+          {
+            "name": "ballcreate2.png",
+            "doc_path": "_images/ballcreate2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "ball create",
@@ -126,7 +139,20 @@
           "command": "ball create position (2,3,4)",
           "description": "Create ball at (2,3,4) with default radius (1/40th of domain extent)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballcreate1.png",
+            "doc_path": "_images/ballcreate1.png"
+          },
+          {
+            "name": "ballcreate2.png",
+            "doc_path": "_images/ballcreate2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "ball create",
@@ -185,7 +211,20 @@
           "command": "ball create position (2,3,4)",
           "description": "Create ball at (2,3,4) with default radius (1/40th of domain extent)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballcreate1.png",
+            "doc_path": "_images/ballcreate1.png"
+          },
+          {
+            "name": "ballcreate2.png",
+            "doc_path": "_images/ballcreate2.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

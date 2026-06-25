@@ -1,14 +1,20 @@
-"""Tests for the figure_reference corpus-flagging pipeline.
+"""Tests for the figure_reference corpus-flagging pipeline (v2).
 
-The ``scripts/corpus/flag_figure_defined.py`` pass marks command docs whose
-geometry/parameters are defined only in figures the text corpus dropped (e.g.
-``zone create2d`` primitives, whose reference-point ordering lives in
-thumbnails). These tests guard both the detection logic and the end-to-end
-surfacing of the flag through the loader (the path ``itasca_browse_commands``
-uses).
+`scripts/corpus/extract_figure_refs.py` mines the source HTML for the reference
+figures the text corpus dropped and writes `figure_manifest.json`;
+`scripts/corpus/flag_figure_defined.py` joins that manifest onto every command
+doc and adds a structured `figure_reference` flag with two independent signals:
+
+* `figures`  -- neutral fact: the figures exist at these verified doc_paths.
+* `text_incomplete` / `deferrals` -- the text itself explicitly defers to a
+  figure (the "do not guess" sub-signal).
+
+These tests guard the detection/assembly logic, the manifest shape, idempotency,
+and end-to-end surfacing through the loader (the `itasca_browse_commands` path).
 """
 
 import importlib.util
+import json
 from pathlib import Path
 
 import pytest
@@ -19,116 +25,167 @@ from itasca_mcp.knowledge.commands.loader import CommandLoader
 _SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "corpus" / "flag_figure_defined.py"
 _spec = importlib.util.spec_from_file_location("flag_figure_defined", _SCRIPT)
 assert _spec and _spec.loader
-flag_figure_defined = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(flag_figure_defined)
+ffd = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(ffd)
+
+# A figure list shaped like the manifest, for unit tests.
+_FIGS = [{"name": "sector-quad.png", "doc_path": "_images/sector-quad.png"}]
 
 
 class TestDeferralDetection:
-    """Unit tests for the figure-deferral text detection."""
+    """Text deferral phrase detection."""
 
     def test_detects_reference_image_idiom(self):
-        text = "The locations of these points are illustrated in the reference images."
-        assert flag_figure_defined._find_deferrals(text)
+        assert ffd._find_deferrals("The points are illustrated in the reference images.")
 
     def test_detects_figures_above_idiom(self):
-        text = "Refer to the figures above for entries and dimensions."
-        assert flag_figure_defined._find_deferrals(text)
+        assert ffd._find_deferrals("Refer to the figures above for entries and dimensions.")
 
     def test_detects_thumbnail_idiom(self):
-        text = "Click on any thumbnail above to access the enlargement."
-        assert flag_figure_defined._find_deferrals(text)
+        assert ffd._find_deferrals("Click on any thumbnail above to access the enlargement.")
 
     def test_ignores_plain_prose(self):
-        text = "Create a ball at the given position with the given radius."
-        assert flag_figure_defined._find_deferrals(text) == []
+        assert ffd._find_deferrals("Create a ball at the given position with the given radius.") == []
 
-    def test_build_flag_collects_distinct_sentences(self):
-        texts = [
-            "Refer to the figures above for entries.",
-            "Refer to the figures above for entries.",  # duplicate -> collapsed
-            "Shown in the reference images.",
-        ]
-        flag = flag_figure_defined._build_flag(texts)
+
+class TestBuildFlag:
+    """The two signals assemble independently."""
+
+    def test_figures_only_is_neutral(self):
+        flag = ffd._build_flag(_FIGS, [])
         assert flag is not None
+        assert flag["figures"] == _FIGS
+        assert "text_incomplete" not in flag
+        assert flag["note"] == ffd.NOTE_NEUTRAL
+
+    def test_deferrals_only_has_no_figures(self):
+        flag = ffd._build_flag(None, ["Refer to the figures above."])
+        assert flag is not None
+        assert "figures" not in flag
         assert flag["text_incomplete"] is True
-        assert len(flag["deferrals"]) == 2
+        assert flag["note"] == ffd.NOTE_INCOMPLETE
 
-    def test_build_flag_none_when_clean(self):
-        assert flag_figure_defined._build_flag(["just plain text"]) is None
+    def test_both_signals_use_incomplete_note(self):
+        flag = ffd._build_flag(_FIGS, ["Refer to the figures above."])
+        assert flag["figures"] == _FIGS
+        assert flag["text_incomplete"] is True
+        assert flag["note"] == ffd.NOTE_INCOMPLETE
+
+    def test_neither_is_none(self):
+        assert ffd._build_flag(None, []) is None
+
+    def test_deferrals_are_capped_and_deduped_upstream(self):
+        flag = ffd._build_flag(None, ["a."] * 10)
+        assert len(flag["deferrals"]) == ffd.MAX_DEFERRALS
 
 
-class TestApplyIdempotent:
-    """The pass must be a stable fixed point."""
+class TestApply:
+    """_apply_to_doc joins the manifest and the text signal."""
 
-    def test_apply_twice_is_stable(self):
+    MANIFEST = {"zone create2d": _FIGS}
+
+    def test_figures_attached_from_manifest(self):
+        doc = {"versions": {"9.0": {"command": "zone create2d", "keywords": []}}}
+        assert ffd._apply_to_doc(doc, self.MANIFEST) is True
+        assert doc["versions"]["9.0"]["figure_reference"]["figures"] == _FIGS
+
+    def test_deferral_text_sets_incomplete(self):
         doc = {
-            "description": "shape command",
             "versions": {
                 "9.0": {
                     "command": "zone create2d",
                     "keywords": [{"name": "size", "description": "shown in the reference images above."}],
                 }
-            },
+            }
         }
-        first = flag_figure_defined._apply_to_doc(doc)
-        second = flag_figure_defined._apply_to_doc(doc)
-        assert first is True
-        assert second is False  # nothing left to change
-        assert "figure_reference" in doc["versions"]["9.0"]
+        ffd._apply_to_doc(doc, self.MANIFEST)
+        fr = doc["versions"]["9.0"]["figure_reference"]
+        assert fr["text_incomplete"] is True and fr["figures"] == _FIGS
 
-    def test_stale_flag_removed_when_text_clean(self):
+    def test_no_match_no_flag(self):
+        doc = {"versions": {"9.0": {"command": "model solve", "keywords": []}}}
+        assert ffd._apply_to_doc(doc, self.MANIFEST) is False
+        assert "figure_reference" not in doc["versions"]["9.0"]
+
+    def test_idempotent(self):
+        doc = {"versions": {"9.0": {"command": "zone create2d", "keywords": []}}}
+        assert ffd._apply_to_doc(doc, self.MANIFEST) is True
+        assert ffd._apply_to_doc(doc, self.MANIFEST) is False
+
+    def test_stale_flag_removed(self):
         doc = {
             "versions": {
                 "9.0": {
-                    "command": "x",
-                    "keywords": [{"name": "k", "description": "plain prose only."}],
-                    "figure_reference": {"text_incomplete": True, "note": "old", "deferrals": []},
+                    "command": "model solve",
+                    "keywords": [],
+                    "figure_reference": {"figures": _FIGS, "note": "old"},
                 }
             }
         }
-        changed = flag_figure_defined._apply_to_doc(doc)
-        assert changed is True
+        assert ffd._apply_to_doc(doc, self.MANIFEST) is True
         assert "figure_reference" not in doc["versions"]["9.0"]
 
     def test_unavailable_version_never_flagged(self):
-        doc = {
-            "description": "shown in the reference images",  # deferral in shared text
-            "versions": {"6.0": {"available": False}},
-        }
-        flag_figure_defined._apply_to_doc(doc)
+        doc = {"versions": {"6.0": {"available": False}}}
+        ffd._apply_to_doc(doc, self.MANIFEST)
         assert "figure_reference" not in doc["versions"]["6.0"]
 
 
+class TestManifest:
+    """The committed manifest is well-formed and covers the key commands."""
+
+    def test_manifest_shape(self):
+        manifest = ffd.load_manifest()
+        assert manifest, "manifest is empty"
+        for command, figs in manifest.items():
+            assert isinstance(command, str) and command
+            for f in figs:
+                assert f["doc_path"] == f"_images/{f['name']}"
+                assert f["name"].lower().endswith((".png", ".svg", ".gif"))
+
+    def test_manifest_has_primitive_creators(self):
+        manifest = ffd.load_manifest()
+        assert "zone create2d" in manifest
+        assert "zone create" in manifest
+        assert any(f["name"] == "sector-quad.png" for f in manifest["zone create2d"])
+
+
 class TestCorpusUpToDate:
-    """The committed corpus must already carry the flags (CI guard == --check)."""
+    """Committed corpus must match the pass output (CI guard == --check)."""
 
     def test_committed_corpus_is_not_stale(self):
-        import json
-
+        manifest = ffd.load_manifest()
         stale = []
-        for path in flag_figure_defined.iter_command_docs():
+        for path in ffd.iter_command_docs():
             doc = json.loads(path.read_text(encoding="utf-8"))
-            if flag_figure_defined._apply_to_doc(doc):
+            if ffd._apply_to_doc(doc, manifest):
                 stale.append(path.name)
         assert not stale, f"Run flag_figure_defined.py; stale: {stale}"
 
 
 class TestFlagSurfacesThroughLoader:
-    """End-to-end: the flag must reach the doc the browse tool returns."""
+    """End-to-end: the flag reaches the doc the browse tool returns."""
 
     def setup_method(self):
         CommandLoader.clear_cache()
 
-    def test_create2d_carries_figure_reference(self):
+    def test_create2d_carries_figures_and_incomplete(self):
         doc = CommandLoader.load_command_doc("zone", "create2d", "9.0", software="flac")
-        assert doc is not None
         fr = doc.get("figure_reference")
         assert fr is not None
+        assert len(fr["figures"]) >= 7
+        assert all(f["doc_path"].startswith("_images/") for f in fr["figures"])
         assert fr["text_incomplete"] is True
-        assert any("reference image" in d.lower() or "figures above" in d.lower() for d in fr["deferrals"])
+
+    def test_illustrative_command_has_figures_but_not_incomplete(self):
+        # ball generate has figures but the text does not defer -> neutral.
+        doc = CommandLoader.load_command_doc("ball", "generate", "9.0", software="pfc")
+        fr = doc.get("figure_reference")
+        assert fr is not None and fr.get("figures")
+        assert "text_incomplete" not in fr
 
     def test_plain_command_has_no_figure_reference(self):
-        doc = CommandLoader.load_command_doc("ball", "create", "7.0", software="pfc")
+        doc = CommandLoader.load_command_doc("model", "solve", "7.0", software="pfc")
         assert doc is not None
         assert "figure_reference" not in doc
 

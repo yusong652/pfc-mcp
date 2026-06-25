@@ -125,7 +125,20 @@
           "command": "wall generate name 'boundary' group 'walls' box -10 10 -10 10 0 20",
           "description": "Generate named box in group 'walls' (3D)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "cones.png",
+            "doc_path": "_images/cones.png"
+          },
+          {
+            "name": "spheres.png",
+            "doc_path": "_images/spheres.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "wall generate",
@@ -229,7 +242,20 @@
           "command": "wall generate name 'boundary' group 'walls' box -10 10 -10 10 0 20",
           "description": "Generate named box in group 'walls' (3D)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "cones.png",
+            "doc_path": "_images/cones.png"
+          },
+          {
+            "name": "spheres.png",
+            "doc_path": "_images/spheres.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "wall generate",
@@ -338,7 +364,20 @@
           "command": "wall generate name 'boundary' group 'walls' box -10 10 -10 10 0 20",
           "description": "Generate named box in group 'walls' (3D)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "cones.png",
+            "doc_path": "_images/cones.png"
+          },
+          {
+            "name": "spheres.png",
+            "doc_path": "_images/spheres.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

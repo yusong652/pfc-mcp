@@ -64,7 +64,24 @@
           "command": "ball export geometry resolution 0.5 range id 1 100",
           "description": "Export balls 1-100 with lower resolution (coarser triangulation)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballexportgeometry12.png",
+            "doc_path": "_images/ballexportgeometry12.png"
+          },
+          {
+            "name": "ballexportgeometry2.png",
+            "doc_path": "_images/ballexportgeometry2.png"
+          },
+          {
+            "name": "ballexportgeometry3.png",
+            "doc_path": "_images/ballexportgeometry3.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "ball export",
@@ -97,7 +114,24 @@
           "command": "ball export geometry resolution 0.5 range id 1 100",
           "description": "Export balls 1-100 with lower resolution (coarser triangulation)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballexportgeometry12.png",
+            "doc_path": "_images/ballexportgeometry12.png"
+          },
+          {
+            "name": "ballexportgeometry2.png",
+            "doc_path": "_images/ballexportgeometry2.png"
+          },
+          {
+            "name": "ballexportgeometry3.png",
+            "doc_path": "_images/ballexportgeometry3.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "ball export",
@@ -130,7 +164,24 @@
           "command": "ball export geometry resolution 0.5 range id 1 100",
           "description": "Export balls 1-100 with lower resolution (coarser triangulation)"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "ballexportgeometry12.png",
+            "doc_path": "_images/ballexportgeometry12.png"
+          },
+          {
+            "name": "ballexportgeometry2.png",
+            "doc_path": "_images/ballexportgeometry2.png"
+          },
+          {
+            "name": "ballexportgeometry3.png",
+            "doc_path": "_images/ballexportgeometry3.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

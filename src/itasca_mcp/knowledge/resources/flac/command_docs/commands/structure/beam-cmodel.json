@@ -96,7 +96,20 @@
           "syntax": "layout <nx> <i2> <i3>",
           "description": "Number of integration points along the beam length (nx) and across the cross section. For a rectangular cross section: i2 = ny (integration points in y), i3 = nz (integration points in z). For a circular cross section: i2 = nr (radial integration points), i3 = ntheta (circumferential integration points). Allowable ranges: nx in {1..12}; ny, nz in {2..12}; nr in {2,4,6,8}; ntheta in {7,9,11}. At least two integration points along the element axis and across the rectangular section, or seven in the circumferential direction of the circular section, are required to resist bending. Suggested minimal layout: (nx=ny=nz=2) for rectangular, (nx=2, nr=2, ntheta=7) for circular."
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "beam-ip-2thetas-circ.png",
+            "doc_path": "_images/beam-ip-2thetas-circ.png"
+          },
+          {
+            "name": "beam-ip-4nyz-rect.png",
+            "doc_path": "_images/beam-ip-4nyz-rect.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

@@ -86,7 +86,28 @@
           "command": "ball distribute number-bins 1 bin 1 radius 0.8 1.2 group 'layer1' volume-fraction 1.0 porosity 0.38",
           "description": "Single distribution assigned to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-balldistribute1.png",
+            "doc_path": "_images/p3d-cmd-balldistribute1.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute2.png",
+            "doc_path": "_images/p3d-cmd-balldistribute2.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute3.png",
+            "doc_path": "_images/p3d-cmd-balldistribute3.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute4.png",
+            "doc_path": "_images/p3d-cmd-balldistribute4.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "6.0": {
       "command": "ball distribute",
@@ -135,7 +156,28 @@
           "command": "ball distribute number-bins 1 bin 1 radius 0.8 1.2 group 'layer1' volume-fraction 1.0 porosity 0.38",
           "description": "Single distribution assigned to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-balldistribute1.png",
+            "doc_path": "_images/p3d-cmd-balldistribute1.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute2.png",
+            "doc_path": "_images/p3d-cmd-balldistribute2.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute3.png",
+            "doc_path": "_images/p3d-cmd-balldistribute3.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute4.png",
+            "doc_path": "_images/p3d-cmd-balldistribute4.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     },
     "9.0": {
       "command": "ball distribute",
@@ -184,7 +226,28 @@
           "command": "ball distribute number-bins 1 bin 1 radius 0.8 1.2 group 'layer1' volume-fraction 1.0 porosity 0.38",
           "description": "Single distribution assigned to group 'layer1'"
         }
-      ]
+      ],
+      "figure_reference": {
+        "figures": [
+          {
+            "name": "p3d-cmd-balldistribute1.png",
+            "doc_path": "_images/p3d-cmd-balldistribute1.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute2.png",
+            "doc_path": "_images/p3d-cmd-balldistribute2.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute3.png",
+            "doc_path": "_images/p3d-cmd-balldistribute3.png"
+          },
+          {
+            "name": "p3d-cmd-balldistribute4.png",
+            "doc_path": "_images/p3d-cmd-balldistribute4.png"
+          }
+        ],
+        "note": "This command embeds reference figures that are not captured in this text corpus. Figures are PNGs under <doc-root>/_images/ (doc-root sits beside the engine install, e.g. C:/Program Files/Itasca/<product>/exe64/doc); read them directly."
+      }
     }
   }
 }

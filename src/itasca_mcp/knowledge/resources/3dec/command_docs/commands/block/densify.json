@@ -49,7 +49,14 @@
           "description": "Tetrahedral blocks will be split by first making cuts through the midpoint of each edge. This results in four new tetrahedra and an octahedron in the center. The octahedron is then split into four tetrahedra with two further cuts along the diagonals (see the figure below). Note that if the tet keyword is given, the \\(segments\\) value is ignored for tetrahedral blocks. Blocks that are not tetrahedral are split normally along the global x,y and z axes."
         }
       ],
-      "examples": []
+      "examples": [],
+      "figure_reference": {
+        "text_incomplete": true,
+        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
+        "deferrals": [
+          "The octahedron is then split into four tetrahedra with two further cuts along the diagonals (see the figure below)."
+        ]
+      }
     }
   }
 }

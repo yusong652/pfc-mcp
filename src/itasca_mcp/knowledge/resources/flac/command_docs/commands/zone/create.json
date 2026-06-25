@@ -130,6 +130,15 @@
         ],
         "syntax_basis": "official FLAC3D 6.0 detailed command page",
         "target_version": "6.0"
+      },
+      "figure_reference": {
+        "text_incomplete": true,
+        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
+        "deferrals": [
+          "Refer to the figures above for entries and dimensions.",
+          "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
+          "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
+        ]
       }
     },
     "7.0": {
@@ -266,6 +275,15 @@
         ],
         "syntax_basis": "official FLAC3D 7.0 detailed command page",
         "target_version": "7.0"
+      },
+      "figure_reference": {
+        "text_incomplete": true,
+        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
+        "deferrals": [
+          "Refer to the figures above for entries and dimensions.",
+          "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
+          "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
+        ]
       }
     },
     "9.0": {
@@ -382,7 +400,17 @@
           "syntax": "sweep-axis",
           "description": "When this keyword is given, edge point 0 - point 2 is used as an axis about which edges point 1 - point 4 and point 3 - point 5 are swept. Without this keyword, the grid faces fall on the ( point 0 , point 1 , point 3 ) and ( point 2 , point 4 , point 5 ) planes. This keyword can only be used with the following keywords of the zone create command: cylinder , and cylindrical-shell ."
         }
-      ]
+      ],
+      "figure_reference": {
+        "text_incomplete": true,
+        "note": "This command's documentation refers to figures/images in the source manual that are not captured in this text corpus. Geometric or parametric detail conveyed only by those figures -- e.g. reference-point ordering (point 0..N), the size -> direction mapping, dimension meaning, or split/subdivision patterns -- may therefore be missing below. Do not guess it: confirm the specifics from the engine itself, e.g. build the construct and read back the resulting gridpoints/zones via itasca_execute_code.",
+        "deferrals": [
+          "Refer to the figures above for entries and dimensions.",
+          "The locations of these points are illustrated in the reference images (click on any thumbnail above to access).",
+          "For each shape, the entries and their associated zone directions are shown in the reference images (click any thumbnail above).",
+          "The entries and their corresponding directions for each shape are shown in the reference images (click any thumbnail above)."
+        ]
+      }
     }
   }
 }

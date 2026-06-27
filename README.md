@@ -44,7 +44,22 @@ https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-
 
 ### Manual Setup
 
-**1. Register the MCP server** in your client config:
+**1. Register the MCP server** with your agent.
+
+Most agents register it with a single command:
+
+```bash
+# Claude Code
+claude mcp add itasca-mcp -- uvx itasca-mcp
+
+# Codex / Codex-cli
+codex mcp add itasca-mcp -- uvx itasca-mcp
+
+# Gemini CLI
+gemini mcp add itasca-mcp uvx itasca-mcp
+```
+
+Or fill in the MCP config file manually:
 
 ```json
 {

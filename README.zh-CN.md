@@ -44,7 +44,22 @@ https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-
 
 ### 手动配置
 
-**1. 在客户端配置中注册 MCP 服务：**
+**1. 向你的智能体注册 MCP 服务。**
+
+大多数智能体一条命令即可添加：
+
+```bash
+# Claude Code
+claude mcp add itasca-mcp -- uvx itasca-mcp
+
+# Codex / Codex-cli
+codex mcp add itasca-mcp -- uvx itasca-mcp
+
+# Gemini CLI
+gemini mcp add itasca-mcp uvx itasca-mcp
+```
+
+或者手动填写MCP配置文件：
 
 ```json
 {

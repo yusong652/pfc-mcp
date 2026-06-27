@@ -12,11 +12,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 
-`pfc3d>model new ;now, with LLM.`
+`itasca>model new ;now, with LLM.`
 
 **itasca-mcp** connects AI agents to [ITASCA](https://www.itascacg.com/)'s numerical modeling software — PFC, FLAC, 3DEC, MPoint, and MassFlow — through the [Model Context Protocol](https://modelcontextprotocol.io/). Browse documentation, run simulations, and execute code, all through natural conversation. Pick the engine with the `software` parameter.
 
-`pfc3d>model solve ;LLM solves.`
+`itasca>model solve ;LLM solves.`
 
 ![itasca-mcp demo](https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/itasca-mcp.gif)
 

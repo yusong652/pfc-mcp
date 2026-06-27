@@ -12,11 +12,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 
-`pfc3d>model new ;now, with LLM.`
+`itasca>model new ;now, with LLM.`
 
 **itasca-mcp** 通过 [Model Context Protocol](https://modelcontextprotocol.io/) 将 AI 智能体连接到 [ITASCA](https://www.itascacg.com/) 的数值模拟软件 —— PFC、FLAC、3DEC、MPoint、MassFlow。通过自然语言对话即可浏览文档、运行仿真和执行代码，用 `software` 参数选择引擎。
 
-`pfc3d>model solve ;LLM solves.`
+`itasca>model solve ;LLM solves.`
 
 ![itasca-mcp demo](https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/itasca-mcp.gif)
 

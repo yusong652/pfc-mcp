@@ -45,6 +45,19 @@ section exists.
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-06-27
+
+### Deprecated
+- **`pfc-mcp` is deprecated and frozen in favor of `itasca-mcp`.** This final
+  release is a thin shim: it depends on `itasca-mcp` and runs it unchanged,
+  after leading the MCP server `instructions` with a migration notice so a
+  connecting agent is told to switch. `uvx pfc-mcp` keeps working (it now runs
+  the multi-engine itasca-mcp server), but please update your client config to
+  `uvx itasca-mcp`. No further `pfc-mcp` releases are planned.
+
+  (Tagged from the renamed `yusong652/itasca-mcp` repository on a throwaway
+  branch where the package name is restored to `pfc-mcp`; `main` is unaffected.)
+
 ## [0.6.0] - 2026-06-27
 
 First release under the `itasca-mcp` name (formerly `pfc-mcp`). The server is

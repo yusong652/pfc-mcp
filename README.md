@@ -30,7 +30,7 @@
 
 ### Prerequisites
 
-- **An ITASCA engine installed** — PFC, FLAC, 3DEC, MPoint, or MassFlow (6.0, 7.0, or 9.0)
+- **An ITASCA engine installed** — PFC, FLAC, 3DEC, MPoint, or MassFlow. 9.0+ recommended; Python 3-compatible 6.0 / 7.0 builds also supported.
 - **[uv](https://docs.astral.sh/uv/getting-started/installation/)** installed (for `uvx`)
 
 ### Agentic Setup (Recommended)

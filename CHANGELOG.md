@@ -45,6 +45,52 @@ section exists.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-06-27
+
+First release under the `itasca-mcp` name (formerly `pfc-mcp`). The server is
+now multi-engine and the bridge transport is HTTP-based.
+
+### Changed
+- **Renamed `pfc-mcp` → `itasca-mcp`.** The Python package is `itasca_mcp`,
+  the console script is `itasca-mcp`, and every tool is renamed `pfc_*` →
+  `itasca_*`: `itasca_execute_code`, `itasca_execute_task`,
+  `itasca_check_task_status`, `itasca_list_tasks`, `itasca_interrupt_task`,
+  `itasca_browse_commands`, `itasca_browse_python_api`,
+  `itasca_browse_reference`, `itasca_query_command`, `itasca_query_python_api`.
+  Update your MCP client config to `uvx itasca-mcp`. The `pfc-mcp` package
+  continues only as a deprecation shim that forwards here.
+- **Bridge transport switched from WebSocket to HTTP + SSE** (httpx client).
+  **Requires `itasca-mcp-bridge >= 0.4.0`** (submodule pin bumped to `v0.4.0`).
+  The bridge self-upgrades from PyPI on every start, so existing installs move
+  in step; WebSocket-era bridges are no longer supported.
+
+### Added
+- **Multi-engine documentation corpus** with a required `software` selector on
+  the browse/query tools, spanning PFC, FLAC, 3DEC, MPoint, and MassFlow:
+  - **3DEC**: commands plus the full engine-specific Python API (block family
+    and all proprietary modules), with references for FISH intrinsics,
+    initial/boundary conditions, geometry data tables, structural properties,
+    plot items, histories-and-results, and joint constitutive models.
+  - **MPoint (MPM)** and **MassFlow (gravity flow / caving)**: commands, Python
+    SDK skeletons, engine-exposed modules, and plot-items references.
+  - Shared references (range-elements, zone constitutive models) factored via a
+    `_common` layer across PFC / FLAC / 3DEC where the engines agree.
+
+### Fixed
+- Engine resolution folds FLAC 9.x into a single key and resolves 9.0-only
+  engines at 9.0.
+- Docker dev container passes an explicit bridge mode instead of `mode=auto`.
+
+### Documentation
+- Command docs sourced from engine HTML now carry verified figure references
+  and flag figure-defined entries as text-incomplete, so an agent knows when a
+  command's full definition lives in an image rather than text.
+- Version-gated the `program call` GIL-blocking warning to the engine versions
+  it actually applies to.
+- README, install docs, and the agentic bootstrap guides updated for the
+  `itasca-mcp` name; daily-start flow recommends the self-upgrading two-liner
+  with `addon.py` as first-install only.
+
 ## [0.5.0] - 2026-06-04
 
 ### Added

@@ -1,4 +1,4 @@
-# Compose file for the pfc-mcp dev container.
+# Compose file for the itasca-mcp dev container.
 #
 # Usage (run from repo root):
 #   docker compose -f docker/docker-compose.yml up --build
@@ -22,7 +22,7 @@ services:
       # ITASCA_DEB_DIR=/path/to/dir before invoking compose.
       additional_contexts:
         itasca-deb: ${ITASCA_DEB_DIR:-${HOME}/Downloads}
-    image: pfc-mcp:dev
+    image: itasca-mcp:dev
     platform: linux/amd64
     # Invoke the bind-mounted entrypoint via bash so a missing exec bit on
     # the host file (Edit/Write tools don't preserve it) doesn't kill the

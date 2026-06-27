@@ -40,7 +40,7 @@ DOC = Path(
     "C:/Program Files/Itasca/Itasca Software Subscription/exe64/doc"
     "/common/docproject/source/manual/scripting/python/doc"
 )
-RESOURCES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RESOURCES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 OUT_PY = RESOURCES / "massflow" / "python_sdk_docs"
 SRC_BASE = "https://docs.itascacg.com/itasca900/common/docproject/source/manual/scripting/python/doc"
 ENGINE = "massflow"

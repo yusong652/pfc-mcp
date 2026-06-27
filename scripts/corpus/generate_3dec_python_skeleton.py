@@ -2,7 +2,7 @@
 
 3DEC's engine-specific Python modules (itasca.block, itasca.flowplane, ...) are
 hand-authored docs and are deferred to a later pass. For now we ship a minimal
-skeleton so pfc_query_python_api / pfc_browse_python_api answer software="3dec"
+skeleton so itasca_query_python_api / itasca_browse_python_api answer software="3dec"
 without erroring: it exposes only the shared `itasca` core module, which already
 lives once in _common/ and is reused verbatim (same as FLAC's index does).
 
@@ -17,7 +17,7 @@ import json
 import shutil
 from pathlib import Path
 
-RESOURCES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RESOURCES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 FLAC_PY = RESOURCES / "flac" / "python_sdk_docs"
 OUT_PY = RESOURCES / "3dec" / "python_sdk_docs"
 

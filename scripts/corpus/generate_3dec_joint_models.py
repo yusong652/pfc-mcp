@@ -33,7 +33,7 @@ from typing import Any
 
 DOC = Path("C:/Program Files/Itasca/ItascaSoftware900/exe64/doc/3dec/docproject/source/theory")
 SRC_BASE = "https://docs.itascacg.com/itasca900/3dec/docproject/source/theory"
-OUT = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
+OUT = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
 CAT_DIR = OUT / "joint-models"
 
 # keyword (as `block contact jmodel assign <keyword>`) -> spec.
@@ -284,8 +284,8 @@ def main() -> None:
         },
         "notes": [
             "References are syntax elements used within commands, not standalone commands",
-            "Use pfc_browse_commands (software='3dec') for command syntax",
-            "Use pfc_browse_reference (software='3dec') for reference documentation",
+            "Use itasca_browse_commands (software='3dec') for command syntax",
+            "Use itasca_browse_reference (software='3dec') for reference documentation",
         ],
     }
     OUT.joinpath("index.json").write_text(json.dumps(top, indent=2, ensure_ascii=False) + "\n", "utf-8")

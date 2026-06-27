@@ -23,7 +23,7 @@ from pathlib import Path
 from typing import Any
 
 DOCROOT = Path("C:/Program Files/Itasca/Itasca Software Subscription/exe64/doc/mpm")
-OUT = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/mpoint/references")
+OUT = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/mpoint/references")
 CAT_DIR = OUT / "fish-intrinsics"
 
 ITEMS: list[dict[str, Any]] = [

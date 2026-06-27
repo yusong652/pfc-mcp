@@ -1,5 +1,5 @@
 #!/bin/bash
-# Bring up the pfc-mcp dev container with the right ports/volumes/platform.
+# Bring up the itasca-mcp dev container with the right ports/volumes/platform.
 # Wraps `docker compose` so the long flag list lives in docker-compose.yml.
 #
 # Usage:  ./docker/run.sh           # console mode (default, faster)
@@ -24,7 +24,7 @@ fi
 # volumes (workspace, bridge source) are untouched.
 docker compose -f "$COMPOSE_FILE" down --remove-orphans 2>/dev/null || true
 
-echo "[run.sh] Bringing up pfc-mcp..."
+echo "[run.sh] Bringing up itasca-mcp..."
 if [ "${PFC_GUI:-}" = "1" ]; then
     echo "  GUI:    http://localhost:6080/vnc.html"
 fi

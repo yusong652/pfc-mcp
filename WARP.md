@@ -1,26 +1,26 @@
 # WARP.md
 
-Guidance for coding agents working in the `pfc-mcp` repository.
+Guidance for coding agents working in the `itasca-mcp` repository.
 
 ## Project Overview
 
-`pfc-mcp` provides an MCP server for ITASCA PFC workflows. The bridge runtime that runs inside PFC GUI lives in the [`itasca-mcp-bridge`](https://github.com/yusong652/itasca-mcp-bridge) repo and is consumed here as a git submodule.
+`itasca-mcp` provides an MCP server for ITASCA PFC workflows. The bridge runtime that runs inside PFC GUI lives in the [`itasca-mcp-bridge`](https://github.com/yusong652/itasca-mcp-bridge) repo and is consumed here as a git submodule.
 
 This repository has two runtime contexts:
 
-- `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
+- `src/itasca_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
 - `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): HTTP bridge running inside PFC GUI
 
 End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first install happens via the agentic bootstrap's terminal pip step or `addon.py`, and from then on `itasca_mcp_bridge.start()` self-upgrades on every start. The submodule exists only so contributors can edit bridge code alongside MCP code without two clones. The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is deprecated.
 
 ## Core Architecture
 
-### MCP side (`src/pfc_mcp`)
+### MCP side (`src/itasca_mcp`)
 
 - Exposes documentation tools and execution tools through FastMCP
-- Communicates with bridge via HTTP client (`pfc_mcp.bridge.client`)
+- Communicates with bridge via HTTP client (`itasca_mcp.bridge.client`)
 - Returns a unified tool envelope: `ok`, `data`, `error`
-- Uses script-first execution model (`pfc_execute_task` + `pfc_check_task_status`)
+- Uses script-first execution model (`itasca_execute_task` + `itasca_check_task_status`)
 
 ### Bridge side (`itasca-mcp-bridge` submodule)
 
@@ -32,8 +32,8 @@ End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first inst
 ## Repository Layout
 
 ```text
-pfc-mcp/
-├── src/pfc_mcp/
+itasca-mcp/
+├── src/itasca_mcp/
 │   ├── bridge/          # MCP-side bridge client/task manager
 │   ├── knowledge/       # command/API/reference search system
 │   ├── tools/           # MCP tool implementations
@@ -51,7 +51,7 @@ Run from repository root.
 ```bash
 uv sync
 uv sync --group dev
-uv run pfc-mcp
+uv run itasca-mcp
 uv run pytest tests/test_phase2_tools.py
 uv run pytest tests/test_tool_contracts.py
 ```
@@ -63,8 +63,8 @@ uv run pytest tests/test_tool_contracts.py
    - Do not introduce application/session policy into bridge runtime.
 
 2. Preserve script-only execution semantics.
-   - `pfc_execute_task` submits scripts and returns quickly.
-   - Progress/result retrieval goes through `pfc_check_task_status`.
+   - `itasca_execute_task` submits scripts and returns quickly.
+   - Progress/result retrieval goes through `itasca_check_task_status`.
 
 3. Maintain structured tool contracts.
    - Prefer stable machine-readable keys over ad-hoc text parsing.
@@ -101,9 +101,9 @@ Mock bridge based tests are preferred for deterministic CI.
 
 PFC searchable docs live under:
 
-- `src/pfc_mcp/knowledge/resources/command_docs/`
-- `src/pfc_mcp/knowledge/resources/python_sdk_docs/`
-- `src/pfc_mcp/knowledge/resources/references/`
+- `src/itasca_mcp/knowledge/resources/command_docs/`
+- `src/itasca_mcp/knowledge/resources/python_sdk_docs/`
+- `src/itasca_mcp/knowledge/resources/references/`
 
 When changing schema/content shape, verify browse/query tool behavior remains consistent.
 

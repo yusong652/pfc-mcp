@@ -1,4 +1,4 @@
-# pfc-mcp Bootstrap (Gemini CLI)
+# itasca-mcp Bootstrap (Gemini CLI)
 
 Use this profile when the client is Gemini CLI.
 
@@ -9,7 +9,7 @@ Use this profile when the client is Gemini CLI.
 **Primary (CLI, user scope):**
 
 ```bash
-gemini mcp add --scope user pfc-mcp uvx pfc-mcp
+gemini mcp add --scope user itasca-mcp uvx itasca-mcp
 ```
 
 `--scope user` is REQUIRED. Without it the default scope is `project` (writes only `./.gemini/settings.json`), which reintroduces the "switch working directory → tool disappears" footgun. Requires Gemini CLI >= v0.36; if `mcp add` or the flag is missing, run `gemini mcp add --help` to confirm, then use the fallback.
@@ -19,9 +19,9 @@ gemini mcp add --scope user pfc-mcp uvx pfc-mcp
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "command": "uvx",
-      "args": ["pfc-mcp"]
+      "args": ["itasca-mcp"]
     }
   }
 }
@@ -32,9 +32,9 @@ If `uvx` is unavailable, fallback to:
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "command": "uv",
-      "args": ["tool", "run", "pfc-mcp"]
+      "args": ["tool", "run", "itasca-mcp"]
     }
   }
 }
@@ -46,10 +46,10 @@ Last resort: if the user config file itself is unavailable or write-blocked, use
 
 Always close and reopen Gemini CLI session before continuing.
 
-Then continue to Step 2 and verify with `pfc_list_tasks` at the end of bootstrap.
+Then continue to Step 2 and verify with `itasca_list_tasks` at the end of bootstrap.
 
 ## Continue with common bootstrap
 
 After Step 1, continue from Step 2 in:
 
-- `docs/agentic/pfc-mcp-bootstrap.md`
+- `docs/agentic/itasca-mcp-bootstrap.md`

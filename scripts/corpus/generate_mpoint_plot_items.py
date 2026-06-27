@@ -29,7 +29,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-RES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 OUT = RES / "mpoint/references"
 CAT_DIR = OUT / "plot-items"
 
@@ -457,8 +457,8 @@ def main() -> None:
             },
             "notes": [
                 "References are syntax elements used within commands, not standalone commands",
-                "Use pfc_browse_commands (software='mpoint') for command syntax",
-                "Use pfc_browse_reference (software='mpoint') for reference documentation",
+                "Use itasca_browse_commands (software='mpoint') for command syntax",
+                "Use itasca_browse_reference (software='mpoint') for reference documentation",
             ],
         }
     top.setdefault("categories", {})["plot-items"] = {

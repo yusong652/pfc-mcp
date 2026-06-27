@@ -1,13 +1,13 @@
-# pfc-mcp Agent Bootstrap Guide
+# itasca-mcp Agent Bootstrap Guide
 
-Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a Windows machine.
+Use this guide when an agent needs to set up `itasca-mcp` execution end-to-end on a Windows machine.
 
 ## Target Outcome
 
-1. MCP client is configured to run `pfc-mcp`.
+1. MCP client is configured to run `itasca-mcp`.
 2. `itasca-mcp-bridge` is installed in the correct PFC embedded Python environment.
 3. Bridge is started in PFC GUI via `itasca_mcp_bridge.start()`.
-4. MCP execution tools are verified with `pfc_execute_code`.
+4. MCP execution tools are verified with `itasca_execute_code`.
 
 ## Agent Execution Rules
 
@@ -26,37 +26,37 @@ Use this guide when an agent needs to set up `pfc-mcp` execution end-to-end on a
 
 Use the client-specific Step 1 profile:
 
-- OpenCode: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-opencode.md>
-- Claude Code: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-claude.md>
-- Codex: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-codex.md>
-- Gemini CLI: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-gemini.md>
-- GitHub Copilot CLI: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-copilot.md>
-- toyoura-nagisa: <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md>
+- OpenCode: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-opencode.md>
+- Claude Code: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-claude.md>
+- Codex: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-codex.md>
+- Gemini CLI: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-gemini.md>
+- GitHub Copilot CLI: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-copilot.md>
+- toyoura-nagisa: <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap-toyoura-nagisa.md>
 
 If raw URL fetch is unavailable, use repository-relative paths:
 
-- `docs/agentic/pfc-mcp-bootstrap-opencode.md`
-- `docs/agentic/pfc-mcp-bootstrap-claude.md`
-- `docs/agentic/pfc-mcp-bootstrap-codex.md`
-- `docs/agentic/pfc-mcp-bootstrap-gemini.md`
-- `docs/agentic/pfc-mcp-bootstrap-copilot.md`
-- `docs/agentic/pfc-mcp-bootstrap-toyoura-nagisa.md`
+- `docs/agentic/itasca-mcp-bootstrap-opencode.md`
+- `docs/agentic/itasca-mcp-bootstrap-claude.md`
+- `docs/agentic/itasca-mcp-bootstrap-codex.md`
+- `docs/agentic/itasca-mcp-bootstrap-gemini.md`
+- `docs/agentic/itasca-mcp-bootstrap-copilot.md`
+- `docs/agentic/itasca-mcp-bootstrap-toyoura-nagisa.md`
 
 Apply this MCP launch contract in your client's native config format:
 
-- server id/name: `pfc-mcp`
-- primary launch command: `uvx pfc-mcp`
-- fallback launch command: `uv tool run pfc-mcp`
+- server id/name: `itasca-mcp`
+- primary launch command: `uvx itasca-mcp`
+- fallback launch command: `uv tool run itasca-mcp`
 - enable server in client config
 - prefer user/global-level config by default; fall back to workspace-level config only if the global config is unavailable or write-blocked
 
-> Rationale: `pfc-mcp` bridges a machine-local PFC GUI over a localhost bridge, so the capability is machine-scoped, not project-scoped. A PFC working directory is a simulation workspace and is rarely a shared repo, so workspace-scoped config mainly creates a "switch working directory → tool disappears, must re-run bootstrap" footgun. Keep the config global so it survives directory changes; the per-client profile names the exact user-scope target and the preferred CLI where one exists.
+> Rationale: `itasca-mcp` bridges a machine-local PFC GUI over a localhost bridge, so the capability is machine-scoped, not project-scoped. A PFC working directory is a simulation workspace and is rarely a shared repo, so workspace-scoped config mainly creates a "switch working directory → tool disappears, must re-run bootstrap" footgun. Keep the config global so it survives directory changes; the per-client profile names the exact user-scope target and the preferred CLI where one exists.
 
 When editing MCP config, use this order:
 
 1. If config file does not exist, create it.
-2. If config exists but has no `pfc-mcp` entry, merge/add only that entry.
-3. If `pfc-mcp` already exists, validate/update only MCP launch fields (`command`, `args`, and client-specific extras).
+2. If config exists but has no `itasca-mcp` entry, merge/add only that entry.
+3. If `itasca-mcp` already exists, validate/update only MCP launch fields (`command`, `args`, and client-specific extras).
 4. Do not overwrite unrelated MCP servers.
 
 ## Step 2 - Resolve `pfc_path`
@@ -211,7 +211,7 @@ Expected output includes:
 
 Then reconnect MCP client and call:
 
-- `pfc_execute_code` with a simple snippet, e.g. `print('hello from PFC')`
+- `itasca_execute_code` with a simple snippet, e.g. `print('hello from PFC')`
 
 If `pfc_*` MCP tools are not visible in the client, ask user to fully restart client session first, then retry.
 
@@ -237,7 +237,7 @@ Success example (shape may vary by client):
   - Bridge package not installed in PFC embedded Python (or installed into the
     wrong interpreter). Re-run Step 3 against the resolved `pfc_python`.
   - One-shot fallback: paste the contents of
-    <https://raw.githubusercontent.com/yusong652/pfc-mcp/main/addon.py> into the
+    <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/addon.py> into the
     PFC IPython console -- it installs (with mirror fallback) and starts the
     bridge in one go.
 - `status remains pending / plot diagnostic timeout during solve`:

@@ -24,7 +24,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-RES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 OUT = RES / "mpoint/references"
 CMD_INDEX = RES / "mpoint/command_docs/index.json"
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build pfc-mcp:dev and immediately reclaim space from layers orphaned by
+# Build itasca-mcp:dev and immediately reclaim space from layers orphaned by
 # the rebuild. Without this, every iteration on the Dockerfile leaves the
 # previous engine layer (~12 GB extracted) hanging around as a dangling
 # image, eventually filling Docker's VM disk.
@@ -12,7 +12,7 @@
 set -e
 
 PLATFORM=linux/amd64
-TAG=pfc-mcp:dev
+TAG=itasca-mcp:dev
 DEB_DIR="${ITASCA_DEB_DIR:-$HOME/Downloads}"
 DEB_FILE="$DEB_DIR/itascasoftware.latest.deb"
 

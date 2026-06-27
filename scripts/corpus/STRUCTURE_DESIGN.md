@@ -245,7 +245,7 @@ Each Python SDK doc includes:
 
 ## Scoring System (for Search)
 
-Similar to `pfc_query_python_api.py`:
+Similar to `itasca_query_python_api.py`:
 
 ```python
 # Score ranges:
@@ -258,7 +258,7 @@ Similar to `pfc_query_python_api.py`:
 HIGH_CONFIDENCE_THRESHOLD = 700
 ```
 
-## Example Usage in pfc_query_command Tool
+## Example Usage in itasca_query_command Tool
 
 ```python
 # User query: "generate balls cubic"
@@ -295,4 +295,4 @@ Each JSON file should be validated against a JSON schema to ensure consistency:
 
 **Design Version**: 1.0
 **Created**: 2025-01-21
-**Purpose**: Foundation for `pfc_query_command` tool implementation
+**Purpose**: Foundation for `itasca_query_command` tool implementation

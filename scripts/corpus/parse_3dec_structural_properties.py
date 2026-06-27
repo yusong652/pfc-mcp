@@ -25,7 +25,7 @@ from typing import Any
 
 SEL = Path("C:/Program Files/Itasca/ItascaSoftware900/exe64/doc/common/sel/doc/manual/sel_manual")
 SRC_BASE = "https://docs.itascacg.com/itasca900/common/sel/doc/manual/sel_manual"
-OUT = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
+OUT = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
 CAT_DIR = OUT / "structural-properties"
 
 # SEL types 3DEC exposes (itasca.structure: Beam/Cable/Geogrid/Liner/Pile/Shell).

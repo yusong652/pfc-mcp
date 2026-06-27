@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/header.gif" alt="pfc-mcp" width="70%">
+  <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/header.gif" alt="itasca-mcp" width="70%">
 </p>
 
-# pfc-mcp
+# itasca-mcp
 
-[English](https://github.com/yusong652/pfc-mcp/blob/main/README.md) | [简体中文](https://github.com/yusong652/pfc-mcp/blob/main/README.zh-CN.md)
+[English](https://github.com/yusong652/itasca-mcp/blob/main/README.md) | [简体中文](https://github.com/yusong652/itasca-mcp/blob/main/README.zh-CN.md)
 
-[![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/)
-[![Downloads](https://static.pepy.tech/badge/pfc-mcp)](https://pepy.tech/project/pfc-mcp)
-[![GitHub stars](https://img.shields.io/github/stars/yusong652/pfc-mcp)](https://github.com/yusong652/pfc-mcp/stargazers)
+[![PyPI](https://img.shields.io/pypi/v/itasca-mcp)](https://pypi.org/project/itasca-mcp/)
+[![Downloads](https://static.pepy.tech/badge/itasca-mcp)](https://pepy.tech/project/itasca-mcp)
+[![GitHub stars](https://img.shields.io/github/stars/yusong652/itasca-mcp)](https://github.com/yusong652/itasca-mcp/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 
 `pfc3d>model new ;now, with LLM.`
 
-**pfc-mcp** connects AI agents to [ITASCA PFC](https://www.itascacg.com/software/pfc) — Itasca's discrete element method (DEM) code — through the [Model Context Protocol](https://modelcontextprotocol.io/). Browse documentation, run simulations, and execute code, all through natural conversation.
+**itasca-mcp** connects AI agents to [ITASCA PFC](https://www.itascacg.com/software/pfc) — Itasca's discrete element method (DEM) code — through the [Model Context Protocol](https://modelcontextprotocol.io/). Browse documentation, run simulations, and execute code, all through natural conversation.
 
 `pfc3d>model solve ;LLM solves.`
 
-![pfc-mcp demo](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/pfc-mcp.gif)
+![itasca-mcp demo](https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/itasca-mcp.gif)
 
 ## Tools (10)
 
@@ -39,7 +39,7 @@ Copy this to your AI agent and let it self-configure:
 
 ```text
 Fetch and follow this bootstrap guide end-to-end:
-https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
+https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap.md
 ```
 
 ### Manual Setup
@@ -49,9 +49,9 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "command": "uvx",
-      "args": ["pfc-mcp"]
+      "args": ["itasca-mcp"]
     }
   }
 }
@@ -64,11 +64,11 @@ Download [`addon.py`](addon.py), then use either of these two flows inside PFC:
 - Copy the file contents into the PFC IPython console and run them
 - Or download the file and execute it in PFC GUI
 
-<img src="https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/addon.gif" alt="addon.py demo" width="60%">
+<img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/addon.gif" alt="addon.py demo" width="60%">
 
 ### Verify
 
-Restart your AI agent (Claude Code, Codex CLI, Gemini CLI, etc.) and ask it to call `pfc_execute_code` to verify the connection.
+Restart your AI agent (Claude Code, Codex CLI, Gemini CLI, etc.) and ask it to call `itasca_execute_code` to verify the connection.
 
 ## Daily Startup
 
@@ -92,14 +92,14 @@ itasca_mcp_bridge.start()
 
 ## Troubleshooting
 
-See [Troubleshooting](docs/agentic/pfc-mcp-bootstrap.md#troubleshooting) in the bootstrap guide.
+See [Troubleshooting](docs/agentic/itasca-mcp-bootstrap.md#troubleshooting) in the bootstrap guide.
 
 ## Development
 
 See [Developer Guide: Install and Run from Source](docs/development/source-install.md).
 
-<a href="https://glama.ai/mcp/servers/yusong652/pfc-mcp">
-  <img width="200" height="105" src="https://glama.ai/mcp/servers/yusong652/pfc-mcp/badge" alt="pfc-mcp MCP server" />
+<a href="https://glama.ai/mcp/servers/yusong652/itasca-mcp">
+  <img width="200" height="105" src="https://glama.ai/mcp/servers/yusong652/itasca-mcp/badge" alt="itasca-mcp MCP server" />
 </a>
 
 ## Contributing

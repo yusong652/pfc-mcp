@@ -19,7 +19,7 @@ Usage:
 import json
 from pathlib import Path
 
-RES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 COMMON_REL = "_common/references/range-elements"
 COMMON_DIR = RES / COMMON_REL
 

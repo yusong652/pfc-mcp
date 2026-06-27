@@ -43,7 +43,7 @@ except ModuleNotFoundError:
 # ---------------------------------------------------------------------------
 
 DEC900_DOC = Path("C:/Program Files/Itasca/ItascaSoftware900/exe64/doc/3dec")
-COMMANDS_DIR = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/3dec/command_docs/commands")
+COMMANDS_DIR = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/3dec/command_docs/commands")
 
 # File-name prefix -> 3DEC-proprietary category. Order matters only for clarity;
 # prefixes are mutually exclusive ("cmd_block." never matches cmd_feblock.*).

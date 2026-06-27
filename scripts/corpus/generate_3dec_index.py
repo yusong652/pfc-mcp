@@ -22,7 +22,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-RESOURCES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RESOURCES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 COMMANDS_DIR = RESOURCES / "3dec" / "command_docs" / "commands"
 FLAC_INDEX = RESOURCES / "flac" / "command_docs" / "index.json"
 OUT_INDEX = RESOURCES / "3dec" / "command_docs" / "index.json"

@@ -1,8 +1,8 @@
 """Generate the MassFlow Python SDK skeleton index.
 
 MassFlow's engine-specific Python modules are hand-authored docs deferred to a
-later pass. For now we ship a minimal skeleton so pfc_query_python_api /
-pfc_browse_python_api answer software="massflow" without erroring: it exposes
+later pass. For now we ship a minimal skeleton so itasca_query_python_api /
+itasca_browse_python_api answer software="massflow" without erroring: it exposes
 only the shared `itasca` core module, which already lives once in _common/ and
 is reused verbatim (same as FLAC/3DEC/MPoint skeletons do).
 
@@ -14,7 +14,7 @@ import json
 import shutil
 from pathlib import Path
 
-RESOURCES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RESOURCES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 FLAC_PY = RESOURCES / "flac" / "python_sdk_docs"
 OUT_PY = RESOURCES / "massflow" / "python_sdk_docs"
 

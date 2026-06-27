@@ -19,7 +19,7 @@ Add/merge this entry under `mcpServers`:
       "command": "uvx",
       "args": ["itasca-mcp"],
       "enabled": true,
-      "description": "PFC MCP server"
+      "description": "ITASCA MCP server"
     }
   }
 }
@@ -35,7 +35,7 @@ If `uvx` is unavailable, fallback to:
       "command": "uv",
       "args": ["tool", "run", "itasca-mcp"],
       "enabled": true,
-      "description": "PFC MCP server"
+      "description": "ITASCA MCP server"
     }
   }
 }

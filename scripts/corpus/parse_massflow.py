@@ -46,7 +46,7 @@ except ModuleNotFoundError:
 # ---------------------------------------------------------------------------
 
 MASSFLOW_DOC = Path("C:/Program Files/Itasca/Itasca Software Subscription/exe64/doc/massflow")
-COMMANDS_DIR = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/massflow/command_docs/commands")
+COMMANDS_DIR = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/massflow/command_docs/commands")
 
 PREFIX_TO_CATEGORY = {
     "cmd_massflow.": "massflow",

@@ -21,7 +21,7 @@ pfc-mcp-bridge/scratch/
 src/
 tests/
 docs/
-.pfc-mcp/
+.itasca-mcp/
 .pfc-mcp-bridge/
 
 # IDE / OS junk

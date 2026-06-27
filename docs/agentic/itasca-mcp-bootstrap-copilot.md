@@ -1,4 +1,4 @@
-# pfc-mcp Bootstrap (GitHub Copilot CLI)
+# itasca-mcp Bootstrap (GitHub Copilot CLI)
 
 Use this profile when the client is GitHub Copilot CLI.
 
@@ -9,10 +9,10 @@ Use this profile when the client is GitHub Copilot CLI.
 **Primary (CLI):** `copilot mcp add` always writes the user-level config (global, all working directories). There is no scope flag — it is user-scoped by design:
 
 ```bash
-copilot mcp add pfc-mcp --type local -- uvx pfc-mcp
+copilot mcp add itasca-mcp --type local -- uvx itasca-mcp
 ```
 
-If `uvx` is unavailable: `copilot mcp add pfc-mcp --type local -- uv tool run pfc-mcp`.
+If `uvx` is unavailable: `copilot mcp add itasca-mcp --type local -- uv tool run itasca-mcp`.
 
 (The "Adding MCP servers" how-to page omits `copilot mcp add`; the CLI command reference documents it. If the subcommand is missing on the installed build, use the file fallback below — it works on any version.)
 
@@ -21,10 +21,10 @@ If `uvx` is unavailable: `copilot mcp add pfc-mcp --type local -- uv tool run pf
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "type": "local",
       "command": "uvx",
-      "args": ["pfc-mcp"]
+      "args": ["itasca-mcp"]
     }
   }
 }
@@ -35,10 +35,10 @@ If `uvx` is unavailable, fallback to:
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "type": "local",
       "command": "uv",
-      "args": ["tool", "run", "pfc-mcp"]
+      "args": ["tool", "run", "itasca-mcp"]
     }
   }
 }
@@ -54,4 +54,4 @@ Always close and restart the Copilot CLI session before continuing. Exit the cur
 
 After Step 1, continue from Step 2 in:
 
-- `docs/agentic/pfc-mcp-bootstrap.md`
+- `docs/agentic/itasca-mcp-bootstrap.md`

@@ -67,7 +67,7 @@ def register(mcp: FastMCP) -> None:
         confirm its version with itasca_execute_code (`import
         itasca_mcp_bridge; print(itasca_mcp_bridge.__version__)`). To
         upgrade, fetch and follow the bootstrap guide, then resubmit:
-        https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
+        https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap.md
         """
         try:
             client = await get_bridge_client()

@@ -1,7 +1,7 @@
 # PFC headless dev container
 
 Runs the Itasca PFC Linux engine in console mode plus `itasca-mcp-bridge`, so
-Mac users can develop and test pfc-mcp without a Windows + USB-key setup.
+Mac users can develop and test itasca-mcp without a Windows + USB-key setup.
 Demo mode (no license required) caps models at 1000 balls/clumps + 1000
 rigid blocks + 10 DFNs — enough for bridge integration testing.
 

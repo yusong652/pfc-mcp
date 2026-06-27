@@ -26,7 +26,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-RES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 OUT = RES / "massflow/references"
 CAT_DIR = OUT / "plot-items"
 

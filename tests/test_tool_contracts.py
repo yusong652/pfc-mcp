@@ -1,7 +1,7 @@
-"""Contract tests for pfc-mcp tool response structures.
+"""Contract tests for itasca-mcp tool response structures.
 
 Verifies that each tool returns the expected field structure,
-ensuring the API contract between pfc-mcp and its consumers is stable.
+ensuring the API contract between itasca-mcp and its consumers is stable.
 """
 
 import http.server

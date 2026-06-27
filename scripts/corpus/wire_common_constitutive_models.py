@@ -21,7 +21,7 @@ Usage:
 import json
 from pathlib import Path
 
-RES = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources")
+RES = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources")
 COMMON_REL = "_common/references/constitutive-models"
 FLAC_CAT = RES / "flac/references/constitutive-models/index.json"
 TDEC_REFS = RES / "3dec/references"

@@ -18,10 +18,10 @@
 # Build (Apple Silicon -> emulate x86_64 via Rosetta):
 #   docker build --platform=linux/amd64 \
 #       --build-context itasca-deb=$HOME/Downloads \
-#       -t pfc-mcp:dev -f docker/Dockerfile .
+#       -t itasca-mcp:dev -f docker/Dockerfile .
 #
 # Run, exposing the bridge WS port to the host:
-#   docker run --rm -it --platform=linux/amd64 -p 9001:9001 pfc-mcp:dev
+#   docker run --rm -it --platform=linux/amd64 -p 9001:9001 itasca-mcp:dev
 
 # ---------- Stage 1: install PFC engine ----------
 # Ubuntu 22.04 is required because the Itasca binaries link against glibc 2.32+
@@ -66,7 +66,7 @@ RUN --mount=type=bind,from=itasca-deb,target=/itasca-deb \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # ---------- Stage 2: GUI stack + bridge ----------
-FROM pfc-engine AS pfc-mcp
+FROM pfc-engine AS itasca-mcp
 
 ARG DEBIAN_FRONTEND=noninteractive
 

@@ -26,7 +26,7 @@ from typing import Any
 DOCROOT = Path("C:/Program Files/Itasca/ItascaSoftware900/exe64/doc/3dec/block/doc/manual")
 BLOCK_FISH = DOCROOT / "block_manual/block_fish"
 FLOW_FISH = DOCROOT / "flow_manual/flow_fish"
-OUT = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
+OUT = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/3dec/references")
 CAT_DIR = OUT / "fish-intrinsics"
 
 # Curated items. Each family's ``examples`` are real intrinsic names (validated

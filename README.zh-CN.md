@@ -1,24 +1,24 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/header.gif" alt="pfc-mcp" width="70%">
+  <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/header.gif" alt="itasca-mcp" width="70%">
 </p>
 
-# pfc-mcp
+# itasca-mcp
 
-[English](https://github.com/yusong652/pfc-mcp/blob/main/README.md) | [简体中文](https://github.com/yusong652/pfc-mcp/blob/main/README.zh-CN.md)
+[English](https://github.com/yusong652/itasca-mcp/blob/main/README.md) | [简体中文](https://github.com/yusong652/itasca-mcp/blob/main/README.zh-CN.md)
 
-[![PyPI](https://img.shields.io/pypi/v/pfc-mcp)](https://pypi.org/project/pfc-mcp/)
-[![Downloads](https://static.pepy.tech/badge/pfc-mcp)](https://pepy.tech/project/pfc-mcp)
-[![GitHub stars](https://img.shields.io/github/stars/yusong652/pfc-mcp)](https://github.com/yusong652/pfc-mcp/stargazers)
+[![PyPI](https://img.shields.io/pypi/v/itasca-mcp)](https://pypi.org/project/itasca-mcp/)
+[![Downloads](https://static.pepy.tech/badge/itasca-mcp)](https://pepy.tech/project/itasca-mcp)
+[![GitHub stars](https://img.shields.io/github/stars/yusong652/itasca-mcp)](https://github.com/yusong652/itasca-mcp/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 
 `pfc3d>model new ;now, with LLM.`
 
-**pfc-mcp** 通过 [Model Context Protocol](https://modelcontextprotocol.io/) 将 AI 智能体连接到 [ITASCA PFC](https://www.itascacg.com/software/pfc) —— Itasca 的离散元方法（DEM）软件。通过自然语言对话即可浏览文档、运行仿真和执行代码。
+**itasca-mcp** 通过 [Model Context Protocol](https://modelcontextprotocol.io/) 将 AI 智能体连接到 [ITASCA PFC](https://www.itascacg.com/software/pfc) —— Itasca 的离散元方法（DEM）软件。通过自然语言对话即可浏览文档、运行仿真和执行代码。
 
 `pfc3d>model solve ;LLM solves.`
 
-![pfc-mcp demo](https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/pfc-mcp.gif)
+![itasca-mcp demo](https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/itasca-mcp.gif)
 
 ## 工具（10）
 
@@ -39,7 +39,7 @@
 
 ```text
 请全程用中文与我交流。然后获取并完整按照这份引导指南执行（指南为英文，照其步骤操作即可）：
-https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bootstrap.md
+https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-mcp-bootstrap.md
 ```
 
 ### 手动配置
@@ -49,9 +49,9 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 ```json
 {
   "mcpServers": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "command": "uvx",
-      "args": ["pfc-mcp"]
+      "args": ["itasca-mcp"]
     }
   }
 }
@@ -64,11 +64,11 @@ https://raw.githubusercontent.com/yusong652/pfc-mcp/main/docs/agentic/pfc-mcp-bo
 - 把这个文件的内容复制到 PFC 的 IPython 控制台里运行
 - 或者先把这个文件下载到本地，再在 PFC GUI 里执行它
 
-<img src="https://raw.githubusercontent.com/yusong652/pfc-mcp/assets/addon.gif" alt="addon.py 演示" width="60%">
+<img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/addon.gif" alt="addon.py 演示" width="60%">
 
 ### 验证
 
-重启你的 AI 智能体（Claude Code、Codex CLI、Gemini CLI 等），让它调用 `pfc_execute_code` 来验证连接是否正常。
+重启你的 AI 智能体（Claude Code、Codex CLI、Gemini CLI 等），让它调用 `itasca_execute_code` 来验证连接是否正常。
 
 ## 日常启动
 
@@ -92,14 +92,14 @@ itasca_mcp_bridge.start()
 
 ## 故障排查
 
-详见 bootstrap 指南中的[故障排查章节](docs/agentic/pfc-mcp-bootstrap.md#troubleshooting)。
+详见 bootstrap 指南中的[故障排查章节](docs/agentic/itasca-mcp-bootstrap.md#troubleshooting)。
 
 ## 开发
 
 详见 [开发者指南：从源码安装与运行](docs/development/source-install.zh-CN.md)。
 
-<a href="https://glama.ai/mcp/servers/yusong652/pfc-mcp">
-  <img width="200" height="105" src="https://glama.ai/mcp/servers/yusong652/pfc-mcp/badge" alt="pfc-mcp MCP server" />
+<a href="https://glama.ai/mcp/servers/yusong652/itasca-mcp">
+  <img width="200" height="105" src="https://glama.ai/mcp/servers/yusong652/itasca-mcp/badge" alt="itasca-mcp MCP server" />
 </a>
 
 ## 贡献

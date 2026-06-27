@@ -1,4 +1,4 @@
-# pfc-mcp Bootstrap (OpenCode)
+# itasca-mcp Bootstrap (OpenCode)
 
 Use this profile when the client is OpenCode.
 
@@ -21,9 +21,9 @@ Add/merge this MCP entry:
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "type": "local",
-      "command": ["uvx", "pfc-mcp"],
+      "command": ["uvx", "itasca-mcp"],
       "enabled": true
     }
   }
@@ -36,9 +36,9 @@ If `uvx` is unavailable, fallback to:
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "pfc-mcp": {
+    "itasca-mcp": {
       "type": "local",
-      "command": ["uv", "tool", "run", "pfc-mcp"],
+      "command": ["uv", "tool", "run", "itasca-mcp"],
       "enabled": true
     }
   }
@@ -51,10 +51,10 @@ Optional verification:
 opencode mcp list
 ```
 
-Confirm `pfc-mcp` is listed and enabled.
+Confirm `itasca-mcp` is listed and enabled.
 
 ## Continue with common bootstrap
 
 After Step 1, continue from Step 2 in:
 
-- `docs/agentic/pfc-mcp-bootstrap.md`
+- `docs/agentic/itasca-mcp-bootstrap.md`

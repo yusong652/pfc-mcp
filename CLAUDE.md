@@ -1,14 +1,14 @@
 # CLAUDE.md
 
-Guidance for coding agents working in the `pfc-mcp` repository.
+Guidance for coding agents working in the `itasca-mcp` repository.
 
 ## Project Overview
 
-`pfc-mcp` provides an MCP server for ITASCA PFC workflows. The bridge runtime that runs inside PFC GUI lives in the [`itasca-mcp-bridge`](https://github.com/yusong652/itasca-mcp-bridge) repo and is consumed here as a git submodule.
+`itasca-mcp` provides an MCP server for ITASCA PFC workflows. The bridge runtime that runs inside PFC GUI lives in the [`itasca-mcp-bridge`](https://github.com/yusong652/itasca-mcp-bridge) repo and is consumed here as a git submodule.
 
 This repository has two runtime contexts:
 
-- `src/pfc_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
+- `src/itasca_mcp/` (Python >= 3.10): MCP server package used by clients/tooling
 - `itasca-mcp-bridge/` (submodule, PFC embedded Python often 3.6): HTTP bridge running inside PFC GUI
 
 Treat these as separate deployment targets. End users get the bridge from PyPI (`pip install itasca-mcp-bridge`): first install happens via the agentic bootstrap's terminal pip step or `addon.py`, and from then on `itasca_mcp_bridge.start()` self-upgrades on every start. The submodule exists only so contributors can edit bridge code alongside MCP code without two clones.
@@ -17,12 +17,12 @@ The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is depre
 
 ## Core Architecture
 
-### MCP side (`src/pfc_mcp`)
+### MCP side (`src/itasca_mcp`)
 
 - Exposes documentation tools and execution tools through FastMCP
-- Communicates with bridge via HTTP client (`pfc_mcp.bridge.client`)
+- Communicates with bridge via HTTP client (`itasca_mcp.bridge.client`)
 - Returns a unified tool envelope: `ok`, `data`, `error`
-- Dual execution model: synchronous REPL (`pfc_execute_code`) for quick queries, script-first async (`pfc_execute_task` + `pfc_check_task_status`) for long-running simulations
+- Dual execution model: synchronous REPL (`itasca_execute_code`) for quick queries, script-first async (`itasca_execute_task` + `itasca_check_task_status`) for long-running simulations
 
 ### Bridge side (`itasca-mcp-bridge` submodule)
 
@@ -35,8 +35,8 @@ The legacy `pfc-mcp-bridge` PyPI package (last release `bridge-v0.3.3`) is depre
 ## Repository Layout
 
 ```text
-pfc-mcp/
-├── src/pfc_mcp/
+itasca-mcp/
+├── src/itasca_mcp/
 │   ├── bridge/          # MCP-side bridge client/task manager
 │   ├── knowledge/       # command/API/reference search system
 │   ├── tools/           # MCP tool implementations
@@ -51,7 +51,7 @@ pfc-mcp/
 
 - Fresh clone needs `git clone --recurse-submodules <url>` or, after a non-recursive clone, `git submodule update --init --recursive`
 - After `git pull` on this repo, re-sync with `git submodule update --recursive` if the pin moved
-- To bump the bridge pin: `cd itasca-mcp-bridge`, fetch/checkout the new commit, then commit the gitlink update in this repo. Push order: bridge repo first (so the pinned commit exists on its origin), pfc-mcp second
+- To bump the bridge pin: `cd itasca-mcp-bridge`, fetch/checkout the new commit, then commit the gitlink update in this repo. Push order: bridge repo first (so the pinned commit exists on its origin), itasca-mcp second
 - "Modified content" / "untracked content" in `git status` for the submodule is normal during local bridge dev — only commit the gitlink when you actually want to bump the pin
 
 ## Development Commands
@@ -61,7 +61,7 @@ Run from repository root.
 ```bash
 uv sync
 uv sync --group dev
-uv run pfc-mcp
+uv run itasca-mcp
 uv run pytest tests/test_phase2_tools.py
 uv run pytest tests/test_tool_contracts.py
 ```
@@ -73,9 +73,9 @@ uv run pytest tests/test_tool_contracts.py
    - Do not introduce application/session policy into bridge runtime.
 
 2. Preserve execution semantics for each model.
-   - `pfc_execute_code` runs synchronous snippets and returns stdout/result immediately.
-   - `pfc_execute_task` submits scripts and returns quickly.
-   - Progress/result retrieval goes through `pfc_check_task_status`.
+   - `itasca_execute_code` runs synchronous snippets and returns stdout/result immediately.
+   - `itasca_execute_task` submits scripts and returns quickly.
+   - Progress/result retrieval goes through `itasca_check_task_status`.
 
 3. Maintain structured tool contracts.
    - Prefer stable machine-readable keys over ad-hoc text parsing.
@@ -132,19 +132,19 @@ Mock bridge based tests are preferred for deterministic CI.
 
 PFC searchable docs live under:
 
-- `src/pfc_mcp/knowledge/resources/command_docs/`
-- `src/pfc_mcp/knowledge/resources/python_sdk_docs/`
-- `src/pfc_mcp/knowledge/resources/references/`
+- `src/itasca_mcp/knowledge/resources/command_docs/`
+- `src/itasca_mcp/knowledge/resources/python_sdk_docs/`
+- `src/itasca_mcp/knowledge/resources/references/`
 
 When changing schema/content shape, verify browse/query tool behavior remains consistent.
 
 ## Release Process
 
-`pfc-mcp` is published to PyPI via GitHub Actions, triggered by pushing a `v*` tag (e.g. `v0.3.16`). Version source: `src/pfc_mcp/__init__.py` (hatch dynamic versioning).
+`itasca-mcp` is published to PyPI via GitHub Actions, triggered by pushing a `v*` tag (e.g. `v0.3.16`). Version source: `src/itasca_mcp/__init__.py` (hatch dynamic versioning).
 
-Steps to release `pfc-mcp`:
+Steps to release `itasca-mcp`:
 
-1. Bump `__version__` in `src/pfc_mcp/__init__.py` (the single source of truth).
+1. Bump `__version__` in `src/itasca_mcp/__init__.py` (the single source of truth).
 2. Curate `## [Unreleased]` in `CHANGELOG.md` from `git log` since the previous release (grouped per the convention comment at the top of that file), rename it to `## [x.y.z] - YYYY-MM-DD`, then start a fresh empty `## [Unreleased]`. The publish workflow extracts the section whose header matches the tag version exactly and fails if it is missing.
 3. Commit and push to `main`.
 4. Tag the commit: `git tag v0.x.x` and `git push origin v0.x.x`.
@@ -170,7 +170,7 @@ Use conventional prefixes seen in repository history, for example:
 Keep commit messages focused on why the change was needed.
 
 Documentation is first-class for this project -- agents rely on the docs and
-the agentic install guides to understand and operate pfc-mcp, so notable
+the agentic install guides to understand and operate itasca-mcp, so notable
 documentation/install-flow changes belong in the changelog alongside
 behaviour changes.
 

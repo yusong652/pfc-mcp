@@ -37,7 +37,7 @@ except ModuleNotFoundError:
 # ---------------------------------------------------------------------------
 
 MPM_DOC = Path("C:/Program Files/Itasca/Itasca Software Subscription/exe64/doc/mpm")
-COMMANDS_DIR = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/mpoint/command_docs/commands")
+COMMANDS_DIR = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/mpoint/command_docs/commands")
 
 PREFIX_TO_CATEGORY = {
     "cmd_mpoint.": "mpoint",

@@ -22,7 +22,7 @@ except ModuleNotFoundError:
 
 
 PFC700_DOC = Path("C:/Program Files/Itasca/PFC700/exe64/doc")
-COMMANDS_DIR = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/command_docs/commands")
+COMMANDS_DIR = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/command_docs/commands")
 
 
 CATEGORY_CONFIG = {

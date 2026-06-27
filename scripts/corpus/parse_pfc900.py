@@ -26,7 +26,7 @@ except ModuleNotFoundError:
 # ---------------------------------------------------------------------------
 
 PFC900_DOC = Path("C:/Program Files/Itasca/ItascaSoftware900/exe64/doc")
-COMMANDS_DIR = Path("C:/Dev/Han/pfc-mcp/src/itasca_mcp/knowledge/resources/command_docs/commands")
+COMMANDS_DIR = Path("C:/Dev/Han/itasca-mcp/src/itasca_mcp/knowledge/resources/command_docs/commands")
 
 # Map category -> (html_dir, filename_pattern, id_prefix)
 #   html_dir: absolute Path to the folder containing HTML command files

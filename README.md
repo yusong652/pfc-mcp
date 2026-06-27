@@ -14,7 +14,7 @@
 
 `pfc3d>model new ;now, with LLM.`
 
-**itasca-mcp** connects AI agents to [ITASCA PFC](https://www.itascacg.com/software/pfc) — Itasca's discrete element method (DEM) code — through the [Model Context Protocol](https://modelcontextprotocol.io/). Browse documentation, run simulations, and execute code, all through natural conversation.
+**itasca-mcp** connects AI agents to [ITASCA](https://www.itascacg.com/)'s numerical modeling software — PFC, FLAC, 3DEC, MPoint, and MassFlow — through the [Model Context Protocol](https://modelcontextprotocol.io/). Browse documentation, run simulations, and execute code, all through natural conversation. Pick the engine with the `software` parameter.
 
 `pfc3d>model solve ;LLM solves.`
 
@@ -22,7 +22,7 @@
 
 ## Tools (10)
 
-**5 documentation tools** — browse and search PFC commands, Python API, and reference docs. No bridge required.
+**5 documentation tools** — browse and search the selected engine's commands, Python API, and reference docs (`software` parameter). No bridge required.
 
 **5 execution tools** — interactive REPL, task submission, progress monitoring, interruption, and history. Requires bridge.
 
@@ -30,7 +30,7 @@
 
 ### Prerequisites
 
-- **ITASCA PFC 6.0, 7.0, or 9.0** installed
+- **An ITASCA engine installed** — PFC, FLAC, 3DEC, MPoint, or MassFlow (6.0, 7.0, or 9.0)
 - **[uv](https://docs.astral.sh/uv/getting-started/installation/)** installed (for `uvx`)
 
 ### Agentic Setup (Recommended)
@@ -57,12 +57,12 @@ https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-
 }
 ```
 
-**2. Start the bridge from inside PFC:**
+**2. Start the bridge from inside the ITASCA engine:**
 
-Download [`addon.py`](addon.py), then use either of these two flows inside PFC:
+Download [`addon.py`](addon.py), then use either of these two flows inside the engine GUI (PFC, FLAC, 3DEC, ...):
 
-- Copy the file contents into the PFC IPython console and run them
-- Or download the file and execute it in PFC GUI
+- Copy the file contents into the engine's IPython console and run them
+- Or download the file and execute it in the engine GUI
 
 <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/addon.gif" alt="addon.py demo" width="60%">
 
@@ -72,7 +72,7 @@ Restart your AI agent (Claude Code, Codex CLI, Gemini CLI, etc.) and ask it to c
 
 ## Daily Startup
 
-Once first-time setup is done, each new PFC session only needs the bridge re-started — run this in PFC's IPython console and you're back online:
+Once first-time setup is done, each new engine session only needs the bridge re-started — run this in the engine's IPython console and you're back online:
 
 ```python
 import itasca_mcp_bridge
@@ -83,8 +83,9 @@ itasca_mcp_bridge.start()
 
 ## Features
 
-- **Multi-version PFC support** - command docs for PFC 6.0, 7.0, and 9.0 via the `version` parameter
-- **Hierarchical documentation browsing** - agents navigate the PFC command tree to discover capabilities and boundaries, reducing hallucinated commands
+- **Multi-engine corpus** - command, Python API, and reference docs for PFC, FLAC, 3DEC, MPoint, and MassFlow, selected via the required `software` parameter
+- **Multi-version support** - command docs across engine versions (e.g. 6.0, 7.0, 9.0) via the `version` parameter
+- **Hierarchical documentation browsing** - agents navigate the engine command tree to discover capabilities and boundaries, reducing hallucinated commands
 - **Enhanced plot documentation** - plot items reference docs supplementing the official documentation
 - **Interactive REPL** - rapid iteration before committing to full scripts; agents can quickly test and refine code
 - **Task lifecycle management** - submit long-running simulations, monitor progress, interrupt running tasks, and browse task history
@@ -110,4 +111,4 @@ PRs and issues are welcome! See the [Developer Guide](docs/development/source-in
 
 MIT - see [LICENSE](LICENSE).
 
-<!-- mcp-name: io.github.yusong652/pfc -->
+<!-- mcp-name: io.github.yusong652/itasca-mcp -->

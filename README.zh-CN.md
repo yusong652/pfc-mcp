@@ -14,7 +14,7 @@
 
 `pfc3d>model new ;now, with LLM.`
 
-**itasca-mcp** 通过 [Model Context Protocol](https://modelcontextprotocol.io/) 将 AI 智能体连接到 [ITASCA PFC](https://www.itascacg.com/software/pfc) —— Itasca 的离散元方法（DEM）软件。通过自然语言对话即可浏览文档、运行仿真和执行代码。
+**itasca-mcp** 通过 [Model Context Protocol](https://modelcontextprotocol.io/) 将 AI 智能体连接到 [ITASCA](https://www.itascacg.com/) 的数值模拟软件 —— PFC、FLAC、3DEC、MPoint、MassFlow。通过自然语言对话即可浏览文档、运行仿真和执行代码，用 `software` 参数选择引擎。
 
 `pfc3d>model solve ;LLM solves.`
 
@@ -22,7 +22,7 @@
 
 ## 工具（10）
 
-**5 个文档工具** — 浏览和搜索 PFC 命令、Python API 及参考文档。无需 bridge。
+**5 个文档工具** — 浏览和搜索所选引擎的命令、Python API 及参考文档（`software` 参数）。无需 bridge。
 
 **5 个执行工具** — 交互式 REPL、任务提交、进度监控、中断和历史浏览。需要 bridge。
 
@@ -30,7 +30,7 @@
 
 ### 前置条件
 
-- 已安装 **ITASCA PFC 6.0、7.0 或 9.0**
+- 已安装一个 **ITASCA 引擎** —— PFC、FLAC、3DEC、MPoint 或 MassFlow（6.0、7.0 或 9.0）
 - 已安装 **[uv](https://docs.astral.sh/uv/getting-started/installation/)**（用于 `uvx`）
 
 ### 智能体自动配置（推荐）
@@ -57,12 +57,12 @@ https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-
 }
 ```
 
-**2. 在 PFC 中启动 bridge：**
+**2. 在 ITASCA 引擎中启动 bridge：**
 
-下载 [`addon.py`](addon.py)，然后在 PFC 中任选一种方式执行：
+下载 [`addon.py`](addon.py)，然后在引擎 GUI（PFC、FLAC、3DEC……）中任选一种方式执行：
 
-- 把这个文件的内容复制到 PFC 的 IPython 控制台里运行
-- 或者先把这个文件下载到本地，再在 PFC GUI 里执行它
+- 把这个文件的内容复制到引擎的 IPython 控制台里运行
+- 或者先把这个文件下载到本地，再在引擎 GUI 里执行它
 
 <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/addon.gif" alt="addon.py 演示" width="60%">
 
@@ -72,7 +72,7 @@ https://raw.githubusercontent.com/yusong652/itasca-mcp/main/docs/agentic/itasca-
 
 ## 日常启动
 
-完成首次配置之后，每次启动 PFC 只需要在 IPython 控制台里运行下面两行，bridge 起来后就可以继续用了：
+完成首次配置之后，每次启动引擎只需要在 IPython 控制台里运行下面两行，bridge 起来后就可以继续用了：
 
 ```python
 import itasca_mcp_bridge
@@ -83,8 +83,9 @@ itasca_mcp_bridge.start()
 
 ## 功能亮点
 
-- **多版本 PFC 支持** — 通过 `version` 参数查阅 PFC 6.0、7.0、9.0 的命令文档
-- **层级式文档浏览** — 智能体沿着 PFC 命令树自主发现能力与边界，减少幻觉命令
+- **多引擎语料** — 覆盖 PFC、FLAC、3DEC、MPoint、MassFlow 的命令、Python API 与参考文档，通过必填的 `software` 参数选择
+- **多版本支持** — 通过 `version` 参数查阅各引擎不同版本（如 6.0、7.0、9.0）的命令文档
+- **层级式文档浏览** — 智能体沿着引擎命令树自主发现能力与边界，减少幻觉命令
 - **增强的 plot 文档** — 在官方文档基础上补充了 plot items 参考文档
 - **交互式 REPL** — 正式编写脚本前快速试错，智能体可以快速迭代验证
 - **任务全生命周期管理** — 提交长时仿真、监控进度、中止运行中的任务、浏览历史任务

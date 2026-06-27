@@ -1,20 +1,20 @@
 # itasca-mcp Agent Bootstrap Guide
 
-Use this guide when an agent needs to set up `itasca-mcp` execution end-to-end on a Windows machine.
+Use this guide when an agent needs to set up `itasca-mcp` execution end-to-end on a Windows machine. It works for any ITASCA engine — PFC, FLAC, 3DEC, MPoint, MassFlow — since they share the same install layout, embedded Python, and bridge.
 
 ## Target Outcome
 
 1. MCP client is configured to run `itasca-mcp`.
-2. `itasca-mcp-bridge` is installed in the correct PFC embedded Python environment.
-3. Bridge is started in PFC GUI via `itasca_mcp_bridge.start()`.
+2. `itasca-mcp-bridge` is installed in the correct ITASCA engine embedded Python environment.
+3. Bridge is started in the ITASCA engine GUI via `itasca_mcp_bridge.start()`.
 4. MCP execution tools are verified with `itasca_execute_code`.
 
 ## Agent Execution Rules
 
-- Use bounded, fast path detection for `pfc_path`; avoid full-drive recursive scans by default.
-- Prefer PFC embedded interpreter for package install:
-  - PFC 6.0/7.0: `"{pfc_path}/exe64/python36/python.exe" -m pip ...`
-  - PFC 9.0: `"{pfc_path}/exe64/python310/python.exe" -m pip ...`
+- Use bounded, fast path detection for `itasca_path`; avoid full-drive recursive scans by default.
+- Install the package with the engine's embedded interpreter (`itasca_python`). Resolve it by globbing `{itasca_path}/exe64/python*/python.exe` (each install ships exactly one):
+  - 6.0 / 7.0: `exe64/python36/python.exe`
+  - 9.0: `exe64/python310/python.exe`
 - If a step fails, report the exact command and output, then apply the next fallback.
 - Respect step ownership labels:
   - `[AGENT]` means the agent should execute the action.
@@ -50,7 +50,7 @@ Apply this MCP launch contract in your client's native config format:
 - enable server in client config
 - prefer user/global-level config by default; fall back to workspace-level config only if the global config is unavailable or write-blocked
 
-> Rationale: `itasca-mcp` bridges a machine-local PFC GUI over a localhost bridge, so the capability is machine-scoped, not project-scoped. A PFC working directory is a simulation workspace and is rarely a shared repo, so workspace-scoped config mainly creates a "switch working directory → tool disappears, must re-run bootstrap" footgun. Keep the config global so it survives directory changes; the per-client profile names the exact user-scope target and the preferred CLI where one exists.
+> Rationale: `itasca-mcp` bridges a machine-local ITASCA engine GUI over a localhost bridge, so the capability is machine-scoped, not project-scoped. An engine working directory is a simulation workspace and is rarely a shared repo, so workspace-scoped config mainly creates a "switch working directory → tool disappears, must re-run bootstrap" footgun. Keep the config global so it survives directory changes; the per-client profile names the exact user-scope target and the preferred CLI where one exists.
 
 When editing MCP config, use this order:
 
@@ -59,11 +59,11 @@ When editing MCP config, use this order:
 3. If `itasca-mcp` already exists, validate/update only MCP launch fields (`command`, `args`, and client-specific extras).
 4. Do not overwrite unrelated MCP servers.
 
-## Step 2 - Resolve `pfc_path`
+## Step 2 - Resolve `itasca_path`
 
 [AGENT]
 
-`pfc_path` should be the PFC install directory containing `exe64/pfc*_gui.exe`.
+`itasca_path` should be the ITASCA engine install directory containing `exe64/<engine>*_gui.exe` (e.g. `pfc2d*_gui.exe`, `pfc3d*_gui.exe`, `flac3d*_gui.exe`, `3dec*_gui.exe`).
 
 ### 2.0 Quick probe (fast path)
 
@@ -74,7 +74,7 @@ ls "C:/Program Files/Itasca"
 ls "D:/Program Files/Itasca"
 ```
 
-If obvious install folders are found, immediately drill into those folders and check `exe64/pfc*_gui.exe` before running the full PowerShell lookup.
+If obvious install folders are found, immediately drill into those folders and check `exe64/*_gui.exe` before running the full PowerShell lookup.
 
 ### 2.1 Bounded common-path lookup (recommended)
 
@@ -88,21 +88,23 @@ foreach($r in $roots){
     Get-ChildItem -Path $r -Directory -ErrorAction SilentlyContinue | ForEach-Object {
       $exeDir=Join-Path $_.FullName 'exe64';
       if(Test-Path $exeDir){
-        Get-ChildItem -Path $exeDir -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
-          $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName }
+        Get-ChildItem -Path $exeDir -Filter '*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
+          $hits += [PSCustomObject]@{ itasca_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName }
         }
       }
     }
   }
 }
-$hits | Sort-Object gui_exe -Unique | Select-Object -First 5
+$hits | Sort-Object gui_exe -Unique | Select-Object -First 10
 ```
 
 If the agent shell is bash on Windows, wrap the PowerShell script in single quotes:
 
 ```bash
-powershell -NoProfile -Command '& {$roots=@("C:\Program Files\Itasca","D:\Program Files\Itasca","C:\Itasca","D:\Itasca"); $hits=@(); foreach($r in $roots){ if(Test-Path $r){ Get-ChildItem -Path $r -Directory -ErrorAction SilentlyContinue | ForEach-Object { $exeDir=Join-Path $_.FullName "exe64"; if(Test-Path $exeDir){ Get-ChildItem -Path $exeDir -Filter "pfc*_gui.exe" -File -ErrorAction SilentlyContinue | ForEach-Object { $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName } } } } } }; $hits | Sort-Object gui_exe -Unique | Select-Object -First 5 }'
+powershell -NoProfile -Command '& {$roots=@("C:\Program Files\Itasca","D:\Program Files\Itasca","C:\Itasca","D:\Itasca"); $hits=@(); foreach($r in $roots){ if(Test-Path $r){ Get-ChildItem -Path $r -Directory -ErrorAction SilentlyContinue | ForEach-Object { $exeDir=Join-Path $_.FullName "exe64"; if(Test-Path $exeDir){ Get-ChildItem -Path $exeDir -Filter "*_gui.exe" -File -ErrorAction SilentlyContinue | ForEach-Object { $hits += [PSCustomObject]@{ itasca_path=$_.Directory.Parent.FullName; gui_exe=$_.FullName } } } } } }; $hits | Sort-Object gui_exe -Unique | Select-Object -First 10 }'
 ```
+
+If multiple engine GUIs are found (e.g. both PFC and FLAC, or both 2D and 3D variants) and the user did not specify which to use, ask the user which engine to target before proceeding.
 
 ### 2.2 Optional registry lookup (fallback)
 
@@ -113,41 +115,44 @@ $keys=@('HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*','HKLM:\SOF
 $hits=@();
 foreach($k in $keys){
   Get-ItemProperty $k -ErrorAction SilentlyContinue |
-    Where-Object { $_.DisplayName -match 'PFC|Itasca' } |
+    Where-Object { $_.DisplayName -match 'PFC|FLAC|3DEC|MassFlow|MPoint|Itasca' } |
     ForEach-Object {
       if($_.InstallLocation){
         $exeDir=Join-Path $_.InstallLocation 'exe64';
-        Get-ChildItem -Path $exeDir -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
+        Get-ChildItem -Path $exeDir -Filter '*_gui.exe' -File -ErrorAction SilentlyContinue | ForEach-Object {
           $exe=$_.FullName;
-          $hits += [PSCustomObject]@{ pfc_path=$_.Directory.Parent.FullName; gui_exe=$exe }
+          $hits += [PSCustomObject]@{ itasca_path=$_.Directory.Parent.FullName; gui_exe=$exe }
         }
       }
     }
 }
-$hits | Sort-Object gui_exe -Unique | Select-Object -First 5
+$hits | Sort-Object gui_exe -Unique | Select-Object -First 10
 ```
 
-If still unresolved, ask user to provide exact `pfc_path`.
+If still unresolved, ask user to provide exact `itasca_path`.
 
-## Step 3 - Install/Upgrade Bridge in PFC Python
+## Step 3 - Install/Upgrade Bridge in the Engine's Python
 
 [AGENT]
 
-First resolve `pfc_python` from the installed PFC version:
+First resolve `itasca_python`, the engine's embedded interpreter. Detect it directly (one `python*` folder per install):
 
-- PFC 6.0/7.0: `{pfc_path}/exe64/python36/python.exe`
-- PFC 9.0: `{pfc_path}/exe64/python310/python.exe`
+```powershell
+Get-ChildItem -Path "{itasca_path}/exe64/python*/python.exe" -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+```
+
+Known mapping if you prefer to resolve it by version: 6.0/7.0 → `exe64/python36/python.exe`, 9.0 → `exe64/python310/python.exe`.
 
 Check current package:
 
 ```powershell
-& "{pfc_python}" -m pip show itasca-mcp-bridge
+& "{itasca_python}" -m pip show itasca-mcp-bridge
 ```
 
 Install/upgrade:
 
 ```powershell
-& "{pfc_python}" -m pip install --user --upgrade itasca-mcp-bridge
+& "{itasca_python}" -m pip install --user --upgrade itasca-mcp-bridge
 ```
 
 If that index is unreachable (PyPI blocked behind a regional network or
@@ -155,38 +160,38 @@ corporate proxy), retry via the Tsinghua mirror -- the same fallback the
 bridge's own self-upgrade performs automatically:
 
 ```powershell
-& "{pfc_python}" -m pip install --user --upgrade --index-url https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn itasca-mcp-bridge
+& "{itasca_python}" -m pip install --user --upgrade --index-url https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn itasca-mcp-bridge
 ```
 
 Verify import and version:
 
 ```powershell
-& "{pfc_python}" -c "import itasca_mcp_bridge; print(itasca_mcp_bridge.__version__)"
+& "{itasca_python}" -c "import itasca_mcp_bridge; print(itasca_mcp_bridge.__version__)"
 ```
 
 Ignore pip upgrade warnings in this environment. Older embedded interpreters commonly use older pip builds.
 
-## Step 4 - Start Bridge in PFC GUI
+## Step 4 - Start the Engine GUI
 
 [AGENT]
 
-If PFC GUI is not open yet, start it from terminal (do not rely on command exit code to infer startup success):
+If the engine GUI is not open yet, start it from terminal (do not rely on command exit code to infer startup success):
 
 ```bash
-powershell -NoProfile -Command "$gui=Get-ChildItem '{pfc_path}/exe64' -Filter 'pfc*_gui.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName; if(-not $gui){ throw 'No pfc*_gui.exe found under exe64' }; Start-Process $gui"
+powershell -NoProfile -Command "$gui=Get-ChildItem '{itasca_path}/exe64' -Filter '*_gui.exe' -File -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName; if(-not $gui){ throw 'No *_gui.exe found under exe64' }; Start-Process $gui"
 ```
 
-Confirm PFC process is running:
+Confirm the engine process is running:
 
 ```bash
-powershell -NoProfile -Command "$procs=Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^pfc(2d|3d)\\d+_gui\\.exe$' }; if($procs){$procs | Select-Object Name,ProcessId | Format-Table -AutoSize} else {Write-Output 'No PFC GUI process found'}"
+powershell -NoProfile -Command "$procs=Get-CimInstance Win32_Process | Where-Object { $_.Name -match '_gui\\.exe$' }; if($procs){$procs | Select-Object Name,ProcessId | Format-Table -AutoSize} else {Write-Output 'No ITASCA engine GUI process found'}"
 ```
 
-If both `pfc2d*_gui.exe` and `pfc3d*_gui.exe` are available and user did not specify, prefer 3D (`pfc3d`) by default.
+If several engine GUIs are available and the user did not specify, ask which to start. For PFC specifically, if both `pfc2d*_gui.exe` and `pfc3d*_gui.exe` exist, prefer 3D (`pfc3d`) by default.
 
 [USER ACTION REQUIRED]
 
-Ask the user to run this in the PFC GUI IPython console (the package was
+Ask the user to run this in the engine GUI's IPython console (the package was
 already installed in Step 3), then restart the client session before Step 5:
 
 ```python
@@ -211,9 +216,9 @@ Expected output includes:
 
 Then reconnect MCP client and call:
 
-- `itasca_execute_code` with a simple snippet, e.g. `print('hello from PFC')`
+- `itasca_execute_code` with a simple snippet, e.g. `print('hello from ITASCA')`
 
-If `pfc_*` MCP tools are not visible in the client, ask user to fully restart client session first, then retry.
+If `itasca_*` MCP tools are not visible in the client, ask user to fully restart client session first, then retry.
 
 Success example (shape may vary by client):
 
@@ -221,32 +226,32 @@ Success example (shape may vary by client):
 {
   "ok": true,
   "data": {
-    "stdout": "hello from PFC\n",
+    "stdout": "hello from ITASCA\n",
     "result": null
   }
 }
 ```
 
-`ok: true` means the full MCP → bridge → PFC pipeline is working.
+`ok: true` means the full MCP → bridge → engine pipeline is working.
 
 ## Troubleshooting
 
 - `Connection refused`:
-  - Bridge not running in PFC GUI, or port `9001` not available.
+  - Bridge not running in the engine GUI, or port `9001` not available.
 - `No module named itasca_mcp_bridge`:
-  - Bridge package not installed in PFC embedded Python (or installed into the
-    wrong interpreter). Re-run Step 3 against the resolved `pfc_python`.
+  - Bridge package not installed in the engine's embedded Python (or installed into the
+    wrong interpreter). Re-run Step 3 against the resolved `itasca_python`.
   - One-shot fallback: paste the contents of
     <https://raw.githubusercontent.com/yusong652/itasca-mcp/main/addon.py> into the
-    PFC IPython console -- it installs (with mirror fallback) and starts the
+    engine's IPython console -- it installs (with mirror fallback) and starts the
     bridge in one go.
 - `status remains pending / plot diagnostic timeout during solve`:
   - Upgrade to the latest `itasca-mcp-bridge` release.
 - `pip` upgrade warning after install:
   - Usually safe to ignore if package install completed successfully.
 - Need to confirm GUI process from terminal:
-  - Run the exact GUI filter command from Step 4 (matches `pfc2d*_gui.exe` / `pfc3d*_gui.exe`).
-- `pfc_*` tools missing in client after setup:
+  - Run the exact GUI filter command from Step 4 (matches `*_gui.exe`).
+- `itasca_*` tools missing in client after setup:
   - Client session was not fully restarted after Step 1. Close/reopen client session and retry Step 5.
 - PowerShell error `Unexpected token '-m'`:
-  - Quoted executable path was not invoked with `&`. Use `& "{pfc_python}" -m ...`.
+  - Quoted executable path was not invoked with `&`. Use `& "{itasca_python}" -m ...`.

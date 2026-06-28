@@ -9,7 +9,7 @@ wash, with a monospace wordmark on top.
 
 Every panel is a real simulation driven through **itasca-mcp** (engine GUI +
 `itasca-mcp-bridge`), not a hand-drawn mock-up. The final composite is
-[`header.png`](../header.png) at the assets-branch root.
+[`header.webp`](../header.webp) at the assets-branch root.
 
 | Panel | Engine | Scenario | What you see |
 |-------|--------|----------|--------------|
@@ -80,7 +80,8 @@ cd header
 uv run --with matplotlib --with numpy --with scipy python render_all.py
 uv run --with matplotlib --with numpy python montage.py
 uv run --with matplotlib --with numpy python add_title.py
-# banner_title_center.png is the final composite -> copied to ../header.png
+# final composite -> WebP q92 (~5x smaller, visually lossless):
+cwebp -q 92 banner_title_center.png -o ../header.webp
 ```
 
 Palette knobs live at the top of each script: `render_all.py` (`BG/INK/COOL/

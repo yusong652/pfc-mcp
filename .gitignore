@@ -23,6 +23,7 @@ build/
 .pfc-mcp-bridge/
 .tmp/
 .pytest_tmp/
+temp/
 
 # Docker dev container's user workspace (mounted into container at /workspace).
 # Keep the dir itself via .gitkeep, ignore everything dropped inside.

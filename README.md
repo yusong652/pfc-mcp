@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/header.gif" alt="itasca-mcp" width="70%">
+  <img src="https://raw.githubusercontent.com/yusong652/itasca-mcp/assets/header.webp" alt="itasca-mcp" width="70%">
 </p>
 
 # itasca-mcp

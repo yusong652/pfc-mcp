@@ -1,11 +1,15 @@
 # Repo header — four-engine montage
 
 Source for the itasca-mcp README header: one panel per Itasca engine, each
-running that engine's *classic* scenario, all rendered in the same dark-bg
-(`#0e1116`) + `inferno` visual language so they tile into a single banner.
+running that engine's *classic* scenario, all in one shared low-saturation
+visual language — a steel-blue↔terracotta field (diverging over signed
+velocity for PFC, cool→warm over magnitude for the scalar-field panels) with
+dark ink linework — tiled into a single banner over a light-blue diagonal
+wash, with a monospace wordmark on top.
 
 Every panel is a real simulation driven through **itasca-mcp** (engine GUI +
-`itasca-mcp-bridge`), not a hand-drawn mock-up.
+`itasca-mcp-bridge`), not a hand-drawn mock-up. The final composite is
+[`header.png`](../header.png) at the assets-branch root.
 
 | Panel | Engine | Scenario | What you see |
 |-------|--------|----------|--------------|
@@ -53,9 +57,32 @@ panel's `<sim>.py` via the itasca-mcp `execute_task` tool (it writes `data/`),
 then render locally:
 
 ```bash
-cd docs/assets/header/<engine>
+cd header/<engine>
 uv run --with matplotlib --with numpy python render.py   # some add --with scipy
 ```
 
-> These scripts produce the raw per-engine panels. Final styling
-> (semi-transparent fills, colour grading, montage assembly) is done downstream.
+> The per-engine `render.py` files are the original standalone panels. The
+> banner that ships in the README is assembled by the three scripts below.
+
+## Banner assembly
+
+The shipped header is rebuilt from `data/` by three scripts in this folder
+(no engine GUI needed — they only read the exported state):
+
+```
+render_all.py  -- all four panels, shared palette, TRANSPARENT background  -->  header/<engine>/<engine>.png
+montage.py     -- equal diagonal-seam strips over a light-blue diagonal wash -->  header/banner.png
+add_title.py   -- monospace "itasca-mcp" wordmark + tagline + slogan        -->  header/banner_title_center.png
+```
+
+```bash
+cd header
+uv run --with matplotlib --with numpy --with scipy python render_all.py
+uv run --with matplotlib --with numpy python montage.py
+uv run --with matplotlib --with numpy python add_title.py
+# banner_title_center.png is the final composite -> copied to ../header.png
+```
+
+Palette knobs live at the top of each script: `render_all.py` (`BG/INK/COOL/
+MID/WARM`), `montage.py` (`GRAD_LIGHT/GRAD_DEEP/SEAM`, strip widths/scales/
+offsets, seam slant `S`), `add_title.py` (text, colour, stroke).
